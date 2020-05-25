@@ -7,7 +7,6 @@ import java.util.Set;
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.AnalysisTransformation;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure;
-import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticNetwork;
 
 import com.google.common.collect.Sets;
 
@@ -16,10 +15,10 @@ public class MLSensitivityAnalysis {
 	public static class MLSensitivityAnalysisBuilder {
 
 		private Set<PropertyMeasure> propertyMeasures = Sets.newHashSet();
-		private TrainingDataBasedAnalysisStrategy analysisStrategy = null;
+		private MLSensitivityAnalysisStrategy analysisStrategy = null;
 
 		public MLSensitivityAnalysisBuilder withSensitivityAnalysisStrategy(
-				TrainingDataBasedAnalysisStrategy analysisStrategy) {
+				MLSensitivityAnalysisStrategy analysisStrategy) {
 			this.analysisStrategy = analysisStrategy;
 			return this;
 		}
@@ -36,33 +35,31 @@ public class MLSensitivityAnalysis {
 						"There hast to be at least one property measure.", new IllegalArgumentException());
 			}
 
-			return new MLSensitivityAnalysis(analysisStrategy, new AnalysisTransformation(propertyMeasures));
+			MLSensitivityAnalysis.analysisTransformation = new AnalysisTransformation(propertyMeasures);
+			return new MLSensitivityAnalysis(analysisStrategy);
 
 		}
 
 	}
+	
+	private static AnalysisTransformation analysisTransformation;
 
-	private final TrainingDataBasedAnalysisStrategy analysisStrategy;
-	private final AnalysisTransformation analysisTransformation;
+	private final MLSensitivityAnalysisStrategy analysisStrategy;
 
-	private MLSensitivityAnalysis(TrainingDataBasedAnalysisStrategy analysisStrategy,
-			AnalysisTransformation analysisTransformation) {
+	private MLSensitivityAnalysis(MLSensitivityAnalysisStrategy analysisStrategy) {
 		this.analysisStrategy = analysisStrategy;
-		this.analysisTransformation = analysisTransformation;
 	}
 
 	public static MLSensitivityAnalysisBuilder newBuilder() {
 		return new MLSensitivityAnalysisBuilder();
 	}
 
-	public GroundProbabilisticNetwork run(MLSensitivityAnalysisConfig config) {
-		GroundProbabilisticNetwork sensitivityModel = config.getSensitivityModel().orElse(deriveFromPropertyMeasures());
-		return sensitivityModel;
+	public static AnalysisTransformation getAnalysisTransformation() {
+		return analysisTransformation;
 	}
-
-	private GroundProbabilisticNetwork deriveFromPropertyMeasures() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public SensitivityModel analyseSensitivity(MLAnalysisContext context) {
+		return analysisStrategy.analyseSensitivity(context);
 	}
 
 }

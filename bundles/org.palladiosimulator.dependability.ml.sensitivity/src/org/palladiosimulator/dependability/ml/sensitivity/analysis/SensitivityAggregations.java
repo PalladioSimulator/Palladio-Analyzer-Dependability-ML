@@ -91,6 +91,8 @@ public class SensitivityAggregations {
 
 	}
 
+	private final static double PROPERTY_OCCURENCE_COUNT = 1.0;
+
 	private final Map<MeasurableProperty, AggregatedValue> propertySensitivityAggregations;
 	private final Map<SensitivityEntry, AggregatedValue> mlSensitivityAggregations;
 
@@ -99,17 +101,16 @@ public class SensitivityAggregations {
 		this.mlSensitivityAggregations = Maps.newHashMap();
 	}
 
-	public void updateLocal(MeasurableProperty property, double value) {
+	public void updatePropertySensitivity(MeasurableProperty property) {
 		var aggValue = Optional.ofNullable(propertySensitivityAggregations.get(property));
 		if (aggValue.isPresent()) {
-			aggValue.get().update(value);
+			aggValue.get().update(PROPERTY_OCCURENCE_COUNT);
 		} else {
-			propertySensitivityAggregations.put(property, new AggregatedValue(value));
+			propertySensitivityAggregations.put(property, new AggregatedValue(PROPERTY_OCCURENCE_COUNT));
 		}
 	}
 
-	public void updateGlobal(Set<MeasurableProperty> properties, double value) {
-		var entry = SensitivityEntry.from(properties);
+	public void updateMLSensitivity(SensitivityEntry entry, double value) {
 		var aggValue = Optional.ofNullable(mlSensitivityAggregations.get(entry));
 		if (aggValue.isPresent()) {
 			aggValue.get().update(value);
