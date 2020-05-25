@@ -16,10 +16,10 @@ public class MLSensitivityAnalysis {
 	public static class MLSensitivityAnalysisBuilder {
 
 		private Set<PropertyMeasure> propertyMeasures = Sets.newHashSet();
-		private MLSensitivityAnalysisAggregator analysisStrategy = null;
+		private TrainingDataBasedAnalysisStrategy analysisStrategy = null;
 
 		public MLSensitivityAnalysisBuilder withSensitivityAnalysisStrategy(
-				MLSensitivityAnalysisAggregator analysisStrategy) {
+				TrainingDataBasedAnalysisStrategy analysisStrategy) {
 			this.analysisStrategy = analysisStrategy;
 			return this;
 		}
@@ -42,10 +42,10 @@ public class MLSensitivityAnalysis {
 
 	}
 
-	private final MLSensitivityAnalysisAggregator analysisStrategy;
+	private final TrainingDataBasedAnalysisStrategy analysisStrategy;
 	private final AnalysisTransformation analysisTransformation;
 
-	private MLSensitivityAnalysis(MLSensitivityAnalysisAggregator analysisStrategy,
+	private MLSensitivityAnalysis(TrainingDataBasedAnalysisStrategy analysisStrategy,
 			AnalysisTransformation analysisTransformation) {
 		this.analysisStrategy = analysisStrategy;
 		this.analysisTransformation = analysisTransformation;

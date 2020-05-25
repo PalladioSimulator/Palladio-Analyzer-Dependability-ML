@@ -1,6 +1,16 @@
 package org.palladiosimulator.dependability.ml.sensitivity.transformation;
 
+import java.util.Set;
+
+import org.palladiosimulator.dependability.ml.sensitivity.prediction.InputData;
+
+import tools.mdsd.probdist.api.entity.CategoricalValue;
+
 public interface PropertyMeasure {
 
-	public MeasureableProperty apply(InputData inputData);
+	public MeasurableProperty apply(InputData inputData);
+	
+	public Set<CategoricalValue> getValueSpace();
+	
+	public String getPropertyName();
 }

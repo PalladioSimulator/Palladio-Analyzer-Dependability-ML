@@ -1,5 +1,7 @@
 package org.palladiosimulator.dependability.ml.sensitivity.exception;
 
+import com.google.common.base.Supplier;
+
 public class MLSensitivityAnalysisException extends RuntimeException {
 
 	/**
@@ -21,6 +23,14 @@ public class MLSensitivityAnalysisException extends RuntimeException {
 
 	public static void throwWithMessageAndCause(String message, Throwable cause) {
 		throw new MLSensitivityAnalysisException(message, cause);
+	}
+
+	public static Supplier<MLSensitivityAnalysisException> supplierWithMessage(String message) {
+		return () -> new MLSensitivityAnalysisException(message);
+	}
+
+	public static Supplier<MLSensitivityAnalysisException> supplierWithMessageAndCause(String message, Throwable cause) {
+		return () -> new MLSensitivityAnalysisException(message, cause);
 	}
 
 }
