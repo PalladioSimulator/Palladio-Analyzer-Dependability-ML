@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import org.palladiosimulator.dependability.ml.sensitivity.prediction.InputData;
+import org.palladiosimulator.dependability.ml.model.InputData;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -21,7 +21,7 @@ public class AnalysisTransformation {
 		this.propertyMeasures = propertyMeasures;
 	}
 
-	public Set<MeasurableProperty> computeMeasurableProperties(InputData inputData) {
+	public Set<MeasurableProperty> computeMeasurableProperties(InputData<?> inputData) {
 		return propertyMeasures.stream().map(each -> each.apply(inputData)).collect(toSet());
 	}
 

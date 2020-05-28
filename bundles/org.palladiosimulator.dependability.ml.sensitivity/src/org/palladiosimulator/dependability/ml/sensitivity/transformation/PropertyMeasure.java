@@ -2,7 +2,7 @@ package org.palladiosimulator.dependability.ml.sensitivity.transformation;
 
 import java.util.Set;
 
-import org.palladiosimulator.dependability.ml.sensitivity.prediction.InputData;
+import org.palladiosimulator.dependability.ml.model.InputData;
 
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 

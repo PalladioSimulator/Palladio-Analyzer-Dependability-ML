@@ -1,16 +1,13 @@
 package org.palladiosimulator.dependability.ml.sensitivity.analysis;
 
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 
+import org.palladiosimulator.dependability.ml.model.MLPredictionResult;
 import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityAggregations.SensitivityEntry;
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
-import org.palladiosimulator.dependability.ml.sensitivity.iterator.TrainingDataIterator;
-import org.palladiosimulator.dependability.ml.sensitivity.iterator.TrainingDataIteratorFactory;
-import org.palladiosimulator.dependability.ml.sensitivity.prediction.MLPredictionResult;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.AnalysisTransformation;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.MeasurableProperty;
 
@@ -41,16 +38,17 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 
 	private SensitivityAggregations computeAggregatedSensitivityValues(MLAnalysisContext context) {
 		var mlModel = context.getMLModel();
+		var dataIterator = mlModel.getTrainingDataIteratorBy(context.getTrainingData());
 		var sensitivityAggregations = new SensitivityAggregations();
-		var dataIterator = createIteratorBy(context);
 
 		while (dataIterator.hasNext()) {
-			var data = dataIterator.next();
+			var dataTuple = dataIterator.next();
 
-			var properties = MLSensitivityAnalysis.getAnalysisTransformation().computeMeasurableProperties(data);
+			var<MeasurableProperty> properties = MLSensitivityAnalysis.getAnalysisTransformation()
+					.computeMeasurableProperties(dataTuple.getFirst());
 			properties.forEach(sensitivityAggregations::updatePropertySensitivity);
 
-			var newValue = incrementalUpdate.apply(mlModel.makePrediction(data));
+			var newValue = incrementalUpdate.apply(mlModel.makePrediction(dataTuple));
 			sensitivityAggregations.updateMLSensitivity(SensitivityEntry.from(properties), newValue);
 		}
 
@@ -60,13 +58,13 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 	private SensitivityModel complementSensitivityModel(SensitivityModel sensitivitiyModel,
 			SensitivityAggregations sensitivityAggregations) {
 		for (String each : sensitivityAggregations.getMeasurablePropertyNames()) {
-			var sensitivityValues = sensitivityAggregations.filterLocalSensitivityValues(each);
+			var<MeasurableProperty, Double> sensitivityValues = sensitivityAggregations.filterLocalSensitivityValues(each);
 			checkAndHandleCompleteness(each, sensitivityValues);
 
 			sensitivitiyModel.setSensitivityValues(sensitivityValues);
 		}
 
-		var mlSensitivityValues = sensitivityAggregations.getMLSensitivityValues();
+		var<SensitivityEntry, Double> mlSensitivityValues = sensitivityAggregations.getMLSensitivityValues();
 		checkAndHandleCompleteness(mlSensitivityValues);
 
 		sensitivitiyModel.setMLSensitivityValues(mlSensitivityValues);
@@ -115,14 +113,6 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 				.orElseThrow(MLSensitivityAnalysisException.supplierWithMessage(
 						String.format("There is no property measure for property %s", propertyName)));
 		return propertyMeasure.getValueSpace();
-	}
-
-	private TrainingDataIterator createIteratorBy(MLAnalysisContext context) {
-		String fileExt = context.getTrainingDataFileExtension();
-		File trainingData = context.getTrainingData();
-		return TrainingDataIteratorFactory.get().createIteratorFor(fileExt, trainingData)
-				.orElseThrow(MLSensitivityAnalysisException
-						.supplierWithMessage(String.format("There is no supported iterator for %s", fileExt)));
 	}
 
 }
