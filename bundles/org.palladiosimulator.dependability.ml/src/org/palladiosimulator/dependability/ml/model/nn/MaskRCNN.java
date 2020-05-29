@@ -10,6 +10,7 @@ import java.util.List;
 import org.palladiosimulator.dependability.ml.exception.DependableMLException;
 import org.palladiosimulator.dependability.ml.iterator.DirectoryBasedTrainingDataIterator;
 import org.palladiosimulator.dependability.ml.model.MLPredictionResult;
+import org.palladiosimulator.dependability.ml.model.OutputData;
 import org.palladiosimulator.dependability.ml.model.TrainedModel;
 import org.palladiosimulator.dependability.ml.model.access.HttpModelAccessor;
 import org.palladiosimulator.dependability.ml.util.Tuple;
@@ -65,7 +66,7 @@ public class MaskRCNN implements TrainedModel<ImageInputData, ImageSegmentationL
 		return parsePredictionResult(prediction);
 	}
 
-	private MLPredictionResult parsePredictionResult(String prediction) {
+	private MLPredictionResult parsePredictionResult(List<OutputData> predictions) {
 		// TODO Auto-generated method stub
 		return null;
 	}

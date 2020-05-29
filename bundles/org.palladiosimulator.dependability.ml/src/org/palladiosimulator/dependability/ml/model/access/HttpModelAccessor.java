@@ -11,12 +11,18 @@ import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.time.Duration;
 import java.util.Base64;
+import java.util.List;
 
 import org.palladiosimulator.dependability.ml.exception.DependableMLException;
 import org.palladiosimulator.dependability.ml.model.InputData;
+import org.palladiosimulator.dependability.ml.model.OutputData;
 
-public class HttpModelAccessor implements TrainedModelAccessor<InputData<?>, String> {
+import com.google.common.collect.Lists;
+import com.google.gson.Gson;
 
+public class HttpModelAccessor implements TrainedModelAccessor<InputData<?>, OutputData> {
+
+	private static int HTTP_OK = 200;
 	private static final String PREDICTION_ROUTE = "/predict";
 	private static final String SUPPORTED_SCHEME = "http";
 	private static final int TIME_OUT_DURATION = 2;
@@ -36,15 +42,17 @@ public class HttpModelAccessor implements TrainedModelAccessor<InputData<?>, Str
 	}
 
 	@Override
-	public String query(InputData<?> inputData) {
-		var request = HttpRequest.newBuilder(remoteModelURI)
-				.header("Content-Type", "application/json")
+	public List<OutputData> query(InputData<?> inputData) {
+		var request = HttpRequest.newBuilder(remoteModelURI).header("Content-Type", "application/json")
 				.timeout(Duration.ofMinutes(TIME_OUT_DURATION))
-				.POST(BodyPublishers.ofString(prepareForSending(inputData)))
-				.build();
+				.POST(BodyPublishers.ofString(prepareForSending(inputData))).build();
 
 		try {
-			return client.send(request, BodyHandlers.ofString()).body();
+			var response = client.send(request, BodyHandlers.ofString());
+			if (response.statusCode() != HTTP_OK) {
+				DependableMLException.throwWithMessage("Querying of remote model was not successfull.");
+			}
+			return readFromJson(response.body());
 		} catch (IOException | InterruptedException e) {
 			throw DependableMLException
 					.supplierWithMessageAndCause("Something went wrong during communication with remote model.", e)
@@ -90,7 +98,12 @@ public class HttpModelAccessor implements TrainedModelAccessor<InputData<?>, Str
 	}
 
 	private String jsonify(String value) {
-		return String.format("{\"value\": %s}", value);
+		return String.format("{\"value\": \"%s\"}", value);
+	}
+	
+	private List<OutputData> readFromJson(String json) {
+		var outData = new Gson().fromJson(json, OutputData[].class);
+		return Lists.newArrayList(outData);
 	}
 
 }

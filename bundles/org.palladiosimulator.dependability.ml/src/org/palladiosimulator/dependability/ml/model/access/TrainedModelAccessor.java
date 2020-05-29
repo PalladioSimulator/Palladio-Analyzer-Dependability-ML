@@ -1,6 +1,7 @@
 package org.palladiosimulator.dependability.ml.model.access;
 
 import java.net.URI;
+import java.util.List;
 
 public interface TrainedModelAccessor<In, Out> {
 	
@@ -8,5 +9,5 @@ public interface TrainedModelAccessor<In, Out> {
 	
 	public void load(URI modelURI);
 	
-	public Out query(In inputData);
+	public List<Out> query(In inputData);
 }

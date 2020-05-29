@@ -1,21 +1,20 @@
 package org.palladiosimulator.dependability.ml.model;
 
-public class OutputData<T> {
-
-	private final T result;
-	private final double confidence;
+public class OutputData {
 	
-	public OutputData(T result, double confidence) {
-		this.result = result;
+	private final String confidence;
+	private final String prediction;
+	
+	public OutputData(String confidence, String prediction) {
 		this.confidence = confidence;
+		this.prediction = prediction;
 	}
 
-	public T getResult() {
-		return result;
+	public double getPredictionConfidence() {
+		return Double.valueOf(confidence);
 	}
 
-	public double getConfidence() {
-		return confidence;
+	public String getPrediction() {
+		return prediction;
 	}
-	
 }

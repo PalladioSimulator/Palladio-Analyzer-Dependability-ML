@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.function.Function;
 
 import org.palladiosimulator.dependability.ml.model.MLPredictionResult;
+import org.palladiosimulator.dependability.ml.model.OutputData;
 import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityAggregations.SensitivityEntry;
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.AnalysisTransformation;
@@ -26,7 +27,12 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 	}
 
 	public static TrainingDataBasedAnalysisStrategy confidenceBasedStrategy() {
-		return new TrainingDataBasedAnalysisStrategy(r -> r.getPredictionConfidence());
+		return new TrainingDataBasedAnalysisStrategy(r -> {
+			var numberOfPredictions = r.getPredictions().size();
+			var sumOfPredictions = r.getPredictions().stream().map(OutputData::getPredictionConfidence)
+					.reduce(Double::sum).get();
+			return sumOfPredictions / numberOfPredictions;
+		});
 	}
 
 	@Override
@@ -58,7 +64,8 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 	private SensitivityModel complementSensitivityModel(SensitivityModel sensitivitiyModel,
 			SensitivityAggregations sensitivityAggregations) {
 		for (String each : sensitivityAggregations.getMeasurablePropertyNames()) {
-			var<MeasurableProperty, Double> sensitivityValues = sensitivityAggregations.filterLocalSensitivityValues(each);
+			var<MeasurableProperty, Double> sensitivityValues = sensitivityAggregations
+					.filterLocalSensitivityValues(each);
 			checkAndHandleCompleteness(each, sensitivityValues);
 
 			sensitivitiyModel.setSensitivityValues(sensitivityValues);

@@ -5,10 +5,14 @@ Bundle-SymbolicName: org.palladiosimulator.dependability.ml
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.palladiosimulator.dependability.ml.Activator
 Require-Bundle: org.eclipse.core.runtime,
- com.google.guava;bundle-version="27.1.0"
+ com.google.guava;bundle-version="27.1.0",
+ com.google.gson;bundle-version="2.8.2"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.palladiosimulator.dependability.ml
 Bundle-ActivationPolicy: lazy
-Export-Package: org.palladiosimulator.dependability.ml.iterator,
+Export-Package: org.palladiosimulator.dependability.ml.exception,
+ org.palladiosimulator.dependability.ml.iterator,
  org.palladiosimulator.dependability.ml.model,
+ org.palladiosimulator.dependability.ml.model.access,
+ org.palladiosimulator.dependability.ml.model.nn,
  org.palladiosimulator.dependability.ml.util
