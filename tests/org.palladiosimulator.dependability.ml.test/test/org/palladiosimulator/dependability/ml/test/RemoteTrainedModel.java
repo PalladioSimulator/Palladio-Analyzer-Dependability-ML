@@ -22,18 +22,11 @@ import org.palladiosimulator.dependability.ml.util.Tuple;
 public class RemoteTrainedModel {
 
 	private final static boolean IS_EXPECTED = true;
-	private final static double CONFIDENCE = 0.99;
 	private final static String TEST_URI = "http://localhost:5000";
 
-	private static class TrainedTestModel implements TrainedModel<InputData<?>, InputDataLabel<?>> {
+	private static class TrainedTestModel implements TrainedModel {
 
 		private final HttpModelAccessor remoteTrainedModel = new HttpModelAccessor();
-
-		@Override
-		public MLPredictionResult makePrediction(Tuple<InputData<?>, InputDataLabel<?>> dataTuple) {
-			var prediction = remoteTrainedModel.query(dataTuple.getFirst());
-			return new MLPredictionResult(IS_EXPECTED);
-		}
 
 		@Override
 		public void loadModel(URI modelURI) {
@@ -44,7 +37,13 @@ public class RemoteTrainedModel {
 		}
 
 		@Override
-		public TrainingDataIterator<InputData<?>, InputDataLabel<?>> getTrainingDataIteratorBy(File dataLocation) {
+		public MLPredictionResult makePrediction(Tuple<InputData, InputDataLabel> dataTuple) {
+			var prediction = remoteTrainedModel.query(dataTuple.getFirst());
+			return new MLPredictionResult(IS_EXPECTED);
+		}
+
+		@Override
+		public TrainingDataIterator getTrainingDataIteratorBy(File dataLocation) {
 			fail("This method is not subject of testing in this case.");
 			return null;
 		}
@@ -67,6 +66,20 @@ public class RemoteTrainedModel {
 		thenModelPredictionIsExpected(result);
 	}
 
+	private void givenModelURIAndInputData() {
+		try {
+			modelURI = new URI(TEST_URI);
+		} catch (URISyntaxException e) {
+			fail("The specified uri is not valid.");
+		}
+		inData = new ImageInputData(TestDataLoader.loadTrainingImage());
+	}
+	
+	private boolean whenLoadingTheModel() {
+		model.loadModel(modelURI);
+		return true;
+	}
+	
 	private MLPredictionResult whenQueryingTheModel() {
 		MLPredictionResult result = null;
 		try {
@@ -77,27 +90,12 @@ public class RemoteTrainedModel {
 		return result;
 	}
 
-	private void thenModelPredictionIsExpected(MLPredictionResult result) {
-		assertTrue(result.isExpectedResult() == IS_EXPECTED);
-		//assertTrue(result.getPredictionConfidence() == CONFIDENCE);
-	}
-
-	private void givenModelURIAndInputData() {
-		try {
-			modelURI = new URI(TEST_URI);
-		} catch (URISyntaxException e) {
-			fail("The specified uri is not valid.");
-		}
-		inData = new ImageInputData(TestDataLoader.loadTrainingImage());
-	}
-
-	private boolean whenLoadingTheModel() {
-		model.loadModel(modelURI);
-		return true;
-	}
-
 	private void thenLoadingWasSuccessfull(boolean successfullyLoaded) {
 		assertTrue(successfullyLoaded);
+	}
+	
+	private void thenModelPredictionIsExpected(MLPredictionResult result) {
+		assertTrue(result.isExpectedResult() == IS_EXPECTED);
 	}
 
 }

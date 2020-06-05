@@ -1,14 +1,14 @@
 package org.palladiosimulator.dependability.ml.model;
 
-public class InputDataLabel<T> {
+public class InputDataLabel {
 
-	private final T label;
+	private final Object label;
 
-	public InputDataLabel(T label) {
+	public InputDataLabel(Object label) {
 		this.label = label;
 	}
 
-	public T getLabel() {
+	public Object getLabel() {
 		return label;
 	}
 }

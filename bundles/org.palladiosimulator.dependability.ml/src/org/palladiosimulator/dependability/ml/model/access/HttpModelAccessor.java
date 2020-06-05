@@ -12,6 +12,9 @@ import java.net.http.HttpResponse.BodyHandlers;
 import java.time.Duration;
 import java.util.Base64;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.nonNull;
+import java.util.function.Function;
 
 import org.palladiosimulator.dependability.ml.exception.DependableMLException;
 import org.palladiosimulator.dependability.ml.model.InputData;
@@ -20,15 +23,34 @@ import org.palladiosimulator.dependability.ml.model.OutputData;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 
-public class HttpModelAccessor implements TrainedModelAccessor<InputData<?>, OutputData> {
+public class HttpModelAccessor implements TrainedModelAccessor<InputData, OutputData> {
 
 	private static int HTTP_OK = 200;
 	private static final String PREDICTION_ROUTE = "/predict";
 	private static final String SUPPORTED_SCHEME = "http";
 	private static final int TIME_OUT_DURATION = 2;
 
-	private HttpClient client = null;
-	private URI remoteModelURI = null;
+	private URI remoteModelURI;
+	
+	private final HttpClient client;
+	private final Function<String, List<OutputData>> jsonParser;
+
+	public HttpModelAccessor(Function<String, List<OutputData>> jsonParser) {
+		this.remoteModelURI = null;
+		this.client = HttpClient.newHttpClient();
+		this.jsonParser = nonNull(jsonParser) ? jsonParser : defaultJsonParser();
+	}
+	
+	public HttpModelAccessor() {
+		this(null);
+	}
+	
+	private Function<String, List<OutputData>> defaultJsonParser() {
+		return json -> {
+			var outData = new Gson().fromJson(json, OutputData[].class);
+			return Lists.newArrayList(outData);
+		};
+	}
 
 	@Override
 	public boolean canAccess(URI modelURI) {
@@ -37,15 +59,18 @@ public class HttpModelAccessor implements TrainedModelAccessor<InputData<?>, Out
 
 	@Override
 	public void load(URI modelURI) {
-		client = HttpClient.newHttpClient();
 		remoteModelURI = adjustQueryUri(modelURI);
 	}
 
 	@Override
-	public List<OutputData> query(InputData<?> inputData) {
-		var request = HttpRequest.newBuilder(remoteModelURI).header("Content-Type", "application/json")
+	public List<OutputData> query(InputData inputData) {
+		requireNonNull(remoteModelURI, "The model must be loaded first.");
+		
+		var request = HttpRequest.newBuilder(remoteModelURI)
+				.header("Content-Type", "application/json")
 				.timeout(Duration.ofMinutes(TIME_OUT_DURATION))
-				.POST(BodyPublishers.ofString(prepareForSending(inputData))).build();
+				.POST(BodyPublishers.ofString(jsonify(inputData)))
+				.build();
 
 		try {
 			var response = client.send(request, BodyHandlers.ofString());
@@ -70,19 +95,26 @@ public class HttpModelAccessor implements TrainedModelAccessor<InputData<?>, Out
 		}
 	}
 
-	private String prepareForSending(InputData<?> inputData) {
-		var body = "";
-		var value = inputData.getValue();
-
-		if (value instanceof String) {
-			body = (String) value;
-		} else if (value instanceof File) {
-			body = encode((File) value);
-		} else {
-			DependableMLException.throwWithMessage("The input data format is not supported.");
+	private String jsonify(InputData inputData) {
+		var jsonMessage = new StringBuilder();
+		for (String each : inputData.getKeys()) {
+			var value = inputData.getValueOf(each);
+			jsonMessage.append(jsonify(each, value));
 		}
-
-		return jsonify(body);
+		
+		jsonMessage.deleteCharAt(jsonMessage.length() - 1);
+		
+		return jsonMessage.toString();
+	}
+	
+	private String jsonify(String key, Object value) {
+		if (value instanceof Number) {
+			return String.format("{\"%1s\": %2s},", key, value);
+		} else if (value instanceof File) {
+			return String.format("{\"%1s\": \"%2s\"},", key, encode((File) value));
+		} else {
+			return String.format("{\"%1s\": \"%2s\"},", key, value);
+		}
 	}
 
 	private String encode(File fileToEncode) {
@@ -96,14 +128,9 @@ public class HttpModelAccessor implements TrainedModelAccessor<InputData<?>, Out
 		}
 		return base64Image;
 	}
-
-	private String jsonify(String value) {
-		return String.format("{\"value\": \"%s\"}", value);
-	}
 	
 	private List<OutputData> readFromJson(String json) {
-		var outData = new Gson().fromJson(json, OutputData[].class);
-		return Lists.newArrayList(outData);
+		return jsonParser.apply(json);
 	}
 
 }

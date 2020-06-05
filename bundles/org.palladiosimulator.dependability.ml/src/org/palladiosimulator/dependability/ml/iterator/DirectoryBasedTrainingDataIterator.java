@@ -10,19 +10,18 @@ import org.palladiosimulator.dependability.ml.util.Tuple;
 
 import com.google.common.collect.Lists;
 
-public abstract class DirectoryBasedTrainingDataIterator<InType extends InputData<?>, LabelType extends InputDataLabel<?>>
-		extends TrainingDataIterator<InType, LabelType> {
+public abstract class DirectoryBasedTrainingDataIterator extends TrainingDataIterator {
 
 	public DirectoryBasedTrainingDataIterator(File trainingDataLocation) {
 		super(trainingDataLocation);
 	}
 
 	@Override
-	protected Iterator<Tuple<InType, LabelType>> load(File trainingDataLocation) {
+	protected Iterator<Tuple<InputData, InputDataLabel>> load(File trainingDataLocation) {
 		var trainData = Lists.newArrayList(trainingDataLocation.listFiles());
 		return arrangeTrainingData(trainData);
 	}
 
-	protected abstract Iterator<Tuple<InType, LabelType>> arrangeTrainingData(List<File> trainData);
+	protected abstract Iterator<Tuple<InputData, InputDataLabel>> arrangeTrainingData(List<File> trainData);
 
 }

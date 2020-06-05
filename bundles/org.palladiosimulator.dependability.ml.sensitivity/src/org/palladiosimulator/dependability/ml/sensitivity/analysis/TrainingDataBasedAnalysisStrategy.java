@@ -7,23 +7,29 @@ import java.util.function.Function;
 
 import org.palladiosimulator.dependability.ml.model.MLPredictionResult;
 import org.palladiosimulator.dependability.ml.model.OutputData;
-import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityAggregations.SensitivityEntry;
+import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityAggregations.MLSensitivityEntry;
+import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityModel.MLOutcomeMeasure;
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.AnalysisTransformation;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.MeasurableProperty;
+
+import com.google.common.collect.Lists;
 
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 
 public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisStrategy {
 
 	private final Function<MLPredictionResult, Double> incrementalUpdate;
+	private final MLOutcomeMeasure outcomeMeasure;
 
-	private TrainingDataBasedAnalysisStrategy(Function<MLPredictionResult, Double> incrementalUpdate) {
+	private TrainingDataBasedAnalysisStrategy(Function<MLPredictionResult, Double> incrementalUpdate,
+			MLOutcomeMeasure outcomeMeasure) {
 		this.incrementalUpdate = incrementalUpdate;
+		this.outcomeMeasure = outcomeMeasure;
 	}
 
-	public static TrainingDataBasedAnalysisStrategy falsePredictionBasedStrategy() {
-		return new TrainingDataBasedAnalysisStrategy(r -> r.isExpectedResult() ? 1.0 : 0.0);
+	public static TrainingDataBasedAnalysisStrategy accuracyBasedStrategy() {
+		return new TrainingDataBasedAnalysisStrategy(r -> r.isExpectedResult() ? 1.0 : 0.0, MLOutcomeMeasure.SUCCESS);
 	}
 
 	public static TrainingDataBasedAnalysisStrategy confidenceBasedStrategy() {
@@ -32,7 +38,7 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 			var sumOfPredictions = r.getPredictions().stream().map(OutputData::getPredictionConfidence)
 					.reduce(Double::sum).get();
 			return sumOfPredictions / numberOfPredictions;
-		});
+		}, MLOutcomeMeasure.CONFIDENCE);
 	}
 
 	@Override
@@ -50,12 +56,10 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 		while (dataIterator.hasNext()) {
 			var dataTuple = dataIterator.next();
 
-			var<MeasurableProperty> properties = MLSensitivityAnalysis.getAnalysisTransformation()
+			var properties = MLSensitivityAnalysis.getAnalysisTransformation()
 					.computeMeasurableProperties(dataTuple.getFirst());
-			properties.forEach(sensitivityAggregations::updatePropertySensitivity);
-
-			var newValue = incrementalUpdate.apply(mlModel.makePrediction(dataTuple));
-			sensitivityAggregations.updateMLSensitivity(SensitivityEntry.from(properties), newValue);
+			var predictionAccuracy = incrementalUpdate.apply(mlModel.makePrediction(dataTuple));
+			sensitivityAggregations.record(properties, predictionAccuracy);
 		}
 
 		return sensitivityAggregations;
@@ -64,16 +68,16 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 	private SensitivityModel complementSensitivityModel(SensitivityModel sensitivitiyModel,
 			SensitivityAggregations sensitivityAggregations) {
 		for (String each : sensitivityAggregations.getMeasurablePropertyNames()) {
-			var<MeasurableProperty, Double> sensitivityValues = sensitivityAggregations
-					.filterLocalSensitivityValues(each);
+			var sensitivityValues = sensitivityAggregations.getPropertySensitivityValues(each);
 			checkAndHandleCompleteness(each, sensitivityValues);
 
 			sensitivitiyModel.setSensitivityValues(sensitivityValues);
 		}
 
-		var<SensitivityEntry, Double> mlSensitivityValues = sensitivityAggregations.getMLSensitivityValues();
+		var mlSensitivityValues = sensitivityAggregations.getMLSensitivityValues();
 		checkAndHandleCompleteness(mlSensitivityValues);
 
+		sensitivitiyModel.setMLOutcomeMeasure(outcomeMeasure);
 		sensitivitiyModel.setMLSensitivityValues(mlSensitivityValues);
 
 		return sensitivitiyModel;
@@ -87,10 +91,11 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 		}
 	}
 
-	private void checkAndHandleCompleteness(Map<SensitivityEntry, Double> mlSensitivityValues) {
+	private void checkAndHandleCompleteness(Map<MLSensitivityEntry, Double> mlSensitivityValues) {
 		AnalysisTransformation transformation = MLSensitivityAnalysis.getAnalysisTransformation();
 		for (List<MeasurableProperty> each : transformation.computePropertyMeasureValueSpace()) {
-			var entry = SensitivityEntry.from(each);
+			// The list of each is immutable; which causes an exception during sorting.
+			var entry = MLSensitivityEntry.from(Lists.newArrayList(each));
 			if (containsNoPropertyWith(entry, mlSensitivityValues.keySet())) {
 				enrichWithZeroSensitivity(mlSensitivityValues, entry);
 			}
@@ -98,10 +103,10 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 	}
 
 	private boolean containsNoPropertyWith(CategoricalValue value, Set<MeasurableProperty> recordedProperties) {
-		return recordedProperties.stream().noneMatch(prop -> prop.getMeasuredValue().equals(value));
+		return recordedProperties.stream().noneMatch(prop -> prop.getMeasuredValue().get().equals(value.get()));
 	}
 
-	private boolean containsNoPropertyWith(SensitivityEntry entry, Set<SensitivityEntry> mlSensitivityValues) {
+	private boolean containsNoPropertyWith(MLSensitivityEntry entry, Set<MLSensitivityEntry> mlSensitivityValues) {
 		return mlSensitivityValues.contains(entry) == false;
 	}
 
@@ -110,8 +115,8 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 		recordedProperties.put(zeroSensitivityProperty, 0.0);
 	}
 
-	private void enrichWithZeroSensitivity(Map<SensitivityEntry, Double> mlSensitivityValues,
-			SensitivityEntry zeroSensitivityProperty) {
+	private void enrichWithZeroSensitivity(Map<MLSensitivityEntry, Double> mlSensitivityValues,
+			MLSensitivityEntry zeroSensitivityProperty) {
 		mlSensitivityValues.put(zeroSensitivityProperty, 0.0);
 	}
 

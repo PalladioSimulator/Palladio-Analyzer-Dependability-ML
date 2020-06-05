@@ -3,10 +3,7 @@ package org.palladiosimulator.dependability.ml.sensitivity.analysis;
 import static java.util.Objects.requireNonNull;
 
 import java.io.File;
-import java.net.URI;
 
-import org.palladiosimulator.dependability.ml.model.InputData;
-import org.palladiosimulator.dependability.ml.model.InputDataLabel;
 import org.palladiosimulator.dependability.ml.model.TrainedModel;
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
 
@@ -14,23 +11,16 @@ public class MLAnalysisContext {
 
 	public static class MLAnalysisContextBuilder {
 
-		private URI mlModelLocation = null;
-		private Class<? extends TrainedModel<InputData<?>, InputDataLabel<?>>> modelType = null;
+		TrainedModel trainedModel;
 		private File trainingData = null;
 		private SensitivityModel sensitivityModel = null;
 
-		public MLAnalysisContextBuilder analyseSensitivityOf(URI mlModelLocation) {
-			this.mlModelLocation = mlModelLocation;
+		public MLAnalysisContextBuilder analyseSensitivityOf(TrainedModel trainedModel) {
+			this.trainedModel = trainedModel;
 			return this;
 		}
 
-		public MLAnalysisContextBuilder withType(
-				Class<? extends TrainedModel<InputData<?>, InputDataLabel<?>>> modelType) {
-			this.modelType = modelType;
-			return this;
-		}
-
-		public MLAnalysisContextBuilder trainedWith(File trainingData) {
+		public MLAnalysisContextBuilder trainedBy(File trainingData) {
 			this.trainingData = trainingData;
 			return this;
 		}
@@ -41,25 +31,12 @@ public class MLAnalysisContext {
 		}
 
 		public MLAnalysisContext build() {
-			requireNonNull(mlModelLocation, "The model location has to be specified.");
+			requireNonNull(trainedModel, "The ML model to analyse must be specified.");
 			requireNonNull(trainingData, "The training data location has to be specified.");
 			requireNonNull(sensitivityModel, "The sensitivity model has to be specified.");
-			requireNonNull(modelType, "The model type has to be specified.");
 
 			if (trainingData.exists() == false) {
 				MLSensitivityAnalysisException.throwWithMessage("The data location does not exist.");
-			}
-
-			if (mlModelLocation.isAbsolute() == false) {
-				MLSensitivityAnalysisException.throwWithMessage("The ml model uri has no scheme.");
-			}
-
-			TrainedModel<InputData<?>, InputDataLabel<?>> trainedModel = null;
-			try {
-				trainedModel = modelType.getDeclaredConstructor().newInstance();
-				trainedModel.loadModel(mlModelLocation);
-			} catch (Exception e) {
-				MLSensitivityAnalysisException.throwWithMessageAndCause("The ml model could not be build.", e);
 			}
 
 			return new MLAnalysisContext(trainedModel, trainingData, sensitivityModel);
@@ -67,13 +44,12 @@ public class MLAnalysisContext {
 
 	}
 
-	private final TrainedModel<InputData<?>, InputDataLabel<?>> mlModel;
+	private final TrainedModel trainedModel;
 	private final File trainingData;
 	private final SensitivityModel sensitivityModel;
 
-	private MLAnalysisContext(TrainedModel<InputData<?>, InputDataLabel<?>> mlModel, File trainingData,
-			SensitivityModel sensitivityModel) {
-		this.mlModel = mlModel;
+	private MLAnalysisContext(TrainedModel trainedModel, File trainingData, SensitivityModel sensitivityModel) {
+		this.trainedModel = trainedModel;
 		this.trainingData = trainingData;
 		this.sensitivityModel = sensitivityModel;
 	}
@@ -82,8 +58,8 @@ public class MLAnalysisContext {
 		return new MLAnalysisContextBuilder();
 	}
 
-	public TrainedModel<InputData<?>, InputDataLabel<?>> getMLModel() {
-		return mlModel;
+	public TrainedModel getMLModel() {
+		return trainedModel;
 	}
 
 	public File getTrainingData() {

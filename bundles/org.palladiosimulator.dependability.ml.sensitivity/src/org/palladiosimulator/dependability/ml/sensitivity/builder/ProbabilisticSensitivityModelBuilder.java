@@ -1,7 +1,8 @@
 package org.palladiosimulator.dependability.ml.sensitivity.builder;
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticModel;
@@ -15,6 +16,8 @@ import org.palladiosimulator.envdyn.environment.templatevariable.TemplateFactor;
 import org.palladiosimulator.envdyn.environment.templatevariable.TemplateVariable;
 import org.palladiosimulator.envdyn.environment.templatevariable.TemplateVariableDefinitions;
 import org.palladiosimulator.envdyn.environment.templatevariable.TemplatevariableFactory;
+
+import com.google.common.collect.Lists;
 
 import tools.mdsd.probdist.distributiontype.ProbabilityDistributionSkeleton;
 import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
@@ -45,6 +48,10 @@ public class ProbabilisticSensitivityModelBuilder {
 
 		buildInitialStructure();
 	}
+	
+	public static ProbabilisticSensitivityModelBuilder get() {
+		return new ProbabilisticSensitivityModelBuilder();
+	}
 
 	public ProbabilisticSensitivityModelBuilder addSensitivityFactor(PropertyMeasure propertyMeasure) {
 		var propertyName = propertyMeasure.getPropertyName();
@@ -71,11 +78,8 @@ public class ProbabilisticSensitivityModelBuilder {
 		return this;
 	}
 
-	public ResourceSet build() {
-		var resourceSet = new ResourceSetImpl();
-		resourceSet.getResources().add(networkRepo.eResource());
-		resourceSet.getResources().add(templateDefinitions.eResource());
-		return resourceSet;
+	public List<EObject> build() {
+		return Lists.newArrayList(networkRepo, templateDefinitions);
 	}
 
 	private DependenceRelation buildDependencyRelationToMLTemplate(TemplateVariable source) {
@@ -167,9 +171,10 @@ public class ProbabilisticSensitivityModelBuilder {
 		networkRepo.getModels().add(groundNetwork);
 	}
 
-	private GroundRandomVariable instantiateTemplate(TemplateVariable Template, String name) {
+	private GroundRandomVariable instantiateTemplate(TemplateVariable template, String name) {
 		var randomVariable = staticModelFactory.createGroundRandomVariable();
 		randomVariable.setEntityName(name);
+		randomVariable.setInstantiatedTemplate(template);
 		return randomVariable;
 	}
 

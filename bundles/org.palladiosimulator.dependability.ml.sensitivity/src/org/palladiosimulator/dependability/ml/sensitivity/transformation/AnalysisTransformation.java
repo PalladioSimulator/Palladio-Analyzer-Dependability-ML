@@ -21,7 +21,7 @@ public class AnalysisTransformation {
 		this.propertyMeasures = propertyMeasures;
 	}
 
-	public Set<MeasurableProperty> computeMeasurableProperties(InputData<?> inputData) {
+	public Set<MeasurableProperty> computeMeasurableProperties(InputData inputData) {
 		return propertyMeasures.stream().map(each -> each.apply(inputData)).collect(toSet());
 	}
 

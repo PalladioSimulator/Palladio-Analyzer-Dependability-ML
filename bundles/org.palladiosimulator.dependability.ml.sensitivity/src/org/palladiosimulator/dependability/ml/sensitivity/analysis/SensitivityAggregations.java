@@ -17,22 +17,22 @@ import com.google.common.collect.Maps;
 
 public class SensitivityAggregations {
 
-	public static class SensitivityEntry {
+	public static class MLSensitivityEntry {
 
 		public final static String SIGNATURE_DELIMITER = ",";
 
 		private final String signature;
 
-		private SensitivityEntry(List<MeasurableProperty> properties) {
+		private MLSensitivityEntry(List<MeasurableProperty> properties) {
 			this.signature = constructSignatureFrom(properties);
 		}
 
-		public static SensitivityEntry from(Set<MeasurableProperty> properties) {
-			return new SensitivityEntry(Lists.newArrayList(properties));
+		public static MLSensitivityEntry from(Set<MeasurableProperty> properties) {
+			return new MLSensitivityEntry(Lists.newArrayList(properties));
 		}
 
-		public static SensitivityEntry from(List<MeasurableProperty> properties) {
-			return new SensitivityEntry(properties);
+		public static MLSensitivityEntry from(List<MeasurableProperty> properties) {
+			return new MLSensitivityEntry(properties);
 		}
 
 		private static String constructSignatureFrom(List<MeasurableProperty> properties) {
@@ -53,8 +53,8 @@ public class SensitivityAggregations {
 
 		@Override
 		public boolean equals(Object obj) {
-			if (obj instanceof SensitivityEntry) {
-				return SensitivityEntry.class.cast(obj).signature.equals(signature);
+			if (obj instanceof MLSensitivityEntry) {
+				return MLSensitivityEntry.class.cast(obj).signature.equals(signature);
 			}
 			return false;
 		}
@@ -70,78 +70,87 @@ public class SensitivityAggregations {
 
 	}
 
-	private static class AggregatedValue {
+	private static class MLSensitivityValue {
 
-		public double sum;
-		public int count;
+		private double sensitivity;
+		private int occurenceCounter;
 
-		public AggregatedValue(double value) {
-			this.sum = value;
-			this.count = 1;
+		public MLSensitivityValue(double initial) {
+			this.sensitivity = initial;
+			this.occurenceCounter = 1;
 		}
 
-		public void update(double value) {
-			sum += value;
-			count++;
+		public MLSensitivityValue incrementalUpdate(MLSensitivityValue newValue) {
+			sensitivity += newValue.sensitivity;
+			occurenceCounter++;
+			return this;
 		}
 
-		public double calculateMean() {
-			return sum / count;
+		public double computeNormalizedAggregatedValue() {
+			return sensitivity / occurenceCounter;
 		}
 
 	}
 
 	private final static double PROPERTY_OCCURENCE_COUNT = 1.0;
 
-	private final Map<MeasurableProperty, AggregatedValue> propertySensitivityAggregations;
-	private final Map<SensitivityEntry, AggregatedValue> mlSensitivityAggregations;
+	private final Map<MeasurableProperty, Double> propertySensitivityAggregations;
+	private final Map<MLSensitivityEntry, MLSensitivityValue> mlSensitivityAggregations;
+
+	private int globalCount;
 
 	public SensitivityAggregations() {
 		this.propertySensitivityAggregations = Maps.newHashMap();
 		this.mlSensitivityAggregations = Maps.newHashMap();
+		this.globalCount = 0;
 	}
 
-	public void updatePropertySensitivity(MeasurableProperty property) {
-		var aggValue = Optional.ofNullable(propertySensitivityAggregations.get(property));
-		if (aggValue.isPresent()) {
-			aggValue.get().update(PROPERTY_OCCURENCE_COUNT);
-		} else {
-			propertySensitivityAggregations.put(property, new AggregatedValue(PROPERTY_OCCURENCE_COUNT));
-		}
-	}
+	public void record(Set<MeasurableProperty> measuredProperties, double predictionAccuracy) {
+		measuredProperties.forEach(this::updatePropertySensitivity);
+		updateMLSensitivity(MLSensitivityEntry.from(measuredProperties), predictionAccuracy);
 
-	public void updateMLSensitivity(SensitivityEntry entry, double value) {
-		var aggValue = Optional.ofNullable(mlSensitivityAggregations.get(entry));
-		if (aggValue.isPresent()) {
-			aggValue.get().update(value);
-		} else {
-			mlSensitivityAggregations.put(entry, new AggregatedValue(value));
-		}
+		incrementGlobalCounter();
 	}
 
 	public Set<String> getMeasurablePropertyNames() {
 		return groupMeasurableProperties().keySet();
 	}
 
-	public Map<SensitivityEntry, Double> getMLSensitivityValues() {
+	public Map<MLSensitivityEntry, Double> getMLSensitivityValues() {
 		return mlSensitivityAggregations.entrySet().stream()
-				.collect(toMap(entry -> entry.getKey(), entry -> entry.getValue().calculateMean()));
+				.collect(toMap(Map.Entry::getKey, normalizeAggregatedValues()));
 	}
 
-	public Map<MeasurableProperty, Double> filterLocalSensitivityValues(String propertyName) {
+	public Map<MeasurableProperty, Double> getPropertySensitivityValues(String propertyName) {
 		return groupMeasurableProperties().get(propertyName).stream()
-				.collect(toMap(Function.identity(), this::getLocalSensitivityValue));
+				.collect(toMap(Function.identity(), this::normalizeAggregatedValues));
+	}
+
+	private Double normalizeAggregatedValues(MeasurableProperty property) {
+		var value = Optional.ofNullable(propertySensitivityAggregations.get(property))
+				.orElseThrow(MLSensitivityAnalysisException.supplierWithMessage(
+						String.format("There is no local sensitivity value for property %s", property.getName())));
+		return value / globalCount;
+	}
+
+	private Function<Map.Entry<MLSensitivityEntry, MLSensitivityValue>, Double> normalizeAggregatedValues() {
+		return e -> e.getValue().computeNormalizedAggregatedValue();
 	}
 
 	private Map<String, List<MeasurableProperty>> groupMeasurableProperties() {
 		return propertySensitivityAggregations.keySet().stream().collect(groupingBy(MeasurableProperty::getName));
 	}
 
-	private Double getLocalSensitivityValue(MeasurableProperty property) {
-		AggregatedValue value = Optional.ofNullable(propertySensitivityAggregations.get(property))
-				.orElseThrow(MLSensitivityAnalysisException.supplierWithMessage(
-						String.format("There is no local sensitivity value for property %s", property.getName())));
-		return value.calculateMean();
+	private void updatePropertySensitivity(MeasurableProperty property) {
+		propertySensitivityAggregations.merge(property, PROPERTY_OCCURENCE_COUNT, Double::sum);
+	}
+
+	private void updateMLSensitivity(MLSensitivityEntry entry, double value) {
+		mlSensitivityAggregations.merge(entry, new MLSensitivityValue(value), MLSensitivityValue::incrementalUpdate);
+	}
+
+	private void incrementGlobalCounter() {
+		globalCount++;
 	}
 
 }

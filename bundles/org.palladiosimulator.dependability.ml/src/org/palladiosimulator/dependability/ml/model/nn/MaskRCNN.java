@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.palladiosimulator.dependability.ml.exception.DependableMLException;
 import org.palladiosimulator.dependability.ml.iterator.DirectoryBasedTrainingDataIterator;
+import org.palladiosimulator.dependability.ml.model.InputData;
+import org.palladiosimulator.dependability.ml.model.InputDataLabel;
 import org.palladiosimulator.dependability.ml.model.MLPredictionResult;
 import org.palladiosimulator.dependability.ml.model.OutputData;
 import org.palladiosimulator.dependability.ml.model.TrainedModel;
@@ -17,17 +19,16 @@ import org.palladiosimulator.dependability.ml.util.Tuple;
 
 import com.google.common.collect.Lists;
 
-public class MaskRCNN implements TrainedModel<ImageInputData, ImageSegmentationLabel> {
+public class MaskRCNN implements TrainedModel {
 
-	public static class MaskRCNNTrainingDataIterator
-			extends DirectoryBasedTrainingDataIterator<ImageInputData, ImageSegmentationLabel> {
+	public static class MaskRCNNTrainingDataIterator extends DirectoryBasedTrainingDataIterator {
 
 		public MaskRCNNTrainingDataIterator(File trainingDataLocation) {
 			super(trainingDataLocation);
 		}
 
 		@Override
-		protected Iterator<Tuple<ImageInputData, ImageSegmentationLabel>> arrangeTrainingData(List<File> trainData) {
+		protected Iterator<Tuple<InputData, InputDataLabel>> arrangeTrainingData(List<File> trainData) {
 			var partitionedData = trainData.stream().collect(partitioningBy(f -> ImageInputData.isTrainingData(f)));
 			var trainDataSplit = partitionedData.get(true);
 			var labelDataSplit = partitionedData.get(false);
@@ -35,7 +36,7 @@ public class MaskRCNN implements TrainedModel<ImageInputData, ImageSegmentationL
 				DependableMLException.throwWithMessage("The number of training and label data is unequal");
 			}
 
-			List<Tuple<ImageInputData, ImageSegmentationLabel>> arrangedData = Lists.newArrayList();
+			List<Tuple<InputData, InputDataLabel>> arrangedData = Lists.newArrayList();
 			for (int i = 0; i < trainDataSplit.size(); i++) {
 				var inputData = new ImageInputData(trainDataSplit.get(i));
 				var label = new ImageSegmentationLabel(labelDataSplit.get(i));
@@ -61,7 +62,7 @@ public class MaskRCNN implements TrainedModel<ImageInputData, ImageSegmentationL
 	}
 
 	@Override
-	public MLPredictionResult makePrediction(Tuple<ImageInputData, ImageSegmentationLabel> dataTuple) {
+	public MLPredictionResult makePrediction(Tuple<InputData, InputDataLabel> dataTuple) {
 		var prediction = remoteTrainedModel.query(dataTuple.getFirst());
 		return parsePredictionResult(prediction);
 	}

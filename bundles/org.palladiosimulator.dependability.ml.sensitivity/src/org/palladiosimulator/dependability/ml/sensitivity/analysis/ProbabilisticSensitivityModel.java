@@ -1,25 +1,71 @@
 package org.palladiosimulator.dependability.ml.sensitivity.analysis;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Predicate;
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
+import static java.util.stream.Collectors.toList;
 
-import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityAggregations.SensitivityEntry;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityAggregations.MLSensitivityEntry;
+import org.palladiosimulator.dependability.ml.sensitivity.builder.ProbabilisticSensitivityModelBuilder;
 import org.palladiosimulator.dependability.ml.sensitivity.builder.ProbabilityDistributionBuilder;
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.MeasurableProperty;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure;
+import org.palladiosimulator.envdyn.api.entity.bn.BayesianNetwork;
+import org.palladiosimulator.envdyn.api.entity.bn.BayesianNetwork.InputValue;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticNetwork;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
+import org.palladiosimulator.envdyn.environment.staticmodel.ProbabilisticModelRepository;
+import org.palladiosimulator.envdyn.environment.templatevariable.TemplateVariableDefinitions;
 
+import com.google.common.collect.Maps;
+
+import tools.mdsd.probdist.api.entity.CategoricalValue;
+import tools.mdsd.probdist.api.parser.DefaultParameterParser;
 import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
+import tools.mdsd.probdist.distributionfunction.SimpleParameter;
 
-public class ProbabilisticSensitivityModel implements SensitivityModel {
+public class ProbabilisticSensitivityModel extends SensitivityModel {
 
+	private final static String PROB_MODEL_NAME = "ProbabilisticSensitivityModel";
+	private final static String PROB_MODEL_EXT = "staticmodel";
+	private final static String TEMPLATE_MODEL_NAME = "ProbabilisticSensitivityModel";
+	private final static String TEMPLATE_MODEL_EXT = "template";
+
+	private final TemplateVariableDefinitions templateVariables;
 	private final GroundProbabilisticNetwork probSensitivityModel;
 
-	public ProbabilisticSensitivityModel(GroundProbabilisticNetwork probSensitivityModel) {
+	private BayesianNetwork bayesianNetwork;
+
+	private ProbabilisticSensitivityModel(GroundProbabilisticNetwork probSensitivityModel,
+			TemplateVariableDefinitions templateVariables) {
 		this.probSensitivityModel = probSensitivityModel;
+		this.templateVariables = templateVariables;
+		this.bayesianNetwork = null;
+	}
+
+	private ProbabilisticSensitivityModel() {
+		this(null, null);
+	}
+
+	public static ProbabilisticSensitivityModel createFrom(GroundProbabilisticNetwork probSensitivityModel,
+			TemplateVariableDefinitions templateVariables) {
+		return new ProbabilisticSensitivityModel(probSensitivityModel, templateVariables);
+	}
+
+	public static ProbabilisticSensitivityModel createFrom(Set<PropertyMeasure> propertyMeasures) {
+		return new ProbabilisticSensitivityModel().deriveFrom(propertyMeasures);
 	}
 
 	@Override
@@ -30,15 +76,121 @@ public class ProbabilisticSensitivityModel implements SensitivityModel {
 	}
 
 	@Override
-	public void setMLSensitivityValues(Map<SensitivityEntry, Double> mlSensitivityValues) {
+	public double getSensitivityValuesOf(MeasurableProperty property) {
+		var probabilisticModel = findRandomVariableFor(property.getName()).getDescriptiveModel();
+		var param = probabilisticModel.getDistribution().getParams().get(0).getRepresentation();
+		if (param instanceof SimpleParameter) {
+			return retrieveSensitivityValueOf(property, (SimpleParameter) param).orElse(0.0);
+		} else {
+			// TODO logging
+			return 0.0;
+		}
+	}
+
+	@Override
+	public void setMLSensitivityValues(Map<MLSensitivityEntry, Double> mlSensitivityValues) {
 		var probabilisticModel = findMLRandomVariable().getDescriptiveModel();
 		probabilisticModel.setDistribution(buildMLProbabilityOfSuccessDistribution(mlSensitivityValues));
 	}
-	
+
 	@Override
-	public SensitivityModel deriveFrom(Set<PropertyMeasure> propertyMeasures) {
-		// TODO Auto-generated method stub
+	public double inferProbabilityOfSuccessGiven(List<MeasurableProperty> properties) {
+		if (isNull(bayesianNetwork)) {
+			bayesianNetwork = new BayesianNetwork(null, probSensitivityModel);
+		}
+
+		var inputs = toInputValues(properties);
+		if (isInferenceRequired(inputs)) {
+			return bayesianNetwork.infer(inputs);
+		}
+		return bayesianNetwork.probability(inputs);
+
+	}
+
+	@Override
+	public void saveAt(URI location) {
+		if (nonNull(location.fileExtension())) {
+			// TODO logging
+			return;
+		}
+
+		saveTemplateVariables(location);
+		saveGroundProbabilisticModel(location);
+	}
+
+	@Override
+	public ProbabilisticSensitivityModel deriveFrom(Set<PropertyMeasure> propertyMeasures) {
+		var builder = ProbabilisticSensitivityModelBuilder.get();
+		propertyMeasures.forEach(builder::addSensitivityFactor);
+		var models = builder.build();
+
+		ProbabilisticModelRepository groundNetworkRepo = getModelOfType(ProbabilisticModelRepository.class, models);
+		TemplateVariableDefinitions templateVariables = getModelOfType(TemplateVariableDefinitions.class, models);
+		return new ProbabilisticSensitivityModel(groundNetworkRepo.getModels().get(0), templateVariables);
+	}
+
+	@SuppressWarnings("unchecked")
+	private <T> T getModelOfType(Class<T> modelType, List<EObject> models) {
+		for (EObject each : models) {
+			if (modelType.isInstance(each)) {
+				return (T) each;
+			}
+		}
 		return null;
+	}
+
+	private boolean isInferenceRequired(List<InputValue> inputs) {
+		return (bayesianNetwork.getGroundVariables().size()) > inputs.size();
+	}
+
+	private List<InputValue> toInputValues(List<MeasurableProperty> properties) {
+		var inputs = properties.stream().map(this::toInputValue).collect(toList());
+
+		var mlVar = findMLRandomVariable();
+		inputs.add(InputValue.create(CategoricalValue.create(MLOutcomeMeasure.SUCCESS.toString()), mlVar));
+
+		return inputs;
+	}
+
+	private InputValue toInputValue(MeasurableProperty property) {
+		return InputValue.create(property.getMeasuredValue(), findRandomVariableFor(property.getName()));
+	}
+
+	private Optional<Double> retrieveSensitivityValueOf(MeasurableProperty property, SimpleParameter param) {
+		var values = param.getValue().split(DefaultParameterParser.SAMPLE_DELIMITER);
+		return Stream.of(values).map(parseValues()).filter(withValue(property.getMeasuredValue()))
+				.map(v -> Double.valueOf(v[1])).findFirst();
+	}
+
+	private Function<String, String[]> parseValues() {
+		return value -> {
+			return new StringBuilder(value).deleteCharAt(0).deleteCharAt(value.length() - 1).toString()
+					.split(DefaultParameterParser.PAIR_DELIMITER);
+		};
+	}
+
+	private Predicate<String[]> withValue(CategoricalValue measuredValue) {
+		return v -> v[0].equals(measuredValue.get());
+	}
+
+	private void saveTemplateVariables(URI location) {
+		var adjustedLocation = location.appendSegment(TEMPLATE_MODEL_NAME).appendFileExtension(TEMPLATE_MODEL_EXT);
+		save(templateVariables.eResource(), adjustedLocation);
+	}
+
+	private void saveGroundProbabilisticModel(URI location) {
+		var adjustedLocation = location.appendSegment(PROB_MODEL_NAME).appendFileExtension(PROB_MODEL_EXT);
+		save(probSensitivityModel.eResource(), adjustedLocation);
+	}
+
+	private void save(Resource resourceToSave, URI adjustedLocation) {
+		resourceToSave.setURI(adjustedLocation);
+		try {
+			resourceToSave.save(Maps.newHashMap());
+		} catch (IOException e) {
+			MLSensitivityAnalysisException
+					.throwWithMessageAndCause(String.format("Model %s could not be safed", adjustedLocation), e);
+		}
 	}
 
 	private MeasurableProperty getGlobalProperty(Map<MeasurableProperty, Double> sensitivityValues) {
@@ -76,9 +228,13 @@ public class ProbabilisticSensitivityModel implements SensitivityModel {
 	}
 
 	public ProbabilityDistribution buildMLProbabilityOfSuccessDistribution(
-			Map<SensitivityEntry, Double> sensitivityValues) {
-		return ProbabilityDistributionBuilder.buildProbabilityDistributionForMLVariable()
-				.withTabularParameterDerivedFrom(sensitivityValues).build();
+			Map<MLSensitivityEntry, Double> sensitivityValues) {
+		var builder = ProbabilityDistributionBuilder.buildProbabilityDistributionForMLVariable()
+				.withTabularParameterDerivedFrom(sensitivityValues);
+		if (outcomeMeasure == MLOutcomeMeasure.CONFIDENCE) {
+			builder.withConfidenceOutcomeMeasure();
+		}
+		return builder.build();
 	}
 
 }

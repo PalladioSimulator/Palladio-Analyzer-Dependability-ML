@@ -28,9 +28,10 @@ public class MeasurableProperty {
 			return false;
 		}
 
-		MeasurableProperty otherProperty = (MeasurableProperty) other;
-		return Boolean.logicalAnd(otherProperty.getName().equals(name),
-				otherProperty.getMeasuredValue().equals(getMeasuredValue()));
+		var otherProperty = (MeasurableProperty) other;
+		var areEqual = otherProperty.getName().equals(name);
+		areEqual &= otherProperty.getMeasuredValue().get().equals(measuredValue.get());
+		return areEqual;
 	}
 
 	@Override
