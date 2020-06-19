@@ -7,6 +7,7 @@ import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivit
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticModel;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
+import org.palladiosimulator.envdyn.environment.staticmodel.LocalProbabilisticNetwork;
 import org.palladiosimulator.envdyn.environment.staticmodel.ProbabilisticModelRepository;
 import org.palladiosimulator.envdyn.environment.staticmodel.StaticmodelFactory;
 import org.palladiosimulator.envdyn.environment.templatevariable.DependenceRelation;
@@ -48,7 +49,7 @@ public class ProbabilisticSensitivityModelBuilder {
 
 		buildInitialStructure();
 	}
-	
+
 	public static ProbabilisticSensitivityModelBuilder get() {
 		return new ProbabilisticSensitivityModelBuilder();
 	}
@@ -74,7 +75,7 @@ public class ProbabilisticSensitivityModelBuilder {
 		addToGroundNetwork(instantiatedFactor);
 
 		groundVariable.setDescriptiveModel(instantiatedFactor);
-		
+
 		return this;
 	}
 
@@ -184,10 +185,15 @@ public class ProbabilisticSensitivityModelBuilder {
 	}
 
 	private void addToGroundNetwork(GroundRandomVariable groundVariable) {
-		var localModel = staticModelFactory.createLocalProbabilisticNetwork();
-		localModel.getGroundRandomVariables().add(groundVariable);
+		getOrCreateLocalModel().getGroundRandomVariables().add(groundVariable);
+	}
 
-		networkRepo.getModels().get(0).getLocalProbabilisticModels().add(localModel);
+	private LocalProbabilisticNetwork getOrCreateLocalModel() {
+		var groundNetwork = networkRepo.getModels().get(0);
+		if (groundNetwork.getLocalProbabilisticModels().isEmpty()) {
+			groundNetwork.getLocalProbabilisticModels().add(staticModelFactory.createLocalProbabilisticNetwork());
+		}
+		return groundNetwork.getLocalProbabilisticModels().get(0);
 	}
 
 	private void addToGroundNetwork(GroundProbabilisticModel instantiatedFactor) {

@@ -3,6 +3,7 @@ package org.palladiosimulator.dependability.ml.sensitivity.analysis;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.stream.Stream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityAggregations.MLSensitivityEntry;
 import org.palladiosimulator.dependability.ml.sensitivity.builder.ProbabilisticSensitivityModelBuilder;
 import org.palladiosimulator.dependability.ml.sensitivity.builder.ProbabilityDistributionBuilder;
@@ -24,6 +25,7 @@ import org.palladiosimulator.dependability.ml.sensitivity.transformation.Measura
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure;
 import org.palladiosimulator.envdyn.api.entity.bn.BayesianNetwork;
 import org.palladiosimulator.envdyn.api.entity.bn.BayesianNetwork.InputValue;
+import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticModel;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticNetwork;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
 import org.palladiosimulator.envdyn.environment.staticmodel.ProbabilisticModelRepository;
@@ -38,10 +40,12 @@ import tools.mdsd.probdist.distributionfunction.SimpleParameter;
 
 public class ProbabilisticSensitivityModel extends SensitivityModel {
 
+	private final static String DIST_MODEL_NAME = "ProbabilityDistributions";
+	private final static String DIST_MODEL_EXT = "distributionfunction";
 	private final static String PROB_MODEL_NAME = "ProbabilisticSensitivityModel";
 	private final static String PROB_MODEL_EXT = "staticmodel";
 	private final static String TEMPLATE_MODEL_NAME = "ProbabilisticSensitivityModel";
-	private final static String TEMPLATE_MODEL_EXT = "template";
+	private final static String TEMPLATE_MODEL_EXT = "templatevariable";
 
 	private final TemplateVariableDefinitions templateVariables;
 	private final GroundProbabilisticNetwork probSensitivityModel;
@@ -94,7 +98,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 	}
 
 	@Override
-	public double inferProbabilityOfSuccessGiven(List<MeasurableProperty> properties) {
+	public double inferSensitivity(List<MeasurableProperty> properties) {
 		if (isNull(bayesianNetwork)) {
 			bayesianNetwork = new BayesianNetwork(null, probSensitivityModel);
 		}
@@ -115,6 +119,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 		}
 
 		saveTemplateVariables(location);
+		saveDistributionFunctions(location);
 		saveGroundProbabilisticModel(location);
 	}
 
@@ -147,50 +152,67 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 		var inputs = properties.stream().map(this::toInputValue).collect(toList());
 
 		var mlVar = findMLRandomVariable();
-		inputs.add(InputValue.create(CategoricalValue.create(MLOutcomeMeasure.SUCCESS.toString()), mlVar));
+		inputs.add(InputValue.create(CategoricalValue.create(outcomeMeasure.toString()), mlVar));
 
 		return inputs;
 	}
 
 	private InputValue toInputValue(MeasurableProperty property) {
-		return InputValue.create(property.getMeasuredValue(), findRandomVariableFor(property.getName()));
+		var value = CategoricalValue.create(property.toString());
+		var variable = findRandomVariableFor(property.getName());
+		return InputValue.create(value, variable);
 	}
 
 	private Optional<Double> retrieveSensitivityValueOf(MeasurableProperty property, SimpleParameter param) {
 		var values = param.getValue().split(DefaultParameterParser.SAMPLE_DELIMITER);
-		return Stream.of(values).map(parseValues()).filter(withValue(property.getMeasuredValue()))
+		return Stream.of(values).map(parseValues()).filter(withValue(property.toString()))
 				.map(v -> Double.valueOf(v[1])).findFirst();
 	}
 
 	private Function<String, String[]> parseValues() {
 		return value -> {
-			return new StringBuilder(value).deleteCharAt(0).deleteCharAt(value.length() - 1).toString()
+			return new StringBuilder(value)
+					.deleteCharAt(0)
+					.deleteCharAt(value.length() - 2)
+					.toString()
 					.split(DefaultParameterParser.PAIR_DELIMITER);
 		};
 	}
 
-	private Predicate<String[]> withValue(CategoricalValue measuredValue) {
-		return v -> v[0].equals(measuredValue.get());
+	private Predicate<String[]> withValue(String measuredValue) {
+		return v -> v[0].equals(measuredValue);
 	}
 
 	private void saveTemplateVariables(URI location) {
 		var adjustedLocation = location.appendSegment(TEMPLATE_MODEL_NAME).appendFileExtension(TEMPLATE_MODEL_EXT);
-		save(templateVariables.eResource(), adjustedLocation);
+		save(templateVariables, adjustedLocation);
 	}
 
 	private void saveGroundProbabilisticModel(URI location) {
 		var adjustedLocation = location.appendSegment(PROB_MODEL_NAME).appendFileExtension(PROB_MODEL_EXT);
-		save(probSensitivityModel.eResource(), adjustedLocation);
+		save(probSensitivityModel.eContainer(), adjustedLocation);
 	}
 
-	private void save(Resource resourceToSave, URI adjustedLocation) {
-		resourceToSave.setURI(adjustedLocation);
+	private void saveDistributionFunctions(URI location) {
+		var adjustedLocation = location.appendSegment(DIST_MODEL_NAME).appendFileExtension(DIST_MODEL_EXT);
+		var root = ProbabilityDistributionBuilder.mergeToSingleRepository(retrieveDistributions());
+		save(root, adjustedLocation);
+	}
+
+	private void save(EObject root, URI adjustedLocation) {
 		try {
+			var resourceToSave = new ResourceSetImpl().createResource(adjustedLocation);
+			resourceToSave.getContents().add(root);
 			resourceToSave.save(Maps.newHashMap());
 		} catch (IOException e) {
 			MLSensitivityAnalysisException
 					.throwWithMessageAndCause(String.format("Model %s could not be safed", adjustedLocation), e);
 		}
+	}
+	
+	private Set<ProbabilityDistribution> retrieveDistributions() {
+		return probSensitivityModel.getLocalModels().stream().map(GroundProbabilisticModel::getDistribution)
+				.collect(toSet());
 	}
 
 	private MeasurableProperty getGlobalProperty(Map<MeasurableProperty, Double> sensitivityValues) {
@@ -227,7 +249,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 				.withSimpleParameterDerivedFrom(sensitivityValues).build();
 	}
 
-	public ProbabilityDistribution buildMLProbabilityOfSuccessDistribution(
+	private ProbabilityDistribution buildMLProbabilityOfSuccessDistribution(
 			Map<MLSensitivityEntry, Double> sensitivityValues) {
 		var builder = ProbabilityDistributionBuilder.buildProbabilityDistributionForMLVariable()
 				.withTabularParameterDerivedFrom(sensitivityValues);

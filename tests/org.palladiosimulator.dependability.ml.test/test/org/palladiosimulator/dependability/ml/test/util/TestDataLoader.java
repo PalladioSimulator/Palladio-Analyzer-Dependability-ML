@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 public class TestDataLoader {
 	
 	private final static String FOLDER = "resource";
-	private final static String IMAGE = "TrainingImg.jpg";
+	private final static String IMAGE = "TrainingImg.png";
 	
 	public static File loadTrainingImage() {
 		var projectPath = System.getProperty("user.dir");

@@ -36,7 +36,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
+import tools.mdsd.probdist.api.apache.supplier.MultinomialDistributionSupplier;
+import tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
+import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
 public class MLSensitivityAnalysisTest {
 
@@ -113,6 +117,9 @@ public class MLSensitivityAnalysisTest {
 
 	@Before
 	public void setUp() throws Exception {
+		DistributionTypeModelUtil.get(BasicDistributionTypesLoader.loadRepository());
+		ProbabilityDistributionFactory.get().register(new MultinomialDistributionSupplier());
+		
 		dummyFile = new File(System.getProperty("user.dir"));
 
 		var trainingDataStrategy = TrainingDataBasedAnalysisStrategy.confidenceBasedStrategy();
@@ -190,6 +197,9 @@ public class MLSensitivityAnalysisTest {
 
 	private void whenAnalysingSensitivity() {
 		result = sensitivityAnalysis.analyseSensitivity(context);
+		
+//		var location = Paths.get(System.getProperty("user.dir"), "model").toFile();
+//		result.saveAt(org.eclipse.emf.common.util.URI.createFileURI(location.getAbsolutePath()));
 	}
 
 	private void thenSensitivityModelIsValid() {
@@ -205,9 +215,9 @@ public class MLSensitivityAnalysisTest {
 				var properties = Lists.newArrayList(
 						new MeasurableProperty(firstMeasure.getPropertyName(), eachValOfFirst),
 						new MeasurableProperty(secondMeasure.getPropertyName(), eachValOfSecond));
-				Double successSensitvity = null;
+				var successSensitvity = -1.0;
 				try {
-					successSensitvity = result.inferProbabilityOfSuccessGiven(properties);
+					successSensitvity = result.inferSensitivity(properties);
 				} catch (MLSensitivityAnalysisException e) {
 					fail(String.format("Something went wrong during inference, see: %s", e.getMessage()));
 				}
