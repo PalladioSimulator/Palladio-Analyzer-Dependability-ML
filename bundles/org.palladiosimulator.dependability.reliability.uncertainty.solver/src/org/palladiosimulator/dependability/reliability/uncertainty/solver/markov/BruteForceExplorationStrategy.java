@@ -14,4 +14,9 @@ public class BruteForceExplorationStrategy implements StateSpaceExplorationStrat
 		return stateSpace.cartesianProduct();
 	}
 
+	@Override
+	public String getName() {
+		return "Brute force exploration strategy";
+	}
+
 }

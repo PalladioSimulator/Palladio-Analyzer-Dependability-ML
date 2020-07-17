@@ -99,9 +99,9 @@ public class UncertaintyBasedReliabilityPrediction {
 
 		ReliabilityPredictionResult result = null;
 
-		DiscreteUncertaintyStateSpace stateSpace = DiscreteUncertaintyStateSpace.deriveFrom(uncertainties);
+		var stateSpace = DiscreteUncertaintyStateSpace.deriveFrom(uncertainties);
 		for (List<UncertaintyState> eachTuple : evalStrategy.explore(stateSpace)) {
-			ReliabilityPredictionResult interimResult = predict(unresolved, eachTuple);
+			var interimResult = predict(unresolved, eachTuple);
 			if (isNull(result)) {
 				result = interimResult;
 			} else {
@@ -113,13 +113,13 @@ public class UncertaintyBasedReliabilityPrediction {
 	}
 
 	public ReliabilityPredictionResult predict(PCMInstance unresolved, List<UncertaintyState> stateTuple) {
-		PCMInstance resolved = uncertaintyResolver.resolve(unresolved, stateTuple);
-		List<MarkovTransformationResult> markovResults = runReliabilityPrediction(resolved);
+		var resolved = uncertaintyResolver.resolve(unresolved, stateTuple);
+		var markovResults = runReliabilityPrediction(resolved);
 		return ReliabilityPredictionResult.of(markovResults);
 	}
 
 	private List<MarkovTransformationResult> runReliabilityPrediction(PCMInstance resolvedPcmModel) {
-		Pcm2MarkovStrategy solver = new Pcm2MarkovStrategy(config);
+		var solver = new Pcm2MarkovStrategy(config);
 		solver.transform(resolvedPcmModel);
 		return solver.getAllSolvedValues();
 	}

@@ -18,9 +18,7 @@ import com.google.common.collect.Sets;
 
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
-import tools.mdsd.probdist.api.parser.ParameterParser.Sample;
 import tools.mdsd.probdist.distributionfunction.ParamRepresentation;
-import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 import tools.mdsd.probdist.distributionfunction.SimpleParameter;
 import tools.mdsd.probdist.distributionfunction.TabularCPD;
 import tools.mdsd.probdist.distributionfunction.TabularCPDEntry;
@@ -100,12 +98,12 @@ public class DiscreteUncertaintyStateSpace {
 	}
 
 	private static UncertaintyState toUncertaintyState(GroundRandomVariable variable) {
-		ProbabilityDistribution probDist = variable.getDescriptiveModel().getDistribution();
+		var probDist = variable.getDescriptiveModel().getDistribution();
 		if (probDist.getParams().size() != 1) {
 			throw new IllegalArgumentException("The distribution is not valid for this operation.");
 		}
 
-		ParamRepresentation param = probDist.getParams().get(0).getRepresentation();
+		var param = probDist.getParams().get(0).getRepresentation();
 		return UncertaintyState.of(variable.getId(), getValueSpace(param));
 	}
 
@@ -121,7 +119,7 @@ public class DiscreteUncertaintyStateSpace {
 	}
 
 	private static Set<CategoricalValue> getValueSpace(SimpleParameter param) {
-		Set<Sample> samples = ProbabilityDistributionFactory.getParameterParser().parseSampleSpace(param);
+		var samples = ProbabilityDistributionFactory.getParameterParser().parseSampleSpace(param);
 		return samples.stream().map(each -> each.value).collect(toSet());
 	}
 
@@ -145,7 +143,7 @@ public class DiscreteUncertaintyStateSpace {
 		return values -> {
 			List<UncertaintyState> valuedStates = Lists.newArrayList();
 			for (int i = 0; i < states.size(); i++) {
-				UncertaintyState valuedState = states.get(i).newValuedStateWith(values.get(i));
+				var valuedState = states.get(i).newValuedStateWith(values.get(i));
 				valuedStates.add(valuedState);
 			}
 			return valuedStates;

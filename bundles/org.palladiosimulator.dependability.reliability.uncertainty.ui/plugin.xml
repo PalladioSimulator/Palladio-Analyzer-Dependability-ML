@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+    <launchConfigurationType
+        name="Uncertainty-based Reliability Prediction"
+        delegate="org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.ReliabilityPredictionLaunchConfigurationDelegate"
+        modes="run"
+        id="org.palladiosimulator.dependability.reliability.uncertainty.ui.launchConfigurationType">
+    </launchConfigurationType>
+</extension>
+
+<extension
+    point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+    <launchConfigurationTabGroup
+        class="org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.ReliabilityPredictionLaunchTabGroup"
+        id="org.palladiosimulator.dependability.reliability.uncertainty.ui.launchConfigurationTabGroup"
+        type="org.palladiosimulator.dependability.reliability.uncertainty.ui.launchConfigurationType">
+    </launchConfigurationTabGroup>
+</extension>
+</plugin>

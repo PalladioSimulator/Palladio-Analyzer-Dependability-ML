@@ -38,7 +38,7 @@ public class UncertaintyResolver {
 		for (FailureType eachFailureType : filterFailureTypes(pcmModel)) {
 			for (UncertaintyInducedFailureType eachUncertainty : uncertainties) {
 				if (isRefined(eachFailureType, eachUncertainty)) {
-					FailureOccurrenceDescription desc = findFailureOccurenceDesc(eachFailureType, pcmModel)
+					var desc = findFailureOccurenceDesc(eachFailureType, pcmModel)
 							.orElseThrow(() -> new RuntimeException(
 									String.format("No failure occurence describtion found for failure type %s",
 											eachFailureType.getEntityName())));
@@ -69,13 +69,13 @@ public class UncertaintyResolver {
 	private double computeFailureProbability(UncertaintyInducedFailureType uncertainty, List<UncertaintyState> values) {
 		List<InputValue> inputValues = Lists.newArrayList();
 
-		BayesianNetwork bn = new BayesianNetwork(null, uncertainty.getUncertaintyModel());
+		var bn = new BayesianNetwork(null, uncertainty.getUncertaintyModel());
 		for (GroundRandomVariable each : bn.getGroundVariables()) {
-			CategoricalValue value = findValue(each, values).orElseThrow(() -> new RuntimeException(
+			var value = findValue(each, values).orElseThrow(() -> new RuntimeException(
 					String.format("An error occurred; there is no value for variable %s", each.getEntityName())));
 			inputValues.add(InputValue.create(value, each));
 		}
-		
+
 		return bn.probability(inputValues);
 	}
 

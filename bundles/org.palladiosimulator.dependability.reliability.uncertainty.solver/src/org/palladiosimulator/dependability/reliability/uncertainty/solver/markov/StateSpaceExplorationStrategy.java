@@ -8,4 +8,6 @@ import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov
 public interface StateSpaceExplorationStrategy {
 	
 	public Set<List<UncertaintyState>> explore(DiscreteUncertaintyStateSpace stateSpace);
+	
+	public String getName();
 }
