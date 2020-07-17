@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Solver
+Bundle-SymbolicName: org.palladiosimulator.dependability.reliability.uncertainty.solver
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.palladiosimulator.dependability.reliability.uncertainty.solver.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.palladiosimulator.dependability.reliability.uncertainty;bundle-version="0.1.0",
+ org.palladiosimulator.envdyn.api;bundle-version="1.0.0",
+ tools.mdsd.probdist.api;bundle-version="1.0.0",
+ tools.mdsd.probdist.api.apache;bundle-version="1.0.0",
+ com.google.guava;bundle-version="27.1.0",
+ org.palladiosimulator.solver;bundle-version="4.2.0",
+ org.palladiosimulator.reliability.solver;bundle-version="4.3.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: org.palladiosimulator.dependability.reliability.uncertainty.solver
+Bundle-ActivationPolicy: lazy

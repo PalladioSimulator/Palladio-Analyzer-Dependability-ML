@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated uncertainty -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.palladiosimulator.dependability.reliability.uncertainty.presentation.UncertaintyModelWizardID"
+            name="%_UI_UncertaintyModelWizard_label"
+            class="org.palladiosimulator.dependability.reliability.uncertainty.presentation.UncertaintyModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/UncertaintyModelFile.gif">
+         <description>%_UI_UncertaintyModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated uncertainty -->
+      <editor
+            id="org.palladiosimulator.dependability.reliability.uncertainty.presentation.UncertaintyEditorID"
+            name="%_UI_UncertaintyEditor_label"
+            icon="icons/full/obj16/UncertaintyModelFile.gif"
+            extensions="uncertainty"
+            class="org.palladiosimulator.dependability.reliability.uncertainty.presentation.UncertaintyEditor"
+            contributorClass="org.palladiosimulator.dependability.reliability.uncertainty.presentation.UncertaintyActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
