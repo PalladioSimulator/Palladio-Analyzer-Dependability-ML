@@ -7,6 +7,10 @@ public interface TrainedModelAccessor<In, Out> {
 	
 	public boolean canAccess(URI modelURI);
 	
+	public default boolean canNotAccess(URI modelURI) {
+		return !canAccess(modelURI);
+	}
+	
 	public void load(URI modelURI);
 	
 	public List<Out> query(In inputData);

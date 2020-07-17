@@ -113,6 +113,11 @@ public class MLSensitivityAnalysisTest {
 			return new TrainingDataIteratorMock(dataLocation);
 		}
 
+		@Override
+		public String getName() {
+			return "MockModel";
+		}
+
 	}
 
 	@Before
@@ -147,6 +152,11 @@ public class MLSensitivityAnalysisTest {
 			public Set<CategoricalValue> getValueSpace() {
 				return Sets.newHashSet(trueValue, falseValue);
 			}
+
+			@Override
+			public Boolean isApplicableTo(InputData inputData) {
+				return true;
+			}
 		};
 		var simpleLowerBoundMeasure = new PropertyMeasure() {
 
@@ -171,11 +181,19 @@ public class MLSensitivityAnalysisTest {
 			public Set<CategoricalValue> getValueSpace() {
 				return Sets.newHashSet(trueValue, falseValue);
 			}
+
+			@Override
+			public Boolean isApplicableTo(InputData inputData) {
+				return true;
+			}
 		};
 		propertyMeasures = Sets.newHashSet(simpleLowerBoundMeasure, simpleUpperBoundMeasure);
 
-		sensitivityAnalysis = MLSensitivityAnalysis.newBuilder().withSensitivityAnalysisStrategy(trainingDataStrategy)
-				.addPropertyMeasure(simpleUpperBoundMeasure).addPropertyMeasure(simpleLowerBoundMeasure).build();
+		sensitivityAnalysis = MLSensitivityAnalysis.newBuilder()
+				.withSensitivityAnalysisStrategy(trainingDataStrategy)
+				.addPropertyMeasure(simpleUpperBoundMeasure)
+				.addPropertyMeasure(simpleLowerBoundMeasure)
+				.build();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -191,8 +209,11 @@ public class MLSensitivityAnalysisTest {
 	}
 
 	private void givenMLContext() {
-		context = MLAnalysisContext.newBuilder().analyseSensitivityOf(new TrainedModelMock()).trainedBy(dummyFile)
-				.andCapturedBy(ProbabilisticSensitivityModel.createFrom(propertyMeasures)).build();
+		context = MLAnalysisContext.newBuilder()
+				.analyseSensitivityOf(new TrainedModelMock())
+				.trainedWith(dummyFile)
+				.andCapturedBy(ProbabilisticSensitivityModel.createFrom(propertyMeasures))
+				.build();
 	}
 
 	private void whenAnalysingSensitivity() {

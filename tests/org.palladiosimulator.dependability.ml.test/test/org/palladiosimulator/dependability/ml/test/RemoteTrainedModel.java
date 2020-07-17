@@ -48,6 +48,11 @@ public class RemoteTrainedModel {
 			return null;
 		}
 
+		@Override
+		public String getName() {
+			return "";
+		}
+
 	}
 
 	private final TrainedTestModel model = new TrainedTestModel();

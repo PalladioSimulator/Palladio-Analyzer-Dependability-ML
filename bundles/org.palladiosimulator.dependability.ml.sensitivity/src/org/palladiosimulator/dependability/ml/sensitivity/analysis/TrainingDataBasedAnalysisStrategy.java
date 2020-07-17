@@ -19,17 +19,23 @@ import tools.mdsd.probdist.api.entity.CategoricalValue;
 
 public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisStrategy {
 
+	private final static String CONFIDENCE_STRATEGY_NAME = "Confidence based training data analysis strategy";
+	private final static String ACCURACY_STRATEGY_NAME = "Accuracy based training data analysis strategy";
+
+	private final String strategyName;
 	private final Function<MLPredictionResult, Double> incrementalUpdate;
 	private final MLOutcomeMeasure outcomeMeasure;
 
 	private TrainingDataBasedAnalysisStrategy(Function<MLPredictionResult, Double> incrementalUpdate,
-			MLOutcomeMeasure outcomeMeasure) {
+			MLOutcomeMeasure outcomeMeasure, String strategyName) {
 		this.incrementalUpdate = incrementalUpdate;
 		this.outcomeMeasure = outcomeMeasure;
+		this.strategyName = strategyName;
 	}
 
 	public static TrainingDataBasedAnalysisStrategy accuracyBasedStrategy() {
-		return new TrainingDataBasedAnalysisStrategy(r -> r.isExpectedResult() ? 1.0 : 0.0, MLOutcomeMeasure.SUCCESS);
+		return new TrainingDataBasedAnalysisStrategy(r -> r.isExpectedResult() ? 1.0 : 0.0, MLOutcomeMeasure.SUCCESS,
+				ACCURACY_STRATEGY_NAME);
 	}
 
 	public static TrainingDataBasedAnalysisStrategy confidenceBasedStrategy() {
@@ -38,7 +44,12 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 			var sumOfPredictions = r.getPredictions().stream().map(OutputData::getPredictionConfidence)
 					.reduce(Double::sum).get();
 			return sumOfPredictions / numberOfPredictions;
-		}, MLOutcomeMeasure.CONFIDENCE);
+		}, MLOutcomeMeasure.CONFIDENCE, CONFIDENCE_STRATEGY_NAME);
+	}
+
+	@Override
+	public String getName() {
+		return strategyName;
 	}
 
 	@Override
@@ -86,7 +97,7 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 	private void checkAndHandleCompleteness(String propertyName, Map<MeasurableProperty, Double> sensitivityValues) {
 		for (CategoricalValue each : retrieveValueSpaceOf(propertyName)) {
 			if (containsNoPropertyWith(each, sensitivityValues.keySet())) {
-				enrichWithZeroSensitivity(sensitivityValues, new MeasurableProperty(propertyName, each));
+				enrichWithMaxEntropy(sensitivityValues, new MeasurableProperty(propertyName, each));
 			}
 		}
 	}
@@ -97,7 +108,7 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 			// The list of each is immutable; which causes an exception during sorting.
 			var entry = MLSensitivityEntry.from(Lists.newArrayList(each));
 			if (containsNoPropertyWith(entry, mlSensitivityValues.keySet())) {
-				enrichWithZeroSensitivity(mlSensitivityValues, entry);
+				enrichWithMaxEntropy(mlSensitivityValues, entry);
 			}
 		}
 	}
@@ -110,14 +121,14 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 		return mlSensitivityValues.contains(entry) == false;
 	}
 
-	private void enrichWithZeroSensitivity(Map<MeasurableProperty, Double> recordedProperties,
+	private void enrichWithMaxEntropy(Map<MeasurableProperty, Double> recordedProperties,
 			MeasurableProperty zeroSensitivityProperty) {
-		recordedProperties.put(zeroSensitivityProperty, 0.0);
+		recordedProperties.put(zeroSensitivityProperty, 0.5);
 	}
 
-	private void enrichWithZeroSensitivity(Map<MLSensitivityEntry, Double> mlSensitivityValues,
+	private void enrichWithMaxEntropy(Map<MLSensitivityEntry, Double> mlSensitivityValues,
 			MLSensitivityEntry zeroSensitivityProperty) {
-		mlSensitivityValues.put(zeroSensitivityProperty, 0.0);
+		mlSensitivityValues.put(zeroSensitivityProperty, 0.5);
 	}
 
 	private Set<CategoricalValue> retrieveValueSpaceOf(String propertyName) {

@@ -20,7 +20,7 @@ public class MLAnalysisContext {
 			return this;
 		}
 
-		public MLAnalysisContextBuilder trainedBy(File trainingData) {
+		public MLAnalysisContextBuilder trainedWith(File trainingData) {
 			this.trainingData = trainingData;
 			return this;
 		}

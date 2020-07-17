@@ -112,15 +112,17 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 	}
 
 	@Override
-	public void saveAt(URI location) {
-		if (nonNull(location.fileExtension())) {
+	public void saveAt(java.net.URI location) {
+		var uri = URI.createFileURI(location.toString());
+		
+		if (nonNull(uri.fileExtension())) {
 			// TODO logging
 			return;
 		}
 
-		saveTemplateVariables(location);
-		saveDistributionFunctions(location);
-		saveGroundProbabilisticModel(location);
+		saveTemplateVariables(uri);
+		saveDistributionFunctions(uri);
+		saveGroundProbabilisticModel(uri);
 	}
 
 	@Override

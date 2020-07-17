@@ -31,7 +31,7 @@ public class HttpModelAccessor implements TrainedModelAccessor<InputData, Output
 	private static final int TIME_OUT_DURATION = 2;
 
 	private URI remoteModelURI;
-	
+
 	private final HttpClient client;
 	private final Function<String, List<OutputData>> jsonParser;
 
@@ -40,11 +40,11 @@ public class HttpModelAccessor implements TrainedModelAccessor<InputData, Output
 		this.client = HttpClient.newHttpClient();
 		this.jsonParser = nonNull(jsonParser) ? jsonParser : defaultJsonParser();
 	}
-	
+
 	public HttpModelAccessor() {
 		this(null);
 	}
-	
+
 	private Function<String, List<OutputData>> defaultJsonParser() {
 		return json -> {
 			var outData = new Gson().fromJson(json, OutputData[].class);
@@ -65,7 +65,7 @@ public class HttpModelAccessor implements TrainedModelAccessor<InputData, Output
 	@Override
 	public List<OutputData> query(InputData inputData) {
 		requireNonNull(remoteModelURI, "The model must be loaded first.");
-		
+
 		var request = HttpRequest.newBuilder(remoteModelURI)
 				.header("Content-Type", "application/json")
 				.timeout(Duration.ofMinutes(TIME_OUT_DURATION))
@@ -101,12 +101,9 @@ public class HttpModelAccessor implements TrainedModelAccessor<InputData, Output
 			var value = inputData.getValueOf(each);
 			jsonMessage.append(jsonify(each, value));
 		}
-		
-		jsonMessage.deleteCharAt(jsonMessage.length() - 1);
-		
-		return jsonMessage.toString();
+		return jsonMessage.deleteCharAt(jsonMessage.length() - 1).toString();
 	}
-	
+
 	private String jsonify(String key, Object value) {
 		if (value instanceof Number) {
 			return String.format("{\"%1s\": %2s},", key, value);
@@ -128,7 +125,7 @@ public class HttpModelAccessor implements TrainedModelAccessor<InputData, Output
 		}
 		return base64Image;
 	}
-	
+
 	private List<OutputData> readFromJson(String json) {
 		return jsonParser.apply(json);
 	}

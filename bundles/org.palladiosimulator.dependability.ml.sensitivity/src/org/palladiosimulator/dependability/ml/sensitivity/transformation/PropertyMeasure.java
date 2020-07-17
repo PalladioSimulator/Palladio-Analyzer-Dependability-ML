@@ -9,6 +9,8 @@ import tools.mdsd.probdist.api.entity.CategoricalValue;
 public interface PropertyMeasure {
 
 	public MeasurableProperty apply(InputData inputData);
+
+	public Boolean isApplicableTo(InputData inputData);
 	
 	public Set<CategoricalValue> getValueSpace();
 	

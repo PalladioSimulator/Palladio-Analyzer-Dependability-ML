@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension point="org.eclipse.debug.core.launchConfigurationTypes">
+    <launchConfigurationType
+        name="ML sensitivity launch"
+        delegate="org.palladiosimulator.dependability.ml.ui.launch.MLSensitivityLaunchConfigurationDelegate"
+        modes="run"
+        id="org.palladiosimulator.dependability.ml.ui.launchConfigurationType">
+    </launchConfigurationType>
+</extension>
+
+<extension
+    point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+    <launchConfigurationTabGroup
+        class="org.palladiosimulator.dependability.ml.ui.launch.MLSensitivityLaunchTabGroup"
+        id="org.palladiosimulator.dependability.ml.ui.launchConfigurationTabGroup"
+        type="org.palladiosimulator.dependability.ml.ui.launchConfigurationType">
+    </launchConfigurationTabGroup>
+</extension>
+
+</plugin>

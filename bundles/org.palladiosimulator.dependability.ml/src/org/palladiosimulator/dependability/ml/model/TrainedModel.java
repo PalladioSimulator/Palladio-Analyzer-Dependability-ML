@@ -13,4 +13,6 @@ public interface TrainedModel {
 	public void loadModel(URI modelLocation);
 
 	public TrainingDataIterator getTrainingDataIteratorBy(File dataLocation);
+	
+	public String getName();
 }

@@ -1,10 +1,10 @@
 package org.palladiosimulator.dependability.ml.sensitivity.analysis;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.URI;
 import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityAggregations.MLSensitivityEntry;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.MeasurableProperty;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure;

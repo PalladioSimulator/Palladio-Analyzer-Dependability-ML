@@ -6,6 +6,8 @@ import java.io.File;
 import java.net.URI;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
+import java.util.function.Predicate;
 
 import org.palladiosimulator.dependability.ml.exception.DependableMLException;
 import org.palladiosimulator.dependability.ml.iterator.DirectoryBasedTrainingDataIterator;
@@ -21,15 +23,21 @@ import com.google.common.collect.Lists;
 
 public class MaskRCNN implements TrainedModel {
 
+	private final static String MODEL_NAME = "Mask R-CNN";
+	private final static String CLASS_1_PREDICTION = "class1";
+	private final static String CLASS_2_PREDICTION = "class2";
+
 	public static class MaskRCNNTrainingDataIterator extends DirectoryBasedTrainingDataIterator {
 
+		private final static String LABEL_POSTFIX = "label.txt";
+		
 		public MaskRCNNTrainingDataIterator(File trainingDataLocation) {
 			super(trainingDataLocation);
 		}
 
 		@Override
 		protected Iterator<Tuple<InputData, InputDataLabel>> arrangeTrainingData(List<File> trainData) {
-			var partitionedData = trainData.stream().collect(partitioningBy(f -> ImageInputData.isTrainingData(f)));
+			var partitionedData = trainData.stream().collect(partitioningBy(isTrainingData()));
 			var trainDataSplit = partitionedData.get(true);
 			var labelDataSplit = partitionedData.get(false);
 			if (trainDataSplit.size() != labelDataSplit.size()) {
@@ -44,6 +52,11 @@ public class MaskRCNN implements TrainedModel {
 			}
 			return arrangedData.iterator();
 		}
+
+		private Predicate<File> isTrainingData() {
+			return file -> file.getName().endsWith(LABEL_POSTFIX) == false;
+		}
+
 	}
 
 	private final HttpModelAccessor remoteTrainedModel = new HttpModelAccessor();
@@ -55,7 +68,7 @@ public class MaskRCNN implements TrainedModel {
 
 	@Override
 	public void loadModel(URI modelURI) {
-		if (remoteTrainedModel.canAccess(modelURI) == false) {
+		if (remoteTrainedModel.canNotAccess(modelURI)) {
 			DependableMLException.throwWithMessage(String.format("The model %s could not be loaded.", modelURI));
 		}
 		remoteTrainedModel.load(modelURI);
@@ -68,8 +81,15 @@ public class MaskRCNN implements TrainedModel {
 	}
 
 	private MLPredictionResult parsePredictionResult(List<OutputData> predictions) {
-		// TODO Auto-generated method stub
-		return null;
+		var randomizedExpectation = new Random(System.currentTimeMillis()).nextInt(2) == 1 ? true : false;
+		var result =  new MLPredictionResult(randomizedExpectation);
+		result.getPredictions().addAll(predictions);
+		return result;
+	}
+
+	@Override
+	public String getName() {
+		return MODEL_NAME;
 	}
 
 }
