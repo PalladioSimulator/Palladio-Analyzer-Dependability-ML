@@ -114,7 +114,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 	@Override
 	public void saveAt(java.net.URI location) {
 		var uri = URI.createFileURI(location.toString());
-		
+
 		if (nonNull(uri.fileExtension())) {
 			// TODO logging
 			return;
@@ -152,15 +152,18 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 
 	private List<InputValue> toInputValues(List<MeasurableProperty> properties) {
 		var inputs = properties.stream().map(this::toInputValue).collect(toList());
-
-		var mlVar = findMLRandomVariable();
-		inputs.add(InputValue.create(CategoricalValue.create(outcomeMeasure.toString()), mlVar));
-
+		inputs.add(mlInputValue());
 		return inputs;
 	}
 
+	private InputValue mlInputValue() {
+		var value = CategoricalValue.create(outcomeMeasure.toString());
+		var mlVariable = findMLRandomVariable();
+		return InputValue.create(value, mlVariable);
+	}
+
 	private InputValue toInputValue(MeasurableProperty property) {
-		var value = CategoricalValue.create(property.toString());
+		var value = property.getMeasuredValue();
 		var variable = findRandomVariableFor(property.getName());
 		return InputValue.create(value, variable);
 	}
@@ -211,7 +214,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 					.throwWithMessageAndCause(String.format("Model %s could not be safed", adjustedLocation), e);
 		}
 	}
-	
+
 	private Set<ProbabilityDistribution> retrieveDistributions() {
 		return probSensitivityModel.getLocalModels().stream().map(GroundProbabilisticModel::getDistribution)
 				.collect(toSet());
@@ -228,7 +231,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 						String.format("There is no variable for measured property %s", propertyName)));
 	}
 
-	private GroundRandomVariable findMLRandomVariable() {
+	public GroundRandomVariable findMLRandomVariable() {
 		return probSensitivityModel.getLocalProbabilisticModels().stream()
 				.flatMap(each -> each.getGroundRandomVariables().stream()).filter(variablesWithParents()).findFirst()
 				.orElseThrow(MLSensitivityAnalysisException
@@ -248,17 +251,15 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 
 	private ProbabilityDistribution buildProbabilityDistributionOf(Map<MeasurableProperty, Double> sensitivityValues) {
 		return ProbabilityDistributionBuilder.buildProbabilityDistributionFor(getGlobalProperty(sensitivityValues))
-				.withSimpleParameterDerivedFrom(sensitivityValues).build();
+				.withSimpleParameterDerivedFrom(sensitivityValues)
+				.build();
 	}
 
 	private ProbabilityDistribution buildMLProbabilityOfSuccessDistribution(
 			Map<MLSensitivityEntry, Double> sensitivityValues) {
-		var builder = ProbabilityDistributionBuilder.buildProbabilityDistributionForMLVariable()
-				.withTabularParameterDerivedFrom(sensitivityValues);
-		if (outcomeMeasure == MLOutcomeMeasure.CONFIDENCE) {
-			builder.withConfidenceOutcomeMeasure();
-		}
-		return builder.build();
+		return ProbabilityDistributionBuilder.buildProbabilityDistributionForMLVariable()
+				.withTabularParameterDerivedFrom(sensitivityValues)
+				.build();
 	}
 
 }

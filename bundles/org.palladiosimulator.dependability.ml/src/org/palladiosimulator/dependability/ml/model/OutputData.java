@@ -6,7 +6,7 @@ import com.google.common.collect.Lists;
 
 public class OutputData {
 	
-	private final List<String> CHARACTER_BLACKLIST = Lists.newArrayList("\"");
+	private final static List<String> CHARACTER_BLACKLIST = Lists.newArrayList("\"");
 	
 	private final String confidence;
 	private final String prediction;

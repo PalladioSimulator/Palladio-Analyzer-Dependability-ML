@@ -26,7 +26,7 @@ public class AnalysisTransformation {
 	}
 
 	public Optional<PropertyMeasure> findPropertyMeasureWith(String propertyName) {
-		return propertyMeasures.stream().filter(each -> each.getPropertyName().equals(propertyName)).findFirst();
+		return propertyMeasures.stream().filter(each -> each.getId().equals(propertyName)).findFirst();
 	}
 
 	public Set<List<MeasurableProperty>> computePropertyMeasureValueSpace() {
@@ -34,7 +34,7 @@ public class AnalysisTransformation {
 		for (PropertyMeasure eachProperty : propertyMeasures) {
 			Set<MeasurableProperty> propertyValueSpace = Sets.newHashSet();
 			for (CategoricalValue eachValue : eachProperty.getValueSpace()) {
-				propertyValueSpace.add(new MeasurableProperty(eachProperty.getPropertyName(), eachValue));
+				propertyValueSpace.add(new MeasurableProperty(eachProperty.getId(), eachValue));
 			}
 			propertyValueSpaces.add(propertyValueSpace);
 		}

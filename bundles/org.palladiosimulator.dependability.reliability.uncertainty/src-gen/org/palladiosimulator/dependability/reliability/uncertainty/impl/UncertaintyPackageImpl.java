@@ -171,6 +171,16 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 	 * @generated
 	 */
 	@Override
+	public EReference getUncertaintyInducedFailureType_FailureVariable() {
+		return (EReference) uncertaintyInducedFailureTypeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getUncertaintyFailureTypeRepository() {
 		return uncertaintyFailureTypeRepositoryEClass;
 	}
@@ -218,6 +228,7 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 		uncertaintyInducedFailureTypeEClass = createEClass(UNCERTAINTY_INDUCED_FAILURE_TYPE);
 		createEReference(uncertaintyInducedFailureTypeEClass, UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES);
 		createEReference(uncertaintyInducedFailureTypeEClass, UNCERTAINTY_INDUCED_FAILURE_TYPE__UNCERTAINTY_MODEL);
+		createEReference(uncertaintyInducedFailureTypeEClass, UNCERTAINTY_INDUCED_FAILURE_TYPE__FAILURE_VARIABLE);
 
 		uncertaintyFailureTypeRepositoryEClass = createEClass(UNCERTAINTY_FAILURE_TYPE_REPOSITORY);
 		createEReference(uncertaintyFailureTypeRepositoryEClass,
@@ -268,6 +279,10 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUncertaintyInducedFailureType_UncertaintyModel(),
 				theStaticmodelPackage.getGroundProbabilisticNetwork(), null, "uncertaintyModel", null, 1, 1,
+				UncertaintyInducedFailureType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUncertaintyInducedFailureType_FailureVariable(),
+				theStaticmodelPackage.getGroundRandomVariable(), null, "failureVariable", null, 0, 1,
 				UncertaintyInducedFailureType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

@@ -7,6 +7,7 @@
         eType="ecore:EClass ../../org.palladiosimulator.pcm/model/pcm.ecore#//reliability/FailureType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="uncertaintyModel" lowerBound="1"
         eType="ecore:EClass ../../org.palladiosimulator.envdyn.model/model/environmentaldynamics.ecore#//staticmodel/GroundProbabilisticNetwork"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="failureVariable" eType="ecore:EClass ../../org.palladiosimulator.envdyn.model/model/environmentaldynamics.ecore#//staticmodel/GroundRandomVariable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UncertaintyFailureTypeRepository">
     <eStructuralFeatures xsi:type="ecore:EReference" name="uncertaintyInducedFailureTypes"

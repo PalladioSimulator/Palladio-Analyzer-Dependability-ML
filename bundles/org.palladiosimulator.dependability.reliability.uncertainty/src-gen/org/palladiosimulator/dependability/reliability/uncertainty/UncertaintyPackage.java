@@ -85,13 +85,22 @@ public interface UncertaintyPackage extends EPackage {
 	int UNCERTAINTY_INDUCED_FAILURE_TYPE__UNCERTAINTY_MODEL = 1;
 
 	/**
+	 * The feature id for the '<em><b>Failure Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_INDUCED_FAILURE_TYPE__FAILURE_VARIABLE = 2;
+
+	/**
 	 * The number of structural features of the '<em>Induced Failure Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNCERTAINTY_INDUCED_FAILURE_TYPE_FEATURE_COUNT = 2;
+	int UNCERTAINTY_INDUCED_FAILURE_TYPE_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Induced Failure Type</em>' class.
@@ -172,6 +181,17 @@ public interface UncertaintyPackage extends EPackage {
 	EReference getUncertaintyInducedFailureType_UncertaintyModel();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getFailureVariable <em>Failure Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Failure Variable</em>'.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getFailureVariable()
+	 * @see #getUncertaintyInducedFailureType()
+	 * @generated
+	 */
+	EReference getUncertaintyInducedFailureType_FailureVariable();
+
+	/**
 	 * Returns the meta object for class '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFailureTypeRepository <em>Failure Type Repository</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -241,6 +261,15 @@ public interface UncertaintyPackage extends EPackage {
 		 */
 		EReference UNCERTAINTY_INDUCED_FAILURE_TYPE__UNCERTAINTY_MODEL = eINSTANCE
 				.getUncertaintyInducedFailureType_UncertaintyModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Failure Variable</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNCERTAINTY_INDUCED_FAILURE_TYPE__FAILURE_VARIABLE = eINSTANCE
+				.getUncertaintyInducedFailureType_FailureVariable();
 
 		/**
 		 * The meta object literal for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyFailureTypeRepositoryImpl <em>Failure Type Repository</em>}' class.

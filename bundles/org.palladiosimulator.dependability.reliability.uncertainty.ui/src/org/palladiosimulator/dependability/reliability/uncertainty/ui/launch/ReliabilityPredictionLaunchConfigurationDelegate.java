@@ -53,11 +53,12 @@ public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConf
 					}
 
 					var reliabilityConfig = UncertaintyBasedReliabilityPredictionConfig.newBuilder()
-							.withReliabilityRunConfig(config).andUncertainties(uncertaintyModelLocation)
+							.withReliabilityRunConfig(config)
+							.andUncertainties(uncertaintyModelLocation)
 							.exploreStateSpaceWith(explorationStrategy)
 							.build();
-					
-					UncertaintyBasedReliabilityPredictor.predict(reliabilityConfig);
+
+					var result = UncertaintyBasedReliabilityPredictor.predict(reliabilityConfig);
 				}
 
 				@Override

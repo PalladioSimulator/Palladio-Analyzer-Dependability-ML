@@ -41,7 +41,7 @@ public class MLSensitivityAnalyser {
 		return ANALYSABLE_MODEL_REGISTRY.stream().filter(modelWith(name)).findFirst();
 	}
 
-	protected static Optional<PropertyMeasure> findAnalysablePropertyMeasureWith(String name) {
+	public static Optional<PropertyMeasure> findAnalysablePropertyMeasureWith(String name) {
 		return PROPERTY_MEASURE_REGISTRY.stream().filter(propertyWith(name)).findFirst();
 	}
 
@@ -62,7 +62,7 @@ public class MLSensitivityAnalyser {
 	}
 
 	public static Set<String> getAnalysablePropertyNames() {
-		return PROPERTY_MEASURE_REGISTRY.stream().map(PropertyMeasure::getPropertyName).collect(toSet());
+		return PROPERTY_MEASURE_REGISTRY.stream().map(PropertyMeasure::getName).collect(toSet());
 	}
 
 	public static Set<String> getAnalysableModelNames() {
@@ -99,7 +99,7 @@ public class MLSensitivityAnalyser {
 	}
 
 	private static Predicate<PropertyMeasure> propertyWith(String queriedName) {
-		return prop -> prop.getPropertyName().equals(queriedName);
+		return prop -> prop.getName().equals(queriedName);
 	}
 
 	private static Predicate<TrainedModel> modelWith(String queriedName) {

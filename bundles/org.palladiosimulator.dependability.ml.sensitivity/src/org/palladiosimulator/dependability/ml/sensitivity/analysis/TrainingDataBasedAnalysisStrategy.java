@@ -8,7 +8,6 @@ import java.util.function.Function;
 import org.palladiosimulator.dependability.ml.model.MLPredictionResult;
 import org.palladiosimulator.dependability.ml.model.OutputData;
 import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityAggregations.MLSensitivityEntry;
-import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityModel.MLOutcomeMeasure;
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.AnalysisTransformation;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.MeasurableProperty;
@@ -24,18 +23,15 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 
 	private final String strategyName;
 	private final Function<MLPredictionResult, Double> incrementalUpdate;
-	private final MLOutcomeMeasure outcomeMeasure;
 
 	private TrainingDataBasedAnalysisStrategy(Function<MLPredictionResult, Double> incrementalUpdate,
-			MLOutcomeMeasure outcomeMeasure, String strategyName) {
+			String strategyName) {
 		this.incrementalUpdate = incrementalUpdate;
-		this.outcomeMeasure = outcomeMeasure;
 		this.strategyName = strategyName;
 	}
 
 	public static TrainingDataBasedAnalysisStrategy accuracyBasedStrategy() {
-		return new TrainingDataBasedAnalysisStrategy(r -> r.isExpectedResult() ? 1.0 : 0.0, MLOutcomeMeasure.SUCCESS,
-				ACCURACY_STRATEGY_NAME);
+		return new TrainingDataBasedAnalysisStrategy(r -> r.isExpectedResult() ? 1.0 : 0.0, ACCURACY_STRATEGY_NAME);
 	}
 
 	public static TrainingDataBasedAnalysisStrategy confidenceBasedStrategy() {
@@ -44,7 +40,7 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 			var sumOfPredictions = r.getPredictions().stream().map(OutputData::getPredictionConfidence)
 					.reduce(Double::sum).get();
 			return sumOfPredictions / numberOfPredictions;
-		}, MLOutcomeMeasure.CONFIDENCE, CONFIDENCE_STRATEGY_NAME);
+		}, CONFIDENCE_STRATEGY_NAME);
 	}
 
 	@Override
@@ -88,7 +84,6 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 		var mlSensitivityValues = sensitivityAggregations.getMLSensitivityValues();
 		checkAndHandleCompleteness(mlSensitivityValues);
 
-		sensitivitiyModel.setMLOutcomeMeasure(outcomeMeasure);
 		sensitivitiyModel.setMLSensitivityValues(mlSensitivityValues);
 
 		return sensitivitiyModel;
@@ -97,7 +92,7 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 	private void checkAndHandleCompleteness(String propertyName, Map<MeasurableProperty, Double> sensitivityValues) {
 		for (CategoricalValue each : retrieveValueSpaceOf(propertyName)) {
 			if (containsNoPropertyWith(each, sensitivityValues.keySet())) {
-				enrichWithMaxEntropy(sensitivityValues, new MeasurableProperty(propertyName, each));
+				enrichWithZeroProbability(sensitivityValues, new MeasurableProperty(propertyName, each));
 			}
 		}
 	}
@@ -121,9 +116,9 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 		return mlSensitivityValues.contains(entry) == false;
 	}
 
-	private void enrichWithMaxEntropy(Map<MeasurableProperty, Double> recordedProperties,
+	private void enrichWithZeroProbability(Map<MeasurableProperty, Double> recordedProperties,
 			MeasurableProperty zeroSensitivityProperty) {
-		recordedProperties.put(zeroSensitivityProperty, 0.5);
+		recordedProperties.put(zeroSensitivityProperty, 0.0);
 	}
 
 	private void enrichWithMaxEntropy(Map<MLSensitivityEntry, Double> mlSensitivityValues,

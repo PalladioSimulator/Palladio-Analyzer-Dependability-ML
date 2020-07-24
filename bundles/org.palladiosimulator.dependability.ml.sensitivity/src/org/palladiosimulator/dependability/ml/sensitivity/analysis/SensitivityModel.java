@@ -13,8 +13,7 @@ public abstract class SensitivityModel {
 
 	public static enum MLOutcomeMeasure {
 		SUCCESS("Success"), 
-		FAIL("Fail"), 
-		CONFIDENCE("Confidence");
+		FAIL("Fail");
 
 		private final String name;
 

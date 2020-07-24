@@ -135,7 +135,7 @@ public class MLSensitivityAnalysisTest {
 			private final CategoricalValue falseValue = CategoricalValue.create("FALSE");
 
 			@Override
-			public String getPropertyName() {
+			public String getId() {
 				return "SimpleUpperBoundMeasure";
 			}
 
@@ -143,9 +143,9 @@ public class MLSensitivityAnalysisTest {
 			public MeasurableProperty apply(InputData inputData) {
 				var value = asNumerical(inputData).getValue().intValue();
 				if (value > 10) {
-					return new MeasurableProperty(getPropertyName(), trueValue);
+					return new MeasurableProperty(getId(), trueValue);
 				}
-				return new MeasurableProperty(getPropertyName(), falseValue);
+				return new MeasurableProperty(getId(), falseValue);
 			}
 
 			@Override
@@ -156,6 +156,11 @@ public class MLSensitivityAnalysisTest {
 			@Override
 			public Boolean isApplicableTo(InputData inputData) {
 				return true;
+			}
+
+			@Override
+			public String getName() {
+				return "";
 			}
 		};
 		var simpleLowerBoundMeasure = new PropertyMeasure() {
@@ -164,7 +169,7 @@ public class MLSensitivityAnalysisTest {
 			private final CategoricalValue falseValue = CategoricalValue.create("FALSE");
 
 			@Override
-			public String getPropertyName() {
+			public String getId() {
 				return "SimpleLowerBoundMeasure";
 			}
 
@@ -172,9 +177,9 @@ public class MLSensitivityAnalysisTest {
 			public MeasurableProperty apply(InputData inputData) {
 				var value = asNumerical(inputData).getValue().intValue();
 				if (value <= 5) {
-					return new MeasurableProperty(getPropertyName(), trueValue);
+					return new MeasurableProperty(getId(), trueValue);
 				}
-				return new MeasurableProperty(getPropertyName(), falseValue);
+				return new MeasurableProperty(getId(), falseValue);
 			}
 
 			@Override
@@ -185,6 +190,11 @@ public class MLSensitivityAnalysisTest {
 			@Override
 			public Boolean isApplicableTo(InputData inputData) {
 				return true;
+			}
+			
+			@Override
+			public String getName() {
+				return "";
 			}
 		};
 		propertyMeasures = Sets.newHashSet(simpleLowerBoundMeasure, simpleUpperBoundMeasure);
@@ -234,8 +244,8 @@ public class MLSensitivityAnalysisTest {
 		for (CategoricalValue eachValOfFirst : firstMeasure.getValueSpace()) {
 			for (CategoricalValue eachValOfSecond : secondMeasure.getValueSpace()) {
 				var properties = Lists.newArrayList(
-						new MeasurableProperty(firstMeasure.getPropertyName(), eachValOfFirst),
-						new MeasurableProperty(secondMeasure.getPropertyName(), eachValOfSecond));
+						new MeasurableProperty(firstMeasure.getId(), eachValOfFirst),
+						new MeasurableProperty(secondMeasure.getId(), eachValOfSecond));
 				var successSensitvity = -1.0;
 				try {
 					successSensitvity = result.inferSensitivity(properties);
@@ -253,11 +263,11 @@ public class MLSensitivityAnalysisTest {
 			Map<MeasurableProperty, Double> sensitivityValues = Maps.newHashMap();
 			for (CategoricalValue eachValue : eachMeasure.getValueSpace()) {
 				try {
-					var prop = new MeasurableProperty(eachMeasure.getPropertyName(), eachValue);
+					var prop = new MeasurableProperty(eachMeasure.getId(), eachValue);
 					var sensitivityValue = result.getSensitivityValuesOf(prop);
 					sensitivityValues.put(prop, sensitivityValue);
 				} catch (MLSensitivityAnalysisException e) {
-					fail(String.format("Property %1s could not be found, see: %2s", eachMeasure.getPropertyName(),
+					fail(String.format("Property %1s could not be found, see: %2s", eachMeasure.getId(),
 							e.getMessage()));
 				}
 			}

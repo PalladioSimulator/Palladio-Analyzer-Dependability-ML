@@ -3,7 +3,8 @@ package org.palladiosimulator.dependability.reliability.uncertainty.solver.marko
 import java.util.List;
 import java.util.Set;
 
-import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.DiscreteUncertaintyStateSpace.UncertaintyState;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
 
 public class BruteForceExplorationStrategy implements StateSpaceExplorationStrategy {
 

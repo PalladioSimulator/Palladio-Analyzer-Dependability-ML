@@ -27,27 +27,27 @@ public class UncertaintyBasedReliabilityPredictor {
 	public static void registerStrategy(StateSpaceExplorationStrategy strategy) {
 		STATE_SPACE_STRATEGY_REGISTER.add(strategy);
 	}
-	
+
 	public static Set<String> getSupportedStrategies() {
 		return STATE_SPACE_STRATEGY_REGISTER.stream().map(StateSpaceExplorationStrategy::getName).collect(toSet());
 	}
 
 	public static ReliabilityPredictionResult predict(UncertaintyBasedReliabilityPredictionConfig config) {
 		var builder = UncertaintyBasedReliabilityPrediction.newBuilder().withConfig(config.getRunConfig());
-		
+
 		if (config.getStateSpaceExplorationStrategy().isPresent()) {
 			builder.exploreStateSpaceWith(config.getStateSpaceExplorationStrategy().get());
 		} else {
 			builder.bruteForceStateSpaceExploration();
 		}
-		
-		config.getUncertainties().forEach(uncertainty -> builder.addUncertaintyFailureType(uncertainty));
-		
+
+		config.getUncertainties().forEach(builder::addUncertaintyFailureType);
+
 		var relPrediction = builder.build();
-		
+
 		return relPrediction.predict(config.getPCMInstance());
 	}
-	
+
 	private static Predicate<StateSpaceExplorationStrategy> strategyWith(String queriedName) {
 		return s -> s.getName().equals(queriedName);
 	}

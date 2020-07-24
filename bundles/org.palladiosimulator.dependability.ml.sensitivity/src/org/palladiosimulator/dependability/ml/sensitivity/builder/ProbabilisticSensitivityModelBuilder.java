@@ -55,7 +55,7 @@ public class ProbabilisticSensitivityModelBuilder {
 	}
 
 	public ProbabilisticSensitivityModelBuilder addSensitivityFactor(PropertyMeasure propertyMeasure) {
-		var propertyName = propertyMeasure.getPropertyName();
+		var propertyName = propertyMeasure.getId();
 
 		var template = buildTemplateWith(propertyName);
 		addToTemplateDefinitions(template);

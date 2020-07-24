@@ -29,7 +29,7 @@ public class ImageBrightness implements PropertyMeasure {
 		private final MeasurableProperty value;
 
 		private BrightnessCategory(String name) {
-			this.value = new MeasurableProperty(PROPERTY_NAME, CategoricalValue.create(name));
+			this.value = new MeasurableProperty(PROPERTY_ID, CategoricalValue.create(name));
 		}
 
 		public CategoricalValue getMeasuredValue() {
@@ -46,6 +46,7 @@ public class ImageBrightness implements PropertyMeasure {
 	}
 
 	private final static String PROPERTY_NAME = "Image brightness measure";
+	private final static String PROPERTY_ID = "ImageBrightnessMeasure";
 
 	@Override
 	public MeasurableProperty apply(InputData inputData) {
@@ -67,8 +68,8 @@ public class ImageBrightness implements PropertyMeasure {
 	}
 
 	@Override
-	public String getPropertyName() {
-		return PROPERTY_NAME;
+	public String getId() {
+		return PROPERTY_ID;
 	}
 
 	private MeasurableProperty computeBrightness(ImageInputData inputData) {
@@ -133,6 +134,11 @@ public class ImageBrightness implements PropertyMeasure {
 					.throwWithMessageAndCause("Something rent wrong during brithness computation.", e);
 		}
 		return img;
+	}
+
+	@Override
+	public String getName() {
+		return PROPERTY_NAME;
 	}
 
 }

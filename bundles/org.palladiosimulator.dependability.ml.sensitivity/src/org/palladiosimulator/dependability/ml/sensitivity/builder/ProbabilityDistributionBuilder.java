@@ -1,6 +1,7 @@
 package org.palladiosimulator.dependability.ml.sensitivity.builder;
 
-import static java.util.Objects.requireNonNull;
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toMap;
 
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.Set;
 
 import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityAggregations.MLSensitivityEntry;
 import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityModel.MLOutcomeMeasure;
+import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.MeasurableProperty;
 
 import com.google.common.collect.Maps;
@@ -30,13 +32,11 @@ public class ProbabilityDistributionBuilder {
 	private final static String DIST_NAME_SUFFIX = "SensitivityDistribution";
 	private final static String ML_DIST_NAME = "MLPrediction";
 	private final static String PARAM_NAME = "SensitivityParam";
-	private final static String INDECISIVE = "indecisive";
 	private final static DistributionfunctionFactory FACTORY = DistributionfunctionFactory.eINSTANCE;
 
 	private ProbabilityDistributionSkeleton skeleton = null;
 	private Map<MeasurableProperty, Double> propertySensitivityValues = null;
 	private Map<MLSensitivityEntry, Double> mlSensitivityValues = null;
-	private boolean isConfidenceBased = false;
 	private String name = null;
 
 	private ProbabilityDistributionBuilder(String name) {
@@ -75,16 +75,11 @@ public class ProbabilityDistributionBuilder {
 		return this;
 	}
 
-	public ProbabilityDistributionBuilder withConfidenceOutcomeMeasure() {
-		this.isConfidenceBased = true;
-		return this;
-	}
-
 	public ProbabilityDistribution build() {
 		checkValidity();
 
 		ParamRepresentation paramRep;
-		if (isConfidenceBased) {
+		if (nonNull(mlSensitivityValues)) {
 			paramRep = buildTabularParam();
 		} else {
 			paramRep = buildSimpleParam(parseToSampleSpace(propertySensitivityValues));
@@ -95,10 +90,9 @@ public class ProbabilityDistributionBuilder {
 	}
 
 	private void checkValidity() {
-		if (isConfidenceBased) {
-			requireNonNull(mlSensitivityValues, "The ml sensitivity values must be specified.");
-		} else {
-			requireNonNull(propertySensitivityValues, "The property sensitivity values must be specified.");
+		if (Boolean.logicalAnd(isNull(mlSensitivityValues), isNull(propertySensitivityValues))) {
+			MLSensitivityAnalysisException
+					.throwWithMessage("There are no ML as well as property sensitivity values specified.");
 		}
 	}
 
@@ -110,15 +104,9 @@ public class ProbabilityDistributionBuilder {
 				tabularCPDEntry.getConditonals().add(eachSignatureComponent);
 			}
 
-			String param;
-			if (isConfidenceBased) {
-				param = parseAsMLConfidenceParam(mlSensitivityValues.get(eachEntry));
-			} else {
-				param = parseAsProbOfSuccessParam(mlSensitivityValues.get(eachEntry));
-			}
-
+			String param = parseAsProbOfSuccessParam(mlSensitivityValues.get(eachEntry));
 			tabularCPDEntry.setEntry(buildSimpleParam(param));
-			
+
 			tabularCPD.getCpdEntries().add(tabularCPDEntry);
 		}
 		return tabularCPD;
@@ -136,11 +124,11 @@ public class ProbabilityDistributionBuilder {
 		distribution.setInstantiated(skeleton);
 		distribution.setEntityName(name);
 		distribution.getParams().add(defaultParameter);
-		
+
 		var defaultRepo = FACTORY.createProbabilityDistributionFunctionRepository();
 		defaultRepo.getDistributions().add(distribution);
 		defaultRepo.getParams().add(defaultParameter);
-		
+
 		return distribution;
 	}
 
@@ -158,7 +146,8 @@ public class ProbabilityDistributionBuilder {
 
 	private String parseToSampleSpace(Map<MeasurableProperty, Double> sensitivityValues) {
 		Map<String, String> sampleSpace = sensitivityValues.entrySet().stream()
-				//.collect(toMap(entry -> entry.getKey().getMeasuredValue().get(), entry -> entry.getValue().toString()));
+				// .collect(toMap(entry -> entry.getKey().getMeasuredValue().get(), entry ->
+				// entry.getValue().toString()));
 				.collect(toMap(entry -> entry.getKey().toString(), entry -> entry.getValue().toString()));
 		return parseToString(sampleSpace);
 	}
@@ -167,13 +156,6 @@ public class ProbabilityDistributionBuilder {
 		Map<String, String> sampleSpace = Maps.newHashMap();
 		sampleSpace.put(MLOutcomeMeasure.SUCCESS.toString(), probOfSuccess.toString());
 		sampleSpace.put(MLOutcomeMeasure.FAIL.toString(), Double.toString(1 - probOfSuccess));
-		return parseToString(sampleSpace);
-	}
-
-	private String parseAsMLConfidenceParam(Double confidence) {
-		Map<String, String> sampleSpace = Maps.newHashMap();
-		sampleSpace.put(MLOutcomeMeasure.CONFIDENCE.toString(), confidence.toString());
-		sampleSpace.put(INDECISIVE, Double.toString(1 - confidence));
 		return parseToString(sampleSpace);
 	}
 

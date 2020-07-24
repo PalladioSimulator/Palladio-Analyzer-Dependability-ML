@@ -38,7 +38,7 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 			super(false);
 
 			this.myBlackboard = new MDSDBlackboard();
-			
+
 			this.addJob(new LoadPCMModelsIntoBlackboardJob(config));
 			this.addJob(new LoadMiddlewareConfigurationIntoBlackboardJob(config));
 			this.addJob(new ValidatePCMModelsJob(config));
@@ -78,12 +78,10 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 			requireValidString(explorationStrategyName);
 			requireValidString(uncertaintyRepository);
 
-			var explorationStrategy = UncertaintyBasedReliabilityPredictor.findStrategyWith(explorationStrategyName)
-					.orElse(null);
+			var strategy = UncertaintyBasedReliabilityPredictor.findStrategyWith(explorationStrategyName).orElse(null);
 			var uncertainties = loadModel().getUncertaintyInducedFailureTypes();
 			var pcmInstance = buildPCMInstance();
-			return new UncertaintyBasedReliabilityPredictionConfig(runConfig, explorationStrategy, uncertainties,
-					pcmInstance);
+			return new UncertaintyBasedReliabilityPredictionConfig(runConfig, strategy, uncertainties, pcmInstance);
 		}
 
 		private PCMInstance buildPCMInstance() {

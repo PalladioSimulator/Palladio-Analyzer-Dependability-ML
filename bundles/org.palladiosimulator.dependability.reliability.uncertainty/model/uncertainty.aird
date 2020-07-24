@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
-  <viewpoint:DAnalysis uid="_wCW18MgFEeqouM-niPEurg" selectedViews="_wLLawMgFEeqouM-niPEurg" version="14.3.0.201909031200">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis uid="_wCW18MgFEeqouM-niPEurg" selectedViews="_wLLawMgFEeqouM-niPEurg" version="14.3.1.202003261200">
     <semanticResources>uncertainty.ecore</semanticResources>
     <semanticResources>uncertainty.genmodel</semanticResources>
     <semanticResources>platform:/resource/org.palladiosimulator.pcm/model/pcm.ecore</semanticResources>
@@ -23,7 +23,7 @@
     <semanticResources>platform:/resource/de.uka.ipd.sdq.stoex/model/stoex.genmodel</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_wLLawMgFEeqouM-niPEurg">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_wM6gIMgFEeqouM-niPEurg" name="uncertainty" repPath="#_wMV4YMgFEeqouM-niPEurg" changeId="c38abb68-ebcc-449f-b5d3-e05ac57322b9">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_wM6gIMgFEeqouM-niPEurg" name="uncertainty" repPath="#_wMV4YMgFEeqouM-niPEurg" changeId="a1084ee0-4ef7-4721-ab54-71b0b4925ae1">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="uncertainty.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -62,11 +62,15 @@
               <styles xmi:type="notation:FontStyle" xmi:id="_cr1QscgGEeqouM-niPEurg" fontName="Segoe UI" fontHeight="8" bold="true"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_cr1QssgGEeqouM-niPEurg"/>
             </children>
+            <children xmi:type="notation:Node" xmi:id="_PcJL8M2bEeqRhvo5K09nSg" type="3010" element="_PbgSws2bEeqRhvo5K09nSg">
+              <styles xmi:type="notation:FontStyle" xmi:id="_PcJL8c2bEeqRhvo5K09nSg" fontName="Segoe UI" fontHeight="8" bold="true"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_PcJL8s2bEeqRhvo5K09nSg"/>
+            </children>
             <styles xmi:type="notation:SortingStyle" xmi:id="_469OUcgFEeqouM-niPEurg"/>
             <styles xmi:type="notation:FilteringStyle" xmi:id="_469OUsgFEeqouM-niPEurg"/>
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_46484cgFEeqouM-niPEurg" fontName="Segoe UI" fontHeight="8"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_46484sgFEeqouM-niPEurg" x="330" y="225" width="203" height="90"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_46484sgFEeqouM-niPEurg" x="330" y="225" width="203" height="103"/>
         </children>
         <children xmi:type="notation:Node" xmi:id="_-N2EQMgFEeqouM-niPEurg" type="2003" element="_-Nv9oMgFEeqouM-niPEurg">
           <children xmi:type="notation:Node" xmi:id="_-N2rUMgFEeqouM-niPEurg" type="5007"/>
@@ -92,7 +96,7 @@
           <styles xmi:type="notation:FontStyle" xmi:id="_AGPwUsgGEeqouM-niPEurg" fontColor="7490599" fontName="Segoe UI" fontHeight="8"/>
           <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_AGPwU8gGEeqouM-niPEurg" points="[-58, 43, -190, -92]$[-58, 135, -190, 0]$[132, 135, 0, 0]"/>
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_AGUBwMgGEeqouM-niPEurg" id="(1.0,0.5612244897959183)"/>
-          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_AGUBwcgGEeqouM-niPEurg" id="(0.0,0.7954545454545454)"/>
+          <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_AGUBwcgGEeqouM-niPEurg" id="(0.0,0.693069306930693)"/>
         </edges>
       </data>
     </ownedAnnotationEntries>
@@ -118,6 +122,14 @@
         <target xmi:type="ecore:EReference" href="uncertainty.ecore#//UncertaintyInducedFailureType/uncertaintyModel"/>
         <semanticElements xmi:type="ecore:EReference" href="uncertainty.ecore#//UncertaintyInducedFailureType/uncertaintyModel"/>
         <ownedStyle xmi:type="diagram:BundledImage" uid="_crqRksgGEeqouM-niPEurg" labelAlignment="LEFT" description="_PlwyUMgGEeqouM-niPEurg" color="114,159,207">
+          <labelFormat>bold</labelFormat>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_PbgSws2bEeqRhvo5K09nSg" name=" failureVariable : GroundRandomVariable" tooltipText="">
+        <target xmi:type="ecore:EReference" href="uncertainty.ecore#//UncertaintyInducedFailureType/failureVariable"/>
+        <semanticElements xmi:type="ecore:EReference" href="uncertainty.ecore#//UncertaintyInducedFailureType/failureVariable"/>
+        <ownedStyle xmi:type="diagram:BundledImage" uid="_PbiH8M2bEeqRhvo5K09nSg" labelAlignment="LEFT" description="_PlwyUMgGEeqouM-niPEurg" color="114,159,207">
           <labelFormat>bold</labelFormat>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode']"/>

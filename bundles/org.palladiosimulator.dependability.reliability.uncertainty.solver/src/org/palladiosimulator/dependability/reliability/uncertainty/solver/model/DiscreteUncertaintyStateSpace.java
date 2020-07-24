@@ -1,4 +1,4 @@
-package org.palladiosimulator.dependability.reliability.uncertainty.solver.markov;
+package org.palladiosimulator.dependability.reliability.uncertainty.solver.model;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
@@ -74,16 +74,12 @@ public class DiscreteUncertaintyStateSpace {
 	public static DiscreteUncertaintyStateSpace of(UncertaintyState... uncertaintyStates) {
 		return new DiscreteUncertaintyStateSpace(Lists.newArrayList(uncertaintyStates));
 	}
-
-	public static DiscreteUncertaintyStateSpace deriveFrom(List<UncertaintyInducedFailureType> uncertainties) {
-		return new DiscreteUncertaintyStateSpace(deriveUncertaintyStates(uncertainties));
+	
+	public static DiscreteUncertaintyStateSpace of(List<UncertaintyState> uncertaintyStates) {
+		return new DiscreteUncertaintyStateSpace(uncertaintyStates);
 	}
 
-	private static List<UncertaintyState> deriveUncertaintyStates(List<UncertaintyInducedFailureType> uncertainties) {
-		return uncertainties.stream().flatMap(each -> deriveUncertaintyStates(each).stream()).collect(toList());
-	}
-
-	private static List<UncertaintyState> deriveUncertaintyStates(UncertaintyInducedFailureType uncertainty) {
+	public static Set<UncertaintyState> valueSpaceOf(UncertaintyInducedFailureType uncertainty) {
 		GroundProbabilisticNetwork groundNetwork = uncertainty.getUncertaintyModel();
 		if (groundNetwork.getLocalProbabilisticModels().size() != 1) {
 			throw new IllegalArgumentException("The bayesian network must include only one local network.");
@@ -92,9 +88,9 @@ public class DiscreteUncertaintyStateSpace {
 		return deriveUncertaintyStates(groundNetwork.getLocalProbabilisticModels().get(0));
 	}
 
-	private static List<UncertaintyState> deriveUncertaintyStates(LocalProbabilisticNetwork localNetwork) {
+	private static Set<UncertaintyState> deriveUncertaintyStates(LocalProbabilisticNetwork localNetwork) {
 		return localNetwork.getGroundRandomVariables().stream().map(DiscreteUncertaintyStateSpace::toUncertaintyState)
-				.collect(toList());
+				.collect(toSet());
 	}
 
 	private static UncertaintyState toUncertaintyState(GroundRandomVariable variable) {
@@ -104,7 +100,7 @@ public class DiscreteUncertaintyStateSpace {
 		}
 
 		var param = probDist.getParams().get(0).getRepresentation();
-		return UncertaintyState.of(variable.getId(), getValueSpace(param));
+		return UncertaintyState.of(variable.getEntityName(), getValueSpace(param));
 	}
 
 	private static Set<CategoricalValue> getValueSpace(ParamRepresentation param) {

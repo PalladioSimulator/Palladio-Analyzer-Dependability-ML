@@ -14,5 +14,7 @@ public interface PropertyMeasure {
 	
 	public Set<CategoricalValue> getValueSpace();
 	
-	public String getPropertyName();
+	public String getId();
+	
+	public String getName();
 }
