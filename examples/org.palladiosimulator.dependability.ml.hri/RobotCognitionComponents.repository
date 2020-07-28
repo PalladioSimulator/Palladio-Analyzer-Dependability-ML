@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<repository:Repository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reliability="http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2" xmlns:seff="http://palladiosimulator.org/PalladioComponentModel/SEFF/5.2" id="_ST3ZANCmEeqWne3bdagE9g" entityName="RobotCognitionComponents">
+<repository:Repository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reliability="http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2" xmlns:seff="http://palladiosimulator.org/PalladioComponentModel/SEFF/5.2" xmlns:stoex="http://sdq.ipd.uka.de/StochasticExpressions/2.2" id="_ST3ZANCmEeqWne3bdagE9g" entityName="RobotCognitionComponents">
   <components__Repository xsi:type="repository:BasicComponent" id="_zbDDANCrEeqWne3bdagE9g" entityName="Camera">
     <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_bNyLwNDBEeqWne3bdagE9g" entityName="Camera.CognitionProcess.Provider" providedInterface__OperationProvidedRole="_fZ1SQNC9EeqWne3bdagE9g"/>
     <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_9GRicNC8EeqWne3bdagE9g" entityName="Camera.ImageEvent.ImgProducer" eventGroup__SourceRole="_EQCsYNC7EeqWne3bdagE9g"/>
@@ -15,7 +15,14 @@
           <softwareInducedFailureType__InternalFailureOccurrenceDescription href="pathmap://PCM_MODELS/FailureTypes.repository#_sLBREFf0EeW5Q6z-Ts8kIg"/>
         </internalFailureOccurrenceDescriptions__InternalAction>
       </steps_Behaviour>
-      <steps_Behaviour xsi:type="seff:EmitEventAction" id="_1Wg04NDREeqWne3bdagE9g" entityName="PublishPerceivedImageMsg" predecessor_AbstractAction="_e7KpMNDREeqWne3bdagE9g" successor_AbstractAction="_bOIKAdDBEeqWne3bdagE9g" eventType__EmitEventAction="_NrhIUNC7EeqWne3bdagE9g" sourceRole__EmitEventAction="_9GRicNC8EeqWne3bdagE9g"/>
+      <steps_Behaviour xsi:type="seff:EmitEventAction" id="_1Wg04NDREeqWne3bdagE9g" entityName="PublishPerceivedImageMsg" predecessor_AbstractAction="_e7KpMNDREeqWne3bdagE9g" successor_AbstractAction="_bOIKAdDBEeqWne3bdagE9g" eventType__EmitEventAction="_NrhIUNC7EeqWne3bdagE9g" sourceRole__EmitEventAction="_9GRicNC8EeqWne3bdagE9g">
+        <inputVariableUsages__CallAction>
+          <variableCharacterisation_VariableUsage type="VALUE">
+            <specification_VariableCharacterisation specification="1"/>
+          </variableCharacterisation_VariableUsage>
+          <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="img"/>
+        </inputVariableUsages__CallAction>
+      </steps_Behaviour>
     </serviceEffectSpecifications__BasicComponent>
   </components__Repository>
   <components__Repository xsi:type="repository:BasicComponent" id="_hnWaENC6EeqWne3bdagE9g" entityName="ObjectDetection">
@@ -26,7 +33,14 @@
       <steps_Behaviour xsi:type="seff:StartAction" id="_E1DMANC9EeqWne3bdagE9g" successor_AbstractAction="_LSqGoNDTEeqWne3bdagE9g"/>
       <steps_Behaviour xsi:type="seff:StopAction" id="_E1FBMNC9EeqWne3bdagE9g" predecessor_AbstractAction="_dQdI8NDTEeqWne3bdagE9g"/>
       <steps_Behaviour xsi:type="seff:ExternalCallAction" id="_LSqGoNDTEeqWne3bdagE9g" entityName="ImageClassification" predecessor_AbstractAction="_E1DMANC9EeqWne3bdagE9g" successor_AbstractAction="_dQdI8NDTEeqWne3bdagE9g" calledService_ExternalService="_n_abcNDSEeqWne3bdagE9g" role_ExternalService="_0XdWMNDSEeqWne3bdagE9g"/>
-      <steps_Behaviour xsi:type="seff:EmitEventAction" id="_dQdI8NDTEeqWne3bdagE9g" entityName="PublishObjectStampedMsg" predecessor_AbstractAction="_LSqGoNDTEeqWne3bdagE9g" successor_AbstractAction="_E1FBMNC9EeqWne3bdagE9g" eventType__EmitEventAction="_JzEhANDEEeqWne3bdagE9g" sourceRole__EmitEventAction="_SZgrANDHEeqWne3bdagE9g"/>
+      <steps_Behaviour xsi:type="seff:EmitEventAction" id="_dQdI8NDTEeqWne3bdagE9g" entityName="PublishObjectStampedMsg" predecessor_AbstractAction="_LSqGoNDTEeqWne3bdagE9g" successor_AbstractAction="_E1FBMNC9EeqWne3bdagE9g" eventType__EmitEventAction="_JzEhANDEEeqWne3bdagE9g" sourceRole__EmitEventAction="_SZgrANDHEeqWne3bdagE9g">
+        <inputVariableUsages__CallAction>
+          <variableCharacterisation_VariableUsage type="NUMBER_OF_ELEMENTS">
+            <specification_VariableCharacterisation specification="3"/>
+          </variableCharacterisation_VariableUsage>
+          <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="objects"/>
+        </inputVariableUsages__CallAction>
+      </steps_Behaviour>
     </serviceEffectSpecifications__BasicComponent>
   </components__Repository>
   <components__Repository xsi:type="repository:BasicComponent" id="_qDQ2cNC6EeqWne3bdagE9g" entityName="TrajectoryPlanner">
@@ -44,7 +58,14 @@
           <softwareInducedFailureType__InternalFailureOccurrenceDescription href="pathmap://PCM_MODELS/FailureTypes.repository#_sLBREFf0EeW5Q6z-Ts8kIg"/>
         </internalFailureOccurrenceDescriptions__InternalAction>
       </steps_Behaviour>
-      <steps_Behaviour xsi:type="seff:EmitEventAction" id="_4t4DMNDaEeqWne3bdagE9g" entityName="PublishTrajectoryMsg" predecessor_AbstractAction="_xIatsNDaEeqWne3bdagE9g" successor_AbstractAction="_CTpIwtDJEeqWne3bdagE9g" eventType__EmitEventAction="_Ujj10NDJEeqWne3bdagE9g" sourceRole__EmitEventAction="_hFyAQNDJEeqWne3bdagE9g"/>
+      <steps_Behaviour xsi:type="seff:EmitEventAction" id="_4t4DMNDaEeqWne3bdagE9g" entityName="PublishTrajectoryMsg" predecessor_AbstractAction="_xIatsNDaEeqWne3bdagE9g" successor_AbstractAction="_CTpIwtDJEeqWne3bdagE9g" eventType__EmitEventAction="_Ujj10NDJEeqWne3bdagE9g" sourceRole__EmitEventAction="_hFyAQNDJEeqWne3bdagE9g">
+        <inputVariableUsages__CallAction>
+          <variableCharacterisation_VariableUsage type="VALUE">
+            <specification_VariableCharacterisation specification="1"/>
+          </variableCharacterisation_VariableUsage>
+          <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="traj"/>
+        </inputVariableUsages__CallAction>
+      </steps_Behaviour>
     </serviceEffectSpecifications__BasicComponent>
   </components__Repository>
   <components__Repository xsi:type="repository:BasicComponent" id="_2abncNC6EeqWne3bdagE9g" entityName="RobotControl">
@@ -78,7 +99,14 @@
           <softwareInducedFailureType__InternalFailureOccurrenceDescription href="pathmap://PCM_MODELS/FailureTypes.repository#_sLBREFf0EeW5Q6z-Ts8kIg"/>
         </internalFailureOccurrenceDescriptions__InternalAction>
       </steps_Behaviour>
-      <steps_Behaviour xsi:type="seff:EmitEventAction" id="_tfAeYNDXEeqWne3bdagE9g" entityName="PublishBuildSequenceMsg" predecessor_AbstractAction="_bCk_UNDXEeqWne3bdagE9g" successor_AbstractAction="_Zk7v4dDHEeqWne3bdagE9g" eventType__EmitEventAction="_kdWq8NDHEeqWne3bdagE9g" sourceRole__EmitEventAction="_-muyINDIEeqWne3bdagE9g"/>
+      <steps_Behaviour xsi:type="seff:EmitEventAction" id="_tfAeYNDXEeqWne3bdagE9g" entityName="PublishBuildSequenceMsg" predecessor_AbstractAction="_bCk_UNDXEeqWne3bdagE9g" successor_AbstractAction="_Zk7v4dDHEeqWne3bdagE9g" eventType__EmitEventAction="_kdWq8NDHEeqWne3bdagE9g" sourceRole__EmitEventAction="_-muyINDIEeqWne3bdagE9g">
+        <inputVariableUsages__CallAction>
+          <variableCharacterisation_VariableUsage type="NUMBER_OF_ELEMENTS">
+            <specification_VariableCharacterisation specification="3"/>
+          </variableCharacterisation_VariableUsage>
+          <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="assemblySequence"/>
+        </inputVariableUsages__CallAction>
+      </steps_Behaviour>
     </serviceEffectSpecifications__BasicComponent>
   </components__Repository>
   <components__Repository xsi:type="repository:BasicComponent" id="_a4yjcNDSEeqWne3bdagE9g" entityName="MaskR-CNN">
@@ -114,7 +142,7 @@
   </interfaces__Repository>
   <interfaces__Repository xsi:type="repository:EventGroup" id="_fDu64NDHEeqWne3bdagE9g" entityName="BuildSequenceMsg">
     <eventTypes__EventGroup id="_kdWq8NDHEeqWne3bdagE9g" entityName="buildSequence">
-      <parameter__EventType dataType__Parameter="_ixl3QNDIEeqWne3bdagE9g" parameterName="assemblySequence" modifier__Parameter="inout"/>
+      <parameter__EventType dataType__Parameter="_2svVQNEDEeqpS-pqxVgAkw" parameterName="assemblySequence" modifier__Parameter="inout"/>
     </eventTypes__EventGroup>
   </interfaces__Repository>
   <interfaces__Repository xsi:type="repository:EventGroup" id="_QYpUkNDJEeqWne3bdagE9g" entityName="TrajectoryMsg">
@@ -146,16 +174,14 @@
     </innerDeclaration_CompositeDataType>
   </dataTypes__Repository>
   <dataTypes__Repository xsi:type="repository:CollectionDataType" id="__pawcNDDEeqWne3bdagE9g" entityName="ObjectPoses" innerType_CollectionDataType="_apW-INDDEeqWne3bdagE9g"/>
-  <dataTypes__Repository xsi:type="repository:CompositeDataType" id="_ixl3QNDIEeqWne3bdagE9g" entityName="BuildSequence">
-    <innerDeclaration_CompositeDataType entityName="sequence">
-      <datatype_InnerDeclaration xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.0"/>
-    </innerDeclaration_CompositeDataType>
-  </dataTypes__Repository>
   <dataTypes__Repository xsi:type="repository:CompositeDataType" id="_ntO1YNDJEeqWne3bdagE9g" entityName="Trajectory"/>
   <dataTypes__Repository xsi:type="repository:CompositeDataType" id="_sTRIMNDQEeqWne3bdagE9g" entityName="EnrichedImage">
     <innerDeclaration_CompositeDataType entityName="img" datatype_InnerDeclaration="_w-QdMNC7EeqWne3bdagE9g"/>
     <innerDeclaration_CompositeDataType entityName="brightness">
       <datatype_InnerDeclaration xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.0"/>
     </innerDeclaration_CompositeDataType>
+  </dataTypes__Repository>
+  <dataTypes__Repository xsi:type="repository:CollectionDataType" id="_2svVQNEDEeqpS-pqxVgAkw" entityName="BuildSequence">
+    <innerType_CollectionDataType xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.0"/>
   </dataTypes__Repository>
 </repository:Repository>
