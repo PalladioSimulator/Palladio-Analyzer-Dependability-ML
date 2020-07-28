@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ASCII"?>
+<system:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:composition="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.2" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2" xmlns:system="http://palladiosimulator.org/PalladioComponentModel/System/5.2" id="_qSosMNDbEeqWne3bdagE9g" entityName="RobotCognitionSystem">
+  <assemblyContexts__ComposedStructure id="_yM83YNDbEeqWne3bdagE9g" entityName="Assembly_Camera">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="RobotCognitionComponents.repository#_zbDDANCrEeqWne3bdagE9g"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_PGlVINDcEeqWne3bdagE9g" entityName="Assembly_ObjectDetection">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="RobotCognitionComponents.repository#_hnWaENC6EeqWne3bdagE9g"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_vH-OANDcEeqWne3bdagE9g" entityName="Assembly_MaskR-CNN">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="RobotCognitionComponents.repository#_a4yjcNDSEeqWne3bdagE9g"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_a4j48NDdEeqWne3bdagE9g" entityName="Assembly_BuildSequenceLogic">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="RobotCognitionComponents.repository#_Nqn-MNDAEeqWne3bdagE9g"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_nwE98NDdEeqWne3bdagE9g" entityName="Assembly_TrajectoryPlanner">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="RobotCognitionComponents.repository#_qDQ2cNC6EeqWne3bdagE9g"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_4u1lINDdEeqWne3bdagE9g" entityName="Assembly_RobotControl">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="RobotCognitionComponents.repository#_2abncNC6EeqWne3bdagE9g"/>
+  </assemblyContexts__ComposedStructure>
+  <eventChannel__ComposedStructure id="_cTR_8NDcEeqWne3bdagE9g" entityName="ImageMsgChannel" eventChannelSourceConnector__EventChannel="_i4CtcNDcEeqWne3bdagE9g" eventChannelSinkConnector__EventChannel="_tV1iANDcEeqWne3bdagE9g">
+    <eventGroup__EventChannel href="RobotCognitionComponents.repository#_EQCsYNC7EeqWne3bdagE9g"/>
+  </eventChannel__ComposedStructure>
+  <eventChannel__ComposedStructure id="_7VmogNDcEeqWne3bdagE9g" entityName="ObjectsStampedChannel" eventChannelSourceConnector__EventChannel="_RAtqENDdEeqWne3bdagE9g" eventChannelSinkConnector__EventChannel="_et4ksNDdEeqWne3bdagE9g">
+    <eventGroup__EventChannel href="RobotCognitionComponents.repository#_3UaUsNDAEeqWne3bdagE9g"/>
+  </eventChannel__ComposedStructure>
+  <eventChannel__ComposedStructure id="_gpWL0NDdEeqWne3bdagE9g" entityName="BuildSequenceMsgChannel" eventChannelSourceConnector__EventChannel="_m1ioUNDdEeqWne3bdagE9g" eventChannelSinkConnector__EventChannel="_zZ6u4NDdEeqWne3bdagE9g">
+    <eventGroup__EventChannel href="RobotCognitionComponents.repository#_fDu64NDHEeqWne3bdagE9g"/>
+  </eventChannel__ComposedStructure>
+  <eventChannel__ComposedStructure id="_0bHGINDdEeqWne3bdagE9g" entityName="TrajectoryMsgChannel" eventChannelSourceConnector__EventChannel="_4agT4NDdEeqWne3bdagE9g" eventChannelSinkConnector__EventChannel="_8Ll_4NDdEeqWne3bdagE9g">
+    <eventGroup__EventChannel href="RobotCognitionComponents.repository#_QYpUkNDJEeqWne3bdagE9g"/>
+  </eventChannel__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:ProvidedDelegationConnector" id="_GwTmsNDcEeqWne3bdagE9g" entityName="newProvidedDelegationConnector" outerProvidedRole_ProvidedDelegationConnector="_EPVewNDcEeqWne3bdagE9g" assemblyContext_ProvidedDelegationConnector="_yM83YNDbEeqWne3bdagE9g">
+    <innerProvidedRole_ProvidedDelegationConnector href="RobotCognitionComponents.repository#_bNyLwNDBEeqWne3bdagE9g"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="_i4CtcNDcEeqWne3bdagE9g" entityName="newEventChannelSourceConnector" assemblyContext__EventChannelSourceConnector="_yM83YNDbEeqWne3bdagE9g" eventChannel__EventChannelSourceConnector="_cTR_8NDcEeqWne3bdagE9g">
+    <sourceRole__EventChannelSourceRole href="RobotCognitionComponents.repository#_9GRicNC8EeqWne3bdagE9g"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_tV1iANDcEeqWne3bdagE9g" entityName="newEventChannelSinkConnector" assemblyContext__EventChannelSinkConnector="_PGlVINDcEeqWne3bdagE9g" eventChannel__EventChannelSinkConnector="_cTR_8NDcEeqWne3bdagE9g">
+    <sinkRole__EventChannelSinkConnector href="RobotCognitionComponents.repository#_E06pINC9EeqWne3bdagE9g"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_5joUkNDcEeqWne3bdagE9g" entityName="newAssemblyConnector" requiringAssemblyContext_AssemblyConnector="_PGlVINDcEeqWne3bdagE9g" providingAssemblyContext_AssemblyConnector="_vH-OANDcEeqWne3bdagE9g">
+    <providedRole_AssemblyConnector href="RobotCognitionComponents.repository#_1dme4NDSEeqWne3bdagE9g"/>
+    <requiredRole_AssemblyConnector href="RobotCognitionComponents.repository#_0XdWMNDSEeqWne3bdagE9g"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="_RAtqENDdEeqWne3bdagE9g" entityName="newEventChannelSourceConnector" assemblyContext__EventChannelSourceConnector="_PGlVINDcEeqWne3bdagE9g" eventChannel__EventChannelSourceConnector="_7VmogNDcEeqWne3bdagE9g">
+    <sourceRole__EventChannelSourceRole href="RobotCognitionComponents.repository#_SZgrANDHEeqWne3bdagE9g"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_et4ksNDdEeqWne3bdagE9g" entityName="newEventChannelSinkConnector" assemblyContext__EventChannelSinkConnector="_a4j48NDdEeqWne3bdagE9g" eventChannel__EventChannelSinkConnector="_7VmogNDcEeqWne3bdagE9g">
+    <sinkRole__EventChannelSinkConnector href="RobotCognitionComponents.repository#_Zk4skNDHEeqWne3bdagE9g"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="_m1ioUNDdEeqWne3bdagE9g" entityName="newEventChannelSourceConnector" assemblyContext__EventChannelSourceConnector="_a4j48NDdEeqWne3bdagE9g" eventChannel__EventChannelSourceConnector="_gpWL0NDdEeqWne3bdagE9g">
+    <sourceRole__EventChannelSourceRole href="RobotCognitionComponents.repository#_-muyINDIEeqWne3bdagE9g"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_zZ6u4NDdEeqWne3bdagE9g" entityName="newEventChannelSinkConnector" assemblyContext__EventChannelSinkConnector="_nwE98NDdEeqWne3bdagE9g" eventChannel__EventChannelSinkConnector="_gpWL0NDdEeqWne3bdagE9g">
+    <sinkRole__EventChannelSinkConnector href="RobotCognitionComponents.repository#_CTohsNDJEeqWne3bdagE9g"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="_4agT4NDdEeqWne3bdagE9g" entityName="newEventChannelSourceConnector" assemblyContext__EventChannelSourceConnector="_nwE98NDdEeqWne3bdagE9g" eventChannel__EventChannelSourceConnector="_0bHGINDdEeqWne3bdagE9g">
+    <sourceRole__EventChannelSourceRole href="RobotCognitionComponents.repository#_hFyAQNDJEeqWne3bdagE9g"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_8Ll_4NDdEeqWne3bdagE9g" entityName="newEventChannelSinkConnector" assemblyContext__EventChannelSinkConnector="_4u1lINDdEeqWne3bdagE9g" eventChannel__EventChannelSinkConnector="_0bHGINDdEeqWne3bdagE9g">
+    <sinkRole__EventChannelSinkConnector href="RobotCognitionComponents.repository#_kW1hUNDJEeqWne3bdagE9g"/>
+  </connectors__ComposedStructure>
+  <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_EPVewNDcEeqWne3bdagE9g" entityName="CognitionProcessProvidedRole">
+    <providedInterface__OperationProvidedRole href="RobotCognitionComponents.repository#_fZ1SQNC9EeqWne3bdagE9g"/>
+  </providedRoles_InterfaceProvidingEntity>
+</system:System>

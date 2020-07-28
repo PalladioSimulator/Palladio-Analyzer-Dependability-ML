@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ASCII"?>
+<allocation:Allocation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:allocation="http://palladiosimulator.org/PalladioComponentModel/Allocation/5.2" id="_Gqfq4NDiEeqWne3bdagE9g" entityName="New Allocation">
+  <targetResourceEnvironment_Allocation href="RobotResourceEnvironment.resourceenvironment#/"/>
+  <system_Allocation href="RobotCognitionSystem.system#_qSosMNDbEeqWne3bdagE9g"/>
+  <allocationContexts_Allocation id="_bwplQNDiEeqWne3bdagE9g" entityName="Allocation_Assembly_Camera">
+    <resourceContainer_AllocationContext href="RobotResourceEnvironment.resourceenvironment#_gm0xYNDfEeqWne3bdagE9g"/>
+    <assemblyContext_AllocationContext href="RobotCognitionSystem.system#_yM83YNDbEeqWne3bdagE9g"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_fpgGINDiEeqWne3bdagE9g" entityName="Allocation_ImageMsgChannel">
+    <resourceContainer_AllocationContext href="RobotResourceEnvironment.resourceenvironment#_gm0xYNDfEeqWne3bdagE9g"/>
+    <eventChannel__AllocationContext href="RobotCognitionSystem.system#_cTR_8NDcEeqWne3bdagE9g"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_jM4GQNDiEeqWne3bdagE9g" entityName="Allocation_Assembly_ObjectDetection">
+    <resourceContainer_AllocationContext href="RobotResourceEnvironment.resourceenvironment#_XE0aMNDgEeqWne3bdagE9g"/>
+    <assemblyContext_AllocationContext href="RobotCognitionSystem.system#_PGlVINDcEeqWne3bdagE9g"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_kemz4NDiEeqWne3bdagE9g" entityName="Allocation_Assembly_MaskR-CNN">
+    <resourceContainer_AllocationContext href="RobotResourceEnvironment.resourceenvironment#_XE0aMNDgEeqWne3bdagE9g"/>
+    <assemblyContext_AllocationContext href="RobotCognitionSystem.system#_vH-OANDcEeqWne3bdagE9g"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_ncAZINDiEeqWne3bdagE9g" entityName="Allocation_Assembly_BuildSequenceLogic">
+    <resourceContainer_AllocationContext href="RobotResourceEnvironment.resourceenvironment#_XE0aMNDgEeqWne3bdagE9g"/>
+    <assemblyContext_AllocationContext href="RobotCognitionSystem.system#_a4j48NDdEeqWne3bdagE9g"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_pNngsNDiEeqWne3bdagE9g" entityName="Allocation_Assembly_TrajectoryPlanner">
+    <resourceContainer_AllocationContext href="RobotResourceEnvironment.resourceenvironment#_XE0aMNDgEeqWne3bdagE9g"/>
+    <assemblyContext_AllocationContext href="RobotCognitionSystem.system#_nwE98NDdEeqWne3bdagE9g"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_qobR0NDiEeqWne3bdagE9g" entityName="Allocation_Assembly_RobotControl">
+    <resourceContainer_AllocationContext href="RobotResourceEnvironment.resourceenvironment#_XE0aMNDgEeqWne3bdagE9g"/>
+    <assemblyContext_AllocationContext href="RobotCognitionSystem.system#_4u1lINDdEeqWne3bdagE9g"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_sfQ3oNDiEeqWne3bdagE9g" entityName="Allocation_ObjectsStampedChannel">
+    <resourceContainer_AllocationContext href="RobotResourceEnvironment.resourceenvironment#_XE0aMNDgEeqWne3bdagE9g"/>
+    <eventChannel__AllocationContext href="RobotCognitionSystem.system#_7VmogNDcEeqWne3bdagE9g"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_upLxgNDiEeqWne3bdagE9g" entityName="Allocation_TrajectoryMsgChannel">
+    <resourceContainer_AllocationContext href="RobotResourceEnvironment.resourceenvironment#_XE0aMNDgEeqWne3bdagE9g"/>
+    <eventChannel__AllocationContext href="RobotCognitionSystem.system#_0bHGINDdEeqWne3bdagE9g"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_v2hHUNDiEeqWne3bdagE9g" entityName="Allocation_BuildSequenceMsgChannel">
+    <resourceContainer_AllocationContext href="RobotResourceEnvironment.resourceenvironment#_XE0aMNDgEeqWne3bdagE9g"/>
+    <eventChannel__AllocationContext href="RobotCognitionSystem.system#_gpWL0NDdEeqWne3bdagE9g"/>
+  </allocationContexts_Allocation>
+</allocation:Allocation>
