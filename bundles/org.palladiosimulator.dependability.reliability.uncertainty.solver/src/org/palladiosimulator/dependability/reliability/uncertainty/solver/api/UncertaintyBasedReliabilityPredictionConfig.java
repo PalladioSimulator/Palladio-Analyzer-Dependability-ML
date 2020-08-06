@@ -9,6 +9,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
 import org.palladiosimulator.analyzer.workflow.jobs.EventsTransformationJob;
@@ -99,8 +100,11 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 			ResourceSet rs = new ResourceSetImpl();
 			rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
 			rs.getPackageRegistry().put(UncertaintyPackage.eNS_URI, UncertaintyPackage.eINSTANCE);
-
-			return (UncertaintyFailureTypeRepository) rs.getResource(createModelURI(), true).getContents().get(0);
+			
+			var resource = rs.getResource(createModelURI(), true);
+			EcoreUtil.resolveAll(rs);
+			
+			return (UncertaintyFailureTypeRepository) resource.getContents().get(0);
 		}
 
 		private URI createModelURI() {

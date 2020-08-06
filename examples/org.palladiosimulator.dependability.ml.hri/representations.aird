@@ -13,6 +13,7 @@
     <semanticResources>ProbabilisticSensitivityModel.templatevariable</semanticResources>
     <semanticResources>pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype</semanticResources>
     <semanticResources>ProbabilityDistributions.distributionfunction</semanticResources>
+    <semanticResources>RobotCognitionUncertaintyModel2.uncertainty</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_TaN9ENCmEeqWne3bdagE9g">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_TfdCYNCmEeqWne3bdagE9g" name="RobotCognitionComponents Repository Diagram" repPath="#_TbBOUNCmEeqWne3bdagE9g" changeId="7b807150-05b3-4f27-a2f2-25426ab141aa">
