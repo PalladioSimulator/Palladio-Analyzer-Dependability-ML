@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ASCII"?>
+<distributionfunction:ProbabilityDistributionFunctionRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:distributionfunction="http://www.mdsd.tools/probdist/distributionfunction/1.0" id="_m0LKAMdTEeqON7K8j0J6NQ">
+  <distributions xsi:type="distributionfunction:ProbabilityDistribution" id="_HIpzcMdTEeqON7K8j0J6NQ" entityName="MLPredictionSensitivityDistribution" params="_HIpMYMdTEeqON7K8j0J6NQ">
+    <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
+  </distributions>
+  <distributions xsi:type="distributionfunction:ProbabilityDistribution" id="_HIbJ8MdTEeqON7K8j0J6NQ" entityName="Image brightness measureSensitivityDistribution" params="_HIai4MdTEeqON7K8j0J6NQ">
+    <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
+  </distributions>
+  <params id="_HIpMYMdTEeqON7K8j0J6NQ" entityName="SensitivityParam">
+    <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
+    <representation xsi:type="distributionfunction:TabularCPD">
+      <cpdEntries>
+        <conditonals>(Imagebrightnessmeasure:High)</conditonals>
+        <entry type="SAMPLESPACE" value="{Confidence,0.0};{indecisive,1.0}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(Imagebrightnessmeasure:Medium)</conditonals>
+        <entry type="SAMPLESPACE" value="{Confidence,0.9859603066666667};{indecisive,0.014039693333333325}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(Imagebrightnessmeasure:Low)</conditonals>
+        <entry type="SAMPLESPACE" value="{Confidence,0.0};{indecisive,1.0}"/>
+      </cpdEntries>
+    </representation>
+  </params>
+  <params id="_HIai4MdTEeqON7K8j0J6NQ" entityName="SensitivityParam">
+    <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
+    <representation xsi:type="distributionfunction:SimpleParameter" type="SAMPLESPACE" value="{(Imagebrightnessmeasure:High),0.0};{(Imagebrightnessmeasure:Medium),1.0};{(Imagebrightnessmeasure:Low),0.0}"/>
+  </params>
+</distributionfunction:ProbabilityDistributionFunctionRepository>

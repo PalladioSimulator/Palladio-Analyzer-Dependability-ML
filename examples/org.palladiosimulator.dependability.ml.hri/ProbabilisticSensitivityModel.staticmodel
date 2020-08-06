@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<staticmodel:ProbabilisticModelRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:staticmodel="http://palladiosimulator.org/Environment/StaticModel/1.0" xmlns:templatevariable="http://palladiosimulator.org/Environment/TemplateVariable/1.0" id="_AQMG0MdTEeqON7K8j0J6NQ">
+  <models id="_AQfBwMdTEeqON7K8j0J6NQ" entityName="MLPredictionSensitivityModel">
+    <localModels id="_AQfBwsdTEeqON7K8j0J6NQ" entityName="MLPredictionSensitivityModel">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="ProbabilisticSensitivityModel.templatevariable#_AQMt4MdTEeqON7K8j0J6NQ"/>
+      <distribution href="ProbabilityDistributions.distributionfunction#_HIpzcMdTEeqON7K8j0J6NQ"/>
+    </localModels>
+    <localModels id="_AQtrQcdTEeqON7K8j0J6NQ" entityName="Image brightness measureModel">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="ProbabilisticSensitivityModel.templatevariable#_AQfBxMdTEeqON7K8j0J6NQ"/>
+      <distribution href="ProbabilityDistributions.distributionfunction#_HIbJ8MdTEeqON7K8j0J6NQ"/>
+    </localModels>
+    <localProbabilisticModels>
+      <groundRandomVariables id="_AQfBwcdTEeqON7K8j0J6NQ" entityName="MLPredictionSensitivity" descriptiveModel="_AQfBwsdTEeqON7K8j0J6NQ">
+        <instantiatedTemplate href="ProbabilisticSensitivityModel.templatevariable#_AQMG0sdTEeqON7K8j0J6NQ"/>
+        <dependenceStructure href="ProbabilisticSensitivityModel.templatevariable#//@relation.0"/>
+      </groundRandomVariables>
+      <groundRandomVariables id="_AQtrQMdTEeqON7K8j0J6NQ" entityName="Image brightness measureSensitivity" descriptiveModel="_AQtrQcdTEeqON7K8j0J6NQ">
+        <instantiatedTemplate href="ProbabilisticSensitivityModel.templatevariable#_AQfBw8dTEeqON7K8j0J6NQ"/>
+      </groundRandomVariables>
+    </localProbabilisticModels>
+  </models>
+</staticmodel:ProbabilisticModelRepository>

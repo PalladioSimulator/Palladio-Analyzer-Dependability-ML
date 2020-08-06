@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<templatevariable:TemplateVariableDefinitions xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:templatevariable="http://palladiosimulator.org/Environment/TemplateVariable/1.0" id="_AQMG0cdTEeqON7K8j0J6NQ">
+  <variables id="_AQMG0sdTEeqON7K8j0J6NQ" entityName="MLPredictionSensitivityTemplate"/>
+  <variables id="_AQfBw8dTEeqON7K8j0J6NQ" entityName="Image brightness measure"/>
+  <factors xsi:type="templatevariable:ProbabilisticTemplateFactor" id="_AQMt4MdTEeqON7K8j0J6NQ" entityName="MLPredictionSensitivityFactor" scope="_AQMG0sdTEeqON7K8j0J6NQ _AQfBw8dTEeqON7K8j0J6NQ">
+    <distributionFamily href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
+  </factors>
+  <factors xsi:type="templatevariable:ProbabilisticTemplateFactor" id="_AQfBxMdTEeqON7K8j0J6NQ" entityName="Image brightness measureFactor" scope="_AQfBw8dTEeqON7K8j0J6NQ">
+    <distributionFamily href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
+  </factors>
+  <relation xsi:type="templatevariable:DependenceRelation" target="_AQMG0sdTEeqON7K8j0J6NQ" source="_AQfBw8dTEeqON7K8j0J6NQ"/>
+</templatevariable:TemplateVariableDefinitions>
