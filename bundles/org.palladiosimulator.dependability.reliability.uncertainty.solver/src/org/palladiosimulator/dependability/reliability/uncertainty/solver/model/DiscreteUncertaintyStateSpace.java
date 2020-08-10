@@ -93,7 +93,7 @@ public class DiscreteUncertaintyStateSpace {
 				.collect(toSet());
 	}
 
-	private static UncertaintyState toUncertaintyState(GroundRandomVariable variable) {
+	public static UncertaintyState toUncertaintyState(GroundRandomVariable variable) {
 		var probDist = variable.getDescriptiveModel().getDistribution();
 		if (probDist.getParams().size() != 1) {
 			throw new IllegalArgumentException("The distribution is not valid for this operation.");

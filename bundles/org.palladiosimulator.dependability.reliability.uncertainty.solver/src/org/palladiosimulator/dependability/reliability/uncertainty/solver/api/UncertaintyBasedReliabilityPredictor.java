@@ -1,7 +1,9 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.solver.api;
 
 import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toList;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -10,6 +12,9 @@ import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.ReliabilityPredictionResult;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.StateSpaceExplorationStrategy;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.UncertaintyBasedReliabilityPrediction;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
+import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
 
 import com.google.common.collect.Sets;
 
@@ -33,6 +38,16 @@ public class UncertaintyBasedReliabilityPredictor {
 	}
 
 	public static ReliabilityPredictionResult predict(UncertaintyBasedReliabilityPredictionConfig config) {
+		return buildReliabilityPredictor(config).predict(config.getPCMInstance());
+	}
+
+	public static ReliabilityPredictionResult predictGiven(List<GroundRandomVariable> states,
+			UncertaintyBasedReliabilityPredictionConfig config) {
+		return buildReliabilityPredictor(config).predict(config.getPCMInstance(), toUncertaintyStates(states));
+	}
+
+	private static UncertaintyBasedReliabilityPrediction buildReliabilityPredictor(
+			UncertaintyBasedReliabilityPredictionConfig config) {
 		var builder = UncertaintyBasedReliabilityPrediction.newBuilder().withConfig(config.getRunConfig());
 
 		if (config.getStateSpaceExplorationStrategy().isPresent()) {
@@ -43,9 +58,11 @@ public class UncertaintyBasedReliabilityPredictor {
 
 		config.getUncertainties().forEach(builder::addUncertaintyFailureType);
 
-		var relPrediction = builder.build();
+		return builder.build();
+	}
 
-		return relPrediction.predict(config.getPCMInstance());
+	private static List<UncertaintyState> toUncertaintyStates(List<GroundRandomVariable> states) {
+		return states.stream().map(DiscreteUncertaintyStateSpace::toUncertaintyState).collect(toList());
 	}
 
 	private static Predicate<StateSpaceExplorationStrategy> strategyWith(String queriedName) {

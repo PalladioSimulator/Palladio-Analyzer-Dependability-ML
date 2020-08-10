@@ -57,7 +57,7 @@
     </ownedViews>
     <ownedViews xmi:type="viewpoint:DView" uid="_LY5QgNDeEeqWne3bdagE9g">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.palladiosimulator.editors.sirius.usage/description/usage.odesign#//@ownedViewpoints[name='UsageModel']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Ldp0sNDeEeqWne3bdagE9g" name="RobotCognitionUsage UsageModel Diagram" repPath="#_Lb7WYNDeEeqWne3bdagE9g" changeId="810f0cea-331b-4698-a0fe-cbe2ecbadbfd">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Ldp0sNDeEeqWne3bdagE9g" name="RobotCognitionUsage UsageModel Diagram" repPath="#_Lb7WYNDeEeqWne3bdagE9g" changeId="3acb2691-f52b-439f-b811-8f4b30f52e52">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.usage/description/usage.odesign#//@ownedViewpoints[name='UsageModel']/@ownedRepresentations[name='UsageModel%20Diagram']"/>
         <target xmi:type="usagemodel:UsageModel" href="RobotCognitionUsage.usagemodel#/"/>
       </ownedRepresentationDescriptors>
@@ -4025,7 +4025,7 @@
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.usage/description/usage.odesign#//@ownedViewpoints[name='UsageModel']/@ownedRepresentations[name='UsageModel%20Diagram']/@defaultLayer/@containerMappings[name='usageScenario']/@subContainerMappings[name='openWorkload']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.usage/description/usage.odesign#//@ownedViewpoints[name='UsageModel']/@ownedRepresentations[name='UsageModel%20Diagram']/@defaultLayer/@containerMappings[name='usageScenario']/@subContainerMappings[name='openWorkload']"/>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_FxmbYNDfEeqWne3bdagE9g" name="Interarrival Time: 0.1">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_FxmbYNDfEeqWne3bdagE9g" name="Interarrival Time: 1.0">
           <target xmi:type="usagemodel:OpenWorkload" href="RobotCognitionUsage.usagemodel#//@usageScenario_UsageModel.0/@workload_UsageScenario"/>
           <semanticElements xmi:type="usagemodel:OpenWorkload" href="RobotCognitionUsage.usagemodel#//@usageScenario_UsageModel.0/@workload_UsageScenario"/>
           <ownedStyle xmi:type="diagram:Note" uid="_FxnCcNDfEeqWne3bdagE9g" labelAlignment="LEFT" color="255,255,255">
