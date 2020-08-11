@@ -1,7 +1,6 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.solver.api;
 
 import static java.util.stream.Collectors.toSet;
-import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,9 +11,7 @@ import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.ReliabilityPredictionResult;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.StateSpaceExplorationStrategy;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.UncertaintyBasedReliabilityPrediction;
-import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
-import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
 
 import com.google.common.collect.Sets;
 
@@ -41,9 +38,9 @@ public class UncertaintyBasedReliabilityPredictor {
 		return buildReliabilityPredictor(config).predict(config.getPCMInstance());
 	}
 
-	public static ReliabilityPredictionResult predictGiven(List<GroundRandomVariable> states,
+	public static ReliabilityPredictionResult predictGiven(List<UncertaintyState> uncertaintyStates,
 			UncertaintyBasedReliabilityPredictionConfig config) {
-		return buildReliabilityPredictor(config).predict(config.getPCMInstance(), toUncertaintyStates(states));
+		return buildReliabilityPredictor(config).predict(config.getPCMInstance(), uncertaintyStates);
 	}
 
 	private static UncertaintyBasedReliabilityPrediction buildReliabilityPredictor(
@@ -59,10 +56,6 @@ public class UncertaintyBasedReliabilityPredictor {
 		config.getUncertainties().forEach(builder::addUncertaintyFailureType);
 
 		return builder.build();
-	}
-
-	private static List<UncertaintyState> toUncertaintyStates(List<GroundRandomVariable> states) {
-		return states.stream().map(DiscreteUncertaintyStateSpace::toUncertaintyState).collect(toList());
 	}
 
 	private static Predicate<StateSpaceExplorationStrategy> strategyWith(String queriedName) {

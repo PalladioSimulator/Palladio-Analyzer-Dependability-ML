@@ -20,4 +20,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.palladiosimulator.dependability.reliability.uncertainty.solver
 Bundle-ActivationPolicy: lazy
 Export-Package: org.palladiosimulator.dependability.reliability.uncertainty.solver.api,
- org.palladiosimulator.dependability.reliability.uncertainty.solver.markov
+ org.palladiosimulator.dependability.reliability.uncertainty.solver.markov,
+ org.palladiosimulator.dependability.reliability.uncertainty.solver.model

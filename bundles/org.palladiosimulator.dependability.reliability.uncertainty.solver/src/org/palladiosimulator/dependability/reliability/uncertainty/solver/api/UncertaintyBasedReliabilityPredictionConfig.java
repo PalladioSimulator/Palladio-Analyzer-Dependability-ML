@@ -100,10 +100,10 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 			ResourceSet rs = new ResourceSetImpl();
 			rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
 			rs.getPackageRegistry().put(UncertaintyPackage.eNS_URI, UncertaintyPackage.eINSTANCE);
-			
+
 			var resource = rs.getResource(createModelURI(), true);
 			EcoreUtil.resolveAll(rs);
-			
+
 			return (UncertaintyFailureTypeRepository) resource.getContents().get(0);
 		}
 
@@ -132,6 +132,12 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 		this.explorationStrategy = Optional.ofNullable(explorationStrategy);
 		this.uncertainties = uncertainties;
 		this.pcm = pcm;
+	}
+
+	public static UncertaintyBasedReliabilityPredictionConfig withNewPCMInstance(
+			UncertaintyBasedReliabilityPredictionConfig config, PCMInstance pcm) {
+		var strategy = config.explorationStrategy.isPresent() ? config.explorationStrategy.get() : null;
+		return new UncertaintyBasedReliabilityPredictionConfig(config.runConfig, strategy, config.uncertainties, pcm);
 	}
 
 	public static UncertaintyBasedReliabilityPredictionConfigBuilder newBuilder() {
