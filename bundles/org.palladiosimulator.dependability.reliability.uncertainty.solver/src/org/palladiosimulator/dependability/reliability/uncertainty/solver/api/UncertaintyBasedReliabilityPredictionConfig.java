@@ -44,7 +44,7 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 			this.addJob(new LoadMiddlewareConfigurationIntoBlackboardJob(config));
 			this.addJob(new ValidatePCMModelsJob(config));
 			this.add(new EventsTransformationJob(config.getStoragePluginID(), config.getEventMiddlewareFile(), false));
-			this.add(new StoreAllPCMModelsJob(config));
+			//this.add(new StoreAllPCMModelsJob(config));
 		}
 	}
 
