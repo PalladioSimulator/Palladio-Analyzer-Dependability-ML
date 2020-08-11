@@ -15,7 +15,6 @@ import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartitio
 import org.palladiosimulator.analyzer.workflow.jobs.EventsTransformationJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadMiddlewareConfigurationIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
-import org.palladiosimulator.analyzer.workflow.jobs.StoreAllPCMModelsJob;
 import org.palladiosimulator.analyzer.workflow.jobs.ValidatePCMModelsJob;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFailureTypeRepository;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
@@ -44,7 +43,6 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 			this.addJob(new LoadMiddlewareConfigurationIntoBlackboardJob(config));
 			this.addJob(new ValidatePCMModelsJob(config));
 			this.add(new EventsTransformationJob(config.getStoragePluginID(), config.getEventMiddlewareFile(), false));
-			//this.add(new StoreAllPCMModelsJob(config));
 		}
 	}
 
