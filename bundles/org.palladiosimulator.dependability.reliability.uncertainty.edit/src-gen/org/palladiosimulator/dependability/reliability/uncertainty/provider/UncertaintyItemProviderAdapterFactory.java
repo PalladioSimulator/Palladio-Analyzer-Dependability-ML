@@ -96,26 +96,141 @@ public class UncertaintyItemProviderAdapterFactory extends UncertaintyAdapterFac
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFailureTypeRepository} instances.
+	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UncertaintyFailureTypeRepositoryItemProvider uncertaintyFailureTypeRepositoryItemProvider;
+	protected UncertaintyRepositoryItemProvider uncertaintyRepositoryItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFailureTypeRepository}.
+	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createUncertaintyFailureTypeRepositoryAdapter() {
-		if (uncertaintyFailureTypeRepositoryItemProvider == null) {
-			uncertaintyFailureTypeRepositoryItemProvider = new UncertaintyFailureTypeRepositoryItemProvider(this);
+	public Adapter createUncertaintyRepositoryAdapter() {
+		if (uncertaintyRepositoryItemProvider == null) {
+			uncertaintyRepositoryItemProvider = new UncertaintyRepositoryItemProvider(this);
 		}
 
-		return uncertaintyFailureTypeRepositoryItemProvider;
+		return uncertaintyRepositoryItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ArchitecturalCountermeasureItemProvider architecturalCountermeasureItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createArchitecturalCountermeasureAdapter() {
+		if (architecturalCountermeasureItemProvider == null) {
+			architecturalCountermeasureItemProvider = new ArchitecturalCountermeasureItemProvider(this);
+		}
+
+		return architecturalCountermeasureItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ActiveComponentPreconditionItemProvider activeComponentPreconditionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createActiveComponentPreconditionAdapter() {
+		if (activeComponentPreconditionItemProvider == null) {
+			activeComponentPreconditionItemProvider = new ActiveComponentPreconditionItemProvider(this);
+		}
+
+		return activeComponentPreconditionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.DeterministicImprovement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DeterministicImprovementItemProvider deterministicImprovementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.DeterministicImprovement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDeterministicImprovementAdapter() {
+		if (deterministicImprovementItemProvider == null) {
+			deterministicImprovementItemProvider = new DeterministicImprovementItemProvider(this);
+		}
+
+		return deterministicImprovementItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.ProbabilisticImprovement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ProbabilisticImprovementItemProvider probabilisticImprovementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.ProbabilisticImprovement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createProbabilisticImprovementAdapter() {
+		if (probabilisticImprovementItemProvider == null) {
+			probabilisticImprovementItemProvider = new ProbabilisticImprovementItemProvider(this);
+		}
+
+		return probabilisticImprovementItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.MapEntry} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MapEntryItemProvider mapEntryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.MapEntry}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMapEntryAdapter() {
+		if (mapEntryItemProvider == null) {
+			mapEntryItemProvider = new MapEntryItemProvider(this);
+		}
+
+		return mapEntryItemProvider;
 	}
 
 	/**
@@ -225,8 +340,18 @@ public class UncertaintyItemProviderAdapterFactory extends UncertaintyAdapterFac
 	public void dispose() {
 		if (uncertaintyInducedFailureTypeItemProvider != null)
 			uncertaintyInducedFailureTypeItemProvider.dispose();
-		if (uncertaintyFailureTypeRepositoryItemProvider != null)
-			uncertaintyFailureTypeRepositoryItemProvider.dispose();
+		if (uncertaintyRepositoryItemProvider != null)
+			uncertaintyRepositoryItemProvider.dispose();
+		if (architecturalCountermeasureItemProvider != null)
+			architecturalCountermeasureItemProvider.dispose();
+		if (activeComponentPreconditionItemProvider != null)
+			activeComponentPreconditionItemProvider.dispose();
+		if (deterministicImprovementItemProvider != null)
+			deterministicImprovementItemProvider.dispose();
+		if (probabilisticImprovementItemProvider != null)
+			probabilisticImprovementItemProvider.dispose();
+		if (mapEntryItemProvider != null)
+			mapEntryItemProvider.dispose();
 	}
 
 }

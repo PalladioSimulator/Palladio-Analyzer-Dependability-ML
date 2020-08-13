@@ -58,8 +58,18 @@ public class UncertaintyFactoryImpl extends EFactoryImpl implements UncertaintyF
 		switch (eClass.getClassifierID()) {
 		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE:
 			return createUncertaintyInducedFailureType();
-		case UncertaintyPackage.UNCERTAINTY_FAILURE_TYPE_REPOSITORY:
-			return createUncertaintyFailureTypeRepository();
+		case UncertaintyPackage.UNCERTAINTY_REPOSITORY:
+			return createUncertaintyRepository();
+		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE:
+			return createArchitecturalCountermeasure();
+		case UncertaintyPackage.ACTIVE_COMPONENT_PRECONDITION:
+			return createActiveComponentPrecondition();
+		case UncertaintyPackage.DETERMINISTIC_IMPROVEMENT:
+			return createDeterministicImprovement();
+		case UncertaintyPackage.PROBABILISTIC_IMPROVEMENT:
+			return createProbabilisticImprovement();
+		case UncertaintyPackage.MAP_ENTRY:
+			return createMapEntry();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -82,9 +92,64 @@ public class UncertaintyFactoryImpl extends EFactoryImpl implements UncertaintyF
 	 * @generated
 	 */
 	@Override
-	public UncertaintyFailureTypeRepository createUncertaintyFailureTypeRepository() {
-		UncertaintyFailureTypeRepositoryImpl uncertaintyFailureTypeRepository = new UncertaintyFailureTypeRepositoryImpl();
-		return uncertaintyFailureTypeRepository;
+	public UncertaintyRepository createUncertaintyRepository() {
+		UncertaintyRepositoryImpl uncertaintyRepository = new UncertaintyRepositoryImpl();
+		return uncertaintyRepository;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ArchitecturalCountermeasure createArchitecturalCountermeasure() {
+		ArchitecturalCountermeasureImpl architecturalCountermeasure = new ArchitecturalCountermeasureImpl();
+		return architecturalCountermeasure;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ActiveComponentPrecondition createActiveComponentPrecondition() {
+		ActiveComponentPreconditionImpl activeComponentPrecondition = new ActiveComponentPreconditionImpl();
+		return activeComponentPrecondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DeterministicImprovement createDeterministicImprovement() {
+		DeterministicImprovementImpl deterministicImprovement = new DeterministicImprovementImpl();
+		return deterministicImprovement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ProbabilisticImprovement createProbabilisticImprovement() {
+		ProbabilisticImprovementImpl probabilisticImprovement = new ProbabilisticImprovementImpl();
+		return probabilisticImprovement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public MapEntry createMapEntry() {
+		MapEntryImpl mapEntry = new MapEntryImpl();
+		return mapEntry;
 	}
 
 	/**

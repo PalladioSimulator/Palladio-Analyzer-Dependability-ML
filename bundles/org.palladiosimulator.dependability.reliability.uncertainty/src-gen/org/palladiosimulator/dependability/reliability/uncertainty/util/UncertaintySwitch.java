@@ -9,6 +9,10 @@ import org.eclipse.emf.ecore.util.Switch;
 
 import org.palladiosimulator.dependability.reliability.uncertainty.*;
 
+import tools.mdsd.modelingfoundations.identifier.Entity;
+import tools.mdsd.modelingfoundations.identifier.Identifier;
+import tools.mdsd.modelingfoundations.identifier.NamedElement;
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Switch</b> for the model's inheritance hierarchy.
@@ -73,9 +77,76 @@ public class UncertaintySwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case UncertaintyPackage.UNCERTAINTY_FAILURE_TYPE_REPOSITORY: {
-			UncertaintyFailureTypeRepository uncertaintyFailureTypeRepository = (UncertaintyFailureTypeRepository) theEObject;
-			T result = caseUncertaintyFailureTypeRepository(uncertaintyFailureTypeRepository);
+		case UncertaintyPackage.UNCERTAINTY_REPOSITORY: {
+			UncertaintyRepository uncertaintyRepository = (UncertaintyRepository) theEObject;
+			T result = caseUncertaintyRepository(uncertaintyRepository);
+			if (result == null)
+				result = caseEntity(uncertaintyRepository);
+			if (result == null)
+				result = caseIdentifier(uncertaintyRepository);
+			if (result == null)
+				result = caseNamedElement(uncertaintyRepository);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE: {
+			ArchitecturalCountermeasure architecturalCountermeasure = (ArchitecturalCountermeasure) theEObject;
+			T result = caseArchitecturalCountermeasure(architecturalCountermeasure);
+			if (result == null)
+				result = caseEntity(architecturalCountermeasure);
+			if (result == null)
+				result = caseIdentifier(architecturalCountermeasure);
+			if (result == null)
+				result = caseNamedElement(architecturalCountermeasure);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case UncertaintyPackage.ARCHITECTURAL_PRECONDITION: {
+			ArchitecturalPrecondition architecturalPrecondition = (ArchitecturalPrecondition) theEObject;
+			T result = caseArchitecturalPrecondition(architecturalPrecondition);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case UncertaintyPackage.ACTIVE_COMPONENT_PRECONDITION: {
+			ActiveComponentPrecondition activeComponentPrecondition = (ActiveComponentPrecondition) theEObject;
+			T result = caseActiveComponentPrecondition(activeComponentPrecondition);
+			if (result == null)
+				result = caseArchitecturalPrecondition(activeComponentPrecondition);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case UncertaintyPackage.UNCERTAINTY_IMPROVEMENT: {
+			UncertaintyImprovement uncertaintyImprovement = (UncertaintyImprovement) theEObject;
+			T result = caseUncertaintyImprovement(uncertaintyImprovement);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case UncertaintyPackage.DETERMINISTIC_IMPROVEMENT: {
+			DeterministicImprovement deterministicImprovement = (DeterministicImprovement) theEObject;
+			T result = caseDeterministicImprovement(deterministicImprovement);
+			if (result == null)
+				result = caseUncertaintyImprovement(deterministicImprovement);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case UncertaintyPackage.PROBABILISTIC_IMPROVEMENT: {
+			ProbabilisticImprovement probabilisticImprovement = (ProbabilisticImprovement) theEObject;
+			T result = caseProbabilisticImprovement(probabilisticImprovement);
+			if (result == null)
+				result = caseUncertaintyImprovement(probabilisticImprovement);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case UncertaintyPackage.MAP_ENTRY: {
+			MapEntry mapEntry = (MapEntry) theEObject;
+			T result = caseMapEntry(mapEntry);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -101,17 +172,167 @@ public class UncertaintySwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Failure Type Repository</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Repository</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Failure Type Repository</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Repository</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseUncertaintyFailureTypeRepository(UncertaintyFailureTypeRepository object) {
+	public T caseUncertaintyRepository(UncertaintyRepository object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Architectural Countermeasure</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Architectural Countermeasure</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseArchitecturalCountermeasure(ArchitecturalCountermeasure object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Architectural Precondition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Architectural Precondition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseArchitecturalPrecondition(ArchitecturalPrecondition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Active Component Precondition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Active Component Precondition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseActiveComponentPrecondition(ActiveComponentPrecondition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Improvement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Improvement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUncertaintyImprovement(UncertaintyImprovement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Deterministic Improvement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Deterministic Improvement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeterministicImprovement(DeterministicImprovement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Probabilistic Improvement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Probabilistic Improvement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseProbabilisticImprovement(ProbabilisticImprovement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Map Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Map Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMapEntry(MapEntry object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Identifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Identifier</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIdentifier(Identifier object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamedElement(NamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Entity</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Entity</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEntity(Entity object) {
 		return null;
 	}
 

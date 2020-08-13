@@ -11,6 +11,10 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.palladiosimulator.dependability.reliability.uncertainty.*;
 
+import tools.mdsd.modelingfoundations.identifier.Entity;
+import tools.mdsd.modelingfoundations.identifier.Identifier;
+import tools.mdsd.modelingfoundations.identifier.NamedElement;
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
@@ -72,8 +76,58 @@ public class UncertaintyAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseUncertaintyFailureTypeRepository(UncertaintyFailureTypeRepository object) {
-			return createUncertaintyFailureTypeRepositoryAdapter();
+		public Adapter caseUncertaintyRepository(UncertaintyRepository object) {
+			return createUncertaintyRepositoryAdapter();
+		}
+
+		@Override
+		public Adapter caseArchitecturalCountermeasure(ArchitecturalCountermeasure object) {
+			return createArchitecturalCountermeasureAdapter();
+		}
+
+		@Override
+		public Adapter caseArchitecturalPrecondition(ArchitecturalPrecondition object) {
+			return createArchitecturalPreconditionAdapter();
+		}
+
+		@Override
+		public Adapter caseActiveComponentPrecondition(ActiveComponentPrecondition object) {
+			return createActiveComponentPreconditionAdapter();
+		}
+
+		@Override
+		public Adapter caseUncertaintyImprovement(UncertaintyImprovement object) {
+			return createUncertaintyImprovementAdapter();
+		}
+
+		@Override
+		public Adapter caseDeterministicImprovement(DeterministicImprovement object) {
+			return createDeterministicImprovementAdapter();
+		}
+
+		@Override
+		public Adapter caseProbabilisticImprovement(ProbabilisticImprovement object) {
+			return createProbabilisticImprovementAdapter();
+		}
+
+		@Override
+		public Adapter caseMapEntry(MapEntry object) {
+			return createMapEntryAdapter();
+		}
+
+		@Override
+		public Adapter caseIdentifier(Identifier object) {
+			return createIdentifierAdapter();
+		}
+
+		@Override
+		public Adapter caseNamedElement(NamedElement object) {
+			return createNamedElementAdapter();
+		}
+
+		@Override
+		public Adapter caseEntity(Entity object) {
+			return createEntityAdapter();
 		}
 
 		@Override
@@ -110,16 +164,156 @@ public class UncertaintyAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFailureTypeRepository <em>Failure Type Repository</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository <em>Repository</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFailureTypeRepository
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository
 	 * @generated
 	 */
-	public Adapter createUncertaintyFailureTypeRepositoryAdapter() {
+	public Adapter createUncertaintyRepositoryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure <em>Architectural Countermeasure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure
+	 * @generated
+	 */
+	public Adapter createArchitecturalCountermeasureAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition <em>Architectural Precondition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition
+	 * @generated
+	 */
+	public Adapter createArchitecturalPreconditionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition <em>Active Component Precondition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition
+	 * @generated
+	 */
+	public Adapter createActiveComponentPreconditionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyImprovement <em>Improvement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyImprovement
+	 * @generated
+	 */
+	public Adapter createUncertaintyImprovementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.palladiosimulator.dependability.reliability.uncertainty.DeterministicImprovement <em>Deterministic Improvement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.DeterministicImprovement
+	 * @generated
+	 */
+	public Adapter createDeterministicImprovementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.palladiosimulator.dependability.reliability.uncertainty.ProbabilisticImprovement <em>Probabilistic Improvement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.ProbabilisticImprovement
+	 * @generated
+	 */
+	public Adapter createProbabilisticImprovementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.palladiosimulator.dependability.reliability.uncertainty.MapEntry <em>Map Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.MapEntry
+	 * @generated
+	 */
+	public Adapter createMapEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tools.mdsd.modelingfoundations.identifier.Identifier <em>Identifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tools.mdsd.modelingfoundations.identifier.Identifier
+	 * @generated
+	 */
+	public Adapter createIdentifierAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tools.mdsd.modelingfoundations.identifier.NamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tools.mdsd.modelingfoundations.identifier.NamedElement
+	 * @generated
+	 */
+	public Adapter createNamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link tools.mdsd.modelingfoundations.identifier.Entity <em>Entity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see tools.mdsd.modelingfoundations.identifier.Entity
+	 * @generated
+	 */
+	public Adapter createEntityAdapter() {
 		return null;
 	}
 

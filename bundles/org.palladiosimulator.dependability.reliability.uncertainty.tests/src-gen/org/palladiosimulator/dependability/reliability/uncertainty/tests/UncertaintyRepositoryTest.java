@@ -7,23 +7,23 @@ import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFactory;
-import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFailureTypeRepository;
+import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository;
 
 /**
  * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Failure Type Repository</b></em>'.
+ * A test case for the model object '<em><b>Repository</b></em>'.
  * <!-- end-user-doc -->
  * @generated
  */
-public class UncertaintyFailureTypeRepositoryTest extends TestCase {
+public class UncertaintyRepositoryTest extends TestCase {
 
 	/**
-	 * The fixture for this Failure Type Repository test case.
+	 * The fixture for this Repository test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UncertaintyFailureTypeRepository fixture = null;
+	protected UncertaintyRepository fixture = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -31,36 +31,36 @@ public class UncertaintyFailureTypeRepositoryTest extends TestCase {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-		TestRunner.run(UncertaintyFailureTypeRepositoryTest.class);
+		TestRunner.run(UncertaintyRepositoryTest.class);
 	}
 
 	/**
-	 * Constructs a new Failure Type Repository test case with the given name.
+	 * Constructs a new Repository test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public UncertaintyFailureTypeRepositoryTest(String name) {
+	public UncertaintyRepositoryTest(String name) {
 		super(name);
 	}
 
 	/**
-	 * Sets the fixture for this Failure Type Repository test case.
+	 * Sets the fixture for this Repository test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void setFixture(UncertaintyFailureTypeRepository fixture) {
+	protected void setFixture(UncertaintyRepository fixture) {
 		this.fixture = fixture;
 	}
 
 	/**
-	 * Returns the fixture for this Failure Type Repository test case.
+	 * Returns the fixture for this Repository test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UncertaintyFailureTypeRepository getFixture() {
+	protected UncertaintyRepository getFixture() {
 		return fixture;
 	}
 
@@ -72,7 +72,7 @@ public class UncertaintyFailureTypeRepositoryTest extends TestCase {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(UncertaintyFactory.eINSTANCE.createUncertaintyFailureTypeRepository());
+		setFixture(UncertaintyFactory.eINSTANCE.createUncertaintyRepository());
 	}
 
 	/**
@@ -86,4 +86,4 @@ public class UncertaintyFailureTypeRepositoryTest extends TestCase {
 		setFixture(null);
 	}
 
-} //UncertaintyFailureTypeRepositoryTest
+} //UncertaintyRepositoryTest

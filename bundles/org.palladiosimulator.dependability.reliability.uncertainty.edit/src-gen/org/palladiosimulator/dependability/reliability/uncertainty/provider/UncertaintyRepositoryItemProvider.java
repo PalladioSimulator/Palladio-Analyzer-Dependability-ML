@@ -12,35 +12,29 @@ import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFactory;
-import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFailureTypeRepository;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
+import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository;
+
+import tools.mdsd.modelingfoundations.identifier.provider.EntityItemProvider;
 
 /**
- * This is the item provider adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFailureTypeRepository} object.
+ * This is the item provider adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class UncertaintyFailureTypeRepositoryItemProvider extends ItemProviderAdapter
-		implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider,
-		IItemLabelProvider, IItemPropertySource {
+public class UncertaintyRepositoryItemProvider extends EntityItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public UncertaintyFailureTypeRepositoryItemProvider(AdapterFactory adapterFactory) {
+	public UncertaintyRepositoryItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -71,8 +65,9 @@ public class UncertaintyFailureTypeRepositoryItemProvider extends ItemProviderAd
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(
-					UncertaintyPackage.Literals.UNCERTAINTY_FAILURE_TYPE_REPOSITORY__UNCERTAINTY_INDUCED_FAILURE_TYPES);
+			childrenFeatures.add(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__UNCERTAINTY_INDUCED_FAILURE_TYPES);
+			childrenFeatures.add(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_COUNTERMEASURES);
+			childrenFeatures.add(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_PRECONDITIONS);
 		}
 		return childrenFeatures;
 	}
@@ -91,14 +86,14 @@ public class UncertaintyFailureTypeRepositoryItemProvider extends ItemProviderAd
 	}
 
 	/**
-	 * This returns UncertaintyFailureTypeRepository.gif.
+	 * This returns UncertaintyRepository.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/UncertaintyFailureTypeRepository"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/UncertaintyRepository"));
 	}
 
 	/**
@@ -119,7 +114,9 @@ public class UncertaintyFailureTypeRepositoryItemProvider extends ItemProviderAd
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_UncertaintyFailureTypeRepository_type");
+		String label = ((UncertaintyRepository) object).getId();
+		return label == null || label.length() == 0 ? getString("_UI_UncertaintyRepository_type")
+				: getString("_UI_UncertaintyRepository_type") + " " + label;
 	}
 
 	/**
@@ -133,8 +130,10 @@ public class UncertaintyFailureTypeRepositoryItemProvider extends ItemProviderAd
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(UncertaintyFailureTypeRepository.class)) {
-		case UncertaintyPackage.UNCERTAINTY_FAILURE_TYPE_REPOSITORY__UNCERTAINTY_INDUCED_FAILURE_TYPES:
+		switch (notification.getFeatureID(UncertaintyRepository.class)) {
+		case UncertaintyPackage.UNCERTAINTY_REPOSITORY__UNCERTAINTY_INDUCED_FAILURE_TYPES:
+		case UncertaintyPackage.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_COUNTERMEASURES:
+		case UncertaintyPackage.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_PRECONDITIONS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -153,8 +152,16 @@ public class UncertaintyFailureTypeRepositoryItemProvider extends ItemProviderAd
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
 		newChildDescriptors.add(createChildParameter(
-				UncertaintyPackage.Literals.UNCERTAINTY_FAILURE_TYPE_REPOSITORY__UNCERTAINTY_INDUCED_FAILURE_TYPES,
+				UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__UNCERTAINTY_INDUCED_FAILURE_TYPES,
 				UncertaintyFactory.eINSTANCE.createUncertaintyInducedFailureType()));
+
+		newChildDescriptors.add(
+				createChildParameter(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_COUNTERMEASURES,
+						UncertaintyFactory.eINSTANCE.createArchitecturalCountermeasure()));
+
+		newChildDescriptors.add(
+				createChildParameter(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_PRECONDITIONS,
+						UncertaintyFactory.eINSTANCE.createActiveComponentPrecondition()));
 	}
 
 	/**

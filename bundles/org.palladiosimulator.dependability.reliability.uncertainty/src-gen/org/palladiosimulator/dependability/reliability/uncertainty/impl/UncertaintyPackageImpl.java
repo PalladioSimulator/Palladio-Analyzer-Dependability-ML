@@ -10,6 +10,7 @@ import de.uka.ipd.sdq.stoex.StoexPackage;
 
 import de.uka.ipd.sdq.units.UnitsPackage;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -17,10 +18,17 @@ import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition;
+import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure;
+import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
+import org.palladiosimulator.dependability.reliability.uncertainty.DeterministicImprovement;
+import org.palladiosimulator.dependability.reliability.uncertainty.MapEntry;
+import org.palladiosimulator.dependability.reliability.uncertainty.ProbabilisticImprovement;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFactory;
-import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFailureTypeRepository;
+import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyImprovement;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
+import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository;
 
 import org.palladiosimulator.envdyn.environment.dynamicmodel.DynamicmodelPackage;
 
@@ -31,6 +39,8 @@ import org.palladiosimulator.envdyn.environment.templatevariable.Templatevariabl
 import org.palladiosimulator.pcm.PcmPackage;
 
 import org.palladiosimulator.pcm.reliability.ReliabilityPackage;
+
+import org.palladiosimulator.pcm.repository.RepositoryPackage;
 
 import tools.mdsd.probdist.distributionfunction.DistributionfunctionPackage;
 
@@ -55,7 +65,56 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass uncertaintyFailureTypeRepositoryEClass = null;
+	private EClass uncertaintyRepositoryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass architecturalCountermeasureEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass architecturalPreconditionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass activeComponentPreconditionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass uncertaintyImprovementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass deterministicImprovementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass probabilisticImprovementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mapEntryEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -181,8 +240,8 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 	 * @generated
 	 */
 	@Override
-	public EClass getUncertaintyFailureTypeRepository() {
-		return uncertaintyFailureTypeRepositoryEClass;
+	public EClass getUncertaintyRepository() {
+		return uncertaintyRepositoryEClass;
 	}
 
 	/**
@@ -191,8 +250,178 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 	 * @generated
 	 */
 	@Override
-	public EReference getUncertaintyFailureTypeRepository_UncertaintyInducedFailureTypes() {
-		return (EReference) uncertaintyFailureTypeRepositoryEClass.getEStructuralFeatures().get(0);
+	public EReference getUncertaintyRepository_UncertaintyInducedFailureTypes() {
+		return (EReference) uncertaintyRepositoryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getUncertaintyRepository_ArchitecturalCountermeasures() {
+		return (EReference) uncertaintyRepositoryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getUncertaintyRepository_ArchitecturalPreconditions() {
+		return (EReference) uncertaintyRepositoryEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getArchitecturalCountermeasure() {
+		return architecturalCountermeasureEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getArchitecturalCountermeasure_ArchitecturalPreconditions() {
+		return (EReference) architecturalCountermeasureEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getArchitecturalCountermeasure_TargetUncertainty() {
+		return (EReference) architecturalCountermeasureEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getArchitecturalCountermeasure_UncertaintyImprovement() {
+		return (EReference) architecturalCountermeasureEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getArchitecturalPrecondition() {
+		return architecturalPreconditionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getActiveComponentPrecondition() {
+		return activeComponentPreconditionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getActiveComponentPrecondition_RequiredActiveComponent() {
+		return (EReference) activeComponentPreconditionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getUncertaintyImprovement() {
+		return uncertaintyImprovementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDeterministicImprovement() {
+		return deterministicImprovementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDeterministicImprovement_MappingTable() {
+		return (EReference) deterministicImprovementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getProbabilisticImprovement() {
+		return probabilisticImprovementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getProbabilisticImprovement_ProbabilityDistribution() {
+		return (EReference) probabilisticImprovementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getMapEntry() {
+		return mapEntryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMapEntry_Key() {
+		return (EAttribute) mapEntryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMapEntry_Value() {
+		return (EAttribute) mapEntryEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -230,9 +459,32 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 		createEReference(uncertaintyInducedFailureTypeEClass, UNCERTAINTY_INDUCED_FAILURE_TYPE__UNCERTAINTY_MODEL);
 		createEReference(uncertaintyInducedFailureTypeEClass, UNCERTAINTY_INDUCED_FAILURE_TYPE__FAILURE_VARIABLE);
 
-		uncertaintyFailureTypeRepositoryEClass = createEClass(UNCERTAINTY_FAILURE_TYPE_REPOSITORY);
-		createEReference(uncertaintyFailureTypeRepositoryEClass,
-				UNCERTAINTY_FAILURE_TYPE_REPOSITORY__UNCERTAINTY_INDUCED_FAILURE_TYPES);
+		uncertaintyRepositoryEClass = createEClass(UNCERTAINTY_REPOSITORY);
+		createEReference(uncertaintyRepositoryEClass, UNCERTAINTY_REPOSITORY__UNCERTAINTY_INDUCED_FAILURE_TYPES);
+		createEReference(uncertaintyRepositoryEClass, UNCERTAINTY_REPOSITORY__ARCHITECTURAL_COUNTERMEASURES);
+		createEReference(uncertaintyRepositoryEClass, UNCERTAINTY_REPOSITORY__ARCHITECTURAL_PRECONDITIONS);
+
+		architecturalCountermeasureEClass = createEClass(ARCHITECTURAL_COUNTERMEASURE);
+		createEReference(architecturalCountermeasureEClass, ARCHITECTURAL_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS);
+		createEReference(architecturalCountermeasureEClass, ARCHITECTURAL_COUNTERMEASURE__TARGET_UNCERTAINTY);
+		createEReference(architecturalCountermeasureEClass, ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT);
+
+		architecturalPreconditionEClass = createEClass(ARCHITECTURAL_PRECONDITION);
+
+		activeComponentPreconditionEClass = createEClass(ACTIVE_COMPONENT_PRECONDITION);
+		createEReference(activeComponentPreconditionEClass, ACTIVE_COMPONENT_PRECONDITION__REQUIRED_ACTIVE_COMPONENT);
+
+		uncertaintyImprovementEClass = createEClass(UNCERTAINTY_IMPROVEMENT);
+
+		deterministicImprovementEClass = createEClass(DETERMINISTIC_IMPROVEMENT);
+		createEReference(deterministicImprovementEClass, DETERMINISTIC_IMPROVEMENT__MAPPING_TABLE);
+
+		probabilisticImprovementEClass = createEClass(PROBABILISTIC_IMPROVEMENT);
+		createEReference(probabilisticImprovementEClass, PROBABILISTIC_IMPROVEMENT__PROBABILITY_DISTRIBUTION);
+
+		mapEntryEClass = createEClass(MAP_ENTRY);
+		createEAttribute(mapEntryEClass, MAP_ENTRY__KEY);
+		createEAttribute(mapEntryEClass, MAP_ENTRY__VALUE);
 	}
 
 	/**
@@ -264,12 +516,24 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 				.getEPackage(ReliabilityPackage.eNS_URI);
 		StaticmodelPackage theStaticmodelPackage = (StaticmodelPackage) EPackage.Registry.INSTANCE
 				.getEPackage(StaticmodelPackage.eNS_URI);
+		tools.mdsd.modelingfoundations.identifier.IdentifierPackage theIdentifierPackage_1 = (tools.mdsd.modelingfoundations.identifier.IdentifierPackage) EPackage.Registry.INSTANCE
+				.getEPackage(tools.mdsd.modelingfoundations.identifier.IdentifierPackage.eNS_URI);
+		RepositoryPackage theRepositoryPackage = (RepositoryPackage) EPackage.Registry.INSTANCE
+				.getEPackage(RepositoryPackage.eNS_URI);
+		DistributionfunctionPackage theDistributionfunctionPackage = (DistributionfunctionPackage) EPackage.Registry.INSTANCE
+				.getEPackage(DistributionfunctionPackage.eNS_URI);
+		EcorePackage theEcorePackage = (EcorePackage) EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		uncertaintyRepositoryEClass.getESuperTypes().add(theIdentifierPackage_1.getEntity());
+		architecturalCountermeasureEClass.getESuperTypes().add(theIdentifierPackage_1.getEntity());
+		activeComponentPreconditionEClass.getESuperTypes().add(this.getArchitecturalPrecondition());
+		deterministicImprovementEClass.getESuperTypes().add(this.getUncertaintyImprovement());
+		probabilisticImprovementEClass.getESuperTypes().add(this.getUncertaintyImprovement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(uncertaintyInducedFailureTypeEClass, UncertaintyInducedFailureType.class,
@@ -286,12 +550,66 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 				UncertaintyInducedFailureType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(uncertaintyFailureTypeRepositoryEClass, UncertaintyFailureTypeRepository.class,
-				"UncertaintyFailureTypeRepository", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getUncertaintyFailureTypeRepository_UncertaintyInducedFailureTypes(),
+		initEClass(uncertaintyRepositoryEClass, UncertaintyRepository.class, "UncertaintyRepository", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUncertaintyRepository_UncertaintyInducedFailureTypes(),
 				this.getUncertaintyInducedFailureType(), null, "uncertaintyInducedFailureTypes", null, 0, -1,
-				UncertaintyFailureTypeRepository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				UncertaintyRepository.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUncertaintyRepository_ArchitecturalCountermeasures(), this.getArchitecturalCountermeasure(),
+				null, "architecturalCountermeasures", null, 0, -1, UncertaintyRepository.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEReference(getUncertaintyRepository_ArchitecturalPreconditions(), this.getArchitecturalPrecondition(), null,
+				"architecturalPreconditions", null, 0, -1, UncertaintyRepository.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(architecturalCountermeasureEClass, ArchitecturalCountermeasure.class, "ArchitecturalCountermeasure",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getArchitecturalCountermeasure_ArchitecturalPreconditions(), this.getArchitecturalPrecondition(),
+				null, "architecturalPreconditions", null, 1, -1, ArchitecturalCountermeasure.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEReference(getArchitecturalCountermeasure_TargetUncertainty(),
+				theStaticmodelPackage.getGroundRandomVariable(), null, "targetUncertainty", null, 1, 1,
+				ArchitecturalCountermeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArchitecturalCountermeasure_UncertaintyImprovement(), this.getUncertaintyImprovement(), null,
+				"uncertaintyImprovement", null, 1, 1, ArchitecturalCountermeasure.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(architecturalPreconditionEClass, ArchitecturalPrecondition.class, "ArchitecturalPrecondition",
+				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(activeComponentPreconditionEClass, ActiveComponentPrecondition.class, "ActiveComponentPrecondition",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getActiveComponentPrecondition_RequiredActiveComponent(),
+				theRepositoryPackage.getBasicComponent(), null, "requiredActiveComponent", null, 1, 1,
+				ActiveComponentPrecondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(uncertaintyImprovementEClass, UncertaintyImprovement.class, "UncertaintyImprovement", IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(deterministicImprovementEClass, DeterministicImprovement.class, "DeterministicImprovement",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDeterministicImprovement_MappingTable(), this.getMapEntry(), null, "mappingTable", null, 1,
+				-1, DeterministicImprovement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(probabilisticImprovementEClass, ProbabilisticImprovement.class, "ProbabilisticImprovement",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getProbabilisticImprovement_ProbabilityDistribution(),
+				theDistributionfunctionPackage.getProbabilityDistribution(), null, "probabilityDistribution", null, 1,
+				1, ProbabilisticImprovement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mapEntryEClass, MapEntry.class, "MapEntry", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMapEntry_Key(), theEcorePackage.getEString(), "key", "", 1, 1, MapEntry.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMapEntry_Value(), theEcorePackage.getEString(), "value", null, 1, 1, MapEntry.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

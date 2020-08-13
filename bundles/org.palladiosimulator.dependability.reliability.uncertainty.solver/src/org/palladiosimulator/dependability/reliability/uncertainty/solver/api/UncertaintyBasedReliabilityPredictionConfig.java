@@ -16,7 +16,7 @@ import org.palladiosimulator.analyzer.workflow.jobs.EventsTransformationJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadMiddlewareConfigurationIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.ValidatePCMModelsJob;
-import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFailureTypeRepository;
+import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.StateSpaceExplorationStrategy;
@@ -118,7 +118,7 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 					.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
 		}
 
-		private UncertaintyFailureTypeRepository loadModel() {
+		private UncertaintyRepository loadModel() {
 			ResourceSet rs = new ResourceSetImpl();
 			rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
 			rs.getPackageRegistry().put(UncertaintyPackage.eNS_URI, UncertaintyPackage.eINSTANCE);
@@ -126,7 +126,7 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 			var resource = rs.getResource(createModelURI(), true);
 			EcoreUtil.resolveAll(rs);
 
-			return (UncertaintyFailureTypeRepository) resource.getContents().get(0);
+			return (UncertaintyRepository) resource.getContents().get(0);
 		}
 
 		private URI createModelURI() {

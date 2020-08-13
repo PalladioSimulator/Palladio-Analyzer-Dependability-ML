@@ -32,13 +32,58 @@ public interface UncertaintyFactory extends EFactory {
 	UncertaintyInducedFailureType createUncertaintyInducedFailureType();
 
 	/**
-	 * Returns a new object of class '<em>Failure Type Repository</em>'.
+	 * Returns a new object of class '<em>Repository</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Failure Type Repository</em>'.
+	 * @return a new object of class '<em>Repository</em>'.
 	 * @generated
 	 */
-	UncertaintyFailureTypeRepository createUncertaintyFailureTypeRepository();
+	UncertaintyRepository createUncertaintyRepository();
+
+	/**
+	 * Returns a new object of class '<em>Architectural Countermeasure</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Architectural Countermeasure</em>'.
+	 * @generated
+	 */
+	ArchitecturalCountermeasure createArchitecturalCountermeasure();
+
+	/**
+	 * Returns a new object of class '<em>Active Component Precondition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Active Component Precondition</em>'.
+	 * @generated
+	 */
+	ActiveComponentPrecondition createActiveComponentPrecondition();
+
+	/**
+	 * Returns a new object of class '<em>Deterministic Improvement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Deterministic Improvement</em>'.
+	 * @generated
+	 */
+	DeterministicImprovement createDeterministicImprovement();
+
+	/**
+	 * Returns a new object of class '<em>Probabilistic Improvement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Probabilistic Improvement</em>'.
+	 * @generated
+	 */
+	ProbabilisticImprovement createProbabilisticImprovement();
+
+	/**
+	 * Returns a new object of class '<em>Map Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Map Entry</em>'.
+	 * @generated
+	 */
+	MapEntry createMapEntry();
 
 	/**
 	 * Returns the package supported by this factory.

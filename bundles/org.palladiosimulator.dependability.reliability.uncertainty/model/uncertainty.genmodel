@@ -17,8 +17,30 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyInducedFailureType/uncertaintyModel"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyInducedFailureType/failureVariable"/>
     </genClasses>
-    <genClasses ecoreClass="uncertainty.ecore#//UncertaintyFailureTypeRepository">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyFailureTypeRepository/uncertaintyInducedFailureTypes"/>
+    <genClasses ecoreClass="uncertainty.ecore#//UncertaintyRepository">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyRepository/uncertaintyInducedFailureTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyRepository/architecturalCountermeasures"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyRepository/architecturalPreconditions"/>
+    </genClasses>
+    <genClasses ecoreClass="uncertainty.ecore#//ArchitecturalCountermeasure">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//ArchitecturalCountermeasure/architecturalPreconditions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//ArchitecturalCountermeasure/targetUncertainty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uncertainty.ecore#//ArchitecturalCountermeasure/uncertaintyImprovement"/>
+    </genClasses>
+    <genClasses ecoreClass="uncertainty.ecore#//ArchitecturalPrecondition"/>
+    <genClasses ecoreClass="uncertainty.ecore#//ActiveComponentPrecondition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//ActiveComponentPrecondition/requiredActiveComponent"/>
+    </genClasses>
+    <genClasses ecoreClass="uncertainty.ecore#//UncertaintyImprovement"/>
+    <genClasses ecoreClass="uncertainty.ecore#//DeterministicImprovement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uncertainty.ecore#//DeterministicImprovement/mappingTable"/>
+    </genClasses>
+    <genClasses ecoreClass="uncertainty.ecore#//ProbabilisticImprovement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//ProbabilisticImprovement/probabilityDistribution"/>
+    </genClasses>
+    <genClasses ecoreClass="uncertainty.ecore#//MapEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uncertainty.ecore#//MapEntry/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uncertainty.ecore#//MapEntry/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

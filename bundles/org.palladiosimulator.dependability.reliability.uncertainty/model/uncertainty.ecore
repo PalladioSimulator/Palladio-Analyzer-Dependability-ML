@@ -9,8 +9,39 @@
         eType="ecore:EClass ../../org.palladiosimulator.envdyn.model/model/environmentaldynamics.ecore#//staticmodel/GroundProbabilisticNetwork"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="failureVariable" eType="ecore:EClass ../../org.palladiosimulator.envdyn.model/model/environmentaldynamics.ecore#//staticmodel/GroundRandomVariable"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UncertaintyFailureTypeRepository">
+  <eClassifiers xsi:type="ecore:EClass" name="UncertaintyRepository" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="uncertaintyInducedFailureTypes"
         upperBound="-1" eType="#//UncertaintyInducedFailureType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="architecturalCountermeasures"
+        upperBound="-1" eType="#//ArchitecturalCountermeasure" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="architecturalPreconditions"
+        upperBound="-1" eType="#//ArchitecturalPrecondition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArchitecturalCountermeasure" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="architecturalPreconditions"
+        lowerBound="1" upperBound="-1" eType="#//ArchitecturalPrecondition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetUncertainty" lowerBound="1"
+        eType="ecore:EClass ../../org.palladiosimulator.envdyn.model/model/environmentaldynamics.ecore#//staticmodel/GroundRandomVariable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="uncertaintyImprovement"
+        lowerBound="1" eType="#//UncertaintyImprovement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArchitecturalPrecondition" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ActiveComponentPrecondition" eSuperTypes="#//ArchitecturalPrecondition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredActiveComponent"
+        lowerBound="1" eType="ecore:EClass ../../org.palladiosimulator.pcm/model/pcm.ecore#//repository/BasicComponent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UncertaintyImprovement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DeterministicImprovement" eSuperTypes="#//UncertaintyImprovement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingTable" lowerBound="1"
+        upperBound="-1" eType="#//MapEntry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProbabilisticImprovement" eSuperTypes="#//UncertaintyImprovement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="probabilityDistribution"
+        lowerBound="1" eType="ecore:EClass ../../tools.mdsd.probdist.model/model/probdist.ecore#//distributionfunction/ProbabilityDistribution"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MapEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

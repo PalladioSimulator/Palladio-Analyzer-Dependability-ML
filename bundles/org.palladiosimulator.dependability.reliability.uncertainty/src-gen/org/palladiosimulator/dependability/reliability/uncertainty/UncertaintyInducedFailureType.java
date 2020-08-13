@@ -5,8 +5,8 @@ package org.palladiosimulator.dependability.reliability.uncertainty;
 import org.eclipse.emf.ecore.EObject;
 
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticNetwork;
-
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
+
 import org.palladiosimulator.pcm.reliability.FailureType;
 
 /**
