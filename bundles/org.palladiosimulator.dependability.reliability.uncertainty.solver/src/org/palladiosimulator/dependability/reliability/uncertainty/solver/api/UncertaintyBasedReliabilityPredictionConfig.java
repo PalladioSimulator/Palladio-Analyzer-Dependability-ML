@@ -44,6 +44,16 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 			this.addJob(new ValidatePCMModelsJob(config));
 			this.add(new EventsTransformationJob(config.getStoragePluginID(), config.getEventMiddlewareFile(), false));
 		}
+
+		public PCMInstanceBuilderJob(PCMSolverWorkflowRunConfiguration config, MDSDBlackboard blackboard) {
+			super(false);
+
+			this.myBlackboard = blackboard;
+			
+			this.addJob(new LoadMiddlewareConfigurationIntoBlackboardJob(config));
+			this.addJob(new ValidatePCMModelsJob(config));
+			this.add(new EventsTransformationJob(config.getStoragePluginID(), config.getEventMiddlewareFile(), false));
+		}
 	}
 
 	public static class UncertaintyBasedReliabilityPredictionConfigBuilder {
@@ -83,8 +93,22 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 			return new UncertaintyBasedReliabilityPredictionConfig(runConfig, strategy, uncertainties, pcmInstance);
 		}
 
+		public UncertaintyBasedReliabilityPredictionConfig rebuild(
+				UncertaintyBasedReliabilityPredictionConfig config, MDSDBlackboard blackboard) {
+			var newPcm = buildPCMInstance(blackboard);
+			var strategy = config.explorationStrategy.isPresent() ? config.explorationStrategy.get() : null;
+			return new UncertaintyBasedReliabilityPredictionConfig(config.runConfig, strategy, config.uncertainties, newPcm);
+		}
+
 		private PCMInstance buildPCMInstance() {
-			var pcmBuilderJob = new PCMInstanceBuilderJob(runConfig);
+			return executePCMInstanceBuildJob(new PCMInstanceBuilderJob(runConfig));
+		}
+		
+		private PCMInstance buildPCMInstance(MDSDBlackboard blackboard) {
+			return executePCMInstanceBuildJob(new PCMInstanceBuilderJob(runConfig, blackboard));
+		}
+
+		private PCMInstance executePCMInstanceBuildJob(PCMInstanceBuilderJob pcmBuilderJob) {
 			try {
 				pcmBuilderJob.execute(new NullProgressMonitor());
 			} catch (JobFailedException | UserCanceledException e) {
@@ -130,12 +154,6 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 		this.explorationStrategy = Optional.ofNullable(explorationStrategy);
 		this.uncertainties = uncertainties;
 		this.pcm = pcm;
-	}
-
-	public static UncertaintyBasedReliabilityPredictionConfig withNewPCMInstance(
-			UncertaintyBasedReliabilityPredictionConfig config, PCMInstance pcm) {
-		var strategy = config.explorationStrategy.isPresent() ? config.explorationStrategy.get() : null;
-		return new UncertaintyBasedReliabilityPredictionConfig(config.runConfig, strategy, config.uncertainties, pcm);
 	}
 
 	public static UncertaintyBasedReliabilityPredictionConfigBuilder newBuilder() {
