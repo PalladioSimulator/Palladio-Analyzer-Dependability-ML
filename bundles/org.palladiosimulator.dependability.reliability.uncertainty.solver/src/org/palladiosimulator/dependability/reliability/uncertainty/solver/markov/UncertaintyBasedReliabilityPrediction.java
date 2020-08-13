@@ -4,8 +4,14 @@ import static java.util.Objects.nonNull;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure;
+import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
+import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository;
+import org.palladiosimulator.dependability.reliability.uncertainty.improvement.UncertaintyImprovementCalculator;
+import org.palladiosimulator.dependability.reliability.uncertainty.precondition.ArchitecturalPreconditionManager;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.UncertaintyModelManager;
 import org.palladiosimulator.reliability.solver.pcm2markov.MarkovTransformationResult;
@@ -15,13 +21,15 @@ import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import com.google.common.collect.Lists;
 
+import tools.mdsd.probdist.api.entity.CategoricalValue;
+
 public class UncertaintyBasedReliabilityPrediction {
 
 	public static class UncertaintyBasedReliabilityPredictionBuilder {
 
 		private PCMSolverWorkflowRunConfiguration config = null;
 		private StateSpaceExplorationStrategy exploreStrategy = null;
-		private List<UncertaintyInducedFailureType> uncertainties = Lists.newArrayList();
+		private UncertaintyRepository uncertaintyRepo = null;
 
 		public UncertaintyBasedReliabilityPredictionBuilder withConfig(PCMSolverWorkflowRunConfiguration config) {
 			this.config = config;
@@ -39,15 +47,8 @@ public class UncertaintyBasedReliabilityPrediction {
 			return this;
 		}
 
-		public UncertaintyBasedReliabilityPredictionBuilder addUncertaintyFailureType(
-				UncertaintyInducedFailureType uncertainty) {
-			this.uncertainties.add(uncertainty);
-			return this;
-		}
-
-		public UncertaintyBasedReliabilityPredictionBuilder addUncertaintyFailureTypes(
-				List<UncertaintyInducedFailureType> uncertainties) {
-			this.uncertainties.addAll(uncertainties);
+		public UncertaintyBasedReliabilityPredictionBuilder andUncertaintyRepo(UncertaintyRepository uncertaintyRepo) {
+			this.uncertaintyRepo = uncertaintyRepo;
 			return this;
 		}
 
@@ -55,16 +56,13 @@ public class UncertaintyBasedReliabilityPrediction {
 			checkValidity();
 
 			adjustConfig();
-			
-			return new UncertaintyBasedReliabilityPrediction(exploreStrategy, config, uncertainties);
+
+			return new UncertaintyBasedReliabilityPrediction(exploreStrategy, config, uncertaintyRepo);
 		}
 
 		private void checkValidity() {
 			requireNonNull(config, "The reliability configuration is missing.");
-			requireNonNull(uncertainties, "The uncertainty induced failure types are missing.");
-			if (uncertainties.isEmpty()) {
-				throw new IllegalArgumentException("The uncertainty induced failure types are not specified.");
-			}
+			requireNonNull(uncertaintyRepo, "The uncertainty repository is missing.");
 		}
 
 		private void adjustConfig() {
@@ -77,17 +75,17 @@ public class UncertaintyBasedReliabilityPrediction {
 
 	}
 
-	private final List<UncertaintyInducedFailureType> uncertainties;
+	private final UncertaintyRepository uncertaintyRepo;
 	private final PCMSolverWorkflowRunConfiguration config;
 	private final StateSpaceExplorationStrategy exploreStrategy;
 
 	private UncertaintyBasedReliabilityPrediction(StateSpaceExplorationStrategy exploreStrategy,
-			PCMSolverWorkflowRunConfiguration config, List<UncertaintyInducedFailureType> uncertainties) {
+			PCMSolverWorkflowRunConfiguration config, UncertaintyRepository uncertaintyRepo) {
 		this.config = config;
 		this.exploreStrategy = exploreStrategy;
-		this.uncertainties = uncertainties;
-		
-		UncertaintyModelManager.get().manage(uncertainties);
+		this.uncertaintyRepo = uncertaintyRepo;
+
+		UncertaintyModelManager.get().manage(uncertaintyRepo.getUncertaintyInducedFailureTypes());
 	}
 
 	public static UncertaintyBasedReliabilityPredictionBuilder newBuilder() {
@@ -109,6 +107,8 @@ public class UncertaintyBasedReliabilityPrediction {
 	}
 
 	public ReliabilityPredictionResult predict(PCMInstance unresolvedModel, List<UncertaintyState> stateTuple) {
+		applyArchitecturalCountermeasures(unresolvedModel, stateTuple);
+
 		var resolvedModel = resolveUncertainties(unresolvedModel, stateTuple);
 
 		var probOfSuccess = predictProbabilityOfSuccessGiven(resolvedModel);
@@ -116,9 +116,54 @@ public class UncertaintyBasedReliabilityPrediction {
 		return ReliabilityPredictionResult.of(probOfSuccess, probOfUncertainties);
 	}
 
+	private void applyArchitecturalCountermeasures(PCMInstance pcmModel, List<UncertaintyState> stateTuple) {
+		for (ArchitecturalCountermeasure each : uncertaintyRepo.getArchitecturalCountermeasures()) {
+			var result = findApplicableState(each, stateTuple);
+			if (result.isEmpty()) {
+				break;
+			}
+
+			var oldState = result.get();
+			stateTuple.remove(oldState);
+
+			var improvedValue = applyArchitecturalCountermeasure(each, pcmModel, oldState);
+			var improvedState = oldState.newValuedStateWith(improvedValue);
+			stateTuple.add(improvedState);
+		}
+	}
+
+	private CategoricalValue applyArchitecturalCountermeasure(ArchitecturalCountermeasure countermeasure,
+			PCMInstance pcmModel, UncertaintyState state) {
+		if (allPreconditionsFulfilled(countermeasure, pcmModel)) {
+			var improvement = countermeasure.getUncertaintyImprovement();
+			return UncertaintyImprovementCalculator.get().calculate(improvement, state.getValue());
+		}
+		return state.getValue();
+	}
+
+	private boolean allPreconditionsFulfilled(ArchitecturalCountermeasure countermeasure, PCMInstance pcmModel) {
+		for (ArchitecturalPrecondition each : countermeasure.getArchitecturalPreconditions()) {
+			var checker = ArchitecturalPreconditionManager.get().findPreconditionCheckerFor(each);
+			if (checker.isEmpty()) {
+				return false;
+			}
+			if (checker.get().isNotFulfiled(each, pcmModel)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private Optional<UncertaintyState> findApplicableState(ArchitecturalCountermeasure countermeasure,
+			List<UncertaintyState> stateTuple) {
+		return stateTuple.stream()
+				.filter(each -> each.getId().equals(countermeasure.getTargetUncertainty().getEntityName())).findFirst();
+	}
+
 	private PCMInstance resolveUncertainties(PCMInstance modelToResolve, List<UncertaintyState> stateTuple) {
 		var uncertaintyResolver = new UncertaintyResolver(modelToResolve);
-		uncertainties.forEach(uncertainty -> uncertaintyResolver.resolve(uncertainty, stateTuple));
+		uncertaintyRepo.getUncertaintyInducedFailureTypes()
+				.forEach(uncertainty -> uncertaintyResolver.resolve(uncertainty, stateTuple));
 		return modelToResolve;
 	}
 
@@ -131,7 +176,7 @@ public class UncertaintyBasedReliabilityPrediction {
 	// Assuming independence of the uncertainty models
 	private Double predictProbabilityOfUncertainties(List<UncertaintyState> stateTuple) {
 		var probOfUncertainties = 1.0;
-		for (UncertaintyInducedFailureType each : uncertainties) {
+		for (UncertaintyInducedFailureType each : uncertaintyRepo.getUncertaintyInducedFailureTypes()) {
 			var uncertaintyModel = UncertaintyModelManager.get().findModelFor(each).orElseThrow();
 			probOfUncertainties *= uncertaintyModel.probability(stateTuple);
 		}

@@ -9,6 +9,8 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: org.palladiosimulator.dependability.reliability.uncertainty,
  org.palladiosimulator.dependability.reliability.uncertainty.impl,
+ org.palladiosimulator.dependability.reliability.uncertainty.improvement,
+ org.palladiosimulator.dependability.reliability.uncertainty.precondition,
  org.palladiosimulator.dependability.reliability.uncertainty.util
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.palladiosimulator.envdyn.model;visibility:=reexport,
@@ -21,5 +23,6 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  de.uka.ipd.sdq.units;visibility:=reexport,
  org.eclipse.core.runtime,
  org.palladiosimulator.solver,
- com.google.guava;bundle-version="27.1.0"
+ com.google.guava;bundle-version="27.1.0",
+ tools.mdsd.probdist.api
 Bundle-ActivationPolicy: lazy

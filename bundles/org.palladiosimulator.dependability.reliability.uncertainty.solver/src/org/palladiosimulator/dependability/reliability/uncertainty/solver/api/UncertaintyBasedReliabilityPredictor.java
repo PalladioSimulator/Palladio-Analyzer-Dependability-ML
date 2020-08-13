@@ -53,7 +53,7 @@ public class UncertaintyBasedReliabilityPredictor {
 			builder.bruteForceStateSpaceExploration();
 		}
 
-		config.getUncertainties().forEach(builder::addUncertaintyFailureType);
+		builder.andUncertaintyRepo(config.getUncertaintyRepository());
 
 		return builder.build();
 	}

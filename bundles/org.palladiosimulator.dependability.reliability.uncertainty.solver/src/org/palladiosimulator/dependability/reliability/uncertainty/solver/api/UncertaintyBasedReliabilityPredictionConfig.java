@@ -2,7 +2,6 @@ package org.palladiosimulator.dependability.reliability.uncertainty.solver.api;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -16,9 +15,8 @@ import org.palladiosimulator.analyzer.workflow.jobs.EventsTransformationJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadMiddlewareConfigurationIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.ValidatePCMModelsJob;
-import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository;
-import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
+import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.StateSpaceExplorationStrategy;
 import org.palladiosimulator.solver.models.PCMInstance;
 import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
@@ -49,7 +47,7 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 			super(false);
 
 			this.myBlackboard = blackboard;
-			
+
 			this.addJob(new LoadMiddlewareConfigurationIntoBlackboardJob(config));
 			this.addJob(new ValidatePCMModelsJob(config));
 			this.add(new EventsTransformationJob(config.getStoragePluginID(), config.getEventMiddlewareFile(), false));
@@ -88,22 +86,23 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 			requireValidString(uncertaintyRepository);
 
 			var strategy = UncertaintyBasedReliabilityPredictor.findStrategyWith(explorationStrategyName).orElse(null);
-			var uncertainties = loadModel().getUncertaintyInducedFailureTypes();
+			var uncertaintyRepo = loadUncertaintyRepo();
 			var pcmInstance = buildPCMInstance();
-			return new UncertaintyBasedReliabilityPredictionConfig(runConfig, strategy, uncertainties, pcmInstance);
+			return new UncertaintyBasedReliabilityPredictionConfig(runConfig, strategy, uncertaintyRepo, pcmInstance);
 		}
 
-		public UncertaintyBasedReliabilityPredictionConfig rebuild(
-				UncertaintyBasedReliabilityPredictionConfig config, MDSDBlackboard blackboard) {
+		public UncertaintyBasedReliabilityPredictionConfig rebuild(UncertaintyBasedReliabilityPredictionConfig config,
+				MDSDBlackboard blackboard) {
 			var newPcm = buildPCMInstance(blackboard);
 			var strategy = config.explorationStrategy.isPresent() ? config.explorationStrategy.get() : null;
-			return new UncertaintyBasedReliabilityPredictionConfig(config.runConfig, strategy, config.uncertainties, newPcm);
+			return new UncertaintyBasedReliabilityPredictionConfig(config.runConfig, strategy, config.uncertaintyRepo,
+					newPcm);
 		}
 
 		private PCMInstance buildPCMInstance() {
 			return executePCMInstanceBuildJob(new PCMInstanceBuilderJob(runConfig));
 		}
-		
+
 		private PCMInstance buildPCMInstance(MDSDBlackboard blackboard) {
 			return executePCMInstanceBuildJob(new PCMInstanceBuilderJob(runConfig, blackboard));
 		}
@@ -118,7 +117,7 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 					.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
 		}
 
-		private UncertaintyRepository loadModel() {
+		private UncertaintyRepository loadUncertaintyRepo() {
 			ResourceSet rs = new ResourceSetImpl();
 			rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
 			rs.getPackageRegistry().put(UncertaintyPackage.eNS_URI, UncertaintyPackage.eINSTANCE);
@@ -144,15 +143,14 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 
 	private final PCMSolverWorkflowRunConfiguration runConfig;
 	private final Optional<StateSpaceExplorationStrategy> explorationStrategy;
-	private final List<UncertaintyInducedFailureType> uncertainties;
+	private final UncertaintyRepository uncertaintyRepo;
 	private final PCMInstance pcm;
 
 	public UncertaintyBasedReliabilityPredictionConfig(PCMSolverWorkflowRunConfiguration runConfig,
-			StateSpaceExplorationStrategy explorationStrategy, List<UncertaintyInducedFailureType> uncertainties,
-			PCMInstance pcm) {
+			StateSpaceExplorationStrategy explorationStrategy, UncertaintyRepository uncertaintyRepo, PCMInstance pcm) {
 		this.runConfig = runConfig;
 		this.explorationStrategy = Optional.ofNullable(explorationStrategy);
-		this.uncertainties = uncertainties;
+		this.uncertaintyRepo = uncertaintyRepo;
 		this.pcm = pcm;
 	}
 
@@ -168,8 +166,8 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 		return explorationStrategy;
 	}
 
-	public List<UncertaintyInducedFailureType> getUncertainties() {
-		return uncertainties;
+	public UncertaintyRepository getUncertaintyRepository() {
+		return uncertaintyRepo;
 	}
 
 	public PCMInstance getPCMInstance() {
