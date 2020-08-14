@@ -18,9 +18,6 @@ import org.palladiosimulator.pcm.repository.Repository;
 import org.palladiosimulator.solver.models.PCMInstance;
 import org.palladiosimulator.solver.transformations.EMFHelper;
 
-import tools.mdsd.probdist.api.apache.supplier.MultinomialDistributionSupplier;
-import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
-
 public class UncertaintyResolver {
 
 	private final static EMFHelper EMF_HELPER = new EMFHelper();
@@ -29,13 +26,6 @@ public class UncertaintyResolver {
 
 	public UncertaintyResolver(PCMInstance pcmInstance) {
 		this.pcmInstance = pcmInstance;
-
-		initProbabilityDistributions();
-	}
-
-	// TODO: This should not happen here: extract method to proper location
-	private void initProbabilityDistributions() {
-		ProbabilityDistributionFactory.get().register(new MultinomialDistributionSupplier());
 	}
 
 	public void resolve(UncertaintyInducedFailureType uncertainty, List<UncertaintyState> values) {

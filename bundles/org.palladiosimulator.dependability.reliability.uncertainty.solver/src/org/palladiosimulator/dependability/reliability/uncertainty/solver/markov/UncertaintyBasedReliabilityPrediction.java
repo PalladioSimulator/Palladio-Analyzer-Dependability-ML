@@ -21,7 +21,9 @@ import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import com.google.common.collect.Lists;
 
+import tools.mdsd.probdist.api.apache.supplier.MultinomialDistributionSupplier;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
+import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 
 public class UncertaintyBasedReliabilityPrediction {
 
@@ -86,6 +88,12 @@ public class UncertaintyBasedReliabilityPrediction {
 		this.uncertaintyRepo = uncertaintyRepo;
 
 		UncertaintyModelManager.get().manage(uncertaintyRepo.getUncertaintyInducedFailureTypes());
+
+		initProbabilityDistributions();
+	}
+
+	private void initProbabilityDistributions() {
+		ProbabilityDistributionFactory.get().register(new MultinomialDistributionSupplier());
 	}
 
 	public static UncertaintyBasedReliabilityPredictionBuilder newBuilder() {
@@ -147,7 +155,7 @@ public class UncertaintyBasedReliabilityPrediction {
 			if (checker.isEmpty()) {
 				return false;
 			}
-			if (checker.get().isNotFulfiled(each, pcmModel)) {
+			if (checker.get().isNotFulfiled(pcmModel, each)) {
 				return false;
 			}
 		}

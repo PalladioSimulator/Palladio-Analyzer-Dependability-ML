@@ -14,8 +14,9 @@ import com.google.common.collect.Lists;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.entity.Conditionable.Conditional;
 import tools.mdsd.probdist.api.entity.ConditionalProbabilityDistribution;
-import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 import tools.mdsd.probdist.distributionfunction.Domain;
+import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
+import tools.mdsd.probdist.distributionfunction.TabularCPD;
 
 public class UncertaintyImprovementCalculator {
 
@@ -46,11 +47,23 @@ public class UncertaintyImprovementCalculator {
 	}
 
 	private CategoricalValue calculateProbabilistically(ProbabilisticImprovement improvement, CategoricalValue value) {
-		var distribution = (ConditionalProbabilityDistribution) ProbabilityDistributionFactory.get()
-				.getInstanceOf(improvement.getProbabilityDistribution()).orElseThrow();
+		var distribution = createCPD(improvement.getProbabilityDistribution());
 
 		var conditionals = Lists.newArrayList(new Conditional(Domain.CATEGORY, value));
 		return distribution.given(conditionals).sample();
+	}
+
+	private ConditionalProbabilityDistribution createCPD(ProbabilityDistribution dist) {
+		if (dist.getParams().isEmpty()) {
+			throw new IllegalArgumentException("The distribution parameters must be set.");
+		}
+
+		var paramRepresentation = dist.getParams().get(0).getRepresentation();
+		if (TabularCPD.class.isInstance(paramRepresentation) == false) {
+			throw new IllegalArgumentException("The parameter representation must be of type TabularCPD.");
+		}
+
+		return new ConditionalProbabilityDistribution(dist, (TabularCPD) paramRepresentation);
 	}
 
 	private CategoricalValue calculateDeterministically(DeterministicImprovement improvement, CategoricalValue value) {

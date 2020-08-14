@@ -1,19 +1,18 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.precondition;
 
-import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.function.Predicate;
 
-import org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition;
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 public class ArchitecturalPreconditionManager {
 
-	private final static Map<Class<? extends ArchitecturalPrecondition>, ArchitecturalPreconditionChecker<?>> PRECONDITION_CHECKER = Maps
-			.newHashMap();
+	private final static Set<ArchitecturalPreconditionChecker> PRECONDITION_CHECKER = Sets.newHashSet();
 	static {
-		PRECONDITION_CHECKER.put(ActiveComponentPrecondition.class, new ActiveComponentChecker());
+		PRECONDITION_CHECKER.add(new ActiveComponentChecker());
 	}
 
 	private static ArchitecturalPreconditionManager managerInstance = null;
@@ -29,11 +28,13 @@ public class ArchitecturalPreconditionManager {
 		return managerInstance;
 	}
 
-	@SuppressWarnings("unchecked")
-	public <T extends ArchitecturalPrecondition> Optional<ArchitecturalPreconditionChecker<T>> findPreconditionCheckerFor(
-			T precondtion) {
-		var result = PRECONDITION_CHECKER.get(precondtion.getClass());
-		return Optional.ofNullable((ArchitecturalPreconditionChecker<T>) result);
+	public Optional<ArchitecturalPreconditionChecker> findPreconditionCheckerFor(
+			ArchitecturalPrecondition precondtion) {
+		return PRECONDITION_CHECKER.stream().filter(preconditionCheckerFor(precondtion)).findFirst();
+	}
+
+	private Predicate<ArchitecturalPreconditionChecker> preconditionCheckerFor(ArchitecturalPrecondition precondition) {
+		return c -> c.isApplicable(precondition);
 	}
 
 }

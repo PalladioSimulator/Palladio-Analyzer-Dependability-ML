@@ -6,6 +6,9 @@
   <distributions xsi:type="distributionfunction:ProbabilityDistribution" id="_a9TY4cqkEeqObY-eK2jOOA" entityName="MLPredictionSensitivityDistribution" params="_a9TY4MqkEeqObY-eK2jOOA">
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
   </distributions>
+  <distributions xsi:type="distributionfunction:ProbabilityDistribution" id="_RWYiwN38Eeq4jrWplRa7Fg" entityName="ImageBrightnessImprovement" params="_VSt1cd38Eeq4jrWplRa7Fg">
+    <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
+  </distributions>
   <params id="_a9RjsMqkEeqObY-eK2jOOA" entityName="SensitivityParam">
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
     <representation xsi:type="distributionfunction:SimpleParameter" type="SAMPLESPACE" value="{(ImageBrightnessMeasure:High),0};{(ImageBrightnessMeasure:Low),0};{(ImageBrightnessMeasure:Medium),1.0}"/>
@@ -24,6 +27,23 @@
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure:Medium)</conditonals>
         <entry type="SAMPLESPACE" value="{Success,0.9859603066666667};{Fail,0.014039693333333325}"/>
+      </cpdEntries>
+    </representation>
+  </params>
+  <params id="_VSt1cd38Eeq4jrWplRa7Fg" entityName="ImprovementParam">
+    <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
+    <representation xsi:type="distributionfunction:TabularCPD">
+      <cpdEntries>
+        <conditonals>(ImageBrightnessMeasure:High)</conditonals>
+        <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure:High),0.3};{(ImageBrightnessMeasure:Low),0};{(ImageBrightnessMeasure:Medium),0.7}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightnessMeasure:Medium)</conditonals>
+        <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure:High),0};{(ImageBrightnessMeasure:Low),0};{(ImageBrightnessMeasure:Medium),1}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightnessMeasure:Low)</conditonals>
+        <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure:High),0};{(ImageBrightnessMeasure:Low),0.3};{(ImageBrightnessMeasure:Medium),0.7}"/>
       </cpdEntries>
     </representation>
   </params>

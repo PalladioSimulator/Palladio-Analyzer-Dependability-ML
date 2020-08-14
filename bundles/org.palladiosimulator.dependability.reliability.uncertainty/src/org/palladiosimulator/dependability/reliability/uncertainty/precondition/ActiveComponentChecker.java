@@ -4,15 +4,30 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition;
+import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
 import org.palladiosimulator.pcm.core.composition.AssemblyContext;
 import org.palladiosimulator.pcm.repository.BasicComponent;
 import org.palladiosimulator.solver.models.PCMInstance;
 
-public class ActiveComponentChecker implements ArchitecturalPreconditionChecker<ActiveComponentPrecondition> {
+public class ActiveComponentChecker implements ArchitecturalPreconditionChecker {
+
+	protected ActiveComponentChecker() {
+		
+	}
+	
+	@Override
+	public boolean isApplicable(ArchitecturalPrecondition precondition) {
+		return precondition instanceof ActiveComponentPrecondition;
+	}
 
 	@Override
-	public boolean isFulfilled(ActiveComponentPrecondition precondition, PCMInstance pcmModel) {
-		return getInstantiatedComponents(pcmModel).anyMatch(isInstantiated(precondition.getRequiredActiveComponent()));
+	public boolean isFulfilled(PCMInstance pcmModel, ArchitecturalPrecondition precondition) {
+		if (isNotApplicable(precondition)) {
+			return false;
+		}
+
+		var requiredActiveComponent = ActiveComponentPrecondition.class.cast(precondition).getRequiredActiveComponent();
+		return getInstantiatedComponents(pcmModel).anyMatch(isInstantiated(requiredActiveComponent));
 	}
 
 	private Predicate<AssemblyContext> isInstantiated(BasicComponent requiredActiveComponent) {

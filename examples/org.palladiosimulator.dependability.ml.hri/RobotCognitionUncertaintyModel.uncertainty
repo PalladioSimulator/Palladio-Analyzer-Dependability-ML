@@ -4,8 +4,11 @@
     <refines xsi:type="reliability:SoftwareInducedFailureType" href="RobotCognitionComponents.repository#_ZkNuedDYEeqWne3bdagE9g"/>
     <uncertaintyModel href="ProbabilisticSensitivityModel.staticmodel#_U5FzuMqkEeqObY-eK2jOOA"/>
   </uncertaintyInducedFailureTypes>
-  <architecturalCountermeasures id="_pVSd0N36Eeq3EYM7_fX0uw" entityName="PreprocessInput">
+  <architecturalCountermeasures id="_pVSd0N36Eeq3EYM7_fX0uw" entityName="PreprocessInput" architecturalPreconditions="//@architecturalPreconditions.0">
     <targetUncertainty href="ProbabilisticSensitivityModel.staticmodel#_U5KsMMqkEeqObY-eK2jOOA"/>
+    <uncertaintyImprovement xsi:type="uncertainty:ProbabilisticImprovement">
+      <probabilityDistribution href="ProbabilityDistributions.distributionfunction#_RWYiwN38Eeq4jrWplRa7Fg"/>
+    </uncertaintyImprovement>
   </architecturalCountermeasures>
   <architecturalPreconditions xsi:type="uncertainty:ActiveComponentPrecondition">
     <requiredActiveComponent href="RobotCognitionComponents.repository#_HIn1oN35Eeq3EYM7_fX0uw"/>
