@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<monitorrepository:MonitorRepository xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:metricspec="http://palladiosimulator.org/MetricSpec/1.0" xmlns:monitorrepository="http://palladiosimulator.org/MonitorRepository/1.0" xmlns:pcmmeasuringpoint="http://palladiosimulator.org/PCM/MeasuringPoint/1.0" id="_g8b9sN4UEeqKieYo_sZiMQ" entityName="RobotCognitionMonitors">
+  <monitors id="_EYxTcd4VEeqKieYo_sZiMQ" entityName="System Response Time">
+    <measurementSpecifications id="_TGfsIN4VEeqKieYo_sZiMQ">
+      <metricDescription xsi:type="metricspec:NumericalBaseMetricDescription" href="pathmap://METRIC_SPEC_MODELS/commonMetrics.metricspec#_6rYmYs7nEeOX_4BzImuHbA"/>
+      <processingType xsi:type="monitorrepository:TimeDrivenAggregation" id="_2aUmIt4VEeqKieYo_sZiMQ">
+        <statisticalCharacterization xsi:type="monitorrepository:ArithmeticMean"/>
+      </processingType>
+    </measurementSpecifications>
+    <measuringPoint xsi:type="pcmmeasuringpoint:UsageScenarioMeasuringPoint" href="RobotCognitionSensors.measuringpoint#//@measuringPoints.0"/>
+  </monitors>
+</monitorrepository:MonitorRepository>

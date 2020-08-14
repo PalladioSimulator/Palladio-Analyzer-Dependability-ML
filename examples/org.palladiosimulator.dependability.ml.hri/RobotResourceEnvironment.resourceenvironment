@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<resourceenvironment:ResourceEnvironment xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:resourceenvironment="http://palladiosimulator.org/PalladioComponentModel/ResourceEnvironment/5.2" entityName="New ResourceEnvironment">
+<resourceenvironment:ResourceEnvironment xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:resourceenvironment="http://palladiosimulator.org/PalladioComponentModel/ResourceEnvironment/5.2" entityName="RobotCognitionResourceEnvironment">
   <linkingResources__ResourceEnvironment id="_kjkeUNDgEeqWne3bdagE9g" entityName="LinkingResource" connectedResourceContainers_LinkingResource="_XE0aMNDgEeqWne3bdagE9g _gm0xYNDfEeqWne3bdagE9g">
     <communicationLinkResourceSpecifications_LinkingResource id="_kjlFYNDgEeqWne3bdagE9g">
       <communicationLinkResourceType_CommunicationLinkResourceSpecification href="pathmap://PCM_MODELS/Palladio.resourcetype#_o3sScH2AEdyH8uerKnHYug"/>

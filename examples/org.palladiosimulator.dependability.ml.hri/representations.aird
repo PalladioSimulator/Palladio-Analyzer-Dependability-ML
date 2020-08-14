@@ -14,6 +14,13 @@
     <semanticResources>pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype</semanticResources>
     <semanticResources>ProbabilityDistributions.distributionfunction</semanticResources>
     <semanticResources>RobotCognitionUncertaintyModel2.uncertainty</semanticResources>
+    <semanticResources>RobotCognitionExperiment.experiments</semanticResources>
+    <semanticResources>RobotCognitionMonitors.monitorrepository</semanticResources>
+    <semanticResources>RobotCognitionSensors.measuringpoint</semanticResources>
+    <semanticResources>pathmap://METRIC_SPEC_MODELS/commonMetrics.metricspec</semanticResources>
+    <semanticResources>ReconfigurationFolder.experiments</semanticResources>
+    <semanticResources>pathmap://PCM_MODELS/Glassfish.repository</semanticResources>
+    <semanticResources>pathmap://PCM_MODELS/default_event_middleware.repository</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_TaN9ENCmEeqWne3bdagE9g">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_TfdCYNCmEeqWne3bdagE9g" name="RobotCognitionComponents Repository Diagram" repPath="#_TbBOUNCmEeqWne3bdagE9g" changeId="6c81c7bb-5987-4248-8ffd-f0c18405c52b">
