@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<staticmodel:ProbabilisticModelRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:staticmodel="http://palladiosimulator.org/Environment/StaticModel/1.0" xmlns:templatevariable="http://palladiosimulator.org/Environment/TemplateVariable/1.0" id="_9iR-8N4jEeqaAYEZJq_V3Q" entityName="StaticEnvironment">
+  <models id="_BnPpMN4kEeqaAYEZJq_V3Q" entityName="GroundStaticEnvironmentNetwork">
+    <localModels id="_FYAlEN4kEeqaAYEZJq_V3Q">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="ProbabilisticSensitivityModel.templatevariable#_U5FzvMqkEeqObY-eK2jOOA"/>
+      <distribution href="ProbabilityDistributions.distributionfunction#_a9RjscqkEeqObY-eK2jOOA"/>
+    </localModels>
+    <localProbabilisticModels>
+      <groundRandomVariables id="_rbdHAN4kEeqaAYEZJq_V3Q" entityName="InstantiatedBrightnessMeasureTemplate" descriptiveModel="_FYAlEN4kEeqaAYEZJq_V3Q">
+        <instantiatedTemplate href="ProbabilisticSensitivityModel.templatevariable#_U5Fzu8qkEeqObY-eK2jOOA"/>
+        <appliedObjects href="RobotCognitionComponents.repository#_J_c3gNDBEeqWne3bdagE9g"/>
+      </groundRandomVariables>
+    </localProbabilisticModels>
+  </models>
+</staticmodel:ProbabilisticModelRepository>
