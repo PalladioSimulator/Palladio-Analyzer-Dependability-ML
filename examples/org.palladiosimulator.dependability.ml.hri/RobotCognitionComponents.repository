@@ -123,6 +123,23 @@
       </steps_Behaviour>
     </serviceEffectSpecifications__BasicComponent>
   </components__Repository>
+  <components__Repository xsi:type="repository:BasicComponent" id="_HIn1oN35Eeq3EYM7_fX0uw" entityName="ImagePreprocessing">
+    <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_gdnH8N35Eeq3EYM7_fX0uw" entityName="ImagePreprocessing.ObjectClassification.OperationProvidedRole" providedInterface__OperationProvidedRole="_flBpENDSEeqWne3bdagE9g"/>
+    <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_cQNTYN35Eeq3EYM7_fX0uw" entityName="ImagePreprocessing.ObjectClassification.OperationRequiredRole" requiredInterface__OperationRequiredRole="_flBpENDSEeqWne3bdagE9g"/>
+    <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_geGQIN35Eeq3EYM7_fX0uw" describedService__SEFF="_n_abcNDSEeqWne3bdagE9g">
+      <steps_Behaviour xsi:type="seff:StartAction" id="_geGQId35Eeq3EYM7_fX0uw" successor_AbstractAction="_rO7VcN35Eeq3EYM7_fX0uw"/>
+      <steps_Behaviour xsi:type="seff:StopAction" id="_geG3MN35Eeq3EYM7_fX0uw" predecessor_AbstractAction="_rO7VcN35Eeq3EYM7_fX0uw"/>
+      <steps_Behaviour xsi:type="seff:InternalAction" id="_rO7VcN35Eeq3EYM7_fX0uw" entityName="PreprocessImage" predecessor_AbstractAction="_geGQId35Eeq3EYM7_fX0uw" successor_AbstractAction="_geG3MN35Eeq3EYM7_fX0uw">
+        <resourceDemand_Action>
+          <specification_ParametericResourceDemand specification="5"/>
+          <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+        </resourceDemand_Action>
+        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01">
+          <softwareInducedFailureType__InternalFailureOccurrenceDescription href="pathmap://PCM_MODELS/FailureTypes.repository#_sLBREFf0EeW5Q6z-Ts8kIg"/>
+        </internalFailureOccurrenceDescriptions__InternalAction>
+      </steps_Behaviour>
+    </serviceEffectSpecifications__BasicComponent>
+  </components__Repository>
   <interfaces__Repository xsi:type="repository:EventGroup" id="_EQCsYNC7EeqWne3bdagE9g" entityName="PerceivedImageMsg">
     <eventTypes__EventGroup id="_NrhIUNC7EeqWne3bdagE9g" entityName="PerceivedImage">
       <parameter__EventType dataType__Parameter="_sTRIMNDQEeqWne3bdagE9g" parameterName="img" modifier__Parameter="inout"/>

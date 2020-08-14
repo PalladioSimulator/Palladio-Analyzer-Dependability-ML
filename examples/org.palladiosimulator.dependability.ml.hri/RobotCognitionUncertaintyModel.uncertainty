@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uncertainty:UncertaintyFailureTypeRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reliability="http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2" xmlns:uncertainty="http://palladiosimulator.org/Uncertainty/1.0">
+<uncertainty:UncertaintyRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reliability="http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2" xmlns:uncertainty="http://palladiosimulator.org/Uncertainty/1.0" id="_mJ0AUN36Eeq3EYM7_fX0uw" entityName="UncertaintyRepo">
   <uncertaintyInducedFailureTypes>
     <refines xsi:type="reliability:SoftwareInducedFailureType" href="RobotCognitionComponents.repository#_ZkNuedDYEeqWne3bdagE9g"/>
     <uncertaintyModel href="ProbabilisticSensitivityModel.staticmodel#_U5FzuMqkEeqObY-eK2jOOA"/>
   </uncertaintyInducedFailureTypes>
-</uncertainty:UncertaintyFailureTypeRepository>
+  <architecturalCountermeasures id="_pVSd0N36Eeq3EYM7_fX0uw" entityName="PreprocessInput">
+    <targetUncertainty href="ProbabilisticSensitivityModel.staticmodel#_U5KsMMqkEeqObY-eK2jOOA"/>
+  </architecturalCountermeasures>
+  <architecturalPreconditions xsi:type="uncertainty:ActiveComponentPrecondition">
+    <requiredActiveComponent href="RobotCognitionComponents.repository#_HIn1oN35Eeq3EYM7_fX0uw"/>
+  </architecturalPreconditions>
+</uncertainty:UncertaintyRepository>

@@ -42,4 +42,8 @@
     <resourceContainer_AllocationContext href="RobotResourceEnvironment.resourceenvironment#_XE0aMNDgEeqWne3bdagE9g"/>
     <eventChannel__AllocationContext href="RobotCognitionSystem.system#_gpWL0NDdEeqWne3bdagE9g"/>
   </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_XaP0kN36Eeq3EYM7_fX0uw" entityName="Allocation_Assembly_ImagePreprocessing">
+    <resourceContainer_AllocationContext href="RobotResourceEnvironment.resourceenvironment#_XE0aMNDgEeqWne3bdagE9g"/>
+    <assemblyContext_AllocationContext href="RobotCognitionSystem.system#_IROnAN36Eeq3EYM7_fX0uw"/>
+  </allocationContexts_Allocation>
 </allocation:Allocation>
