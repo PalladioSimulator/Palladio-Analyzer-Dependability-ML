@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<distributionfunction:ProbabilityDistributionFunctionRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:distributionfunction="http://www.mdsd.tools/probdist/distributionfunction/1.0" id="_cCT5IMqkEeqObY-eK2jOOA">
+<distributionfunction:ProbabilityDistributionFunctionRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:distributionfunction="http://www.mdsd.tools/probdist/distributionfunction/1.0" id="_cCT5IMqkEeqObY-eK2jOOA" entityName="HRIDistributionRepo">
   <distributions xsi:type="distributionfunction:ProbabilityDistribution" id="_a9RjscqkEeqObY-eK2jOOA" entityName="ImageBrightnessMeasureSensitivityDistribution" params="_a9RjsMqkEeqObY-eK2jOOA">
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
   </distributions>
@@ -7,6 +7,9 @@
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
   </distributions>
   <distributions xsi:type="distributionfunction:ProbabilityDistribution" id="_RWYiwN38Eeq4jrWplRa7Fg" entityName="ImageBrightnessImprovement" params="_VSt1cd38Eeq4jrWplRa7Fg">
+    <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
+  </distributions>
+  <distributions xsi:type="distributionfunction:ProbabilityDistribution" id="_nrLDMOBcEeq7Govxf64fxQ" entityName="TemporalImageBrightnessDistribution" params="_vzzXMeBcEeq7Govxf64fxQ">
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
   </distributions>
   <params id="_a9RjsMqkEeqObY-eK2jOOA" entityName="SensitivityParam">
@@ -44,6 +47,23 @@
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure:Low)</conditonals>
         <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure:High),0};{(ImageBrightnessMeasure:Low),0.3};{(ImageBrightnessMeasure:Medium),0.7}"/>
+      </cpdEntries>
+    </representation>
+  </params>
+  <params id="_vzzXMeBcEeq7Govxf64fxQ" entityName="TemporalBrightnessParam">
+    <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
+    <representation xsi:type="distributionfunction:TabularCPD">
+      <cpdEntries>
+        <conditonals>(ImageBrightnessMeasure:High)</conditonals>
+        <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure:High),0.4};{(ImageBrightnessMeasure:Low),0};{(ImageBrightnessMeasure:Medium),0.6}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightnessMeasure:Medium)</conditonals>
+        <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure:High),0.2};{(ImageBrightnessMeasure:Low),0.2};{(ImageBrightnessMeasure:Medium),0.6}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightnessMeasure:Low)</conditonals>
+        <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure:High),0};{(ImageBrightnessMeasure:Low),0.4};{(ImageBrightnessMeasure:Medium),0.6}"/>
       </cpdEntries>
     </representation>
   </params>

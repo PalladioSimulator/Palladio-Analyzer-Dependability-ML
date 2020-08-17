@@ -19,7 +19,7 @@
     <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="RobotCognitionComponents.repository#_2abncNC6EeqWne3bdagE9g"/>
   </assemblyContexts__ComposedStructure>
   <assemblyContexts__ComposedStructure id="_IROnAN36Eeq3EYM7_fX0uw" entityName="Assembly_ImagePreprocessing">
-    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="RobotCognitionComponents.repository#_HIn1oN35Eeq3EYM7_fX0uw"/>
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="RobotCognitionComponents.repository#_EcqX8OBlEeq7Govxf64fxQ"/>
   </assemblyContexts__ComposedStructure>
   <eventChannel__ComposedStructure id="_cTR_8NDcEeqWne3bdagE9g" entityName="ImageMsgChannel" eventChannelSourceConnector__EventChannel="_i4CtcNDcEeqWne3bdagE9g" eventChannelSinkConnector__EventChannel="_tV1iANDcEeqWne3bdagE9g">
     <eventGroup__EventChannel href="RobotCognitionComponents.repository#_EQCsYNC7EeqWne3bdagE9g"/>

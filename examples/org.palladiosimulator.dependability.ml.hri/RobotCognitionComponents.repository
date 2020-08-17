@@ -140,6 +140,23 @@
       </steps_Behaviour>
     </serviceEffectSpecifications__BasicComponent>
   </components__Repository>
+  <components__Repository xsi:type="repository:BasicComponent" id="_EcqX8OBlEeq7Govxf64fxQ" entityName="PassThroughComponent">
+    <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_fAwhsOBlEeq7Govxf64fxQ" entityName="PassThroughComponent.ObjectClassification.OperationProvidedRole" providedInterface__OperationProvidedRole="_flBpENDSEeqWne3bdagE9g"/>
+    <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_YLPbYOBlEeq7Govxf64fxQ" entityName="PassThroughComponent.ObjectClassification.OperationRequiredRole" requiredInterface__OperationRequiredRole="_flBpENDSEeqWne3bdagE9g"/>
+    <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_fBIVIOBlEeq7Govxf64fxQ" describedService__SEFF="_n_abcNDSEeqWne3bdagE9g">
+      <steps_Behaviour xsi:type="seff:StartAction" id="_fBI8MOBlEeq7Govxf64fxQ" successor_AbstractAction="_ltKvUOBlEeq7Govxf64fxQ"/>
+      <steps_Behaviour xsi:type="seff:StopAction" id="_fBI8MeBlEeq7Govxf64fxQ" predecessor_AbstractAction="_ltKvUOBlEeq7Govxf64fxQ"/>
+      <steps_Behaviour xsi:type="seff:InternalAction" id="_ltKvUOBlEeq7Govxf64fxQ" entityName="PassThrough" predecessor_AbstractAction="_fBI8MOBlEeq7Govxf64fxQ" successor_AbstractAction="_fBI8MeBlEeq7Govxf64fxQ">
+        <resourceDemand_Action>
+          <specification_ParametericResourceDemand specification="0"/>
+          <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+        </resourceDemand_Action>
+        <internalFailureOccurrenceDescriptions__InternalAction>
+          <softwareInducedFailureType__InternalFailureOccurrenceDescription href="pathmap://PCM_MODELS/FailureTypes.repository#_sLBREFf0EeW5Q6z-Ts8kIg"/>
+        </internalFailureOccurrenceDescriptions__InternalAction>
+      </steps_Behaviour>
+    </serviceEffectSpecifications__BasicComponent>
+  </components__Repository>
   <interfaces__Repository xsi:type="repository:EventGroup" id="_EQCsYNC7EeqWne3bdagE9g" entityName="PerceivedImageMsg">
     <eventTypes__EventGroup id="_NrhIUNC7EeqWne3bdagE9g" entityName="PerceivedImage">
       <parameter__EventType dataType__Parameter="_sTRIMNDQEeqWne3bdagE9g" parameterName="img" modifier__Parameter="inout"/>

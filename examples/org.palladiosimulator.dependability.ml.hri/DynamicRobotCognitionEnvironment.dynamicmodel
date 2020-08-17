@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dynamicmodel:DynamicBehaviourRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dynamicmodel="http://palladiosimulator.org/Environment/DynamicModel/1.0" xmlns:templatevariable="http://palladiosimulator.org/Environment/TemplateVariable/1.0" id="_Zx1fYOBdEeq7Govxf64fxQ" entityName="HRITemporalDynamics">
+  <extensions id="_uoflMOBdEeq7Govxf64fxQ" entityName="TemporalDynamicsDesc">
+    <model href="StaticRobotCognitionEnvironment.staticmodel#_BnPpMN4kEeqaAYEZJq_V3Q"/>
+    <behaviour xsi:type="dynamicmodel:InductiveDynamicBehaviour">
+      <localModels id="_KZEeQOBgEeq7Govxf64fxQ" entityName="TemporalImageBrightnessFactorInstantiation">
+        <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="HRITemplateDefinitions.templatevariable#_uXdNoeBfEeq7Govxf64fxQ"/>
+        <distributionFunction href="ProbabilityDistributions.distributionfunction#_nrLDMOBcEeq7Govxf64fxQ"/>
+      </localModels>
+      <timeSliceInductions xsi:type="dynamicmodel:InterTimeSliceInduction" descriptiveModel="_KZEeQOBgEeq7Govxf64fxQ">
+        <appliedGroundVariable href="StaticRobotCognitionEnvironment.staticmodel#_rbdHAN4kEeqaAYEZJq_V3Q"/>
+        <temporalStructure xsi:type="templatevariable:PersistenceRelation" href="HRITemplateDefinitions.templatevariable#//@relation.1"/>
+      </timeSliceInductions>
+    </behaviour>
+  </extensions>
+</dynamicmodel:DynamicBehaviourRepository>
