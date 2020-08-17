@@ -1,0 +1,82 @@
+/*
+ * Two modeltypes are declared. The http NS URIs correspond to those used to register the 
+ * Ecore models in the environment. Alternatively, a workspace metamodel may be used 
+ * in conjunction with mappings defined in the project properties.
+ */
+modeltype RUNTIMEMEASUREMENT uses 'http://simulizar.palladiosimulator.org/RuntimeMeasurement/1.0';
+modeltype PCM_ALLOC uses 'http://palladiosimulator.org/PalladioComponentModel/Allocation/5.2';
+modeltype PCM_REP uses 'http://palladiosimulator.org/PalladioComponentModel/Repository/5.2';
+modeltype PCM_SEFF uses 'http://palladiosimulator.org/PalladioComponentModel/SEFF/5.2';
+modeltype PCM_SYS uses 'http://palladiosimulator.org/PalladioComponentModel/System/5.2';
+modeltype PCM_RES_ENV uses 'http://palladiosimulator.org/PalladioComponentModel/ResourceEnvironment/5.2';
+modeltype PCM_RES_TYPE uses 'http://palladiosimulator.org/PalladioComponentModel/ResourceType/5.2';
+modeltype PCM_USAGE uses 'http://palladiosimulator.org/PalladioComponentModel/UsageModel/5.2';
+modeltype PCM_FEATURE_CONF uses 'http://sdq.ipd.uka.de/FeatureConfig/2.0';
+modeltype PCM_FEATURE_MOD uses 'http://sdq.ipd.uka.de/FeatureModel/2.0';
+modeltype PCM_CORE uses 'http://palladiosimulator.org/PalladioComponentModel/Core/5.2';
+modeltype PCM_COMP uses 'http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.2';
+modeltype PCM_ENTITY uses 'http://palladiosimulator.org/PalladioComponentModel/Core/Entity/5.2';
+modeltype PCM_PARAM uses 'http://palladiosimulator.org/PalladioComponentModel/Parameter/5.2';
+modeltype PCM_STOEX uses 'http://sdq.ipd.uka.de/StochasticExpressions/2.2';
+
+/*
+ * The transformation simply exchanges the preprocessing component from image preprocessing to non-preprocessing.
+ */
+transformation DeactivateFilterComponent(inout pcmSystem : PCM_SYS, in pcmRepo : PCM_REP) {
+							
+							
+	property imgPreprocessingAssemblyId : String = "_IROnAN36Eeq3EYM7_fX0uw";
+	property nonPreprocessingComponentId : String = "_EcqX8OBlEeq7Govxf64fxQ";
+
+	/**
+	 * The main transformation.
+	 * This is the entry point to the overall transformation.
+	 */
+	main() {
+	
+		log('Simulated experience: deactivate filter component.');
+		
+		var passThroughComponent : BasicComponent := findPassThroughComponent();
+		activate(passThroughComponent);
+
+	}
+	
+	helper findPassThroughComponent() : BasicComponent {
+		var filterComponent : BasicComponent := null;
+		pcmRepo.rootObjects()[Repository].allSubobjects()[BasicComponent]->forEach(component) {
+			if component.id = nonPreprocessingComponentId then {
+				log('Found preprocessing component: ' + component.entityName);
+				
+				filterComponent := component;
+				break;
+			} 
+			endif
+		};
+		
+		assert fatal(filterComponent != null) with log('The image preprocessing component could not be found.');
+		
+		return filterComponent;
+	}
+	
+	/**
+	 * Activate pass through component.
+	 */
+	helper activate(passThroughComponent : BasicComponent) {
+		var activatedSuccessfully : Boolean = false;	
+	
+		pcmSystem.rootObjects()[System].allSubobjects()[AssemblyContext]->forEach(assembly) {
+			if assembly.id = imgPreprocessingAssemblyId then {
+				log('Found target assembly: ' + assembly.entityName);
+				
+				assembly.encapsulatedComponent__AssemblyContext := passThroughComponent;
+				
+				activatedSuccessfully := true;
+				break;
+			} 
+			endif
+		};
+		
+		assert fatal(activatedSuccessfully) with log('The image preprocessing component could not be found.');
+	}
+	
+}
