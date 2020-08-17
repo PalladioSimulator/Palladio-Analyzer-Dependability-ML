@@ -157,6 +157,20 @@
       </steps_Behaviour>
     </serviceEffectSpecifications__BasicComponent>
   </components__Repository>
+  <components__Repository xsi:type="repository:BasicComponent" id="_hDRrsOBoEeq7Govxf64fxQ" entityName="RobustObjectClassifier">
+    <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_mAqywOBoEeq7Govxf64fxQ" entityName="RobustObjectClassifier.ObjectClassification.OperationProvidedRole" providedInterface__OperationProvidedRole="_flBpENDSEeqWne3bdagE9g"/>
+    <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_mA4OIOBoEeq7Govxf64fxQ" describedService__SEFF="_n_abcNDSEeqWne3bdagE9g">
+      <steps_Behaviour xsi:type="seff:StartAction" id="_mA4OIeBoEeq7Govxf64fxQ" successor_AbstractAction="_qGKogOBoEeq7Govxf64fxQ"/>
+      <steps_Behaviour xsi:type="seff:StopAction" id="_mA4OIuBoEeq7Govxf64fxQ" predecessor_AbstractAction="_qGKogOBoEeq7Govxf64fxQ"/>
+      <steps_Behaviour xsi:type="seff:InternalAction" id="_qGKogOBoEeq7Govxf64fxQ" entityName="MakeRobustPrediction" predecessor_AbstractAction="_mA4OIeBoEeq7Govxf64fxQ" successor_AbstractAction="_mA4OIuBoEeq7Govxf64fxQ">
+        <resourceDemand_Action>
+          <specification_ParametericResourceDemand specification="20"/>
+          <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+        </resourceDemand_Action>
+        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.1" softwareInducedFailureType__InternalFailureOccurrenceDescription="_ZkNuedDYEeqWne3bdagE9g"/>
+      </steps_Behaviour>
+    </serviceEffectSpecifications__BasicComponent>
+  </components__Repository>
   <interfaces__Repository xsi:type="repository:EventGroup" id="_EQCsYNC7EeqWne3bdagE9g" entityName="PerceivedImageMsg">
     <eventTypes__EventGroup id="_NrhIUNC7EeqWne3bdagE9g" entityName="PerceivedImage">
       <parameter__EventType dataType__Parameter="_sTRIMNDQEeqWne3bdagE9g" parameterName="img" modifier__Parameter="inout"/>
@@ -187,7 +201,7 @@
       <parameters__OperationSignature dataType__Parameter="_w-QdMNC7EeqWne3bdagE9g" parameterName="img" modifier__Parameter="in"/>
     </signatures__OperationInterface>
   </interfaces__Repository>
-  <failureTypes__Repository xsi:type="reliability:SoftwareInducedFailureType" id="_ZkNuedDYEeqWne3bdagE9g" entityName="ImageClassificationPredictionFailure" internalFailureOccurrenceDescriptions__SoftwareInducedFailureType="//@components__Repository.5/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
+  <failureTypes__Repository xsi:type="reliability:SoftwareInducedFailureType" id="_ZkNuedDYEeqWne3bdagE9g" entityName="ImageClassificationPredictionFailure" internalFailureOccurrenceDescriptions__SoftwareInducedFailureType="//@components__Repository.5/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.8/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
   <dataTypes__Repository xsi:type="repository:CollectionDataType" id="_w-QdMNC7EeqWne3bdagE9g" entityName="Image">
     <innerType_CollectionDataType xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.5"/>
   </dataTypes__Repository>
