@@ -12,6 +12,7 @@ import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyIn
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticNetwork;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
 import org.palladiosimulator.envdyn.environment.staticmodel.LocalProbabilisticNetwork;
+import org.palladiosimulator.envdyn.environment.templatevariable.TemplateVariable;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -27,24 +28,24 @@ public class DiscreteUncertaintyStateSpace {
 
 	public static class UncertaintyState {
 
-		private final String id;
+		private final GroundRandomVariable variable;
 		private final Set<CategoricalValue> valueSpace;
 		private final CategoricalValue value;
 
 		private UncertaintyState(UncertaintyState state, CategoricalValue value) {
-			this.id = state.id;
+			this.variable = state.variable;
 			this.valueSpace = state.valueSpace;
 			this.value = value;
 		}
 
-		private UncertaintyState(String id, Set<CategoricalValue> valueSpace) {
-			this.id = id;
+		private UncertaintyState(GroundRandomVariable variable, Set<CategoricalValue> valueSpace) {
+			this.variable = variable;
 			this.valueSpace = valueSpace;
 			this.value = null;
 		}
 
-		public static UncertaintyState of(String id, Set<CategoricalValue> valueSpace) {
-			return new UncertaintyState(id, valueSpace);
+		public static UncertaintyState of(GroundRandomVariable variable, Set<CategoricalValue> valueSpace) {
+			return new UncertaintyState(variable, valueSpace);
 		}
 
 		public UncertaintyState newValuedStateWith(CategoricalValue value) {
@@ -52,7 +53,11 @@ public class DiscreteUncertaintyStateSpace {
 		}
 
 		public String getId() {
-			return id;
+			return variable.getEntityName();
+		}
+		
+		public boolean instantiates(TemplateVariable template) {
+			return variable.getInstantiatedTemplate().getId().equals(template.getId());
 		}
 
 		public Set<CategoricalValue> getValueSpace() {
@@ -74,7 +79,7 @@ public class DiscreteUncertaintyStateSpace {
 	public static DiscreteUncertaintyStateSpace of(UncertaintyState... uncertaintyStates) {
 		return new DiscreteUncertaintyStateSpace(Lists.newArrayList(uncertaintyStates));
 	}
-	
+
 	public static DiscreteUncertaintyStateSpace of(List<UncertaintyState> uncertaintyStates) {
 		return new DiscreteUncertaintyStateSpace(uncertaintyStates);
 	}
@@ -100,7 +105,7 @@ public class DiscreteUncertaintyStateSpace {
 		}
 
 		var param = probDist.getParams().get(0).getRepresentation();
-		return UncertaintyState.of(variable.getEntityName(), getValueSpace(param));
+		return UncertaintyState.of(variable, getValueSpace(param));
 	}
 
 	private static Set<CategoricalValue> getValueSpace(ParamRepresentation param) {
@@ -123,14 +128,14 @@ public class DiscreteUncertaintyStateSpace {
 		return Sets.cartesianProduct(getStateSpace()).stream().map(enrichWithValues()).collect(toSet());
 	}
 
-	public Optional<UncertaintyState> findStateWith(String id) {
-		return states.stream().filter(each -> each.id.equals(id)).findFirst();
+	public Optional<UncertaintyState> findStateInstantiating(TemplateVariable template) {
+		return states.stream().filter(each -> each.instantiates(template)).findFirst();
 	}
-	
+
 	public int getNumberOfStates() {
 		return states.size();
 	}
-	
+
 	private List<Set<CategoricalValue>> getStateSpace() {
 		return states.stream().map(each -> each.getValueSpace()).collect(toList());
 	}

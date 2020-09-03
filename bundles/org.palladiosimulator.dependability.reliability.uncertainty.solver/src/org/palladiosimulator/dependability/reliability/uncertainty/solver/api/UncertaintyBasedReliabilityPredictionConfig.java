@@ -98,6 +98,14 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 			return new UncertaintyBasedReliabilityPredictionConfig(config.runConfig, strategy, config.uncertaintyRepo,
 					newPcm);
 		}
+		
+		public UncertaintyBasedReliabilityPredictionConfig rebuild(UncertaintyBasedReliabilityPredictionConfig config,
+				PCMResourceSetPartition partition) {
+			var newPcm = new PCMInstance(partition);
+			var strategy = config.explorationStrategy.isPresent() ? config.explorationStrategy.get() : null;
+			return new UncertaintyBasedReliabilityPredictionConfig(config.runConfig, strategy, config.uncertaintyRepo,
+					newPcm);
+		}
 
 		private PCMInstance buildPCMInstance() {
 			return executePCMInstanceBuildJob(new PCMInstanceBuilderJob(runConfig));
