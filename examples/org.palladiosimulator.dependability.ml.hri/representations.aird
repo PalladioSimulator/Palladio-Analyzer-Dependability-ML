@@ -28,6 +28,7 @@
     <semanticResources>reconfigurations/ActivateFilterComponent.qvto</semanticResources>
     <semanticResources>reconfigurations/SwitchToDefaultMLModel.qvto</semanticResources>
     <semanticResources>reconfigurations/SwitchToRobustMLModel.qvto</semanticResources>
+    <semanticResources>RobotCognitionServiceLevelObjectives.slo</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_TaN9ENCmEeqWne3bdagE9g">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_TfdCYNCmEeqWne3bdagE9g" name="RobotCognitionComponents Repository Diagram" repPath="#_TbBOUNCmEeqWne3bdagE9g" changeId="c6b57eab-babd-4908-b206-03cf2e5d3c53">

@@ -4,7 +4,7 @@
     <toolConfiguration xsi:type="simucomtooladapter:SimuComConfiguration" name="Default EDP2 SimuCom Configuration">
       <stopConditions xsi:type="ExperimentAutomation.Experiments.AbstractSimulation:MeasurementCountStopCondition" measurementCount="1000"/>
       <stopConditions xsi:type="ExperimentAutomation.Experiments.AbstractSimulation:SimTimeStopCondition" simulationTime="-1"/>
-      <datasource xsi:type="ExperimentAutomation.Experiments.AbstractSimulation:FileDatasource" location="C:/data/experimentAutomation"/>
+      <datasource xsi:type="ExperimentAutomation.Experiments.AbstractSimulation:MemoryDatasource"/>
     </toolConfiguration>
     <experimentDesign xsi:type="ExperimentAutomation.Experiments:FullFactorialDesign"/>
     <responseMeasurement xsi:type="ExperimentAutomation.Experiments:SimulationDurationMeasurement"/>
@@ -15,6 +15,7 @@
       <eventMiddleWareRepository href="pathmap://PCM_MODELS/default_event_middleware.repository#_Onc7cMALEd-LKvNtxXAQbQ"/>
       <reconfigurationRules href="ReconfigurationFolder.experiments#/"/>
       <monitorRepository href="RobotCognitionMonitors.monitorrepository#_g8b9sN4UEeqKieYo_sZiMQ"/>
+      <serviceLevelObjectives href="RobotCognitionServiceLevelObjectives.slo#/"/>
       <repository href="RobotCognitionComponents.repository#_ST3ZANCmEeqWne3bdagE9g"/>
       <system href="RobotCognitionSystem.system#_qSosMNDbEeqWne3bdagE9g"/>
       <resourceEnvironment href="RobotResourceEnvironment.resourceenvironment#/"/>
