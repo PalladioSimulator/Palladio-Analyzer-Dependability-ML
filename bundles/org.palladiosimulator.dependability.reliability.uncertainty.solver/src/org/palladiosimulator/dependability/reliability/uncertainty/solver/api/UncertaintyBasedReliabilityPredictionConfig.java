@@ -93,25 +93,18 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 
 		public UncertaintyBasedReliabilityPredictionConfig rebuild(UncertaintyBasedReliabilityPredictionConfig config,
 				MDSDBlackboard blackboard) {
-			var newPcm = buildPCMInstance(blackboard);
+			var runConfig = config.runConfig;
 			var strategy = config.explorationStrategy.isPresent() ? config.explorationStrategy.get() : null;
-			return new UncertaintyBasedReliabilityPredictionConfig(config.runConfig, strategy, config.uncertaintyRepo,
-					newPcm);
-		}
-		
-		public UncertaintyBasedReliabilityPredictionConfig rebuild(UncertaintyBasedReliabilityPredictionConfig config,
-				PCMResourceSetPartition partition) {
-			var newPcm = new PCMInstance(partition);
-			var strategy = config.explorationStrategy.isPresent() ? config.explorationStrategy.get() : null;
-			return new UncertaintyBasedReliabilityPredictionConfig(config.runConfig, strategy, config.uncertaintyRepo,
-					newPcm);
+			var uncertaintyRepo = config.uncertaintyRepo;
+			var pcmInstance = rebuildPCMInstance(blackboard, config.runConfig);
+			return new UncertaintyBasedReliabilityPredictionConfig(runConfig, strategy, uncertaintyRepo, pcmInstance);
 		}
 
 		private PCMInstance buildPCMInstance() {
 			return executePCMInstanceBuildJob(new PCMInstanceBuilderJob(runConfig));
 		}
 
-		private PCMInstance buildPCMInstance(MDSDBlackboard blackboard) {
+		private PCMInstance rebuildPCMInstance(MDSDBlackboard blackboard, PCMSolverWorkflowRunConfiguration runConfig) {
 			return executePCMInstanceBuildJob(new PCMInstanceBuilderJob(runConfig, blackboard));
 		}
 
