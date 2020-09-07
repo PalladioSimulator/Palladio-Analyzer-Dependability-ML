@@ -27,6 +27,7 @@ transformation SwitchToRobustMLModel(inout pcmSystem : PCM_SYS, in pcmRepo : PCM
 							
 	property mlModelAssemblyId : String = "_vH-OANDcEeqWne3bdagE9g";
 	property robustMlModelComponentId : String = "_hDRrsOBoEeq7Govxf64fxQ";
+	property mlAssemblyConnectorId : String = "_XHpwEOBoEeq7Govxf64fxQ";
 
 	/**
 	 * The main transformation.
@@ -37,7 +38,8 @@ transformation SwitchToRobustMLModel(inout pcmSystem : PCM_SYS, in pcmRepo : PCM
 		log('Simulated experience: switch to robust ml model.');
 		
 		var robustMLModel : BasicComponent := findRobustMLModelComponent();
-		exchange(robustMLModel);
+		adjustAssemblyConnector(robustMLModel);
+		switchComponentOfAssembly(robustMLModel);
 
 	}
 	
@@ -59,9 +61,30 @@ transformation SwitchToRobustMLModel(inout pcmSystem : PCM_SYS, in pcmRepo : PCM
 	}
 	
 	/**
+	 * Adjusts the roles of the corresponding assembly connector.
+	 */
+	helper adjustAssemblyConnector(robustMLModel : BasicComponent) {
+		var adjustedSuccessfully : Boolean = false;
+		
+		pcmSystem.rootObjects()[System].allSubobjects()[AssemblyConnector]->forEach(connector) {
+			if connector.id = mlAssemblyConnectorId then {
+				log('Found target assembly connector: ' + connector.entityName);
+				
+				connector.providedRole_AssemblyConnector := robustMLModel.providedRoles_InterfaceProvidingEntity->asSequence()->first().oclAsType(OperationProvidedRole);
+				
+				adjustedSuccessfully := true;
+				break;
+			} 
+			endif
+		};
+		
+		assert fatal(adjustedSuccessfully) with log('The ML model assembly connector could not be found.');
+	}
+	
+	/**
 	 * Exchange ML model component.
 	 */
-	helper exchange(robustMLModel : BasicComponent) {
+	helper switchComponentOfAssembly(robustMLModel : BasicComponent) {
 		var exchangedSuccessfully : Boolean = false;	
 	
 		pcmSystem.rootObjects()[System].allSubobjects()[AssemblyContext]->forEach(assembly) {
