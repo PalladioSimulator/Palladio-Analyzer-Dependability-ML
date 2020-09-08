@@ -11,5 +11,5 @@ public interface UncertaintyModel {
 
 	public double probability(List<UncertaintyState> values);
 	
-	public double probabilityOfFailure(List<UncertaintyState> values);
+	public double probabilityOfFailureGiven(List<UncertaintyState> values);
 }

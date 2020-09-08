@@ -76,8 +76,10 @@ public class MLInducedUncertaintyModel implements UncertaintyModel {
 	}
 
 	@Override
-	public double probabilityOfFailure(List<UncertaintyState> values) {
-		return sensitivityModel.inferSensitivity(filterRelevantStates(values));
+	public double probabilityOfFailureGiven(List<UncertaintyState> values) {
+		var probOfFailure = sensitivityModel.inferSensitivity(filterRelevantStates(values));
+		var probOfUncertainty = probability(values);
+		return probOfFailure / probOfUncertainty;
 	}
 
 	private List<MeasurableProperty> filterRelevantStates(List<UncertaintyState> values) {

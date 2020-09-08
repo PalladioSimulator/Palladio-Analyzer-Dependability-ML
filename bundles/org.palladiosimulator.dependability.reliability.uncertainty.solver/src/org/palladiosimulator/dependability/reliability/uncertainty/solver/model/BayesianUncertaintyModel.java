@@ -51,8 +51,10 @@ public class BayesianUncertaintyModel implements UncertaintyModel {
 	}
 
 	@Override
-	public double probabilityOfFailure(List<UncertaintyState> values) {
-		return bayesianNetwork.probability(filterRelevantValues(values));
+	public double probabilityOfFailureGiven(List<UncertaintyState> values) {
+		var probOfFailure = bayesianNetwork.probability(filterRelevantValues(values));
+		var probOfUncertainty = probability(values);
+		return probOfFailure / probOfUncertainty;
 	}
 
 	private double marginalizingFailureVariable(List<InputValue> values) {

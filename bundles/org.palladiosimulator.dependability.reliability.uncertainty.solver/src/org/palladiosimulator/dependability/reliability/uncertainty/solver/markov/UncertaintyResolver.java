@@ -144,7 +144,7 @@ public class UncertaintyResolver {
 	private double computeProbabilityOfFailure(UncertaintyInducedFailureType uncertainty,
 			List<UncertaintyState> values) {
 		var uncertaintyModel = UncertaintyModelManager.get().findModelFor(uncertainty).orElseThrow();
-		return uncertaintyModel.probabilityOfFailure(values);
+		return uncertaintyModel.probabilityOfFailureGiven(values);
 	}
 
 	public PCMInstance getResolved() {
