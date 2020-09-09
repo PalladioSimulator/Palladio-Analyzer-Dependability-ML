@@ -27,7 +27,7 @@ transformation SwitchToDefaultMLModel(inout pcmSystem : PCM_SYS, in pcmRepo : PC
 							
 	property mlModelAssemblyId : String = "_vH-OANDcEeqWne3bdagE9g";
 	property defaultMlModelComponentId : String = "_a4yjcNDSEeqWne3bdagE9g";
-	property mlAssemblyConnectorId : String = "_XHpwEOBoEeq7Govxf64fxQ";
+	property mlAssemblyConnectorId : String = "_WLAugPJ4EeqofrndBLNacw";
 
 	/**
 	 * The main transformation.

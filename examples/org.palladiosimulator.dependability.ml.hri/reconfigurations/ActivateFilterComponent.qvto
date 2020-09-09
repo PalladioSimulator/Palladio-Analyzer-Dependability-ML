@@ -27,8 +27,7 @@ transformation ActivateFilterComponent(inout pcmSystem : PCM_SYS, in pcmRepo : P
 							
 	property imgPreprocessingAssemblyId : String = "_IROnAN36Eeq3EYM7_fX0uw";
 	property imgPreprocessingComponentId : String = "_HIn1oN35Eeq3EYM7_fX0uw";
-	property objectDetectionToImgPreprocessingConnectorId : String = "_Wep2YOBoEeq7Govxf64fxQ";
-	property imgPreprocessingToMLClassifierConnectorId : String = "_XHpwEOBoEeq7Govxf64fxQ";
+	property preprocessingConnectorId : String = "_dxDS0PJ4EeqofrndBLNacw";
 
 	/**
 	 * The main transformation.
@@ -39,8 +38,7 @@ transformation ActivateFilterComponent(inout pcmSystem : PCM_SYS, in pcmRepo : P
 		log('Simulated experience: Activate filter component.');
 		
 		var filterComponent : BasicComponent := findImgPreprocessingComponent();
-		adjustObjectDetectionToImgPreprocessingConnector(filterComponent);
-		adjustImgPreprocessingToMLClassifierConnector(filterComponent);
+		adjustAssemblyConnector(filterComponent);
 		activate(filterComponent);
 
 	}
@@ -63,13 +61,13 @@ transformation ActivateFilterComponent(inout pcmSystem : PCM_SYS, in pcmRepo : P
 	}
 	
 	/**
-	 * Adjusts the roles of the object detection to img preprocessing connector connector.
+	 * Adjusts the roles of the corresponding assembly connector.
 	 */
-	helper adjustObjectDetectionToImgPreprocessingConnector(filterComponent : BasicComponent) {
+	helper adjustAssemblyConnector(filterComponent : BasicComponent) {
 		var adjustedSuccessfully : Boolean = false;
 		
 		pcmSystem.rootObjects()[System].allSubobjects()[AssemblyConnector]->forEach(connector) {
-			if connector.id = objectDetectionToImgPreprocessingConnectorId then {
+			if connector.id = preprocessingConnectorId then {
 				log('Found target assembly connector: ' + connector.entityName);
 				
 				connector.providedRole_AssemblyConnector := filterComponent.providedRoles_InterfaceProvidingEntity->asSequence()->first().oclAsType(OperationProvidedRole);
@@ -80,28 +78,7 @@ transformation ActivateFilterComponent(inout pcmSystem : PCM_SYS, in pcmRepo : P
 			endif
 		};
 		
-		assert fatal(adjustedSuccessfully) with log('The object detection to img preprocessing connector could not be found.');
-	}
-	
-	/**
-	 * Adjusts the roles of the img preprocessing to ml classifier connector.
-	 */
-	helper adjustImgPreprocessingToMLClassifierConnector(filterComponent : BasicComponent) {
-		var adjustedSuccessfully : Boolean = false;
-		
-		pcmSystem.rootObjects()[System].allSubobjects()[AssemblyConnector]->forEach(connector) {
-			if connector.id = imgPreprocessingToMLClassifierConnectorId then {
-				log('Found target assembly connector: ' + connector.entityName);
-				
-				connector.requiredRole_AssemblyConnector := filterComponent.requiredRoles_InterfaceRequiringEntity->asSequence()->first().oclAsType(OperationRequiredRole);
-				
-				adjustedSuccessfully := true;
-				break;
-			} 
-			endif
-		};
-		
-		assert fatal(adjustedSuccessfully) with log('The img preprocessing to ml classifier could not be found.');
+		assert fatal(adjustedSuccessfully) with log('The assembly connector could not be found.');
 	}
 	
 	/**

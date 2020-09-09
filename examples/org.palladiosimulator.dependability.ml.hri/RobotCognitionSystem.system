@@ -60,13 +60,13 @@
   <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_8Ll_4NDdEeqWne3bdagE9g" entityName="newEventChannelSinkConnector" assemblyContext__EventChannelSinkConnector="_4u1lINDdEeqWne3bdagE9g" eventChannel__EventChannelSinkConnector="_0bHGINDdEeqWne3bdagE9g">
     <sinkRole__EventChannelSinkConnector href="RobotCognitionComponents.repository#_kW1hUNDJEeqWne3bdagE9g"/>
   </connectors__ComposedStructure>
-  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_Wep2YOBoEeq7Govxf64fxQ" entityName="newAssemblyConnector" requiringAssemblyContext_AssemblyConnector="_PGlVINDcEeqWne3bdagE9g" providingAssemblyContext_AssemblyConnector="_IROnAN36Eeq3EYM7_fX0uw">
-    <providedRole_AssemblyConnector href="RobotCognitionComponents.repository#_fAwhsOBlEeq7Govxf64fxQ"/>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_WLAugPJ4EeqofrndBLNacw" entityName="newAssemblyConnector" requiringAssemblyContext_AssemblyConnector="_PGlVINDcEeqWne3bdagE9g" providingAssemblyContext_AssemblyConnector="_vH-OANDcEeqWne3bdagE9g">
+    <providedRole_AssemblyConnector href="RobotCognitionComponents.repository#_1dme4NDSEeqWne3bdagE9g"/>
     <requiredRole_AssemblyConnector href="RobotCognitionComponents.repository#_0XdWMNDSEeqWne3bdagE9g"/>
   </connectors__ComposedStructure>
-  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_XHpwEOBoEeq7Govxf64fxQ" entityName="newAssemblyConnector" requiringAssemblyContext_AssemblyConnector="_IROnAN36Eeq3EYM7_fX0uw" providingAssemblyContext_AssemblyConnector="_vH-OANDcEeqWne3bdagE9g">
-    <providedRole_AssemblyConnector href="RobotCognitionComponents.repository#_1dme4NDSEeqWne3bdagE9g"/>
-    <requiredRole_AssemblyConnector href="RobotCognitionComponents.repository#_YLPbYOBlEeq7Govxf64fxQ"/>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_dxDS0PJ4EeqofrndBLNacw" entityName="newAssemblyConnector" requiringAssemblyContext_AssemblyConnector="_yM83YNDbEeqWne3bdagE9g" providingAssemblyContext_AssemblyConnector="_IROnAN36Eeq3EYM7_fX0uw">
+    <providedRole_AssemblyConnector href="RobotCognitionComponents.repository#_T3tEkPJ3EeqofrndBLNacw"/>
+    <requiredRole_AssemblyConnector href="RobotCognitionComponents.repository#_xiZL0PJ3EeqofrndBLNacw"/>
   </connectors__ComposedStructure>
   <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_EPVewNDcEeqWne3bdagE9g" entityName="CognitionProcessProvidedRole">
     <providedInterface__OperationProvidedRole href="RobotCognitionComponents.repository#_fZ1SQNC9EeqWne3bdagE9g"/>

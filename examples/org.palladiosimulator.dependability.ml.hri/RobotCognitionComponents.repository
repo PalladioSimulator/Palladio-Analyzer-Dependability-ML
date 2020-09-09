@@ -3,10 +3,11 @@
   <components__Repository xsi:type="repository:BasicComponent" id="_zbDDANCrEeqWne3bdagE9g" entityName="Camera">
     <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_bNyLwNDBEeqWne3bdagE9g" entityName="Camera.CognitionProcess.Provider" providedInterface__OperationProvidedRole="_fZ1SQNC9EeqWne3bdagE9g"/>
     <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_9GRicNC8EeqWne3bdagE9g" entityName="Camera.ImageEvent.ImgProducer" eventGroup__SourceRole="_EQCsYNC7EeqWne3bdagE9g"/>
+    <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_xiZL0PJ3EeqofrndBLNacw" entityName="Camera.PreProcessing.OperationRequiredRole" requiredInterface__OperationRequiredRole="_Z7xVQPJ2EeqofrndBLNacw"/>
     <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_bOHi8NDBEeqWne3bdagE9g" describedService__SEFF="_J_c3gNDBEeqWne3bdagE9g">
       <steps_Behaviour xsi:type="seff:StartAction" id="_bOIKANDBEeqWne3bdagE9g" successor_AbstractAction="_e7KpMNDREeqWne3bdagE9g"/>
       <steps_Behaviour xsi:type="seff:StopAction" id="_bOIKAdDBEeqWne3bdagE9g" predecessor_AbstractAction="_1Wg04NDREeqWne3bdagE9g"/>
-      <steps_Behaviour xsi:type="seff:InternalAction" id="_e7KpMNDREeqWne3bdagE9g" entityName="ComputeImgBrightness" predecessor_AbstractAction="_bOIKANDBEeqWne3bdagE9g" successor_AbstractAction="_1Wg04NDREeqWne3bdagE9g">
+      <steps_Behaviour xsi:type="seff:InternalAction" id="_e7KpMNDREeqWne3bdagE9g" entityName="ComputeImgBrightness" predecessor_AbstractAction="_bOIKANDBEeqWne3bdagE9g" successor_AbstractAction="_Gk6jYPJ4EeqofrndBLNacw">
         <resourceDemand_Action>
           <specification_ParametericResourceDemand specification="1"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
@@ -15,7 +16,7 @@
           <softwareInducedFailureType__InternalFailureOccurrenceDescription href="pathmap://PCM_MODELS/FailureTypes.repository#_sLBREFf0EeW5Q6z-Ts8kIg"/>
         </internalFailureOccurrenceDescriptions__InternalAction>
       </steps_Behaviour>
-      <steps_Behaviour xsi:type="seff:EmitEventAction" id="_1Wg04NDREeqWne3bdagE9g" entityName="PublishPerceivedImageMsg" predecessor_AbstractAction="_e7KpMNDREeqWne3bdagE9g" successor_AbstractAction="_bOIKAdDBEeqWne3bdagE9g" eventType__EmitEventAction="_NrhIUNC7EeqWne3bdagE9g" sourceRole__EmitEventAction="_9GRicNC8EeqWne3bdagE9g">
+      <steps_Behaviour xsi:type="seff:EmitEventAction" id="_1Wg04NDREeqWne3bdagE9g" entityName="PublishPerceivedImageMsg" predecessor_AbstractAction="_Gk6jYPJ4EeqofrndBLNacw" successor_AbstractAction="_bOIKAdDBEeqWne3bdagE9g" eventType__EmitEventAction="_NrhIUNC7EeqWne3bdagE9g" sourceRole__EmitEventAction="_9GRicNC8EeqWne3bdagE9g">
         <inputVariableUsages__CallAction>
           <variableCharacterisation_VariableUsage type="VALUE">
             <specification_VariableCharacterisation specification="1"/>
@@ -23,6 +24,7 @@
           <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="img"/>
         </inputVariableUsages__CallAction>
       </steps_Behaviour>
+      <steps_Behaviour xsi:type="seff:ExternalCallAction" id="_Gk6jYPJ4EeqofrndBLNacw" entityName="ExternalCallAction1" predecessor_AbstractAction="_e7KpMNDREeqWne3bdagE9g" successor_AbstractAction="_1Wg04NDREeqWne3bdagE9g" calledService_ExternalService="_xr1RIPJ2EeqofrndBLNacw" role_ExternalService="_xiZL0PJ3EeqofrndBLNacw"/>
     </serviceEffectSpecifications__BasicComponent>
   </components__Repository>
   <components__Repository xsi:type="repository:BasicComponent" id="_hnWaENC6EeqWne3bdagE9g" entityName="ObjectDetection">
@@ -124,14 +126,13 @@
     </serviceEffectSpecifications__BasicComponent>
   </components__Repository>
   <components__Repository xsi:type="repository:BasicComponent" id="_HIn1oN35Eeq3EYM7_fX0uw" entityName="ImagePreprocessing">
-    <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_gdnH8N35Eeq3EYM7_fX0uw" entityName="ImagePreprocessing.ObjectClassification.OperationProvidedRole" providedInterface__OperationProvidedRole="_flBpENDSEeqWne3bdagE9g"/>
-    <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_cQNTYN35Eeq3EYM7_fX0uw" entityName="ImagePreprocessing.ObjectClassification.OperationRequiredRole" requiredInterface__OperationRequiredRole="_flBpENDSEeqWne3bdagE9g"/>
-    <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_geGQIN35Eeq3EYM7_fX0uw" describedService__SEFF="_n_abcNDSEeqWne3bdagE9g">
-      <steps_Behaviour xsi:type="seff:StartAction" id="_geGQId35Eeq3EYM7_fX0uw" successor_AbstractAction="_rO7VcN35Eeq3EYM7_fX0uw"/>
-      <steps_Behaviour xsi:type="seff:StopAction" id="_geG3MN35Eeq3EYM7_fX0uw" predecessor_AbstractAction="_rO7VcN35Eeq3EYM7_fX0uw"/>
-      <steps_Behaviour xsi:type="seff:InternalAction" id="_rO7VcN35Eeq3EYM7_fX0uw" entityName="PreprocessImage" predecessor_AbstractAction="_geGQId35Eeq3EYM7_fX0uw" successor_AbstractAction="_geG3MN35Eeq3EYM7_fX0uw">
+    <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_P7lNQPJ3EeqofrndBLNacw" entityName="ImagePreprocessing.PreProcessing.OperationProvidedRole" providedInterface__OperationProvidedRole="_Z7xVQPJ2EeqofrndBLNacw"/>
+    <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_P72TAPJ3EeqofrndBLNacw" describedService__SEFF="_xr1RIPJ2EeqofrndBLNacw">
+      <steps_Behaviour xsi:type="seff:StartAction" id="_P72TAfJ3EeqofrndBLNacw" successor_AbstractAction="_biHLgPJ3EeqofrndBLNacw"/>
+      <steps_Behaviour xsi:type="seff:StopAction" id="_P72TAvJ3EeqofrndBLNacw" predecessor_AbstractAction="_biHLgPJ3EeqofrndBLNacw"/>
+      <steps_Behaviour xsi:type="seff:InternalAction" id="_biHLgPJ3EeqofrndBLNacw" entityName="PreProcess" predecessor_AbstractAction="_P72TAfJ3EeqofrndBLNacw" successor_AbstractAction="_P72TAvJ3EeqofrndBLNacw">
         <resourceDemand_Action>
-          <specification_ParametericResourceDemand specification="15"/>
+          <specification_ParametericResourceDemand specification="20"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
         <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01">
@@ -141,20 +142,10 @@
     </serviceEffectSpecifications__BasicComponent>
   </components__Repository>
   <components__Repository xsi:type="repository:BasicComponent" id="_EcqX8OBlEeq7Govxf64fxQ" entityName="PassThroughComponent">
-    <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_fAwhsOBlEeq7Govxf64fxQ" entityName="PassThroughComponent.ObjectClassification.OperationProvidedRole" providedInterface__OperationProvidedRole="_flBpENDSEeqWne3bdagE9g"/>
-    <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_YLPbYOBlEeq7Govxf64fxQ" entityName="PassThroughComponent.ObjectClassification.OperationRequiredRole" requiredInterface__OperationRequiredRole="_flBpENDSEeqWne3bdagE9g"/>
-    <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_fBIVIOBlEeq7Govxf64fxQ" describedService__SEFF="_n_abcNDSEeqWne3bdagE9g">
-      <steps_Behaviour xsi:type="seff:StartAction" id="_fBI8MOBlEeq7Govxf64fxQ" successor_AbstractAction="_ltKvUOBlEeq7Govxf64fxQ"/>
-      <steps_Behaviour xsi:type="seff:StopAction" id="_fBI8MeBlEeq7Govxf64fxQ" predecessor_AbstractAction="_ltKvUOBlEeq7Govxf64fxQ"/>
-      <steps_Behaviour xsi:type="seff:InternalAction" id="_ltKvUOBlEeq7Govxf64fxQ" entityName="PassThrough" predecessor_AbstractAction="_fBI8MOBlEeq7Govxf64fxQ" successor_AbstractAction="_fBI8MeBlEeq7Govxf64fxQ">
-        <resourceDemand_Action>
-          <specification_ParametericResourceDemand specification="0"/>
-          <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
-        </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction>
-          <softwareInducedFailureType__InternalFailureOccurrenceDescription href="pathmap://PCM_MODELS/FailureTypes.repository#_sLBREFf0EeW5Q6z-Ts8kIg"/>
-        </internalFailureOccurrenceDescriptions__InternalAction>
-      </steps_Behaviour>
+    <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_T3tEkPJ3EeqofrndBLNacw" entityName="PassThroughComponent.PreProcessing.OperationProvidedRole" providedInterface__OperationProvidedRole="_Z7xVQPJ2EeqofrndBLNacw"/>
+    <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_T3uSsPJ3EeqofrndBLNacw" describedService__SEFF="_xr1RIPJ2EeqofrndBLNacw">
+      <steps_Behaviour xsi:type="seff:StartAction" id="_T3u5wPJ3EeqofrndBLNacw" successor_AbstractAction="_T3u5wfJ3EeqofrndBLNacw"/>
+      <steps_Behaviour xsi:type="seff:StopAction" id="_T3u5wfJ3EeqofrndBLNacw" predecessor_AbstractAction="_T3u5wPJ3EeqofrndBLNacw"/>
     </serviceEffectSpecifications__BasicComponent>
   </components__Repository>
   <components__Repository xsi:type="repository:BasicComponent" id="_hDRrsOBoEeq7Govxf64fxQ" entityName="RobustObjectClassifier">
@@ -201,6 +192,11 @@
   <interfaces__Repository xsi:type="repository:OperationInterface" id="_flBpENDSEeqWne3bdagE9g" entityName="ObjectClassification">
     <signatures__OperationInterface id="_n_abcNDSEeqWne3bdagE9g" entityName="classify" returnType__OperationSignature="__pawcNDDEeqWne3bdagE9g">
       <parameters__OperationSignature dataType__Parameter="_w-QdMNC7EeqWne3bdagE9g" parameterName="img" modifier__Parameter="in"/>
+    </signatures__OperationInterface>
+  </interfaces__Repository>
+  <interfaces__Repository xsi:type="repository:OperationInterface" id="_Z7xVQPJ2EeqofrndBLNacw" entityName="PreProcessing">
+    <signatures__OperationInterface id="_xr1RIPJ2EeqofrndBLNacw" entityName="apply" returnType__OperationSignature="_sTRIMNDQEeqWne3bdagE9g">
+      <parameters__OperationSignature dataType__Parameter="_sTRIMNDQEeqWne3bdagE9g" parameterName="img" modifier__Parameter="inout"/>
     </signatures__OperationInterface>
   </interfaces__Repository>
   <failureTypes__Repository xsi:type="reliability:SoftwareInducedFailureType" id="_ZkNuedDYEeqWne3bdagE9g" entityName="ImageClassificationPredictionFailure" internalFailureOccurrenceDescriptions__SoftwareInducedFailureType="//@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0"/>

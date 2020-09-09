@@ -27,7 +27,7 @@ transformation SwitchToRobustMLModel(inout pcmSystem : PCM_SYS, in pcmRepo : PCM
 							
 	property mlModelAssemblyId : String = "_vH-OANDcEeqWne3bdagE9g";
 	property robustMlModelComponentId : String = "_hDRrsOBoEeq7Govxf64fxQ";
-	property mlAssemblyConnectorId : String = "_XHpwEOBoEeq7Govxf64fxQ";
+	property mlAssemblyConnectorId : String = "_WLAugPJ4EeqofrndBLNacw";
 
 	/**
 	 * The main transformation.
