@@ -11,6 +11,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
+import org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
 
 /**
@@ -92,7 +93,9 @@ public class ActiveComponentPreconditionItemProvider extends ArchitecturalPrecon
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_ActiveComponentPrecondition_type");
+		String label = ((ActiveComponentPrecondition) object).getEntityName();
+		return label == null || label.length() == 0 ? getString("_UI_ActiveComponentPrecondition_type")
+				: getString("_UI_ActiveComponentPrecondition_type") + " " + label;
 	}
 
 	/**

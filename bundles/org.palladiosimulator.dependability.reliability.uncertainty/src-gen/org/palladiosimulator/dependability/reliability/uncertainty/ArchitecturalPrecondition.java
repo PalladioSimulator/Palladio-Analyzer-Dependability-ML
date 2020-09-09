@@ -2,7 +2,7 @@
  */
 package org.palladiosimulator.dependability.reliability.uncertainty;
 
-import org.eclipse.emf.ecore.EObject;
+import tools.mdsd.modelingfoundations.identifier.Entity;
 
 /**
  * <!-- begin-user-doc -->
@@ -14,5 +14,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface ArchitecturalPrecondition extends EObject {
+public interface ArchitecturalPrecondition extends Entity {
 } // ArchitecturalPrecondition

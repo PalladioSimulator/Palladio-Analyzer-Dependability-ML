@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="uncertainty" nsURI="http://palladiosimulator.org/Uncertainty/1.0"
     nsPrefix="uncertainty">
-  <eClassifiers xsi:type="ecore:EClass" name="UncertaintyInducedFailureType">
+  <eClassifiers xsi:type="ecore:EClass" name="UncertaintyInducedFailureType" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="refines" lowerBound="1"
         eType="ecore:EClass ../../org.palladiosimulator.pcm/model/pcm.ecore#//reliability/FailureType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="uncertaintyModel" lowerBound="1"
@@ -27,7 +27,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="uncertaintyImprovement"
         lowerBound="1" eType="#//UncertaintyImprovement" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArchitecturalPrecondition" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArchitecturalPrecondition" abstract="true"
+      eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
   <eClassifiers xsi:type="ecore:EClass" name="ActiveComponentPrecondition" eSuperTypes="#//ArchitecturalPrecondition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiredActiveComponent"
         lowerBound="1" eType="ecore:EClass ../../org.palladiosimulator.pcm/model/pcm.ecore#//repository/BasicComponent"/>

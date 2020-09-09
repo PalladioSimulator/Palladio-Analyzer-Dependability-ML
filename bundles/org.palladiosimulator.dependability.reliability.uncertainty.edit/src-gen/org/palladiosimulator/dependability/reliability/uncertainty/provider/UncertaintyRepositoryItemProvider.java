@@ -114,7 +114,7 @@ public class UncertaintyRepositoryItemProvider extends EntityItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((UncertaintyRepository) object).getId();
+		String label = ((UncertaintyRepository) object).getEntityName();
 		return label == null || label.length() == 0 ? getString("_UI_UncertaintyRepository_type")
 				: getString("_UI_UncertaintyRepository_type") + " " + label;
 	}

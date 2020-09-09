@@ -148,7 +148,7 @@ public class ArchitecturalCountermeasureItemProvider extends EntityItemProvider 
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ArchitecturalCountermeasure) object).getId();
+		String label = ((ArchitecturalCountermeasure) object).getEntityName();
 		return label == null || label.length() == 0 ? getString("_UI_ArchitecturalCountermeasure_type")
 				: getString("_UI_ArchitecturalCountermeasure_type") + " " + label;
 	}

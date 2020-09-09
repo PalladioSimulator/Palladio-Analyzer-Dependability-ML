@@ -12,24 +12,24 @@
   <foreignModel>uncertainty.ecore</foreignModel>
   <genPackages prefix="Uncertainty" basePackage="org.palladiosimulator.dependability.reliability"
       disposableProviderFactory="true" ecorePackage="uncertainty.ecore#/">
-    <genClasses ecoreClass="uncertainty.ecore#//UncertaintyInducedFailureType">
+    <genClasses ecoreClass="uncertainty.ecore#//UncertaintyInducedFailureType" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyInducedFailureType/refines"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyInducedFailureType/uncertaintyModel"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyInducedFailureType/failureVariable"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyInducedFailureType/architecturalPreconditions"/>
     </genClasses>
-    <genClasses ecoreClass="uncertainty.ecore#//UncertaintyRepository">
+    <genClasses ecoreClass="uncertainty.ecore#//UncertaintyRepository" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyRepository/uncertaintyInducedFailureTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyRepository/architecturalCountermeasures"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyRepository/architecturalPreconditions"/>
     </genClasses>
-    <genClasses ecoreClass="uncertainty.ecore#//ArchitecturalCountermeasure">
+    <genClasses ecoreClass="uncertainty.ecore#//ArchitecturalCountermeasure" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//ArchitecturalCountermeasure/architecturalPreconditions"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//ArchitecturalCountermeasure/targetUncertainty"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uncertainty.ecore#//ArchitecturalCountermeasure/uncertaintyImprovement"/>
     </genClasses>
-    <genClasses ecoreClass="uncertainty.ecore#//ArchitecturalPrecondition"/>
-    <genClasses ecoreClass="uncertainty.ecore#//ActiveComponentPrecondition">
+    <genClasses ecoreClass="uncertainty.ecore#//ArchitecturalPrecondition" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName"/>
+    <genClasses ecoreClass="uncertainty.ecore#//ActiveComponentPrecondition" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//ActiveComponentPrecondition/requiredActiveComponent"/>
     </genClasses>
     <genClasses ecoreClass="uncertainty.ecore#//UncertaintyImprovement"/>

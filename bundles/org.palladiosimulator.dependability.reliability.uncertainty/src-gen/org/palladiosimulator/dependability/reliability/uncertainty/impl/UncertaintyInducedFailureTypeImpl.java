@@ -11,8 +11,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
@@ -22,6 +20,7 @@ import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticN
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
 
 import org.palladiosimulator.pcm.reliability.FailureType;
+import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,8 +38,7 @@ import org.palladiosimulator.pcm.reliability.FailureType;
  *
  * @generated
  */
-public class UncertaintyInducedFailureTypeImpl extends MinimalEObjectImpl.Container
-		implements UncertaintyInducedFailureType {
+public class UncertaintyInducedFailureTypeImpl extends EntityImpl implements UncertaintyInducedFailureType {
 	/**
 	 * The cached value of the '{@link #getRefines() <em>Refines</em>}' reference.
 	 * <!-- begin-user-doc -->

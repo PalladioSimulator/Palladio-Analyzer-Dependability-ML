@@ -3,11 +3,9 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
+import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,8 +14,7 @@ import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPa
  *
  * @generated
  */
-public abstract class ArchitecturalPreconditionImpl extends MinimalEObjectImpl.Container
-		implements ArchitecturalPrecondition {
+public abstract class ArchitecturalPreconditionImpl extends EntityImpl implements ArchitecturalPrecondition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -70,13 +70,31 @@ public interface UncertaintyPackage extends EPackage {
 	int UNCERTAINTY_INDUCED_FAILURE_TYPE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_INDUCED_FAILURE_TYPE__ID = IdentifierPackage.ENTITY__ID;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_INDUCED_FAILURE_TYPE__ENTITY_NAME = IdentifierPackage.ENTITY__ENTITY_NAME;
+
+	/**
 	 * The feature id for the '<em><b>Refines</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES = 0;
+	int UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES = IdentifierPackage.ENTITY_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Uncertainty Model</b></em>' reference.
@@ -85,7 +103,7 @@ public interface UncertaintyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNCERTAINTY_INDUCED_FAILURE_TYPE__UNCERTAINTY_MODEL = 1;
+	int UNCERTAINTY_INDUCED_FAILURE_TYPE__UNCERTAINTY_MODEL = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Failure Variable</b></em>' reference.
@@ -94,7 +112,7 @@ public interface UncertaintyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNCERTAINTY_INDUCED_FAILURE_TYPE__FAILURE_VARIABLE = 2;
+	int UNCERTAINTY_INDUCED_FAILURE_TYPE__FAILURE_VARIABLE = IdentifierPackage.ENTITY_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Architectural Preconditions</b></em>' reference list.
@@ -103,7 +121,7 @@ public interface UncertaintyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNCERTAINTY_INDUCED_FAILURE_TYPE__ARCHITECTURAL_PRECONDITIONS = 3;
+	int UNCERTAINTY_INDUCED_FAILURE_TYPE__ARCHITECTURAL_PRECONDITIONS = IdentifierPackage.ENTITY_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Induced Failure Type</em>' class.
@@ -112,7 +130,7 @@ public interface UncertaintyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNCERTAINTY_INDUCED_FAILURE_TYPE_FEATURE_COUNT = 4;
+	int UNCERTAINTY_INDUCED_FAILURE_TYPE_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Induced Failure Type</em>' class.
@@ -121,7 +139,7 @@ public interface UncertaintyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNCERTAINTY_INDUCED_FAILURE_TYPE_OPERATION_COUNT = 0;
+	int UNCERTAINTY_INDUCED_FAILURE_TYPE_OPERATION_COUNT = IdentifierPackage.ENTITY_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyRepositoryImpl <em>Repository</em>}' class.
@@ -280,13 +298,31 @@ public interface UncertaintyPackage extends EPackage {
 	int ARCHITECTURAL_PRECONDITION = 3;
 
 	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURAL_PRECONDITION__ID = IdentifierPackage.ENTITY__ID;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARCHITECTURAL_PRECONDITION__ENTITY_NAME = IdentifierPackage.ENTITY__ENTITY_NAME;
+
+	/**
 	 * The number of structural features of the '<em>Architectural Precondition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARCHITECTURAL_PRECONDITION_FEATURE_COUNT = 0;
+	int ARCHITECTURAL_PRECONDITION_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Architectural Precondition</em>' class.
@@ -295,7 +331,7 @@ public interface UncertaintyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARCHITECTURAL_PRECONDITION_OPERATION_COUNT = 0;
+	int ARCHITECTURAL_PRECONDITION_OPERATION_COUNT = IdentifierPackage.ENTITY_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.ActiveComponentPreconditionImpl <em>Active Component Precondition</em>}' class.
@@ -306,6 +342,24 @@ public interface UncertaintyPackage extends EPackage {
 	 * @generated
 	 */
 	int ACTIVE_COMPONENT_PRECONDITION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTIVE_COMPONENT_PRECONDITION__ID = ARCHITECTURAL_PRECONDITION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTIVE_COMPONENT_PRECONDITION__ENTITY_NAME = ARCHITECTURAL_PRECONDITION__ENTITY_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Required Active Component</b></em>' reference.

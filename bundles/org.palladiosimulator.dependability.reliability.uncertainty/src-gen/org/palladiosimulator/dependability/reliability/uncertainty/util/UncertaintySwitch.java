@@ -74,6 +74,12 @@ public class UncertaintySwitch<T> extends Switch<T> {
 			UncertaintyInducedFailureType uncertaintyInducedFailureType = (UncertaintyInducedFailureType) theEObject;
 			T result = caseUncertaintyInducedFailureType(uncertaintyInducedFailureType);
 			if (result == null)
+				result = caseEntity(uncertaintyInducedFailureType);
+			if (result == null)
+				result = caseIdentifier(uncertaintyInducedFailureType);
+			if (result == null)
+				result = caseNamedElement(uncertaintyInducedFailureType);
+			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
@@ -107,6 +113,12 @@ public class UncertaintySwitch<T> extends Switch<T> {
 			ArchitecturalPrecondition architecturalPrecondition = (ArchitecturalPrecondition) theEObject;
 			T result = caseArchitecturalPrecondition(architecturalPrecondition);
 			if (result == null)
+				result = caseEntity(architecturalPrecondition);
+			if (result == null)
+				result = caseIdentifier(architecturalPrecondition);
+			if (result == null)
+				result = caseNamedElement(architecturalPrecondition);
+			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
@@ -115,6 +127,12 @@ public class UncertaintySwitch<T> extends Switch<T> {
 			T result = caseActiveComponentPrecondition(activeComponentPrecondition);
 			if (result == null)
 				result = caseArchitecturalPrecondition(activeComponentPrecondition);
+			if (result == null)
+				result = caseEntity(activeComponentPrecondition);
+			if (result == null)
+				result = caseIdentifier(activeComponentPrecondition);
+			if (result == null)
+				result = caseNamedElement(activeComponentPrecondition);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;

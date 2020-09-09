@@ -3,12 +3,11 @@
 package org.palladiosimulator.dependability.reliability.uncertainty;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticNetwork;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
 
 import org.palladiosimulator.pcm.reliability.FailureType;
+import tools.mdsd.modelingfoundations.identifier.Entity;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +28,7 @@ import org.palladiosimulator.pcm.reliability.FailureType;
  * @model
  * @generated
  */
-public interface UncertaintyInducedFailureType extends EObject {
+public interface UncertaintyInducedFailureType extends Entity {
 	/**
 	 * Returns the value of the '<em><b>Refines</b></em>' reference.
 	 * <!-- begin-user-doc -->

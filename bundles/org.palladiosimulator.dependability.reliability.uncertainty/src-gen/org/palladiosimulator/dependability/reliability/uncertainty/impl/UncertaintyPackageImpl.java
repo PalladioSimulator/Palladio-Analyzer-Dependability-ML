@@ -524,12 +524,12 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
+		tools.mdsd.modelingfoundations.identifier.IdentifierPackage theIdentifierPackage_1 = (tools.mdsd.modelingfoundations.identifier.IdentifierPackage) EPackage.Registry.INSTANCE
+				.getEPackage(tools.mdsd.modelingfoundations.identifier.IdentifierPackage.eNS_URI);
 		ReliabilityPackage theReliabilityPackage = (ReliabilityPackage) EPackage.Registry.INSTANCE
 				.getEPackage(ReliabilityPackage.eNS_URI);
 		StaticmodelPackage theStaticmodelPackage = (StaticmodelPackage) EPackage.Registry.INSTANCE
 				.getEPackage(StaticmodelPackage.eNS_URI);
-		tools.mdsd.modelingfoundations.identifier.IdentifierPackage theIdentifierPackage_1 = (tools.mdsd.modelingfoundations.identifier.IdentifierPackage) EPackage.Registry.INSTANCE
-				.getEPackage(tools.mdsd.modelingfoundations.identifier.IdentifierPackage.eNS_URI);
 		RepositoryPackage theRepositoryPackage = (RepositoryPackage) EPackage.Registry.INSTANCE
 				.getEPackage(RepositoryPackage.eNS_URI);
 		DistributionfunctionPackage theDistributionfunctionPackage = (DistributionfunctionPackage) EPackage.Registry.INSTANCE
@@ -541,8 +541,10 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		uncertaintyInducedFailureTypeEClass.getESuperTypes().add(theIdentifierPackage_1.getEntity());
 		uncertaintyRepositoryEClass.getESuperTypes().add(theIdentifierPackage_1.getEntity());
 		architecturalCountermeasureEClass.getESuperTypes().add(theIdentifierPackage_1.getEntity());
+		architecturalPreconditionEClass.getESuperTypes().add(theIdentifierPackage_1.getEntity());
 		activeComponentPreconditionEClass.getESuperTypes().add(this.getArchitecturalPrecondition());
 		deterministicImprovementEClass.getESuperTypes().add(this.getUncertaintyImprovement());
 		probabilisticImprovementEClass.getESuperTypes().add(this.getUncertaintyImprovement());
