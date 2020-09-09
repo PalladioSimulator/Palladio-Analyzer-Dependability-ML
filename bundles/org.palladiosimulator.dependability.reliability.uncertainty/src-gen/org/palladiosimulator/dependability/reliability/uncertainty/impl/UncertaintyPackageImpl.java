@@ -240,6 +240,16 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 	 * @generated
 	 */
 	@Override
+	public EReference getUncertaintyInducedFailureType_ArchitecturalPreconditions() {
+		return (EReference) uncertaintyInducedFailureTypeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getUncertaintyRepository() {
 		return uncertaintyRepositoryEClass;
 	}
@@ -458,6 +468,8 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 		createEReference(uncertaintyInducedFailureTypeEClass, UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES);
 		createEReference(uncertaintyInducedFailureTypeEClass, UNCERTAINTY_INDUCED_FAILURE_TYPE__UNCERTAINTY_MODEL);
 		createEReference(uncertaintyInducedFailureTypeEClass, UNCERTAINTY_INDUCED_FAILURE_TYPE__FAILURE_VARIABLE);
+		createEReference(uncertaintyInducedFailureTypeEClass,
+				UNCERTAINTY_INDUCED_FAILURE_TYPE__ARCHITECTURAL_PRECONDITIONS);
 
 		uncertaintyRepositoryEClass = createEClass(UNCERTAINTY_REPOSITORY);
 		createEReference(uncertaintyRepositoryEClass, UNCERTAINTY_REPOSITORY__UNCERTAINTY_INDUCED_FAILURE_TYPES);
@@ -547,6 +559,10 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUncertaintyInducedFailureType_FailureVariable(),
 				theStaticmodelPackage.getGroundRandomVariable(), null, "failureVariable", null, 0, 1,
+				UncertaintyInducedFailureType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUncertaintyInducedFailureType_ArchitecturalPreconditions(),
+				this.getArchitecturalPrecondition(), null, "architecturalPreconditions", null, 0, -1,
 				UncertaintyInducedFailureType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

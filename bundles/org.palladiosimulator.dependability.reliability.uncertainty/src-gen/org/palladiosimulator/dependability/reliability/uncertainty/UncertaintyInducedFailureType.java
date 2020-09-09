@@ -2,6 +2,7 @@
  */
 package org.palladiosimulator.dependability.reliability.uncertainty;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticNetwork;
@@ -21,6 +22,7 @@ import org.palladiosimulator.pcm.reliability.FailureType;
  *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getRefines <em>Refines</em>}</li>
  *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getUncertaintyModel <em>Uncertainty Model</em>}</li>
  *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getFailureVariable <em>Failure Variable</em>}</li>
+ *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getArchitecturalPreconditions <em>Architectural Preconditions</em>}</li>
  * </ul>
  *
  * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage#getUncertaintyInducedFailureType()
@@ -93,5 +95,17 @@ public interface UncertaintyInducedFailureType extends EObject {
 	 * @generated
 	 */
 	void setFailureVariable(GroundRandomVariable value);
+
+	/**
+	 * Returns the value of the '<em><b>Architectural Preconditions</b></em>' reference list.
+	 * The list contents are of type {@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Architectural Preconditions</em>' reference list.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage#getUncertaintyInducedFailureType_ArchitecturalPreconditions()
+	 * @model
+	 * @generated
+	 */
+	EList<ArchitecturalPrecondition> getArchitecturalPreconditions();
 
 } // UncertaintyInducedFailureType

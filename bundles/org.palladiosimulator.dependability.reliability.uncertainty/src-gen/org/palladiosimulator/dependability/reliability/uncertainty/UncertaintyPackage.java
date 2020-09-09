@@ -97,13 +97,22 @@ public interface UncertaintyPackage extends EPackage {
 	int UNCERTAINTY_INDUCED_FAILURE_TYPE__FAILURE_VARIABLE = 2;
 
 	/**
+	 * The feature id for the '<em><b>Architectural Preconditions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_INDUCED_FAILURE_TYPE__ARCHITECTURAL_PRECONDITIONS = 3;
+
+	/**
 	 * The number of structural features of the '<em>Induced Failure Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNCERTAINTY_INDUCED_FAILURE_TYPE_FEATURE_COUNT = 3;
+	int UNCERTAINTY_INDUCED_FAILURE_TYPE_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Induced Failure Type</em>' class.
@@ -517,6 +526,17 @@ public interface UncertaintyPackage extends EPackage {
 	EReference getUncertaintyInducedFailureType_FailureVariable();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getArchitecturalPreconditions <em>Architectural Preconditions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Architectural Preconditions</em>'.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getArchitecturalPreconditions()
+	 * @see #getUncertaintyInducedFailureType()
+	 * @generated
+	 */
+	EReference getUncertaintyInducedFailureType_ArchitecturalPreconditions();
+
+	/**
 	 * Returns the meta object for class '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository <em>Repository</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -775,6 +795,15 @@ public interface UncertaintyPackage extends EPackage {
 		 */
 		EReference UNCERTAINTY_INDUCED_FAILURE_TYPE__FAILURE_VARIABLE = eINSTANCE
 				.getUncertaintyInducedFailureType_FailureVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Architectural Preconditions</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNCERTAINTY_INDUCED_FAILURE_TYPE__ARCHITECTURAL_PRECONDITIONS = eINSTANCE
+				.getUncertaintyInducedFailureType_ArchitecturalPreconditions();
 
 		/**
 		 * The meta object literal for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyRepositoryImpl <em>Repository</em>}' class.

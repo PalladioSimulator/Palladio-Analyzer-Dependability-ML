@@ -2,8 +2,10 @@
  */
 package org.palladiosimulator.dependability.reliability.uncertainty.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -11,6 +13,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
 
@@ -30,6 +34,7 @@ import org.palladiosimulator.pcm.reliability.FailureType;
  *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyInducedFailureTypeImpl#getRefines <em>Refines</em>}</li>
  *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyInducedFailureTypeImpl#getUncertaintyModel <em>Uncertainty Model</em>}</li>
  *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyInducedFailureTypeImpl#getFailureVariable <em>Failure Variable</em>}</li>
+ *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyInducedFailureTypeImpl#getArchitecturalPreconditions <em>Architectural Preconditions</em>}</li>
  * </ul>
  *
  * @generated
@@ -65,6 +70,16 @@ public class UncertaintyInducedFailureTypeImpl extends MinimalEObjectImpl.Contai
 	 * @ordered
 	 */
 	protected GroundRandomVariable failureVariable;
+
+	/**
+	 * The cached value of the '{@link #getArchitecturalPreconditions() <em>Architectural Preconditions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArchitecturalPreconditions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ArchitecturalPrecondition> architecturalPreconditions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -221,6 +236,21 @@ public class UncertaintyInducedFailureTypeImpl extends MinimalEObjectImpl.Contai
 	 * @generated
 	 */
 	@Override
+	public EList<ArchitecturalPrecondition> getArchitecturalPreconditions() {
+		if (architecturalPreconditions == null) {
+			architecturalPreconditions = new EObjectResolvingEList<ArchitecturalPrecondition>(
+					ArchitecturalPrecondition.class, this,
+					UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__ARCHITECTURAL_PRECONDITIONS);
+		}
+		return architecturalPreconditions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES:
@@ -235,6 +265,8 @@ public class UncertaintyInducedFailureTypeImpl extends MinimalEObjectImpl.Contai
 			if (resolve)
 				return getFailureVariable();
 			return basicGetFailureVariable();
+		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__ARCHITECTURAL_PRECONDITIONS:
+			return getArchitecturalPreconditions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -244,6 +276,7 @@ public class UncertaintyInducedFailureTypeImpl extends MinimalEObjectImpl.Contai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -255,6 +288,10 @@ public class UncertaintyInducedFailureTypeImpl extends MinimalEObjectImpl.Contai
 			return;
 		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__FAILURE_VARIABLE:
 			setFailureVariable((GroundRandomVariable) newValue);
+			return;
+		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__ARCHITECTURAL_PRECONDITIONS:
+			getArchitecturalPreconditions().clear();
+			getArchitecturalPreconditions().addAll((Collection<? extends ArchitecturalPrecondition>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -277,6 +314,9 @@ public class UncertaintyInducedFailureTypeImpl extends MinimalEObjectImpl.Contai
 		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__FAILURE_VARIABLE:
 			setFailureVariable((GroundRandomVariable) null);
 			return;
+		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__ARCHITECTURAL_PRECONDITIONS:
+			getArchitecturalPreconditions().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -295,6 +335,8 @@ public class UncertaintyInducedFailureTypeImpl extends MinimalEObjectImpl.Contai
 			return uncertaintyModel != null;
 		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__FAILURE_VARIABLE:
 			return failureVariable != null;
+		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__ARCHITECTURAL_PRECONDITIONS:
+			return architecturalPreconditions != null && !architecturalPreconditions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

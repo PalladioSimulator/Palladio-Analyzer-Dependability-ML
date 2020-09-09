@@ -16,6 +16,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyInducedFailureType/refines"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyInducedFailureType/uncertaintyModel"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyInducedFailureType/failureVariable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyInducedFailureType/architecturalPreconditions"/>
     </genClasses>
     <genClasses ecoreClass="uncertainty.ecore#//UncertaintyRepository">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyRepository/uncertaintyInducedFailureTypes"/>

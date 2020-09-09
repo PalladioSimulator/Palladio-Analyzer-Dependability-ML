@@ -1,6 +1,7 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.solver.markov;
 
 import static java.util.stream.Collectors.toList;
+import static org.palladiosimulator.dependability.reliability.uncertainty.solver.util.ArchitecturalPreconditionUtil.allPreconditionsFulfilled;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -135,7 +136,7 @@ public class UncertaintyResolver {
 	public void resolve(UncertaintyInducedFailureType uncertainty, List<UncertaintyState> values) {
 		var probabilityUpdater = new ProbabilityUpdater();
 		for (FailureType each : filterFailureTypes(pcmInstance)) {
-			if (isRefined(each, uncertainty)) {
+			if (isRefined(each, uncertainty) && isActive(uncertainty)) {
 				probabilityUpdater.update(each, computeProbabilityOfFailure(uncertainty, values));
 			}
 		}
@@ -160,6 +161,10 @@ public class UncertaintyResolver {
 				.map(FailureType.class::cast).collect(toList());
 	}
 
+	private boolean isActive(UncertaintyInducedFailureType uncertainty) {
+		return allPreconditionsFulfilled(uncertainty, pcmInstance);
+	}
+	
 	private boolean isRefined(FailureType failureType, UncertaintyInducedFailureType uncertainty) {
 		return areEqual(uncertainty.getRefines(), failureType);
 	}

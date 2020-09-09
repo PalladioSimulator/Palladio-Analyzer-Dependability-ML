@@ -2,16 +2,15 @@ package org.palladiosimulator.dependability.reliability.uncertainty.solver.marko
 
 import static java.util.Objects.nonNull;
 import static java.util.Objects.requireNonNull;
+import static org.palladiosimulator.dependability.reliability.uncertainty.solver.util.ArchitecturalPreconditionUtil.allPreconditionsFulfilled;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure;
-import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository;
 import org.palladiosimulator.dependability.reliability.uncertainty.improvement.UncertaintyImprovementCalculator;
-import org.palladiosimulator.dependability.reliability.uncertainty.precondition.ArchitecturalPreconditionManager;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.UncertaintyModelManager;
 import org.palladiosimulator.reliability.solver.pcm2markov.MarkovTransformationResult;
@@ -139,6 +138,12 @@ public class UncertaintyBasedReliabilityPrediction {
 			stateTuple.add(improvedState);
 		}
 	}
+	
+	private Optional<UncertaintyState> findApplicableState(ArchitecturalCountermeasure countermeasure,
+			List<UncertaintyState> stateTuple) {
+		return stateTuple.stream()
+				.filter(each -> each.getId().equals(countermeasure.getTargetUncertainty().getEntityName())).findFirst();
+	}
 
 	private CategoricalValue applyArchitecturalCountermeasure(ArchitecturalCountermeasure countermeasure,
 			PCMInstance pcmModel, UncertaintyState state) {
@@ -147,25 +152,6 @@ public class UncertaintyBasedReliabilityPrediction {
 			return UncertaintyImprovementCalculator.get().calculate(improvement, state.getValue());
 		}
 		return state.getValue();
-	}
-
-	private boolean allPreconditionsFulfilled(ArchitecturalCountermeasure countermeasure, PCMInstance pcmModel) {
-		for (ArchitecturalPrecondition each : countermeasure.getArchitecturalPreconditions()) {
-			var checker = ArchitecturalPreconditionManager.get().findPreconditionCheckerFor(each);
-			if (checker.isEmpty()) {
-				return false;
-			}
-			if (checker.get().isNotFulfiled(pcmModel, each)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private Optional<UncertaintyState> findApplicableState(ArchitecturalCountermeasure countermeasure,
-			List<UncertaintyState> stateTuple) {
-		return stateTuple.stream()
-				.filter(each -> each.getId().equals(countermeasure.getTargetUncertainty().getEntityName())).findFirst();
 	}
 
 	private PCMInstance resolveUncertainties(PCMInstance modelToResolve, List<UncertaintyState> stateTuple) {
