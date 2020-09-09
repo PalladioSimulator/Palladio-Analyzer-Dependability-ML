@@ -12,6 +12,9 @@
   <distributions xsi:type="distributionfunction:ProbabilityDistribution" id="_nrLDMOBcEeq7Govxf64fxQ" entityName="TemporalImageBrightnessDistribution" params="_vzzXMeBcEeq7Govxf64fxQ">
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
   </distributions>
+  <distributions xsi:type="distributionfunction:ProbabilityDistribution" id="_CuLRoPKUEeqz1MDQAu5L-Q" entityName="RobustMLPredictionSensitivityDistribution" params="_IzTc0fKUEeqz1MDQAu5L-Q">
+    <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
+  </distributions>
   <params id="_a9RjsMqkEeqObY-eK2jOOA" entityName="SensitivityParam">
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
     <representation xsi:type="distributionfunction:SimpleParameter" type="SAMPLESPACE" value="{(ImageBrightnessMeasure:High),0.3};{(ImageBrightnessMeasure:Low),0.3};{(ImageBrightnessMeasure:Medium),0.4}"/>
@@ -64,6 +67,23 @@
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure:Low)</conditonals>
         <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure:High),0};{(ImageBrightnessMeasure:Low),0.4};{(ImageBrightnessMeasure:Medium),0.6}"/>
+      </cpdEntries>
+    </representation>
+  </params>
+  <params id="_IzTc0fKUEeqz1MDQAu5L-Q" entityName="RobustSensitivityParam">
+    <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
+    <representation xsi:type="distributionfunction:TabularCPD">
+      <cpdEntries>
+        <conditonals>(ImageBrightnessMeasure:High)</conditonals>
+        <entry type="SAMPLESPACE" value="{Success,0.85};{Fail,0.15}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightnessMeasure:Low)</conditonals>
+        <entry type="SAMPLESPACE" value="{Success,0.9};{Fail,0.1}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightnessMeasure:Medium)</conditonals>
+        <entry type="SAMPLESPACE" value="{Success,0.9859603066666667};{Fail,0.014039693333333325}"/>
       </cpdEntries>
     </representation>
   </params>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<staticmodel:ProbabilisticModelRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:staticmodel="http://palladiosimulator.org/Environment/StaticModel/1.0" xmlns:templatevariable="http://palladiosimulator.org/Environment/TemplateVariable/1.0" id="_U5ElkMqkEeqObY-eK2jOOA">
+<staticmodel:ProbabilisticModelRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:staticmodel="http://palladiosimulator.org/Environment/StaticModel/1.0" xmlns:templatevariable="http://palladiosimulator.org/Environment/TemplateVariable/1.0" id="_U5ElkMqkEeqObY-eK2jOOA" entityName="ProbabilisticSensitivityModelRepository">
   <models id="_U5FzuMqkEeqObY-eK2jOOA" entityName="MLPredictionSensitivityModel">
     <localModels id="_U5FzusqkEeqObY-eK2jOOA" entityName="MLPredictionSensitivityModel">
       <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="HRITemplateDefinitions.templatevariable#_U5Elk8qkEeqObY-eK2jOOA"/>
@@ -15,6 +15,25 @@
         <dependenceStructure href="HRITemplateDefinitions.templatevariable#//@relation.0"/>
       </groundRandomVariables>
       <groundRandomVariables id="_U5KsMMqkEeqObY-eK2jOOA" entityName="ImageBrightnessMeasureSensitivity" descriptiveModel="_U5KsMcqkEeqObY-eK2jOOA">
+        <instantiatedTemplate href="HRITemplateDefinitions.templatevariable#_U5Fzu8qkEeqObY-eK2jOOA"/>
+      </groundRandomVariables>
+    </localProbabilisticModels>
+  </models>
+  <models id="_oHP9sPKQEeqz1MDQAu5L-Q" entityName="RobustMLPredictionSensitivityModel">
+    <localModels id="_y_AKYPKQEeqz1MDQAu5L-Q" entityName="RobustMLPredictionSensitivityModel">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="HRITemplateDefinitions.templatevariable#_U5Elk8qkEeqObY-eK2jOOA"/>
+      <distribution href="ProbabilityDistributions.distributionfunction#_CuLRoPKUEeqz1MDQAu5L-Q"/>
+    </localModels>
+    <localModels id="_0EyGsPKQEeqz1MDQAu5L-Q" entityName="ImageBrightnessMeasureModel">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="HRITemplateDefinitions.templatevariable#_U5FzvMqkEeqObY-eK2jOOA"/>
+      <distribution href="ProbabilityDistributions.distributionfunction#_a9RjscqkEeqObY-eK2jOOA"/>
+    </localModels>
+    <localProbabilisticModels>
+      <groundRandomVariables id="_EMoCEPKTEeqz1MDQAu5L-Q" entityName="RobustMLPredictionSensitivity" descriptiveModel="_y_AKYPKQEeqz1MDQAu5L-Q">
+        <instantiatedTemplate href="HRITemplateDefinitions.templatevariable#_U5ElksqkEeqObY-eK2jOOA"/>
+        <dependenceStructure href="HRITemplateDefinitions.templatevariable#//@relation.0"/>
+      </groundRandomVariables>
+      <groundRandomVariables id="_EuL3APKTEeqz1MDQAu5L-Q" entityName="ImageBrightnessMeasureSensitivity" descriptiveModel="_0EyGsPKQEeqz1MDQAu5L-Q">
         <instantiatedTemplate href="HRITemplateDefinitions.templatevariable#_U5Fzu8qkEeqObY-eK2jOOA"/>
       </groundRandomVariables>
     </localProbabilisticModels>
