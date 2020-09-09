@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
 <resourceenvironment:ResourceEnvironment xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:resourceenvironment="http://palladiosimulator.org/PalladioComponentModel/ResourceEnvironment/5.2" entityName="RobotCognitionResourceEnvironment">
-  <linkingResources__ResourceEnvironment id="_kjkeUNDgEeqWne3bdagE9g" entityName="LinkingResource" connectedResourceContainers_LinkingResource="_XE0aMNDgEeqWne3bdagE9g _gm0xYNDfEeqWne3bdagE9g">
-    <communicationLinkResourceSpecifications_LinkingResource id="_kjlFYNDgEeqWne3bdagE9g">
-      <communicationLinkResourceType_CommunicationLinkResourceSpecification href="pathmap://PCM_MODELS/Palladio.resourcetype#_o3sScH2AEdyH8uerKnHYug"/>
-      <latency_CommunicationLinkResourceSpecification specification="1"/>
-      <throughput_CommunicationLinkResourceSpecification specification="1"/>
-    </communicationLinkResourceSpecifications_LinkingResource>
-  </linkingResources__ResourceEnvironment>
-  <resourceContainer_ResourceEnvironment id="_gm0xYNDfEeqWne3bdagE9g" entityName="CameraDevice">
-    <activeResourceSpecifications_ResourceContainer id="_jj3xUNDfEeqWne3bdagE9g">
-      <schedulingPolicy href="pathmap://PCM_MODELS/Palladio.resourcetype#ProcessorSharing"/>
-      <activeResourceType_ActiveResourceSpecification href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
-      <processingRate_ProcessingResourceSpecification specification="1"/>
-    </activeResourceSpecifications_ResourceContainer>
-  </resourceContainer_ResourceEnvironment>
   <resourceContainer_ResourceEnvironment id="_XE0aMNDgEeqWne3bdagE9g" entityName="RobotComputationUnit">
     <activeResourceSpecifications_ResourceContainer id="_aVuxUNDgEeqWne3bdagE9g">
       <schedulingPolicy href="pathmap://PCM_MODELS/Palladio.resourcetype#ProcessorSharing"/>

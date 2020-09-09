@@ -51,7 +51,7 @@
       <steps_Behaviour xsi:type="seff:StopAction" id="_CTpIwtDJEeqWne3bdagE9g" predecessor_AbstractAction="_4t4DMNDaEeqWne3bdagE9g"/>
       <steps_Behaviour xsi:type="seff:InternalAction" id="_xIatsNDaEeqWne3bdagE9g" entityName="ComputeTrajectory" predecessor_AbstractAction="_CTpIwdDJEeqWne3bdagE9g" successor_AbstractAction="_4t4DMNDaEeqWne3bdagE9g">
         <resourceDemand_Action>
-          <specification_ParametericResourceDemand specification="70"/>
+          <specification_ParametericResourceDemand specification="65"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
         <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.1" softwareInducedFailureType__InternalFailureOccurrenceDescription="_ZkNuedDYEeqWne3bdagE9g"/>
@@ -73,7 +73,7 @@
       <steps_Behaviour xsi:type="seff:StopAction" id="_kW2vcNDJEeqWne3bdagE9g" predecessor_AbstractAction="_RYI9gNDbEeqWne3bdagE9g"/>
       <steps_Behaviour xsi:type="seff:InternalAction" id="_RYI9gNDbEeqWne3bdagE9g" entityName="TranslateTrajectoryToControlSignals" predecessor_AbstractAction="_kW2IYdDJEeqWne3bdagE9g" successor_AbstractAction="_kW2vcNDJEeqWne3bdagE9g">
         <resourceDemand_Action>
-          <specification_ParametericResourceDemand specification="30"/>
+          <specification_ParametericResourceDemand specification="20"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
         <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01">
@@ -114,7 +114,7 @@
       <steps_Behaviour xsi:type="seff:StopAction" id="_1d-SUtDSEeqWne3bdagE9g" predecessor_AbstractAction="_sFIr8NDYEeqWne3bdagE9g"/>
       <steps_Behaviour xsi:type="seff:InternalAction" id="_sFIr8NDYEeqWne3bdagE9g" entityName="MakePrediction" predecessor_AbstractAction="_1d-SUdDSEeqWne3bdagE9g" successor_AbstractAction="_1d-SUtDSEeqWne3bdagE9g">
         <resourceDemand_Action>
-          <specification_ParametericResourceDemand specification="10"/>
+          <specification_ParametericResourceDemand specification="15"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
         <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01">
@@ -131,7 +131,7 @@
       <steps_Behaviour xsi:type="seff:StopAction" id="_geG3MN35Eeq3EYM7_fX0uw" predecessor_AbstractAction="_rO7VcN35Eeq3EYM7_fX0uw"/>
       <steps_Behaviour xsi:type="seff:InternalAction" id="_rO7VcN35Eeq3EYM7_fX0uw" entityName="PreprocessImage" predecessor_AbstractAction="_geGQId35Eeq3EYM7_fX0uw" successor_AbstractAction="_geG3MN35Eeq3EYM7_fX0uw">
         <resourceDemand_Action>
-          <specification_ParametericResourceDemand specification="5"/>
+          <specification_ParametericResourceDemand specification="15"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
         <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01">
@@ -164,7 +164,7 @@
       <steps_Behaviour xsi:type="seff:StopAction" id="_mA4OIuBoEeq7Govxf64fxQ" predecessor_AbstractAction="_qGKogOBoEeq7Govxf64fxQ"/>
       <steps_Behaviour xsi:type="seff:InternalAction" id="_qGKogOBoEeq7Govxf64fxQ" entityName="MakeRobustPrediction" predecessor_AbstractAction="_mA4OIeBoEeq7Govxf64fxQ" successor_AbstractAction="_mA4OIuBoEeq7Govxf64fxQ">
         <resourceDemand_Action>
-          <specification_ParametericResourceDemand specification="20"/>
+          <specification_ParametericResourceDemand specification="25"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
         <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01">
@@ -232,4 +232,5 @@
   <dataTypes__Repository xsi:type="repository:CollectionDataType" id="_2svVQNEDEeqpS-pqxVgAkw" entityName="BuildSequence">
     <innerType_CollectionDataType xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.0"/>
   </dataTypes__Repository>
+  <dataTypes__Repository xsi:type="repository:CompositeDataType" id="_TJRmoPHaEeqsDYuIs4r3qA" entityName="ControlSignal"/>
 </repository:Repository>

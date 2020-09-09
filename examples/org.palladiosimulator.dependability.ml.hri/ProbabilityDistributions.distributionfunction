@@ -14,18 +14,18 @@
   </distributions>
   <params id="_a9RjsMqkEeqObY-eK2jOOA" entityName="SensitivityParam">
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
-    <representation xsi:type="distributionfunction:SimpleParameter" type="SAMPLESPACE" value="{(ImageBrightnessMeasure:High),0.4};{(ImageBrightnessMeasure:Low),0.4};{(ImageBrightnessMeasure:Medium),0.2}"/>
+    <representation xsi:type="distributionfunction:SimpleParameter" type="SAMPLESPACE" value="{(ImageBrightnessMeasure:High),0.3};{(ImageBrightnessMeasure:Low),0.3};{(ImageBrightnessMeasure:Medium),0.4}"/>
   </params>
   <params id="_a9TY4MqkEeqObY-eK2jOOA" entityName="SensitivityParam">
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
     <representation xsi:type="distributionfunction:TabularCPD">
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure:High)</conditonals>
-        <entry type="SAMPLESPACE" value="{Success,0.2};{Fail,0.8}"/>
+        <entry type="SAMPLESPACE" value="{Success,0.7};{Fail,0.3}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure:Low)</conditonals>
-        <entry type="SAMPLESPACE" value="{Success,0.1};{Fail,0.9}"/>
+        <entry type="SAMPLESPACE" value="{Success,0.7};{Fail,0.3}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure:Medium)</conditonals>

@@ -3,11 +3,11 @@
   <targetResourceEnvironment_Allocation href="RobotResourceEnvironment.resourceenvironment#/"/>
   <system_Allocation href="RobotCognitionSystem.system#_qSosMNDbEeqWne3bdagE9g"/>
   <allocationContexts_Allocation id="_bwplQNDiEeqWne3bdagE9g" entityName="Allocation_Assembly_Camera">
-    <resourceContainer_AllocationContext href="RobotResourceEnvironment.resourceenvironment#_gm0xYNDfEeqWne3bdagE9g"/>
+    <resourceContainer_AllocationContext href="RobotResourceEnvironment.resourceenvironment#_XE0aMNDgEeqWne3bdagE9g"/>
     <assemblyContext_AllocationContext href="RobotCognitionSystem.system#_yM83YNDbEeqWne3bdagE9g"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_fpgGINDiEeqWne3bdagE9g" entityName="Allocation_ImageMsgChannel">
-    <resourceContainer_AllocationContext href="RobotResourceEnvironment.resourceenvironment#_gm0xYNDfEeqWne3bdagE9g"/>
+    <resourceContainer_AllocationContext href="RobotResourceEnvironment.resourceenvironment#_XE0aMNDgEeqWne3bdagE9g"/>
     <eventChannel__AllocationContext href="RobotCognitionSystem.system#_cTR_8NDcEeqWne3bdagE9g"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_jM4GQNDiEeqWne3bdagE9g" entityName="Allocation_Assembly_ObjectDetection">
