@@ -66,7 +66,7 @@
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']"/>
         <target xmi:type="seff:ResourceDemandingSEFF" href="RobotCognitionComponents.repository#_mA4OIOBoEeq7Govxf64fxQ"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_P8EVcfJ3EeqofrndBLNacw" name="&lt;ImagePreprocessing>&lt;apply> SEFF Diagram" repPath="#_P77LgPJ3EeqofrndBLNacw" changeId="a2eec657-f37e-44e4-9c99-43c8edb2e724">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_P8EVcfJ3EeqofrndBLNacw" name="&lt;ImagePreprocessing>&lt;apply> SEFF Diagram" repPath="#_P77LgPJ3EeqofrndBLNacw" changeId="145510bc-6429-493e-b8d4-7252225a922b">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']"/>
         <target xmi:type="seff:ResourceDemandingSEFF" href="RobotCognitionComponents.repository#_P72TAPJ3EeqofrndBLNacw"/>
       </ownedRepresentationDescriptors>
@@ -5681,7 +5681,7 @@
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']"/>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_jHKRUPJ3EeqofrndBLNacw" name="20 &lt;CPU>">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_jHKRUPJ3EeqofrndBLNacw" name="10 &lt;CPU>">
           <target xmi:type="seff_performance:ParametricResourceDemand" href="RobotCognitionComponents.repository#//@components__Repository.6/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
           <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="RobotCognitionComponents.repository#//@components__Repository.6/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_jHK4YPJ3EeqofrndBLNacw" labelPosition="node">

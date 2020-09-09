@@ -53,7 +53,7 @@
       <steps_Behaviour xsi:type="seff:StopAction" id="_CTpIwtDJEeqWne3bdagE9g" predecessor_AbstractAction="_4t4DMNDaEeqWne3bdagE9g"/>
       <steps_Behaviour xsi:type="seff:InternalAction" id="_xIatsNDaEeqWne3bdagE9g" entityName="ComputeTrajectory" predecessor_AbstractAction="_CTpIwdDJEeqWne3bdagE9g" successor_AbstractAction="_4t4DMNDaEeqWne3bdagE9g">
         <resourceDemand_Action>
-          <specification_ParametericResourceDemand specification="65"/>
+          <specification_ParametericResourceDemand specification="50"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
         <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.1" softwareInducedFailureType__InternalFailureOccurrenceDescription="_ZkNuedDYEeqWne3bdagE9g"/>
@@ -75,7 +75,7 @@
       <steps_Behaviour xsi:type="seff:StopAction" id="_kW2vcNDJEeqWne3bdagE9g" predecessor_AbstractAction="_RYI9gNDbEeqWne3bdagE9g"/>
       <steps_Behaviour xsi:type="seff:InternalAction" id="_RYI9gNDbEeqWne3bdagE9g" entityName="TranslateTrajectoryToControlSignals" predecessor_AbstractAction="_kW2IYdDJEeqWne3bdagE9g" successor_AbstractAction="_kW2vcNDJEeqWne3bdagE9g">
         <resourceDemand_Action>
-          <specification_ParametericResourceDemand specification="20"/>
+          <specification_ParametericResourceDemand specification="15"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
         <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01">
@@ -132,7 +132,7 @@
       <steps_Behaviour xsi:type="seff:StopAction" id="_P72TAvJ3EeqofrndBLNacw" predecessor_AbstractAction="_biHLgPJ3EeqofrndBLNacw"/>
       <steps_Behaviour xsi:type="seff:InternalAction" id="_biHLgPJ3EeqofrndBLNacw" entityName="PreProcess" predecessor_AbstractAction="_P72TAfJ3EeqofrndBLNacw" successor_AbstractAction="_P72TAvJ3EeqofrndBLNacw">
         <resourceDemand_Action>
-          <specification_ParametericResourceDemand specification="20"/>
+          <specification_ParametericResourceDemand specification="10"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
         <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01">
