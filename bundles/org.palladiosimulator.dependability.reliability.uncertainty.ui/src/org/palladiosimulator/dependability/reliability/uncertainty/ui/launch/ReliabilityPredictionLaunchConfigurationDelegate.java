@@ -10,7 +10,7 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.api.UncertaintyBasedReliabilityPredictionConfig;
-import org.palladiosimulator.dependability.reliability.uncertainty.solver.api.UncertaintyBasedReliabilityPredictor;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.api.UncertaintyBasedReliabilityPrediction;
 import org.palladiosimulator.reliability.solver.runconfig.PCMSolverReliabilityLaunchConfigurationDelegate;
 import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
@@ -58,7 +58,7 @@ public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConf
 							.exploreStateSpaceWith(explorationStrategy)
 							.build();
 
-					var result = UncertaintyBasedReliabilityPredictor.predict(reliabilityConfig);
+					var result = UncertaintyBasedReliabilityPrediction.predict(reliabilityConfig);
 				}
 
 				@Override

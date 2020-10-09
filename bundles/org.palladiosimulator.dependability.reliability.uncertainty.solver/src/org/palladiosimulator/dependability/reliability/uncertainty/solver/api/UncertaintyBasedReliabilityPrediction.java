@@ -10,12 +10,12 @@ import java.util.function.Predicate;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.BruteForceExplorationStrategy;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.ReliabilityPredictionResult;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.StateSpaceExplorationStrategy;
-import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.UncertaintyBasedReliabilityPrediction;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.UncertaintyBasedReliabilityPredictor;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
 
 import com.google.common.collect.Sets;
 
-public class UncertaintyBasedReliabilityPredictor {
+public class UncertaintyBasedReliabilityPrediction {
 
 	private final static Set<StateSpaceExplorationStrategy> STATE_SPACE_STRATEGY_REGISTER = Sets.newHashSet();
 	static {
@@ -35,17 +35,18 @@ public class UncertaintyBasedReliabilityPredictor {
 	}
 
 	public static ReliabilityPredictionResult predict(UncertaintyBasedReliabilityPredictionConfig config) {
-		return buildReliabilityPredictor(config).predict(config.getPCMInstance());
+		return buildReliabilityPredictor(config).predictSuccessProbability(config.getPCMInstance());
 	}
 
 	public static ReliabilityPredictionResult predictGiven(List<UncertaintyState> uncertaintyStates,
 			UncertaintyBasedReliabilityPredictionConfig config) {
-		return buildReliabilityPredictor(config).predict(config.getPCMInstance(), uncertaintyStates);
+		return buildReliabilityPredictor(config).predictConditionalSuccessProbability(config.getPCMInstance(),
+				uncertaintyStates);
 	}
 
-	private static UncertaintyBasedReliabilityPrediction buildReliabilityPredictor(
+	private static UncertaintyBasedReliabilityPredictor buildReliabilityPredictor(
 			UncertaintyBasedReliabilityPredictionConfig config) {
-		var builder = UncertaintyBasedReliabilityPrediction.newBuilder().withConfig(config.getRunConfig());
+		var builder = UncertaintyBasedReliabilityPredictor.newBuilder().withConfig(config.getRunConfig());
 
 		if (config.getStateSpaceExplorationStrategy().isPresent()) {
 			builder.exploreStateSpaceWith(config.getStateSpaceExplorationStrategy().get());

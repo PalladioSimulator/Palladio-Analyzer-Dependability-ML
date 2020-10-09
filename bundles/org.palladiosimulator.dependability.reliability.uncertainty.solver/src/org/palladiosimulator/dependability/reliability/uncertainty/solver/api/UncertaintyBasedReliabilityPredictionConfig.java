@@ -85,7 +85,7 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 			requireValidString(explorationStrategyName);
 			requireValidString(uncertaintyRepository);
 
-			var strategy = UncertaintyBasedReliabilityPredictor.findStrategyWith(explorationStrategyName).orElse(null);
+			var strategy = UncertaintyBasedReliabilityPrediction.findStrategyWith(explorationStrategyName).orElse(null);
 			var uncertaintyRepo = loadUncertaintyRepo();
 			var pcmInstance = buildPCMInstance();
 			return new UncertaintyBasedReliabilityPredictionConfig(runConfig, strategy, uncertaintyRepo, pcmInstance);

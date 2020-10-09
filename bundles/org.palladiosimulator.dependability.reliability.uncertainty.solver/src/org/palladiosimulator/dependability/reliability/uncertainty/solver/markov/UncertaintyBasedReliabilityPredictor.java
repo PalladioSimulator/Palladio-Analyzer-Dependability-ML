@@ -3,6 +3,7 @@ package org.palladiosimulator.dependability.reliability.uncertainty.solver.marko
 import static java.util.Objects.nonNull;
 import static java.util.Objects.requireNonNull;
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.util.ArchitecturalPreconditionUtil.allPreconditionsFulfilled;
+import static org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.ReliabilityPredictionResult.marginalizingUncertaintiesForEachScenario;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +25,7 @@ import tools.mdsd.probdist.api.apache.supplier.MultinomialDistributionSupplier;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 
-public class UncertaintyBasedReliabilityPrediction {
+public class UncertaintyBasedReliabilityPredictor {
 
 	public static class UncertaintyBasedReliabilityPredictionBuilder {
 
@@ -53,12 +54,12 @@ public class UncertaintyBasedReliabilityPrediction {
 			return this;
 		}
 
-		public UncertaintyBasedReliabilityPrediction build() {
+		public UncertaintyBasedReliabilityPredictor build() {
 			checkValidity();
 
 			adjustConfig();
 
-			return new UncertaintyBasedReliabilityPrediction(exploreStrategy, config, uncertaintyRepo);
+			return new UncertaintyBasedReliabilityPredictor(exploreStrategy, config, uncertaintyRepo);
 		}
 
 		private void checkValidity() {
@@ -80,7 +81,7 @@ public class UncertaintyBasedReliabilityPrediction {
 	private final PCMSolverWorkflowRunConfiguration config;
 	private final StateSpaceExplorationStrategy exploreStrategy;
 
-	private UncertaintyBasedReliabilityPrediction(StateSpaceExplorationStrategy exploreStrategy,
+	private UncertaintyBasedReliabilityPredictor(StateSpaceExplorationStrategy exploreStrategy,
 			PCMSolverWorkflowRunConfiguration config, UncertaintyRepository uncertaintyRepo) {
 		this.config = config;
 		this.exploreStrategy = exploreStrategy;
@@ -99,28 +100,30 @@ public class UncertaintyBasedReliabilityPrediction {
 		return new UncertaintyBasedReliabilityPredictionBuilder();
 	}
 
-	public ReliabilityPredictionResult predict(PCMInstance unresolved) {
+	public ReliabilityPredictionResult predictSuccessProbability(PCMInstance unresolved) {
 		requireNonNull(exploreStrategy, "Cannot predict reliability when no evaluation strategy is selected.");
 
 		List<ReliabilityPredictionResult> results = Lists.newArrayList();
 
 		var stateSpace = UncertaintyModelManager.get().getStateSpace();
 		for (List<UncertaintyState> eachTuple : exploreStrategy.explore(stateSpace)) {
-			results.add(predict(unresolved, eachTuple));
+			var conditionalPoS = predictConditionalSuccessProbability(unresolved, eachTuple);
+			results.add(conditionalPoS);
 		}
 
-		return results.stream().reduce(ReliabilityPredictionResult.marginalizingUncertainties())
+		return results.stream().reduce(marginalizingUncertaintiesForEachScenario())
 				.orElse(ReliabilityPredictionResult.empty());
 	}
 
-	public ReliabilityPredictionResult predict(PCMInstance unresolvedModel, List<UncertaintyState> stateTuple) {
+	public ReliabilityPredictionResult predictConditionalSuccessProbability(PCMInstance unresolvedModel,
+			List<UncertaintyState> stateTuple) {
 		applyArchitecturalCountermeasures(unresolvedModel, stateTuple);
 
 		var resolvedModel = resolveUncertainties(unresolvedModel, stateTuple);
 
-		var probOfSuccess = predictProbabilityOfSuccessGiven(resolvedModel);
+		var conditionalPoS = predictProbabilityOfSuccessGiven(resolvedModel);
 		var probOfUncertainties = predictProbabilityOfUncertainties(stateTuple);
-		return ReliabilityPredictionResult.of(probOfSuccess, probOfUncertainties);
+		return ReliabilityPredictionResult.of(conditionalPoS, probOfUncertainties);
 	}
 
 	private void applyArchitecturalCountermeasures(PCMInstance pcmModel, List<UncertaintyState> stateTuple) {
@@ -138,7 +141,7 @@ public class UncertaintyBasedReliabilityPrediction {
 			stateTuple.add(improvedState);
 		}
 	}
-	
+
 	private Optional<UncertaintyState> findApplicableState(ArchitecturalCountermeasure countermeasure,
 			List<UncertaintyState> stateTuple) {
 		return stateTuple.stream()

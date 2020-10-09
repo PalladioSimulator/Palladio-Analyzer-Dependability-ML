@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.palladiosimulator.dependability.reliability.uncertainty.solver.api.UncertaintyBasedReliabilityPredictor;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.api.UncertaintyBasedReliabilityPrediction;
 
 import de.uka.ipd.sdq.workflow.launchconfig.tabs.TabHelper;
 
@@ -73,7 +73,7 @@ public class ReliabilityPredictionOptionsTab extends AbstractLaunchConfiguration
 	}
 
 	private String[] getStrategyNames() {
-		var strategies = UncertaintyBasedReliabilityPredictor.getSupportedStrategies();
+		var strategies = UncertaintyBasedReliabilityPrediction.getSupportedStrategies();
 		var strategiesAsArray = new String[strategies.size()];
 		return strategies.toArray(strategiesAsArray);
 	}
