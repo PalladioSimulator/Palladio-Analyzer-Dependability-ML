@@ -23,7 +23,7 @@
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure:Medium)</conditonals>
-        <entry type="SAMPLESPACE" value="{Success,0.98};{Fail,0.02}"/>
+        <entry type="SAMPLESPACE" value="{Success,0.95};{Fail,0.05}"/>
       </cpdEntries>
     </representation>
   </params>

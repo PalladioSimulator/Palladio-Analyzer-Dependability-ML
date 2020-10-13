@@ -1,6 +1,6 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.solver.tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.api.UncertaintyBasedReliabilityPrediction;
@@ -31,9 +31,9 @@ class MarginalizingUncertaintiesTest extends UncertaintyBasedReliabilityPredicti
 			ReliabilityPredictionResult uncertaintyBasedResult) {
 		var usageScenario = nonUncertaintyBasedResult.getScenario();
 		
-		var successProb1 = nonUncertaintyBasedResult.getSuccessProbability();
-		var successProb2 = uncertaintyBasedResult.getProbabilityOfSuccess(usageScenario);
-		assertTrue(successProb1 == successProb2);
+		var expected = nonUncertaintyBasedResult.getSuccessProbability();
+		var actual = uncertaintyBasedResult.getProbabilityOfSuccessGiven(usageScenario);
+		assertEquals(expected, actual);
 	}
 
 	private UncertaintyBasedReliabilityPredictionConfig buildUncertaintyBasedReliabilityPredictionConfig() {
