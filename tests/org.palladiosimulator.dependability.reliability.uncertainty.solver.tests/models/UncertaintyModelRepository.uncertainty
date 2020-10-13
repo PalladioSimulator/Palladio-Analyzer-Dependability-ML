@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uncertainty:UncertaintyRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reliability="http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2" xmlns:uncertainty="http://palladiosimulator.org/Uncertainty/1.0" id="_PJyKgAxuEeu3MuHyVCFTuQ" entityName="UncertaintyModelRepository">
+  <uncertaintyInducedFailureTypes id="_RjbicAxuEeu3MuHyVCFTuQ" entityName="TestUncertaintyInducedFailureType">
+    <refines xsi:type="reliability:SoftwareInducedFailureType" href="default.repository#_mT-LSSjgEeKEJ8UeV7BBTw"/>
+    <uncertaintyModel href="ProbabilisticSensitivityModel.staticmodel#_U5FzuMqkEeqObY-eK2jOOA"/>
+  </uncertaintyInducedFailureTypes>
+</uncertainty:UncertaintyRepository>
