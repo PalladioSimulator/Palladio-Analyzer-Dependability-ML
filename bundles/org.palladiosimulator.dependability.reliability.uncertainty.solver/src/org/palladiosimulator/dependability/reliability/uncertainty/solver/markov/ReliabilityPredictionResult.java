@@ -10,7 +10,7 @@ import java.util.function.BinaryOperator;
 import org.palladiosimulator.pcm.usagemodel.UsageScenario;
 import org.palladiosimulator.reliability.solver.pcm2markov.MarkovTransformationResult;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 
 public class ReliabilityPredictionResult {
 
@@ -20,8 +20,11 @@ public class ReliabilityPredictionResult {
 	private final double probabilityOfUncertainties;
 
 	private ReliabilityPredictionResult() {
-		this.successProbabilityToUsageScenario = Maps.newHashMap();
-		this.probabilityOfUncertainties = ZERO_PROBABILITY;
+		this(ZERO_PROBABILITY);
+	}
+
+	private ReliabilityPredictionResult(double probabilityOfUncertainties) {
+		this(Lists.newArrayList(), probabilityOfUncertainties);
 	}
 
 	private ReliabilityPredictionResult(List<MarkovTransformationResult> results, double probabilityOfUncertainties) {
@@ -60,16 +63,18 @@ public class ReliabilityPredictionResult {
 
 	public static BinaryOperator<ReliabilityPredictionResult> marginalizingUncertaintiesForEachScenario() {
 		return (r1, r2) -> {
-			var newResult = new ReliabilityPredictionResult();
+			var summedProbOfUncertainties = r1.probabilityOfUncertainties + r2.probabilityOfUncertainties;
+			var newResult = new ReliabilityPredictionResult(summedProbOfUncertainties);
 			for (String each : r1.successProbabilityToUsageScenario.keySet()) {
 				var successProbability1 = r1.successProbabilityToUsageScenario.get(each);
 				var successProbability2 = r2.successProbabilityToUsageScenario.get(each);
 
-				var accumulatedSuccessProbability = (r1.probabilityOfUncertainties * successProbability1)
+				var summedSuccessProbability = (r1.probabilityOfUncertainties * successProbability1)
 						+ (r2.probabilityOfUncertainties * successProbability2);
 
-				newResult.successProbabilityToUsageScenario.put(each, accumulatedSuccessProbability);
+				newResult.successProbabilityToUsageScenario.put(each, summedSuccessProbability);
 			}
+
 			return newResult;
 		};
 	}
