@@ -3,9 +3,9 @@ package org.palladiosimulator.dependability.reliability.uncertainty.solver.marko
 import static java.util.Objects.nonNull;
 import static java.util.Objects.requireNonNull;
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.util.ArchitecturalPreconditionUtil.allPreconditionsFulfilled;
-import static org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.ReliabilityPredictionResult.marginalizingUncertaintiesForEachScenario;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure;
@@ -14,12 +14,15 @@ import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRe
 import org.palladiosimulator.dependability.reliability.uncertainty.improvement.UncertaintyImprovementCalculator;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.UncertaintyModelManager;
+import org.palladiosimulator.pcm.usagemodel.UsageModel;
+import org.palladiosimulator.pcm.usagemodel.UsageScenario;
 import org.palladiosimulator.reliability.solver.pcm2markov.MarkovTransformationResult;
 import org.palladiosimulator.reliability.solver.pcm2markov.Pcm2MarkovStrategy;
 import org.palladiosimulator.solver.models.PCMInstance;
 import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import tools.mdsd.probdist.api.apache.supplier.MultinomialDistributionSupplier;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
@@ -111,8 +114,7 @@ public class UncertaintyBasedReliabilityPredictor {
 			results.add(conditionalPoS);
 		}
 
-		return results.stream().reduce(marginalizingUncertaintiesForEachScenario())
-				.orElse(ReliabilityPredictionResult.empty());
+		return marginalizingUncertaintiesForEachScenario(results, unresolved.getUsageModel());
 	}
 
 	public ReliabilityPredictionResult predictConditionalSuccessProbability(PCMInstance unresolvedModel,
@@ -124,6 +126,33 @@ public class UncertaintyBasedReliabilityPredictor {
 		var conditionalPoS = predictProbabilityOfSuccessGiven(resolvedModel);
 		var probOfUncertainties = predictProbabilityOfUncertainties(stateTuple);
 		return ReliabilityPredictionResult.of(conditionalPoS, probOfUncertainties);
+	}
+
+	private ReliabilityPredictionResult marginalizingUncertaintiesForEachScenario(
+			List<ReliabilityPredictionResult> results, UsageModel usageModel) {
+		var summedUncertaintyProbs = computeSumOfUncertaintyProbabilities(results);
+
+		requireUnitMeasure(summedUncertaintyProbs);
+
+		Map<UsageScenario, Double> succesProbabilitiesPerScenario = Maps.newHashMap();
+		for (UsageScenario each : usageModel.getUsageScenario_UsageModel()) {
+			var summedSuccessProbs = results.stream().map(r -> r.getJoinedSuccessAndUncertaintyProbability(each))
+					.reduce(Double::sum)
+					.orElseThrow(() -> new RuntimeException("Something went wrong during marginalizing process."));
+			succesProbabilitiesPerScenario.put(each, summedSuccessProbs);
+		}
+		return ReliabilityPredictionResult.of(succesProbabilitiesPerScenario, summedUncertaintyProbs);
+	}
+
+	private double computeSumOfUncertaintyProbabilities(List<ReliabilityPredictionResult> results) {
+		return results.stream().map(ReliabilityPredictionResult::getProbabilityOfUncertainty).reduce(Double::sum)
+				.orElse(Double.NaN);
+	}
+
+	private void requireUnitMeasure(double summedUncertaintyProbs) {
+		if (summedUncertaintyProbs != 1.0) {
+			throw new RuntimeException("The sum of uncertainty probabilities must be equal to one.");
+		}
 	}
 
 	private void applyArchitecturalCountermeasures(PCMInstance pcmModel, List<UncertaintyState> stateTuple) {

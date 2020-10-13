@@ -2,15 +2,14 @@ package org.palladiosimulator.dependability.reliability.uncertainty.solver.marko
 
 import static java.util.stream.Collectors.toMap;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
-import java.util.function.BinaryOperator;
 
 import org.palladiosimulator.pcm.usagemodel.UsageScenario;
 import org.palladiosimulator.reliability.solver.pcm2markov.MarkovTransformationResult;
-
-import com.google.common.collect.Lists;
 
 public class ReliabilityPredictionResult {
 
@@ -24,7 +23,7 @@ public class ReliabilityPredictionResult {
 	}
 
 	private ReliabilityPredictionResult(double probabilityOfUncertainties) {
-		this(Lists.newArrayList(), probabilityOfUncertainties);
+		this(new HashMap<UsageScenario, Double>(), probabilityOfUncertainties);
 	}
 
 	private ReliabilityPredictionResult(List<MarkovTransformationResult> results, double probabilityOfUncertainties) {
@@ -32,8 +31,17 @@ public class ReliabilityPredictionResult {
 		this.probabilityOfUncertainties = probabilityOfUncertainties;
 	}
 
-	private Map<String, Double> initSuccessProbabilityEntries(List<MarkovTransformationResult> results) {
+	private ReliabilityPredictionResult(Map<UsageScenario, Double> results, double probabilityOfUncertainties) {
+		this.successProbabilityToUsageScenario = initSuccessProbabilityEntries(results);
+		this.probabilityOfUncertainties = probabilityOfUncertainties;
+	}
+
+	private static Map<String, Double> initSuccessProbabilityEntries(List<MarkovTransformationResult> results) {
 		return results.stream().collect(toMap(r -> r.getScenario().getId(), r -> r.getSuccessProbability()));
+	}
+
+	private static Map<String, Double> initSuccessProbabilityEntries(Map<UsageScenario, Double> results) {
+		return results.entrySet().stream().collect(toMap(e -> e.getKey().getId(), Entry::getValue));
 	}
 
 	public static ReliabilityPredictionResult of(List<MarkovTransformationResult> results,
@@ -41,42 +49,37 @@ public class ReliabilityPredictionResult {
 		return new ReliabilityPredictionResult(results, probabilityOfUncertainties);
 	}
 
+	public static ReliabilityPredictionResult of(Map<UsageScenario, Double> successProbabilityToUsageScenario,
+			double probabilityOfUncertainties) {
+		return new ReliabilityPredictionResult(successProbabilityToUsageScenario, probabilityOfUncertainties);
+	}
+
 	public static ReliabilityPredictionResult empty() {
 		return new ReliabilityPredictionResult();
 	}
 
-	public double getProbabilityOfSuccess(UsageScenario scenario) {
+	public double getProbabilityOfSuccessGiven(UsageScenario scenario) {
 		return findProbability(scenario).orElse(ZERO_PROBABILITY);
 	}
 
-	public double getProbabilityOfFailure(UsageScenario scenario) {
-		return 1 - getProbabilityOfSuccess(scenario);
+	public double getProbabilityOfFailureGiven(UsageScenario scenario) {
+		return 1 - getProbabilityOfSuccessGiven(scenario);
 	}
 
 	public double getProbabilityOfUncertainty() {
 		return probabilityOfUncertainties;
 	}
 
-	private Optional<Double> findProbability(UsageScenario scenario) {
-		return Optional.ofNullable(successProbabilityToUsageScenario.get(scenario.getId()));
+	public double getJoinedSuccessAndUncertaintyProbability(UsageScenario scenario) {
+		return getProbabilityOfSuccessGiven(scenario) * getProbabilityOfUncertainty();
 	}
 
-	public static BinaryOperator<ReliabilityPredictionResult> marginalizingUncertaintiesForEachScenario() {
-		return (r1, r2) -> {
-			var summedProbOfUncertainties = r1.probabilityOfUncertainties + r2.probabilityOfUncertainties;
-			var newResult = new ReliabilityPredictionResult(summedProbOfUncertainties);
-			for (String each : r1.successProbabilityToUsageScenario.keySet()) {
-				var successProbability1 = r1.successProbabilityToUsageScenario.get(each);
-				var successProbability2 = r2.successProbabilityToUsageScenario.get(each);
+	public double getJoinedFailureAndUncertaintyProbability(UsageScenario scenario) {
+		return getProbabilityOfFailureGiven(scenario) * getProbabilityOfUncertainty();
+	}
 
-				var summedSuccessProbability = (r1.probabilityOfUncertainties * successProbability1)
-						+ (r2.probabilityOfUncertainties * successProbability2);
-
-				newResult.successProbabilityToUsageScenario.put(each, summedSuccessProbability);
-			}
-
-			return newResult;
-		};
+	private Optional<Double> findProbability(UsageScenario scenario) {
+		return Optional.ofNullable(successProbabilityToUsageScenario.get(scenario.getId()));
 	}
 
 }
