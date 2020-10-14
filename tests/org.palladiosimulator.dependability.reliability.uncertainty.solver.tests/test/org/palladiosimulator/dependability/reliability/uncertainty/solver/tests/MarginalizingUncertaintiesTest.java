@@ -11,6 +11,7 @@ import org.palladiosimulator.solver.models.PCMInstance;
 
 class MarginalizingUncertaintiesTest extends UncertaintyBasedReliabilityPredictionTest {
 
+	private final static double DELTA = 0.01;
 	private final static String TEST_STRATEGY = "Brute force exploration strategy";
 
 	@Test
@@ -33,7 +34,7 @@ class MarginalizingUncertaintiesTest extends UncertaintyBasedReliabilityPredicti
 		
 		var expected = nonUncertaintyBasedResult.getSuccessProbability();
 		var actual = uncertaintyBasedResult.getProbabilityOfSuccessGiven(usageScenario);
-		assertEquals(expected, actual);
+		assertEquals(expected, actual, DELTA);
 	}
 
 	private UncertaintyBasedReliabilityPredictionConfig buildUncertaintyBasedReliabilityPredictionConfig() {

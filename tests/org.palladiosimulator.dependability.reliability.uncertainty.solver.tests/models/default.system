@@ -3,8 +3,15 @@
   <assemblyContexts__ComposedStructure id="_8TG8ECjgEeKEJ8UeV7BBTw" entityName="Assembly_aName &lt;aName>">
     <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="default.repository#_FmEKoCjgEeKEJ8UeV7BBTw"/>
   </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_tc82oA3lEeuWW4i_901nng" entityName="CompBInstance">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="default.repository#_iq7T8A3kEeuWW4i_901nng"/>
+  </assemblyContexts__ComposedStructure>
   <connectors__ComposedStructure xsi:type="composition:ProvidedDelegationConnector" id="_9kUFQCjgEeKEJ8UeV7BBTw" entityName="ProvDelegation Provided_start -> Provided_start_aName" outerProvidedRole_ProvidedDelegationConnector="_4EF98CjgEeKEJ8UeV7BBTw" assemblyContext_ProvidedDelegationConnector="_8TG8ECjgEeKEJ8UeV7BBTw">
     <innerProvidedRole_ProvidedDelegationConnector href="default.repository#_G57mQCjgEeKEJ8UeV7BBTw"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_wrLtNg3lEeuWW4i_901nng" requiringAssemblyContext_AssemblyConnector="_8TG8ECjgEeKEJ8UeV7BBTw" providingAssemblyContext_AssemblyConnector="_tc82oA3lEeuWW4i_901nng">
+    <providedRole_AssemblyConnector href="default.repository#_2QgzcA3kEeuWW4i_901nng"/>
+    <requiredRole_AssemblyConnector href="default.repository#_cejb1Q3lEeuWW4i_901nng"/>
   </connectors__ComposedStructure>
   <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_4EF98CjgEeKEJ8UeV7BBTw" entityName="Provided_start">
     <providedInterface__OperationProvidedRole href="default.repository#_DQDVgCjgEeKEJ8UeV7BBTw"/>

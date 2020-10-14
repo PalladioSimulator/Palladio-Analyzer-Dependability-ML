@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceenvironment:ResourceEnvironment xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:resourceenvironment="http://palladiosimulator.org/PalladioComponentModel/ResourceEnvironment/5.2">
+  <linkingResources__ResourceEnvironment id="_R5iIcA3mEeuWW4i_901nng" entityName="ServerAToB" connectedResourceContainers_LinkingResource="_CL1C8CjhEeKEJ8UeV7BBTw _89vD8Q3lEeuWW4i_901nng">
+    <communicationLinkResourceSpecifications_LinkingResource id="_kE33gA3mEeuWW4i_901nng">
+      <communicationLinkResourceType_CommunicationLinkResourceSpecification href="pathmap://PCM_MODELS/Palladio.resourcetype#_o3sScH2AEdyH8uerKnHYug"/>
+    </communicationLinkResourceSpecifications_LinkingResource>
+  </linkingResources__ResourceEnvironment>
   <resourceContainer_ResourceEnvironment id="_CL1C8CjhEeKEJ8UeV7BBTw">
-    <activeResourceSpecifications_ResourceContainer id="_CrQw8CjhEeKEJ8UeV7BBTw">
+    <activeResourceSpecifications_ResourceContainer id="_CrQw8CjhEeKEJ8UeV7BBTw" MTTR="6.0" MTTF="100.0">
+      <schedulingPolicy href="pathmap://PCM_MODELS/Palladio.resourcetype#ProcessorSharing"/>
+      <activeResourceType_ActiveResourceSpecification href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+      <processingRate_ProcessingResourceSpecification specification="1"/>
+    </activeResourceSpecifications_ResourceContainer>
+  </resourceContainer_ResourceEnvironment>
+  <resourceContainer_ResourceEnvironment id="_89vD8Q3lEeuWW4i_901nng" entityName="ServerB">
+    <activeResourceSpecifications_ResourceContainer id="_-29PYA3lEeuWW4i_901nng" MTTR="6.0" MTTF="100.0">
       <schedulingPolicy href="pathmap://PCM_MODELS/Palladio.resourcetype#ProcessorSharing"/>
       <activeResourceType_ActiveResourceSpecification href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
       <processingRate_ProcessingResourceSpecification specification="1"/>

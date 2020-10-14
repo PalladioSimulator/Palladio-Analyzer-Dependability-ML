@@ -6,4 +6,8 @@
     <resourceContainer_AllocationContext href="default.resourceenvironment#_CL1C8CjhEeKEJ8UeV7BBTw"/>
     <assemblyContext_AllocationContext href="default.system#_8TG8ECjgEeKEJ8UeV7BBTw"/>
   </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_XbvMwA3mEeuWW4i_901nng" entityName="ComBAllocation">
+    <resourceContainer_AllocationContext href="default.resourceenvironment#_89vD8Q3lEeuWW4i_901nng"/>
+    <assemblyContext_AllocationContext href="default.system#_tc82oA3lEeuWW4i_901nng"/>
+  </allocationContexts_Allocation>
 </allocation:Allocation>
