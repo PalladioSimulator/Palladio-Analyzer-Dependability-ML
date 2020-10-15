@@ -27,4 +27,6 @@ Require-Bundle: org.junit,
  org.eclipse.emf.query;bundle-version="1.7.0",
  org.palladiosimulator.reliability.markov;bundle-version="4.3.0",
  de.uka.ipd.sdq.probfunction.math;bundle-version="4.3.0",
- org.apache.commons.math3;bundle-version="3.6.1"
+ org.apache.commons.math3;bundle-version="3.6.1",
+ tools.mdsd.probdist.api;bundle-version="1.0.0",
+ org.palladiosimulator.dependability.reliability.uncertainty

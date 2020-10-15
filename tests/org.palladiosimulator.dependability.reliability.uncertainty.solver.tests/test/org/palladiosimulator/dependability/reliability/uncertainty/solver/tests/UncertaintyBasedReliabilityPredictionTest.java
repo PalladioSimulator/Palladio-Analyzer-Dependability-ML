@@ -1,115 +1,87 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.solver.tests;
 
-import java.nio.file.Paths;
-import java.util.List;
+import static org.junit.Assert.assertTrue;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Optional;
+import java.util.Set;
+
 import org.eclipse.emf.common.util.URI;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
-import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
-import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
-import org.palladiosimulator.dependability.reliability.uncertainty.solver.util.PCMInstanceBuilderJob;
-import org.palladiosimulator.reliability.solver.pcm2markov.MarkovTransformationResult;
-import org.palladiosimulator.reliability.solver.pcm2markov.Pcm2MarkovStrategy;
-import org.palladiosimulator.solver.models.PCMInstance;
-import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.junit.jupiter.api.Test;
+import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
+import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.tests.ReliabilityPredictionTestDefinition.PredictionResultBasedAssertion;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
-import de.uka.ipd.sdq.workflow.jobs.JobFailedException;
-import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
-import tools.mdsd.library.standalone.initialization.StandaloneInitializationException;
-import tools.mdsd.library.standalone.initialization.StandaloneInitializerBuilder;
+import tools.mdsd.probdist.api.entity.CategoricalValue;
 
-public abstract class UncertaintyBasedReliabilityPredictionTest {
+class UncertaintyBasedReliabilityPredictionTest extends BaseReliabilityPredictionTest {
 
-	private static final String PROJECT_NAME_TEST = "org.palladiosimulator.dependability.reliability.uncertainty.solver.tests";
-	private static final String RELATIVE_UNCERTAINTY_TEST_MODEL_PATH = Paths.get("models", "UncertaintyModelRepository.uncertainty").toString();
-	private static final String RELATIVE_ALLOCATION_TEST_MODEL_PATH = Paths.get("models", "default.allocation").toString();
-	private static final String RELATIVE_USAGEMODEL_TEST_MODEL_PATH = Paths.get("models", "default.usagemodel").toString();
+	private static final String ML_VARIABLE = "MLPredictionSensitivity";
 
-	protected static PCMSolverWorkflowRunConfiguration runConfig = null;
-
-	private PCMInstance testPCMInstance = null;
-
-	@BeforeAll
-	public static void globalSetUp() throws StandaloneInitializationException {
-		var standaloneInitializer = StandaloneInitializerBuilder.builder()
-				.registerProjectURI(UncertaintyBasedReliabilityPredictionTest.class, PROJECT_NAME_TEST)
-				.build();
-		standaloneInitializer.init();
-
-		runConfig = createDefaultRunConfig();
+	@Test
+	public void test() {
+		getUncertaintyStateSpace().forEach(this::test);
 	}
 
-	@BeforeEach
-	public void setUpBeforeEachTest() throws Exception {
-		testPCMInstance = loadPCMInstance();
+	public void test(UncertaintyState uncertaintyState) {
+		ReliabilityPredictionTestDefinition.createTest()
+			.givenDefaultRunConfigs()
+			.whenApplyingPCMRel()
+			.whenApplyingUncertaintyBasedPCMRelGiven(Lists.newArrayList(uncertaintyState))
+			.thenAssert(uncertaintyProbabilityIsSmallerThanSuccessProbability(uncertaintyState))
+			.test();
 	}
 
-	protected String getUncertaintyModelURI() {
-		return makePlatformResourceURI(RELATIVE_UNCERTAINTY_TEST_MODEL_PATH);
+	private PredictionResultBasedAssertion uncertaintyProbabilityIsSmallerThanSuccessProbability(
+			UncertaintyState uncertaintyState) {
+		return (pcmRelResult, uncertaintyResult) -> {
+			var usageScenario = pcmRelResult.getScenario();
+			
+			var success = pcmRelResult.getSuccessProbability();
+			var joined = uncertaintyResult.getJoinedSuccessAndUncertaintyProbability(usageScenario);
+			assertTrue(joined <= success);
+		};
 	}
 
-	protected PCMInstance givenAPCMTestInstance() {
-		return testPCMInstance;
+	private Set<UncertaintyState> getUncertaintyStateSpace() {
+		var stateSpace = DiscreteUncertaintyStateSpace.valueSpaceOf(getUncertaintyInducedFailureType());
+		excludeMLUncertaintyState(stateSpace);
+		return enrichToValuedUncertaintyStates(stateSpace);
 	}
 
-	protected List<MarkovTransformationResult> whenApplyingClassicReliabilityPredictionTo(PCMInstance pcmModel) {
-		var solver = new Pcm2MarkovStrategy(runConfig);
-		solver.transform(pcmModel);
-		return solver.getAllSolvedValues();
+	private void excludeMLUncertaintyState(Set<UncertaintyState> stateSpace) {
+		stateSpace.removeIf(each -> each.getId().equals(ML_VARIABLE));
 	}
-
-	private static PCMSolverWorkflowRunConfiguration createDefaultRunConfig() {
-		var config = new PCMSolverWorkflowRunConfiguration();
-		config.setReliabilityAnalysis(true);
-		config.setPrintMarkovStatistics(false);
-		config.setPrintMarkovSingleResults(false);
-		config.setSensitivityModelEnabled(false);
-		config.setSensitivityModelFileName(null);
-		config.setSensitivityLogFileName(null);
-		config.setDeleteTemporaryDataAfterAnalysis(true);
-		config.setDistance(1.0);
-		config.setDomainSize(32);
-		config.setIterationOverPhysicalSystemStatesEnabled(true);
-		config.setMarkovModelReductionEnabled(true);
-		config.setNumberOfEvaluatedSystemStates(1);
-		config.setNumberOfEvaluatedSystemStatesEnabled(false);
-		config.setSolvingTimeLimitEnabled(false);
-		config.setLogFile(null);
-		config.setNumberOfEvaluatedSystemStatesEnabled(false);
-		config.setNumberOfEvaluatedSystemStates(0);
-		config.setNumberOfExactDecimalPlacesEnabled(false);
-		config.setNumberOfExactDecimalPlaces(0);
-		config.setSolvingTimeLimitEnabled(false);
-		config.setMarkovModelStorageEnabled(false);
-		config.setIterationOverPhysicalSystemStatesEnabled(true);
-		config.setMarkovEvaluationMode("POINTSOFFAILURE");
-		config.setSaveResultsToFileEnabled(false);
-		config.setRMIMiddlewareFile(ConstantsContainer.DEFAULT_RMI_MIDDLEWARE_REPOSITORY_FILE);
-		config.setEventMiddlewareFile(ConstantsContainer.DEFAULT_EVENT_MIDDLEWARE_FILE);
-		config.setUsageModelFile(makePlatformResourceURI(RELATIVE_USAGEMODEL_TEST_MODEL_PATH));
-		config.setAllocationFiles(Lists.newArrayList(makePlatformResourceURI(RELATIVE_ALLOCATION_TEST_MODEL_PATH)));
-		return config;
-	}
-
-	private static String makePlatformResourceURI(String relativeTestModelPath) {
-		var pathName = Paths.get(PROJECT_NAME_TEST, relativeTestModelPath).toString();
-		return URI.createPlatformResourceURI(pathName, true).toString();
-	}
-
-	private PCMInstance loadPCMInstance() {
-		var pcmBuilderJob = new PCMInstanceBuilderJob(runConfig);
-		try {
-			pcmBuilderJob.execute(new NullProgressMonitor());
-		} catch (JobFailedException | UserCanceledException e) {
-			throw new RuntimeException("Something went wrong while building the PCM instance.", e);
+	
+	private Set<UncertaintyState> enrichToValuedUncertaintyStates(Set<UncertaintyState> stateSpace) {
+		var stateToEnrich = stateSpace.iterator().next();
+		
+		Set<UncertaintyState> enriched = Sets.newHashSet();
+		for (CategoricalValue each : stateToEnrich.getValueSpace()) {
+			enriched.add(stateToEnrich.newValuedStateWith(each));
 		}
-		return new PCMInstance((PCMResourceSetPartition) pcmBuilderJob.getBlackboard()
-				.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
+		return enriched;
+	}
+
+	private UncertaintyInducedFailureType getUncertaintyInducedFailureType() {
+		var repoURI = URI.createURI(makePlatformResourceURI(RELATIVE_UNCERTAINTY_TEST_MODEL_PATH), true);
+		var repoResource = new ResourceSetImpl().getResource(repoURI, true);
+		var repo = Optional.ofNullable(repoResource)
+				.map(Resource::getContents)
+				.map(Collection::iterator)
+	            .map(Iterator::next)
+				.filter(UncertaintyRepository.class::isInstance)
+				.map(UncertaintyRepository.class::cast)
+				.orElseThrow();
+		return repo.getUncertaintyInducedFailureTypes().get(0);
 	}
 
 }
