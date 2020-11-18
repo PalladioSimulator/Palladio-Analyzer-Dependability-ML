@@ -27,17 +27,17 @@ public class ImageBrightness extends PropertyMeasure {
 		MEDIUM("Medium"), 
 		LOW("Low");
 
-		private final MeasurableProperty value;
+		private final MeasurableSensitivityProperty value;
 
 		private BrightnessCategory(String name) {
-			this.value = INSTANCE.new MeasurableProperty(CategoricalValue.create(name));
+			this.value = INSTANCE.generateFromRaw(CategoricalValue.create(name));
 		}
 
-		public MeasurableProperty asMeasurableProperty() {
+		public MeasurableSensitivityProperty asMeasurableProperty() {
 			return value;
 		}
 
-		public static Set<MeasurableProperty> getValueSpace() {
+		public static Set<MeasurableSensitivityProperty> getValueSpace() {
 			return Sets.newHashSet(HIGH.asMeasurableProperty(), MEDIUM.asMeasurableProperty(),
 					LOW.asMeasurableProperty());
 		}
@@ -56,7 +56,7 @@ public class ImageBrightness extends PropertyMeasure {
 	}
 
 	@Override
-	public MeasurableProperty apply(InputData inputData) {
+	public MeasurableSensitivityProperty apply(InputData inputData) {
 		if (isApplicableTo(inputData) == false) {
 			MLSensitivityAnalysisException.throwWithMessage("Input data is not applicable to propertymeasure");
 		}
@@ -70,7 +70,7 @@ public class ImageBrightness extends PropertyMeasure {
 	}
 
 	@Override
-	public Set<MeasurableProperty> getMeasurablePropertySpace() {
+	public Set<MeasurableSensitivityProperty> getMeasurablePropertySpace() {
 		return BrightnessCategory.getValueSpace();
 	}
 
@@ -79,7 +79,7 @@ public class ImageBrightness extends PropertyMeasure {
 		return PROPERTY_ID;
 	}
 
-	private MeasurableProperty computeBrightness(ImageInputData inputData) {
+	private MeasurableSensitivityProperty computeBrightness(ImageInputData inputData) {
 		var img = readImageToProcess(inputData);
 
 		var grayscaleHist = computeGrayScaleHist(img);

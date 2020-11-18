@@ -22,8 +22,8 @@ import org.palladiosimulator.dependability.ml.sensitivity.builder.ProbabilisticS
 import org.palladiosimulator.dependability.ml.sensitivity.builder.ProbabilityDistributionBuilder;
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure;
-import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableProperty;
-import org.palladiosimulator.dependability.ml.sensitivity.transformation.property.conversion.MeasurablePropertyConversion;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.SensitivityProperty;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.property.conversion.SensitivityPropertyConventions;
 import org.palladiosimulator.envdyn.api.entity.bn.BayesianNetwork;
 import org.palladiosimulator.envdyn.api.entity.bn.BayesianNetwork.InputValue;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticModel;
@@ -74,14 +74,14 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 	}
 
 	@Override
-	public void setSensitivityValues(Map<MeasurableProperty, Double> sensitivityValues) {
+	public void setSensitivityValues(Map<SensitivityProperty, Double> sensitivityValues) {
 		var propertyName = getGlobalProperty(sensitivityValues);
 		var probabilisticModel = findRandomVariableFor(propertyName).getDescriptiveModel();
 		probabilisticModel.setDistribution(buildProbabilityDistributionOf(sensitivityValues));
 	}
 
 	@Override
-	public double getSensitivityValuesOf(MeasurableProperty property) {
+	public double getSensitivityValuesOf(SensitivityProperty property) {
 		var probabilisticModel = findRandomVariableFor(property).getDescriptiveModel();
 		var param = probabilisticModel.getDistribution().getParams().get(0).getRepresentation();
 		if (param instanceof SimpleParameter) {
@@ -99,7 +99,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 	}
 
 	@Override
-	public double inferSensitivity(List<MeasurableProperty> properties) {
+	public double inferSensitivity(List<SensitivityProperty> properties) {
 		if (isNull(bayesianNetwork)) {
 			bayesianNetwork = new BayesianNetwork(null, probSensitivityModel);
 		}
@@ -151,7 +151,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 		return (bayesianNetwork.getGroundVariables().size()) > inputs.size();
 	}
 
-	private List<InputValue> toInputValues(List<MeasurableProperty> properties) {
+	private List<InputValue> toInputValues(List<SensitivityProperty> properties) {
 		var inputs = properties.stream()
 				.map(this::toInputValue)
 				.collect(toList());
@@ -167,17 +167,17 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 		return InputValue.create(value, mlVariable);
 	}
 
-	private InputValue toInputValue(MeasurableProperty property) {
-		var value = property.getMeasuredValue();
+	private InputValue toInputValue(SensitivityProperty property) {
+		var value = property.getValue();
 		var variable = findRandomVariableFor(property);
 		return InputValue.create(value, variable);
 	}
 
-	private Optional<Double> retrieveSensitivityValueOf(MeasurableProperty property, SimpleParameter param) {
+	private Optional<Double> retrieveSensitivityValueOf(SensitivityProperty property, SimpleParameter param) {
 		var values = param.getValue().split(DefaultParameterParser.SAMPLE_DELIMITER);
 		return Stream.of(values)
 				.map(parseValues())
-				.filter(withValue(property.getMeasuredValue()))
+				.filter(withValue(property.getValue()))
 				.map(v -> Double.valueOf(v[1]))
 				.findFirst();
 	}
@@ -232,17 +232,17 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 				.collect(toSet());
 	}
 
-	private MeasurableProperty getGlobalProperty(Map<MeasurableProperty, Double> sensitivityValues) {
+	private SensitivityProperty getGlobalProperty(Map<SensitivityProperty, Double> sensitivityValues) {
 		return sensitivityValues.keySet().iterator().next();
 	}
 
-	private GroundRandomVariable findRandomVariableFor(MeasurableProperty property) {
+	private GroundRandomVariable findRandomVariableFor(SensitivityProperty property) {
 		return probSensitivityModel.getLocalProbabilisticModels().stream()
 				.flatMap(each -> each.getGroundRandomVariables().stream())
 				.filter(variableOf(property))
 				.findFirst()
 				.orElseThrow(MLSensitivityAnalysisException.supplierWithMessage(
-						String.format("There is no variable for measured property %s", property.getName())));
+						String.format("There is no variable for measured property %s", property.getId())));
 	}
 
 	public GroundRandomVariable findMLRandomVariable() {
@@ -259,11 +259,11 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 		return v -> v.getDependenceStructure().isEmpty() == false;
 	}
 
-	private Predicate<GroundRandomVariable> variableOf(MeasurableProperty property) {
-		return v -> MeasurablePropertyConversion.areSemanticallyEqual(v, property);
+	private Predicate<GroundRandomVariable> variableOf(SensitivityProperty property) {
+		return v -> SensitivityPropertyConventions.areSemanticallyEqual(v, property);
 	}
 
-	private ProbabilityDistribution buildProbabilityDistributionOf(Map<MeasurableProperty, Double> sensitivityValues) {
+	private ProbabilityDistribution buildProbabilityDistributionOf(Map<SensitivityProperty, Double> sensitivityValues) {
 		return ProbabilityDistributionBuilder.buildProbabilityDistributionFor(getGlobalProperty(sensitivityValues))
 				.withSimpleParameterDerivedFrom(sensitivityValues)
 				.build();

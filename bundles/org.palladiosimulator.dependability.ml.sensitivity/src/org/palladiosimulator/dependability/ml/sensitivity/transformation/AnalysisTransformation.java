@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.palladiosimulator.dependability.ml.model.InputData;
-import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableProperty;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableSensitivityProperty;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -20,7 +20,7 @@ public class AnalysisTransformation {
 		this.propertyMeasures = propertyMeasures;
 	}
 
-	public Set<MeasurableProperty> computeMeasurableProperties(InputData inputData) {
+	public Set<MeasurableSensitivityProperty> computeMeasurableProperties(InputData inputData) {
 		return propertyMeasures.stream().map(each -> each.apply(inputData)).collect(toSet());
 	}
 
@@ -28,8 +28,8 @@ public class AnalysisTransformation {
 		return propertyMeasures.stream().filter(each -> each.getId().equals(propertId)).findFirst();
 	}
 
-	public Set<List<MeasurableProperty>> computeMeasurableSpace() {
-		List<Set<MeasurableProperty>> measurableSpace = Lists.newArrayList();
+	public Set<List<MeasurableSensitivityProperty>> computeMeasurableSpace() {
+		List<Set<MeasurableSensitivityProperty>> measurableSpace = Lists.newArrayList();
 		for (PropertyMeasure eachMeasure : propertyMeasures) {
 			var propertySpace = Sets.newHashSet(eachMeasure.getMeasurablePropertySpace());
 			measurableSpace.add(propertySpace);

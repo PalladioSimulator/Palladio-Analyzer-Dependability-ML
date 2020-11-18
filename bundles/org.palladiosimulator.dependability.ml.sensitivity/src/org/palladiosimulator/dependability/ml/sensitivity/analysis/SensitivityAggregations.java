@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.function.Function;
 
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
-import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableProperty;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableSensitivityProperty;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -23,30 +23,31 @@ public class SensitivityAggregations {
 
 		private final String signature;
 
-		private MLSensitivityEntry(List<MeasurableProperty> properties) {
+		private MLSensitivityEntry(List<MeasurableSensitivityProperty> properties) {
 			this.signature = constructSignatureFrom(properties);
 		}
 
-		public static MLSensitivityEntry from(Set<MeasurableProperty> properties) {
+		public static MLSensitivityEntry from(Set<MeasurableSensitivityProperty> properties) {
 			return new MLSensitivityEntry(Lists.newArrayList(properties));
 		}
 
-		public static MLSensitivityEntry from(List<MeasurableProperty> properties) {
+		public static MLSensitivityEntry from(List<MeasurableSensitivityProperty> properties) {
 			return new MLSensitivityEntry(properties);
 		}
 
-		private static String constructSignatureFrom(List<MeasurableProperty> properties) {
+		private static String constructSignatureFrom(List<MeasurableSensitivityProperty> properties) {
 			var builder = new StringBuilder();
-			
-			for (MeasurableProperty each : orderAlphabeticallyByName(properties)) {
-				builder.append(each.getMeasuredValue().toString()).append(SIGNATURE_DELIMITER);
+
+			for (MeasurableSensitivityProperty each : orderAlphabeticallyByName(properties)) {
+				builder.append(each.getValue().toString()).append(SIGNATURE_DELIMITER);
 			}
 			builder.deleteCharAt(builder.lastIndexOf(SIGNATURE_DELIMITER));
 
 			return builder.toString();
 		}
 
-		private static List<MeasurableProperty> orderAlphabeticallyByName(List<MeasurableProperty> properties) {
+		private static List<MeasurableSensitivityProperty> orderAlphabeticallyByName(
+				List<MeasurableSensitivityProperty> properties) {
 			properties.sort((p1, p2) -> p1.getId().compareTo(p2.getId()));
 			return properties;
 		}
@@ -94,7 +95,7 @@ public class SensitivityAggregations {
 
 	private final static double PROPERTY_OCCURENCE_COUNT = 1.0;
 
-	private final Map<MeasurableProperty, Double> propertySensitivityAggregations;
+	private final Map<MeasurableSensitivityProperty, Double> propertySensitivityAggregations;
 	private final Map<MLSensitivityEntry, MLSensitivityValue> mlSensitivityAggregations;
 
 	private int globalCount;
@@ -105,7 +106,7 @@ public class SensitivityAggregations {
 		this.globalCount = 0;
 	}
 
-	public void record(Set<MeasurableProperty> measuredProperties, double predictionAccuracy) {
+	public void record(Set<MeasurableSensitivityProperty> measuredProperties, double predictionAccuracy) {
 		measuredProperties.forEach(this::updatePropertySensitivity);
 		updateMLSensitivity(MLSensitivityEntry.from(measuredProperties), predictionAccuracy);
 
@@ -121,15 +122,15 @@ public class SensitivityAggregations {
 				.collect(toMap(Map.Entry::getKey, normalizeAggregatedValues()));
 	}
 
-	public Map<MeasurableProperty, Double> getPropertySensitivityValues(String propertyName) {
+	public Map<MeasurableSensitivityProperty, Double> getPropertySensitivityValues(String propertyName) {
 		return groupMeasurableProperties().get(propertyName).stream()
 				.collect(toMap(Function.identity(), this::normalizeAggregatedValues));
 	}
 
-	private Double normalizeAggregatedValues(MeasurableProperty property) {
+	private Double normalizeAggregatedValues(MeasurableSensitivityProperty property) {
 		var value = Optional.ofNullable(propertySensitivityAggregations.get(property))
 				.orElseThrow(MLSensitivityAnalysisException.supplierWithMessage(
-						String.format("There is no local sensitivity value for property %s", property.getName())));
+						String.format("There is no local sensitivity value for property %s", property.getId())));
 		return value / globalCount;
 	}
 
@@ -137,11 +138,12 @@ public class SensitivityAggregations {
 		return e -> e.getValue().computeNormalizedAggregatedValue();
 	}
 
-	private Map<String, List<MeasurableProperty>> groupMeasurableProperties() {
-		return propertySensitivityAggregations.keySet().stream().collect(groupingBy(MeasurableProperty::getId));
+	private Map<String, List<MeasurableSensitivityProperty>> groupMeasurableProperties() {
+		return propertySensitivityAggregations.keySet().stream()
+				.collect(groupingBy(MeasurableSensitivityProperty::getId));
 	}
 
-	private void updatePropertySensitivity(MeasurableProperty property) {
+	private void updatePropertySensitivity(MeasurableSensitivityProperty property) {
 		propertySensitivityAggregations.merge(property, PROPERTY_OCCURENCE_COUNT, Double::sum);
 	}
 

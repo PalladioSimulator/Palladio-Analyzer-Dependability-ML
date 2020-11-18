@@ -5,7 +5,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure;
-import org.palladiosimulator.dependability.ml.sensitivity.transformation.property.conversion.MeasurablePropertyConversion;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.property.conversion.SensitivityPropertyConventions;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticModel;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
 import org.palladiosimulator.envdyn.environment.staticmodel.LocalProbabilisticNetwork;
@@ -56,7 +56,7 @@ public class ProbabilisticSensitivityModelBuilder {
 	}
 
 	public ProbabilisticSensitivityModelBuilder addSensitivityFactor(PropertyMeasure propertyMeasure) {
-		var name = MeasurablePropertyConversion.convertToTemplateVariableName(propertyMeasure);
+		var name = SensitivityPropertyConventions.convertToTemplateVariableName(propertyMeasure);
 
 		var template = buildTemplateWith(name);
 		addToTemplateDefinitions(template);

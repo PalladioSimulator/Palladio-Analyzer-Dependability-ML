@@ -10,7 +10,7 @@ import java.util.Set;
 import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityAggregations.MLSensitivityEntry;
 import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityModel.MLOutcomeMeasure;
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
-import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableProperty;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.SensitivityProperty;
 
 import com.google.common.collect.Maps;
 
@@ -35,7 +35,7 @@ public class ProbabilityDistributionBuilder {
 	private final static DistributionfunctionFactory FACTORY = DistributionfunctionFactory.eINSTANCE;
 
 	private ProbabilityDistributionSkeleton skeleton = null;
-	private Map<MeasurableProperty, Double> propertySensitivityValues = null;
+	private Map<SensitivityProperty, Double> propertySensitivityValues = null;
 	private Map<MLSensitivityEntry, Double> mlSensitivityValues = null;
 	private String name = null;
 
@@ -57,7 +57,7 @@ public class ProbabilityDistributionBuilder {
 		return repo;
 	}
 
-	public static ProbabilityDistributionBuilder buildProbabilityDistributionFor(MeasurableProperty property) {
+	public static ProbabilityDistributionBuilder buildProbabilityDistributionFor(SensitivityProperty property) {
 		return new ProbabilityDistributionBuilder(property.getId());
 	}
 
@@ -66,7 +66,7 @@ public class ProbabilityDistributionBuilder {
 	}
 
 	public ProbabilityDistributionBuilder withSimpleParameterDerivedFrom(
-			Map<MeasurableProperty, Double> sensitivityValues) {
+			Map<SensitivityProperty, Double> sensitivityValues) {
 		this.propertySensitivityValues = sensitivityValues;
 		return this;
 	}
@@ -146,9 +146,9 @@ public class ProbabilityDistributionBuilder {
 		return skeleton.getParamStructures().get(0);
 	}
 
-	private String parseToSampleSpace(Map<MeasurableProperty, Double> sensitivityValues) {
+	private String parseToSampleSpace(Map<SensitivityProperty, Double> sensitivityValues) {
 		Map<String, String> sampleSpace = sensitivityValues.entrySet().stream()
-				.collect(toMap(entry -> entry.getKey().getMeasuredValue().toString(), 
+				.collect(toMap(entry -> entry.getKey().getValue().toString(), 
 						entry -> entry.getValue().toString()));
 		return parseToString(sampleSpace);
 	}

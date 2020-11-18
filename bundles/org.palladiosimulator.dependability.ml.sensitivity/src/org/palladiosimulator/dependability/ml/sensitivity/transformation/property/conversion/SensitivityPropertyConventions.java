@@ -1,18 +1,19 @@
 package org.palladiosimulator.dependability.ml.sensitivity.transformation.property.conversion;
 
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure;
-import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableProperty;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableSensitivityProperty;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.SensitivityProperty;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
 import org.palladiosimulator.envdyn.environment.templatevariable.TemplateVariable;
 
 /**
  * The class defines functions or rather rules that semantically relates the
- * concepts MeasurableProperty, PropertyMeasure and TemplateVariables.
+ * concepts SensitivityProperty, PropertyMeasure and TemplateVariables.
  * 
  * @author scheerer
  *
  */
-public class MeasurablePropertyConversion {
+public class SensitivityPropertyConventions {
 
 	/**
 	 * Converts a property measure to the semantically correct template variable
@@ -35,16 +36,16 @@ public class MeasurablePropertyConversion {
 	 * @param property to convert.
 	 * @return the converted template variable name.
 	 */
-	public static String convertToTemplateVariableName(MeasurableProperty property) {
+	public static String convertToTemplateVariableName(SensitivityProperty property) {
 		return property.getId();
 	}
 
 	/**
-	 * @see #convertToTemplateVariableName(MeasurableProperty)
+	 * @see #convertToTemplateVariableName(MeasurableSensitivityProperty)
 	 * @param template to restore the id from.
 	 * @return the restored id.
 	 */
-	public static String convertToMeasurablePropertyId(TemplateVariable template) {
+	public static String convertToPropertyId(TemplateVariable template) {
 		return template.getEntityName();
 	}
 
@@ -52,16 +53,16 @@ public class MeasurablePropertyConversion {
 		return areSemanticallyEqual(variable.getInstantiatedTemplate(), measure);
 	}
 	
-	public static boolean areSemanticallyEqual(GroundRandomVariable variable, MeasurableProperty property) {
+	public static boolean areSemanticallyEqual(GroundRandomVariable variable, SensitivityProperty property) {
 		return areSemanticallyEqual(variable.getInstantiatedTemplate(), property);
 	}
 
 	public static boolean areSemanticallyEqual(TemplateVariable template, PropertyMeasure measure) {
-		return convertToMeasurablePropertyId(template).equals(measure.getId());
+		return convertToPropertyId(template).equals(measure.getId());
 	}
 	
-	public static boolean areSemanticallyEqual(TemplateVariable template, MeasurableProperty property) {
-		return convertToMeasurablePropertyId(template).equals(property.getId());
+	public static boolean areSemanticallyEqual(TemplateVariable template, SensitivityProperty property) {
+		return convertToPropertyId(template).equals(property.getId());
 	}
 
 }

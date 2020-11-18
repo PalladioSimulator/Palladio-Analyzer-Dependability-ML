@@ -1,5 +1,7 @@
 package org.palladiosimulator.dependability.ml.sensitivity.analysis;
 
+import static java.util.stream.Collectors.toMap;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -11,7 +13,8 @@ import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityAg
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.AnalysisTransformation;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure;
-import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableProperty;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.SensitivityProperty;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableSensitivityProperty;
 
 import com.google.common.collect.Lists;
 
@@ -36,8 +39,10 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 	public static TrainingDataBasedAnalysisStrategy confidenceBasedStrategy() {
 		return new TrainingDataBasedAnalysisStrategy(r -> {
 			var numberOfPredictions = r.getPredictions().size();
-			var sumOfPredictions = r.getPredictions().stream().map(OutputData::getPredictionConfidence)
-					.reduce(Double::sum).get();
+			var sumOfPredictions = r.getPredictions().stream()
+					.map(OutputData::getPredictionConfidence)
+					.reduce(Double::sum)
+					.get();
 			return sumOfPredictions / numberOfPredictions;
 		}, CONFIDENCE_STRATEGY_NAME);
 	}
@@ -77,7 +82,9 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 			var sensitivityValues = sensitivityAggregations.getPropertySensitivityValues(each);
 			complementPropertyValuesIfNecessary(sensitivityValues);
 
-			sensitivitiyModel.setSensitivityValues(sensitivityValues);
+			var result = sensitivityValues.entrySet().stream()
+					.collect(toMap(e -> (SensitivityProperty) e.getKey(), Map.Entry::getValue));
+			sensitivitiyModel.setSensitivityValues(result);
 		}
 
 		var mlSensitivityValues = sensitivityAggregations.getMLSensitivityValues();
@@ -88,9 +95,9 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 		return sensitivitiyModel;
 	}
 
-	private void complementPropertyValuesIfNecessary(Map<MeasurableProperty, Double> sensitivityValues) {
+	private void complementPropertyValuesIfNecessary(Map<MeasurableSensitivityProperty, Double> sensitivityValues) {
 		var measure = retrievePropertyMeasureBy(reduceToSingleProperty(sensitivityValues));
-		for (MeasurableProperty each : measure.getMeasurablePropertySpace()) {
+		for (MeasurableSensitivityProperty each : measure.getMeasurablePropertySpace()) {
 			if (containsNoPropertyWith(each, sensitivityValues.keySet())) {
 				enrichWithZeroProbability(sensitivityValues, each);
 			}
@@ -99,7 +106,7 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 
 	private void complementSensitivityValuesIfNecessary(Map<MLSensitivityEntry, Double> mlSensitivityValues) {
 		AnalysisTransformation transformation = MLSensitivityAnalysis.getAnalysisTransformation();
-		for (List<MeasurableProperty> each : transformation.computeMeasurableSpace()) {
+		for (List<MeasurableSensitivityProperty> each : transformation.computeMeasurableSpace()) {
 			// The list of each is immutable; which causes an exception during sorting.
 			var entry = MLSensitivityEntry.from(Lists.newArrayList(each));
 			if (containsNoPropertyWith(entry, mlSensitivityValues.keySet())) {
@@ -108,7 +115,7 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 		}
 	}
 
-	private boolean containsNoPropertyWith(MeasurableProperty property, Set<MeasurableProperty> recordedProperties) {
+	private boolean containsNoPropertyWith(MeasurableSensitivityProperty property, Set<MeasurableSensitivityProperty> recordedProperties) {
 		return recordedProperties.stream().noneMatch(prop -> prop.equals(property));
 	}
 
@@ -116,8 +123,8 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 		return mlSensitivityValues.contains(entry) == false;
 	}
 
-	private void enrichWithZeroProbability(Map<MeasurableProperty, Double> recordedProperties,
-			MeasurableProperty zeroSensitivityProperty) {
+	private void enrichWithZeroProbability(Map<MeasurableSensitivityProperty, Double> recordedProperties,
+			MeasurableSensitivityProperty zeroSensitivityProperty) {
 		recordedProperties.put(zeroSensitivityProperty, 0.0);
 	}
 
@@ -126,14 +133,14 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 		mlSensitivityValues.put(zeroSensitivityProperty, 0.5);
 	}
 	
-	private MeasurableProperty reduceToSingleProperty(Map<MeasurableProperty, Double> sensitivityValues) {
+	private MeasurableSensitivityProperty reduceToSingleProperty(Map<MeasurableSensitivityProperty, Double> sensitivityValues) {
 		return sensitivityValues.keySet().iterator().next();
 	}
 
-	private PropertyMeasure retrievePropertyMeasureBy(MeasurableProperty property) {
+	private PropertyMeasure retrievePropertyMeasureBy(MeasurableSensitivityProperty property) {
 		return MLSensitivityAnalysis.getAnalysisTransformation().findPropertyMeasureWith(property.getId())
 				.orElseThrow(MLSensitivityAnalysisException.supplierWithMessage(
-						String.format("There is no property measure for property %s", property.getName())));
+						String.format("There is no property measure for property %s", property.getId())));
 	}
 
 }
