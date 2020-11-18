@@ -29,7 +29,8 @@ import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityMo
 import org.palladiosimulator.dependability.ml.sensitivity.analysis.TrainingDataBasedAnalysisStrategy;
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure;
-import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableProperty;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableSensitivityProperty;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.SensitivityProperty;
 import org.palladiosimulator.dependability.ml.util.Tuple;
 
 import com.google.common.collect.Lists;
@@ -139,8 +140,8 @@ public class MLSensitivityAnalysisTest {
 
 		var simpleUpperBoundMeasure = new PropertyMeasure() {
 
-			private final MeasurableProperty trueValue = new MeasurableProperty(CategoricalValue.create("TRUE"));
-			private final MeasurableProperty falseValue = new MeasurableProperty(CategoricalValue.create("FALSE"));
+			private final MeasurableSensitivityProperty trueValue = generateFromRaw(CategoricalValue.create("TRUE"));
+			private final MeasurableSensitivityProperty falseValue = generateFromRaw(CategoricalValue.create("FALSE"));
 
 			@Override
 			public String getId() {
@@ -148,7 +149,7 @@ public class MLSensitivityAnalysisTest {
 			}
 
 			@Override
-			public MeasurableProperty apply(InputData inputData) {
+			public MeasurableSensitivityProperty apply(InputData inputData) {
 				var value = asNumerical(inputData).getValue().intValue();
 				if (value > 10) {
 					return trueValue;
@@ -157,7 +158,7 @@ public class MLSensitivityAnalysisTest {
 			}
 
 			@Override
-			public Set<MeasurableProperty> getMeasurablePropertySpace() {
+			public Set<MeasurableSensitivityProperty> getMeasurablePropertySpace() {
 				return Sets.newHashSet(trueValue, falseValue);
 			}
 
@@ -173,8 +174,8 @@ public class MLSensitivityAnalysisTest {
 		};
 		var simpleLowerBoundMeasure = new PropertyMeasure() {
 
-			private final MeasurableProperty trueValue = new MeasurableProperty(CategoricalValue.create("TRUE"));
-			private final MeasurableProperty falseValue = new MeasurableProperty(CategoricalValue.create("FALSE"));
+			private final MeasurableSensitivityProperty trueValue = generateFromRaw(CategoricalValue.create("TRUE"));
+			private final MeasurableSensitivityProperty falseValue = generateFromRaw(CategoricalValue.create("FALSE"));
 
 			@Override
 			public String getId() {
@@ -182,7 +183,7 @@ public class MLSensitivityAnalysisTest {
 			}
 
 			@Override
-			public MeasurableProperty apply(InputData inputData) {
+			public MeasurableSensitivityProperty apply(InputData inputData) {
 				var value = asNumerical(inputData).getValue().intValue();
 				if (value <= 5) {
 					return trueValue;
@@ -191,7 +192,7 @@ public class MLSensitivityAnalysisTest {
 			}
 
 			@Override
-			public Set<MeasurableProperty> getMeasurablePropertySpace() {
+			public Set<MeasurableSensitivityProperty> getMeasurablePropertySpace() {
 				return Sets.newHashSet(trueValue, falseValue);
 			}
 
@@ -250,9 +251,9 @@ public class MLSensitivityAnalysisTest {
 		var iterator = propertyMeasures.iterator();
 		var firstMeasure = iterator.next();
 		var secondMeasure = iterator.next();
-		for (MeasurableProperty eachValOfFirst : firstMeasure.getMeasurablePropertySpace()) {
-			for (MeasurableProperty eachValOfSecond : secondMeasure.getMeasurablePropertySpace()) {
-				var properties = Lists.newArrayList(eachValOfFirst, eachValOfSecond);
+		for (MeasurableSensitivityProperty eachValOfFirst : firstMeasure.getMeasurablePropertySpace()) {
+			for (MeasurableSensitivityProperty eachValOfSecond : secondMeasure.getMeasurablePropertySpace()) {
+				var properties = Lists.<SensitivityProperty>newArrayList(eachValOfFirst, eachValOfSecond);
 				var successSensitivity = -1.0;
 				try {
 					successSensitivity = result.inferSensitivity(properties);
@@ -267,8 +268,8 @@ public class MLSensitivityAnalysisTest {
 
 	private void assertValidSensitivityValuesOfAll(Set<PropertyMeasure> propertyMeasures) {
 		for (PropertyMeasure eachMeasure : propertyMeasures) {
-			Map<MeasurableProperty, Double> sensitivityValues = Maps.newHashMap();
-			for (MeasurableProperty eachProperty : eachMeasure.getMeasurablePropertySpace()) {
+			Map<MeasurableSensitivityProperty, Double> sensitivityValues = Maps.newHashMap();
+			for (MeasurableSensitivityProperty eachProperty : eachMeasure.getMeasurablePropertySpace()) {
 				try {
 					var sensitivityValue = result.getSensitivityValuesOf(eachProperty);
 					sensitivityValues.put(eachProperty, sensitivityValue);
@@ -281,8 +282,8 @@ public class MLSensitivityAnalysisTest {
 		}
 	}
 
-	private void assertValidValues(Map<MeasurableProperty, Double> sensitivityValues) {
-		for (MeasurableProperty each : sensitivityValues.keySet()) {
+	private void assertValidValues(Map<MeasurableSensitivityProperty, Double> sensitivityValues) {
+		for (MeasurableSensitivityProperty each : sensitivityValues.keySet()) {
 			assertValueIsInRange(sensitivityValues.get(each));
 		}
 		assertSumsUpToOne(sensitivityValues.values());
