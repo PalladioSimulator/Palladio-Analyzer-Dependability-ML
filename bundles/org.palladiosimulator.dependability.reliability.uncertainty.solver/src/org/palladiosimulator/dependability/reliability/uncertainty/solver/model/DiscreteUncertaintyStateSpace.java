@@ -55,10 +55,6 @@ public class DiscreteUncertaintyStateSpace {
 		public String getId() {
 			return variable.getEntityName();
 		}
-		
-		public boolean instantiates(TemplateVariable template) {
-			return variable.getInstantiatedTemplate().getId().equals(template.getId());
-		}
 
 		public Set<CategoricalValue> getValueSpace() {
 			return valueSpace;
@@ -66,6 +62,14 @@ public class DiscreteUncertaintyStateSpace {
 
 		public CategoricalValue getValue() {
 			return value;
+		}
+		
+		public boolean instantiates(TemplateVariable template) {
+			return getInstantiatedTemplate().getId().equals(template.getId());
+		}
+		
+		public TemplateVariable getInstantiatedTemplate() {
+			return variable.getInstantiatedTemplate();
 		}
 
 	}

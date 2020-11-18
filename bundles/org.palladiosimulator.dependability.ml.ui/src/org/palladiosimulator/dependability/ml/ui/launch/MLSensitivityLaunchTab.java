@@ -27,6 +27,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.palladiosimulator.dependability.ml.sensitivity.api.MLSensitivityAnalyser;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure;
 
 import com.google.common.collect.Lists;
 
@@ -108,10 +109,10 @@ public class MLSensitivityLaunchTab extends AbstractLaunchConfigurationTab {
 		GridLayoutFactory.swtDefaults().numColumns(3).applyTo(sensitivityPropertiesGroup);
 
 		propertyCheckboxes = Lists.newArrayList();
-		for (String each : MLSensitivityAnalyser.getAnalysablePropertyNames()) {
+		for (PropertyMeasure each : MLSensitivityAnalyser.getAnalysablePropertyMeasures()) {
 			var propButton = new Button(sensitivityPropertiesGroup, SWT.CHECK);
 			propButton.setSelection(false);
-			propButton.setText(each);
+			propButton.setText(each.getName());
 
 			propertyCheckboxes.add(propButton);
 		}

@@ -7,11 +7,10 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.palladiosimulator.dependability.ml.model.InputData;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableProperty;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
-import tools.mdsd.probdist.api.entity.CategoricalValue;
 
 public class AnalysisTransformation {
 
@@ -25,20 +24,17 @@ public class AnalysisTransformation {
 		return propertyMeasures.stream().map(each -> each.apply(inputData)).collect(toSet());
 	}
 
-	public Optional<PropertyMeasure> findPropertyMeasureWith(String propertyName) {
-		return propertyMeasures.stream().filter(each -> each.getId().equals(propertyName)).findFirst();
+	public Optional<PropertyMeasure> findPropertyMeasureWith(String propertId) {
+		return propertyMeasures.stream().filter(each -> each.getId().equals(propertId)).findFirst();
 	}
 
-	public Set<List<MeasurableProperty>> computePropertyMeasureValueSpace() {
-		List<Set<MeasurableProperty>> propertyValueSpaces = Lists.newArrayList();
-		for (PropertyMeasure eachProperty : propertyMeasures) {
-			Set<MeasurableProperty> propertyValueSpace = Sets.newHashSet();
-			for (CategoricalValue eachValue : eachProperty.getValueSpace()) {
-				propertyValueSpace.add(new MeasurableProperty(eachProperty.getId(), eachValue));
-			}
-			propertyValueSpaces.add(propertyValueSpace);
+	public Set<List<MeasurableProperty>> computeMeasurableSpace() {
+		List<Set<MeasurableProperty>> measurableSpace = Lists.newArrayList();
+		for (PropertyMeasure eachMeasure : propertyMeasures) {
+			var propertySpace = Sets.newHashSet(eachMeasure.getMeasurablePropertySpace());
+			measurableSpace.add(propertySpace);
 		}
-		return Sets.cartesianProduct(propertyValueSpaces);
+		return Sets.cartesianProduct(measurableSpace);
 	}
 
 }

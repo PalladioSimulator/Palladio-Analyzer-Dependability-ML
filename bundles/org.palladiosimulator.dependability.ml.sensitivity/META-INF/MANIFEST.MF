@@ -18,4 +18,5 @@ Bundle-ActivationPolicy: lazy
 Export-Package: org.palladiosimulator.dependability.ml.sensitivity.analysis,
  org.palladiosimulator.dependability.ml.sensitivity.api,
  org.palladiosimulator.dependability.ml.sensitivity.exception,
- org.palladiosimulator.dependability.ml.sensitivity.transformation
+ org.palladiosimulator.dependability.ml.sensitivity.transformation,
+ org.palladiosimulator.dependability.ml.sensitivity.transformation.property.conversion

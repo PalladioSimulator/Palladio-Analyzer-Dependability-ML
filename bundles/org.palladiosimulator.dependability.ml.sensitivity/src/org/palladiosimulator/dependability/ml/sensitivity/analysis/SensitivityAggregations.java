@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.function.Function;
 
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
-import org.palladiosimulator.dependability.ml.sensitivity.transformation.MeasurableProperty;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableProperty;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -37,17 +37,17 @@ public class SensitivityAggregations {
 
 		private static String constructSignatureFrom(List<MeasurableProperty> properties) {
 			var builder = new StringBuilder();
-			for (MeasurableProperty each : orderAlphabeticallyByPropertyName(properties)) {
-				builder.append(each.toString()).append(SIGNATURE_DELIMITER);
+			
+			for (MeasurableProperty each : orderAlphabeticallyByName(properties)) {
+				builder.append(each.getMeasuredValue().toString()).append(SIGNATURE_DELIMITER);
 			}
-
 			builder.deleteCharAt(builder.lastIndexOf(SIGNATURE_DELIMITER));
 
 			return builder.toString();
 		}
 
-		private static List<MeasurableProperty> orderAlphabeticallyByPropertyName(List<MeasurableProperty> properties) {
-			properties.sort((p1, p2) -> p1.getName().compareTo(p2.getName()));
+		private static List<MeasurableProperty> orderAlphabeticallyByName(List<MeasurableProperty> properties) {
+			properties.sort((p1, p2) -> p1.getId().compareTo(p2.getId()));
 			return properties;
 		}
 
@@ -112,7 +112,7 @@ public class SensitivityAggregations {
 		incrementGlobalCounter();
 	}
 
-	public Set<String> getMeasurablePropertyNames() {
+	public Set<String> getMeasurablePropertyIds() {
 		return groupMeasurableProperties().keySet();
 	}
 
@@ -138,7 +138,7 @@ public class SensitivityAggregations {
 	}
 
 	private Map<String, List<MeasurableProperty>> groupMeasurableProperties() {
-		return propertySensitivityAggregations.keySet().stream().collect(groupingBy(MeasurableProperty::getName));
+		return propertySensitivityAggregations.keySet().stream().collect(groupingBy(MeasurableProperty::getId));
 	}
 
 	private void updatePropertySensitivity(MeasurableProperty property) {

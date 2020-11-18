@@ -29,7 +29,7 @@ public class MLSensitivityAnalyser {
 	
 	private static final Set<PropertyMeasure> PROPERTY_MEASURE_REGISTRY = Sets.newHashSet();
 	static {
-		PROPERTY_MEASURE_REGISTRY.add(new ImageBrightness());
+		PROPERTY_MEASURE_REGISTRY.add(ImageBrightness.get());
 	}
 	
 	private static final Set<TrainedModel> ANALYSABLE_MODEL_REGISTRY = Sets.newHashSet();
@@ -41,8 +41,8 @@ public class MLSensitivityAnalyser {
 		return ANALYSABLE_MODEL_REGISTRY.stream().filter(modelWith(name)).findFirst();
 	}
 
-	public static Optional<PropertyMeasure> findAnalysablePropertyMeasureWith(String name) {
-		return PROPERTY_MEASURE_REGISTRY.stream().filter(propertyWith(name)).findFirst();
+	public static Optional<PropertyMeasure> findAnalysablePropertyMeasureWith(String id) {
+		return PROPERTY_MEASURE_REGISTRY.stream().filter(propertyWith(id)).findFirst();
 	}
 
 	protected static Optional<MLSensitivityAnalysisStrategy> findAnalysisStrategyWith(String name) {
@@ -61,8 +61,8 @@ public class MLSensitivityAnalyser {
 		ANALYSIS_STRATEGY_REGISTRY.add(strategy);
 	}
 
-	public static Set<String> getAnalysablePropertyNames() {
-		return PROPERTY_MEASURE_REGISTRY.stream().map(PropertyMeasure::getName).collect(toSet());
+	public static Set<PropertyMeasure> getAnalysablePropertyMeasures() {
+		return PROPERTY_MEASURE_REGISTRY;
 	}
 
 	public static Set<String> getAnalysableModelNames() {
@@ -98,8 +98,8 @@ public class MLSensitivityAnalyser {
 		analyse(config).saveAt(config.getSensitivityModelStoringLocation());
 	}
 
-	private static Predicate<PropertyMeasure> propertyWith(String queriedName) {
-		return prop -> prop.getName().equals(queriedName);
+	private static Predicate<PropertyMeasure> propertyWith(String queriedId) {
+		return prop -> prop.getId().equals(queriedId);
 	}
 
 	private static Predicate<TrainedModel> modelWith(String queriedName) {

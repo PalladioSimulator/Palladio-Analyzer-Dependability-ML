@@ -59,10 +59,10 @@ public class BayesianUncertaintyModel implements UncertaintyModel {
 
 	private double marginalizingFailureVariable(List<InputValue> values) {
 		var probability = 0.0;
-		for (CategoricalValue each : retrieveValueSpaceOf(failureVariable)) {			
+		for (CategoricalValue each : retrieveValueSpaceOf(failureVariable)) {
 			var copiedValues = Lists.newArrayList(values);
 			copiedValues.add(InputValue.create(each, failureVariable));
-			
+
 			probability += bayesianNetwork.probability(copiedValues);
 		}
 		return probability;
@@ -92,7 +92,9 @@ public class BayesianUncertaintyModel implements UncertaintyModel {
 	}
 
 	private Optional<CategoricalValue> findValue(GroundRandomVariable variable, List<UncertaintyState> values) {
-		return values.stream().filter(each -> each.getId().equals(variable.getId())).map(UncertaintyState::getValue)
+		return values.stream()
+				.filter(each -> each.getId().equals(variable.getEntityName()))
+				.map(UncertaintyState::getValue)
 				.findFirst();
 	}
 

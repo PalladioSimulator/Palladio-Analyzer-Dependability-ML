@@ -5,6 +5,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.property.conversion.MeasurablePropertyConversion;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticModel;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
 import org.palladiosimulator.envdyn.environment.staticmodel.LocalProbabilisticNetwork;
@@ -55,23 +56,23 @@ public class ProbabilisticSensitivityModelBuilder {
 	}
 
 	public ProbabilisticSensitivityModelBuilder addSensitivityFactor(PropertyMeasure propertyMeasure) {
-		var propertyName = propertyMeasure.getId();
+		var name = MeasurablePropertyConversion.convertToTemplateVariableName(propertyMeasure);
 
-		var template = buildTemplateWith(propertyName);
+		var template = buildTemplateWith(name);
 		addToTemplateDefinitions(template);
 		adjustMLFactorScope(template);
 
-		var factor = buildTemplateFactor(template, propertyName.concat(FACTOR_SUFFIX));
+		var factor = buildTemplateFactor(template, name.concat(FACTOR_SUFFIX));
 		addToTemplateDefinitions(factor);
 
 		var dependencyRelation = buildDependencyRelationToMLTemplate(template);
 		addToTemplateDefinitions(dependencyRelation);
 		adjustMLDependencyStructure(dependencyRelation);
 
-		var groundVariable = instantiateTemplate(template, propertyName.concat(VARIABLE_NAME_SUFFIX));
+		var groundVariable = instantiateTemplate(template, name.concat(VARIABLE_NAME_SUFFIX));
 		addToGroundNetwork(groundVariable);
 
-		var instantiatedFactor = instantiateFactor(factor, propertyName.concat(INSTANTIATION_FACTOR_SUFFIX));
+		var instantiatedFactor = instantiateFactor(factor, name.concat(INSTANTIATION_FACTOR_SUFFIX));
 		addToGroundNetwork(instantiatedFactor);
 
 		groundVariable.setDescriptiveModel(instantiatedFactor);

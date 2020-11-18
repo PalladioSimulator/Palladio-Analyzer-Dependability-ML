@@ -10,7 +10,7 @@ import java.util.Set;
 import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityAggregations.MLSensitivityEntry;
 import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityModel.MLOutcomeMeasure;
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
-import org.palladiosimulator.dependability.ml.sensitivity.transformation.MeasurableProperty;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableProperty;
 
 import com.google.common.collect.Maps;
 
@@ -42,7 +42,9 @@ public class ProbabilityDistributionBuilder {
 	private ProbabilityDistributionBuilder(String name) {
 		this.name = new StringBuilder(name).append(DIST_NAME_SUFFIX).toString();
 		this.skeleton = BasicDistributionTypesLoader.loadRepository().getDistributionFamilies().stream()
-				.filter(each -> each.getEntityName().equals(MULTINOMIAL_DIST_SKELETON)).findFirst().get();
+				.filter(each -> each.getEntityName().equals(MULTINOMIAL_DIST_SKELETON))
+				.findFirst()
+				.get();
 	}
 
 	public static ProbabilityDistributionFunctionRepository mergeToSingleRepository(
@@ -56,7 +58,7 @@ public class ProbabilityDistributionBuilder {
 	}
 
 	public static ProbabilityDistributionBuilder buildProbabilityDistributionFor(MeasurableProperty property) {
-		return new ProbabilityDistributionBuilder(property.getName());
+		return new ProbabilityDistributionBuilder(property.getId());
 	}
 
 	public static ProbabilityDistributionBuilder buildProbabilityDistributionForMLVariable() {
@@ -146,9 +148,8 @@ public class ProbabilityDistributionBuilder {
 
 	private String parseToSampleSpace(Map<MeasurableProperty, Double> sensitivityValues) {
 		Map<String, String> sampleSpace = sensitivityValues.entrySet().stream()
-				// .collect(toMap(entry -> entry.getKey().getMeasuredValue().get(), entry ->
-				// entry.getValue().toString()));
-				.collect(toMap(entry -> entry.getKey().toString(), entry -> entry.getValue().toString()));
+				.collect(toMap(entry -> entry.getKey().getMeasuredValue().toString(), 
+						entry -> entry.getValue().toString()));
 		return parseToString(sampleSpace);
 	}
 

@@ -10,11 +10,10 @@ import org.palladiosimulator.dependability.ml.model.OutputData;
 import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityAggregations.MLSensitivityEntry;
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.AnalysisTransformation;
-import org.palladiosimulator.dependability.ml.sensitivity.transformation.MeasurableProperty;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableProperty;
 
 import com.google.common.collect.Lists;
-
-import tools.mdsd.probdist.api.entity.CategoricalValue;
 
 public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisStrategy {
 
@@ -74,32 +73,33 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 
 	private SensitivityModel complementSensitivityModel(SensitivityModel sensitivitiyModel,
 			SensitivityAggregations sensitivityAggregations) {
-		for (String each : sensitivityAggregations.getMeasurablePropertyNames()) {
+		for (String each : sensitivityAggregations.getMeasurablePropertyIds()) {
 			var sensitivityValues = sensitivityAggregations.getPropertySensitivityValues(each);
-			checkAndHandleCompleteness(each, sensitivityValues);
+			complementPropertyValuesIfNecessary(sensitivityValues);
 
 			sensitivitiyModel.setSensitivityValues(sensitivityValues);
 		}
 
 		var mlSensitivityValues = sensitivityAggregations.getMLSensitivityValues();
-		checkAndHandleCompleteness(mlSensitivityValues);
+		complementSensitivityValuesIfNecessary(mlSensitivityValues);
 
 		sensitivitiyModel.setMLSensitivityValues(mlSensitivityValues);
 
 		return sensitivitiyModel;
 	}
 
-	private void checkAndHandleCompleteness(String propertyName, Map<MeasurableProperty, Double> sensitivityValues) {
-		for (CategoricalValue each : retrieveValueSpaceOf(propertyName)) {
+	private void complementPropertyValuesIfNecessary(Map<MeasurableProperty, Double> sensitivityValues) {
+		var measure = retrievePropertyMeasureBy(reduceToSingleProperty(sensitivityValues));
+		for (MeasurableProperty each : measure.getMeasurablePropertySpace()) {
 			if (containsNoPropertyWith(each, sensitivityValues.keySet())) {
-				enrichWithZeroProbability(sensitivityValues, new MeasurableProperty(propertyName, each));
+				enrichWithZeroProbability(sensitivityValues, each);
 			}
 		}
 	}
 
-	private void checkAndHandleCompleteness(Map<MLSensitivityEntry, Double> mlSensitivityValues) {
+	private void complementSensitivityValuesIfNecessary(Map<MLSensitivityEntry, Double> mlSensitivityValues) {
 		AnalysisTransformation transformation = MLSensitivityAnalysis.getAnalysisTransformation();
-		for (List<MeasurableProperty> each : transformation.computePropertyMeasureValueSpace()) {
+		for (List<MeasurableProperty> each : transformation.computeMeasurableSpace()) {
 			// The list of each is immutable; which causes an exception during sorting.
 			var entry = MLSensitivityEntry.from(Lists.newArrayList(each));
 			if (containsNoPropertyWith(entry, mlSensitivityValues.keySet())) {
@@ -108,8 +108,8 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 		}
 	}
 
-	private boolean containsNoPropertyWith(CategoricalValue value, Set<MeasurableProperty> recordedProperties) {
-		return recordedProperties.stream().noneMatch(prop -> prop.getMeasuredValue().get().equals(value.get()));
+	private boolean containsNoPropertyWith(MeasurableProperty property, Set<MeasurableProperty> recordedProperties) {
+		return recordedProperties.stream().noneMatch(prop -> prop.equals(property));
 	}
 
 	private boolean containsNoPropertyWith(MLSensitivityEntry entry, Set<MLSensitivityEntry> mlSensitivityValues) {
@@ -125,12 +125,15 @@ public class TrainingDataBasedAnalysisStrategy implements MLSensitivityAnalysisS
 			MLSensitivityEntry zeroSensitivityProperty) {
 		mlSensitivityValues.put(zeroSensitivityProperty, 0.5);
 	}
+	
+	private MeasurableProperty reduceToSingleProperty(Map<MeasurableProperty, Double> sensitivityValues) {
+		return sensitivityValues.keySet().iterator().next();
+	}
 
-	private Set<CategoricalValue> retrieveValueSpaceOf(String propertyName) {
-		var propertyMeasure = MLSensitivityAnalysis.getAnalysisTransformation().findPropertyMeasureWith(propertyName)
+	private PropertyMeasure retrievePropertyMeasureBy(MeasurableProperty property) {
+		return MLSensitivityAnalysis.getAnalysisTransformation().findPropertyMeasureWith(property.getId())
 				.orElseThrow(MLSensitivityAnalysisException.supplierWithMessage(
-						String.format("There is no property measure for property %s", propertyName)));
-		return propertyMeasure.getValueSpace();
+						String.format("There is no property measure for property %s", property.getName())));
 	}
 
 }

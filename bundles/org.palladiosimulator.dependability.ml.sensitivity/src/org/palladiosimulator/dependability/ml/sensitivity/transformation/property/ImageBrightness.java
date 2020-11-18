@@ -10,7 +10,6 @@ import javax.imageio.ImageIO;
 import org.palladiosimulator.dependability.ml.model.InputData;
 import org.palladiosimulator.dependability.ml.model.nn.ImageInputData;
 import org.palladiosimulator.dependability.ml.sensitivity.exception.MLSensitivityAnalysisException;
-import org.palladiosimulator.dependability.ml.sensitivity.transformation.MeasurableProperty;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure;
 
 import com.google.common.collect.Maps;
@@ -18,35 +17,43 @@ import com.google.common.collect.Sets;
 
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 
-public class ImageBrightness implements PropertyMeasure {
+public class ImageBrightness extends PropertyMeasure {
 
 	private final static int HIGH_BRIGHTNESS_THRESHOLD = 175;
 	private final static int MEDIUM_BRIGHTNESS_THRESHOLD = 75;
 
-	private static enum BrightnessCategory {
-		HIGH("High"), MEDIUM("Medium"), LOW("Low");
+	private enum BrightnessCategory {
+		HIGH("High"), 
+		MEDIUM("Medium"), 
+		LOW("Low");
 
 		private final MeasurableProperty value;
 
 		private BrightnessCategory(String name) {
-			this.value = new MeasurableProperty(PROPERTY_ID, CategoricalValue.create(name));
-		}
-
-		public CategoricalValue getMeasuredValue() {
-			return value.getMeasuredValue();
+			this.value = INSTANCE.new MeasurableProperty(CategoricalValue.create(name));
 		}
 
 		public MeasurableProperty asMeasurableProperty() {
 			return value;
 		}
 
-		public static Set<CategoricalValue> getValueSpace() {
-			return Sets.newHashSet(HIGH.getMeasuredValue(), MEDIUM.getMeasuredValue(), LOW.getMeasuredValue());
+		public static Set<MeasurableProperty> getValueSpace() {
+			return Sets.newHashSet(HIGH.asMeasurableProperty(), MEDIUM.asMeasurableProperty(),
+					LOW.asMeasurableProperty());
 		}
 	}
 
 	private final static String PROPERTY_NAME = "Image brightness measure";
 	private final static String PROPERTY_ID = "ImageBrightnessMeasure";
+	private final static ImageBrightness INSTANCE = new ImageBrightness();
+
+	private ImageBrightness() {
+
+	}
+
+	public static ImageBrightness get() {
+		return INSTANCE;
+	}
 
 	@Override
 	public MeasurableProperty apply(InputData inputData) {
@@ -63,7 +70,7 @@ public class ImageBrightness implements PropertyMeasure {
 	}
 
 	@Override
-	public Set<CategoricalValue> getValueSpace() {
+	public Set<MeasurableProperty> getMeasurablePropertySpace() {
 		return BrightnessCategory.getValueSpace();
 	}
 
@@ -131,7 +138,7 @@ public class ImageBrightness implements PropertyMeasure {
 			img = ImageIO.read(inputData.getImage());
 		} catch (IOException e) {
 			MLSensitivityAnalysisException
-					.throwWithMessageAndCause("Something rent wrong during brithness computation.", e);
+					.throwWithMessageAndCause("Something went wrong during brithness computation.", e);
 		}
 		return img;
 	}

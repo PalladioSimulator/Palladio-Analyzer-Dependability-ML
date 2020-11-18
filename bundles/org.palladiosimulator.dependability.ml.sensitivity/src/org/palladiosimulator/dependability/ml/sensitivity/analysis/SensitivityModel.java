@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.palladiosimulator.dependability.ml.sensitivity.analysis.SensitivityAggregations.MLSensitivityEntry;
-import org.palladiosimulator.dependability.ml.sensitivity.transformation.MeasurableProperty;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure;
+import org.palladiosimulator.dependability.ml.sensitivity.transformation.PropertyMeasure.MeasurableProperty;
 
 public abstract class SensitivityModel {
 
