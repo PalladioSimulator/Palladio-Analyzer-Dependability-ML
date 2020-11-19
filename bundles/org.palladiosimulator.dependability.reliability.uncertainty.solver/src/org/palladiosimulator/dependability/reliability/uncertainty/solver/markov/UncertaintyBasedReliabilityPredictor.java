@@ -145,7 +145,9 @@ public class UncertaintyBasedReliabilityPredictor {
 	}
 
 	private double computeSumOfUncertaintyProbabilities(List<ReliabilityPredictionResult> results) {
-		return results.stream().map(ReliabilityPredictionResult::getProbabilityOfUncertainty).reduce(Double::sum)
+		return results.stream()
+				.map(ReliabilityPredictionResult::getProbabilityOfUncertainty)
+				.reduce(Double::sum)
 				.orElse(Double.NaN);
 	}
 
@@ -174,7 +176,8 @@ public class UncertaintyBasedReliabilityPredictor {
 	private Optional<UncertaintyState> findApplicableState(ArchitecturalCountermeasure countermeasure,
 			List<UncertaintyState> stateTuple) {
 		return stateTuple.stream()
-				.filter(each -> each.getId().equals(countermeasure.getTargetUncertainty().getEntityName())).findFirst();
+				.filter(each -> each.instantiates(countermeasure.getTargetUncertainty()))
+				.findFirst();
 	}
 
 	private CategoricalValue applyArchitecturalCountermeasure(ArchitecturalCountermeasure countermeasure,

@@ -9,7 +9,7 @@
     <uncertaintyModel href="ProbabilisticSensitivityModel.staticmodel#_oHP9sPKQEeqz1MDQAu5L-Q"/>
   </uncertaintyInducedFailureTypes>
   <architecturalCountermeasures id="_pVSd0N36Eeq3EYM7_fX0uw" entityName="PreprocessInput" architecturalPreconditions="_jofawPKNEeqz1MDQAu5L-Q">
-    <targetUncertainty href="ProbabilisticSensitivityModel.staticmodel#_U5KsMMqkEeqObY-eK2jOOA"/>
+    <targetUncertainty href="HRITemplateDefinitions.templatevariable#_0uh4oCpGEeuMpaabmuiN-Q"/>
     <uncertaintyImprovement xsi:type="uncertainty:ProbabilisticImprovement">
       <probabilityDistribution href="ProbabilityDistributions.distributionfunction#_RWYiwN38Eeq4jrWplRa7Fg"/>
     </uncertaintyImprovement>

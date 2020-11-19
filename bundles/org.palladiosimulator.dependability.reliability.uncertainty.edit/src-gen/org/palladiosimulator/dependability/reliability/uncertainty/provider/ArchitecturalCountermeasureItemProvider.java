@@ -11,10 +11,11 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFactory;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;

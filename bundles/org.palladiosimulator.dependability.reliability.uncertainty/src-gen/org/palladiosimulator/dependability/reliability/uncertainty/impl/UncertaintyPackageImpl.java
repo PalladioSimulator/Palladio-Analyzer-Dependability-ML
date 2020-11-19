@@ -530,6 +530,8 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 				.getEPackage(ReliabilityPackage.eNS_URI);
 		StaticmodelPackage theStaticmodelPackage = (StaticmodelPackage) EPackage.Registry.INSTANCE
 				.getEPackage(StaticmodelPackage.eNS_URI);
+		TemplatevariablePackage theTemplatevariablePackage = (TemplatevariablePackage) EPackage.Registry.INSTANCE
+				.getEPackage(TemplatevariablePackage.eNS_URI);
 		RepositoryPackage theRepositoryPackage = (RepositoryPackage) EPackage.Registry.INSTANCE
 				.getEPackage(RepositoryPackage.eNS_URI);
 		DistributionfunctionPackage theDistributionfunctionPackage = (DistributionfunctionPackage) EPackage.Registry.INSTANCE
@@ -589,7 +591,7 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 		initEReference(getArchitecturalCountermeasure_TargetUncertainty(),
-				theStaticmodelPackage.getGroundRandomVariable(), null, "targetUncertainty", null, 1, 1,
+				theTemplatevariablePackage.getTemplateVariable(), null, "targetUncertainty", null, 1, 1,
 				ArchitecturalCountermeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArchitecturalCountermeasure_UncertaintyImprovement(), this.getUncertaintyImprovement(), null,

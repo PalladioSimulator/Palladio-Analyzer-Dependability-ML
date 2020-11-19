@@ -3,10 +3,12 @@
 package org.palladiosimulator.dependability.reliability.uncertainty;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticNetwork;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
 
 import org.palladiosimulator.pcm.reliability.FailureType;
+
 import tools.mdsd.modelingfoundations.identifier.Entity;
 
 /**

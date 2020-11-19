@@ -5,8 +5,8 @@ package org.palladiosimulator.dependability.reliability.uncertainty.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -21,7 +21,7 @@ import org.palladiosimulator.dependability.reliability.uncertainty.Architectural
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyImprovement;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
 
-import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
+import org.palladiosimulator.envdyn.environment.templatevariable.TemplateVariable;
 
 import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
 
@@ -59,7 +59,7 @@ public class ArchitecturalCountermeasureImpl extends EntityImpl implements Archi
 	 * @generated
 	 * @ordered
 	 */
-	protected GroundRandomVariable targetUncertainty;
+	protected TemplateVariable targetUncertainty;
 
 	/**
 	 * The cached value of the '{@link #getUncertaintyImprovement() <em>Uncertainty Improvement</em>}' containment reference.
@@ -111,10 +111,10 @@ public class ArchitecturalCountermeasureImpl extends EntityImpl implements Archi
 	 * @generated
 	 */
 	@Override
-	public GroundRandomVariable getTargetUncertainty() {
+	public TemplateVariable getTargetUncertainty() {
 		if (targetUncertainty != null && targetUncertainty.eIsProxy()) {
 			InternalEObject oldTargetUncertainty = (InternalEObject) targetUncertainty;
-			targetUncertainty = (GroundRandomVariable) eResolveProxy(oldTargetUncertainty);
+			targetUncertainty = (TemplateVariable) eResolveProxy(oldTargetUncertainty);
 			if (targetUncertainty != oldTargetUncertainty) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
@@ -130,7 +130,7 @@ public class ArchitecturalCountermeasureImpl extends EntityImpl implements Archi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GroundRandomVariable basicGetTargetUncertainty() {
+	public TemplateVariable basicGetTargetUncertainty() {
 		return targetUncertainty;
 	}
 
@@ -140,8 +140,8 @@ public class ArchitecturalCountermeasureImpl extends EntityImpl implements Archi
 	 * @generated
 	 */
 	@Override
-	public void setTargetUncertainty(GroundRandomVariable newTargetUncertainty) {
-		GroundRandomVariable oldTargetUncertainty = targetUncertainty;
+	public void setTargetUncertainty(TemplateVariable newTargetUncertainty) {
+		TemplateVariable oldTargetUncertainty = targetUncertainty;
 		targetUncertainty = newTargetUncertainty;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
@@ -252,7 +252,7 @@ public class ArchitecturalCountermeasureImpl extends EntityImpl implements Archi
 			getArchitecturalPreconditions().addAll((Collection<? extends ArchitecturalPrecondition>) newValue);
 			return;
 		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__TARGET_UNCERTAINTY:
-			setTargetUncertainty((GroundRandomVariable) newValue);
+			setTargetUncertainty((TemplateVariable) newValue);
 			return;
 		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT:
 			setUncertaintyImprovement((UncertaintyImprovement) newValue);
@@ -273,7 +273,7 @@ public class ArchitecturalCountermeasureImpl extends EntityImpl implements Archi
 			getArchitecturalPreconditions().clear();
 			return;
 		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__TARGET_UNCERTAINTY:
-			setTargetUncertainty((GroundRandomVariable) null);
+			setTargetUncertainty((TemplateVariable) null);
 			return;
 		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT:
 			setUncertaintyImprovement((UncertaintyImprovement) null);

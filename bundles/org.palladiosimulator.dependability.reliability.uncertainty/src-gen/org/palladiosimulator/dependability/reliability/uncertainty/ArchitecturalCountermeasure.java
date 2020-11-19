@@ -4,7 +4,7 @@ package org.palladiosimulator.dependability.reliability.uncertainty;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
+import org.palladiosimulator.envdyn.environment.templatevariable.TemplateVariable;
 
 import tools.mdsd.modelingfoundations.identifier.Entity;
 
@@ -44,12 +44,12 @@ public interface ArchitecturalCountermeasure extends Entity {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target Uncertainty</em>' reference.
-	 * @see #setTargetUncertainty(GroundRandomVariable)
+	 * @see #setTargetUncertainty(TemplateVariable)
 	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage#getArchitecturalCountermeasure_TargetUncertainty()
 	 * @model required="true"
 	 * @generated
 	 */
-	GroundRandomVariable getTargetUncertainty();
+	TemplateVariable getTargetUncertainty();
 
 	/**
 	 * Sets the value of the '{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getTargetUncertainty <em>Target Uncertainty</em>}' reference.
@@ -59,7 +59,7 @@ public interface ArchitecturalCountermeasure extends Entity {
 	 * @see #getTargetUncertainty()
 	 * @generated
 	 */
-	void setTargetUncertainty(GroundRandomVariable value);
+	void setTargetUncertainty(TemplateVariable value);
 
 	/**
 	 * Returns the value of the '<em><b>Uncertainty Improvement</b></em>' containment reference.

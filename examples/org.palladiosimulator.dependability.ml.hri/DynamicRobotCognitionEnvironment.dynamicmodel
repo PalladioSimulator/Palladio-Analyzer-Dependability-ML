@@ -7,9 +7,17 @@
         <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="HRITemplateDefinitions.templatevariable#_uXdNoeBfEeq7Govxf64fxQ"/>
         <distributionFunction href="ProbabilityDistributions.distributionfunction#_nrLDMOBcEeq7Govxf64fxQ"/>
       </localModels>
+      <localModels id="_PSemgCpJEeuMpaabmuiN-Q" entityName="TemporalSensorNoiseFactorInstantiation">
+        <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="HRITemplateDefinitions.templatevariable#_gd0jESpHEeuMpaabmuiN-Q"/>
+        <distributionFunction href="ProbabilityDistributions.distributionfunction#_9o2KcCpVEeuMpaabmuiN-Q"/>
+      </localModels>
       <timeSliceInductions xsi:type="dynamicmodel:InterTimeSliceInduction" descriptiveModel="_KZEeQOBgEeq7Govxf64fxQ">
         <appliedGroundVariable href="StaticRobotCognitionEnvironment.staticmodel#_rbdHAN4kEeqaAYEZJq_V3Q"/>
         <temporalStructure xsi:type="templatevariable:PersistenceRelation" href="HRITemplateDefinitions.templatevariable#//@relation.1"/>
+      </timeSliceInductions>
+      <timeSliceInductions xsi:type="dynamicmodel:InterTimeSliceInduction" descriptiveModel="_PSemgCpJEeuMpaabmuiN-Q">
+        <appliedGroundVariable href="StaticRobotCognitionEnvironment.staticmodel#_mDumMCpIEeuMpaabmuiN-Q"/>
+        <temporalStructure xsi:type="templatevariable:PersistenceRelation" href="HRITemplateDefinitions.templatevariable#//@relation.3"/>
       </timeSliceInductions>
     </behaviour>
   </extensions>

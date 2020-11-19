@@ -23,7 +23,7 @@
     <semanticResources>platform:/resource/de.uka.ipd.sdq.stoex/model/stoex.genmodel</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_wLLawMgFEeqouM-niPEurg">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_wM6gIMgFEeqouM-niPEurg" name="uncertainty" repPath="#_wMV4YMgFEeqouM-niPEurg" changeId="f96a4bf5-8b6e-4361-b4e5-24a399cdd4fd">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_wM6gIMgFEeqouM-niPEurg" name="uncertainty" repPath="#_wMV4YMgFEeqouM-niPEurg" changeId="c0c3fb10-b1c8-413f-b525-920d7dee5d7b">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="uncertainty.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -189,6 +189,21 @@
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_uSNT8d1vEeqSdKurlZojVA" fontName="Segoe UI" fontHeight="8"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uSNT8t1vEeqSdKurlZojVA" x="304" y="660" width="162" height="65"/>
+        </children>
+        <children xmi:type="notation:Shape" xmi:id="_l3rEMCppEeub5-kNXpS8yw" type="Note" fontName="Segoe UI" description="Assumption uncertainty model: Each template describing an uncertainty is instantiated only once, that is the number of ground variables is equal to the number of instantiated templates." fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_l3rEMSppEeub5-kNXpS8yw" source="specificStyles">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_l3rEMippEeub5-kNXpS8yw" key="verticalAlignment" value="8"/>
+          </eAnnotations>
+          <children xmi:type="notation:BasicDecorationNode" xmi:id="_l3s5YCppEeub5-kNXpS8yw" type="DiagramName">
+            <element xsi:nil="true"/>
+          </children>
+          <children xmi:type="notation:BasicDecorationNode" xmi:id="_l3s5YSppEeub5-kNXpS8yw" type="Description">
+            <element xsi:nil="true"/>
+          </children>
+          <styles xmi:type="notation:TextStyle" xmi:id="_l3rEMyppEeub5-kNXpS8yw" textAlignment="Center"/>
+          <styles xmi:type="notation:LineTypeStyle" xmi:id="_l3rENCppEeub5-kNXpS8yw"/>
+          <element xsi:nil="true"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_l3rENSppEeub5-kNXpS8yw" x="-220" y="165" width="206"/>
         </children>
         <styles xmi:type="notation:DiagramStyle" xmi:id="_wNE4MsgFEeqouM-niPEurg"/>
         <edges xmi:type="notation:Edge" xmi:id="_6kgcwN1TEeqSdKurlZojVA" type="4001" element="_6kWEsN1TEeqSdKurlZojVA" source="_6kZvEN1TEeqSdKurlZojVA" target="_46484MgFEeqouM-niPEurg">
@@ -422,7 +437,7 @@
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_lMb4sN1jEeqSdKurlZojVA" name=" targetUncertainty : GroundRandomVariable" tooltipText="">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_lMb4sN1jEeqSdKurlZojVA" name=" targetUncertainty : TemplateVariable" tooltipText="">
         <target xmi:type="ecore:EReference" href="uncertainty.ecore#//ArchitecturalCountermeasure/targetUncertainty"/>
         <semanticElements xmi:type="ecore:EReference" href="uncertainty.ecore#//ArchitecturalCountermeasure/targetUncertainty"/>
         <ownedStyle xmi:type="diagram:BundledImage" uid="_lMb4sd1jEeqSdKurlZojVA" labelAlignment="LEFT" description="_PlwyUMgGEeqouM-niPEurg" color="114,159,207">

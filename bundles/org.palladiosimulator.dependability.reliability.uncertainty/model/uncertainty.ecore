@@ -23,7 +23,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="architecturalPreconditions"
         lowerBound="1" upperBound="-1" eType="#//ArchitecturalPrecondition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetUncertainty" lowerBound="1"
-        eType="ecore:EClass ../../org.palladiosimulator.envdyn.model/model/environmentaldynamics.ecore#//staticmodel/GroundRandomVariable"/>
+        eType="ecore:EClass ../../org.palladiosimulator.envdyn.model/model/environmentaldynamics.ecore#//templatevariable/TemplateVariable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="uncertaintyImprovement"
         lowerBound="1" eType="#//UncertaintyImprovement" containment="true"/>
   </eClassifiers>

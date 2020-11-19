@@ -5,9 +5,17 @@
       <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="HRITemplateDefinitions.templatevariable#_U5FzvMqkEeqObY-eK2jOOA"/>
       <distribution href="ProbabilityDistributions.distributionfunction#_a9RjscqkEeqObY-eK2jOOA"/>
     </localModels>
+    <localModels id="_zY5QgCpIEeuMpaabmuiN-Q">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="HRITemplateDefinitions.templatevariable#_X73JESpHEeuMpaabmuiN-Q"/>
+      <distribution href="ProbabilityDistributions.distributionfunction#_UxIxICpVEeuMpaabmuiN-Q"/>
+    </localModels>
     <localProbabilisticModels>
       <groundRandomVariables id="_rbdHAN4kEeqaAYEZJq_V3Q" entityName="InstantiatedBrightnessMeasureTemplate" descriptiveModel="_FYAlEN4kEeqaAYEZJq_V3Q">
         <instantiatedTemplate href="HRITemplateDefinitions.templatevariable#_U5Fzu8qkEeqObY-eK2jOOA"/>
+        <appliedObjects href="RobotCognitionComponents.repository#_J_c3gNDBEeqWne3bdagE9g"/>
+      </groundRandomVariables>
+      <groundRandomVariables id="_mDumMCpIEeuMpaabmuiN-Q" entityName="InstantiatedSensorNoiseTemplate" descriptiveModel="_zY5QgCpIEeuMpaabmuiN-Q">
+        <instantiatedTemplate href="HRITemplateDefinitions.templatevariable#_0uh4oCpGEeuMpaabmuiN-Q"/>
         <appliedObjects href="RobotCognitionComponents.repository#_J_c3gNDBEeqWne3bdagE9g"/>
       </groundRandomVariables>
     </localProbabilisticModels>

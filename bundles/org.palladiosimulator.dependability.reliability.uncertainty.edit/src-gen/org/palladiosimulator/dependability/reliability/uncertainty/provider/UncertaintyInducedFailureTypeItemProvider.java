@@ -12,8 +12,10 @@ import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
+
 import tools.mdsd.modelingfoundations.identifier.provider.EntityItemProvider;
 
 /**

@@ -3,8 +3,10 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
+
 import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
 
 /**

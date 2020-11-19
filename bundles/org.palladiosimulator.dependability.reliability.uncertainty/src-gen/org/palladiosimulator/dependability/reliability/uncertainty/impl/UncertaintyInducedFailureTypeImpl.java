@@ -3,15 +3,19 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
@@ -20,6 +24,7 @@ import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticN
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
 
 import org.palladiosimulator.pcm.reliability.FailureType;
+
 import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
 
 /**
