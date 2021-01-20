@@ -84,7 +84,7 @@
       </cpdEntries>
       <cpdEntries>
         <conditonals>(SensorNoise=Medium)</conditonals>
-        <entry type="SAMPLESPACE" value="{(SensorNoise=High),0.0};{(SensorNoise=Low),0.9};{(SensorNoise=Medium),0.2}"/>
+        <entry type="SAMPLESPACE" value="{(SensorNoise=High),0.0};{(SensorNoise=Low),0.9};{(SensorNoise=Medium),0.1}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(SensorNoise=Low)</conditonals>
@@ -97,7 +97,7 @@
     <representation xsi:type="distributionfunction:TabularCPD">
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=High)</conditonals>
-        <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure=High),0.4};{(ImageBrightnessMeasure=Low),0};{(ImageBrightnessMeasure=Medium),0.6}"/>
+        <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure=High),0.75};{(ImageBrightnessMeasure=Low),0};{(ImageBrightnessMeasure=Medium),0.25}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=Medium)</conditonals>
@@ -105,7 +105,7 @@
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=Low)</conditonals>
-        <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure=High),0};{(ImageBrightnessMeasure=Low),0.4};{(ImageBrightnessMeasure=Medium),0.6}"/>
+        <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure=High),0};{(ImageBrightnessMeasure=Low),0.75};{(ImageBrightnessMeasure=Medium),0.25}"/>
       </cpdEntries>
     </representation>
   </params>
@@ -115,32 +115,32 @@
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=High)</conditonals>
         <conditonals>(SensorNoise=High)</conditonals>
-        <entry type="SAMPLESPACE" value="{Success,0.9};{Fail,0.1}"/>
+        <entry type="SAMPLESPACE" value="{Success,0.95};{Fail,0.05}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=High)</conditonals>
         <conditonals>(SensorNoise=Medium)</conditonals>
-        <entry type="SAMPLESPACE" value="{Success,0.93};{Fail,0.07}"/>
+        <entry type="SAMPLESPACE" value="{Success,0.97};{Fail,0.03}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=High)</conditonals>
         <conditonals>(SensorNoise=Low)</conditonals>
-        <entry type="SAMPLESPACE" value="{Success,0.97};{Fail,0.03}"/>
+        <entry type="SAMPLESPACE" value="{Success,0.99};{Fail,0.01}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=Low)</conditonals>
         <conditonals>(SensorNoise=High)</conditonals>
-        <entry type="SAMPLESPACE" value="{Success,0.9};{Fail,0.1}"/>
+        <entry type="SAMPLESPACE" value="{Success,0.95};{Fail,0.05}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=Low)</conditonals>
         <conditonals>(SensorNoise=Medium)</conditonals>
-        <entry type="SAMPLESPACE" value="{Success,0.93};{Fail,0.07}"/>
+        <entry type="SAMPLESPACE" value="{Success,0.97};{Fail,0.03}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=Low)</conditonals>
         <conditonals>(SensorNoise=Low)</conditonals>
-        <entry type="SAMPLESPACE" value="{Success,0.97};{Fail,0.03}"/>
+        <entry type="SAMPLESPACE" value="{Success,0.99};{Fail,0.01}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=Medium)</conditonals>
@@ -168,11 +168,11 @@
     <representation xsi:type="distributionfunction:TabularCPD">
       <cpdEntries>
         <conditonals>(SensorNoise=High)</conditonals>
-        <entry type="SAMPLESPACE" value="{(SensorNoise=High),0.25};{(SensorNoise=Low),0};{(SensorNoise=Medium),0.75}"/>
+        <entry type="SAMPLESPACE" value="{(SensorNoise=High),0.75};{(SensorNoise=Low),0};{(SensorNoise=Medium),0.25}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(SensorNoise=Medium)</conditonals>
-        <entry type="SAMPLESPACE" value="{(SensorNoise=High),0.25};{(SensorNoise=Low),0.5};{(SensorNoise=Medium),0.25}"/>
+        <entry type="SAMPLESPACE" value="{(SensorNoise=High),0.25};{(SensorNoise=Low),0.25};{(SensorNoise=Medium),0.5}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(SensorNoise=Low)</conditonals>
