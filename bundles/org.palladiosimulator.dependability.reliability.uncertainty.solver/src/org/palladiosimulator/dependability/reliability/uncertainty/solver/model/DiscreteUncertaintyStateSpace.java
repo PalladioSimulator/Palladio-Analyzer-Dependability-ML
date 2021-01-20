@@ -71,13 +71,35 @@ public class DiscreteUncertaintyStateSpace {
 		public TemplateVariable getInstantiatedTemplate() {
 			return variable.getInstantiatedTemplate();
 		}
+		
+		private boolean valueSpaceIsEqual(UncertaintyState state) {
+			if (state.valueSpace.size() != this.valueSpace.size()) {
+				return false;
+			}
+			
+			var copy = Sets.newHashSet(this.valueSpace);
+			for (CategoricalValue each : state.valueSpace) {
+				copy.removeIf(v -> v.get().equals(each.get()));
+			}
+			return copy.isEmpty();
+		}
 
 	}
 
 	private final List<UncertaintyState> states;
 
 	private DiscreteUncertaintyStateSpace(List<UncertaintyState> states) {
-		this.states = states;
+		this.states = mergeToDistinctStates(states);
+	}
+
+	private List<UncertaintyState> mergeToDistinctStates(List<UncertaintyState> states) {
+		var distinctStates = Lists.<UncertaintyState>newArrayList();
+		for (UncertaintyState each : states) {
+			if (distinctStates.stream().noneMatch(s -> s.valueSpaceIsEqual(each))) {
+				distinctStates.add(each);
+			}
+		}
+		return distinctStates;
 	}
 
 	public static DiscreteUncertaintyStateSpace of(UncertaintyState... uncertaintyStates) {
