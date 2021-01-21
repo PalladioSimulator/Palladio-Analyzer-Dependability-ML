@@ -21,6 +21,9 @@
           <variableCharacterisation_VariableUsage type="VALUE">
             <specification_VariableCharacterisation specification="1"/>
           </variableCharacterisation_VariableUsage>
+          <variableCharacterisation_VariableUsage type="BYTESIZE">
+            <specification_VariableCharacterisation specification="IntPMF[(1; 1.0)]"/>
+          </variableCharacterisation_VariableUsage>
           <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="img"/>
         </inputVariableUsages__CallAction>
       </steps_Behaviour>
@@ -39,6 +42,9 @@
         <inputVariableUsages__CallAction>
           <variableCharacterisation_VariableUsage type="NUMBER_OF_ELEMENTS">
             <specification_VariableCharacterisation specification="3"/>
+          </variableCharacterisation_VariableUsage>
+          <variableCharacterisation_VariableUsage type="BYTESIZE">
+            <specification_VariableCharacterisation specification="IntPMF[(1; 1.0)]"/>
           </variableCharacterisation_VariableUsage>
           <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="objects"/>
         </inputVariableUsages__CallAction>
@@ -60,8 +66,8 @@
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:EmitEventAction" id="_4t4DMNDaEeqWne3bdagE9g" entityName="PublishTrajectoryMsg" predecessor_AbstractAction="_xIatsNDaEeqWne3bdagE9g" successor_AbstractAction="_CTpIwtDJEeqWne3bdagE9g" eventType__EmitEventAction="_Ujj10NDJEeqWne3bdagE9g" sourceRole__EmitEventAction="_hFyAQNDJEeqWne3bdagE9g">
         <inputVariableUsages__CallAction>
-          <variableCharacterisation_VariableUsage type="VALUE">
-            <specification_VariableCharacterisation specification="1"/>
+          <variableCharacterisation_VariableUsage type="BYTESIZE">
+            <specification_VariableCharacterisation specification="IntPMF[(1; 1.0)]"/>
           </variableCharacterisation_VariableUsage>
           <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="traj"/>
         </inputVariableUsages__CallAction>
@@ -103,6 +109,9 @@
         <inputVariableUsages__CallAction>
           <variableCharacterisation_VariableUsage type="NUMBER_OF_ELEMENTS">
             <specification_VariableCharacterisation specification="3"/>
+          </variableCharacterisation_VariableUsage>
+          <variableCharacterisation_VariableUsage type="BYTESIZE">
+            <specification_VariableCharacterisation specification="IntPMF[(1; 1.0)]"/>
           </variableCharacterisation_VariableUsage>
           <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="assemblySequence"/>
         </inputVariableUsages__CallAction>
@@ -186,12 +195,12 @@
   </interfaces__Repository>
   <interfaces__Repository xsi:type="repository:EventGroup" id="_QYpUkNDJEeqWne3bdagE9g" entityName="TrajectoryMsg">
     <eventTypes__EventGroup id="_Ujj10NDJEeqWne3bdagE9g" entityName="plannedTraj">
-      <parameter__EventType dataType__Parameter="_ntO1YNDJEeqWne3bdagE9g" parameterName="traj"/>
+      <parameter__EventType dataType__Parameter="_ntO1YNDJEeqWne3bdagE9g" parameterName="traj" modifier__Parameter="inout"/>
     </eventTypes__EventGroup>
   </interfaces__Repository>
   <interfaces__Repository xsi:type="repository:OperationInterface" id="_flBpENDSEeqWne3bdagE9g" entityName="ObjectClassification">
     <signatures__OperationInterface id="_n_abcNDSEeqWne3bdagE9g" entityName="classify" returnType__OperationSignature="__pawcNDDEeqWne3bdagE9g">
-      <parameters__OperationSignature dataType__Parameter="_w-QdMNC7EeqWne3bdagE9g" parameterName="img" modifier__Parameter="in"/>
+      <parameters__OperationSignature dataType__Parameter="_w-QdMNC7EeqWne3bdagE9g" parameterName="img" modifier__Parameter="inout"/>
     </signatures__OperationInterface>
   </interfaces__Repository>
   <interfaces__Repository xsi:type="repository:OperationInterface" id="_Z7xVQPJ2EeqofrndBLNacw" entityName="PreProcessing">
@@ -218,7 +227,11 @@
     </innerDeclaration_CompositeDataType>
   </dataTypes__Repository>
   <dataTypes__Repository xsi:type="repository:CollectionDataType" id="__pawcNDDEeqWne3bdagE9g" entityName="ObjectPoses" innerType_CollectionDataType="_apW-INDDEeqWne3bdagE9g"/>
-  <dataTypes__Repository xsi:type="repository:CompositeDataType" id="_ntO1YNDJEeqWne3bdagE9g" entityName="Trajectory"/>
+  <dataTypes__Repository xsi:type="repository:CompositeDataType" id="_ntO1YNDJEeqWne3bdagE9g" entityName="Trajectory">
+    <innerDeclaration_CompositeDataType entityName="geometricalData">
+      <datatype_InnerDeclaration xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.5"/>
+    </innerDeclaration_CompositeDataType>
+  </dataTypes__Repository>
   <dataTypes__Repository xsi:type="repository:CompositeDataType" id="_sTRIMNDQEeqWne3bdagE9g" entityName="EnrichedImage">
     <innerDeclaration_CompositeDataType entityName="img" datatype_InnerDeclaration="_w-QdMNC7EeqWne3bdagE9g"/>
     <innerDeclaration_CompositeDataType entityName="brightness">
