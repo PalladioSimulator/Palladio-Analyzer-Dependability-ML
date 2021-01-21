@@ -14,6 +14,7 @@ import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRe
 import org.palladiosimulator.dependability.reliability.uncertainty.improvement.UncertaintyImprovementCalculator;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.UncertaintyModelManager;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.util.ArchitecturalPreconditionUtil;
 import org.palladiosimulator.pcm.usagemodel.UsageModel;
 import org.palladiosimulator.pcm.usagemodel.UsageScenario;
 import org.palladiosimulator.reliability.solver.pcm2markov.MarkovTransformationResult;
@@ -124,7 +125,7 @@ public class UncertaintyBasedReliabilityPredictor {
 		var resolvedModel = resolveUncertainties(unresolvedModel, stateTuple);
 
 		var conditionalPoS = predictProbabilityOfSuccessGiven(resolvedModel);
-		var probOfUncertainties = predictProbabilityOfUncertainties(stateTuple);
+		var probOfUncertainties = predictProbabilityOfUncertainties(stateTuple, resolvedModel);
 		return ReliabilityPredictionResult.of(conditionalPoS, probOfUncertainties);
 	}
 
@@ -152,7 +153,8 @@ public class UncertaintyBasedReliabilityPredictor {
 	}
 
 	private void requireUnitMeasure(double summedUncertaintyProbs) {
-		if (summedUncertaintyProbs != 1.0) {
+		final var tolerance = 0.0001;
+		if (Math.abs(1 - summedUncertaintyProbs) > tolerance) {
 			throw new RuntimeException("The sum of uncertainty probabilities must be equal to one.");
 		}
 	}
@@ -203,11 +205,13 @@ public class UncertaintyBasedReliabilityPredictor {
 	}
 
 	// Assuming independence of the uncertainty models
-	private Double predictProbabilityOfUncertainties(List<UncertaintyState> stateTuple) {
+	private Double predictProbabilityOfUncertainties(List<UncertaintyState> stateTuple, PCMInstance pcmModel) {
 		var probOfUncertainties = 1.0;
 		for (UncertaintyInducedFailureType each : uncertaintyRepo.getUncertaintyInducedFailureTypes()) {
-			var uncertaintyModel = UncertaintyModelManager.get().findModelFor(each).orElseThrow();
-			probOfUncertainties *= uncertaintyModel.probability(stateTuple);
+			if (allPreconditionsFulfilled(each, pcmModel)) {
+				var uncertaintyModel = UncertaintyModelManager.get().findModelFor(each).orElseThrow();
+				probOfUncertainties *= uncertaintyModel.probability(stateTuple);
+			}
 		}
 		return probOfUncertainties;
 	}

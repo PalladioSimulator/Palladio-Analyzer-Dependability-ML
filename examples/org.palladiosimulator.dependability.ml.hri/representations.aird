@@ -31,7 +31,7 @@
     <semanticResources>RobotCognitionServiceLevelObjectives.slo</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_TaN9ENCmEeqWne3bdagE9g">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_TfdCYNCmEeqWne3bdagE9g" name="RobotCognitionComponents Repository Diagram" repPath="#_TbBOUNCmEeqWne3bdagE9g" changeId="4ab7f425-636d-4d17-8b2e-70d9e2042dbb">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_TfdCYNCmEeqWne3bdagE9g" name="RobotCognitionComponents Repository Diagram" repPath="#_TbBOUNCmEeqWne3bdagE9g" changeId="4989f4bc-fccc-4cdd-bcca-e7ca19474cb0">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']"/>
         <target xmi:type="repository:Repository" href="RobotCognitionComponents.repository#_ST3ZANCmEeqWne3bdagE9g"/>
       </ownedRepresentationDescriptors>
@@ -54,7 +54,7 @@
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']"/>
         <target xmi:type="seff:ResourceDemandingSEFF" href="RobotCognitionComponents.repository#_Zk6hwNDHEeqWne3bdagE9g"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Os3U8NDZEeqWne3bdagE9g" name="&lt;TrajectoryPlanner>&lt;handleObjectsStampedMsg> SEFF Diagram" repPath="#_OsxOUNDZEeqWne3bdagE9g" changeId="9989c66e-e3b2-4e1c-b500-b05dc3f9fbf9">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Os3U8NDZEeqWne3bdagE9g" name="&lt;TrajectoryPlanner>&lt;handleObjectsStampedMsg> SEFF Diagram" repPath="#_OsxOUNDZEeqWne3bdagE9g" changeId="d8c4f377-0d7b-4294-8d9c-755fa6e9cd57">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']"/>
         <target xmi:type="seff:ResourceDemandingSEFF" href="RobotCognitionComponents.repository#_CTpIwNDJEeqWne3bdagE9g"/>
       </ownedRepresentationDescriptors>
@@ -84,7 +84,7 @@
     </ownedViews>
     <ownedViews xmi:type="viewpoint:DView" uid="_LY5QgNDeEeqWne3bdagE9g">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.palladiosimulator.editors.sirius.usage/description/usage.odesign#//@ownedViewpoints[name='UsageModel']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Ldp0sNDeEeqWne3bdagE9g" name="RobotCognitionUsage UsageModel Diagram" repPath="#_Lb7WYNDeEeqWne3bdagE9g" changeId="6c7fe953-1a49-440c-9829-91c9b40ae352">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_Ldp0sNDeEeqWne3bdagE9g" name="RobotCognitionUsage UsageModel Diagram" repPath="#_Lb7WYNDeEeqWne3bdagE9g" changeId="b27cc3a2-6624-4519-a2a9-31433a5a9c23">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.usage/description/usage.odesign#//@ownedViewpoints[name='UsageModel']/@ownedRepresentations[name='UsageModel%20Diagram']"/>
         <target xmi:type="usagemodel:UsageModel" href="RobotCognitionUsage.usagemodel#/"/>
       </ownedRepresentationDescriptors>
@@ -503,6 +503,10 @@
         <children xmi:type="notation:Node" xmi:id="_ntmBwNDJEeqWne3bdagE9g" type="2003" element="_ntPccNDJEeqWne3bdagE9g">
           <children xmi:type="notation:Node" xmi:id="_ntmBw9DJEeqWne3bdagE9g" type="5007"/>
           <children xmi:type="notation:Node" xmi:id="_ntmo0NDJEeqWne3bdagE9g" type="7004">
+            <children xmi:type="notation:Node" xmi:id="_F44v8FvYEeuVNM2uGnL5hQ" type="3010" element="_F15tYVvYEeuVNM2uGnL5hQ">
+              <styles xmi:type="notation:FontStyle" xmi:id="_F44v8VvYEeuVNM2uGnL5hQ" fontName="Segoe UI" fontHeight="8"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_F44v8lvYEeuVNM2uGnL5hQ"/>
+            </children>
             <styles xmi:type="notation:SortingStyle" xmi:id="_ntmo0dDJEeqWne3bdagE9g"/>
             <styles xmi:type="notation:FilteringStyle" xmi:id="_ntmo0tDJEeqWne3bdagE9g"/>
           </children>
@@ -1599,6 +1603,14 @@
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']"/>
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_F15tYVvYEeuVNM2uGnL5hQ" name="geometricalData : BYTE">
+        <target xmi:type="repository:InnerDeclaration" href="RobotCognitionComponents.repository#//@dataTypes__Repository.4/@innerDeclaration_CompositeDataType.0"/>
+        <semanticElements xmi:type="repository:InnerDeclaration" href="RobotCognitionComponents.repository#//@dataTypes__Repository.4/@innerDeclaration_CompositeDataType.0"/>
+        <ownedStyle xmi:type="diagram:Square" uid="_F17ikFvYEeuVNM2uGnL5hQ" labelPosition="node">
+          <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']/@subNodeMappings[name='InnerDeclaration']/@conditionnalStyles.0/@style"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']/@subNodeMappings[name='InnerDeclaration']"/>
+      </ownedElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_sTRvQNDQEeqWne3bdagE9g" name="&lt;&lt;CompositeDataType>>&#xA;EnrichedImage" outgoingEdges="_zZVzANDQEeqWne3bdagE9g" width="10" height="5">
       <target xmi:type="repository:CompositeDataType" href="RobotCognitionComponents.repository#_sTRIMNDQEeqWne3bdagE9g"/>
@@ -3365,7 +3377,7 @@
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']"/>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_NlTEYNDjEeqWne3bdagE9g" name="70 &lt;CPU>">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_NlTEYNDjEeqWne3bdagE9g" name="50 &lt;CPU>">
           <target xmi:type="seff_performance:ParametricResourceDemand" href="RobotCognitionComponents.repository#//@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
           <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="RobotCognitionComponents.repository#//@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_NlTrcNDjEeqWne3bdagE9g" labelPosition="node">
@@ -3382,7 +3394,7 @@
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='FailureOccurenceDescription%20Container']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='FailureOccurenceDescription%20Container']"/>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_0pu4UNDaEeqWne3bdagE9g" name="[SoftwareInducedFailure] 0.01">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_0pu4UNDaEeqWne3bdagE9g" name="[ImageClassificationPredictionFailure] 0.1">
           <target xmi:type="reliability:InternalFailureOccurrenceDescription" href="RobotCognitionComponents.repository#//@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
           <semanticElements xmi:type="reliability:InternalFailureOccurrenceDescription" href="RobotCognitionComponents.repository#//@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_0pu4UdDaEeqWne3bdagE9g" labelPosition="node">
@@ -3432,7 +3444,7 @@
             <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']"/>
-          <ownedElements xmi:type="diagram:DNodeListElement" uid="_ofZQUtEEEeqpS-pqxVgAkw" name="VALUE = 1">
+          <ownedElements xmi:type="diagram:DNodeListElement" uid="_ofZQUtEEEeqpS-pqxVgAkw" name="BYTESIZE = 1.0">
             <target xmi:type="parameter:VariableCharacterisation" href="RobotCognitionComponents.repository#//@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
             <semanticElements xmi:type="parameter:VariableCharacterisation" href="RobotCognitionComponents.repository#//@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
             <ownedStyle xmi:type="diagram:Square" uid="_ofZ3YNEEEeqpS-pqxVgAkw" labelPosition="node" color="209,209,209">
@@ -4682,7 +4694,7 @@
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.usage/description/usage.odesign#//@ownedViewpoints[name='UsageModel']/@ownedRepresentations[name='UsageModel%20Diagram']/@defaultLayer/@containerMappings[name='usageScenario']/@subContainerMappings[name='openWorkload']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.usage/description/usage.odesign#//@ownedViewpoints[name='UsageModel']/@ownedRepresentations[name='UsageModel%20Diagram']/@defaultLayer/@containerMappings[name='usageScenario']/@subContainerMappings[name='openWorkload']"/>
-        <ownedElements xmi:type="diagram:DNodeListElement" uid="_FxmbYNDfEeqWne3bdagE9g" name="Interarrival Time: 0.98">
+        <ownedElements xmi:type="diagram:DNodeListElement" uid="_FxmbYNDfEeqWne3bdagE9g" name="Interarrival Time: 1.0">
           <target xmi:type="usagemodel:OpenWorkload" href="RobotCognitionUsage.usagemodel#//@usageScenario_UsageModel.0/@workload_UsageScenario"/>
           <semanticElements xmi:type="usagemodel:OpenWorkload" href="RobotCognitionUsage.usagemodel#//@usageScenario_UsageModel.0/@workload_UsageScenario"/>
           <ownedStyle xmi:type="diagram:Note" uid="_FxnCcNDfEeqWne3bdagE9g" labelAlignment="LEFT" color="255,255,255">
