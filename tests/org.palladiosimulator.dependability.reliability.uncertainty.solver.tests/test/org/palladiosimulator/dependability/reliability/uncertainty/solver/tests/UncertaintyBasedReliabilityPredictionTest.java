@@ -72,7 +72,7 @@ class UncertaintyBasedReliabilityPredictionTest extends BaseReliabilityPredictio
 	}
 
 	private UncertaintyInducedFailureType getUncertaintyInducedFailureType() {
-		var repoURI = URI.createURI(makePlatformResourceURI(RELATIVE_UNCERTAINTY_TEST_MODEL_PATH), true);
+		var repoURI = URI.createURI(makeAbsolute(RELATIVE_UNCERTAINTY_TEST_MODEL_PATH), true);
 		var repoResource = new ResourceSetImpl().getResource(repoURI, true);
 		var repo = Optional.ofNullable(repoResource)
 				.map(Resource::getContents)

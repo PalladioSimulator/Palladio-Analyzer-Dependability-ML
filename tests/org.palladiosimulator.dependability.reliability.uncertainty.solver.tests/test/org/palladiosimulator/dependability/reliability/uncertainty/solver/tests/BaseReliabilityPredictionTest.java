@@ -23,9 +23,9 @@ public abstract class BaseReliabilityPredictionTest {
 		standaloneInitializer.init();
 	}
 	
-	public static String makePlatformResourceURI(String relativeTestModelPath) {
-		var pathName = Paths.get(PROJECT_NAME_TEST, relativeTestModelPath).toString();
-		return URI.createPlatformResourceURI(pathName, true).toString();
+	public static String makeAbsolute(String relativeTestModelPath) {
+		var absolute = Paths.get(System.getProperty("user.dir"), relativeTestModelPath).toString();
+		return URI.createFileURI(absolute).toString();
 	}
 
 }

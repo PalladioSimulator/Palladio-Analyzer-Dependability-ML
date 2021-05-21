@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.tests.BaseReliabilityPredictionTest.RELATIVE_ALLOCATION_TEST_MODEL_PATH;
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.tests.BaseReliabilityPredictionTest.RELATIVE_UNCERTAINTY_TEST_MODEL_PATH;
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.tests.BaseReliabilityPredictionTest.RELATIVE_USAGEMODEL_TEST_MODEL_PATH;
-import static org.palladiosimulator.dependability.reliability.uncertainty.solver.tests.BaseReliabilityPredictionTest.makePlatformResourceURI;
+import static org.palladiosimulator.dependability.reliability.uncertainty.solver.tests.BaseReliabilityPredictionTest.makeAbsolute;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -152,8 +152,8 @@ public class ReliabilityPredictionTestDefinition {
 		config.setSaveResultsToFileEnabled(false);
 		config.setRMIMiddlewareFile(ConstantsContainer.DEFAULT_RMI_MIDDLEWARE_REPOSITORY_FILE);
 		config.setEventMiddlewareFile(ConstantsContainer.DEFAULT_EVENT_MIDDLEWARE_FILE);
-		config.setUsageModelFile(makePlatformResourceURI(RELATIVE_USAGEMODEL_TEST_MODEL_PATH));
-		config.setAllocationFiles(Lists.newArrayList(makePlatformResourceURI(RELATIVE_ALLOCATION_TEST_MODEL_PATH)));
+		config.setUsageModelFile(makeAbsolute(RELATIVE_USAGEMODEL_TEST_MODEL_PATH));
+		config.setAllocationFiles(Lists.newArrayList(makeAbsolute(RELATIVE_ALLOCATION_TEST_MODEL_PATH)));
 		return config;
 	}
 
@@ -169,7 +169,7 @@ public class ReliabilityPredictionTestDefinition {
 	}
 
 	private String getUncertaintyModelURI() {
-		return makePlatformResourceURI(RELATIVE_UNCERTAINTY_TEST_MODEL_PATH);
+		return makeAbsolute(RELATIVE_UNCERTAINTY_TEST_MODEL_PATH);
 	}
 
 }

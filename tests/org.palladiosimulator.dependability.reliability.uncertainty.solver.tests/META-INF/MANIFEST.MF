@@ -29,4 +29,5 @@ Require-Bundle: org.junit,
  de.uka.ipd.sdq.probfunction.math;bundle-version="4.3.0",
  org.apache.commons.math3;bundle-version="3.6.1",
  tools.mdsd.probdist.api;bundle-version="1.0.0",
- org.palladiosimulator.dependability.reliability.uncertainty
+ org.palladiosimulator.dependability.reliability.uncertainty,
+ de.uka.ipd.sdq.stoex.analyser;bundle-version="5.0.0"
