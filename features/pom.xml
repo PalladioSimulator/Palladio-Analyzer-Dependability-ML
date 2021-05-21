@@ -11,7 +11,8 @@
 	<packaging>pom</packaging>
 	
 	<modules>
-		<!-- insert feature folders here -->
+		<module>org.palladiosimulator.dependability.reliability.uncertainty.feature</module>
+		<module>org.palladiosimulator.dependability.ml.feature</module>
 	</modules>
 	
 </project>

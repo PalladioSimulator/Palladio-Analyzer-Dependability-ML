@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.palladiosimulator.dependability.reliability.uncertainty.feature"
+      label="Uncertainty-based Reliability Prediction"
+      version="1.0.0.qualifier"
+      plugin="org.palladiosimulator.branding"
+      license-feature="org.palladiosimulator.license"
+      license-feature-version="1.0.0">
+
+   <description url="http://palladiosimulator.org">
+      The reliability-based predicition is a Palladio plug-in for predicting reliability properties of systems with uncertainties. The plugin extends the conventional reliability predicition tool of palladio by refining failure types with uncertainties.
+   </description>
+
+   <includes
+         id="org.palladiosimulator.dependability.ml.feature"
+         version="0.0.0"/>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.debug.core"/>
+      <import plugin="org.eclipse.debug.ui"/>
+      <import plugin="org.palladiosimulator.solver"/>
+      <import plugin="org.palladiosimulator.reliability.solver"/>
+      <import plugin="org.palladiosimulator.analyzer.workflow" version="4.3.0" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.workflow.mdsd" version="4.3.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.dependability.reliability.uncertainty.solver" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.dependability.reliability.uncertainty" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.envdyn.api" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="tools.mdsd.probdist.api" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="tools.mdsd.probdist.api.apache" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.google.guava" version="27.1.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.solver" version="4.2.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.reliability.solver" version="4.3.0" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.workflow"/>
+      <import plugin="org.palladiosimulator.dependability.ml.sensitivity" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.dependability.ml"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.palladiosimulator.envdyn.model"/>
+      <import plugin="de.uka.ipd.sdq.identifier"/>
+      <import plugin="tools.mdsd.modelingfoundations.identifier"/>
+      <import plugin="org.palladiosimulator.pcm"/>
+      <import plugin="de.uka.ipd.sdq.probfunction"/>
+      <import plugin="tools.mdsd.probdist.model"/>
+      <import plugin="de.uka.ipd.sdq.stoex"/>
+      <import plugin="de.uka.ipd.sdq.units"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.eclipse.emf.ecore.edit"/>
+      <import plugin="org.palladiosimulator.envdyn.model.edit"/>
+      <import plugin="de.uka.ipd.sdq.identifier.edit"/>
+      <import plugin="tools.mdsd.modelingfoundations.identifier.edit"/>
+      <import plugin="org.palladiosimulator.pcm.edit"/>
+      <import plugin="de.uka.ipd.sdq.probfunction.edit"/>
+      <import plugin="tools.mdsd.probdist.model.edit"/>
+      <import plugin="de.uka.ipd.sdq.stoex.edit"/>
+      <import plugin="de.uka.ipd.sdq.units.edit"/>
+      <import plugin="org.junit"/>
+      <import plugin="org.junit.jupiter.api"/>
+      <import plugin="org.palladiosimulator.solver" version="4.3.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.pcm" version="4.3.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.analyzer.completions" version="4.3.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.mwe.core" version="1.5.3" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtend" version="2.2.0" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.errorhandling" version="4.3.0" match="greaterOrEqual"/>
+      <import plugin="tools.mdsd.library.standalone.initialization" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.pcm.resources" version="4.3.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.commons.logging" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtend.typesystem.emf" version="2.2.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.solver.context" version="4.3.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.reliability" version="4.3.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.query" version="1.7.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.reliability.markov" version="4.3.0" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.probfunction.math" version="4.3.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.commons.math3" version="3.6.1" match="greaterOrEqual"/>
+      <import plugin="de.uka.ipd.sdq.stoex.analyser" version="5.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+   </requires>
+
+   <plugin
+         id="org.palladiosimulator.dependability.reliability.uncertainty.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.palladiosimulator.dependability.reliability.uncertainty.solver"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.palladiosimulator.dependability.reliability.uncertainty"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.palladiosimulator.dependability.reliability.uncertainty.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.palladiosimulator.dependability.reliability.uncertainty.solver.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.palladiosimulator.dependability.reliability.uncertainty.editor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
