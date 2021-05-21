@@ -11,7 +11,14 @@
 	<packaging>pom</packaging>
 	
 	<modules>
-		<!-- insert bundle folders here -->
+		<module>org.palladiosimulator.dependability.ml</module>
+		<module>org.palladiosimulator.dependability.ml.sensitivity</module>
+		<module>org.palladiosimulator.dependability.ml.ui</module>
+		<module>org.palladiosimulator.dependability.reliability.uncertainty</module>
+		<module>org.palladiosimulator.dependability.reliability.uncertainty.edit</module>
+		<module>org.palladiosimulator.dependability.reliability.uncertainty.editor</module>
+		<module>org.palladiosimulator.dependability.reliability.uncertainty.solver</module>
+		<module>org.palladiosimulator.dependability.reliability.uncertainty.ui</module>
 	</modules>
 	
 </project>

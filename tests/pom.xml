@@ -11,7 +11,8 @@
 	<packaging>pom</packaging>
 	
 	<modules>
-		<!-- insert test folders here -->
+		<module>org.palladiosimulator.dependability.ml.sensitivity.test</module>
+		<module>org.palladiosimulator.dependability.reliability.uncertainty.solver.tests</module>
 	</modules>
 	
 </project>
