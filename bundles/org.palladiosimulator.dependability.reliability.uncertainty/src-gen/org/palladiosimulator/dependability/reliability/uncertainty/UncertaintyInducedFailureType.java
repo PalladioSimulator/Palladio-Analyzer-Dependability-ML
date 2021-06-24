@@ -20,7 +20,7 @@ import tools.mdsd.modelingfoundations.identifier.Entity;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getRefines <em>Refines</em>}</li>
+ *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getRefinesFailureType <em>Refines Failure Type</em>}</li>
  *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getUncertaintyModel <em>Uncertainty Model</em>}</li>
  *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getFailureVariable <em>Failure Variable</em>}</li>
  *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getArchitecturalPreconditions <em>Architectural Preconditions</em>}</li>
@@ -32,26 +32,26 @@ import tools.mdsd.modelingfoundations.identifier.Entity;
  */
 public interface UncertaintyInducedFailureType extends Entity {
 	/**
-	 * Returns the value of the '<em><b>Refines</b></em>' reference.
+	 * Returns the value of the '<em><b>Refines Failure Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Refines</em>' reference.
-	 * @see #setRefines(FailureType)
-	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage#getUncertaintyInducedFailureType_Refines()
+	 * @return the value of the '<em>Refines Failure Type</em>' reference.
+	 * @see #setRefinesFailureType(FailureType)
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage#getUncertaintyInducedFailureType_RefinesFailureType()
 	 * @model required="true"
 	 * @generated
 	 */
-	FailureType getRefines();
+	FailureType getRefinesFailureType();
 
 	/**
-	 * Sets the value of the '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getRefines <em>Refines</em>}' reference.
+	 * Sets the value of the '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getRefinesFailureType <em>Refines Failure Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Refines</em>' reference.
-	 * @see #getRefines()
+	 * @param value the new value of the '<em>Refines Failure Type</em>' reference.
+	 * @see #getRefinesFailureType()
 	 * @generated
 	 */
-	void setRefines(FailureType value);
+	void setRefinesFailureType(FailureType value);
 
 	/**
 	 * Returns the value of the '<em><b>Uncertainty Model</b></em>' reference.

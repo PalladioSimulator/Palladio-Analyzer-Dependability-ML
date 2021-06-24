@@ -166,7 +166,7 @@ public class UncertaintyResolver {
 	}
 	
 	private boolean isRefined(FailureType failureType, UncertaintyInducedFailureType uncertainty) {
-		return areEqual(uncertainty.getRefines(), failureType);
+		return areEqual(uncertainty.getRefinesFailureType(), failureType);
 	}
 
 	private boolean areEqual(FailureType first, FailureType second) {

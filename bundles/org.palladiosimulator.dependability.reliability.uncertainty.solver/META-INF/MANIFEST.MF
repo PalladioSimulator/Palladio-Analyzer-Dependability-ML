@@ -16,7 +16,8 @@ Require-Bundle: org.eclipse.core.runtime,
  de.uka.ipd.sdq.workflow.mdsd;bundle-version="4.3.0",
  org.palladiosimulator.analyzer.workflow;bundle-version="4.3.0",
  org.palladiosimulator.dependability.ml.sensitivity;bundle-version="1.0.0",
- org.palladiosimulator.dependability.ml
+ org.palladiosimulator.dependability.ml,
+ org.palladiosimulator.pcm;bundle-version="5.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.palladiosimulator.dependability.reliability.uncertainty.solver
 Bundle-ActivationPolicy: lazy

@@ -112,6 +112,16 @@ public class UncertaintyBasedReliabilityPredictor {
 		var stateSpace = UncertaintyModelManager.get().getStateSpace();
 		for (List<UncertaintyState> eachTuple : exploreStrategy.explore(stateSpace)) {
 			var conditionalPoS = predictConditionalSuccessProbability(unresolved, eachTuple);
+			eachTuple.forEach((v) -> System.out.println(v.getId() + ", " + v.getValue().toString()));
+			// System.out.println(stateSpace);
+			System.out.println(conditionalPoS.toString());
+			// print each conditionalPoS
+			
+			/*
+			 *	ImageBrightnessMeasureSensitivity, (ImageBrightnessMeasure=Low)
+				SensorNoiseSensitivity, (SensorNoise=High)
+				successProbabilityToUsageScenario: k:_NbnWMNDeEeqWne3bdagE9g, v:0.6724172069999999; probabilityOfUncertainties: 0.075
+			 */
 			results.add(conditionalPoS);
 		}
 
@@ -146,9 +156,7 @@ public class UncertaintyBasedReliabilityPredictor {
 	}
 
 	private double computeSumOfUncertaintyProbabilities(List<ReliabilityPredictionResult> results) {
-		return results.stream()
-				.map(ReliabilityPredictionResult::getProbabilityOfUncertainty)
-				.reduce(Double::sum)
+		return results.stream().map(ReliabilityPredictionResult::getProbabilityOfUncertainty).reduce(Double::sum)
 				.orElse(Double.NaN);
 	}
 
@@ -177,9 +185,7 @@ public class UncertaintyBasedReliabilityPredictor {
 
 	private Optional<UncertaintyState> findApplicableState(ArchitecturalCountermeasure countermeasure,
 			List<UncertaintyState> stateTuple) {
-		return stateTuple.stream()
-				.filter(each -> each.instantiates(countermeasure.getTargetUncertainty()))
-				.findFirst();
+		return stateTuple.stream().filter(each -> each.instantiates(countermeasure.getTargetUncertainty())).findFirst();
 	}
 
 	private CategoricalValue applyArchitecturalCountermeasure(ArchitecturalCountermeasure countermeasure,

@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 import org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition;
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
 import org.palladiosimulator.pcm.core.composition.AssemblyContext;
-import org.palladiosimulator.pcm.repository.BasicComponent;
+import org.palladiosimulator.pcm.core.entity.InterfaceProvidingRequiringEntity;
 import org.palladiosimulator.solver.models.PCMInstance;
 
 public class ActiveComponentChecker implements ArchitecturalPreconditionChecker {
@@ -30,7 +30,7 @@ public class ActiveComponentChecker implements ArchitecturalPreconditionChecker 
 		return getInstantiatedComponents(pcmModel).anyMatch(isInstantiated(requiredActiveComponent));
 	}
 
-	private Predicate<AssemblyContext> isInstantiated(BasicComponent requiredActiveComponent) {
+	private Predicate<AssemblyContext> isInstantiated(InterfaceProvidingRequiringEntity requiredActiveComponent) {
 		return assContext -> assContext.getEncapsulatedComponent__AssemblyContext().getId()
 				.equals(requiredActiveComponent.getId());
 	}

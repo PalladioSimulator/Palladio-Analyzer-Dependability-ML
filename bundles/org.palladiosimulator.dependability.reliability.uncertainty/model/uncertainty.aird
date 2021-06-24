@@ -23,7 +23,7 @@
     <semanticResources>platform:/resource/de.uka.ipd.sdq.stoex/model/stoex.genmodel</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_wLLawMgFEeqouM-niPEurg">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_wM6gIMgFEeqouM-niPEurg" name="uncertainty" repPath="#_wMV4YMgFEeqouM-niPEurg" changeId="c0c3fb10-b1c8-413f-b525-920d7dee5d7b">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_wM6gIMgFEeqouM-niPEurg" name="uncertainty" repPath="#_wMV4YMgFEeqouM-niPEurg" changeId="5c7c77ad-5b1a-4f3c-b90b-58aab133e4d9">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="uncertainty.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -80,9 +80,9 @@
         <children xmi:type="notation:Node" xmi:id="_46484MgFEeqouM-niPEurg" type="2003" element="_46tWsMgFEeqouM-niPEurg">
           <children xmi:type="notation:Node" xmi:id="_468AMMgFEeqouM-niPEurg" type="5007"/>
           <children xmi:type="notation:Node" xmi:id="_469OUMgFEeqouM-niPEurg" type="7004">
-            <children xmi:type="notation:Node" xmi:id="_Pl8_kMgGEeqouM-niPEurg" type="3010" element="_PlwLQMgGEeqouM-niPEurg">
-              <styles xmi:type="notation:FontStyle" xmi:id="_Pl8_kcgGEeqouM-niPEurg" fontName="Segoe UI" fontHeight="8" bold="true"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_Pl8_ksgGEeqouM-niPEurg"/>
+            <children xmi:type="notation:Node" xmi:id="_queEkNKdEeuSwYiAqe6Ivw" type="3010" element="_quO0ANKdEeuSwYiAqe6Ivw">
+              <styles xmi:type="notation:FontStyle" xmi:id="_queEkdKdEeuSwYiAqe6Ivw" fontName=".AppleSystemUIFont" fontHeight="8" bold="true"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_queEktKdEeuSwYiAqe6Ivw"/>
             </children>
             <children xmi:type="notation:Node" xmi:id="_cr1QsMgGEeqouM-niPEurg" type="3010" element="_crqRkcgGEeqouM-niPEurg">
               <styles xmi:type="notation:FontStyle" xmi:id="_cr1QscgGEeqouM-niPEurg" fontName="Segoe UI" fontHeight="8" bold="true"/>
@@ -378,10 +378,10 @@
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_PlwLQMgGEeqouM-niPEurg" name=" refines : FailureType" tooltipText="">
-        <target xmi:type="ecore:EReference" href="uncertainty.ecore#//UncertaintyInducedFailureType/refines"/>
-        <semanticElements xmi:type="ecore:EReference" href="uncertainty.ecore#//UncertaintyInducedFailureType/refines"/>
-        <ownedStyle xmi:type="diagram:BundledImage" uid="_PlwyUcgGEeqouM-niPEurg" labelAlignment="LEFT" description="_PlwyUMgGEeqouM-niPEurg" color="114,159,207">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_quO0ANKdEeuSwYiAqe6Ivw" name=" refinesFailureType : FailureType" tooltipText="">
+        <target xmi:type="ecore:EReference" href="uncertainty.ecore#//UncertaintyInducedFailureType/refinesFailureType"/>
+        <semanticElements xmi:type="ecore:EReference" href="uncertainty.ecore#//UncertaintyInducedFailureType/refinesFailureType"/>
+        <ownedStyle xmi:type="diagram:BundledImage" uid="_quQCINKdEeuSwYiAqe6Ivw" labelAlignment="LEFT" description="_PlwyUMgGEeqouM-niPEurg" color="114,159,207">
           <labelFormat>bold</labelFormat>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode']"/>
@@ -505,7 +505,7 @@
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_WfbRsN1jEeqSdKurlZojVA" name=" requiredActiveComponent : BasicComponent" tooltipText="">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_WfbRsN1jEeqSdKurlZojVA" name=" requiredActiveComponent : InterfaceProvidingRequiringEntity" tooltipText="">
         <target xmi:type="ecore:EReference" href="uncertainty.ecore#//ActiveComponentPrecondition/requiredActiveComponent"/>
         <semanticElements xmi:type="ecore:EReference" href="uncertainty.ecore#//ActiveComponentPrecondition/requiredActiveComponent"/>
         <ownedStyle xmi:type="diagram:BundledImage" uid="_Wfb4wN1jEeqSdKurlZojVA" labelAlignment="LEFT" description="_PlwyUMgGEeqouM-niPEurg" color="114,159,207">

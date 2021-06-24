@@ -35,7 +35,7 @@ import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyInducedFailureTypeImpl#getRefines <em>Refines</em>}</li>
+ *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyInducedFailureTypeImpl#getRefinesFailureType <em>Refines Failure Type</em>}</li>
  *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyInducedFailureTypeImpl#getUncertaintyModel <em>Uncertainty Model</em>}</li>
  *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyInducedFailureTypeImpl#getFailureVariable <em>Failure Variable</em>}</li>
  *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyInducedFailureTypeImpl#getArchitecturalPreconditions <em>Architectural Preconditions</em>}</li>
@@ -45,14 +45,14 @@ import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
  */
 public class UncertaintyInducedFailureTypeImpl extends EntityImpl implements UncertaintyInducedFailureType {
 	/**
-	 * The cached value of the '{@link #getRefines() <em>Refines</em>}' reference.
+	 * The cached value of the '{@link #getRefinesFailureType() <em>Refines Failure Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRefines()
+	 * @see #getRefinesFailureType()
 	 * @generated
 	 * @ordered
 	 */
-	protected FailureType refines;
+	protected FailureType refinesFailureType;
 
 	/**
 	 * The cached value of the '{@link #getUncertaintyModel() <em>Uncertainty Model</em>}' reference.
@@ -109,17 +109,18 @@ public class UncertaintyInducedFailureTypeImpl extends EntityImpl implements Unc
 	 * @generated
 	 */
 	@Override
-	public FailureType getRefines() {
-		if (refines != null && ((EObject) refines).eIsProxy()) {
-			InternalEObject oldRefines = (InternalEObject) refines;
-			refines = (FailureType) eResolveProxy(oldRefines);
-			if (refines != oldRefines) {
+	public FailureType getRefinesFailureType() {
+		if (refinesFailureType != null && ((EObject) refinesFailureType).eIsProxy()) {
+			InternalEObject oldRefinesFailureType = (InternalEObject) refinesFailureType;
+			refinesFailureType = (FailureType) eResolveProxy(oldRefinesFailureType);
+			if (refinesFailureType != oldRefinesFailureType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES, oldRefines, refines));
+							UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES_FAILURE_TYPE,
+							oldRefinesFailureType, refinesFailureType));
 			}
 		}
-		return refines;
+		return refinesFailureType;
 	}
 
 	/**
@@ -127,8 +128,8 @@ public class UncertaintyInducedFailureTypeImpl extends EntityImpl implements Unc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FailureType basicGetRefines() {
-		return refines;
+	public FailureType basicGetRefinesFailureType() {
+		return refinesFailureType;
 	}
 
 	/**
@@ -137,12 +138,13 @@ public class UncertaintyInducedFailureTypeImpl extends EntityImpl implements Unc
 	 * @generated
 	 */
 	@Override
-	public void setRefines(FailureType newRefines) {
-		FailureType oldRefines = refines;
-		refines = newRefines;
+	public void setRefinesFailureType(FailureType newRefinesFailureType) {
+		FailureType oldRefinesFailureType = refinesFailureType;
+		refinesFailureType = newRefinesFailureType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES, oldRefines, refines));
+					UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES_FAILURE_TYPE, oldRefinesFailureType,
+					refinesFailureType));
 	}
 
 	/**
@@ -256,10 +258,10 @@ public class UncertaintyInducedFailureTypeImpl extends EntityImpl implements Unc
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES:
+		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES_FAILURE_TYPE:
 			if (resolve)
-				return getRefines();
-			return basicGetRefines();
+				return getRefinesFailureType();
+			return basicGetRefinesFailureType();
 		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__UNCERTAINTY_MODEL:
 			if (resolve)
 				return getUncertaintyModel();
@@ -283,8 +285,8 @@ public class UncertaintyInducedFailureTypeImpl extends EntityImpl implements Unc
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES:
-			setRefines((FailureType) newValue);
+		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES_FAILURE_TYPE:
+			setRefinesFailureType((FailureType) newValue);
 			return;
 		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__UNCERTAINTY_MODEL:
 			setUncertaintyModel((GroundProbabilisticNetwork) newValue);
@@ -308,8 +310,8 @@ public class UncertaintyInducedFailureTypeImpl extends EntityImpl implements Unc
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES:
-			setRefines((FailureType) null);
+		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES_FAILURE_TYPE:
+			setRefinesFailureType((FailureType) null);
 			return;
 		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__UNCERTAINTY_MODEL:
 			setUncertaintyModel((GroundProbabilisticNetwork) null);
@@ -332,8 +334,8 @@ public class UncertaintyInducedFailureTypeImpl extends EntityImpl implements Unc
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES:
-			return refines != null;
+		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES_FAILURE_TYPE:
+			return refinesFailureType != null;
 		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__UNCERTAINTY_MODEL:
 			return uncertaintyModel != null;
 		case UncertaintyPackage.UNCERTAINTY_INDUCED_FAILURE_TYPE__FAILURE_VARIABLE:

@@ -59,6 +59,7 @@ public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConf
 							.build();
 
 					var result = UncertaintyBasedReliabilityPrediction.predict(reliabilityConfig);
+					var variable = 1;
 				}
 
 				@Override

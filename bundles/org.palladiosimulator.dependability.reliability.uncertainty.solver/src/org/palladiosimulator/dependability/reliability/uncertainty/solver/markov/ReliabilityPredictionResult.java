@@ -3,6 +3,7 @@ package org.palladiosimulator.dependability.reliability.uncertainty.solver.marko
 import static java.util.stream.Collectors.toMap;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -22,6 +23,18 @@ public class ReliabilityPredictionResult {
 		this(ZERO_PROBABILITY);
 	}
 
+	public String toString() {
+		String str = "successProbabilityToUsageScenario: ";
+		 Iterator<Map.Entry<String, Double>> iterator = successProbabilityToUsageScenario.entrySet().iterator();
+		    while (iterator.hasNext()) {
+		        Map.Entry<String, Double> entry = iterator.next();
+		        str += "k:" + entry.getKey() + ", v:" + entry.getValue() + "; ";
+		        // System.out.println(entry.getKey() + ":" + entry.getValue());
+		    }
+		str += "probabilityOfUncertainties: " + probabilityOfUncertainties;
+		return str;
+	}
+	
 	private ReliabilityPredictionResult(double probabilityOfUncertainties) {
 		this(new HashMap<UsageScenario, Double>(), probabilityOfUncertainties);
 	}

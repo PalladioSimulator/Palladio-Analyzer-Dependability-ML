@@ -12,8 +12,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
-
-import org.palladiosimulator.pcm.repository.BasicComponent;
+import org.palladiosimulator.pcm.core.entity.InterfaceProvidingRequiringEntity;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,7 +37,7 @@ public class ActiveComponentPreconditionImpl extends ArchitecturalPreconditionIm
 	 * @generated
 	 * @ordered
 	 */
-	protected BasicComponent requiredActiveComponent;
+	protected InterfaceProvidingRequiringEntity requiredActiveComponent;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -65,10 +64,10 @@ public class ActiveComponentPreconditionImpl extends ArchitecturalPreconditionIm
 	 * @generated
 	 */
 	@Override
-	public BasicComponent getRequiredActiveComponent() {
+	public InterfaceProvidingRequiringEntity getRequiredActiveComponent() {
 		if (requiredActiveComponent != null && ((EObject) requiredActiveComponent).eIsProxy()) {
 			InternalEObject oldRequiredActiveComponent = (InternalEObject) requiredActiveComponent;
-			requiredActiveComponent = (BasicComponent) eResolveProxy(oldRequiredActiveComponent);
+			requiredActiveComponent = (InterfaceProvidingRequiringEntity) eResolveProxy(oldRequiredActiveComponent);
 			if (requiredActiveComponent != oldRequiredActiveComponent) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
@@ -84,7 +83,7 @@ public class ActiveComponentPreconditionImpl extends ArchitecturalPreconditionIm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BasicComponent basicGetRequiredActiveComponent() {
+	public InterfaceProvidingRequiringEntity basicGetRequiredActiveComponent() {
 		return requiredActiveComponent;
 	}
 
@@ -94,8 +93,8 @@ public class ActiveComponentPreconditionImpl extends ArchitecturalPreconditionIm
 	 * @generated
 	 */
 	@Override
-	public void setRequiredActiveComponent(BasicComponent newRequiredActiveComponent) {
-		BasicComponent oldRequiredActiveComponent = requiredActiveComponent;
+	public void setRequiredActiveComponent(InterfaceProvidingRequiringEntity newRequiredActiveComponent) {
+		InterfaceProvidingRequiringEntity oldRequiredActiveComponent = requiredActiveComponent;
 		requiredActiveComponent = newRequiredActiveComponent;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
@@ -128,7 +127,7 @@ public class ActiveComponentPreconditionImpl extends ArchitecturalPreconditionIm
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 		case UncertaintyPackage.ACTIVE_COMPONENT_PRECONDITION__REQUIRED_ACTIVE_COMPONENT:
-			setRequiredActiveComponent((BasicComponent) newValue);
+			setRequiredActiveComponent((InterfaceProvidingRequiringEntity) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -143,7 +142,7 @@ public class ActiveComponentPreconditionImpl extends ArchitecturalPreconditionIm
 	public void eUnset(int featureID) {
 		switch (featureID) {
 		case UncertaintyPackage.ACTIVE_COMPONENT_PRECONDITION__REQUIRED_ACTIVE_COMPONENT:
-			setRequiredActiveComponent((BasicComponent) null);
+			setRequiredActiveComponent((InterfaceProvidingRequiringEntity) null);
 			return;
 		}
 		super.eUnset(featureID);

@@ -38,10 +38,8 @@ import org.palladiosimulator.envdyn.environment.templatevariable.Templatevariabl
 
 import org.palladiosimulator.pcm.PcmPackage;
 
+import org.palladiosimulator.pcm.core.entity.EntityPackage;
 import org.palladiosimulator.pcm.reliability.ReliabilityPackage;
-
-import org.palladiosimulator.pcm.repository.RepositoryPackage;
-
 import tools.mdsd.probdist.distributionfunction.DistributionfunctionPackage;
 
 import tools.mdsd.probdist.distributiontype.DistributiontypePackage;
@@ -210,7 +208,7 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 	 * @generated
 	 */
 	@Override
-	public EReference getUncertaintyInducedFailureType_Refines() {
+	public EReference getUncertaintyInducedFailureType_RefinesFailureType() {
 		return (EReference) uncertaintyInducedFailureTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -465,7 +463,7 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 
 		// Create classes and their features
 		uncertaintyInducedFailureTypeEClass = createEClass(UNCERTAINTY_INDUCED_FAILURE_TYPE);
-		createEReference(uncertaintyInducedFailureTypeEClass, UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES);
+		createEReference(uncertaintyInducedFailureTypeEClass, UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES_FAILURE_TYPE);
 		createEReference(uncertaintyInducedFailureTypeEClass, UNCERTAINTY_INDUCED_FAILURE_TYPE__UNCERTAINTY_MODEL);
 		createEReference(uncertaintyInducedFailureTypeEClass, UNCERTAINTY_INDUCED_FAILURE_TYPE__FAILURE_VARIABLE);
 		createEReference(uncertaintyInducedFailureTypeEClass,
@@ -532,8 +530,7 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 				.getEPackage(StaticmodelPackage.eNS_URI);
 		TemplatevariablePackage theTemplatevariablePackage = (TemplatevariablePackage) EPackage.Registry.INSTANCE
 				.getEPackage(TemplatevariablePackage.eNS_URI);
-		RepositoryPackage theRepositoryPackage = (RepositoryPackage) EPackage.Registry.INSTANCE
-				.getEPackage(RepositoryPackage.eNS_URI);
+		EntityPackage theEntityPackage = (EntityPackage) EPackage.Registry.INSTANCE.getEPackage(EntityPackage.eNS_URI);
 		DistributionfunctionPackage theDistributionfunctionPackage = (DistributionfunctionPackage) EPackage.Registry.INSTANCE
 				.getEPackage(DistributionfunctionPackage.eNS_URI);
 		EcorePackage theEcorePackage = (EcorePackage) EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
@@ -554,9 +551,10 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 		// Initialize classes, features, and operations; add parameters
 		initEClass(uncertaintyInducedFailureTypeEClass, UncertaintyInducedFailureType.class,
 				"UncertaintyInducedFailureType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getUncertaintyInducedFailureType_Refines(), theReliabilityPackage.getFailureType(), null,
-				"refines", null, 1, 1, UncertaintyInducedFailureType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUncertaintyInducedFailureType_RefinesFailureType(), theReliabilityPackage.getFailureType(),
+				null, "refinesFailureType", null, 1, 1, UncertaintyInducedFailureType.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 		initEReference(getUncertaintyInducedFailureType_UncertaintyModel(),
 				theStaticmodelPackage.getGroundProbabilisticNetwork(), null, "uncertaintyModel", null, 1, 1,
 				UncertaintyInducedFailureType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
@@ -604,7 +602,7 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 		initEClass(activeComponentPreconditionEClass, ActiveComponentPrecondition.class, "ActiveComponentPrecondition",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getActiveComponentPrecondition_RequiredActiveComponent(),
-				theRepositoryPackage.getBasicComponent(), null, "requiredActiveComponent", null, 1, 1,
+				theEntityPackage.getInterfaceProvidingRequiringEntity(), null, "requiredActiveComponent", null, 1, 1,
 				ActiveComponentPrecondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
