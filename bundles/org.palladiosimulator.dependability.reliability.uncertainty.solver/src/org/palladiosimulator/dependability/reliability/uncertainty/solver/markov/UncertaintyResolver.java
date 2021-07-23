@@ -145,6 +145,25 @@ public class UncertaintyResolver {
 	private double computeProbabilityOfFailure(UncertaintyInducedFailureType uncertainty,
 			List<UncertaintyState> values) {
 		var uncertaintyModel = UncertaintyModelManager.get().findModelFor(uncertainty).orElseThrow();
+		// hier fällt er hin wegen Fail/Success nicht gefunden, aus der auswertung von System.
+		
+		for(int i = 0; i < values.size(); i++) {
+			var iter = values.get(i).getValueSpace().iterator();
+			while(iter.hasNext()) {
+				var value = iter.next();
+
+				System.out.println(value.toString());
+				if(value.toString().equals("Success") || value.toString().equals("Fail") ) {
+					System.out.println("If Success || Fail");
+					values.remove(i);
+					break;
+				}
+			}
+		}
+		// der UncertaintyState Space ist zu groß und muss dann theoretisch verkleinert werden
+		// bzw soll dann nur noch die relevanten nutzen.
+		
+
 		return uncertaintyModel.probabilityOfFailureGiven(values);
 	}
 

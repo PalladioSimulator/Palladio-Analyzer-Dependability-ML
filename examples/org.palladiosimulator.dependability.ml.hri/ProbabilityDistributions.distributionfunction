@@ -21,7 +21,7 @@
   <distributions xsi:type="distributionfunction:ProbabilityDistribution" id="_9o2KcCpVEeuMpaabmuiN-Q" entityName="TemporalSensorNoiseDistribution" params="_Bd_3ESpWEeuMpaabmuiN-Q">
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
   </distributions>
-  <params id="_a9RjsMqkEeqObY-eK2jOOA" entityName="SensitivityParam">
+  <params id="_a9RjsMqkEeqObY-eK2jOOA" entityName="SensitivityBrightnessParam">
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
     <representation xsi:type="distributionfunction:SimpleParameter" type="SAMPLESPACE" value="{(ImageBrightnessMeasure=High),0.3};{(ImageBrightnessMeasure=Low),0.3};{(ImageBrightnessMeasure=Medium),0.4}"/>
   </params>

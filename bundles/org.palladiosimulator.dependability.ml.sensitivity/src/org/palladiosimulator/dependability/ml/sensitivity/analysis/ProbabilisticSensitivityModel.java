@@ -66,6 +66,8 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 
 	public static ProbabilisticSensitivityModel createFrom(GroundProbabilisticNetwork probSensitivityModel,
 			TemplateVariableDefinitions templateVariables) {
+		// nutze templates vom teilbaum
+		
 		return new ProbabilisticSensitivityModel(probSensitivityModel, templateVariables);
 	}
 
@@ -106,7 +108,8 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 
 		var inputs = toInputValues(properties);
 		if (isInferenceRequired(inputs)) {
-			return bayesianNetwork.infer(inputs);
+			return bayesianNetwork.infer(inputs); // the Method is not implemented yet.. 
+			// durch das rauslöschen von Success/Fail aus dem SampleSpace komme ich hier mit dem fehler raus..
 		}
 		return bayesianNetwork.probability(inputs);
 

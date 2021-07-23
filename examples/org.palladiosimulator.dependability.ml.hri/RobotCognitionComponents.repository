@@ -209,6 +209,9 @@
     </signatures__OperationInterface>
   </interfaces__Repository>
   <failureTypes__Repository xsi:type="reliability:SoftwareInducedFailureType" id="_ZkNuedDYEeqWne3bdagE9g" entityName="ImageClassificationPredictionFailure" internalFailureOccurrenceDescriptions__SoftwareInducedFailureType="//@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
+  <failureTypes__Repository xsi:type="reliability:HardwareInducedFailureType" id="_Pst3iNjJEeuZAO8BZqE4Cg" entityName="HardwareError">
+    <processingResourceType__HardwareInducedFailureType href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+  </failureTypes__Repository>
   <dataTypes__Repository xsi:type="repository:CollectionDataType" id="_w-QdMNC7EeqWne3bdagE9g" entityName="Image">
     <innerType_CollectionDataType xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.5"/>
   </dataTypes__Repository>

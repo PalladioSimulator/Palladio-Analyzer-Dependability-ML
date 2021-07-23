@@ -23,7 +23,7 @@
     <semanticResources>platform:/resource/de.uka.ipd.sdq.stoex/model/stoex.genmodel</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_wLLawMgFEeqouM-niPEurg">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_wM6gIMgFEeqouM-niPEurg" name="uncertainty" repPath="#_wMV4YMgFEeqouM-niPEurg" changeId="5c7c77ad-5b1a-4f3c-b90b-58aab133e4d9">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_wM6gIMgFEeqouM-niPEurg" name="uncertainty" repPath="#_wMV4YMgFEeqouM-niPEurg" changeId="81a49ffc-06c4-4aa4-9d8d-24fe1cfbbc99">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="uncertainty.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -149,7 +149,7 @@
             <styles xmi:type="notation:FilteringStyle" xmi:id="_wcTw091rEeqSdKurlZojVA"/>
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_wcSisd1rEeqSdKurlZojVA" fontName="Segoe UI" fontHeight="8"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wcSist1rEeqSdKurlZojVA" x="409" y="410" width="173" height="83"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wcSist1rEeqSdKurlZojVA" x="380" y="556" width="173" height="83"/>
         </children>
         <children xmi:type="notation:Node" xmi:id="_3UDEsN1rEeqSdKurlZojVA" type="2003" element="_3TfrEN1rEeqSdKurlZojVA">
           <children xmi:type="notation:Node" xmi:id="_3UDrwN1rEeqSdKurlZojVA" type="5007"/>
@@ -158,7 +158,7 @@
             <styles xmi:type="notation:FilteringStyle" xmi:id="_3UES0t1rEeqSdKurlZojVA"/>
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_3UDEsd1rEeqSdKurlZojVA" fontName="Segoe UI" fontHeight="8"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3UDEst1rEeqSdKurlZojVA" x="304" y="550" width="168" height="75"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3UDEst1rEeqSdKurlZojVA" x="264" y="724" width="168" height="75"/>
         </children>
         <children xmi:type="notation:Node" xmi:id="_5Sbc8N1rEeqSdKurlZojVA" type="2003" element="_5R-J8N1rEeqSdKurlZojVA">
           <children xmi:type="notation:Node" xmi:id="_5ScEAN1rEeqSdKurlZojVA" type="5007"/>
@@ -171,7 +171,7 @@
             <styles xmi:type="notation:FilteringStyle" xmi:id="_5ScEA91rEeqSdKurlZojVA"/>
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_5Sbc8d1rEeqSdKurlZojVA" fontName="Segoe UI" fontHeight="8"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5Sbc8t1rEeqSdKurlZojVA" x="529" y="553" width="178" height="70"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5Sbc8t1rEeqSdKurlZojVA" x="489" y="727" width="178" height="70"/>
         </children>
         <children xmi:type="notation:Node" xmi:id="_uSNT8N1vEeqSdKurlZojVA" type="2003" element="_uRm3AN1vEeqSdKurlZojVA">
           <children xmi:type="notation:Node" xmi:id="_uSNT891vEeqSdKurlZojVA" type="5007"/>
@@ -188,7 +188,7 @@
             <styles xmi:type="notation:FilteringStyle" xmi:id="_uSN7At1vEeqSdKurlZojVA"/>
           </children>
           <styles xmi:type="notation:ShapeStyle" xmi:id="_uSNT8d1vEeqSdKurlZojVA" fontName="Segoe UI" fontHeight="8"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uSNT8t1vEeqSdKurlZojVA" x="304" y="660" width="162" height="65"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uSNT8t1vEeqSdKurlZojVA" x="264" y="834" width="162" height="65"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_l3rEMCppEeub5-kNXpS8yw" type="Note" fontName="Segoe UI" description="Assumption uncertainty model: Each template describing an uncertainty is instantiated only once, that is the number of ground variables is equal to the number of instantiated templates." fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
           <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_l3rEMSppEeub5-kNXpS8yw" source="specificStyles">
@@ -336,17 +336,17 @@
         </edges>
         <edges xmi:type="notation:Edge" xmi:id="_ZCVAYN1wEeqSdKurlZojVA" type="4001" element="_ZB3GVt1wEeqSdKurlZojVA" source="_8YHvcN1TEeqSdKurlZojVA" target="_wcSisN1rEeqSdKurlZojVA">
           <children xmi:type="notation:Node" xmi:id="_ZCVAZN1wEeqSdKurlZojVA" type="6001">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZCVAZd1wEeqSdKurlZojVA" x="-3" y="-91"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZCVAZd1wEeqSdKurlZojVA" x="-76" y="-91"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_ZCVAZt1wEeqSdKurlZojVA" type="6002">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZCVAZ91wEeqSdKurlZojVA" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZCVAZ91wEeqSdKurlZojVA" x="-22" y="10"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_ZCVncN1wEeqSdKurlZojVA" type="6003">
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZCVncd1wEeqSdKurlZojVA" y="10"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZCVncd1wEeqSdKurlZojVA" x="-124" y="10"/>
           </children>
           <styles xmi:type="notation:ConnectorStyle" xmi:id="_ZCVAYd1wEeqSdKurlZojVA" routing="Rectilinear"/>
           <styles xmi:type="notation:FontStyle" xmi:id="_ZCVAYt1wEeqSdKurlZojVA" fontColor="7490599" fontName="Segoe UI" fontHeight="8"/>
-          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ZCVAY91wEeqSdKurlZojVA" points="[-80, 0, 56, -52]$[-80, 52, 56, 0]"/>
+          <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ZCVAY91wEeqSdKurlZojVA" points="[-109, 0, 56, -198]$[-109, 198, 56, 0]"/>
           <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ZCVnct1wEeqSdKurlZojVA" id="(0.9166666666666666,1.0)"/>
           <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ZCVnc91wEeqSdKurlZojVA" id="(0.14619883040935672,0.0)"/>
         </edges>

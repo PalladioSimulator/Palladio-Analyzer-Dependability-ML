@@ -4,6 +4,15 @@ import static java.util.Objects.nonNull;
 import static java.util.Objects.requireNonNull;
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.util.ArchitecturalPreconditionUtil.allPreconditionsFulfilled;
 
+import java.io.Console;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -109,32 +118,57 @@ public class UncertaintyBasedReliabilityPredictor {
 
 		List<ReliabilityPredictionResult> results = Lists.newArrayList();
 
+		ArrayList<String> lines = new ArrayList<String>(Arrays.asList("Uncertainty Report for debugging purposes", "---------------------------"));
+
 		var stateSpace = UncertaintyModelManager.get().getStateSpace();
 		for (List<UncertaintyState> eachTuple : exploreStrategy.explore(stateSpace)) {
 			var conditionalPoS = predictConditionalSuccessProbability(unresolved, eachTuple);
-			eachTuple.forEach((v) -> System.out.println(v.getId() + ", " + v.getValue().toString()));
-			// System.out.println(stateSpace);
+			
+			eachTuple.forEach((v) -> lines.add(v.getId() + ", " + v.getValue().toString()));
 			System.out.println(conditionalPoS.toString());
 			// print each conditionalPoS
-			
-			/*
-			 *	ImageBrightnessMeasureSensitivity, (ImageBrightnessMeasure=Low)
-				SensorNoiseSensitivity, (SensorNoise=High)
-				successProbabilityToUsageScenario: k:_NbnWMNDeEeqWne3bdagE9g, v:0.6724172069999999; probabilityOfUncertainties: 0.075
-			 */
+			lines.add(conditionalPoS.toString());
 			results.add(conditionalPoS);
 		}
 
+		
+		Path file = Paths.get("/Users/dmb/Desktop/uncertainty-results.txt");
+		// if()
+		int i = 1;
+		boolean noFileNameFound = true;
+		while(noFileNameFound) {
+			file = Paths.get("/Users/dmb/Desktop/uncertainty-results" + i + ".txt");
+			if(!file.toFile().exists()) {
+				noFileNameFound = false;
+			}
+			i++;
+		}
+				
+		try {
+			Files.write(file, lines, StandardCharsets.UTF_8);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//Files.write(file, lines, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
+		
+		
 		return marginalizingUncertaintiesForEachScenario(results, unresolved.getUsageModel());
 	}
 
 	public ReliabilityPredictionResult predictConditionalSuccessProbability(PCMInstance unresolvedModel,
 			List<UncertaintyState> stateTuple) {
-		applyArchitecturalCountermeasures(unresolvedModel, stateTuple);
+		// hier ansetzten passt also werte an countermeasure an
+		// hier anpassen
+		applyArchitecturalCountermeasures(unresolvedModel, stateTuple); // stateTuple wird angepasst.
 
-		var resolvedModel = resolveUncertainties(unresolvedModel, stateTuple);
+		// pcm model wird angepasst, sprich hier werden die neue uncertainty fehler berechnet 
+		var resolvedModel = resolveUncertainties(unresolvedModel, stateTuple); // neue stateTuple werte ändern PCMInstanzen
 
-		var conditionalPoS = predictProbabilityOfSuccessGiven(resolvedModel);
+		// berechnet systemfehler und passt hier system an -> echte markov auswertung 
+		var conditionalPoS = predictProbabilityOfSuccessGiven(resolvedModel); 
+		// also hier werden die HardwareInducedFehler beachtet
+		// wie wahrscheinlich ist es dass der fall eintritt? wird extra berechnet
 		var probOfUncertainties = predictProbabilityOfUncertainties(stateTuple, resolvedModel);
 		return ReliabilityPredictionResult.of(conditionalPoS, probOfUncertainties);
 	}
@@ -191,14 +225,16 @@ public class UncertaintyBasedReliabilityPredictor {
 	private CategoricalValue applyArchitecturalCountermeasure(ArchitecturalCountermeasure countermeasure,
 			PCMInstance pcmModel, UncertaintyState state) {
 		if (allPreconditionsFulfilled(countermeasure, pcmModel)) {
-			var improvement = countermeasure.getUncertaintyImprovement();
+			var improvement = countermeasure.getUncertaintyImprovement();// hier greift man direkt auf das uncertaintyImprovement zu
 			return UncertaintyImprovementCalculator.get().calculate(improvement, state.getValue());
 		}
 		return state.getValue();
 	}
 
+	// hier muss auch beachtet werden, dass pcminstanzen auf pcminstanzen einfluss haben.. bzw einzelnen objekte aus den pcminstanzen auf andere (ML auf system)
 	private PCMInstance resolveUncertainties(PCMInstance modelToResolve, List<UncertaintyState> stateTuple) {
 		var uncertaintyResolver = new UncertaintyResolver(modelToResolve);
+		System.out.println("UncertaintyBasedReliabilityPredictor:resolveUncertainties");
 		uncertaintyRepo.getUncertaintyInducedFailureTypes()
 				.forEach(uncertainty -> uncertaintyResolver.resolve(uncertainty, stateTuple));
 		return modelToResolve;
