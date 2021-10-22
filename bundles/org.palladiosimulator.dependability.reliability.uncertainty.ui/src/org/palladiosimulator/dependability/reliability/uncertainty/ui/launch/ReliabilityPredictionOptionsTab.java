@@ -1,9 +1,11 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.ui.launch;
 
+import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.APPLY_AT_ATTR;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.DEFAULT_ATTR;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.EXPLORATION_STRATEGY_ATTR;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.UNCERTAINTY_MODEL_ATTR;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
@@ -12,6 +14,10 @@ import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
@@ -27,14 +33,19 @@ public class ReliabilityPredictionOptionsTab extends AbstractLaunchConfiguration
 
 	private Text uncertaintyModelLocation;
 	private Combo supportedStrategiesCombobox;
+	private Button atButton;
 
 	private final ModifyListener modifyListener = new ModifyListener() {
 
 		public void modifyText(ModifyEvent e) {
-			setDirty(true);
-			updateLaunchConfigurationDialog();
+			updateTab();
 		}
 	};
+	
+	private void updateTab() {
+		setDirty(true);
+		updateLaunchConfigurationDialog();
+	}
 
 	@Override
 	public void createControl(Composite parent) {
@@ -43,6 +54,8 @@ public class ReliabilityPredictionOptionsTab extends AbstractLaunchConfiguration
 		createUncertaintyModelLocationText(container);
 
 		createSupportedExplorationStrategiesGroup(container);
+
+		createArchitecturalTemplateGroup(container);
 	}
 
 	private Composite createRootContainer(Composite parent) {
@@ -70,6 +83,35 @@ public class ReliabilityPredictionOptionsTab extends AbstractLaunchConfiguration
 		supportedStrategiesCombobox = new Combo(mlModelsGroup, SWT.READ_ONLY);
 		supportedStrategiesCombobox.setItems(getStrategyNames());
 		supportedStrategiesCombobox.setSize(400, 200);
+		supportedStrategiesCombobox.addModifyListener(new ModifyListener() {
+			
+			@Override
+			public void modifyText(ModifyEvent arg0) {
+				updateTab();
+			}
+		});
+	}
+
+	private void createArchitecturalTemplateGroup(Composite container) {
+		var atGroup = new Group(container, SWT.NONE);
+		atGroup.setText("Architectural templates");
+		GridLayoutFactory.swtDefaults().numColumns(2).applyTo(atGroup);
+
+		atButton = new Button(atGroup, SWT.CHECK);
+		atButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 4, 1));
+		atButton.setText("Apply architectural templates, if any");
+		atButton.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				updateTab();
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				updateTab();
+			}
+		});
 	}
 
 	private String[] getStrategyNames() {
@@ -80,13 +122,33 @@ public class ReliabilityPredictionOptionsTab extends AbstractLaunchConfiguration
 
 	@Override
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-		// TODO Auto-generated method stub
-
+		configuration.setAttribute(EXPLORATION_STRATEGY_ATTR, DEFAULT_ATTR);
+		configuration.setAttribute(UNCERTAINTY_MODEL_ATTR, DEFAULT_ATTR);
+		configuration.setAttribute(APPLY_AT_ATTR, false);
 	}
 
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
-		supportedStrategiesCombobox.select(0);
+		try {
+			uncertaintyModelLocation.setText(configuration.getAttribute(UNCERTAINTY_MODEL_ATTR, DEFAULT_ATTR));
+			
+			
+			supportedStrategiesCombobox.select(0);
+			var expAttr = configuration.getAttribute(EXPLORATION_STRATEGY_ATTR, DEFAULT_ATTR);
+			for (int i = 0; i < supportedStrategiesCombobox.getItemCount(); i++) {
+				var item = supportedStrategiesCombobox.getItem(i);
+				if (item.equals(expAttr)) {
+					supportedStrategiesCombobox.select(i);
+					break;
+				}
+			}
+
+			atButton.setSelection(configuration.getAttribute(APPLY_AT_ATTR, false));
+		} catch (CoreException e) {
+			uncertaintyModelLocation.setText(DEFAULT_ATTR);
+			supportedStrategiesCombobox.select(0);
+			atButton.setSelection(false);
+		}
 	}
 
 	@Override
@@ -94,6 +156,7 @@ public class ReliabilityPredictionOptionsTab extends AbstractLaunchConfiguration
 		configuration.setAttribute(EXPLORATION_STRATEGY_ATTR,
 				supportedStrategiesCombobox.getItem(supportedStrategiesCombobox.getSelectionIndex()));
 		configuration.setAttribute(UNCERTAINTY_MODEL_ATTR, uncertaintyModelLocation.getText());
+		configuration.setAttribute(APPLY_AT_ATTR, atButton.getSelection());
 	}
 
 	@Override

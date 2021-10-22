@@ -12,7 +12,12 @@ Require-Bundle: org.eclipse.ui,
  org.palladiosimulator.reliability.solver,
  org.palladiosimulator.analyzer.workflow;bundle-version="4.3.0",
  de.uka.ipd.sdq.workflow.mdsd;bundle-version="4.3.0",
- org.palladiosimulator.dependability.reliability.uncertainty.solver;bundle-version="1.0.0"
+ org.palladiosimulator.dependability.reliability.uncertainty.solver;bundle-version="1.0.0",
+ org.palladiosimulator.architecturaltemplates.jobs;bundle-version="5.0.0",
+ org.palladiosimulator.analyzer.workflow;bundle-version="1.0.0",
+ org.palladiosimulator.experimentautomation.application;bundle-version="5.0.0",
+ org.palladiosimulator.architecturaltemplates.api;bundle-version="5.0.0",
+ org.eclipse.emf.common;bundle-version="2.21.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.palladiosimulator.dependability.reliability.uncertainty.ui
 Bundle-ActivationPolicy: lazy
