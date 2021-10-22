@@ -40,8 +40,9 @@ public class UncertaintyBasedReliabilityPrediction {
 
 	public static ReliabilityPredictionResult predictGiven(List<UncertaintyState> uncertaintyStates,
 			UncertaintyBasedReliabilityPredictionConfig config) {
-		return buildReliabilityPredictor(config).predictConditionalSuccessProbability(config.getPCMInstance(),
+		var results = buildReliabilityPredictor(config).predictConditionalSuccessProbability(config.getPCMInstance(),
 				uncertaintyStates);
+		return new ReliabilityPredictionResult(results);
 	}
 
 	private static UncertaintyBasedReliabilityPredictor buildReliabilityPredictor(

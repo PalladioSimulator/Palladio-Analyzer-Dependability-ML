@@ -17,11 +17,14 @@ Require-Bundle: org.eclipse.core.runtime,
  org.palladiosimulator.analyzer.workflow;bundle-version="4.3.0",
  org.palladiosimulator.dependability.ml.sensitivity;bundle-version="1.0.0",
  org.palladiosimulator.dependability.ml,
- org.palladiosimulator.pcm;bundle-version="5.0.0"
+ org.palladiosimulator.pcm;bundle-version="5.0.0",
+ org.palladiosimulator.experimentautomation.application,
+ org.palladiosimulator.architecturaltemplates.jobs
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.palladiosimulator.dependability.reliability.uncertainty.solver
 Bundle-ActivationPolicy: lazy
 Export-Package: org.palladiosimulator.dependability.reliability.uncertainty.solver.api,
+ org.palladiosimulator.dependability.reliability.uncertainty.solver.jobs,
  org.palladiosimulator.dependability.reliability.uncertainty.solver.markov,
  org.palladiosimulator.dependability.reliability.uncertainty.solver.model,
  org.palladiosimulator.dependability.reliability.uncertainty.solver.util

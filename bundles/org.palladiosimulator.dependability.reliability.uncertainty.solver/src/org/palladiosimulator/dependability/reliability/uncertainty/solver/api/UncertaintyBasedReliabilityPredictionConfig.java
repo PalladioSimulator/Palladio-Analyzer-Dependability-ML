@@ -14,8 +14,8 @@ import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartitio
 import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.jobs.PCMInstanceBuilderJob;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.StateSpaceExplorationStrategy;
-import org.palladiosimulator.dependability.reliability.uncertainty.solver.util.PCMInstanceBuilderJob;
 import org.palladiosimulator.solver.models.PCMInstance;
 import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
@@ -28,6 +28,7 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 	public static class UncertaintyBasedReliabilityPredictionConfigBuilder {
 
 		private PCMSolverWorkflowRunConfiguration runConfig;
+		private MDSDBlackboard blackboard;
 		private String explorationStrategyName;
 		private String uncertaintyRepository;
 
@@ -38,6 +39,11 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 		public UncertaintyBasedReliabilityPredictionConfigBuilder withReliabilityRunConfig(
 				PCMSolverWorkflowRunConfiguration runConfig) {
 			this.runConfig = runConfig;
+			return this;
+		}
+		
+		public UncertaintyBasedReliabilityPredictionConfigBuilder andPcmModels(MDSDBlackboard blackboard) {
+			this.blackboard = blackboard;
 			return this;
 		}
 
@@ -58,10 +64,12 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 
 			var strategy = UncertaintyBasedReliabilityPrediction.findStrategyWith(explorationStrategyName).orElse(null);
 			var uncertaintyRepo = loadUncertaintyRepo();
-			var pcmInstance = buildPCMInstance();
+			var pcmInstance = new PCMInstance((PCMResourceSetPartition) blackboard
+					.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
 			return new UncertaintyBasedReliabilityPredictionConfig(runConfig, strategy, uncertaintyRepo, pcmInstance);
 		}
 
+		//TODO check how this can be simplified in SimExp
 		public UncertaintyBasedReliabilityPredictionConfig rebuild(UncertaintyBasedReliabilityPredictionConfig config,
 				MDSDBlackboard blackboard) {
 			var runConfig = config.runConfig;
@@ -69,10 +77,6 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 			var uncertaintyRepo = config.uncertaintyRepo;
 			var pcmInstance = rebuildPCMInstance(blackboard, config.runConfig);
 			return new UncertaintyBasedReliabilityPredictionConfig(runConfig, strategy, uncertaintyRepo, pcmInstance);
-		}
-
-		private PCMInstance buildPCMInstance() {
-			return executePCMInstanceBuildJob(new PCMInstanceBuilderJob(runConfig));
 		}
 
 		private PCMInstance rebuildPCMInstance(MDSDBlackboard blackboard, PCMSolverWorkflowRunConfiguration runConfig) {

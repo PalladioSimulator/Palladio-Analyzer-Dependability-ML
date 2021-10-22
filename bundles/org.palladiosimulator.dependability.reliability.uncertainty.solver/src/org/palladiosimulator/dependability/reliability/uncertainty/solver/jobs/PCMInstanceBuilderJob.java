@@ -1,4 +1,4 @@
-package org.palladiosimulator.dependability.reliability.uncertainty.solver.util;
+package org.palladiosimulator.dependability.reliability.uncertainty.solver.jobs;
 
 import org.palladiosimulator.analyzer.workflow.jobs.EventsTransformationJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadMiddlewareConfigurationIntoBlackboardJob;
@@ -15,11 +15,8 @@ public class PCMInstanceBuilderJob extends SequentialBlackboardInteractingJob<MD
 	public PCMInstanceBuilderJob(PCMSolverWorkflowRunConfiguration config) {
 		super(false);
 
-		this.myBlackboard = new MDSDBlackboard();
-
 		this.addJob(new LoadPCMModelsIntoBlackboardJob(config));
 		this.addJob(new LoadMiddlewareConfigurationIntoBlackboardJob(config));
-		this.addJob(new ValidatePCMModelsJob(config));
 		this.add(new EventsTransformationJob(config.getStoragePluginID(), config.getEventMiddlewareFile(), false));
 	}
 
