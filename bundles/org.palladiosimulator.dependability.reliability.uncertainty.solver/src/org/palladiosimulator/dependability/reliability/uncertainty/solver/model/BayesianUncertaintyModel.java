@@ -91,7 +91,12 @@ public class BayesianUncertaintyModel implements UncertaintyModel {
 		return inputValues;
 	}
 
+	// Hier vlt eine Fehlermeldung angeben, wenn variable nicht gefunden wird..
 	private Optional<CategoricalValue> findValue(GroundRandomVariable variable, List<UncertaintyState> values) {
+		// for debug purposes
+		System.out.println("findValue");
+		System.out.println(values);
+		values.stream().forEach(each -> System.out.println("Searched value.ID: " + each.getId() + ", and variable.entityName: " + variable.getEntityName()));
 		return values.stream()
 				.filter(each -> each.getId().equals(variable.getEntityName()))
 				.map(UncertaintyState::getValue)

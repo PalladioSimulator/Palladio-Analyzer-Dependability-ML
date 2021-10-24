@@ -137,29 +137,33 @@ public class UncertaintyResolver {
 		var probabilityUpdater = new ProbabilityUpdater();
 		for (FailureType each : filterFailureTypes(pcmInstance)) {
 			if (isRefined(each, uncertainty) && isActive(uncertainty)) {
-				probabilityUpdater.update(each, computeProbabilityOfFailure(uncertainty, values));
+				probabilityUpdater.update(each, computeProbabilityOfFailure(uncertainty, values)); // mit AT fällt er hier hin..
 			}
 		}
 	}
 
 	private double computeProbabilityOfFailure(UncertaintyInducedFailureType uncertainty,
 			List<UncertaintyState> values) {
+		System.out.println("UncertaintyResolver:computeProbabilityOfFailure");
 		var uncertaintyModel = UncertaintyModelManager.get().findModelFor(uncertainty).orElseThrow();
 		// hier fällt er hin wegen Fail/Success nicht gefunden, aus der auswertung von System.
 		
+		/*
 		for(int i = 0; i < values.size(); i++) {
 			var iter = values.get(i).getValueSpace().iterator();
 			while(iter.hasNext()) {
 				var value = iter.next();
 
 				System.out.println(value.toString());
+				// Code abschnitt dient zum Debuggen. Entfernt alle Einträge mit "Success" und/oder "Fail".
 				if(value.toString().equals("Success") || value.toString().equals("Fail") ) {
 					System.out.println("If Success || Fail");
 					values.remove(i);
 					break;
-				}
+				} 
 			}
 		}
+		*/
 		// der UncertaintyState Space ist zu groß und muss dann theoretisch verkleinert werden
 		// bzw soll dann nur noch die relevanten nutzen.
 		

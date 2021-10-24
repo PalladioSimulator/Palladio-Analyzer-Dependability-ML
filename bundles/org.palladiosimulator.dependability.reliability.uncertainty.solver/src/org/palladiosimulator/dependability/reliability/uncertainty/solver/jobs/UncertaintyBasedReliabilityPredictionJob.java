@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
+import org.palladiosimulator.analyzer.workflow.jobs.EventsTransformationJob;
+import org.palladiosimulator.analyzer.workflow.jobs.LoadMiddlewareConfigurationIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadModelIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.ValidatePCMModelsJob;
@@ -47,19 +49,29 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 		}
 		
 		public UncertaintyBasedReliabilityPredictionJob build() {
+			
 			var relPredictionJob = new UncertaintyBasedReliabilityPredictionJob();
 			relPredictionJob.myBlackboard = new MDSDBlackboard();
+
+			// test replacement: first apply ats then transform them
+			var applyATs = launchConfig != null;
+			if (applyATs) {
+				addATJob(relPredictionJob);
+			}
+			// test replacement 
 			
 			requireNonNull(config, "The reliability config must be specified.");
 			var pcmInstanceBuilderJob = new PCMInstanceBuilderJob(config);
 			relPredictionJob.addJob(pcmInstanceBuilderJob);
 			
-			var applyATs = launchConfig != null;
-			if (applyATs) {
-				addATJob(relPredictionJob);
+			// test removel and placed it before the other jobs are running
+			// var applyATs = launchConfig != null;
+			/* if (applyATs) {
+				// addATJob(relPredictionJob);				
 			} else {
-				relPredictionJob.addJob(new ValidatePCMModelsJob(config));
+				//relPredictionJob.addJob(new ValidatePCMModelsJob(config));
 			}
+			*/
 			
 			relPredictionJob.addJob(new RootReliabilityPredictionRunJob(config, uncertaintyModel, explorationStrategy));
 			
@@ -68,6 +80,10 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 
 		private void addATJob(UncertaintyBasedReliabilityPredictionJob rootJob) {
 			var uncertaintyUri = URI.createURI(uncertaintyModel);
+			// im anderen () aber:
+			// this.addJob(new LoadPCMModelsIntoBlackboardJob(config));
+			// weicht config von den anderen parametern ab?
+			rootJob.addJob(new LoadPCMModelsIntoBlackboardJob(config));
 			rootJob.addJob(new LoadModelIntoBlackboardJob(uncertaintyUri, LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
 			rootJob.addJob(new PrepareBlackboardJob());
 			
@@ -80,6 +96,7 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 			}
 			
 			rootJob.addJob(atJob);
+			rootJob.addJob(new ValidatePCMModelsJob(config));
 		}
 		
 	}
