@@ -20,6 +20,8 @@ import org.palladiosimulator.reliability.solver.pcm2markov.Pcm2MarkovStrategy;
 import org.palladiosimulator.solver.models.PCMInstance;
 import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
+import com.google.common.collect.Lists;
+
 import tools.mdsd.probdist.api.apache.supplier.MultinomialDistributionSupplier;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
@@ -114,41 +116,43 @@ public class UncertaintyBasedReliabilityPredictor {
 	}
 
 	public Set<ReliabilityPredictionResultPerScenario> predictConditionalSuccessProbability(PCMInstance unresolvedModel,
-			List<UncertaintyState> stateTuple) {
+			List<UncertaintyState> original) {
 		// hier ansetzten passt also werte an countermeasure an
 		// hier anpassen
-		applyArchitecturalCountermeasures(unresolvedModel, stateTuple); // stateTuple wird angepasst.
+		var improved = applyArchitecturalCountermeasures(unresolvedModel, original); // stateTuple wird angepasst.
 
 		// pcm model wird angepasst, sprich hier werden die neue uncertainty fehler
 		// berechnet
-		var resolvedModel = resolveUncertainties(unresolvedModel, stateTuple); // neue stateTuple werte ändern
+		var resolvedModel = resolveUncertainties(unresolvedModel, improved); // neue stateTuple werte ändern
 																				// PCMInstanzen
 
 		// berechnet systemfehler und passt hier system an -> echte markov auswertung
 		var conditionalPoS = predictProbabilityOfSuccessGiven(resolvedModel);
 		// also hier werden die HardwareInducedFehler beachtet
 		// wie wahrscheinlich ist es dass der fall eintritt? wird extra berechnet
-		var probOfUncertainties = predictProbabilityOfUncertainties(stateTuple, resolvedModel);
+		var probOfUncertainties = predictProbabilityOfUncertainties(original, resolvedModel);
 		
 		return conditionalPoS.stream()
-				.map(each -> ReliabilityPredictionResultPerScenario.of(each, stateTuple, probOfUncertainties))
+				.map(each -> ReliabilityPredictionResultPerScenario.of(each, improved, probOfUncertainties))
 				.collect(toSet());
 	}
 
-	private void applyArchitecturalCountermeasures(PCMInstance pcmModel, List<UncertaintyState> stateTuple) {
+	private List<UncertaintyState> applyArchitecturalCountermeasures(PCMInstance pcmModel, List<UncertaintyState> stateTuple) {
+		List<UncertaintyState> improved = Lists.newArrayList(stateTuple);		
 		for (ArchitecturalCountermeasure each : uncertaintyRepo.getArchitecturalCountermeasures()) {
-			var result = findApplicableState(each, stateTuple);
+			var result = findApplicableState(each, improved);
 			if (result.isEmpty()) {
 				break;
 			}
 
 			var oldState = result.get();
-			stateTuple.remove(oldState);
+			improved.remove(oldState);
 
 			var improvedValue = applyArchitecturalCountermeasure(each, pcmModel, oldState);
 			var improvedState = oldState.newValuedStateWith(improvedValue);
-			stateTuple.add(improvedState);
+			improved.add(improvedState);
 		}
+		return improved;
 	}
 
 	private Optional<UncertaintyState> findApplicableState(ArchitecturalCountermeasure countermeasure,

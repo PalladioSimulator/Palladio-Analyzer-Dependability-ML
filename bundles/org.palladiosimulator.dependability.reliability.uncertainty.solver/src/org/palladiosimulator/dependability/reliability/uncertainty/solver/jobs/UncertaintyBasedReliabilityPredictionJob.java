@@ -6,7 +6,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
 import org.palladiosimulator.analyzer.workflow.jobs.EventsTransformationJob;
-import org.palladiosimulator.analyzer.workflow.jobs.LoadMiddlewareConfigurationIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadModelIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.ValidatePCMModelsJob;
@@ -57,13 +56,12 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 			var pcmInstanceBuilderJob = new PCMInstanceBuilderJob(config);
 			relPredictionJob.addJob(pcmInstanceBuilderJob);
 			
-			 var applyATs = launchConfig != null;
-			 if (applyATs) {
+			var applyATs = launchConfig != null;
+			if (applyATs) {
 				addATJob(relPredictionJob);				
-			} else {
-				relPredictionJob.addJob(new ValidatePCMModelsJob(config));
 			}
 			
+			relPredictionJob.addJob(new ValidatePCMModelsJob(config));
 			relPredictionJob.addJob(new EventsTransformationJob(config.getStoragePluginID(), config.getEventMiddlewareFile(), false));
 			relPredictionJob.addJob(new RootReliabilityPredictionRunJob(config, uncertaintyModel, explorationStrategy));
 			
