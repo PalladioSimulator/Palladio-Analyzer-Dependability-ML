@@ -60,7 +60,6 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 		public UncertaintyBasedReliabilityPredictionConfig build() {
 			requireNonNull(runConfig, "The reliability run config must not be null.");
 			requireValidString(explorationStrategyName);
-			requireValidString(uncertaintyRepository);
 
 			var strategy = UncertaintyBasedReliabilityPrediction.findStrategyWith(explorationStrategyName).orElse(null);
 			var uncertaintyRepo = loadUncertaintyRepo();
@@ -94,6 +93,19 @@ public class UncertaintyBasedReliabilityPredictionConfig {
 		}
 
 		private UncertaintyRepository loadUncertaintyRepo() {
+			if (uncertaintyRepository == null) {
+				var rs = (PCMResourceSetPartition) blackboard
+						.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID);
+				var repo = rs.getElement(UncertaintyPackage.eINSTANCE.getUncertaintyRepository());
+				if (repo.isEmpty()) {
+					throw new RuntimeException("The uncertainty model is neither specified by an URI nor loaded to the blackboard.");
+				}
+				
+				return (UncertaintyRepository) repo.get(0);
+			}
+			
+			requireValidString(uncertaintyRepository);
+			
 			ResourceSet rs = new ResourceSetImpl();
 			rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
 			rs.getPackageRegistry().put(UncertaintyPackage.eNS_URI, UncertaintyPackage.eINSTANCE);

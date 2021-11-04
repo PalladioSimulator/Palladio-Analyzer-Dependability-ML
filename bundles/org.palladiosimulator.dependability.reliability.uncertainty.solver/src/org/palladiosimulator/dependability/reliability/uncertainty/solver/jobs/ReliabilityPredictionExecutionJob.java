@@ -19,7 +19,6 @@ public class ReliabilityPredictionExecutionJob extends ReliabilityPredictionRunJ
 		var runConfig = UncertaintyBasedReliabilityPredictionConfig.newBuilder()
 				.withReliabilityRunConfig(context.config)
 				.andPcmModels(getBlackboard())
-				.andUncertainties(context.uncertaintyModel)
 				.exploreStateSpaceWith(context.explorationStrategy)
 				.build();
 		var result = UncertaintyBasedReliabilityPrediction.predict(runConfig);

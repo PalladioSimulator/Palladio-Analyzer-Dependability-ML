@@ -55,6 +55,9 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 			requireNonNull(config, "The reliability config must be specified.");
 			var pcmInstanceBuilderJob = new PCMInstanceBuilderJob(config);
 			relPredictionJob.addJob(pcmInstanceBuilderJob);
+			relPredictionJob.addJob(new LoadModelIntoBlackboardJob(URI.createURI(uncertaintyModel), 
+					LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
+			relPredictionJob.addJob(new PrepareBlackboardJob());
 			
 			var applyATs = launchConfig != null;
 			if (applyATs) {
@@ -69,10 +72,6 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 		}
 
 		private void addATJob(UncertaintyBasedReliabilityPredictionJob rootJob) {
-			var uncertaintyUri = URI.createURI(uncertaintyModel);
-			rootJob.addJob(new LoadModelIntoBlackboardJob(uncertaintyUri, LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
-			rootJob.addJob(new PrepareBlackboardJob());
-			
 			var atJob = new RunATJob();
 			var jobConfigurationBuilder = new ATExtensionConfigurationBuilder();
 			try {

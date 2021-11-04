@@ -14,7 +14,7 @@ public class PCMInstanceBuilderJob extends SequentialBlackboardInteractingJob<MD
 
 	public PCMInstanceBuilderJob(PCMSolverWorkflowRunConfiguration config) {
 		super(false);
-
+		
 		this.addJob(new LoadPCMModelsIntoBlackboardJob(config));
 		this.addJob(new LoadMiddlewareConfigurationIntoBlackboardJob(config));
 		//this.add(new EventsTransformationJob(config.getStoragePluginID(), config.getEventMiddlewareFile(), false));
