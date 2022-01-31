@@ -84,10 +84,6 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 		
 	}
 	
-	private UncertaintyBasedReliabilityPredictionJob() {
-		
-	}
-	
 	public static UncertaintyBasedReliabilityPredictionJobBuilder newBuilder() {
 		return new UncertaintyBasedReliabilityPredictionJobBuilder();
 	}

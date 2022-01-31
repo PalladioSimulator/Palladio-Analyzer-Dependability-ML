@@ -5,13 +5,13 @@ package org.palladiosimulator.dependability.reliability.uncertainty.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
+
 import org.palladiosimulator.pcm.core.entity.InterfaceProvidingRequiringEntity;
 
 /**
@@ -65,7 +65,7 @@ public class ActiveComponentPreconditionImpl extends ArchitecturalPreconditionIm
 	 */
 	@Override
 	public InterfaceProvidingRequiringEntity getRequiredActiveComponent() {
-		if (requiredActiveComponent != null && ((EObject) requiredActiveComponent).eIsProxy()) {
+		if (requiredActiveComponent != null && requiredActiveComponent.eIsProxy()) {
 			InternalEObject oldRequiredActiveComponent = (InternalEObject) requiredActiveComponent;
 			requiredActiveComponent = (InterfaceProvidingRequiringEntity) eResolveProxy(oldRequiredActiveComponent);
 			if (requiredActiveComponent != oldRequiredActiveComponent) {

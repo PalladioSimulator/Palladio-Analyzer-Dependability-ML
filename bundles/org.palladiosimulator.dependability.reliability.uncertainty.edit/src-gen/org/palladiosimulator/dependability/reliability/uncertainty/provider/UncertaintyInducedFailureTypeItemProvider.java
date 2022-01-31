@@ -46,7 +46,7 @@ public class UncertaintyInducedFailureTypeItemProvider extends EntityItemProvide
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addRefinesFailureTypePropertyDescriptor(object);
+			addRefinesPropertyDescriptor(object);
 			addUncertaintyModelPropertyDescriptor(object);
 			addFailureVariablePropertyDescriptor(object);
 			addArchitecturalPreconditionsPropertyDescriptor(object);
@@ -55,20 +55,19 @@ public class UncertaintyInducedFailureTypeItemProvider extends EntityItemProvide
 	}
 
 	/**
-	 * This adds a property descriptor for the Refines Failure Type feature.
+	 * This adds a property descriptor for the Refines feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addRefinesFailureTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_UncertaintyInducedFailureType_refinesFailureType_feature"),
-						getString("_UI_PropertyDescriptor_description",
-								"_UI_UncertaintyInducedFailureType_refinesFailureType_feature",
-								"_UI_UncertaintyInducedFailureType_type"),
-						UncertaintyPackage.Literals.UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES_FAILURE_TYPE, true, false,
-						true, null, null, null));
+	protected void addRefinesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_UncertaintyInducedFailureType_refines_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_UncertaintyInducedFailureType_refines_feature",
+						"_UI_UncertaintyInducedFailureType_type"),
+				UncertaintyPackage.Literals.UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES, true, false, true, null, null,
+				null));
 	}
 
 	/**

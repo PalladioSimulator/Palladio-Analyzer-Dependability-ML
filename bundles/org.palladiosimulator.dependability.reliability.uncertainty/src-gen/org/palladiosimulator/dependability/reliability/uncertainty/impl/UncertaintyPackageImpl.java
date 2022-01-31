@@ -39,7 +39,9 @@ import org.palladiosimulator.envdyn.environment.templatevariable.Templatevariabl
 import org.palladiosimulator.pcm.PcmPackage;
 
 import org.palladiosimulator.pcm.core.entity.EntityPackage;
+
 import org.palladiosimulator.pcm.reliability.ReliabilityPackage;
+
 import tools.mdsd.probdist.distributionfunction.DistributionfunctionPackage;
 
 import tools.mdsd.probdist.distributiontype.DistributiontypePackage;
@@ -208,7 +210,7 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 	 * @generated
 	 */
 	@Override
-	public EReference getUncertaintyInducedFailureType_RefinesFailureType() {
+	public EReference getUncertaintyInducedFailureType_Refines() {
 		return (EReference) uncertaintyInducedFailureTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -463,7 +465,7 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 
 		// Create classes and their features
 		uncertaintyInducedFailureTypeEClass = createEClass(UNCERTAINTY_INDUCED_FAILURE_TYPE);
-		createEReference(uncertaintyInducedFailureTypeEClass, UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES_FAILURE_TYPE);
+		createEReference(uncertaintyInducedFailureTypeEClass, UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES);
 		createEReference(uncertaintyInducedFailureTypeEClass, UNCERTAINTY_INDUCED_FAILURE_TYPE__UNCERTAINTY_MODEL);
 		createEReference(uncertaintyInducedFailureTypeEClass, UNCERTAINTY_INDUCED_FAILURE_TYPE__FAILURE_VARIABLE);
 		createEReference(uncertaintyInducedFailureTypeEClass,
@@ -551,10 +553,9 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 		// Initialize classes, features, and operations; add parameters
 		initEClass(uncertaintyInducedFailureTypeEClass, UncertaintyInducedFailureType.class,
 				"UncertaintyInducedFailureType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getUncertaintyInducedFailureType_RefinesFailureType(), theReliabilityPackage.getFailureType(),
-				null, "refinesFailureType", null, 1, 1, UncertaintyInducedFailureType.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
+		initEReference(getUncertaintyInducedFailureType_Refines(), theReliabilityPackage.getFailureType(), null,
+				"refines", null, 1, 1, UncertaintyInducedFailureType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUncertaintyInducedFailureType_UncertaintyModel(),
 				theStaticmodelPackage.getGroundProbabilisticNetwork(), null, "uncertaintyModel", null, 1, 1,
 				UncertaintyInducedFailureType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,

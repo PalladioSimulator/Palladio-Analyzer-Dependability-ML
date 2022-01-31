@@ -88,13 +88,13 @@ public interface UncertaintyPackage extends EPackage {
 	int UNCERTAINTY_INDUCED_FAILURE_TYPE__ENTITY_NAME = IdentifierPackage.ENTITY__ENTITY_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Refines Failure Type</b></em>' reference.
+	 * The feature id for the '<em><b>Refines</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES_FAILURE_TYPE = IdentifierPackage.ENTITY_FEATURE_COUNT + 0;
+	int UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES = IdentifierPackage.ENTITY_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Uncertainty Model</b></em>' reference.
@@ -547,15 +547,15 @@ public interface UncertaintyPackage extends EPackage {
 	EClass getUncertaintyInducedFailureType();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getRefinesFailureType <em>Refines Failure Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getRefines <em>Refines</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Refines Failure Type</em>'.
-	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getRefinesFailureType()
+	 * @return the meta object for the reference '<em>Refines</em>'.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getRefines()
 	 * @see #getUncertaintyInducedFailureType()
 	 * @generated
 	 */
-	EReference getUncertaintyInducedFailureType_RefinesFailureType();
+	EReference getUncertaintyInducedFailureType_Refines();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType#getUncertaintyModel <em>Uncertainty Model</em>}'.
@@ -825,13 +825,12 @@ public interface UncertaintyPackage extends EPackage {
 		EClass UNCERTAINTY_INDUCED_FAILURE_TYPE = eINSTANCE.getUncertaintyInducedFailureType();
 
 		/**
-		 * The meta object literal for the '<em><b>Refines Failure Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Refines</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES_FAILURE_TYPE = eINSTANCE
-				.getUncertaintyInducedFailureType_RefinesFailureType();
+		EReference UNCERTAINTY_INDUCED_FAILURE_TYPE__REFINES = eINSTANCE.getUncertaintyInducedFailureType_Refines();
 
 		/**
 		 * The meta object literal for the '<em><b>Uncertainty Model</b></em>' reference feature.

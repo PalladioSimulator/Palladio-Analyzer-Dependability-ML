@@ -9,7 +9,7 @@ public class ReliabilityPredictionContext {
 	protected final String uncertaintyModel;
 	protected final String explorationStrategy;
 	
-	protected ReliabilityPredictionResult result;
+	public ReliabilityPredictionResult result;
 
 	protected ReliabilityPredictionContext(PCMSolverWorkflowRunConfiguration config, String uncertaintyModel,
 			String explorationStrategy, ReliabilityPredictionResult result) {
@@ -19,7 +19,7 @@ public class ReliabilityPredictionContext {
 		this.result = result;
 	}
 	
-	protected ReliabilityPredictionContext(PCMSolverWorkflowRunConfiguration config, String uncertaintyModel,
+	public ReliabilityPredictionContext(PCMSolverWorkflowRunConfiguration config, String uncertaintyModel,
 			String explorationStrategy) {
 		this(config, uncertaintyModel, explorationStrategy, null);
 	}

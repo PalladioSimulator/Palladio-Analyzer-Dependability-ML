@@ -1,6 +1,7 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.solver.tests;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.tests.BaseReliabilityPredictionTest.RELATIVE_ALLOCATION_TEST_MODEL_PATH;
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.tests.BaseReliabilityPredictionTest.RELATIVE_UNCERTAINTY_TEST_MODEL_PATH;
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.tests.BaseReliabilityPredictionTest.RELATIVE_USAGEMODEL_TEST_MODEL_PATH;
@@ -13,11 +14,16 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
 import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
+import org.palladiosimulator.analyzer.workflow.jobs.ValidatePCMModelsJob;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.api.UncertaintyBasedReliabilityPrediction;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.api.UncertaintyBasedReliabilityPredictionConfig;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.jobs.PCMInstanceBuilderJob;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.jobs.ReliabilityPredictionContext;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.jobs.ReliabilityPredictionExecutionJob;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.jobs.ReliabilityPredictionRunJob;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.jobs.UncertaintyBasedReliabilityPredictionJob;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.ReliabilityPredictionResult;
-import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
-import org.palladiosimulator.dependability.reliability.uncertainty.solver.util.PCMInstanceBuilderJob;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.tests.util.PCMTestInstanceBuilderJob;
 import org.palladiosimulator.reliability.solver.pcm2markov.MarkovTransformationResult;
 import org.palladiosimulator.reliability.solver.pcm2markov.Pcm2MarkovStrategy;
 import org.palladiosimulator.solver.models.PCMInstance;
@@ -27,9 +33,22 @@ import com.google.common.collect.Lists;
 
 import de.uka.ipd.sdq.workflow.jobs.JobFailedException;
 import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
+import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
 
 public class ReliabilityPredictionTestDefinition {
 
+	private class ReliabilityPredictionResultJob extends ReliabilityPredictionRunJob {
+
+		public ReliabilityPredictionResultJob(ReliabilityPredictionContext context) {
+			super(context);
+		}
+		
+		public ReliabilityPredictionResult getPredictionResult() {
+			return context.result;
+		}
+		
+	}
+	
 	public interface PredictionResultBasedAssertion
 			extends BiConsumer<MarkovTransformationResult, ReliabilityPredictionResult> {
 
@@ -38,7 +57,6 @@ public class ReliabilityPredictionTestDefinition {
 	private final static String TEST_STRATEGY = "Brute force exploration strategy";
 
 	private PCMSolverWorkflowRunConfiguration pcmRelConfig = null;
-	private UncertaintyBasedReliabilityPredictionConfig uncertaintyPCMRelConfig = null;
 	private MarkovTransformationResult pcmRelResult = null;
 	private ReliabilityPredictionResult uncertaintyBasedResult = null;
 	private List<PredictionResultBasedAssertion> assertions = Lists.newArrayList();
@@ -53,14 +71,11 @@ public class ReliabilityPredictionTestDefinition {
 
 	public ReliabilityPredictionTestDefinition givenDefaultRunConfigs() {
 		this.pcmRelConfig = createDefaultPCMRelConfig();
-		this.uncertaintyPCMRelConfig = createDefaultUncertaintyBasedPCMRelConfig();
 		return this;
 	}
 
-	public ReliabilityPredictionTestDefinition givenCustomRunConfigs(PCMSolverWorkflowRunConfiguration pcmRelConfig,
-			UncertaintyBasedReliabilityPredictionConfig uncertaintyPCMRelConfig) {
+	public ReliabilityPredictionTestDefinition givenCustomRunConfigs(PCMSolverWorkflowRunConfiguration pcmRelConfig) {
 		this.pcmRelConfig = pcmRelConfig;
-		this.uncertaintyPCMRelConfig = uncertaintyPCMRelConfig;
 		return this;
 	}
 
@@ -76,20 +91,28 @@ public class ReliabilityPredictionTestDefinition {
 	}
 
 	public ReliabilityPredictionTestDefinition whenApplyingUncertaintyBasedPCMRel() {
-		requireNonNull(uncertaintyPCMRelConfig, "The uncertainty based PCM-Rel config must be specified first.");
-
-		uncertaintyBasedResult = UncertaintyBasedReliabilityPrediction.predict(uncertaintyPCMRelConfig);
-
-		return this;
-	}
-
-	public ReliabilityPredictionTestDefinition whenApplyingUncertaintyBasedPCMRelGiven(
-			List<UncertaintyState> uncertaintyStates) {
-		requireNonNull(uncertaintyPCMRelConfig, "The uncertainty based PCM-Rel config must be specified first.");
-
-		uncertaintyBasedResult = UncertaintyBasedReliabilityPrediction.predictGiven(uncertaintyStates,
-				uncertaintyPCMRelConfig);
-
+		var relPredictionJob = new UncertaintyBasedReliabilityPredictionJob();
+		relPredictionJob.setBlackboard(new MDSDBlackboard());
+		
+		requireNonNull(pcmRelConfig, "The reliability config must be specified.");
+		var pcmInstanceBuilderJob = new PCMInstanceBuilderJob(pcmRelConfig);
+		relPredictionJob.addJob(pcmInstanceBuilderJob);
+		relPredictionJob.addJob(new ValidatePCMModelsJob(pcmRelConfig));
+		
+		var context = new ReliabilityPredictionContext(pcmRelConfig, getUncertaintyModelURI(), TEST_STRATEGY);
+		relPredictionJob.add(new ReliabilityPredictionExecutionJob(context));
+		
+		var resultJob = new ReliabilityPredictionResultJob(context);
+		relPredictionJob.add(resultJob);
+		
+		try {
+			relPredictionJob.execute(new NullProgressMonitor());
+		} catch (Exception e) {
+			fail("Something went wrong during the uncertainty based reliability job", e);
+		}
+		
+		uncertaintyBasedResult = resultJob.getPredictionResult();
+		
 		return this;
 	}
 
@@ -114,14 +137,6 @@ public class ReliabilityPredictionTestDefinition {
 
 	public void test() {
 		assertions.forEach(assertion -> assertion.accept(pcmRelResult, uncertaintyBasedResult));
-	}
-
-	private UncertaintyBasedReliabilityPredictionConfig createDefaultUncertaintyBasedPCMRelConfig() {
-		return UncertaintyBasedReliabilityPredictionConfig.newBuilder()
-				.withReliabilityRunConfig(pcmRelConfig)
-				.andUncertainties(getUncertaintyModelURI())
-				.exploreStateSpaceWith(TEST_STRATEGY)
-				.build();
 	}
 
 	private PCMSolverWorkflowRunConfiguration createDefaultPCMRelConfig() {
@@ -158,14 +173,18 @@ public class ReliabilityPredictionTestDefinition {
 	}
 
 	private PCMInstance loadPCMInstance() {
-		var pcmBuilderJob = new PCMInstanceBuilderJob(pcmRelConfig);
+		return new PCMInstance((PCMResourceSetPartition) loadPcmModel()
+				.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
+	}
+	
+	private MDSDBlackboard loadPcmModel() {
+		var pcmBuilderJob = new PCMTestInstanceBuilderJob(pcmRelConfig);
 		try {
 			pcmBuilderJob.execute(new NullProgressMonitor());
 		} catch (JobFailedException | UserCanceledException e) {
 			throw new RuntimeException("Something went wrong while building the PCM instance.", e);
 		}
-		return new PCMInstance((PCMResourceSetPartition) pcmBuilderJob.getBlackboard()
-				.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
+		return pcmBuilderJob.getBlackboard();
 	}
 
 	private String getUncertaintyModelURI() {

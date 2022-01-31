@@ -13,7 +13,7 @@
   <genPackages prefix="Uncertainty" basePackage="org.palladiosimulator.dependability.reliability"
       disposableProviderFactory="true" ecorePackage="uncertainty.ecore#/">
     <genClasses ecoreClass="uncertainty.ecore#//UncertaintyInducedFailureType" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyInducedFailureType/refinesFailureType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyInducedFailureType/refines"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyInducedFailureType/uncertaintyModel"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyInducedFailureType/failureVariable"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintyInducedFailureType/architecturalPreconditions"/>

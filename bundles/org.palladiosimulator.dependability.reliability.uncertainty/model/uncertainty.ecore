@@ -3,7 +3,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="uncertainty" nsURI="http://palladiosimulator.org/Uncertainty/1.0"
     nsPrefix="uncertainty">
   <eClassifiers xsi:type="ecore:EClass" name="UncertaintyInducedFailureType" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="refinesFailureType" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refines" lowerBound="1"
         eType="ecore:EClass ../../org.palladiosimulator.pcm/model/pcm.ecore#//reliability/FailureType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="uncertaintyModel" lowerBound="1"
         eType="ecore:EClass ../../org.palladiosimulator.envdyn.model/model/environmentaldynamics.ecore#//staticmodel/GroundProbabilisticNetwork"/>
