@@ -2,7 +2,7 @@
 <feature
       id="org.palladiosimulator.dependability.ml.feature"
       label="Sensitivity Analysis for Machine Learning Models"
-      version="1.0.0.qualifier"
+      version="5.1.0.qualifier"
       plugin="org.palladiosimulator.branding"
       license-feature="org.palladiosimulator.license"
       license-feature-version="1.0.0">
@@ -18,13 +18,13 @@
       <import plugin="org.palladiosimulator.envdyn.model" version="0.1.0" match="greaterOrEqual"/>
       <import plugin="tools.mdsd.probdist.api" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="tools.mdsd.probdist.model.basic" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.palladiosimulator.dependability.ml" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.dependability.ml" version="5.1.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.envdyn.api" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources" version="3.13.700" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.debug.core"/>
       <import plugin="org.eclipse.debug.ui" version="3.14.400" match="greaterOrEqual"/>
-      <import plugin="org.palladiosimulator.dependability.ml.sensitivity" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.palladiosimulator.dependability.ml.sensitivity" version="5.1.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.workflow.launchconfig" version="4.2.0" match="greaterOrEqual"/>
    </requires>
 

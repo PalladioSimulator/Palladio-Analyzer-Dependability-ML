@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
 	<!-- add features here -->
-
+	<feature url="features/org.palladiosimulator.dependability.ml.feature_5.1.0.qualifier.jar" id="org.palladiosimulator.dependability.ml.feature" version="5.1.0.qualifier">
+      <category name="org.palladiosimulator.addons.category"/>
+   </feature>
+   <feature url="features/org.palladiosimulator.dependability.reliability.uncertainty.feature_5.1.0.qualifier.jar" id="org.palladiosimulator.dependability.reliability.uncertainty.feature" version="5.1.0.qualifier">
+      <category name="org.palladiosimulator.addons.category"/>
+   </feature>
 	<!-- category definitions -->
 	<category-def name="org.palladiosimulator.addons.category" label="Palladio Bench Addons">
 	   <description>
 	      Palladio Bench Addons
 	   </description>
 	  </category-def>
-	  <category-def name="org.palladiosimulator.addons.source.category" label="Palladio Bench Addons Source">
-	     <description>
-	        Palladio Bench Addons Source
-	     </description>
-	  </category-def>
-	
 </site>
