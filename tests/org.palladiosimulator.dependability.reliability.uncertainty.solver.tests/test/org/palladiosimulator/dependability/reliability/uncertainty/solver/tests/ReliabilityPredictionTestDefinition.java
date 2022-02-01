@@ -95,20 +95,6 @@ public class ReliabilityPredictionTestDefinition {
 	}
 
 	public ReliabilityPredictionTestDefinition whenApplyingUncertaintyBasedPCMRel() {
-//		var relPredictionJob = new UncertaintyBasedReliabilityPredictionJob();
-//		relPredictionJob.setBlackboard(new MDSDBlackboard());
-//		
-//		requireNonNull(pcmRelConfig, "The reliability config must be specified.");
-//		var pcmInstanceBuilderJob = new PCMInstanceBuilderJob(pcmRelConfig);
-//		relPredictionJob.addJob(pcmInstanceBuilderJob);
-//		relPredictionJob.addJob(new ValidatePCMModelsJob(pcmRelConfig));
-//		
-//		var context = new ReliabilityPredictionContext(pcmRelConfig, getUncertaintyModelURI(), TEST_STRATEGY);
-//		relPredictionJob.add(new ReliabilityPredictionExecutionJob(context));
-//		
-//		var resultJob = new ReliabilityPredictionResultJob(context);
-//		relPredictionJob.add(resultJob);
-		
 		var relPredictionJob = new UncertaintyBasedReliabilityPredictionJob();
 		relPredictionJob.setBlackboard(new MDSDBlackboard());
 		
