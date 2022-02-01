@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uncertainty:UncertaintyRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reliability="http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2" xmlns:uncertainty="http://palladiosimulator.org/Uncertainty/1.0" xsi:schemaLocation="http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//reliability http://palladiosimulator.org/PalladioComponentModel/Repository/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//repository" id="_2dddkMnREeuac4AYdkgHbw" entityName="UncertaintyRepo">
+  <uncertaintyInducedFailureTypes id="_P3iucMnWEeuac4AYdkgHbw" entityName="MLInducedUncertaintyOfMLModel" architecturalPreconditions="_rjsmQsnzEeu9AOcPvs9c6Q">
+    <refines xsi:type="reliability:SoftwareInducedFailureType" href="AutonomousSystemComponents.repository#_B1LEScn0Eeu9AOcPvs9c6Q"/>
+    <uncertaintyModel href="DNNSensitivityModels.staticmodel#_k1EB0DPwEeyLC5Tfbz4pBQ"/>
+  </uncertaintyInducedFailureTypes>
+  <architecturalCountermeasures id="_BBh8ocn7Eeu9AOcPvs9c6Q" entityName="Filter_Countermeasure" architecturalPreconditions="_rjsmQsnzEeu9AOcPvs9c6Q">
+    <targetUncertainty href="DNNTemplateVariables.templatevariable#_0uh4oCpGEeuMpaabmuiN-Q"/>
+    <uncertaintyImprovement xsi:type="uncertainty:ProbabilisticImprovement">
+      <probabilityDistribution href="DNNSensitivityDistributions.distributionfunction#_U0Va8DV2EeyQlMi8YS9oig"/>
+    </uncertaintyImprovement>
+  </architecturalCountermeasures>
+  <architecturalPreconditions xsi:type="uncertainty:ActiveComponentPrecondition" id="_rjsmQsnzEeu9AOcPvs9c6Q" entityName="DecisionPlanning">
+    <requiredActiveComponent xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_tFYp8LvmEeuyDrQZkcWZSA"/>
+  </architecturalPreconditions>
+</uncertainty:UncertaintyRepository>

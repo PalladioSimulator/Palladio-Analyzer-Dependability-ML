@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmi:id="_EOiSgL12EeunTKCICMkJWw" type="PCM Usage Model" name="AutonomousSystemUsage.usagemodel_diagram" measurementUnit="Pixel">
+  <children xmi:id="_ERDbAL12EeunTKCICMkJWw" type="2004">
+    <children xsi:type="notation:DecorationNode" xmi:id="_ERECEL12EeunTKCICMkJWw" type="5017"/>
+    <children xsi:type="notation:DecorationNode" xmi:id="_ERECEb12EeunTKCICMkJWw" type="7012">
+      <children xsi:type="notation:Shape" xmi:id="_ERRdcL12EeunTKCICMkJWw" type="3014" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_ERRdcr12EeunTKCICMkJWw" type="7013">
+          <children xmi:id="_ERWV8L12EeunTKCICMkJWw" type="3001" element="_EOfPMr12EeunTKCICMkJWw">
+            <styles xsi:type="notation:DescriptionStyle" xmi:id="_ERWV8b12EeunTKCICMkJWw"/>
+            <styles xsi:type="notation:FontStyle" xmi:id="_ERWV8r12EeunTKCICMkJWw" fontName=".AppleSystemUIFont"/>
+            <styles xsi:type="notation:LineStyle" xmi:id="_ERWV8712EeunTKCICMkJWw"/>
+            <layoutConstraint xsi:type="notation:Bounds" xmi:id="_ERWV9L12EeunTKCICMkJWw" x="31" y="12"/>
+          </children>
+          <children xsi:type="notation:Shape" xmi:id="_ERWV9b12EeunTKCICMkJWw" type="3002" fontName=".AppleSystemUIFont">
+            <element href="AutonomousSystemUsage.usagemodel#_EOfPM712EeunTKCICMkJWw"/>
+            <layoutConstraint xsi:type="notation:Bounds" xmi:id="_ERWV9r12EeunTKCICMkJWw" x="199" y="292"/>
+          </children>
+          <children xsi:type="notation:Shape" xmi:id="_s1HLQBoKEeysZodRQ7UdNQ" type="3003" fontName=".AppleSystemUIFont">
+            <children xsi:type="notation:DecorationNode" xmi:id="_s1HLQhoKEeysZodRQ7UdNQ" type="5004"/>
+            <children xsi:type="notation:DecorationNode" xmi:id="_s1HLQxoKEeysZodRQ7UdNQ" type="7002">
+              <styles xsi:type="notation:SortingStyle" xmi:id="_s1HLRBoKEeysZodRQ7UdNQ"/>
+              <styles xsi:type="notation:FilteringStyle" xmi:id="_s1HLRRoKEeysZodRQ7UdNQ"/>
+            </children>
+            <element href="AutonomousSystemUsage.usagemodel#_fPuToBoKEeysZodRQ7UdNQ"/>
+            <layoutConstraint xsi:type="notation:Bounds" xmi:id="_s1HLQRoKEeysZodRQ7UdNQ" x="87" y="100"/>
+          </children>
+        </children>
+        <element href="AutonomousSystemUsage.usagemodel#_EOfPMb12EeunTKCICMkJWw"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_ERRdcb12EeunTKCICMkJWw" width="285" height="363"/>
+      </children>
+      <children xmi:id="_UiJD4L12EeunTKCICMkJWw" type="3015">
+        <children xsi:type="notation:DecorationNode" xmi:id="_UiJq8L12EeunTKCICMkJWw" type="5013"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_UiJq8b12EeunTKCICMkJWw" type="5014"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_UiJq8r12EeunTKCICMkJWw" type="5015"/>
+        <styles xsi:type="notation:DescriptionStyle" xmi:id="_UiJD4b12EeunTKCICMkJWw"/>
+        <styles xsi:type="notation:FontStyle" xmi:id="_UiJD4r12EeunTKCICMkJWw" fontName=".AppleSystemUIFont"/>
+        <styles xsi:type="notation:LineStyle" xmi:id="_UiJD4712EeunTKCICMkJWw"/>
+        <element href="AutonomousSystemUsage.usagemodel#//@usageScenario_UsageModel.0/@workload_UsageScenario"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_UiJD5L12EeunTKCICMkJWw" x="468" y="26"/>
+      </children>
+    </children>
+    <styles xsi:type="notation:DescriptionStyle" xmi:id="_ERDbAb12EeunTKCICMkJWw"/>
+    <styles xsi:type="notation:FontStyle" xmi:id="_ERDbAr12EeunTKCICMkJWw" fontName=".AppleSystemUIFont"/>
+    <styles xsi:type="notation:FillStyle" xmi:id="_ERDbA712EeunTKCICMkJWw"/>
+    <element href="AutonomousSystemUsage.usagemodel#_EOfPML12EeunTKCICMkJWw"/>
+    <layoutConstraint xsi:type="notation:Bounds" xmi:id="_ERDbBL12EeunTKCICMkJWw" x="48" y="36" width="645" height="421"/>
+  </children>
+  <styles xsi:type="notation:DiagramStyle" xmi:id="_EOiSgb12EeunTKCICMkJWw"/>
+  <element href="AutonomousSystemUsage.usagemodel#/"/>
+</notation:Diagram>

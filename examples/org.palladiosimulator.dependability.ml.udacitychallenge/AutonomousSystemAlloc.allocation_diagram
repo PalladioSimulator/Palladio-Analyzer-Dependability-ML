@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmi:id="_8EdNAb11EeunTKCICMkJWw" type="allocation" name="AutonomousSystemAlloc.allocation_diagram" measurementUnit="Pixel">
+  <children xsi:type="notation:Shape" xmi:id="_8GqzgL11EeunTKCICMkJWw" type="2003" fontName=".AppleSystemUIFont">
+    <children xsi:type="notation:DecorationNode" xmi:id="_8GrakL11EeunTKCICMkJWw" type="5008"/>
+    <children xsi:type="notation:DecorationNode" xmi:id="_8Grakb11EeunTKCICMkJWw" type="7003">
+      <children xsi:type="notation:Shape" xmi:id="_TpcosBLmEeyhoefTU0X9Qg" type="3002" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_TpdPwBLmEeyhoefTU0X9Qg" type="5006"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_TpdPwRLmEeyhoefTU0X9Qg" type="5007"/>
+        <element href="AutonomousSystemAlloc.allocation#_TBhGABLmEeyhoefTU0X9Qg"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_TpcosRLmEeyhoefTU0X9Qg" x="31" y="24"/>
+      </children>
+      <children xsi:type="notation:Shape" xmi:id="_aC_ksBLmEeyhoefTU0X9Qg" type="3002" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_aDALwBLmEeyhoefTU0X9Qg" type="5006"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_aDALwRLmEeyhoefTU0X9Qg" type="5007"/>
+        <element href="AutonomousSystemAlloc.allocation#_ZcwrIBLmEeyhoefTU0X9Qg"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_aC_ksRLmEeyhoefTU0X9Qg" x="31" y="112"/>
+      </children>
+      <children xsi:type="notation:Shape" xmi:id="_iCX2EBLmEeyhoefTU0X9Qg" type="3002" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_iCYdIRLmEeyhoefTU0X9Qg" type="5006"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_iCYdIhLmEeyhoefTU0X9Qg" type="5007"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_iCYdIBLmEeyhoefTU0X9Qg" x="367" y="105"/>
+      </children>
+      <children xsi:type="notation:Shape" xmi:id="_jS_JYBLmEeyhoefTU0X9Qg" type="3002" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_jS_JYhLmEeyhoefTU0X9Qg" type="5006"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_jS_JYxLmEeyhoefTU0X9Qg" type="5007"/>
+        <element href="AutonomousSystemAlloc.allocation#_i0qOoBLmEeyhoefTU0X9Qg"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_jS_JYRLmEeyhoefTU0X9Qg" x="19" y="213"/>
+      </children>
+      <children xsi:type="notation:Shape" xmi:id="_lS0TIBLmEeyhoefTU0X9Qg" type="3002" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_lS06MBLmEeyhoefTU0X9Qg" type="5006"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_lS06MRLmEeyhoefTU0X9Qg" type="5007"/>
+        <element href="AutonomousSystemAlloc.allocation#_kHmdMBLmEeyhoefTU0X9Qg"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_lS0TIRLmEeyhoefTU0X9Qg" x="35" y="293"/>
+      </children>
+      <children xsi:type="notation:Shape" xmi:id="_nBL5cBLmEeyhoefTU0X9Qg" type="3002" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_nBL5chLmEeyhoefTU0X9Qg" type="5006"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_nBL5cxLmEeyhoefTU0X9Qg" type="5007"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_nBL5cRLmEeyhoefTU0X9Qg" x="359" y="29"/>
+      </children>
+      <children xsi:type="notation:Shape" xmi:id="_o_q_YBLmEeyhoefTU0X9Qg" type="3002" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_o_q_YhLmEeyhoefTU0X9Qg" type="5006"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_o_q_YxLmEeyhoefTU0X9Qg" type="5007"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_o_q_YRLmEeyhoefTU0X9Qg" x="419" y="205"/>
+      </children>
+      <children xsi:type="notation:Shape" xmi:id="_qSnN8BLmEeyhoefTU0X9Qg" type="3002" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_qSnN8hLmEeyhoefTU0X9Qg" type="5006"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_qSnN8xLmEeyhoefTU0X9Qg" type="5007"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_qSnN8RLmEeyhoefTU0X9Qg" x="363" y="289"/>
+      </children>
+      <children xsi:type="notation:Shape" xmi:id="_sJTCwBLmEeyhoefTU0X9Qg" type="3002" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_sJTp0BLmEeyhoefTU0X9Qg" type="5006"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_sJTp0RLmEeyhoefTU0X9Qg" type="5007"/>
+        <element href="AutonomousSystemAlloc.allocation#_rFjGwBLmEeyhoefTU0X9Qg"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_sJTCwRLmEeyhoefTU0X9Qg" x="978" y="13"/>
+      </children>
+      <children xsi:type="notation:Shape" xmi:id="_tJO1wBLmEeyhoefTU0X9Qg" type="3002" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_tJO1whLmEeyhoefTU0X9Qg" type="5006"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_tJO1wxLmEeyhoefTU0X9Qg" type="5007"/>
+        <element href="AutonomousSystemAlloc.allocation#_sq7wMBLmEeyhoefTU0X9Qg"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_tJO1wRLmEeyhoefTU0X9Qg" x="611" y="253"/>
+      </children>
+      <children xsi:type="notation:Shape" xmi:id="_vHuiwBLmEeyhoefTU0X9Qg" type="3002" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_vHuiwhLmEeyhoefTU0X9Qg" type="5006"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_vHuiwxLmEeyhoefTU0X9Qg" type="5007"/>
+        <element href="AutonomousSystemAlloc.allocation#_trM6YBLmEeyhoefTU0X9Qg"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_vHuiwRLmEeyhoefTU0X9Qg" x="548" y="88"/>
+      </children>
+      <children xsi:type="notation:Shape" xmi:id="_w6hWEBLmEeyhoefTU0X9Qg" type="3002" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_w6h9IRLmEeyhoefTU0X9Qg" type="5006"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_w6h9IhLmEeyhoefTU0X9Qg" type="5007"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_w6h9IBLmEeyhoefTU0X9Qg" x="817" y="35"/>
+      </children>
+      <children xsi:type="notation:Shape" xmi:id="_z3uuEBLmEeyhoefTU0X9Qg" type="3002" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_z3uuEhLmEeyhoefTU0X9Qg" type="5006"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_z3uuExLmEeyhoefTU0X9Qg" type="5007"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_z3uuERLmEeyhoefTU0X9Qg" x="983" y="197"/>
+      </children>
+      <children xsi:type="notation:Shape" xmi:id="_4KvbYBLmEeyhoefTU0X9Qg" type="3002" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_4KvbYhLmEeyhoefTU0X9Qg" type="5006"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_4KwCcBLmEeyhoefTU0X9Qg" type="5007"/>
+        <element href="AutonomousSystemAlloc.allocation#_2Hi0kBLmEeyhoefTU0X9Qg"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_4KvbYRLmEeyhoefTU0X9Qg" x="1114" y="281"/>
+      </children>
+      <children xsi:type="notation:Shape" xmi:id="_5jn54BLmEeyhoefTU0X9Qg" type="3002" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_5jn54hLmEeyhoefTU0X9Qg" type="5006"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_5jn54xLmEeyhoefTU0X9Qg" type="5007"/>
+        <element href="AutonomousSystemAlloc.allocation#_5H0HoBLmEeyhoefTU0X9Qg"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_5jn54RLmEeyhoefTU0X9Qg" x="1267" y="146"/>
+      </children>
+      <children xsi:type="notation:Shape" xmi:id="_719I4BLmEeyhoefTU0X9Qg" type="3002" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:DecorationNode" xmi:id="_719I4hLmEeyhoefTU0X9Qg" type="5006"/>
+        <children xsi:type="notation:DecorationNode" xmi:id="_719I4xLmEeyhoefTU0X9Qg" type="5007"/>
+        <layoutConstraint xsi:type="notation:Bounds" xmi:id="_719I4RLmEeyhoefTU0X9Qg" x="1496" y="157"/>
+      </children>
+    </children>
+    <element href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <layoutConstraint xsi:type="notation:Bounds" xmi:id="_8Gqzgb11EeunTKCICMkJWw" x="-924" y="80" width="2141" height="453"/>
+  </children>
+  <styles xsi:type="notation:DiagramStyle" xmi:id="_8Ed0EL11EeunTKCICMkJWw"/>
+  <element href="AutonomousSystemAlloc.allocation#_8EdNAL11EeunTKCICMkJWw"/>
+</notation:Diagram>

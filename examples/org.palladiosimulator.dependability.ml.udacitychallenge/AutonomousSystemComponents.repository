@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emfprofileapplication="http://www.modelversioning.org/emfprofile/application/1.1" xmlns:org.palladiosimulator.architecturaltemplates.catalog.profiles="org.palladiosimulator.architecturaltemplates.catalog.profiles.NVersionProgrammingAi" xmlns:reliability="http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2" xmlns:seff="http://palladiosimulator.org/PalladioComponentModel/SEFF/5.2" xmlns:stoex="http://sdq.ipd.uka.de/StochasticExpressions/2.2" xsi:schemaLocation="org.palladiosimulator.architecturaltemplates.catalog.profiles.NVersionProgrammingAi ../../plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram#_yYDN0DbyEeyCQ69JbDj2Qw http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//reliability http://palladiosimulator.org/PalladioComponentModel/Repository/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//repository http://palladiosimulator.org/PalladioComponentModel/SEFF/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//seff">
+  <repository:Repository id="_ntjpoLvmEeuyDrQZkcWZSA" entityName="AutonomousSystemComponentsRepository" repositoryDescription="">
+    <components__Repository xsi:type="repository:BasicComponent" id="_tFYp8LvmEeuyDrQZkcWZSA" entityName="DecisionPlanning">
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_4_VhsAZcEeyBeaTSQFCmQg" entityName="Provided_IDecisionPlanning_DecisionPlanning" providedInterface__OperationProvidedRole="_pPldELvmEeuyDrQZkcWZSA"/>
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_kfAw4AZfEeyBeaTSQFCmQg" entityName="Sink_EnrichedImage_DecisionPlanning" eventGroup__SinkRole="_7tCeEAZcEeyBeaTSQFCmQg"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_Fycm0AZoEeyBeaTSQFCmQg" entityName="Source_TrajectoryMsg_DecisionPlanning" eventGroup__SourceRole="_tfjDoAZnEeyBeaTSQFCmQg"/>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_kfAw4QZfEeyBeaTSQFCmQg" describedService__SEFF="_-gHCoAZcEeyBeaTSQFCmQg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_kfBX8AZfEeyBeaTSQFCmQg" entityName="start" successor_AbstractAction="_ZPGtEA_aEeyEv_6ldihyWQ"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_kfBX8QZfEeyBeaTSQFCmQg" entityName="stop" predecessor_AbstractAction="_q5F6Ow_oEeyEv_6ldihyWQ"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_ZPGtEA_aEeyEv_6ldihyWQ" entityName="ComputeSteeringAngle" predecessor_AbstractAction="_kfBX8AZfEeyBeaTSQFCmQg" successor_AbstractAction="_q5F6Ow_oEeyEv_6ldihyWQ">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="2.0"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01" softwareInducedFailureType__InternalFailureOccurrenceDescription="_B1LEScn0Eeu9AOcPvs9c6Q"/>
+        </steps_Behaviour>
+        <steps_Behaviour xsi:type="seff:EmitEventAction" id="_q5F6Ow_oEeyEv_6ldihyWQ" entityName="PublishTrajectoryMsg" predecessor_AbstractAction="_ZPGtEA_aEeyEv_6ldihyWQ" successor_AbstractAction="_kfBX8QZfEeyBeaTSQFCmQg" eventType__EmitEventAction="_uyKiEAZnEeyBeaTSQFCmQg" sourceRole__EmitEventAction="_Fycm0AZoEeyBeaTSQFCmQg">
+          <inputVariableUsages__CallAction>
+            <variableCharacterisation_VariableUsage type="BYTESIZE">
+              <specification_VariableCharacterisation specification="IntPMF[(1; 1.0)]"/>
+            </variableCharacterisation_VariableUsage>
+            <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="trajectoryEvent"/>
+          </inputVariableUsages__CallAction>
+        </steps_Behaviour>
+      </serviceEffectSpecifications__BasicComponent>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_M67PZzuwEeymvdx4Ldek3A" describedService__SEFF="_dQitoDrZEeyKGZY-c7BXbA">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_RHpHcjuwEeymvdx4Ldek3A" entityName="startDecisionPlanning" successor_AbstractAction="_KGEQPDuyEeymvdx4Ldek3A"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_ULkLcDuwEeymvdx4Ldek3A" entityName="stopDecisionPlanning" predecessor_AbstractAction="_KGEQPDuyEeymvdx4Ldek3A"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_KGEQPDuyEeymvdx4Ldek3A" entityName="internalActionDecisionPlanning" predecessor_AbstractAction="_RHpHcjuwEeymvdx4Ldek3A" successor_AbstractAction="_ULkLcDuwEeymvdx4Ldek3A">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="2.0"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01" softwareInducedFailureType__InternalFailureOccurrenceDescription="_B1LEScn0Eeu9AOcPvs9c6Q"/>
+        </steps_Behaviour>
+      </serviceEffectSpecifications__BasicComponent>
+    </components__Repository>
+    <components__Repository xsi:type="repository:BasicComponent" id="_j7cKIL1rEeunTKCICMkJWw" entityName="Camera">
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_kYevQAZYEeyBeaTSQFCmQg" entityName="Provided_IPerception_Perception" providedInterface__OperationProvidedRole="_ibE5VwZWEeyBeaTSQFCmQg"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_FRX34AZZEeyBeaTSQFCmQg" entityName="Source_PerceivedImage_Perception" eventGroup__SourceRole="_uRMg0AZYEeyBeaTSQFCmQg"/>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_kYkO0AZYEeyBeaTSQFCmQg" describedService__SEFF="_mpGY8AZWEeyBeaTSQFCmQg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_kYkO0QZYEeyBeaTSQFCmQg" entityName="start" successor_AbstractAction="_zgCiQAZuEeyBeaTSQFCmQg"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_kYk14AZYEeyBeaTSQFCmQg" entityName="stop" predecessor_AbstractAction="_c598Cw27EeyCrf1VYDZcXw"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_zgCiQAZuEeyBeaTSQFCmQg" entityName="ScaleImgBrightness" predecessor_AbstractAction="_kYkO0QZYEeyBeaTSQFCmQg" successor_AbstractAction="_c598Cw27EeyCrf1VYDZcXw">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="1"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01">
+            <softwareInducedFailureType__InternalFailureOccurrenceDescription href="pathmap://PCM_MODELS/FailureTypes.repository#_sLBREFf0EeW5Q6z-Ts8kIg"/>
+          </internalFailureOccurrenceDescriptions__InternalAction>
+        </steps_Behaviour>
+        <steps_Behaviour xsi:type="seff:EmitEventAction" id="_c598Cw27EeyCrf1VYDZcXw" entityName="PublishPerceivedImage" predecessor_AbstractAction="_zgCiQAZuEeyBeaTSQFCmQg" successor_AbstractAction="_kYk14AZYEeyBeaTSQFCmQg" eventType__EmitEventAction="_4ilREAZYEeyBeaTSQFCmQg" sourceRole__EmitEventAction="_FRX34AZZEeyBeaTSQFCmQg">
+          <inputVariableUsages__CallAction>
+            <variableCharacterisation_VariableUsage type="NUMBER_OF_ELEMENTS">
+              <specification_VariableCharacterisation specification="1"/>
+            </variableCharacterisation_VariableUsage>
+            <variableCharacterisation_VariableUsage type="BYTESIZE">
+              <specification_VariableCharacterisation specification="IntPMF[(1; 1.0)]"/>
+            </variableCharacterisation_VariableUsage>
+            <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="img"/>
+          </inputVariableUsages__CallAction>
+        </steps_Behaviour>
+      </serviceEffectSpecifications__BasicComponent>
+    </components__Repository>
+    <components__Repository xsi:type="repository:BasicComponent" id="_tHu6kL1rEeunTKCICMkJWw" entityName="Planner">
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_uNWe0L1rEeunTKCICMkJWw" entityName="Provided_IPlanner_Planner" providedInterface__OperationProvidedRole="_GqaK8L1pEeuDZfkzylcu4A"/>
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_i6DlQAZfEeyBeaTSQFCmQg" entityName="Sink_EnrichedDistanceMeasure_Planner" eventGroup__SinkRole="_Kj_EMAZdEeyBeaTSQFCmQg"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_G5zQcAZoEeyBeaTSQFCmQg" entityName="Source_TrajectoryMsg_Planner" eventGroup__SourceRole="_tfjDoAZnEeyBeaTSQFCmQg"/>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_i6EMUAZfEeyBeaTSQFCmQg" describedService__SEFF="_NRDHYAZdEeyBeaTSQFCmQg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_i6EMUQZfEeyBeaTSQFCmQg" entityName="start" successor_AbstractAction="_c2jzkA_oEeyEv_6ldihyWQ"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_i6EMUgZfEeyBeaTSQFCmQg" entityName="stop" predecessor_AbstractAction="_xCoESw_oEeyEv_6ldihyWQ"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_c2jzkA_oEeyEv_6ldihyWQ" entityName="ComputeDistanceMeasurement" predecessor_AbstractAction="_i6EMUQZfEeyBeaTSQFCmQg" successor_AbstractAction="_xCoESw_oEeyEv_6ldihyWQ">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="1.0"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+        </steps_Behaviour>
+        <steps_Behaviour xsi:type="seff:EmitEventAction" id="_xCoESw_oEeyEv_6ldihyWQ" entityName="PublishTrajectoryMsg" predecessor_AbstractAction="_c2jzkA_oEeyEv_6ldihyWQ" successor_AbstractAction="_i6EMUgZfEeyBeaTSQFCmQg" eventType__EmitEventAction="_uyKiEAZnEeyBeaTSQFCmQg" sourceRole__EmitEventAction="_G5zQcAZoEeyBeaTSQFCmQg">
+          <inputVariableUsages__CallAction>
+            <variableCharacterisation_VariableUsage type="BYTESIZE">
+              <specification_VariableCharacterisation specification="IntPMF[(1; 1.0)]"/>
+            </variableCharacterisation_VariableUsage>
+            <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="trajectoryEvent"/>
+          </inputVariableUsages__CallAction>
+        </steps_Behaviour>
+      </serviceEffectSpecifications__BasicComponent>
+    </components__Repository>
+    <components__Repository xsi:type="repository:BasicComponent" id="_U6orwAZZEeyBeaTSQFCmQg" entityName="DistanceMeasure">
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_X4VzAAZZEeyBeaTSQFCmQg" entityName="Provided_IPerception_DistanceMeasure" providedInterface__OperationProvidedRole="_ibE5VwZWEeyBeaTSQFCmQg"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_AsuLgAZaEeyBeaTSQFCmQg" entityName="Source_DistanceMeasure_DistanceMeasure" eventGroup__SourceRole="_Yll6kAZZEeyBeaTSQFCmQg"/>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_X4WaEAZZEeyBeaTSQFCmQg" describedService__SEFF="_mpGY8AZWEeyBeaTSQFCmQg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_X4WaEQZZEeyBeaTSQFCmQg" entityName="start" successor_AbstractAction="_IeXBsA7zEeyOMYqsQbPIfw"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_X4WaEgZZEeyBeaTSQFCmQg" entityName="stop" predecessor_AbstractAction="_wWFNGxoJEeysZodRQ7UdNQ"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_IeXBsA7zEeyOMYqsQbPIfw" entityName="readSensorAndCalculate" predecessor_AbstractAction="_X4WaEQZZEeyBeaTSQFCmQg" successor_AbstractAction="_wWFNGxoJEeysZodRQ7UdNQ">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="1.0"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+        </steps_Behaviour>
+        <steps_Behaviour xsi:type="seff:EmitEventAction" id="_wWFNGxoJEeysZodRQ7UdNQ" entityName="Emit DistanceMeasure" predecessor_AbstractAction="_IeXBsA7zEeyOMYqsQbPIfw" successor_AbstractAction="_X4WaEgZZEeyBeaTSQFCmQg" eventType__EmitEventAction="_a4DscAZZEeyBeaTSQFCmQg" sourceRole__EmitEventAction="_AsuLgAZaEeyBeaTSQFCmQg">
+          <inputVariableUsages__CallAction>
+            <variableCharacterisation_VariableUsage type="VALUE">
+              <specification_VariableCharacterisation specification="1"/>
+            </variableCharacterisation_VariableUsage>
+            <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="distance"/>
+          </inputVariableUsages__CallAction>
+        </steps_Behaviour>
+      </serviceEffectSpecifications__BasicComponent>
+    </components__Repository>
+    <components__Repository xsi:type="repository:BasicComponent" id="_C6PL8AZaEeyBeaTSQFCmQg" entityName="DirtSensor">
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_HVRz4AZaEeyBeaTSQFCmQg" entityName="Provided_IPerception_DirtSensor" providedInterface__OperationProvidedRole="_ibE5VwZWEeyBeaTSQFCmQg"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_QdmqUAZaEeyBeaTSQFCmQg" entityName="Source_DirtLevelMeasure_DirtSensor" eventGroup__SourceRole="_IP3M0AZaEeyBeaTSQFCmQg"/>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_HVSa8AZaEeyBeaTSQFCmQg" describedService__SEFF="_mpGY8AZWEeyBeaTSQFCmQg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_HVSa8QZaEeyBeaTSQFCmQg" entityName="start" successor_AbstractAction="_5Ygc4A7yEeyOMYqsQbPIfw"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_HVSa8gZaEeyBeaTSQFCmQg" entityName="stop" predecessor_AbstractAction="_H24aaxoJEeysZodRQ7UdNQ"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_5Ygc4A7yEeyOMYqsQbPIfw" entityName="readSensor" predecessor_AbstractAction="_HVSa8QZaEeyBeaTSQFCmQg" successor_AbstractAction="_H24aaxoJEeysZodRQ7UdNQ">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="0.25"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+        </steps_Behaviour>
+        <steps_Behaviour xsi:type="seff:EmitEventAction" id="_H24aaxoJEeysZodRQ7UdNQ" entityName="EmitDirtLevel" predecessor_AbstractAction="_5Ygc4A7yEeyOMYqsQbPIfw" successor_AbstractAction="_HVSa8gZaEeyBeaTSQFCmQg" eventType__EmitEventAction="_Knr_0AZaEeyBeaTSQFCmQg" sourceRole__EmitEventAction="_QdmqUAZaEeyBeaTSQFCmQg">
+          <inputVariableUsages__CallAction>
+            <variableCharacterisation_VariableUsage type="VALUE">
+              <specification_VariableCharacterisation specification="1"/>
+            </variableCharacterisation_VariableUsage>
+            <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="dirtLevel"/>
+          </inputVariableUsages__CallAction>
+        </steps_Behaviour>
+      </serviceEffectSpecifications__BasicComponent>
+    </components__Repository>
+    <components__Repository xsi:type="repository:BasicComponent" id="_UrPIYAZaEeyBeaTSQFCmQg" entityName="SensorEnrichment">
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_Ml_qIAZbEeyBeaTSQFCmQg" entityName="Sink_DirtLevelMeasure_SensorFusionSemanticUnderstanding" eventGroup__SinkRole="_IP3M0AZaEeyBeaTSQFCmQg"/>
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_M9Y2cAZbEeyBeaTSQFCmQg" entityName="Sink_PerceivedImage_SensorFusionSemanticUnderstanding" eventGroup__SinkRole="_uRMg0AZYEeyBeaTSQFCmQg"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_1U90oDJBEey5eoGE8NduBA" entityName="SensorEnrichment.IImageFusion.OperationRequiredRole1" requiredInterface__OperationRequiredRole="_pCBcUDJBEey5eoGE8NduBA"/>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_Ml_qIQZbEeyBeaTSQFCmQg" describedService__SEFF="_Knr_0AZaEeyBeaTSQFCmQg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_MmARMAZbEeyBeaTSQFCmQg" entityName="start" successor_AbstractAction="_n3ckcA7zEeyOMYqsQbPIfw"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_MmARMQZbEeyBeaTSQFCmQg" entityName="stop" predecessor_AbstractAction="_tcj4gDJCEey5eoGE8NduBA"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_n3ckcA7zEeyOMYqsQbPIfw" entityName="setLatestValue" predecessor_AbstractAction="_MmARMAZbEeyBeaTSQFCmQg" successor_AbstractAction="_tcj4gDJCEey5eoGE8NduBA">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="0.01"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+        </steps_Behaviour>
+        <steps_Behaviour xsi:type="seff:ExternalCallAction" id="_tcj4gDJCEey5eoGE8NduBA" entityName="ExternalCallAction1" predecessor_AbstractAction="_n3ckcA7zEeyOMYqsQbPIfw" successor_AbstractAction="_MmARMQZbEeyBeaTSQFCmQg" calledService_ExternalService="_wQ0lUDJBEey5eoGE8NduBA" role_ExternalService="_1U90oDJBEey5eoGE8NduBA"/>
+      </serviceEffectSpecifications__BasicComponent>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_M9Y2cQZbEeyBeaTSQFCmQg" describedService__SEFF="_4ilREAZYEeyBeaTSQFCmQg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_M9ZdgAZbEeyBeaTSQFCmQg" entityName="start" successor_AbstractAction="_n-H54DJCEey5eoGE8NduBA"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_M9ZdgQZbEeyBeaTSQFCmQg" entityName="stop" predecessor_AbstractAction="_n-H54DJCEey5eoGE8NduBA"/>
+        <steps_Behaviour xsi:type="seff:ExternalCallAction" id="_n-H54DJCEey5eoGE8NduBA" entityName="ExternalCallAction1" predecessor_AbstractAction="_M9ZdgAZbEeyBeaTSQFCmQg" successor_AbstractAction="_M9ZdgQZbEeyBeaTSQFCmQg" calledService_ExternalService="_wQ0lUDJBEey5eoGE8NduBA" role_ExternalService="_1U90oDJBEey5eoGE8NduBA"/>
+      </serviceEffectSpecifications__BasicComponent>
+    </components__Repository>
+    <components__Repository xsi:type="repository:BasicComponent" id="_bk2rkAZaEeyBeaTSQFCmQg" entityName="Localisation">
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_dQJIsAZaEeyBeaTSQFCmQg" entityName="Provided_IPerception_Localisation" providedInterface__OperationProvidedRole="_ibE5VwZWEeyBeaTSQFCmQg"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_3n5fkAZaEeyBeaTSQFCmQg" entityName="Source_LocalisationCoordinates_Localisation" eventGroup__SourceRole="_d3NIsAZaEeyBeaTSQFCmQg"/>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_dQJvwAZaEeyBeaTSQFCmQg" describedService__SEFF="_mpGY8AZWEeyBeaTSQFCmQg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_dQJvwQZaEeyBeaTSQFCmQg" entityName="start" successor_AbstractAction="_CciCIA7zEeyOMYqsQbPIfw"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_dQJvwgZaEeyBeaTSQFCmQg" entityName="stop" predecessor_AbstractAction="_ZLjnOxoJEeysZodRQ7UdNQ"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_CciCIA7zEeyOMYqsQbPIfw" entityName="readLocation" predecessor_AbstractAction="_dQJvwQZaEeyBeaTSQFCmQg" successor_AbstractAction="_ZLjnOxoJEeysZodRQ7UdNQ">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="0.25"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+        </steps_Behaviour>
+        <steps_Behaviour xsi:type="seff:EmitEventAction" id="_ZLjnOxoJEeysZodRQ7UdNQ" entityName="Emit Localisation" predecessor_AbstractAction="_CciCIA7zEeyOMYqsQbPIfw" successor_AbstractAction="_dQJvwgZaEeyBeaTSQFCmQg" eventType__EmitEventAction="_iQhSUAZaEeyBeaTSQFCmQg" sourceRole__EmitEventAction="_3n5fkAZaEeyBeaTSQFCmQg">
+          <inputVariableUsages__CallAction>
+            <variableCharacterisation_VariableUsage type="BYTESIZE">
+              <specification_VariableCharacterisation specification="IntPMF[(1; 1.0)]"/>
+            </variableCharacterisation_VariableUsage>
+            <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="gpsCoordinates"/>
+          </inputVariableUsages__CallAction>
+        </steps_Behaviour>
+      </serviceEffectSpecifications__BasicComponent>
+    </components__Repository>
+    <components__Repository xsi:type="repository:BasicComponent" id="_HM76wAZbEeyBeaTSQFCmQg" entityName="SensorEnrichmentDistance">
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_LfLMAAZbEeyBeaTSQFCmQg" entityName="Sink_LocalisationCoordinates_SensorFusionPace" eventGroup__SinkRole="_d3NIsAZaEeyBeaTSQFCmQg"/>
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_MBnxwAZbEeyBeaTSQFCmQg" entityName="Sink_DistanceMeasure_SensorFusionPace" eventGroup__SinkRole="_Yll6kAZZEeyBeaTSQFCmQg"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_bbuYYBocEeycFaD4cAfUiA" entityName="Required_ISensorFusion_SensorEnrichmentDistance" requiredInterface__OperationRequiredRole="_-m2OsAZaEeyBeaTSQFCmQg"/>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_LfMaIAZbEeyBeaTSQFCmQg" describedService__SEFF="_iQhSUAZaEeyBeaTSQFCmQg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_LfMaIQZbEeyBeaTSQFCmQg" entityName="start" successor_AbstractAction="_JbkUBg73EeyOMYqsQbPIfw"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_LfMaIgZbEeyBeaTSQFCmQg" entityName="stop" predecessor_AbstractAction="_JbkUBg73EeyOMYqsQbPIfw"/>
+        <steps_Behaviour xsi:type="seff:ExternalCallAction" id="_JbkUBg73EeyOMYqsQbPIfw" entityName="startFusion" predecessor_AbstractAction="_LfMaIQZbEeyBeaTSQFCmQg" successor_AbstractAction="_LfMaIgZbEeyBeaTSQFCmQg" calledService_ExternalService="_QRwxQAZbEeyBeaTSQFCmQg" role_ExternalService="_bbuYYBocEeycFaD4cAfUiA"/>
+      </serviceEffectSpecifications__BasicComponent>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_MBnxwQZbEeyBeaTSQFCmQg" describedService__SEFF="_a4DscAZZEeyBeaTSQFCmQg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_MBnxwgZbEeyBeaTSQFCmQg" entityName="start" successor_AbstractAction="_V1AV5g73EeyOMYqsQbPIfw"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_MBnxwwZbEeyBeaTSQFCmQg" entityName="stop" predecessor_AbstractAction="_V1AV5g73EeyOMYqsQbPIfw"/>
+        <steps_Behaviour xsi:type="seff:ExternalCallAction" id="_V1AV5g73EeyOMYqsQbPIfw" entityName="startFusion" predecessor_AbstractAction="_MBnxwgZbEeyBeaTSQFCmQg" successor_AbstractAction="_MBnxwwZbEeyBeaTSQFCmQg" calledService_ExternalService="_QRwxQAZbEeyBeaTSQFCmQg" role_ExternalService="_bbuYYBocEeycFaD4cAfUiA"/>
+      </serviceEffectSpecifications__BasicComponent>
+    </components__Repository>
+    <components__Repository xsi:type="repository:BasicComponent" id="_Ljtw8AZfEeyBeaTSQFCmQg" entityName="TrajectoryController">
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_HTimIAZoEeyBeaTSQFCmQg" entityName="Sink_TrajectoryMsg_TrajectoryController" eventGroup__SinkRole="_tfjDoAZnEeyBeaTSQFCmQg"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_cUPfUBodEeycFaD4cAfUiA" entityName="Required_ITrajectoryController_TrajectoryController" requiredInterface__OperationRequiredRole="_4bos0AZeEeyBeaTSQFCmQg"/>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_HTjNMAZoEeyBeaTSQFCmQg" describedService__SEFF="_uyKiEAZnEeyBeaTSQFCmQg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_HTjNMQZoEeyBeaTSQFCmQg" entityName="start" successor_AbstractAction="_or0OZg74EeyOMYqsQbPIfw"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_HTjNMgZoEeyBeaTSQFCmQg" entityName="stop" predecessor_AbstractAction="_ldLvNg74EeyOMYqsQbPIfw"/>
+        <steps_Behaviour xsi:type="seff:ExternalCallAction" id="_b2fhxg74EeyOMYqsQbPIfw" entityName="SetBrakeValue" predecessor_AbstractAction="_or0OZg74EeyOMYqsQbPIfw" successor_AbstractAction="_ldLvNg74EeyOMYqsQbPIfw" calledService_ExternalService="_6mQKQAZeEeyBeaTSQFCmQg" role_ExternalService="_cUPfUBodEeycFaD4cAfUiA"/>
+        <steps_Behaviour xsi:type="seff:ExternalCallAction" id="_ldLvNg74EeyOMYqsQbPIfw" entityName="SetSteeringAngle" predecessor_AbstractAction="_b2fhxg74EeyOMYqsQbPIfw" successor_AbstractAction="_HTjNMgZoEeyBeaTSQFCmQg" calledService_ExternalService="_C0vOoAZfEeyBeaTSQFCmQg" role_ExternalService="_cUPfUBodEeycFaD4cAfUiA"/>
+        <steps_Behaviour xsi:type="seff:ExternalCallAction" id="_or0OZg74EeyOMYqsQbPIfw" entityName="SetAcceleration" predecessor_AbstractAction="_HTjNMQZoEeyBeaTSQFCmQg" successor_AbstractAction="_b2fhxg74EeyOMYqsQbPIfw" calledService_ExternalService="_FAOOwAZfEeyBeaTSQFCmQg" role_ExternalService="_cUPfUBodEeycFaD4cAfUiA"/>
+      </serviceEffectSpecifications__BasicComponent>
+    </components__Repository>
+    <components__Repository xsi:type="repository:BasicComponent" id="_ksPMYBoaEeycFaD4cAfUiA" entityName="SensorFusionImage">
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_300iQDJBEey5eoGE8NduBA" entityName="SensorFusionImage.IImageFusion.OperationProvidedRole1" providedInterface__OperationProvidedRole="_pCBcUDJBEey5eoGE8NduBA"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_3EmDwBoaEeycFaD4cAfUiA" entityName="Source_EnrichedImage_SensorFusionImage" eventGroup__SourceRole="_7tCeEAZcEeyBeaTSQFCmQg"/>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_31G2IDJBEey5eoGE8NduBA" describedService__SEFF="_wQ0lUDJBEey5eoGE8NduBA">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_2FNqYBoaEeycFaD4cAfUiA" entityName="start" successor_AbstractAction="_AcPvoBobEeycFaD4cAfUiA"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_2FNqYRoaEeycFaD4cAfUiA" entityName="stop" predecessor_AbstractAction="_L8zoyxobEeycFaD4cAfUiA"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_AcPvoBobEeycFaD4cAfUiA" entityName="CalcEnrichedImage" predecessor_AbstractAction="_2FNqYBoaEeycFaD4cAfUiA" successor_AbstractAction="_L8zoyxobEeycFaD4cAfUiA">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="2.0"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01">
+            <softwareInducedFailureType__InternalFailureOccurrenceDescription href="pathmap://PCM_MODELS/FailureTypes.repository#_sLBREFf0EeW5Q6z-Ts8kIg"/>
+          </internalFailureOccurrenceDescriptions__InternalAction>
+        </steps_Behaviour>
+        <steps_Behaviour xsi:type="seff:EmitEventAction" id="_L8zoyxobEeycFaD4cAfUiA" entityName="EmitEnrichedImage" predecessor_AbstractAction="_AcPvoBobEeycFaD4cAfUiA" successor_AbstractAction="_2FNqYRoaEeycFaD4cAfUiA" eventType__EmitEventAction="_-gHCoAZcEeyBeaTSQFCmQg" sourceRole__EmitEventAction="_3EmDwBoaEeycFaD4cAfUiA">
+          <inputVariableUsages__CallAction>
+            <variableCharacterisation_VariableUsage type="VALUE">
+              <specification_VariableCharacterisation specification="1"/>
+            </variableCharacterisation_VariableUsage>
+            <variableCharacterisation_VariableUsage type="BYTESIZE">
+              <specification_VariableCharacterisation specification="IntPMF[(1; 1.0)]"/>
+            </variableCharacterisation_VariableUsage>
+            <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="enrichedImg"/>
+          </inputVariableUsages__CallAction>
+        </steps_Behaviour>
+      </serviceEffectSpecifications__BasicComponent>
+    </components__Repository>
+    <components__Repository xsi:type="repository:BasicComponent" id="_YdfssBocEeycFaD4cAfUiA" entityName="SensorFusionDistance">
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_cd6OIBocEeycFaD4cAfUiA" entityName="Provided_ISensorFusion_SensorFusionDistance" providedInterface__OperationProvidedRole="_-m2OsAZaEeyBeaTSQFCmQg"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_dUJUXhocEeycFaD4cAfUiA" entityName="Source_EnrichedDistanceMeasure_SensorFusionDistance" eventGroup__SourceRole="_Kj_EMAZdEeyBeaTSQFCmQg"/>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_cd61MBocEeycFaD4cAfUiA" describedService__SEFF="_QRwxQAZbEeyBeaTSQFCmQg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_cd61MRocEeycFaD4cAfUiA" entityName="start" successor_AbstractAction="_gvuooBocEeycFaD4cAfUiA"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_cd61MhocEeycFaD4cAfUiA" entityName="stop" predecessor_AbstractAction="_nnHXOxocEeycFaD4cAfUiA"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_gvuooBocEeycFaD4cAfUiA" entityName="CalcEnrichedDistanceMeasure" predecessor_AbstractAction="_cd61MRocEeycFaD4cAfUiA" successor_AbstractAction="_nnHXOxocEeycFaD4cAfUiA">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="1.0"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01">
+            <softwareInducedFailureType__InternalFailureOccurrenceDescription href="pathmap://PCM_MODELS/FailureTypes.repository#_sLBREFf0EeW5Q6z-Ts8kIg"/>
+          </internalFailureOccurrenceDescriptions__InternalAction>
+        </steps_Behaviour>
+        <steps_Behaviour xsi:type="seff:EmitEventAction" id="_nnHXOxocEeycFaD4cAfUiA" entityName="EmitEnrichedDistance" predecessor_AbstractAction="_gvuooBocEeycFaD4cAfUiA" successor_AbstractAction="_cd61MhocEeycFaD4cAfUiA" eventType__EmitEventAction="_NRDHYAZdEeyBeaTSQFCmQg" sourceRole__EmitEventAction="_dUJUXhocEeycFaD4cAfUiA">
+          <inputVariableUsages__CallAction>
+            <variableCharacterisation_VariableUsage type="BYTESIZE">
+              <specification_VariableCharacterisation specification="IntPMF[(1; 1.0)]"/>
+            </variableCharacterisation_VariableUsage>
+            <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="enrichedDistance"/>
+          </inputVariableUsages__CallAction>
+        </steps_Behaviour>
+      </serviceEffectSpecifications__BasicComponent>
+    </components__Repository>
+    <components__Repository xsi:type="repository:BasicComponent" id="_X899EBodEeycFaD4cAfUiA" entityName="TrajectoryActuator">
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_zAmhIDJIEey3M8R0wBejUA" entityName="TrajectoryActuator.ITrajectoryActuator.OperationProvidedRole1" providedInterface__OperationProvidedRole="_4bos0AZeEeyBeaTSQFCmQg"/>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_azRb0BodEeycFaD4cAfUiA" describedService__SEFF="_6mQKQAZeEeyBeaTSQFCmQg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_azRb0RodEeycFaD4cAfUiA" entityName="start" successor_AbstractAction="_fsje8BodEeycFaD4cAfUiA"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_azRb0hodEeycFaD4cAfUiA" entityName="stop" predecessor_AbstractAction="_fsje8BodEeycFaD4cAfUiA"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_fsje8BodEeycFaD4cAfUiA" entityName="setBrakeStatus" predecessor_AbstractAction="_azRb0RodEeycFaD4cAfUiA" successor_AbstractAction="_azRb0hodEeycFaD4cAfUiA">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="0.25"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+        </steps_Behaviour>
+      </serviceEffectSpecifications__BasicComponent>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_azSC4BodEeycFaD4cAfUiA" describedService__SEFF="_C0vOoAZfEeyBeaTSQFCmQg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_azSC4RodEeycFaD4cAfUiA" entityName="start" successor_AbstractAction="_qbGsUBodEeycFaD4cAfUiA"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_azSC4hodEeycFaD4cAfUiA" entityName="stop" predecessor_AbstractAction="_qbGsUBodEeycFaD4cAfUiA"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_qbGsUBodEeycFaD4cAfUiA" entityName="setSteeringAngle" predecessor_AbstractAction="_azSC4RodEeycFaD4cAfUiA" successor_AbstractAction="_azSC4hodEeycFaD4cAfUiA">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="0.25"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+        </steps_Behaviour>
+      </serviceEffectSpecifications__BasicComponent>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_azSC4xodEeycFaD4cAfUiA" describedService__SEFF="_FAOOwAZfEeyBeaTSQFCmQg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_azSC5BodEeycFaD4cAfUiA" entityName="start" successor_AbstractAction="_2LHWsBodEeycFaD4cAfUiA"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_azSC5RodEeycFaD4cAfUiA" entityName="stop" predecessor_AbstractAction="_2LHWsBodEeycFaD4cAfUiA"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_2LHWsBodEeycFaD4cAfUiA" entityName="setAcceleration" predecessor_AbstractAction="_azSC5BodEeycFaD4cAfUiA" successor_AbstractAction="_azSC5RodEeycFaD4cAfUiA">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="0.25"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+        </steps_Behaviour>
+      </serviceEffectSpecifications__BasicComponent>
+    </components__Repository>
+    <components__Repository xsi:type="repository:BasicComponent" id="_5-fPYDchEeylpfVm0_xYGQ" entityName="DecisionPlanning2">
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_BVvw0DciEeylpfVm0_xYGQ" entityName="Sink_EnrichedImage" eventGroup__SinkRole="_7tCeEAZcEeyBeaTSQFCmQg"/>
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_VNORkTciEeylpfVm0_xYGQ" entityName="Provied_IDecisionPlanning" providedInterface__OperationProvidedRole="_pPldELvmEeuyDrQZkcWZSA"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_EcHr5jciEeylpfVm0_xYGQ" entityName="Source_TrajectoryMsg" eventGroup__SourceRole="_tfjDoAZnEeyBeaTSQFCmQg"/>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_awtIRzciEeylpfVm0_xYGQ" describedService__SEFF="_-gHCoAZcEeyBeaTSQFCmQg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_fGljYjciEeylpfVm0_xYGQ" entityName="start_2" successor_AbstractAction="_-dtXQDciEeylpfVm0_xYGQ"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_f0J0ADciEeylpfVm0_xYGQ" entityName="stop_2" predecessor_AbstractAction="_iEEBKzciEeylpfVm0_xYGQ"/>
+        <steps_Behaviour xsi:type="seff:EmitEventAction" id="_iEEBKzciEeylpfVm0_xYGQ" entityName="publishTrajectoryMsg_2" predecessor_AbstractAction="_-dtXQDciEeylpfVm0_xYGQ" successor_AbstractAction="_f0J0ADciEeylpfVm0_xYGQ" eventType__EmitEventAction="_uyKiEAZnEeyBeaTSQFCmQg" sourceRole__EmitEventAction="_EcHr5jciEeylpfVm0_xYGQ">
+          <inputVariableUsages__CallAction>
+            <variableCharacterisation_VariableUsage type="BYTESIZE">
+              <specification_VariableCharacterisation specification="IntPMF[(1; 1.0)]"/>
+            </variableCharacterisation_VariableUsage>
+            <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="trajectoryEvent"/>
+          </inputVariableUsages__CallAction>
+        </steps_Behaviour>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_-dtXQDciEeylpfVm0_xYGQ" entityName="InternalAction1" predecessor_AbstractAction="_fGljYjciEeylpfVm0_xYGQ" successor_AbstractAction="_iEEBKzciEeylpfVm0_xYGQ">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="5.0"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01" softwareInducedFailureType__InternalFailureOccurrenceDescription="_B1LEScn0Eeu9AOcPvs9c6Q"/>
+        </steps_Behaviour>
+      </serviceEffectSpecifications__BasicComponent>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_2rIhgDuxEeymvdx4Ldek3A" describedService__SEFF="_dQitoDrZEeyKGZY-c7BXbA">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_4Z1fAjuxEeymvdx4Ldek3A" entityName="startDecisionPlanning2" successor_AbstractAction="_8fvkfDuxEeymvdx4Ldek3A"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_8fvkfDuxEeymvdx4Ldek3A" entityName="internalActionDecisionPlanning2" predecessor_AbstractAction="_4Z1fAjuxEeymvdx4Ldek3A" successor_AbstractAction="_AItPMDuyEeymvdx4Ldek3A">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="5.0"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01" softwareInducedFailureType__InternalFailureOccurrenceDescription="_B1LEScn0Eeu9AOcPvs9c6Q"/>
+        </steps_Behaviour>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_AItPMDuyEeymvdx4Ldek3A" entityName="stopDecisionPlanning2" predecessor_AbstractAction="_8fvkfDuxEeymvdx4Ldek3A"/>
+      </serviceEffectSpecifications__BasicComponent>
+    </components__Repository>
+    <interfaces__Repository xsi:type="repository:OperationInterface" id="_pPldELvmEeuyDrQZkcWZSA" entityName="IDecisionPlanning">
+      <signatures__OperationInterface id="_dQitoDrZEeyKGZY-c7BXbA" entityName="calcSteeringAngle" returnType__OperationSignature="_1-EvLQZnEeyBeaTSQFCmQg">
+        <parameters__OperationSignature dataType__Parameter="_XiAEvQZbEeyBeaTSQFCmQg" parameterName="enrichedImg"/>
+      </signatures__OperationInterface>
+    </interfaces__Repository>
+    <interfaces__Repository xsi:type="repository:OperationInterface" id="_GqaK8L1pEeuDZfkzylcu4A" entityName="IPlanner"/>
+    <interfaces__Repository xsi:type="repository:OperationInterface" id="_ibE5VwZWEeyBeaTSQFCmQg" entityName="IPerception">
+      <signatures__OperationInterface id="_mpGY8AZWEeyBeaTSQFCmQg" entityName="sense"/>
+    </interfaces__Repository>
+    <interfaces__Repository xsi:type="repository:EventGroup" id="_uRMg0AZYEeyBeaTSQFCmQg" entityName="PerceivedImage">
+      <eventTypes__EventGroup id="_4ilREAZYEeyBeaTSQFCmQg" entityName="PerceivedImage">
+        <parameter__EventType dataType__Parameter="_sZfsbAS4Eey2zaw7LNPKtQ" parameterName="img"/>
+      </eventTypes__EventGroup>
+    </interfaces__Repository>
+    <interfaces__Repository xsi:type="repository:EventGroup" id="_Yll6kAZZEeyBeaTSQFCmQg" entityName="DistanceMeasure">
+      <eventTypes__EventGroup id="_a4DscAZZEeyBeaTSQFCmQg" entityName="PerceivedDistance">
+        <parameter__EventType parameterName="distance">
+          <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.0"/>
+        </parameter__EventType>
+      </eventTypes__EventGroup>
+    </interfaces__Repository>
+    <interfaces__Repository xsi:type="repository:EventGroup" id="_IP3M0AZaEeyBeaTSQFCmQg" entityName="DirtLevelMeasure">
+      <eventTypes__EventGroup id="_Knr_0AZaEeyBeaTSQFCmQg" entityName="DirtLevel">
+        <parameter__EventType parameterName="dirtLevel">
+          <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.0"/>
+        </parameter__EventType>
+      </eventTypes__EventGroup>
+    </interfaces__Repository>
+    <interfaces__Repository xsi:type="repository:EventGroup" id="_d3NIsAZaEeyBeaTSQFCmQg" entityName="LocalisationCoordinates">
+      <eventTypes__EventGroup id="_iQhSUAZaEeyBeaTSQFCmQg" entityName="Coordiantes">
+        <parameter__EventType dataType__Parameter="_nQcI_QZaEeyBeaTSQFCmQg" parameterName="gpsCoordinates"/>
+      </eventTypes__EventGroup>
+    </interfaces__Repository>
+    <interfaces__Repository xsi:type="repository:OperationInterface" id="_-m2OsAZaEeyBeaTSQFCmQg" entityName="ISensorFusion">
+      <signatures__OperationInterface id="_QRwxQAZbEeyBeaTSQFCmQg" entityName="fusion"/>
+    </interfaces__Repository>
+    <interfaces__Repository xsi:type="repository:EventGroup" id="_7tCeEAZcEeyBeaTSQFCmQg" entityName="EnrichedImage">
+      <eventTypes__EventGroup id="_-gHCoAZcEeyBeaTSQFCmQg" entityName="EnrichedImageEvent">
+        <parameter__EventType dataType__Parameter="_XiAEvQZbEeyBeaTSQFCmQg" parameterName="enrichedImg"/>
+      </eventTypes__EventGroup>
+    </interfaces__Repository>
+    <interfaces__Repository xsi:type="repository:EventGroup" id="_Kj_EMAZdEeyBeaTSQFCmQg" entityName="EnrichedDistanceMeasure">
+      <eventTypes__EventGroup id="_NRDHYAZdEeyBeaTSQFCmQg" entityName="EnrichedDistanceMeasure">
+        <parameter__EventType dataType__Parameter="_jjTTbQZbEeyBeaTSQFCmQg" parameterName="enrichedDistance"/>
+      </eventTypes__EventGroup>
+    </interfaces__Repository>
+    <interfaces__Repository xsi:type="repository:OperationInterface" id="_4bos0AZeEeyBeaTSQFCmQg" entityName="ITrajectoryActuator">
+      <signatures__OperationInterface id="_6mQKQAZeEeyBeaTSQFCmQg" entityName="brake"/>
+      <signatures__OperationInterface id="_C0vOoAZfEeyBeaTSQFCmQg" entityName="steer"/>
+      <signatures__OperationInterface id="_FAOOwAZfEeyBeaTSQFCmQg" entityName="accelerate"/>
+    </interfaces__Repository>
+    <interfaces__Repository xsi:type="repository:EventGroup" id="_tfjDoAZnEeyBeaTSQFCmQg" entityName="TrajectoryMsg">
+      <eventTypes__EventGroup id="_uyKiEAZnEeyBeaTSQFCmQg" entityName="TrajectoryMsg">
+        <parameter__EventType dataType__Parameter="_1-EvLQZnEeyBeaTSQFCmQg" parameterName="trajectoryEvent"/>
+      </eventTypes__EventGroup>
+    </interfaces__Repository>
+    <interfaces__Repository xsi:type="repository:OperationInterface" id="_pCBcUDJBEey5eoGE8NduBA" entityName="IImageFusion">
+      <signatures__OperationInterface id="_wQ0lUDJBEey5eoGE8NduBA" entityName="fusion"/>
+    </interfaces__Repository>
+    <failureTypes__Repository xsi:type="reliability:SoftwareInducedFailureType" id="_B1LEScn0Eeu9AOcPvs9c6Q" entityName="RecognitionClassificationFailure" internalFailureOccurrenceDescriptions__SoftwareInducedFailureType="/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 /0/@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0 /0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 /0/@components__Repository.12/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.1/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
+    <dataTypes__Repository xsi:type="repository:CollectionDataType" id="_ej3v4L1oEeuDZfkzylcu4A" entityName="stringarray">
+      <innerType_CollectionDataType xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
+    </dataTypes__Repository>
+    <dataTypes__Repository xsi:type="repository:CollectionDataType" id="_sZfsbAS4Eey2zaw7LNPKtQ" entityName="Image">
+      <innerType_CollectionDataType xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.5"/>
+    </dataTypes__Repository>
+    <dataTypes__Repository xsi:type="repository:CompositeDataType" id="_nQcI_QZaEeyBeaTSQFCmQg" entityName="GpsCoordinates">
+      <innerDeclaration_CompositeDataType entityName="longitude">
+        <datatype_InnerDeclaration xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.3"/>
+      </innerDeclaration_CompositeDataType>
+      <innerDeclaration_CompositeDataType entityName="latitude">
+        <datatype_InnerDeclaration xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.3"/>
+      </innerDeclaration_CompositeDataType>
+    </dataTypes__Repository>
+    <dataTypes__Repository xsi:type="repository:CompositeDataType" id="_XiAEvQZbEeyBeaTSQFCmQg" entityName="EnrichedImage">
+      <innerDeclaration_CompositeDataType entityName="dirtlevel">
+        <datatype_InnerDeclaration xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.3"/>
+      </innerDeclaration_CompositeDataType>
+      <innerDeclaration_CompositeDataType entityName="img" datatype_InnerDeclaration="_sZfsbAS4Eey2zaw7LNPKtQ"/>
+    </dataTypes__Repository>
+    <dataTypes__Repository xsi:type="repository:CompositeDataType" id="_jjTTbQZbEeyBeaTSQFCmQg" entityName="SpeedRegulation">
+      <innerDeclaration_CompositeDataType entityName="position">
+        <datatype_InnerDeclaration xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
+      </innerDeclaration_CompositeDataType>
+      <innerDeclaration_CompositeDataType entityName="distance">
+        <datatype_InnerDeclaration xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
+      </innerDeclaration_CompositeDataType>
+    </dataTypes__Repository>
+    <dataTypes__Repository xsi:type="repository:CompositeDataType" id="_1-EvLQZnEeyBeaTSQFCmQg" entityName="Trajectory">
+      <innerDeclaration_CompositeDataType entityName="geomtetricalData">
+        <datatype_InnerDeclaration xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.5"/>
+      </innerDeclaration_CompositeDataType>
+    </dataTypes__Repository>
+  </repository:Repository>
+  <emfprofileapplication:ProfileApplication>
+    <stereotypeApplications xsi:type="org.palladiosimulator.architecturaltemplates.catalog.profiles:AiNVBasicComponent" appliedTo="_5-fPYDchEeylpfVm0_xYGQ">
+      <extension href="../../plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram#_8zmKMDbzEeyCQ69JbDj2Qw"/>
+    </stereotypeApplications>
+    <stereotypeApplications xsi:type="org.palladiosimulator.architecturaltemplates.catalog.profiles:AiNVBasicComponent" appliedTo="_tFYp8LvmEeuyDrQZkcWZSA">
+      <extension href="../../plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram#_8zmKMDbzEeyCQ69JbDj2Qw"/>
+    </stereotypeApplications>
+    <importedProfiles nsURI="org.palladiosimulator.architecturaltemplates.catalog.profiles.NVersionProgrammingAi" location="platform:/plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram"/>
+  </emfprofileapplication:ProfileApplication>
+</xmi:XMI>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dynamicmodel:DynamicBehaviourRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dynamicmodel="http://palladiosimulator.org/Environment/DynamicModel/1.0" xmlns:templatevariable="http://palladiosimulator.org/Environment/TemplateVariable/1.0" id="_2bY28MiSEeu4ldHQmCCVsQ">
+  <extensions id="_3PmiIMiSEeu4ldHQmCCVsQ" entityName="TemporalDynamicsDesc">
+    <model href="StaticCognitionEnvironment.staticmodel#_BDjaYMiREeu4ldHQmCCVsQ"/>
+    <behaviour xsi:type="dynamicmodel:InductiveDynamicBehaviour">
+      <localModels id="_J7eycMiTEeu4ldHQmCCVsQ" entityName="TemporalImageBrightnessFactorInstantiation">
+        <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="templateVariable.templatevariable#_lHIpgdaLEeu3JPPFxl43Jg"/>
+        <distributionFunction href="default.distributionfunction#_arcO0Mh2EeuSv7ZQ4FB_Ew"/>
+      </localModels>
+      <localModels id="_Rdkq4MiTEeu4ldHQmCCVsQ" entityName="TemporalNoiseFactorInstantiation">
+        <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="templateVariable.templatevariable#_5FJ3IdaLEeu3JPPFxl43Jg"/>
+        <distributionFunction href="default.distributionfunction#_1YYnAMiAEeu4ldHQmCCVsQ"/>
+      </localModels>
+      <localModels id="_Xvy24MiTEeu4ldHQmCCVsQ" entityName="TemporalDirtFactorInstantiation">
+        <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="templateVariable.templatevariable#__KGcIdaLEeu3JPPFxl43Jg"/>
+        <distributionFunction href="default.distributionfunction#_UvRMgMiQEeu4ldHQmCCVsQ"/>
+      </localModels>
+      <localModels id="_eWTywNaHEeugmZy9iKpkSg" entityName="TemporalDummyFactorInstantiation">
+        <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="templateVariable.templatevariable#_E7l5odaMEeu3JPPFxl43Jg"/>
+        <distributionFunction href="default.distributionfunction#_JbM3QNTFEeujHpQKFaqPpw"/>
+      </localModels>
+      <timeSliceInductions xsi:type="dynamicmodel:InterTimeSliceInduction" descriptiveModel="_J7eycMiTEeu4ldHQmCCVsQ">
+        <appliedGroundVariable href="StaticCognitionEnvironment.staticmodel#_156-EMiREeu4ldHQmCCVsQ"/>
+        <temporalStructure xsi:type="templatevariable:PersistenceRelation" href="templateVariable.templatevariable#//@relation.5"/>
+      </timeSliceInductions>
+      <timeSliceInductions xsi:type="dynamicmodel:InterTimeSliceInduction" descriptiveModel="_Rdkq4MiTEeu4ldHQmCCVsQ">
+        <appliedGroundVariable href="StaticCognitionEnvironment.staticmodel#_bvWSIMiSEeu4ldHQmCCVsQ"/>
+        <temporalStructure xsi:type="templatevariable:PersistenceRelation" href="templateVariable.templatevariable#//@relation.6"/>
+      </timeSliceInductions>
+      <timeSliceInductions xsi:type="dynamicmodel:InterTimeSliceInduction" descriptiveModel="_Xvy24MiTEeu4ldHQmCCVsQ">
+        <appliedGroundVariable href="StaticCognitionEnvironment.staticmodel#_VDSCwMiSEeu4ldHQmCCVsQ"/>
+        <temporalStructure xsi:type="templatevariable:PersistenceRelation" href="templateVariable.templatevariable#//@relation.7"/>
+      </timeSliceInductions>
+      <timeSliceInductions xsi:type="dynamicmodel:InterTimeSliceInduction" descriptiveModel="_eWTywNaHEeugmZy9iKpkSg">
+        <appliedGroundVariable href="StaticCognitionEnvironment.staticmodel#_nHei4NaGEeugmZy9iKpkSg"/>
+        <temporalStructure xsi:type="templatevariable:PersistenceRelation" href="templateVariable.templatevariable#//@relation.8"/>
+      </timeSliceInductions>
+    </behaviour>
+  </extensions>
+</dynamicmodel:DynamicBehaviourRepository>

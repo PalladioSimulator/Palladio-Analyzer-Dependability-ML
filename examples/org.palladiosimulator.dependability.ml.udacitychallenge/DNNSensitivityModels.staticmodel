@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<staticmodel:ProbabilisticModelRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:staticmodel="http://palladiosimulator.org/Environment/StaticModel/1.0" xmlns:templatevariable="http://palladiosimulator.org/Environment/TemplateVariable/1.0" id="_gbnVUDPwEeyLC5Tfbz4pBQ" entityName="DNNSensitivityModels">
+  <models id="_k1EB0DPwEeyLC5Tfbz4pBQ" entityName="ChauffeurSensitivityModel">
+    <localModels id="_m0818DPwEeyLC5Tfbz4pBQ" entityName="ChauffeurPredictionSensitivityModel">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="DNNTemplateVariables.templatevariable#_U5Elk8qkEeqObY-eK2jOOA"/>
+      <distribution href="DNNSensitivityDistributions.distributionfunction#_ybF9MDPxEeyLC5Tfbz4pBQ"/>
+    </localModels>
+    <localModels id="_0LRW0DPwEeyLC5Tfbz4pBQ" entityName="ImageBrightnessModel">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="DNNTemplateVariables.templatevariable#_U5FzvMqkEeqObY-eK2jOOA"/>
+      <distribution href="DNNSensitivityDistributions.distributionfunction#_sUrjIDPyEeyLC5Tfbz4pBQ"/>
+    </localModels>
+    <localModels id="_G4HQcDPxEeyLC5Tfbz4pBQ" entityName="ImageBlurringModel">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="DNNTemplateVariables.templatevariable#_X73JESpHEeuMpaabmuiN-Q"/>
+      <distribution href="DNNSensitivityDistributions.distributionfunction#_syQ3ADPyEeyLC5Tfbz4pBQ"/>
+    </localModels>
+    <localProbabilisticModels>
+      <groundRandomVariables id="_owzeoDPwEeyLC5Tfbz4pBQ" entityName="ChauffeurPredictionSensitivityVariable" descriptiveModel="_m0818DPwEeyLC5Tfbz4pBQ">
+        <instantiatedTemplate href="DNNTemplateVariables.templatevariable#_U5ElksqkEeqObY-eK2jOOA"/>
+        <dependenceStructure href="DNNTemplateVariables.templatevariable#//@relation.0"/>
+        <dependenceStructure href="DNNTemplateVariables.templatevariable#//@relation.1"/>
+      </groundRandomVariables>
+      <groundRandomVariables id="_zmjgMDPwEeyLC5Tfbz4pBQ" entityName="ImageBrightnessVariable" descriptiveModel="_0LRW0DPwEeyLC5Tfbz4pBQ">
+        <instantiatedTemplate href="DNNTemplateVariables.templatevariable#_U5Fzu8qkEeqObY-eK2jOOA"/>
+      </groundRandomVariables>
+      <groundRandomVariables id="_z5xXIDPwEeyLC5Tfbz4pBQ" entityName="ImageBlurringVariable" descriptiveModel="_G4HQcDPxEeyLC5Tfbz4pBQ">
+        <instantiatedTemplate href="DNNTemplateVariables.templatevariable#_0uh4oCpGEeuMpaabmuiN-Q"/>
+      </groundRandomVariables>
+    </localProbabilisticModels>
+  </models>
+  <models id="_gHzLwDvjEeyUxdLFDMY-5A" entityName="NVersionSensitivityModel">
+    <localModels id="_jeroADvjEeyUxdLFDMY-5A" entityName="NVersion-PredictionSensitivityModel">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="DNNTemplateVariables.templatevariable#_U5Elk8qkEeqObY-eK2jOOA"/>
+      <distribution href="DNNSensitivityDistributions.distributionfunction#_u5348DvjEeyUxdLFDMY-5A"/>
+    </localModels>
+    <localModels id="_2WL5gDvjEeyUxdLFDMY-5A" entityName="ImageBrightnessModel">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="DNNTemplateVariables.templatevariable#_U5FzvMqkEeqObY-eK2jOOA"/>
+      <distribution href="DNNSensitivityDistributions.distributionfunction#_sUrjIDPyEeyLC5Tfbz4pBQ"/>
+    </localModels>
+    <localModels id="_8dZvYDvjEeyUxdLFDMY-5A" entityName="ImageBlurringModel">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="DNNTemplateVariables.templatevariable#_X73JESpHEeuMpaabmuiN-Q"/>
+      <distribution href="DNNSensitivityDistributions.distributionfunction#_syQ3ADPyEeyLC5Tfbz4pBQ"/>
+    </localModels>
+    <localProbabilisticModels>
+      <groundRandomVariables id="_Cv-gsDvkEeyUxdLFDMY-5A" entityName="NVersion-PredictionSensitivityVariable" descriptiveModel="_jeroADvjEeyUxdLFDMY-5A">
+        <instantiatedTemplate href="DNNTemplateVariables.templatevariable#_U5ElksqkEeqObY-eK2jOOA"/>
+        <dependenceStructure href="DNNTemplateVariables.templatevariable#//@relation.0"/>
+        <dependenceStructure href="DNNTemplateVariables.templatevariable#//@relation.1"/>
+      </groundRandomVariables>
+      <groundRandomVariables id="_K6Ur8DvkEeyUxdLFDMY-5A" entityName="ImageBrightnessVariable" descriptiveModel="_2WL5gDvjEeyUxdLFDMY-5A">
+        <instantiatedTemplate href="DNNTemplateVariables.templatevariable#_U5Fzu8qkEeqObY-eK2jOOA"/>
+      </groundRandomVariables>
+      <groundRandomVariables id="_S1zUwDvkEeyUxdLFDMY-5A" entityName="ImageBlurringVariable" descriptiveModel="_8dZvYDvjEeyUxdLFDMY-5A">
+        <instantiatedTemplate href="DNNTemplateVariables.templatevariable#_0uh4oCpGEeuMpaabmuiN-Q"/>
+      </groundRandomVariables>
+    </localProbabilisticModels>
+  </models>
+  <models id="_SNgmUEBxEeykDOng-lD2og" entityName="RamboSensitivityModel">
+    <localModels id="_SnTmYEBxEeykDOng-lD2og" entityName="RamboPredictionSensitivityModel">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="DNNTemplateVariables.templatevariable#_U5Elk8qkEeqObY-eK2jOOA"/>
+      <distribution href="DNNSensitivityDistributions.distributionfunction#_7FFSMEBwEeykDOng-lD2og"/>
+    </localModels>
+    <localModels id="_gIZz4EBxEeykDOng-lD2og" entityName="ImageBrightnessModel">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="DNNTemplateVariables.templatevariable#_U5FzvMqkEeqObY-eK2jOOA"/>
+      <distribution href="DNNSensitivityDistributions.distributionfunction#_sUrjIDPyEeyLC5Tfbz4pBQ"/>
+    </localModels>
+    <localModels id="_ka48wEBxEeykDOng-lD2og" entityName="ImageBlurringModel">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="DNNTemplateVariables.templatevariable#_X73JESpHEeuMpaabmuiN-Q"/>
+      <distribution href="DNNSensitivityDistributions.distributionfunction#_syQ3ADPyEeyLC5Tfbz4pBQ"/>
+    </localModels>
+    <localProbabilisticModels>
+      <groundRandomVariables id="_p_9H0EBxEeykDOng-lD2og" entityName="RamboPredictionSensitivityVariable" descriptiveModel="_SnTmYEBxEeykDOng-lD2og">
+        <instantiatedTemplate href="DNNTemplateVariables.templatevariable#_U5ElksqkEeqObY-eK2jOOA"/>
+        <dependenceStructure href="DNNTemplateVariables.templatevariable#//@relation.0"/>
+        <dependenceStructure href="DNNTemplateVariables.templatevariable#//@relation.1"/>
+      </groundRandomVariables>
+      <groundRandomVariables id="_1m9AIEBxEeykDOng-lD2og" entityName="ImageBrightnessVariable" descriptiveModel="_gIZz4EBxEeykDOng-lD2og">
+        <instantiatedTemplate href="DNNTemplateVariables.templatevariable#_U5Fzu8qkEeqObY-eK2jOOA"/>
+      </groundRandomVariables>
+      <groundRandomVariables id="_8MvBUEBxEeykDOng-lD2og" entityName="ImageBlurringVariable" descriptiveModel="_ka48wEBxEeykDOng-lD2og">
+        <instantiatedTemplate href="DNNTemplateVariables.templatevariable#_0uh4oCpGEeuMpaabmuiN-Q"/>
+      </groundRandomVariables>
+    </localProbabilisticModels>
+  </models>
+</staticmodel:ProbabilisticModelRepository>

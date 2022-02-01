@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<templatevariable:TemplateVariableDefinitions xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:templatevariable="http://palladiosimulator.org/Environment/TemplateVariable/1.0" id="_U5ElkcqkEeqObY-eK2jOOA">
+  <variables id="_U5Fzu8qkEeqObY-eK2jOOA" entityName="ImageBrightness"/>
+  <variables id="_U5ElksqkEeqObY-eK2jOOA" entityName="MLPredictionSensitivityTemplate"/>
+  <variables id="_0uh4oCpGEeuMpaabmuiN-Q" entityName="ImageBlurring"/>
+  <factors xsi:type="templatevariable:ProbabilisticTemplateFactor" id="_U5Elk8qkEeqObY-eK2jOOA" entityName="MLPredictionSensitivityFactor" scope="_U5ElksqkEeqObY-eK2jOOA _U5Fzu8qkEeqObY-eK2jOOA _0uh4oCpGEeuMpaabmuiN-Q">
+    <distributionFamily href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
+  </factors>
+  <factors xsi:type="templatevariable:ProbabilisticTemplateFactor" id="_U5FzvMqkEeqObY-eK2jOOA" entityName="ImageBrightnessFactor" scope="_U5Fzu8qkEeqObY-eK2jOOA">
+    <distributionFamily href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
+  </factors>
+  <factors xsi:type="templatevariable:ProbabilisticTemplateFactor" id="_X73JESpHEeuMpaabmuiN-Q" entityName="ImageBlurringFactor" scope="_0uh4oCpGEeuMpaabmuiN-Q">
+    <distributionFamily href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
+  </factors>
+  <relation xsi:type="templatevariable:DependenceRelation" target="_U5ElksqkEeqObY-eK2jOOA" source="_U5Fzu8qkEeqObY-eK2jOOA"/>
+  <relation xsi:type="templatevariable:DependenceRelation" target="_U5ElksqkEeqObY-eK2jOOA" source="_0uh4oCpGEeuMpaabmuiN-Q"/>
+</templatevariable:TemplateVariableDefinitions>
