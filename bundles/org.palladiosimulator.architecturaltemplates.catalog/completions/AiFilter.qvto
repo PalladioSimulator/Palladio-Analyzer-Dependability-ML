@@ -1,0 +1,782 @@
+import org.palladiosimulator.architecturaltemplates.catalog.black.ProfilesLibrary;
+
+modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
+modeltype PCM_UNCERTAINTY uses 'http://palladiosimulator.org/Uncertainty/1.0';
+
+modeltype PCM_ALLOC uses 'http://palladiosimulator.org/PalladioComponentModel/Allocation/5.2';
+modeltype PCM_REP uses 'http://palladiosimulator.org/PalladioComponentModel/Repository/5.2';
+modeltype PCM_SYS uses 'http://palladiosimulator.org/PalladioComponentModel/System/5.2';
+modeltype PCM_RES_ENV uses 'http://palladiosimulator.org/PalladioComponentModel/ResourceEnvironment/5.2';
+modeltype PCM_CORE uses 'http://palladiosimulator.org/PalladioComponentModel/Core/5.2';
+modeltype PCMComposition uses pcm::core::composition('http://palladiosimulator.org/PalladioComponentModel/5.2');
+modeltype PCMSEFF uses pcm::seff('http://palladiosimulator.org/PalladioComponentModel/SEFF/5.2');
+modeltype PCM_COMPLETION uses 'http://palladiosimulator.org/AnalyzerFramework/Completions/1.0';
+modeltype PCMSEFF_PERFORMANCE uses pcm::seff::seff_performance('http://palladiosimulator.org/PalladioComponentModel/SEFF/5.2');
+modeltype PCM_RESOURCETYPE uses pcm::resourcetype('http://palladiosimulator.org/PalladioComponentModel/5.2');
+modeltype PCM_REL uses 'http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2';
+
+transformation AiFilter(inout pcmAllocation : PCM_ALLOC, inout pcmUncertainty: PCM_UNCERTAINTY);
+
+// Pseudocode 3.4: 2 - Initilize Strings constants , PCM models
+// String constants
+property AiBasicComponent : String = "AiBasicComponent";
+
+property FILTERING_ASSEMBLY_CONTEXT_PROFILE : String = "AiFilterProfile";
+property FILTERED_ASSEMBLY_CONTEXT_STEREOTYPE : String = "AiAssemblyContext";
+
+property FILTERTOAICHANNEL : String = "FilterToAiChannel";
+
+property FILTERIMPROVEMENT : String = "Filter_Improvement";
+property FILTERCOUNTERMEASURE : String = "Filter_Countermeasure";
+
+// Models
+property allocation : Allocation = pcmAllocation.rootObjects()![Allocation];
+property system : System = allocation.system_Allocation;
+property resourceEnvironment : ResourceEnvironment = allocation.targetResourceEnvironment_Allocation;
+// property pcmUncertainty : Uncertainty = new Uncertainty(); 
+property uncertaintyRepo : UncertaintyRepository = pcmUncertainty.rootObjects()![UncertaintyRepository];
+
+// Pseudocode 3.4: 3 - main()
+main() {
+	
+	// Pseudocode 3.4: 4 - checkConstraints()
+	log("Started main of QvTO!");
+	var assemblyContexts : Set(AssemblyContext) := system.assemblyContexts__ComposedStructure;
+
+	if (system.oclAsType(EObject) = null) {
+		 log("pcm System = null");
+	} endif;
+	assert fatal(isProfileApplied(system.oclAsType(EObject), FILTERING_ASSEMBLY_CONTEXT_PROFILE))
+		with log ("The system has no profile" + FILTERING_ASSEMBLY_CONTEXT_PROFILE + " applied!");	
+	
+	assert fatal(hasAppliedStereotype(assemblyContexts, FILTERED_ASSEMBLY_CONTEXT_STEREOTYPE))
+		with log ("No assembly context has the stereotype" + FILTERED_ASSEMBLY_CONTEXT_STEREOTYPE + " applied!");
+	
+	log("QvTO: Finished asserts!");
+	
+	// Pseudocode 3.4: 5 - AiAssemblys = getAiAssembly()
+	//get the stereotyped AssemblyContexts
+	var aiBasedAssemblyContexts : Set(AssemblyContext) :=
+		assemblyContexts
+		->select(assemblyContext : AssemblyContext |
+			hasAppliedStereotype(assemblyContext, FILTERED_ASSEMBLY_CONTEXT_STEREOTYPE)
+		);
+	
+	// For debugging purposes
+	// log("AiBasedAssemblyContexts isEmpty()?: " + aiBasedAssemblyContexts->isEmpty().toString());
+	
+	var assemblyContexts_requiredRoles : Set(AssemblyContext);
+	
+	
+	// Pseudocode 3.4: 6 - forEach ( aiAssembly : AiAssemblys ) 
+	aiBasedAssemblyContexts->forEach(aiAssemblyContext) {
+		
+		// Pseudocode 3.4: 7 - filter = createFilterWithEventChannel(aiAssembly)
+		// check if required roles are set up.. maybe check if there are events?
+		var filterAssemblyContext := aiAssemblyContext.createFilterWithChannel();
+		// TODO
+		// filter is now created with own eventchannel to ai component, but..
+			// - ai component still reads events from original eventchannel -> delete that one
+			// - filter component should also read events from original Eventchannel -> add that one here
+			// - should be it, bc it shouldn't change failure probability
+		
+		// Pseudocode 3.4: 8 - switchSinkEventChannel ( aiAssembly , f i l t e r )
+		var aiSinkEvents : Set(EventChannel) :=  // all events that have aiAssemblyContext as Sink destination
+		system.eventChannel__ComposedStructure
+		->select(eventChannel: EventChannel | 
+		eventChannel.eventChannelSinkConnector__EventChannel->exists(connector| connector.assemblyContext__EventChannelSinkConnector = aiAssemblyContext)); // Warning its a SET!
+	
+		aiSinkEvents->forEach(aiSinkEvent){
+			aiSinkEvent.eventChannelSinkConnector__EventChannel->forEach(aiSinkConnector) {
+				if(aiSinkConnector.assemblyContext__EventChannelSinkConnector = aiAssemblyContext) {
+					aiSinkConnector.assemblyContext__EventChannelSinkConnector := filterAssemblyContext;	
+				}
+			};	
+		};
+		
+		
+		// Pseudocode 3.4: 9 - setNewSinkEventChannelFromTo(filter.getEventChannel() , aiAssembly)
+		// if there are sink events, then connect them to the newly created filter assemblyContext (and delete connection to ai-assemblyContext)
+		
+		var filterEventChannel : Set(EventChannel) :=  // all events that have filterEventChannel as source destination
+		system.eventChannel__ComposedStructure
+		->select(eventChannel: EventChannel | 
+		eventChannel.eventChannelSourceConnector__EventChannel->exists(connector| connector.assemblyContext__EventChannelSourceConnector = filterAssemblyContext)); // Warning its a SET!
+	
+		filterEventChannel.eventChannelSinkConnector__EventChannel->forEach(eventChannelSinkConnecotr) {
+			eventChannelSinkConnecotr.assemblyContext__EventChannelSinkConnector := aiAssemblyContext;
+		};
+		
+		// Pseudocode: NONE -
+		// EXPERIMENTAL PART -> for interface-communication
+		// if provided role and if required role are set
+		assemblyContexts->forEach(assemblyContext) { // all assemblyContext
+			if (not(aiAssemblyContext.encapsulatedComponent__AssemblyContext.providedRoles_InterfaceProvidingEntity->isEmpty())) {
+				aiAssemblyContext.encapsulatedComponent__AssemblyContext.providedRoles_InterfaceProvidingEntity->forEach(providedRole) {
+					if (not(aiAssemblyContext.encapsulatedComponent__AssemblyContext.requiredRoles_InterfaceRequiringEntity->isEmpty())) {
+						assemblyContext.encapsulatedComponent__AssemblyContext.requiredRoles_InterfaceRequiringEntity->forEach(requiredRole) {
+							// oder ist das die ID des Roles Objekts?
+							if (providedRole.providingEntity_ProvidedRole.id = requiredRole.requiringEntity_RequiredRole.id) then {
+								assemblyContexts_requiredRoles += assemblyContext;						
+								// genau hier erkennt man die verbindung zwischen dene
+								//  ggf. hier umhängen auf den filter bzw hier der filter erstellen?
+								
+								// alle connectoren die mit der AI componente verbunden sind.  
+								var aiProvidingConnectors : Set(AssemblyConnector) := 
+								system.connectors__ComposedStructure[AssemblyConnector]->select(assemblyConnector | 
+									 assemblyConnector.providingAssemblyContext_AssemblyConnector.id = aiAssemblyContext.id
+								);
+								
+								
+								var componentRequiresAiConnectors : Set(AssemblyConnector) := 
+								system.connectors__ComposedStructure[AssemblyConnector]-> select(assemblyConnector | 
+									assemblyConnector.requiringAssemblyContext_AssemblyConnector.id = assemblyContext.id
+								);
+								
+								if(not(aiProvidingConnectors->isEmpty())) {
+									if(not(componentRequiresAiConnectors->isEmpty())) {
+										componentRequiresAiConnectors-> map createFilterForAssemblyConnector(aiAssemblyContext, aiProvidingConnectors->asOrderedSet()->at(1).providingAssemblyContext_AssemblyConnector);
+									}
+								}
+								
+								//aiProvidingConnectors->map createFilterForAssemblyConnector(aiAssemblyContext, componentRequiresAiConnectors);
+								
+							} endif
+						}
+					} endif
+				}	
+			} endif
+			
+			
+		 }
+	};
+	 
+	 // braucht für Countermeasure:
+	 /* 
+	 / 	- precondition -> basiccomponent
+	 	- template variable -> referenz zum netz
+	 		-> falls das noch nicht da ist, muss es generiert werden.
+	 		-> improvement muss ebenfalls angegeben werden oder generiert werden.
+	 		
+	 */
+	 
+	// Add connection between the modeled countermeasure and the modeled distributionfunction via creation of an uncertainty-improvement object.  
+	/*
+	distributionFunctionRepo.distributions
+	->selectByKind(ProbabilityDistribution) 
+	->forEach(distri) { // distributionfunction:ProbabilityDistribution
+		if(distri.entityName = FILTERIMPROVEMENT) {
+			log("found distributionFunction!");
+			uncertaintyRepo.architecturalCountermeasures->forEach(countermeasure) {
+				if(countermeasure.entityName = FILTERCOUNTERMEASURE) {
+					log("found ArchitecturalCountermeasure");
+					log("Building connection of ArchitecturalCountermeasure and distributionFunction");
+					// UncertaintyImprovement
+					if (countermeasure.uncertaintyImprovement != null) {
+						if (countermeasure.uncertaintyImprovement->selectByKind(ProbabilisticImprovement) = null) {
+							countermeasure.uncertaintyImprovement := new ProbabilisticImprovement(distri);	
+						} else {
+							log("failed building new connection (1)");
+						}; // else bykind DeterministicImprovement
+					} else {
+						// do nothing
+						countermeasure.uncertaintyImprovement := new ProbabilisticImprovement(distri);	
+						log("build new connection!");
+					};
+				}
+			};
+		};
+	};
+	*/
+	
+	
+	
+	// uncertainty creation
+	log("QvTO: Finished main!");
+		 
+};
+
+abstract mapping inout Connector::abstractCreateFilterForConnector(originalAssemblyContext : AssemblyContext, providingAssemblyContext: AssemblyContext) : Connector {
+	entityName := self.entityName+"_from_filter";
+	parentStructure__Connector := self.parentStructure__Connector;
+		
+};
+
+mapping inout AssemblyConnector::createFilterForAssemblyConnector(originalAssemblyContext : AssemblyContext, providingAssemblyContext: AssemblyContext) : AssemblyConnector
+	inherits Connector::abstractCreateFilterForConnector
+ {
+ 	
+	var filterAssemblyContext : AssemblyContext :=
+		self
+		.requiringAssemblyContext_AssemblyConnector
+		.createFilter(self.requiredRole_AssemblyConnector);
+		
+		
+		providingAssemblyContext_AssemblyConnector := filterAssemblyContext; 
+		requiringAssemblyContext_AssemblyConnector := providingAssemblyContext;
+		
+		providedRole_AssemblyConnector := null;
+		requiredRole_AssemblyConnector := self.requiredRole_AssemblyConnector;
+		
+		// andere Connectoren umhängen
+		self.requiringAssemblyContext_AssemblyConnector := filterAssemblyContext;
+		// self.requiredRole_AssemblyConnector := null;
+};
+	
+
+helper AssemblyContext::createFilter(operationRequiredRole : OperationRequiredRole) : AssemblyContext {
+	log("createFilter via operationRequiredRole");
+	var filter : BasicComponent := self.map assemblyToFilterBasicComponent(operationRequiredRole);
+	var filterAssemblyContext : AssemblyContext := new AssemblyContext(filter);	
+	var filterAllocationContext : AllocationContext := new AllocationContext(filterAssemblyContext, findResourceContainer(self), null);
+	
+	
+	return filterAssemblyContext;
+};
+
+mapping AssemblyContext::assemblyToFilterBasicComponent(operationRequiredRole : OperationRequiredRole) : BasicComponent {
+	// ImplementationComponentType
+		 // RepositoryComponent
+		 // InterfaceProvidingRequiringEntity
+	entityName := "Filter_" + self.entityName + "_" + operationRequiredRole.entityName;
+	providedRoles_InterfaceProvidingEntity := new OperationProvidedRole(operationRequiredRole);
+	requiredRoles_InterfaceRequiringEntity := new OperationRequiredRole(operationRequiredRole);	
+	
+	repository__RepositoryComponent := self.encapsulatedComponent__AssemblyContext.repository__RepositoryComponent;
+	componentParameterUsage_ImplementationComponentType := self.encapsulatedComponent__AssemblyContext[ImplementationComponentType].componentParameterUsage_ImplementationComponentType;
+	
+	// operationSignatur ist nicht null! hier muss noch die ideale Signatur für den Filter erstellt werden. Ggf. fehlt noch eine ID zur klaren Identifizierung
+	var signatur = operationRequiredRole.requiredInterface__OperationRequiredRole.signatures__OperationInterface->asOrderedSet()->at(1);
+	serviceEffectSpecifications__BasicComponent := new ResourceDemandingSEFF(signatur, operationRequiredRole, null, self, null, null);
+	//ServiceEffectSpecification
+};
+
+// Pseudocode 3.5: 1 - createFilterWithChannel ( aiAssembly : AssemblyContext )
+helper AssemblyContext::createFilterWithChannel() : AssemblyContext {
+
+	log("createFilterWithChannel");
+	var aiComponentName: String := self.encapsulatedComponent__AssemblyContext.entityName;
+			// create new channel between filter and ai
+			// Pseudocode 3.5: 3 - sinkRole = new SinkRole ()
+				// create roles:
+				var sinkRole: SinkRole = new SinkRole(aiComponentName);
+				var sourceRole: SourceRole = new SourceRole(aiComponentName);
+				// Pseudocode 3.5: 5 - newAiSinkRole = new SinkRole()
+				var newAiSinkRole: SinkRole = new SinkRole(aiComponentName);
+				// Channel
+				// TODO 1 + 2 + 3
+				// get ai EventChannelSinkConnector
+				// annahme: es gibt nur ein event connection für die ai componente.
+				//var oldAiSinkRole := self.encapsulatedComponent__AssemblyContext.providedRoles_InterfaceProvidingEntity->selectOne(true);
+				
+				// Pseudocode 3.5: 6 - oldAiSinkRole = aiAssembly.getSinkRole()
+				// description: only one event connection to the ai componente will be replaced with a filter connection
+				var oldAiSinkRole: SinkRole := self.encapsulatedComponent__AssemblyContext.providedRoles_InterfaceProvidingEntity->selectByKind(SinkRole)->any(true);
+				
+
+				//Pseudocode 3.5: 8 findEventChannelAndReplaceSinkRole(oldAiSinkRole, sinkRole)
+				//event channel sink/source connectoren fehlen noch
+				system.eventChannel__ComposedStructure->forEach(eventChannel) {	
+					eventChannel.eventChannelSinkConnector__EventChannel->forEach(sinkConnector){
+						if(sinkConnector.sinkRole__EventChannelSinkConnector.id = oldAiSinkRole.id) {
+							sinkConnector.sinkRole__EventChannelSinkConnector := sinkRole;
+						};
+					};	
+				};
+				
+				// Pseudocode 3.5: 9 - aiAssembly . setSinkRole ( newAiSinkRole )		
+				self.encapsulatedComponent__AssemblyContext.providedRoles_InterfaceProvidingEntity := newAiSinkRole;
+			
+			// Pseudocode 3.5: 11 - oldParameter = oldAiSinkRole . getParameter ()
+			// so that the filter event types (including parameter) equals the ai event types 
+			var oldParameter := oldAiSinkRole.eventGroup__SinkRole.eventTypes__EventGroup->any(true).parameter__EventType.deepclone();
+ 			
+			//Pseudocode 3.5: 13 - filterAiEventChannel = new EventChannel ( newAiSinkRole , aiAssembly ,sourceRole, oldParameter)
+			var filterAiChannel: EventChannel = new EventChannel(aiComponentName, newAiSinkRole, self, sourceRole, oldParameter); // die sinkrole ist eiglt die role von AI
+				// var filterAiSinkConnector = new SinkConnector();
+			
+			//Pseudocode 3.5: 15 - newFilterEventType = filterAiEventChannel.getEventTypes()−>any(true)
+			// filterAiChannel only has one Eventtype
+			var newfilterEventType : EventType := filterAiChannel.eventGroup__EventChannel.eventTypes__EventGroup->any(true);
+			
+			// hold oldAiSeffSignature for the seff signature at the filter
+			// place new eventType into ai Basic Component Seff
+			var selfEmitEventAction : EmitEventAction :=  self.encapsulatedComponent__AssemblyContext->selectByKind(BasicComponent).serviceEffectSpecifications__BasicComponent->selectByKind(ResourceDemandingSEFF).steps_Behaviour->selectByKind(EmitEventAction)->any(true);
+			
+			// Pseudocode 3.5: 16 - oldAiSeffSignature = aiAssembly.getSeffSignature()−>any(true)
+			var oldAiSeffSignature : Signature = self.encapsulatedComponent__AssemblyContext
+				->selectByKind(BasicComponent).serviceEffectSpecifications__BasicComponent
+				->selectByKind(ResourceDemandingSEFF) // only take RDSeffs
+				->selectOne(rdseff|rdseff.steps_Behaviour->includes(selfEmitEventAction)) // filter all but one which include the EmitEventAction
+				.describedService__SEFF;
+			
+			// Pseudocode 3.5: 18 - aiAssembly . setSeffSignature ( newFilterEventType )
+			self.encapsulatedComponent__AssemblyContext // take assemblyContext
+				->selectByKind(BasicComponent).serviceEffectSpecifications__BasicComponent // then in there the basicComponent, then seff
+				->selectByKind(ResourceDemandingSEFF) // only take RDSeffs
+				->selectOne(rdseff|rdseff.steps_Behaviour->includes(selfEmitEventAction)) // filter all but one which include the EmitEventAction
+				.describedService__SEFF := newfilterEventType; // then set the type of this RDSeff
+
+			//->any(true).describedService__SEFF := newfilterEventType;
+			
+			
+			// create filter with sink interface to event channel and emit interface to new created event channel
+			//var filter = new BasicComponent(aiComponentName, sinkRole, sourceRole);
+			
+			
+			// set new sink interface for events at ai 
+			
+			
+			// create EventType set Filter (BasicComponent) with it
+			var eventGroup := filterAiChannel.eventGroup__EventChannel;
+			eventGroup.eventTypes__EventGroup->forEach(eventType) {
+				eventType.eventGroup__EventType := eventGroup;
+				
+			};
+			// Pseudocode 3.5: 20 - eventTypes = filterAiEventChannel . getEventType ()
+			var eventTypes := eventGroup.eventTypes__EventGroup;
+			
+			//Pseudocode 3.5: 22 - newAiSinkRole . setEventGroup ( filterAiEventChannel . getEventGroup () )
+			// add sink reference from channel to ai component
+			newAiSinkRole.eventGroup__SinkRole := eventGroup;
+			
+			// Pseudocode 3.5: 23 - sourceRole . setEventGroup ( filterAiEventChannel . getEventGroup () )
+			//add source reference from filter to channel
+			sourceRole.eventGroup__SourceRole := eventGroup;
+			
+			// Pseudocode 3.5: 24 - sinkRole . setEventGroup ( oldAiSinkRole . getEventGroup () )
+			// add sink reference from old channel to filter
+			// how to find old refence
+			sinkRole.eventGroup__SinkRole := oldAiSinkRole.eventGroup__SinkRole;
+			
+		
+	// Pseudocode 3.5: 26 - f i l t e r = new BasicComponent ( sinkRole , sourceRole , aiAssembly ,eventTypes, oldAiSinkRole)
+	var filter := new BasicComponent(aiComponentName, sinkRole, sourceRole, self, eventTypes, oldAiSinkRole);
+	// place the old ai seff signature at the newly created filter
+	
+	// Pseudocode 3.5: 28 - filter.setSeff(oldAiSeffSignature)
+	filter.serviceEffectSpecifications__BasicComponent->any(true).describedService__SEFF := oldAiSeffSignature;
+	
+	
+	//oldAiSinkRole.providingEntity_ProvidedRole := filter;
+	// remove oldAiSinkRole and connector
+	
+	filter.serviceEffectSpecifications__BasicComponent->forEach(rdseff){
+		rdseff.basicComponent_ServiceEffectSpecification := filter;
+		
+		// rdseff.describedService__SEFF := 
+	};
+	
+	// Pseudocode 3.5: 30 - filterAssembly = new AssemblyContext ( f i l t e r )
+	var filterAssemblyContext : AssemblyContext := new AssemblyContext(filter);
+	
+	// set for each connector (its only one :P) the assembly Context -> source: Filter, sink: AiComponent
+	/*
+		// seems to be broken
+	filterAiChannel.eventChannelSinkConnector__EventChannel->forEach(sinkConnector) {
+		sinkConnector.assemblyContext__EventChannelSinkConnector := self;
+	};
+	*/ 
+	filterAiChannel.eventChannelSourceConnector__EventChannel->forEach(sourceConnector) {
+		sourceConnector.assemblyContext__EventChannelSourceConnector := filterAssemblyContext;
+	};
+	
+	// Pseudocode 3.5: 33 - resourceContainer = findResourceContainer ()
+	var rc : ResourceContainer = findResourceContainer(self);
+	
+	// log(rc.id);
+	
+	// Pseudocode 3.5: 35 - new AllocationContext ( filterAiEventChannel , resourceContainer )
+	var filterAiChannelAllocContext : AllocationContext := new AllocationContext(null, rc, filterAiChannel);
+	
+	// Pseudocode 3.5: 36 - new AllocationContext ( filterAssembly , resourceContainer )
+	var filterAllocationContext : AllocationContext := new AllocationContext(filterAssemblyContext, rc, null);
+	
+	// Pseudocode 3.5: 37 - return filterAssembly
+	return filterAssemblyContext;
+};
+
+constructor BasicComponent::BasicComponent(
+	name: String,
+	sinkRole : SinkRole,
+	sourceRole : SourceRole,
+	aiAssemblyContext: AssemblyContext,
+	eventTypes : Set(EventType),
+	oldSinkrole: SinkRole) {
+
+	entityName := 'Filter_' + name;
+	providedRoles_InterfaceProvidingEntity := sinkRole;
+	requiredRoles_InterfaceRequiringEntity := sourceRole;
+	
+	repository__RepositoryComponent := aiAssemblyContext.encapsulatedComponent__AssemblyContext.repository__RepositoryComponent;
+	componentParameterUsage_ImplementationComponentType := aiAssemblyContext.encapsulatedComponent__AssemblyContext[ImplementationComponentType].componentParameterUsage_ImplementationComponentType;
+	
+	 serviceEffectSpecifications__BasicComponent := new ResourceDemandingSEFF(null, null, eventTypes, aiAssemblyContext, sourceRole, oldSinkrole); //TODO
+	// InterfaceProvidingRequiringEntity
+};
+
+constructor RequiredRole::RequiredRole() {
+	requiringEntity_RequiredRole := null;
+	// Role
+	entityName := null;
+};
+
+constructor ProvidedRole::ProvidedRole() {
+	providingEntity_ProvidedRole := null;
+	// Role
+	entityName := null;
+};
+
+
+// uncertainty models 
+
+constructor ActiveComponentPrecondition::ActiveComponentPrecondition(component: RepositoryComponent) {
+	requiredActiveComponent := component;
+	entityName := null;
+	requiredActiveComponent := null;	
+};
+
+constructor ArchitecturalCountermeasure::ArchitecturalCountermeasure(preconditions : Set(ArchitecturalPrecondition)) {
+	targetUncertainty := null;
+	architecturalPreconditions := preconditions;
+};
+
+constructor UncertaintyInducedFailureType::UncertaintyInducedFailureType(precondition : ArchitecturalPrecondition, softwareInducedFailureType: SoftwareInducedFailureType) {
+	//refinesFailureType := softwareInducedFailureType; // naming von refines ist reserviert -> geändert auf refinesFailureType
+	// refinesFailureType := null; // naming von refines ist reserviert -> geändert auf refinesFailureType
+	
+	uncertaintyModel := null; // here the domain expert has to create and select the proper uncertainty model
+	// failureVariable := null;
+	architecturalPreconditions := precondition;
+};
+
+constructor EventGroup::EventGroup(name : String, sinkAssemblyContext: AssemblyContext, parameter: Parameter) {
+	eventTypes__EventGroup := new EventType(name, parameter);
+	// Interface
+	entityName := 'EventGroup' + '_' + name;
+	parentInterfaces__Interface := null;
+	protocols__Interface := null;
+	repository__Interface := sinkAssemblyContext.encapsulatedComponent__AssemblyContext.repository__RepositoryComponent;
+	requiredCharacterisations := null;
+};
+
+constructor EventType::EventType(name : String, parameter: Parameter) {
+	eventGroup__EventType := null;
+	parameter__EventType := parameter; // Parameter from the old event connection..
+	// Signature
+	exceptions__Signature := null;
+	//failureType := null;
+	
+	// Entity
+	entityName := 'EventType_' + name;
+};
+ 
+
+constructor EventChannel::EventChannel(name: String, sinkRole : SinkRole, aiAssemblyContext: AssemblyContext, sourceRole : SourceRole, parameter: Parameter) {
+	entityName := FILTERTOAICHANNEL + '_' + name;
+	eventChannelSinkConnector__EventChannel := new EventChannelSinkConnector(name, sinkRole);
+	eventChannelSourceConnector__EventChannel := new EventChannelSourceConnector(name, sourceRole);
+	eventGroup__EventChannel := new EventGroup(name, aiAssemblyContext, parameter);
+	eventGroup__EventChannel.eventTypes__EventGroup->forEach(eventType) {
+		log(eventType.entityName);
+		eventType.eventGroup__EventType := eventGroup__EventChannel;	
+	};
+	parentStructure__EventChannel := system;
+};
+
+constructor EventChannelSinkConnector::EventChannelSinkConnector(name: String, sinkRole : SinkRole) {
+	assemblyContext__EventChannelSinkConnector := null; // has to be set to the old aiAssemblyContext
+	eventChannel__EventChannelSinkConnector := null;
+	filterCondition__EventChannelSinkConnector := null;
+	sinkRole__EventChannelSinkConnector := sinkRole; // sinkRole von AI übernehmen
+	entityName := FILTERTOAICHANNEL + 'SinkConnector' + '_' + name;
+	parentStructure__Connector := system;
+	
+};
+
+constructor SinkRole::SinkRole(name: String) { // parameter sinkrole von ai?
+	eventGroup__SinkRole := null; // TODO 1: sinkrole von AI
+	// ProvidedRole
+	providingEntity_ProvidedRole := null;
+	// Role
+	entityName := FILTERTOAICHANNEL + 'SinkRole' + '_' + name; // TODO 2: sinkrole name von AI
+};
+
+constructor EventChannelSourceConnector::EventChannelSourceConnector(name: String, sourceRole : SourceRole) {
+	assemblyContext__EventChannelSourceConnector := null;
+	eventChannel__EventChannelSourceConnector := null;
+	// filterCondition__EventChannelSourceConnector := null;
+	sourceRole__EventChannelSourceRole := sourceRole;
+	entityName := FILTERTOAICHANNEL + 'SourceConnector'+ '_' + name;
+	parentStructure__Connector := system;	
+};
+
+constructor SourceRole::SourceRole(name: String) {
+	eventGroup__SourceRole := null; // TODO 3: setzen
+	// RequiredRole
+	requiringEntity_RequiredRole := null;
+	// Role
+	entityName := FILTERTOAICHANNEL + 'SourceRole' + '_' + name;
+};
+
+constructor OperationProvidedRole::OperationProvidedRole(pr : OperationRequiredRole) {
+	entityName := "Provided_" + pr.requiredInterface__OperationRequiredRole.entityName + "_Filter";
+	providedInterface__OperationProvidedRole := pr.requiredInterface__OperationRequiredRole;
+};
+
+constructor OperationRequiredRole::OperationRequiredRole(rr : OperationRequiredRole) {
+	entityName := "Required_" + rr.requiredInterface__OperationRequiredRole.entityName + "_Filter";
+	requiredInterface__OperationRequiredRole := rr.requiredInterface__OperationRequiredRole;
+	
+	//entityName := "Required_" + rr.providedInterface__OperationProvidedRole.entityName +"_Filter";
+	//requiredInterface__OperationRequiredRole := rr.providedInterface__OperationProvidedRole;
+};
+
+constructor ResourceDemandingSEFF::ResourceDemandingSEFF(
+	operationSignature : OperationSignature, 
+	requiredRole : OperationRequiredRole,
+	eventTypes : Set(EventType),
+	aiAssemblyContext: AssemblyContext,
+	sourceRole : SourceRole,
+	oldSinkrole: SinkRole){
+	// Identifier
+	// ServiceEffectSpecification
+	// ResourceDemandingInternalBehaviour
+	 	// resourceDemandingSEFF_ResourceDemandingInternalBehaviour := null;
+		// ResourceDemandingSEFF
+		 // ResourceDemandingBehaviour
+		 abstractBranchTransition_ResourceDemandingBehaviour := null;
+		 abstractLoopAction_ResourceDemandingBehaviour := null;
+		 steps_Behaviour := null;
+				// AbstractAction
+	var startAction : StartAction := new StartAction();
+		
+	//get resource demand from aiAssemblyContext	
+	var aiBasicComponent : BasicComponent := aiAssemblyContext.encapsulatedComponent__AssemblyContext->selectByKind(BasicComponent)->selectOne(true);
+	//var aiRdSeff : ResourceDemandingSEFF := aiBasicComponent.serviceEffectSpecifications__BasicComponent->selectByKind(ResourceDemandingSEFF)->selectOne(true);
+	
+	var selfEmitEventAction : EmitEventAction := 
+		aiBasicComponent.serviceEffectSpecifications__BasicComponent
+		->selectByKind(ResourceDemandingSEFF).steps_Behaviour->selectByKind(EmitEventAction)->any(true); // still not precise since the ai component could send to different eventgroups/eventtypes
+			
+	var aiRdSeff : ResourceDemandingSEFF := 
+		aiBasicComponent.serviceEffectSpecifications__BasicComponent // then in there the basicComponent, then seff
+		->selectByKind(ResourceDemandingSEFF) // only take RDSeffs
+		->selectOne(rdseff|rdseff.steps_Behaviour->includes(selfEmitEventAction)); // filter all but one which include the EmitEventAction
+	
+	var aiInternalAction : InternalAction := aiRdSeff.steps_Behaviour->selectByKind(InternalAction)->selectOne(true);
+	var aiRD : Set(ParametricResourceDemand) := null; 
+		
+	aiInternalAction.resourceDemand_Action->forEach(resourceDemand) { 
+		var prd : ParametricResourceDemand := resourceDemand.deepclone();
+		aiRD += prd;
+	};
+	
+	var applyFilter : InternalAction := new InternalAction("Internal Calculation", startAction, aiRD, aiAssemblyContext);	
+	
+	var middleAction : AbstractAction := null;
+	if (not(operationSignature = null) and (not(requiredRole = null))) {
+		log("creating RDSeff: case operationSignature, requiredRole are set.. ");	
+		describedService__SEFF := operationSignature;
+		
+		var externalCall : ExternalCallAction := new ExternalCallAction("Call "+operationSignature.entityName, applyFilter, requiredRole, operationSignature);
+
+		middleAction := externalCall;
+		
+	} else {
+		log("creating RDSeff: case operationSignature, requiredRole are NOT set.. ");	
+		describedService__SEFF := null;
+	};
+	
+	if(not(eventTypes = null)) {
+		if(not(eventTypes->isEmpty())) {
+			if(eventTypes->size() = 1) {
+				
+				log("creating RDSeff: case there is only one eventType");	
+				eventTypes->forEach(eventType) {
+					
+				var eventAction : EmitEventAction := new EmitEventAction(eventType, applyFilter, sourceRole, aiAssemblyContext, oldSinkrole);
+				describedService__SEFF := eventType;
+				middleAction := eventAction;
+				}
+			} else {
+				
+				log("creating RDSeff: case there are multiple eventTypes");	
+				
+				// this case is not really tested.. missing describedService__SEFF.
+				steps_Behaviour += startAction;
+				steps_Behaviour += applyFilter;
+				steps_Behaviour += middleAction;
+				
+				var lastevent := middleAction;
+				eventTypes->forEach(eventType) {
+					
+				var eventAction : EmitEventAction := new EmitEventAction(eventType, lastevent, sourceRole, aiAssemblyContext, oldSinkrole);
+				steps_Behaviour += eventAction;
+				lastevent := eventAction;	
+				};
+				
+				var stopAction : StopAction := object StopAction{
+					predecessor_AbstractAction := lastevent;
+				};
+				steps_Behaviour += stopAction;
+
+			};
+			
+		} endif;
+		
+	} endif;
+	
+	if (not(eventTypes->size() > 1) or eventTypes->isEmpty()) { // complicated but does its job
+		var stopAction : StopAction := object StopAction{
+		predecessor_AbstractAction := middleAction;
+		};
+		steps_Behaviour += startAction;
+		steps_Behaviour += applyFilter;
+		steps_Behaviour += middleAction;
+		steps_Behaviour += stopAction;
+	} endif;
+};
+
+constructor StartAction::StartAction() {
+	// Entity
+	entityName := "start_Filter";
+	// AbstractInternalControlFlowAction
+	infrastructureCall__Action := null;
+	resourceCall__Action := null;
+	resourceDemand_Action := null;
+	// AbstractAction
+	predecessor_AbstractAction := null;
+	resourceDemandingBehaviour_AbstractAction := null;
+	successor_AbstractAction := null;
+};
+
+constructor InternalAction::InternalAction(name : String,
+	predecessor: AbstractAction, 
+	parametricResourceDemand: Set(ParametricResourceDemand),
+	assemblyContext: AssemblyContext) {
+		
+	
+	entityName := name;
+	// AbstractInternalControlFlowAction
+	infrastructureCall__Action := null;
+	resourceCall__Action := null;
+	resourceDemand_Action := parametricResourceDemand;
+		// AbstractAction
+	predecessor_AbstractAction := predecessor;
+	resourceDemandingBehaviour_AbstractAction := null;
+	successor_AbstractAction := null;
+
+	//internalFailureOccurrenceDescriptions__InternalAction := new InternalFailureOccurrenceDescription(assemblyContext); 
+};
+
+constructor InternalFailureOccurrenceDescription::InternalFailureOccurrenceDescription(assemblyContext: AssemblyContext) {
+	failureProbability := 0.001;
+		
+	var failureTypes : Set(FailureType) := assemblyContext.encapsulatedComponent__AssemblyContext.repository__RepositoryComponent.failureTypes__Repository;
+
+	softwareInducedFailureType__InternalFailureOccurrenceDescription := failureTypes->selectByType(SoftwareInducedFailureType)->any(true);
+	// softwareFailureType;
+};
+
+constructor SoftwareInducedFailureType::SoftwareInducedFailureType(aiAssemblyContext : AssemblyContext) {
+	
+	repository__FailureType := aiAssemblyContext.encapsulatedComponent__AssemblyContext.repository__RepositoryComponent;
+};
+
+constructor ExternalCallAction::ExternalCallAction(
+	name : String,
+	predecessor: AbstractAction,
+	roleExternal: OperationRequiredRole,
+	operationSignature: OperationSignature) {
+		entityName := name;
+		calledService_ExternalService := operationSignature;
+		retryCount := null;
+		role_ExternalService := roleExternal;
+			// AbstractAction
+		predecessor_AbstractAction := predecessor;
+		resourceDemandingBehaviour_AbstractAction := null;
+		successor_AbstractAction := null;
+};
+
+constructor ParametricResourceDemand::ParametricResourceDemand() {
+	action_ParametricResourceDemand := null;
+	requiredResource_ParametricResourceDemand := null;
+	specification_ParametericResourceDemand := null; 
+};
+
+constructor EmitEventAction::EmitEventAction(
+	eventType: EventType,
+	predecessor: AbstractAction,
+	sourceRole : SourceRole,
+	aiAssemblyContext: AssemblyContext,
+	oldSinkrole	: SinkRole
+	) {
+	
+	eventType__EmitEventAction := eventType;
+	sourceRole__EmitEventAction := sourceRole;
+	// AbstractAction
+	predecessor_AbstractAction := predecessor;
+	resourceDemandingBehaviour_AbstractAction := null;
+	successor_AbstractAction := null;
+	// CallAction
+	entityName := null;
+	// inputVariableUsages__CallAction kopie wie aus der EnrichedImage
+	// aiassembly.sinkrole -> alte eventgroup.id
+	// über alle assemblyContexte itereiren wo gilt : assemblyContext.sourceRole.eventgroup.id = dem oben
+	// dann habe ich also den kontext gefunden, dann schnappe alle emiteventactions und deepclone auf VariableUsage
+	var eventGroupBetweenAiAndComponentBefore : String := oldSinkrole.eventGroup__SinkRole.id;
+		
+	log("finding proper variable usage..");
+	system.assemblyContexts__ComposedStructure->forEach(assemblyContext) {
+		var normalBasicComponent : BasicComponent := assemblyContext.encapsulatedComponent__AssemblyContext->selectByType(BasicComponent)->any(true); // damit man eine basicComponent erhält 
+		var eventGroupId : String := normalBasicComponent.requiredRoles_InterfaceRequiringEntity->selectByType(SourceRole)->any(true).eventGroup__SourceRole.id;
+		if(eventGroupBetweenAiAndComponentBefore = eventGroupId) { // found eventgroup between Ai and the componente before that. This should be now before the filter. But filter needs usage variable of the emiteventAction.
+			log("found variable usage! Starting coping..");
+			
+			var resourceDemandSEFF : ResourceDemandingSEFF:= normalBasicComponent.serviceEffectSpecifications__BasicComponent->selectByType(ResourceDemandingSEFF)->any(true);
+			var emitEventAction : EmitEventAction := resourceDemandSEFF.steps_Behaviour->selectByType(EmitEventAction)->any(true);
+			
+			inputVariableUsages__CallAction := emitEventAction.inputVariableUsages__CallAction.deepclone();
+			log("copied successfuly!");
+		};
+	};
+};
+
+constructor AssemblyContext::AssemblyContext(bc : RepositoryComponent){
+	entityName := "Assembly_"+bc.entityName;
+	encapsulatedComponent__AssemblyContext := bc;
+	parentStructure__AssemblyContext := system;
+};
+
+constructor AllocationContext::AllocationContext(ac : AssemblyContext, rc: ResourceContainer, ec: EventChannel){
+	var name : String := null;
+	
+		
+	if(ac != null) {
+		name := "Allocation_" + ac.entityName;
+	} else {
+		name := "Allocation_" + ec.entityName;
+	};
+	entityName := name;
+	assemblyContext_AllocationContext := ac;
+	resourceContainer_AllocationContext := rc;
+	allocation_AllocationContext := allocation;
+	eventChannel__AllocationContext := ec;
+};
+
+/**
+ * Returns the ResourceContainer the AllocationContext corresponds to.
+ */
+query findResourceContainer(assemblyContext : AssemblyContext) : ResourceContainer {
+	var rcAlloc : Set(AllocationContext) = null;
+		
+	allocation.allocationContexts_Allocation->forEach(alloc) {
+		if(alloc.assemblyContext_AllocationContext.id = assemblyContext.id) {
+			rcAlloc += alloc;
+		};
+	};
+	return rcAlloc->selectOne(true).resourceContainer_AllocationContext;
+};
+
+	  
