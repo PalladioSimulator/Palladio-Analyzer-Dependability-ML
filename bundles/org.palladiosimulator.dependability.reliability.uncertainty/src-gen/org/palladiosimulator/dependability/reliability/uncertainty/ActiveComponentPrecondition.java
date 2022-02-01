@@ -2,7 +2,7 @@
  */
 package org.palladiosimulator.dependability.reliability.uncertainty;
 
-import org.palladiosimulator.pcm.repository.BasicComponent;
+import org.palladiosimulator.pcm.core.entity.InterfaceProvidingRequiringEntity;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,12 +26,12 @@ public interface ActiveComponentPrecondition extends ArchitecturalPrecondition {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Required Active Component</em>' reference.
-	 * @see #setRequiredActiveComponent(BasicComponent)
+	 * @see #setRequiredActiveComponent(InterfaceProvidingRequiringEntity)
 	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage#getActiveComponentPrecondition_RequiredActiveComponent()
 	 * @model required="true"
 	 * @generated
 	 */
-	BasicComponent getRequiredActiveComponent();
+	InterfaceProvidingRequiringEntity getRequiredActiveComponent();
 
 	/**
 	 * Sets the value of the '{@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition#getRequiredActiveComponent <em>Required Active Component</em>}' reference.
@@ -41,6 +41,6 @@ public interface ActiveComponentPrecondition extends ArchitecturalPrecondition {
 	 * @see #getRequiredActiveComponent()
 	 * @generated
 	 */
-	void setRequiredActiveComponent(BasicComponent value);
+	void setRequiredActiveComponent(InterfaceProvidingRequiringEntity value);
 
 } // ActiveComponentPrecondition

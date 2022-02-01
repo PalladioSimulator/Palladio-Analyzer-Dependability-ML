@@ -31,7 +31,7 @@
       eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
   <eClassifiers xsi:type="ecore:EClass" name="ActiveComponentPrecondition" eSuperTypes="#//ArchitecturalPrecondition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiredActiveComponent"
-        lowerBound="1" eType="ecore:EClass ../../org.palladiosimulator.pcm/model/pcm.ecore#//repository/BasicComponent"/>
+        lowerBound="1" eType="ecore:EClass ../../org.palladiosimulator.pcm/model/pcm.ecore#//core/entity/InterfaceProvidingRequiringEntity"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UncertaintyImprovement" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="DeterministicImprovement" eSuperTypes="#//UncertaintyImprovement">

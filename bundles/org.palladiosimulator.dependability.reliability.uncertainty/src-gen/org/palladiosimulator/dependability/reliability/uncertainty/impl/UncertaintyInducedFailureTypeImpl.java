@@ -9,7 +9,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -110,7 +109,7 @@ public class UncertaintyInducedFailureTypeImpl extends EntityImpl implements Unc
 	 */
 	@Override
 	public FailureType getRefines() {
-		if (refines != null && ((EObject) refines).eIsProxy()) {
+		if (refines != null && refines.eIsProxy()) {
 			InternalEObject oldRefines = (InternalEObject) refines;
 			refines = (FailureType) eResolveProxy(oldRefines);
 			if (refines != oldRefines) {

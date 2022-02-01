@@ -17,7 +17,6 @@ import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.tests.ReliabilityPredictionTestDefinition.PredictionResultBasedAssertion;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import tools.mdsd.probdist.api.entity.CategoricalValue;
@@ -35,7 +34,7 @@ class UncertaintyBasedReliabilityPredictionTest extends BaseReliabilityPredictio
 		ReliabilityPredictionTestDefinition.createTest()
 			.givenDefaultRunConfigs()
 			.whenApplyingPCMRel()
-			.whenApplyingUncertaintyBasedPCMRelGiven(Lists.newArrayList(uncertaintyState))
+			.whenApplyingUncertaintyBasedPCMRel()
 			.thenAssert(uncertaintyProbabilityIsSmallerThanSuccessProbability(uncertaintyState))
 			.test();
 	}
@@ -43,10 +42,12 @@ class UncertaintyBasedReliabilityPredictionTest extends BaseReliabilityPredictio
 	private PredictionResultBasedAssertion uncertaintyProbabilityIsSmallerThanSuccessProbability(
 			UncertaintyState uncertaintyState) {
 		return (pcmRelResult, uncertaintyResult) -> {
-			var usageScenario = pcmRelResult.getScenario();
-			
 			var success = pcmRelResult.getSuccessProbability();
-			var joined = uncertaintyResult.getJoinedSuccessAndUncertaintyProbability(usageScenario);
+			
+			var usageScenario = pcmRelResult.getScenario();
+			var predictionPerUsage = uncertaintyResult.filterPredictionResultsFor(usageScenario).iterator().next();
+			var joined = predictionPerUsage.getJoinedSuccessAndUncertaintyProbability();
+			
 			assertTrue(joined <= success);
 		};
 	}

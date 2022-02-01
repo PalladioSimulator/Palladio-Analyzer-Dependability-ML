@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uncertainty:UncertaintyRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reliability="http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2" xmlns:uncertainty="http://palladiosimulator.org/Uncertainty/1.0" id="_mJ0AUN36Eeq3EYM7_fX0uw" entityName="UncertaintyRepo">
+<uncertainty:UncertaintyRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reliability="http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2" xmlns:uncertainty="http://palladiosimulator.org/Uncertainty/1.0" id="_mJ0AUN36Eeq3EYM7_fX0uw" entityName="UncertaintyRepo">
   <uncertaintyInducedFailureTypes id="_jny3MPKNEeqz1MDQAu5L-Q" entityName="MLInducedUncertaintyOfDefaultMLModel" architecturalPreconditions="_jok6UfKNEeqz1MDQAu5L-Q">
-    <refines xsi:type="reliability:SoftwareInducedFailureType" href="RobotCognitionComponents.repository#_ZkNuedDYEeqWne3bdagE9g"/>
+    <refinesFailureType xsi:type="reliability:SoftwareInducedFailureType" href="RobotCognitionComponents.repository#_ZkNuedDYEeqWne3bdagE9g"/>
     <uncertaintyModel href="ProbabilisticSensitivityModel.staticmodel#_U5FzuMqkEeqObY-eK2jOOA"/>
   </uncertaintyInducedFailureTypes>
   <uncertaintyInducedFailureTypes id="_hAu44PKOEeqz1MDQAu5L-Q" entityName="MLInducedUncertaintyOfRobustMLModel" architecturalPreconditions="_Kg6c4vKOEeqz1MDQAu5L-Q">
-    <refines xsi:type="reliability:SoftwareInducedFailureType" href="RobotCognitionComponents.repository#_ZkNuedDYEeqWne3bdagE9g"/>
+    <refinesFailureType xsi:type="reliability:SoftwareInducedFailureType" href="RobotCognitionComponents.repository#_ZkNuedDYEeqWne3bdagE9g"/>
     <uncertaintyModel href="ProbabilisticSensitivityModel.staticmodel#_oHP9sPKQEeqz1MDQAu5L-Q"/>
   </uncertaintyInducedFailureTypes>
   <architecturalCountermeasures id="_pVSd0N36Eeq3EYM7_fX0uw" entityName="PreprocessInput" architecturalPreconditions="_jofawPKNEeqz1MDQAu5L-Q">
@@ -15,12 +15,12 @@
     </uncertaintyImprovement>
   </architecturalCountermeasures>
   <architecturalPreconditions xsi:type="uncertainty:ActiveComponentPrecondition" id="_jofawPKNEeqz1MDQAu5L-Q" entityName="ActivePreProcessingComponent">
-    <requiredActiveComponent href="RobotCognitionComponents.repository#_HIn1oN35Eeq3EYM7_fX0uw"/>
+    <requiredActiveComponent xsi:type="repository:BasicComponent" href="RobotCognitionComponents.repository#_HIn1oN35Eeq3EYM7_fX0uw"/>
   </architecturalPreconditions>
   <architecturalPreconditions xsi:type="uncertainty:ActiveComponentPrecondition" id="_jok6UfKNEeqz1MDQAu5L-Q" entityName="ActiveDefaultMLComponent">
-    <requiredActiveComponent href="RobotCognitionComponents.repository#_a4yjcNDSEeqWne3bdagE9g"/>
+    <requiredActiveComponent xsi:type="repository:BasicComponent" href="RobotCognitionComponents.repository#_a4yjcNDSEeqWne3bdagE9g"/>
   </architecturalPreconditions>
   <architecturalPreconditions xsi:type="uncertainty:ActiveComponentPrecondition" id="_Kg6c4vKOEeqz1MDQAu5L-Q" entityName="ActiveRobustMLComponent">
-    <requiredActiveComponent href="RobotCognitionComponents.repository#_hDRrsOBoEeq7Govxf64fxQ"/>
+    <requiredActiveComponent xsi:type="repository:BasicComponent" href="RobotCognitionComponents.repository#_hDRrsOBoEeq7Govxf64fxQ"/>
   </architecturalPreconditions>
 </uncertainty:UncertaintyRepository>

@@ -16,7 +16,6 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.palladiosimulator.envdyn.model;visibility:=reexport,
  de.uka.ipd.sdq.identifier;visibility:=reexport,
  tools.mdsd.modelingfoundations.identifier;visibility:=reexport,
- org.palladiosimulator.pcm;visibility:=reexport,
  de.uka.ipd.sdq.probfunction;visibility:=reexport,
  tools.mdsd.probdist.model;visibility:=reexport,
  de.uka.ipd.sdq.stoex;visibility:=reexport,
@@ -24,5 +23,6 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.core.runtime,
  org.palladiosimulator.solver,
  com.google.guava;bundle-version="27.1.0",
- tools.mdsd.probdist.api
+ tools.mdsd.probdist.api,
+ org.palladiosimulator.pcm;bundle-version="5.0.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy

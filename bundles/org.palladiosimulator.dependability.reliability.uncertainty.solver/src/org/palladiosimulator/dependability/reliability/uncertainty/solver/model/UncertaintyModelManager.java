@@ -37,6 +37,9 @@ public class UncertaintyModelManager {
 	}
 
 	public DiscreteUncertaintyStateSpace getStateSpace() {
+		System.out.println("getStateSpace, printing managedModels:");
+		managedModels.forEach((k,v) -> System.out.println(k.toString() + ", " + v.toString()));
+		
 		var states = managedModels.values().stream().flatMap(m -> m.getValueSpace().stream()).collect(toList());
 		return DiscreteUncertaintyStateSpace.of(states);
 	}

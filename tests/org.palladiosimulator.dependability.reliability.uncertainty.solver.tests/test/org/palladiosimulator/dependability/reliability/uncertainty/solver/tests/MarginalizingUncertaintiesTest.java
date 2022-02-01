@@ -24,7 +24,7 @@ class MarginalizingUncertaintiesTest extends BaseReliabilityPredictionTest {
 			var usageScenario = pcmRelResult.getScenario();
 			
 			var expected = pcmRelResult.getSuccessProbability();
-			var actual = uncertaintyBasedResult.getProbabilityOfSuccessGiven(usageScenario);
+			var actual = uncertaintyBasedResult.getProbabilityOfSuccess(usageScenario);
 			assertEquals(expected, actual, DELTA);
 		};
 	}
