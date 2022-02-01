@@ -131,7 +131,7 @@ public class UncertaintyBasedReliabilityPredictor {
 
 	private List<UncertaintyState> applyArchitecturalCountermeasures(PCMInstance pcmModel, List<UncertaintyState> stateTuple) {
 		List<UncertaintyState> improved = Lists.newArrayList(stateTuple);
-		for (ArchitecturalCountermeasure each : uncertaintyRepo.getArchitecturalCountermeasures()) {
+		for (ArchitecturalCountermeasure each : filterActiveArchitecturalCountermeasures(pcmModel)) {
 			var result = findApplicableState(each, improved);
 			if (result.isEmpty()) {
 				break;
@@ -140,11 +140,17 @@ public class UncertaintyBasedReliabilityPredictor {
 			var oldState = result.get();
 			improved.remove(oldState);
 
-			var improvedValue = applyArchitecturalCountermeasure(each, pcmModel, oldState);
+			var improvedValue = applyArchitecturalCountermeasure(each, oldState);
 			var improvedState = oldState.newValuedStateWith(improvedValue);
 			improved.add(improvedState);
 		}
 		return improved;
+	}
+
+	private Set<ArchitecturalCountermeasure> filterActiveArchitecturalCountermeasures(PCMInstance pcmModel) {
+		return uncertaintyRepo.getArchitecturalCountermeasures().stream()
+				.filter(c -> allPreconditionsFulfilled(c, pcmModel))
+				.collect(toSet());
 	}
 
 	private Optional<UncertaintyState> findApplicableState(ArchitecturalCountermeasure countermeasure,
@@ -154,18 +160,11 @@ public class UncertaintyBasedReliabilityPredictor {
 				.findFirst();
 	}
 
-	private CategoricalValue applyArchitecturalCountermeasure(ArchitecturalCountermeasure countermeasure,
-			PCMInstance pcmModel, UncertaintyState state) {
-		if (allPreconditionsFulfilled(countermeasure, pcmModel)) {
-			var improvement = countermeasure.getUncertaintyImprovement();// hier greift man direkt auf das
-																			// uncertaintyImprovement zu
-			return UncertaintyImprovementCalculator.get().calculate(improvement, state.getValue());
-		}
-		return state.getValue();
+	private CategoricalValue applyArchitecturalCountermeasure(ArchitecturalCountermeasure countermeasure, UncertaintyState state) {
+		var improvement = countermeasure.getUncertaintyImprovement();
+		return UncertaintyImprovementCalculator.get().calculate(improvement, state.getValue());
 	}
 
-	// hier muss auch beachtet werden, dass pcminstanzen auf pcminstanzen einfluss
-	// haben.. bzw einzelnen objekte aus den pcminstanzen auf andere (ML auf system)
 	private PCMInstance resolveUncertainties(PCMInstance modelToResolve, List<UncertaintyState> stateTuple) {
 		var uncertaintyResolver = new UncertaintyResolver(modelToResolve);
 		System.out.println("UncertaintyBasedReliabilityPredictor:resolveUncertainties");
