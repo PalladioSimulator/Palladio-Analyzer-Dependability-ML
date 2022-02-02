@@ -116,6 +116,16 @@ public class UncertaintyAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseUncertaintySpecificCountermeasure(UncertaintySpecificCountermeasure object) {
+			return createUncertaintySpecificCountermeasureAdapter();
+		}
+
+		@Override
+		public Adapter caseGlobalUncertaintyCountermeasure(GlobalUncertaintyCountermeasure object) {
+			return createGlobalUncertaintyCountermeasureAdapter();
+		}
+
+		@Override
 		public Adapter caseIdentifier(Identifier object) {
 			return createIdentifierAdapter();
 		}
@@ -272,6 +282,34 @@ public class UncertaintyAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMapEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure <em>Specific Countermeasure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure
+	 * @generated
+	 */
+	public Adapter createUncertaintySpecificCountermeasureAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.palladiosimulator.dependability.reliability.uncertainty.GlobalUncertaintyCountermeasure <em>Global Uncertainty Countermeasure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.GlobalUncertaintyCountermeasure
+	 * @generated
+	 */
+	public Adapter createGlobalUncertaintyCountermeasureAdapter() {
 		return null;
 	}
 

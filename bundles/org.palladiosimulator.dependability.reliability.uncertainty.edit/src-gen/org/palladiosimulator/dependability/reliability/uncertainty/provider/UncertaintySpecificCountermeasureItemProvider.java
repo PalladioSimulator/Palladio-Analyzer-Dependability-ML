@@ -8,33 +8,30 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFactory;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
-import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository;
-
-import tools.mdsd.modelingfoundations.identifier.provider.EntityItemProvider;
+import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure;
 
 /**
- * This is the item provider adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository} object.
+ * This is the item provider adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class UncertaintyRepositoryItemProvider extends EntityItemProvider {
+public class UncertaintySpecificCountermeasureItemProvider extends ArchitecturalCountermeasureItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public UncertaintyRepositoryItemProvider(AdapterFactory adapterFactory) {
+	public UncertaintySpecificCountermeasureItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -49,8 +46,26 @@ public class UncertaintyRepositoryItemProvider extends EntityItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addTargetUncertaintyPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Target Uncertainty feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTargetUncertaintyPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_UncertaintySpecificCountermeasure_targetUncertainty_feature"),
+				getString("_UI_PropertyDescriptor_description",
+						"_UI_UncertaintySpecificCountermeasure_targetUncertainty_feature",
+						"_UI_UncertaintySpecificCountermeasure_type"),
+				UncertaintyPackage.Literals.UNCERTAINTY_SPECIFIC_COUNTERMEASURE__TARGET_UNCERTAINTY, true, false, true,
+				null, null, null));
 	}
 
 	/**
@@ -65,9 +80,8 @@ public class UncertaintyRepositoryItemProvider extends EntityItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__UNCERTAINTY_INDUCED_FAILURE_TYPES);
-			childrenFeatures.add(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_COUNTERMEASURES);
-			childrenFeatures.add(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_PRECONDITIONS);
+			childrenFeatures
+					.add(UncertaintyPackage.Literals.UNCERTAINTY_SPECIFIC_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT);
 		}
 		return childrenFeatures;
 	}
@@ -86,14 +100,14 @@ public class UncertaintyRepositoryItemProvider extends EntityItemProvider {
 	}
 
 	/**
-	 * This returns UncertaintyRepository.gif.
+	 * This returns UncertaintySpecificCountermeasure.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/UncertaintyRepository"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/UncertaintySpecificCountermeasure"));
 	}
 
 	/**
@@ -114,9 +128,9 @@ public class UncertaintyRepositoryItemProvider extends EntityItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((UncertaintyRepository) object).getEntityName();
-		return label == null || label.length() == 0 ? getString("_UI_UncertaintyRepository_type")
-				: getString("_UI_UncertaintyRepository_type") + " " + label;
+		String label = ((UncertaintySpecificCountermeasure) object).getId();
+		return label == null || label.length() == 0 ? getString("_UI_UncertaintySpecificCountermeasure_type")
+				: getString("_UI_UncertaintySpecificCountermeasure_type") + " " + label;
 	}
 
 	/**
@@ -130,10 +144,8 @@ public class UncertaintyRepositoryItemProvider extends EntityItemProvider {
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(UncertaintyRepository.class)) {
-		case UncertaintyPackage.UNCERTAINTY_REPOSITORY__UNCERTAINTY_INDUCED_FAILURE_TYPES:
-		case UncertaintyPackage.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_COUNTERMEASURES:
-		case UncertaintyPackage.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_PRECONDITIONS:
+		switch (notification.getFeatureID(UncertaintySpecificCountermeasure.class)) {
+		case UncertaintyPackage.UNCERTAINTY_SPECIFIC_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
 		}
@@ -152,31 +164,12 @@ public class UncertaintyRepositoryItemProvider extends EntityItemProvider {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
 		newChildDescriptors.add(createChildParameter(
-				UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__UNCERTAINTY_INDUCED_FAILURE_TYPES,
-				UncertaintyFactory.eINSTANCE.createUncertaintyInducedFailureType()));
+				UncertaintyPackage.Literals.UNCERTAINTY_SPECIFIC_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT,
+				UncertaintyFactory.eINSTANCE.createDeterministicImprovement()));
 
-		newChildDescriptors.add(
-				createChildParameter(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_COUNTERMEASURES,
-						UncertaintyFactory.eINSTANCE.createUncertaintySpecificCountermeasure()));
-
-		newChildDescriptors.add(
-				createChildParameter(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_COUNTERMEASURES,
-						UncertaintyFactory.eINSTANCE.createGlobalUncertaintyCountermeasure()));
-
-		newChildDescriptors.add(
-				createChildParameter(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_PRECONDITIONS,
-						UncertaintyFactory.eINSTANCE.createActiveComponentPrecondition()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return UncertaintyEditPlugin.INSTANCE;
+		newChildDescriptors.add(createChildParameter(
+				UncertaintyPackage.Literals.UNCERTAINTY_SPECIFIC_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT,
+				UncertaintyFactory.eINSTANCE.createProbabilisticImprovement()));
 	}
 
 }

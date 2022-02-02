@@ -60,8 +60,6 @@ public class UncertaintyFactoryImpl extends EFactoryImpl implements UncertaintyF
 			return createUncertaintyInducedFailureType();
 		case UncertaintyPackage.UNCERTAINTY_REPOSITORY:
 			return createUncertaintyRepository();
-		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE:
-			return createArchitecturalCountermeasure();
 		case UncertaintyPackage.ACTIVE_COMPONENT_PRECONDITION:
 			return createActiveComponentPrecondition();
 		case UncertaintyPackage.DETERMINISTIC_IMPROVEMENT:
@@ -70,6 +68,10 @@ public class UncertaintyFactoryImpl extends EFactoryImpl implements UncertaintyF
 			return createProbabilisticImprovement();
 		case UncertaintyPackage.MAP_ENTRY:
 			return createMapEntry();
+		case UncertaintyPackage.UNCERTAINTY_SPECIFIC_COUNTERMEASURE:
+			return createUncertaintySpecificCountermeasure();
+		case UncertaintyPackage.GLOBAL_UNCERTAINTY_COUNTERMEASURE:
+			return createGlobalUncertaintyCountermeasure();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -95,17 +97,6 @@ public class UncertaintyFactoryImpl extends EFactoryImpl implements UncertaintyF
 	public UncertaintyRepository createUncertaintyRepository() {
 		UncertaintyRepositoryImpl uncertaintyRepository = new UncertaintyRepositoryImpl();
 		return uncertaintyRepository;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ArchitecturalCountermeasure createArchitecturalCountermeasure() {
-		ArchitecturalCountermeasureImpl architecturalCountermeasure = new ArchitecturalCountermeasureImpl();
-		return architecturalCountermeasure;
 	}
 
 	/**
@@ -150,6 +141,28 @@ public class UncertaintyFactoryImpl extends EFactoryImpl implements UncertaintyF
 	public MapEntry createMapEntry() {
 		MapEntryImpl mapEntry = new MapEntryImpl();
 		return mapEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public UncertaintySpecificCountermeasure createUncertaintySpecificCountermeasure() {
+		UncertaintySpecificCountermeasureImpl uncertaintySpecificCountermeasure = new UncertaintySpecificCountermeasureImpl();
+		return uncertaintySpecificCountermeasure;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public GlobalUncertaintyCountermeasure createGlobalUncertaintyCountermeasure() {
+		GlobalUncertaintyCountermeasureImpl globalUncertaintyCountermeasure = new GlobalUncertaintyCountermeasureImpl();
+		return globalUncertaintyCountermeasure;
 	}
 
 	/**

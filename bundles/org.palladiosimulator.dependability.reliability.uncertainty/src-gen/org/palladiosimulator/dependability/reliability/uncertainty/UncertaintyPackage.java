@@ -252,22 +252,13 @@ public interface UncertaintyPackage extends EPackage {
 	int ARCHITECTURAL_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS = IdentifierPackage.ENTITY_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Target Uncertainty</b></em>' reference.
+	 * The feature id for the '<em><b>Appliedfailuretype</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARCHITECTURAL_COUNTERMEASURE__TARGET_UNCERTAINTY = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Uncertainty Improvement</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT = IdentifierPackage.ENTITY_FEATURE_COUNT + 2;
+	int ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Architectural Countermeasure</em>' class.
@@ -276,7 +267,7 @@ public interface UncertaintyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARCHITECTURAL_COUNTERMEASURE_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 3;
+	int ARCHITECTURAL_COUNTERMEASURE_FEATURE_COUNT = IdentifierPackage.ENTITY_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Architectural Countermeasure</em>' class.
@@ -537,6 +528,161 @@ public interface UncertaintyPackage extends EPackage {
 	int MAP_ENTRY_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintySpecificCountermeasureImpl <em>Specific Countermeasure</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintySpecificCountermeasureImpl
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyPackageImpl#getUncertaintySpecificCountermeasure()
+	 * @generated
+	 */
+	int UNCERTAINTY_SPECIFIC_COUNTERMEASURE = 9;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_SPECIFIC_COUNTERMEASURE__ID = ARCHITECTURAL_COUNTERMEASURE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_SPECIFIC_COUNTERMEASURE__ENTITY_NAME = ARCHITECTURAL_COUNTERMEASURE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Architectural Preconditions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_SPECIFIC_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS = ARCHITECTURAL_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Appliedfailuretype</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_SPECIFIC_COUNTERMEASURE__APPLIEDFAILURETYPE = ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE;
+
+	/**
+	 * The feature id for the '<em><b>Target Uncertainty</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_SPECIFIC_COUNTERMEASURE__TARGET_UNCERTAINTY = ARCHITECTURAL_COUNTERMEASURE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Uncertainty Improvement</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_SPECIFIC_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT = ARCHITECTURAL_COUNTERMEASURE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Specific Countermeasure</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_SPECIFIC_COUNTERMEASURE_FEATURE_COUNT = ARCHITECTURAL_COUNTERMEASURE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Specific Countermeasure</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_SPECIFIC_COUNTERMEASURE_OPERATION_COUNT = ARCHITECTURAL_COUNTERMEASURE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.GlobalUncertaintyCountermeasureImpl <em>Global Uncertainty Countermeasure</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.GlobalUncertaintyCountermeasureImpl
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyPackageImpl#getGlobalUncertaintyCountermeasure()
+	 * @generated
+	 */
+	int GLOBAL_UNCERTAINTY_COUNTERMEASURE = 10;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GLOBAL_UNCERTAINTY_COUNTERMEASURE__ID = ARCHITECTURAL_COUNTERMEASURE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GLOBAL_UNCERTAINTY_COUNTERMEASURE__ENTITY_NAME = ARCHITECTURAL_COUNTERMEASURE__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Architectural Preconditions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GLOBAL_UNCERTAINTY_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS = ARCHITECTURAL_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Appliedfailuretype</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GLOBAL_UNCERTAINTY_COUNTERMEASURE__APPLIEDFAILURETYPE = ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE;
+
+	/**
+	 * The feature id for the '<em><b>Improved Uncertainty Model</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GLOBAL_UNCERTAINTY_COUNTERMEASURE__IMPROVED_UNCERTAINTY_MODEL = ARCHITECTURAL_COUNTERMEASURE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Global Uncertainty Countermeasure</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GLOBAL_UNCERTAINTY_COUNTERMEASURE_FEATURE_COUNT = ARCHITECTURAL_COUNTERMEASURE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Global Uncertainty Countermeasure</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GLOBAL_UNCERTAINTY_COUNTERMEASURE_OPERATION_COUNT = ARCHITECTURAL_COUNTERMEASURE_OPERATION_COUNT + 0;
+
+	/**
 	 * Returns the meta object for class '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType <em>Induced Failure Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -655,26 +801,15 @@ public interface UncertaintyPackage extends EPackage {
 	EReference getArchitecturalCountermeasure_ArchitecturalPreconditions();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getTargetUncertainty <em>Target Uncertainty</em>}'.
+	 * Returns the meta object for the reference '{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getAppliedfailuretype <em>Appliedfailuretype</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Target Uncertainty</em>'.
-	 * @see org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getTargetUncertainty()
+	 * @return the meta object for the reference '<em>Appliedfailuretype</em>'.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getAppliedfailuretype()
 	 * @see #getArchitecturalCountermeasure()
 	 * @generated
 	 */
-	EReference getArchitecturalCountermeasure_TargetUncertainty();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getUncertaintyImprovement <em>Uncertainty Improvement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Uncertainty Improvement</em>'.
-	 * @see org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getUncertaintyImprovement()
-	 * @see #getArchitecturalCountermeasure()
-	 * @generated
-	 */
-	EReference getArchitecturalCountermeasure_UncertaintyImprovement();
+	EReference getArchitecturalCountermeasure_Appliedfailuretype();
 
 	/**
 	 * Returns the meta object for class '{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition <em>Architectural Precondition</em>}'.
@@ -790,6 +925,59 @@ public interface UncertaintyPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getMapEntry_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure <em>Specific Countermeasure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Specific Countermeasure</em>'.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure
+	 * @generated
+	 */
+	EClass getUncertaintySpecificCountermeasure();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure#getTargetUncertainty <em>Target Uncertainty</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target Uncertainty</em>'.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure#getTargetUncertainty()
+	 * @see #getUncertaintySpecificCountermeasure()
+	 * @generated
+	 */
+	EReference getUncertaintySpecificCountermeasure_TargetUncertainty();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure#getUncertaintyImprovement <em>Uncertainty Improvement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Uncertainty Improvement</em>'.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure#getUncertaintyImprovement()
+	 * @see #getUncertaintySpecificCountermeasure()
+	 * @generated
+	 */
+	EReference getUncertaintySpecificCountermeasure_UncertaintyImprovement();
+
+	/**
+	 * Returns the meta object for class '{@link org.palladiosimulator.dependability.reliability.uncertainty.GlobalUncertaintyCountermeasure <em>Global Uncertainty Countermeasure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Global Uncertainty Countermeasure</em>'.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.GlobalUncertaintyCountermeasure
+	 * @generated
+	 */
+	EClass getGlobalUncertaintyCountermeasure();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.palladiosimulator.dependability.reliability.uncertainty.GlobalUncertaintyCountermeasure#getImprovedUncertaintyModel <em>Improved Uncertainty Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Improved Uncertainty Model</em>'.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.GlobalUncertaintyCountermeasure#getImprovedUncertaintyModel()
+	 * @see #getGlobalUncertaintyCountermeasure()
+	 * @generated
+	 */
+	EReference getGlobalUncertaintyCountermeasure_ImprovedUncertaintyModel();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -916,22 +1104,13 @@ public interface UncertaintyPackage extends EPackage {
 				.getArchitecturalCountermeasure_ArchitecturalPreconditions();
 
 		/**
-		 * The meta object literal for the '<em><b>Target Uncertainty</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Appliedfailuretype</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ARCHITECTURAL_COUNTERMEASURE__TARGET_UNCERTAINTY = eINSTANCE
-				.getArchitecturalCountermeasure_TargetUncertainty();
-
-		/**
-		 * The meta object literal for the '<em><b>Uncertainty Improvement</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT = eINSTANCE
-				.getArchitecturalCountermeasure_UncertaintyImprovement();
+		EReference ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE = eINSTANCE
+				.getArchitecturalCountermeasure_Appliedfailuretype();
 
 		/**
 		 * The meta object literal for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.ArchitecturalPreconditionImpl <em>Architectural Precondition</em>}' class.
@@ -1034,6 +1213,53 @@ public interface UncertaintyPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MAP_ENTRY__VALUE = eINSTANCE.getMapEntry_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintySpecificCountermeasureImpl <em>Specific Countermeasure</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintySpecificCountermeasureImpl
+		 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyPackageImpl#getUncertaintySpecificCountermeasure()
+		 * @generated
+		 */
+		EClass UNCERTAINTY_SPECIFIC_COUNTERMEASURE = eINSTANCE.getUncertaintySpecificCountermeasure();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Uncertainty</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNCERTAINTY_SPECIFIC_COUNTERMEASURE__TARGET_UNCERTAINTY = eINSTANCE
+				.getUncertaintySpecificCountermeasure_TargetUncertainty();
+
+		/**
+		 * The meta object literal for the '<em><b>Uncertainty Improvement</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNCERTAINTY_SPECIFIC_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT = eINSTANCE
+				.getUncertaintySpecificCountermeasure_UncertaintyImprovement();
+
+		/**
+		 * The meta object literal for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.GlobalUncertaintyCountermeasureImpl <em>Global Uncertainty Countermeasure</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.GlobalUncertaintyCountermeasureImpl
+		 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyPackageImpl#getGlobalUncertaintyCountermeasure()
+		 * @generated
+		 */
+		EClass GLOBAL_UNCERTAINTY_COUNTERMEASURE = eINSTANCE.getGlobalUncertaintyCountermeasure();
+
+		/**
+		 * The meta object literal for the '<em><b>Improved Uncertainty Model</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GLOBAL_UNCERTAINTY_COUNTERMEASURE__IMPROVED_UNCERTAINTY_MODEL = eINSTANCE
+				.getGlobalUncertaintyCountermeasure_ImprovedUncertaintyModel();
 
 	}
 

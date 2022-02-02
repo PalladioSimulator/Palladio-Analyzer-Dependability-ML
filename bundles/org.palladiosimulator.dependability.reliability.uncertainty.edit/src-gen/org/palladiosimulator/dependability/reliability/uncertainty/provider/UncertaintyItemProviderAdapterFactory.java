@@ -119,29 +119,6 @@ public class UncertaintyItemProviderAdapterFactory extends UncertaintyAdapterFac
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ArchitecturalCountermeasureItemProvider architecturalCountermeasureItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createArchitecturalCountermeasureAdapter() {
-		if (architecturalCountermeasureItemProvider == null) {
-			architecturalCountermeasureItemProvider = new ArchitecturalCountermeasureItemProvider(this);
-		}
-
-		return architecturalCountermeasureItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -231,6 +208,52 @@ public class UncertaintyItemProviderAdapterFactory extends UncertaintyAdapterFac
 		}
 
 		return mapEntryItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UncertaintySpecificCountermeasureItemProvider uncertaintySpecificCountermeasureItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUncertaintySpecificCountermeasureAdapter() {
+		if (uncertaintySpecificCountermeasureItemProvider == null) {
+			uncertaintySpecificCountermeasureItemProvider = new UncertaintySpecificCountermeasureItemProvider(this);
+		}
+
+		return uncertaintySpecificCountermeasureItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.GlobalUncertaintyCountermeasure} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected GlobalUncertaintyCountermeasureItemProvider globalUncertaintyCountermeasureItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.GlobalUncertaintyCountermeasure}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createGlobalUncertaintyCountermeasureAdapter() {
+		if (globalUncertaintyCountermeasureItemProvider == null) {
+			globalUncertaintyCountermeasureItemProvider = new GlobalUncertaintyCountermeasureItemProvider(this);
+		}
+
+		return globalUncertaintyCountermeasureItemProvider;
 	}
 
 	/**
@@ -342,8 +365,6 @@ public class UncertaintyItemProviderAdapterFactory extends UncertaintyAdapterFac
 			uncertaintyInducedFailureTypeItemProvider.dispose();
 		if (uncertaintyRepositoryItemProvider != null)
 			uncertaintyRepositoryItemProvider.dispose();
-		if (architecturalCountermeasureItemProvider != null)
-			architecturalCountermeasureItemProvider.dispose();
 		if (activeComponentPreconditionItemProvider != null)
 			activeComponentPreconditionItemProvider.dispose();
 		if (deterministicImprovementItemProvider != null)
@@ -352,6 +373,10 @@ public class UncertaintyItemProviderAdapterFactory extends UncertaintyAdapterFac
 			probabilisticImprovementItemProvider.dispose();
 		if (mapEntryItemProvider != null)
 			mapEntryItemProvider.dispose();
+		if (uncertaintySpecificCountermeasureItemProvider != null)
+			uncertaintySpecificCountermeasureItemProvider.dispose();
+		if (globalUncertaintyCountermeasureItemProvider != null)
+			globalUncertaintyCountermeasureItemProvider.dispose();
 	}
 
 }

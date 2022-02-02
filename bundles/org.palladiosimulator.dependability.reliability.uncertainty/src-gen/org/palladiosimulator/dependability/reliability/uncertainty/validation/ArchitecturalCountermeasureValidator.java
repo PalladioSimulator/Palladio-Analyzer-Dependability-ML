@@ -7,9 +7,7 @@ package org.palladiosimulator.dependability.reliability.uncertainty.validation;
 import org.eclipse.emf.common.util.EList;
 
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
-import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyImprovement;
-
-import org.palladiosimulator.envdyn.environment.templatevariable.TemplateVariable;
+import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
 
 /**
  * A sample validator interface for {@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure}.
@@ -22,7 +20,5 @@ public interface ArchitecturalCountermeasureValidator {
 
 	boolean validateArchitecturalPreconditions(EList<ArchitecturalPrecondition> value);
 
-	boolean validateTargetUncertainty(TemplateVariable value);
-
-	boolean validateUncertaintyImprovement(UncertaintyImprovement value);
+	boolean validateAppliedfailuretype(UncertaintyInducedFailureType value);
 }

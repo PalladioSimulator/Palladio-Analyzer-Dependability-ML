@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.palladiosimulator.dependability.reliability.uncertainty.edit;singleton:=true
 Automatic-Module-Name: org.palladiosimulator.dependability.reliability.uncertainty.edit
-Bundle-Version: 5.1.0.qualifier
+Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.palladiosimulator.dependability.reliability.uncertainty.provider.UncertaintyEditPlugin$Implementation
 Bundle-Vendor: %providerName

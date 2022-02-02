@@ -5,7 +5,6 @@ package org.palladiosimulator.dependability.reliability.uncertainty.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -18,10 +17,8 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure;
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
-import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyImprovement;
+import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
-
-import org.palladiosimulator.envdyn.environment.templatevariable.TemplateVariable;
 
 import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
 
@@ -34,13 +31,12 @@ import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
  * </p>
  * <ul>
  *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.ArchitecturalCountermeasureImpl#getArchitecturalPreconditions <em>Architectural Preconditions</em>}</li>
- *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.ArchitecturalCountermeasureImpl#getTargetUncertainty <em>Target Uncertainty</em>}</li>
- *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.ArchitecturalCountermeasureImpl#getUncertaintyImprovement <em>Uncertainty Improvement</em>}</li>
+ *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.ArchitecturalCountermeasureImpl#getAppliedfailuretype <em>Appliedfailuretype</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ArchitecturalCountermeasureImpl extends EntityImpl implements ArchitecturalCountermeasure {
+public abstract class ArchitecturalCountermeasureImpl extends EntityImpl implements ArchitecturalCountermeasure {
 	/**
 	 * The cached value of the '{@link #getArchitecturalPreconditions() <em>Architectural Preconditions</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -52,24 +48,14 @@ public class ArchitecturalCountermeasureImpl extends EntityImpl implements Archi
 	protected EList<ArchitecturalPrecondition> architecturalPreconditions;
 
 	/**
-	 * The cached value of the '{@link #getTargetUncertainty() <em>Target Uncertainty</em>}' reference.
+	 * The cached value of the '{@link #getAppliedfailuretype() <em>Appliedfailuretype</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTargetUncertainty()
+	 * @see #getAppliedfailuretype()
 	 * @generated
 	 * @ordered
 	 */
-	protected TemplateVariable targetUncertainty;
-
-	/**
-	 * The cached value of the '{@link #getUncertaintyImprovement() <em>Uncertainty Improvement</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUncertaintyImprovement()
-	 * @generated
-	 * @ordered
-	 */
-	protected UncertaintyImprovement uncertaintyImprovement;
+	protected UncertaintyInducedFailureType appliedfailuretype;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -111,18 +97,18 @@ public class ArchitecturalCountermeasureImpl extends EntityImpl implements Archi
 	 * @generated
 	 */
 	@Override
-	public TemplateVariable getTargetUncertainty() {
-		if (targetUncertainty != null && targetUncertainty.eIsProxy()) {
-			InternalEObject oldTargetUncertainty = (InternalEObject) targetUncertainty;
-			targetUncertainty = (TemplateVariable) eResolveProxy(oldTargetUncertainty);
-			if (targetUncertainty != oldTargetUncertainty) {
+	public UncertaintyInducedFailureType getAppliedfailuretype() {
+		if (appliedfailuretype != null && appliedfailuretype.eIsProxy()) {
+			InternalEObject oldAppliedfailuretype = (InternalEObject) appliedfailuretype;
+			appliedfailuretype = (UncertaintyInducedFailureType) eResolveProxy(oldAppliedfailuretype);
+			if (appliedfailuretype != oldAppliedfailuretype) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__TARGET_UNCERTAINTY, oldTargetUncertainty,
-							targetUncertainty));
+							UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE, oldAppliedfailuretype,
+							appliedfailuretype));
 			}
 		}
-		return targetUncertainty;
+		return appliedfailuretype;
 	}
 
 	/**
@@ -130,8 +116,8 @@ public class ArchitecturalCountermeasureImpl extends EntityImpl implements Archi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TemplateVariable basicGetTargetUncertainty() {
-		return targetUncertainty;
+	public UncertaintyInducedFailureType basicGetAppliedfailuretype() {
+		return appliedfailuretype;
 	}
 
 	/**
@@ -140,82 +126,13 @@ public class ArchitecturalCountermeasureImpl extends EntityImpl implements Archi
 	 * @generated
 	 */
 	@Override
-	public void setTargetUncertainty(TemplateVariable newTargetUncertainty) {
-		TemplateVariable oldTargetUncertainty = targetUncertainty;
-		targetUncertainty = newTargetUncertainty;
+	public void setAppliedfailuretype(UncertaintyInducedFailureType newAppliedfailuretype) {
+		UncertaintyInducedFailureType oldAppliedfailuretype = appliedfailuretype;
+		appliedfailuretype = newAppliedfailuretype;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__TARGET_UNCERTAINTY, oldTargetUncertainty,
-					targetUncertainty));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public UncertaintyImprovement getUncertaintyImprovement() {
-		return uncertaintyImprovement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetUncertaintyImprovement(UncertaintyImprovement newUncertaintyImprovement,
-			NotificationChain msgs) {
-		UncertaintyImprovement oldUncertaintyImprovement = uncertaintyImprovement;
-		uncertaintyImprovement = newUncertaintyImprovement;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT, oldUncertaintyImprovement,
-					newUncertaintyImprovement);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setUncertaintyImprovement(UncertaintyImprovement newUncertaintyImprovement) {
-		if (newUncertaintyImprovement != uncertaintyImprovement) {
-			NotificationChain msgs = null;
-			if (uncertaintyImprovement != null)
-				msgs = ((InternalEObject) uncertaintyImprovement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-						- UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT, null, msgs);
-			if (newUncertaintyImprovement != null)
-				msgs = ((InternalEObject) newUncertaintyImprovement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-						- UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT, null, msgs);
-			msgs = basicSetUncertaintyImprovement(newUncertaintyImprovement, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT, newUncertaintyImprovement,
-					newUncertaintyImprovement));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT:
-			return basicSetUncertaintyImprovement(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+					UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE, oldAppliedfailuretype,
+					appliedfailuretype));
 	}
 
 	/**
@@ -228,12 +145,10 @@ public class ArchitecturalCountermeasureImpl extends EntityImpl implements Archi
 		switch (featureID) {
 		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS:
 			return getArchitecturalPreconditions();
-		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__TARGET_UNCERTAINTY:
+		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE:
 			if (resolve)
-				return getTargetUncertainty();
-			return basicGetTargetUncertainty();
-		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT:
-			return getUncertaintyImprovement();
+				return getAppliedfailuretype();
+			return basicGetAppliedfailuretype();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -251,11 +166,8 @@ public class ArchitecturalCountermeasureImpl extends EntityImpl implements Archi
 			getArchitecturalPreconditions().clear();
 			getArchitecturalPreconditions().addAll((Collection<? extends ArchitecturalPrecondition>) newValue);
 			return;
-		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__TARGET_UNCERTAINTY:
-			setTargetUncertainty((TemplateVariable) newValue);
-			return;
-		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT:
-			setUncertaintyImprovement((UncertaintyImprovement) newValue);
+		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE:
+			setAppliedfailuretype((UncertaintyInducedFailureType) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -272,11 +184,8 @@ public class ArchitecturalCountermeasureImpl extends EntityImpl implements Archi
 		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS:
 			getArchitecturalPreconditions().clear();
 			return;
-		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__TARGET_UNCERTAINTY:
-			setTargetUncertainty((TemplateVariable) null);
-			return;
-		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT:
-			setUncertaintyImprovement((UncertaintyImprovement) null);
+		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE:
+			setAppliedfailuretype((UncertaintyInducedFailureType) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -292,10 +201,8 @@ public class ArchitecturalCountermeasureImpl extends EntityImpl implements Archi
 		switch (featureID) {
 		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS:
 			return architecturalPreconditions != null && !architecturalPreconditions.isEmpty();
-		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__TARGET_UNCERTAINTY:
-			return targetUncertainty != null;
-		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT:
-			return uncertaintyImprovement != null;
+		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE:
+			return appliedfailuretype != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -8,30 +8,26 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
-import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure;
+import org.palladiosimulator.dependability.reliability.uncertainty.GlobalUncertaintyCountermeasure;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
 
-import tools.mdsd.modelingfoundations.identifier.provider.EntityItemProvider;
-
 /**
- * This is the item provider adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure} object.
+ * This is the item provider adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.GlobalUncertaintyCountermeasure} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ArchitecturalCountermeasureItemProvider extends EntityItemProvider {
+public class GlobalUncertaintyCountermeasureItemProvider extends ArchitecturalCountermeasureItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArchitecturalCountermeasureItemProvider(AdapterFactory adapterFactory) {
+	public GlobalUncertaintyCountermeasureItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -46,55 +42,37 @@ public class ArchitecturalCountermeasureItemProvider extends EntityItemProvider 
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addArchitecturalPreconditionsPropertyDescriptor(object);
-			addAppliedfailuretypePropertyDescriptor(object);
+			addImprovedUncertaintyModelPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Architectural Preconditions feature.
+	 * This adds a property descriptor for the Improved Uncertainty Model feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addArchitecturalPreconditionsPropertyDescriptor(Object object) {
+	protected void addImprovedUncertaintyModelPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
 				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_ArchitecturalCountermeasure_architecturalPreconditions_feature"),
+				getString("_UI_GlobalUncertaintyCountermeasure_improvedUncertaintyModel_feature"),
 				getString("_UI_PropertyDescriptor_description",
-						"_UI_ArchitecturalCountermeasure_architecturalPreconditions_feature",
-						"_UI_ArchitecturalCountermeasure_type"),
-				UncertaintyPackage.Literals.ARCHITECTURAL_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS, true, false,
+						"_UI_GlobalUncertaintyCountermeasure_improvedUncertaintyModel_feature",
+						"_UI_GlobalUncertaintyCountermeasure_type"),
+				UncertaintyPackage.Literals.GLOBAL_UNCERTAINTY_COUNTERMEASURE__IMPROVED_UNCERTAINTY_MODEL, true, false,
 				true, null, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Appliedfailuretype feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAppliedfailuretypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_ArchitecturalCountermeasure_appliedfailuretype_feature"),
-						getString("_UI_PropertyDescriptor_description",
-								"_UI_ArchitecturalCountermeasure_appliedfailuretype_feature",
-								"_UI_ArchitecturalCountermeasure_type"),
-						UncertaintyPackage.Literals.ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE, true, false, true,
-						null, null, null));
-	}
-
-	/**
-	 * This returns ArchitecturalCountermeasure.gif.
+	 * This returns GlobalUncertaintyCountermeasure.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ArchitecturalCountermeasure"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/GlobalUncertaintyCountermeasure"));
 	}
 
 	/**
@@ -115,9 +93,9 @@ public class ArchitecturalCountermeasureItemProvider extends EntityItemProvider 
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ArchitecturalCountermeasure) object).getEntityName();
-		return label == null || label.length() == 0 ? getString("_UI_ArchitecturalCountermeasure_type")
-				: getString("_UI_ArchitecturalCountermeasure_type") + " " + label;
+		String label = ((GlobalUncertaintyCountermeasure) object).getId();
+		return label == null || label.length() == 0 ? getString("_UI_GlobalUncertaintyCountermeasure_type")
+				: getString("_UI_GlobalUncertaintyCountermeasure_type") + " " + label;
 	}
 
 	/**
@@ -143,17 +121,6 @@ public class ArchitecturalCountermeasureItemProvider extends EntityItemProvider 
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return UncertaintyEditPlugin.INSTANCE;
 	}
 
 }

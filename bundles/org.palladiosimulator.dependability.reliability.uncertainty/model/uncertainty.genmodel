@@ -25,8 +25,7 @@
     </genClasses>
     <genClasses ecoreClass="uncertainty.ecore#//ArchitecturalCountermeasure" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//ArchitecturalCountermeasure/architecturalPreconditions"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//ArchitecturalCountermeasure/targetUncertainty"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uncertainty.ecore#//ArchitecturalCountermeasure/uncertaintyImprovement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//ArchitecturalCountermeasure/appliedfailuretype"/>
     </genClasses>
     <genClasses ecoreClass="uncertainty.ecore#//ArchitecturalPrecondition" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName"/>
     <genClasses ecoreClass="uncertainty.ecore#//ActiveComponentPrecondition" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
@@ -42,6 +41,13 @@
     <genClasses ecoreClass="uncertainty.ecore#//MapEntry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uncertainty.ecore#//MapEntry/key"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uncertainty.ecore#//MapEntry/value"/>
+    </genClasses>
+    <genClasses ecoreClass="uncertainty.ecore#//UncertaintySpecificCountermeasure">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintySpecificCountermeasure/targetUncertainty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uncertainty.ecore#//UncertaintySpecificCountermeasure/uncertaintyImprovement"/>
+    </genClasses>
+    <genClasses ecoreClass="uncertainty.ecore#//GlobalUncertaintyCountermeasure">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uncertainty.ecore#//GlobalUncertaintyCountermeasure/improvedUncertaintyModel"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
