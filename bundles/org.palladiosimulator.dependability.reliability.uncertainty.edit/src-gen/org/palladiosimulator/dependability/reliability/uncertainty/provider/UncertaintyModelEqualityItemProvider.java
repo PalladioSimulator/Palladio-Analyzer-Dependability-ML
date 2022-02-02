@@ -11,23 +11,23 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
-import org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition;
+import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyModelEquality;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
 
 /**
- * This is the item provider adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition} object.
+ * This is the item provider adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyModelEquality} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ActiveComponentPreconditionItemProvider extends ArchitecturalPreconditionItemProvider {
+public class UncertaintyModelEqualityItemProvider extends ArchitecturalPreconditionItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ActiveComponentPreconditionItemProvider(AdapterFactory adapterFactory) {
+	public UncertaintyModelEqualityItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -42,37 +42,51 @@ public class ActiveComponentPreconditionItemProvider extends ArchitecturalPrecon
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addRequiredActiveComponentPropertyDescriptor(object);
+			addFirstPropertyDescriptor(object);
+			addSecondPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Required Active Component feature.
+	 * This adds a property descriptor for the First feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addRequiredActiveComponentPropertyDescriptor(Object object) {
+	protected void addFirstPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
 				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_ActiveComponentPrecondition_requiredActiveComponent_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_ActiveComponentPrecondition_requiredActiveComponent_feature",
-						"_UI_ActiveComponentPrecondition_type"),
-				UncertaintyPackage.Literals.ACTIVE_COMPONENT_PRECONDITION__REQUIRED_ACTIVE_COMPONENT, true, false, true,
-				null, null, null));
+				getString("_UI_UncertaintyModelEquality_first_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_UncertaintyModelEquality_first_feature",
+						"_UI_UncertaintyModelEquality_type"),
+				UncertaintyPackage.Literals.UNCERTAINTY_MODEL_EQUALITY__FIRST, true, false, true, null, null, null));
 	}
 
 	/**
-	 * This returns ActiveComponentPrecondition.gif.
+	 * This adds a property descriptor for the Second feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSecondPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_UncertaintyModelEquality_second_feature"),
+				getString("_UI_PropertyDescriptor_description", "_UI_UncertaintyModelEquality_second_feature",
+						"_UI_UncertaintyModelEquality_type"),
+				UncertaintyPackage.Literals.UNCERTAINTY_MODEL_EQUALITY__SECOND, true, false, true, null, null, null));
+	}
+
+	/**
+	 * This returns UncertaintyModelEquality.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ActiveComponentPrecondition"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/UncertaintyModelEquality"));
 	}
 
 	/**
@@ -93,9 +107,9 @@ public class ActiveComponentPreconditionItemProvider extends ArchitecturalPrecon
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ActiveComponentPrecondition) object).getEntityName();
-		return label == null || label.length() == 0 ? getString("_UI_ActiveComponentPrecondition_type")
-				: getString("_UI_ActiveComponentPrecondition_type") + " " + label;
+		String label = ((UncertaintyModelEquality) object).getId();
+		return label == null || label.length() == 0 ? getString("_UI_UncertaintyModelEquality_type")
+				: getString("_UI_UncertaintyModelEquality_type") + " " + label;
 	}
 
 	/**

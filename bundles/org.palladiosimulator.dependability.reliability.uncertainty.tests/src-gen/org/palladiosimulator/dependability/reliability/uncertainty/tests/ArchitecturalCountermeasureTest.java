@@ -3,6 +3,7 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.tests;
 
 import junit.framework.TestCase;
+
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure;
 
 /**

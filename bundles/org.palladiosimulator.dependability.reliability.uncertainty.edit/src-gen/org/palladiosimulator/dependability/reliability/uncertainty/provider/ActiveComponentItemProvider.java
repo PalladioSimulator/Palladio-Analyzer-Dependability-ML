@@ -8,30 +8,26 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
-import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure;
+import org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponent;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
 
-import tools.mdsd.modelingfoundations.identifier.provider.EntityItemProvider;
-
 /**
- * This is the item provider adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure} object.
+ * This is the item provider adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponent} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ArchitecturalCountermeasureItemProvider extends EntityItemProvider {
+public class ActiveComponentItemProvider extends ArchitecturalPreconditionItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArchitecturalCountermeasureItemProvider(AdapterFactory adapterFactory) {
+	public ActiveComponentItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -46,55 +42,36 @@ public class ArchitecturalCountermeasureItemProvider extends EntityItemProvider 
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addArchitecturalPreconditionsPropertyDescriptor(object);
-			addAppliedFailureTypePropertyDescriptor(object);
+			addRequiredActiveComponentPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Architectural Preconditions feature.
+	 * This adds a property descriptor for the Required Active Component feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addArchitecturalPreconditionsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_ArchitecturalCountermeasure_architecturalPreconditions_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_ArchitecturalCountermeasure_architecturalPreconditions_feature",
-						"_UI_ArchitecturalCountermeasure_type"),
-				UncertaintyPackage.Literals.ARCHITECTURAL_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS, true, false,
-				true, null, null, null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Applied Failure Type feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAppliedFailureTypePropertyDescriptor(Object object) {
+	protected void addRequiredActiveComponentPropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_ArchitecturalCountermeasure_appliedFailureType_feature"),
+						getResourceLocator(), getString("_UI_ActiveComponent_requiredActiveComponent_feature"),
 						getString("_UI_PropertyDescriptor_description",
-								"_UI_ArchitecturalCountermeasure_appliedFailureType_feature",
-								"_UI_ArchitecturalCountermeasure_type"),
-						UncertaintyPackage.Literals.ARCHITECTURAL_COUNTERMEASURE__APPLIED_FAILURE_TYPE, true, false,
-						true, null, null, null));
+								"_UI_ActiveComponent_requiredActiveComponent_feature", "_UI_ActiveComponent_type"),
+						UncertaintyPackage.Literals.ACTIVE_COMPONENT__REQUIRED_ACTIVE_COMPONENT, true, false, true,
+						null, null, null));
 	}
 
 	/**
-	 * This returns ArchitecturalCountermeasure.gif.
+	 * This returns ActiveComponent.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ArchitecturalCountermeasure"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ActiveComponent"));
 	}
 
 	/**
@@ -115,9 +92,9 @@ public class ArchitecturalCountermeasureItemProvider extends EntityItemProvider 
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ArchitecturalCountermeasure) object).getEntityName();
-		return label == null || label.length() == 0 ? getString("_UI_ArchitecturalCountermeasure_type")
-				: getString("_UI_ArchitecturalCountermeasure_type") + " " + label;
+		String label = ((ActiveComponent) object).getEntityName();
+		return label == null || label.length() == 0 ? getString("_UI_ActiveComponent_type")
+				: getString("_UI_ActiveComponent_type") + " " + label;
 	}
 
 	/**
@@ -143,17 +120,6 @@ public class ArchitecturalCountermeasureItemProvider extends EntityItemProvider 
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return UncertaintyEditPlugin.INSTANCE;
 	}
 
 }

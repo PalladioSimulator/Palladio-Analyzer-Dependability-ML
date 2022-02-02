@@ -119,26 +119,26 @@ public class UncertaintyItemProviderAdapterFactory extends UncertaintyAdapterFac
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition} instances.
+	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponent} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ActiveComponentPreconditionItemProvider activeComponentPreconditionItemProvider;
+	protected ActiveComponentItemProvider activeComponentItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition}.
+	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponent}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createActiveComponentPreconditionAdapter() {
-		if (activeComponentPreconditionItemProvider == null) {
-			activeComponentPreconditionItemProvider = new ActiveComponentPreconditionItemProvider(this);
+	public Adapter createActiveComponentAdapter() {
+		if (activeComponentItemProvider == null) {
+			activeComponentItemProvider = new ActiveComponentItemProvider(this);
 		}
 
-		return activeComponentPreconditionItemProvider;
+		return activeComponentItemProvider;
 	}
 
 	/**
@@ -257,6 +257,29 @@ public class UncertaintyItemProviderAdapterFactory extends UncertaintyAdapterFac
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyModelEquality} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UncertaintyModelEqualityItemProvider uncertaintyModelEqualityItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyModelEquality}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUncertaintyModelEqualityAdapter() {
+		if (uncertaintyModelEqualityItemProvider == null) {
+			uncertaintyModelEqualityItemProvider = new UncertaintyModelEqualityItemProvider(this);
+		}
+
+		return uncertaintyModelEqualityItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -365,8 +388,8 @@ public class UncertaintyItemProviderAdapterFactory extends UncertaintyAdapterFac
 			uncertaintyInducedFailureTypeItemProvider.dispose();
 		if (uncertaintyRepositoryItemProvider != null)
 			uncertaintyRepositoryItemProvider.dispose();
-		if (activeComponentPreconditionItemProvider != null)
-			activeComponentPreconditionItemProvider.dispose();
+		if (activeComponentItemProvider != null)
+			activeComponentItemProvider.dispose();
 		if (deterministicImprovementItemProvider != null)
 			deterministicImprovementItemProvider.dispose();
 		if (probabilisticImprovementItemProvider != null)
@@ -377,6 +400,8 @@ public class UncertaintyItemProviderAdapterFactory extends UncertaintyAdapterFac
 			uncertaintySpecificCountermeasureItemProvider.dispose();
 		if (globalUncertaintyCountermeasureItemProvider != null)
 			globalUncertaintyCountermeasureItemProvider.dispose();
+		if (uncertaintyModelEqualityItemProvider != null)
+			uncertaintyModelEqualityItemProvider.dispose();
 	}
 
 }

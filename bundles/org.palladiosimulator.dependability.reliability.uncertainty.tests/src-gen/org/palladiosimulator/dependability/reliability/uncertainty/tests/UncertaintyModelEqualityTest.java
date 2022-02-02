@@ -4,16 +4,16 @@ package org.palladiosimulator.dependability.reliability.uncertainty.tests;
 
 import junit.textui.TestRunner;
 
-import org.palladiosimulator.dependability.reliability.uncertainty.DeterministicImprovement;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFactory;
+import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyModelEquality;
 
 /**
  * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Deterministic Improvement</b></em>'.
+ * A test case for the model object '<em><b>Model Equality</b></em>'.
  * <!-- end-user-doc -->
  * @generated
  */
-public class DeterministicImprovementTest extends UncertaintyImprovementTest {
+public class UncertaintyModelEqualityTest extends ArchitecturalPreconditionTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -21,28 +21,28 @@ public class DeterministicImprovementTest extends UncertaintyImprovementTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-		TestRunner.run(DeterministicImprovementTest.class);
+		TestRunner.run(UncertaintyModelEqualityTest.class);
 	}
 
 	/**
-	 * Constructs a new Deterministic Improvement test case with the given name.
+	 * Constructs a new Model Equality test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DeterministicImprovementTest(String name) {
+	public UncertaintyModelEqualityTest(String name) {
 		super(name);
 	}
 
 	/**
-	 * Returns the fixture for this Deterministic Improvement test case.
+	 * Returns the fixture for this Model Equality test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	protected DeterministicImprovement getFixture() {
-		return (DeterministicImprovement) fixture;
+	protected UncertaintyModelEquality getFixture() {
+		return (UncertaintyModelEquality) fixture;
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class DeterministicImprovementTest extends UncertaintyImprovementTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(UncertaintyFactory.eINSTANCE.createDeterministicImprovement());
+		setFixture(UncertaintyFactory.eINSTANCE.createUncertaintyModelEquality());
 	}
 
 	/**
@@ -67,4 +67,4 @@ public class DeterministicImprovementTest extends UncertaintyImprovementTest {
 		setFixture(null);
 	}
 
-} //DeterministicImprovementTest
+} //UncertaintyModelEqualityTest

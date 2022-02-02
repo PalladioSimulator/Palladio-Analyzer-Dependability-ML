@@ -41,13 +41,13 @@ public interface UncertaintyFactory extends EFactory {
 	UncertaintyRepository createUncertaintyRepository();
 
 	/**
-	 * Returns a new object of class '<em>Active Component Precondition</em>'.
+	 * Returns a new object of class '<em>Active Component</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Active Component Precondition</em>'.
+	 * @return a new object of class '<em>Active Component</em>'.
 	 * @generated
 	 */
-	ActiveComponentPrecondition createActiveComponentPrecondition();
+	ActiveComponent createActiveComponent();
 
 	/**
 	 * Returns a new object of class '<em>Deterministic Improvement</em>'.
@@ -93,6 +93,15 @@ public interface UncertaintyFactory extends EFactory {
 	 * @generated
 	 */
 	GlobalUncertaintyCountermeasure createGlobalUncertaintyCountermeasure();
+
+	/**
+	 * Returns a new object of class '<em>Model Equality</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Model Equality</em>'.
+	 * @generated
+	 */
+	UncertaintyModelEquality createUncertaintyModelEquality();
 
 	/**
 	 * Returns the package supported by this factory.

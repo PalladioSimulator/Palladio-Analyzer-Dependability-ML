@@ -16,7 +16,7 @@ import tools.mdsd.modelingfoundations.identifier.Entity;
  * </p>
  * <ul>
  *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getArchitecturalPreconditions <em>Architectural Preconditions</em>}</li>
- *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getAppliedfailuretype <em>Appliedfailuretype</em>}</li>
+ *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getAppliedFailureType <em>Applied Failure Type</em>}</li>
  * </ul>
  *
  * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage#getArchitecturalCountermeasure()
@@ -37,25 +37,25 @@ public interface ArchitecturalCountermeasure extends Entity {
 	EList<ArchitecturalPrecondition> getArchitecturalPreconditions();
 
 	/**
-	 * Returns the value of the '<em><b>Appliedfailuretype</b></em>' reference.
+	 * Returns the value of the '<em><b>Applied Failure Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Appliedfailuretype</em>' reference.
-	 * @see #setAppliedfailuretype(UncertaintyInducedFailureType)
-	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage#getArchitecturalCountermeasure_Appliedfailuretype()
+	 * @return the value of the '<em>Applied Failure Type</em>' reference.
+	 * @see #setAppliedFailureType(UncertaintyInducedFailureType)
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage#getArchitecturalCountermeasure_AppliedFailureType()
 	 * @model required="true"
 	 * @generated
 	 */
-	UncertaintyInducedFailureType getAppliedfailuretype();
+	UncertaintyInducedFailureType getAppliedFailureType();
 
 	/**
-	 * Sets the value of the '{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getAppliedfailuretype <em>Appliedfailuretype</em>}' reference.
+	 * Sets the value of the '{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getAppliedFailureType <em>Applied Failure Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Appliedfailuretype</em>' reference.
-	 * @see #getAppliedfailuretype()
+	 * @param value the new value of the '<em>Applied Failure Type</em>' reference.
+	 * @see #getAppliedFailureType()
 	 * @generated
 	 */
-	void setAppliedfailuretype(UncertaintyInducedFailureType value);
+	void setAppliedFailureType(UncertaintyInducedFailureType value);
 
 } // ArchitecturalCountermeasure

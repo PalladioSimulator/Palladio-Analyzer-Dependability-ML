@@ -20,5 +20,5 @@ public interface ArchitecturalCountermeasureValidator {
 
 	boolean validateArchitecturalPreconditions(EList<ArchitecturalPrecondition> value);
 
-	boolean validateAppliedfailuretype(UncertaintyInducedFailureType value);
+	boolean validateAppliedFailureType(UncertaintyInducedFailureType value);
 }

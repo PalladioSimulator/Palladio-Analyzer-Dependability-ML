@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition;
+import org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponent;
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure;
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
 import org.palladiosimulator.dependability.reliability.uncertainty.DeterministicImprovement;
@@ -28,6 +28,7 @@ import org.palladiosimulator.dependability.reliability.uncertainty.Probabilistic
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFactory;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyImprovement;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
+import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyModelEquality;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure;
@@ -88,7 +89,7 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass activeComponentPreconditionEClass = null;
+	private EClass activeComponentEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -131,6 +132,13 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 	 * @generated
 	 */
 	private EClass globalUncertaintyCountermeasureEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass uncertaintyModelEqualityEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -326,7 +334,7 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 	 * @generated
 	 */
 	@Override
-	public EReference getArchitecturalCountermeasure_Appliedfailuretype() {
+	public EReference getArchitecturalCountermeasure_AppliedFailureType() {
 		return (EReference) architecturalCountermeasureEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -346,8 +354,8 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 	 * @generated
 	 */
 	@Override
-	public EClass getActiveComponentPrecondition() {
-		return activeComponentPreconditionEClass;
+	public EClass getActiveComponent() {
+		return activeComponentEClass;
 	}
 
 	/**
@@ -356,8 +364,8 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 	 * @generated
 	 */
 	@Override
-	public EReference getActiveComponentPrecondition_RequiredActiveComponent() {
-		return (EReference) activeComponentPreconditionEClass.getEStructuralFeatures().get(0);
+	public EReference getActiveComponent_RequiredActiveComponent() {
+		return (EReference) activeComponentEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -496,6 +504,36 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 	 * @generated
 	 */
 	@Override
+	public EClass getUncertaintyModelEquality() {
+		return uncertaintyModelEqualityEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getUncertaintyModelEquality_First() {
+		return (EReference) uncertaintyModelEqualityEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getUncertaintyModelEquality_Second() {
+		return (EReference) uncertaintyModelEqualityEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public UncertaintyFactory getUncertaintyFactory() {
 		return (UncertaintyFactory) getEFactoryInstance();
 	}
@@ -534,12 +572,12 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 
 		architecturalCountermeasureEClass = createEClass(ARCHITECTURAL_COUNTERMEASURE);
 		createEReference(architecturalCountermeasureEClass, ARCHITECTURAL_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS);
-		createEReference(architecturalCountermeasureEClass, ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE);
+		createEReference(architecturalCountermeasureEClass, ARCHITECTURAL_COUNTERMEASURE__APPLIED_FAILURE_TYPE);
 
 		architecturalPreconditionEClass = createEClass(ARCHITECTURAL_PRECONDITION);
 
-		activeComponentPreconditionEClass = createEClass(ACTIVE_COMPONENT_PRECONDITION);
-		createEReference(activeComponentPreconditionEClass, ACTIVE_COMPONENT_PRECONDITION__REQUIRED_ACTIVE_COMPONENT);
+		activeComponentEClass = createEClass(ACTIVE_COMPONENT);
+		createEReference(activeComponentEClass, ACTIVE_COMPONENT__REQUIRED_ACTIVE_COMPONENT);
 
 		uncertaintyImprovementEClass = createEClass(UNCERTAINTY_IMPROVEMENT);
 
@@ -562,6 +600,10 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 		globalUncertaintyCountermeasureEClass = createEClass(GLOBAL_UNCERTAINTY_COUNTERMEASURE);
 		createEReference(globalUncertaintyCountermeasureEClass,
 				GLOBAL_UNCERTAINTY_COUNTERMEASURE__IMPROVED_UNCERTAINTY_MODEL);
+
+		uncertaintyModelEqualityEClass = createEClass(UNCERTAINTY_MODEL_EQUALITY);
+		createEReference(uncertaintyModelEqualityEClass, UNCERTAINTY_MODEL_EQUALITY__FIRST);
+		createEReference(uncertaintyModelEqualityEClass, UNCERTAINTY_MODEL_EQUALITY__SECOND);
 	}
 
 	/**
@@ -611,11 +653,12 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 		uncertaintyRepositoryEClass.getESuperTypes().add(theIdentifierPackage_1.getEntity());
 		architecturalCountermeasureEClass.getESuperTypes().add(theIdentifierPackage_1.getEntity());
 		architecturalPreconditionEClass.getESuperTypes().add(theIdentifierPackage_1.getEntity());
-		activeComponentPreconditionEClass.getESuperTypes().add(this.getArchitecturalPrecondition());
+		activeComponentEClass.getESuperTypes().add(this.getArchitecturalPrecondition());
 		deterministicImprovementEClass.getESuperTypes().add(this.getUncertaintyImprovement());
 		probabilisticImprovementEClass.getESuperTypes().add(this.getUncertaintyImprovement());
 		uncertaintySpecificCountermeasureEClass.getESuperTypes().add(this.getArchitecturalCountermeasure());
 		globalUncertaintyCountermeasureEClass.getESuperTypes().add(this.getArchitecturalCountermeasure());
+		uncertaintyModelEqualityEClass.getESuperTypes().add(this.getArchitecturalPrecondition());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(uncertaintyInducedFailureTypeEClass, UncertaintyInducedFailureType.class,
@@ -656,19 +699,19 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 				null, "architecturalPreconditions", null, 1, -1, ArchitecturalCountermeasure.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-		initEReference(getArchitecturalCountermeasure_Appliedfailuretype(), this.getUncertaintyInducedFailureType(),
-				null, "appliedfailuretype", null, 1, 1, ArchitecturalCountermeasure.class, !IS_TRANSIENT, !IS_VOLATILE,
+		initEReference(getArchitecturalCountermeasure_AppliedFailureType(), this.getUncertaintyInducedFailureType(),
+				null, "appliedFailureType", null, 1, 1, ArchitecturalCountermeasure.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(architecturalPreconditionEClass, ArchitecturalPrecondition.class, "ArchitecturalPrecondition",
 				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(activeComponentPreconditionEClass, ActiveComponentPrecondition.class, "ActiveComponentPrecondition",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getActiveComponentPrecondition_RequiredActiveComponent(),
+		initEClass(activeComponentEClass, ActiveComponent.class, "ActiveComponent", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getActiveComponent_RequiredActiveComponent(),
 				theEntityPackage.getInterfaceProvidingRequiringEntity(), null, "requiredActiveComponent", null, 1, 1,
-				ActiveComponentPrecondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+				ActiveComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(uncertaintyImprovementEClass, UncertaintyImprovement.class, "UncertaintyImprovement", IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -710,6 +753,15 @@ public class UncertaintyPackageImpl extends EPackageImpl implements UncertaintyP
 				theStaticmodelPackage.getGroundProbabilisticNetwork(), null, "improvedUncertaintyModel", null, 1, 1,
 				GlobalUncertaintyCountermeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(uncertaintyModelEqualityEClass, UncertaintyModelEquality.class, "UncertaintyModelEquality",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUncertaintyModelEquality_First(), theStaticmodelPackage.getGroundProbabilisticNetwork(), null,
+				"first", null, 1, 1, UncertaintyModelEquality.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUncertaintyModelEquality_Second(), theStaticmodelPackage.getGroundProbabilisticNetwork(),
+				null, "second", null, 1, 1, UncertaintyModelEquality.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

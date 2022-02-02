@@ -60,8 +60,8 @@ public class UncertaintyFactoryImpl extends EFactoryImpl implements UncertaintyF
 			return createUncertaintyInducedFailureType();
 		case UncertaintyPackage.UNCERTAINTY_REPOSITORY:
 			return createUncertaintyRepository();
-		case UncertaintyPackage.ACTIVE_COMPONENT_PRECONDITION:
-			return createActiveComponentPrecondition();
+		case UncertaintyPackage.ACTIVE_COMPONENT:
+			return createActiveComponent();
 		case UncertaintyPackage.DETERMINISTIC_IMPROVEMENT:
 			return createDeterministicImprovement();
 		case UncertaintyPackage.PROBABILISTIC_IMPROVEMENT:
@@ -72,6 +72,8 @@ public class UncertaintyFactoryImpl extends EFactoryImpl implements UncertaintyF
 			return createUncertaintySpecificCountermeasure();
 		case UncertaintyPackage.GLOBAL_UNCERTAINTY_COUNTERMEASURE:
 			return createGlobalUncertaintyCountermeasure();
+		case UncertaintyPackage.UNCERTAINTY_MODEL_EQUALITY:
+			return createUncertaintyModelEquality();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -105,9 +107,9 @@ public class UncertaintyFactoryImpl extends EFactoryImpl implements UncertaintyF
 	 * @generated
 	 */
 	@Override
-	public ActiveComponentPrecondition createActiveComponentPrecondition() {
-		ActiveComponentPreconditionImpl activeComponentPrecondition = new ActiveComponentPreconditionImpl();
-		return activeComponentPrecondition;
+	public ActiveComponent createActiveComponent() {
+		ActiveComponentImpl activeComponent = new ActiveComponentImpl();
+		return activeComponent;
 	}
 
 	/**
@@ -163,6 +165,17 @@ public class UncertaintyFactoryImpl extends EFactoryImpl implements UncertaintyF
 	public GlobalUncertaintyCountermeasure createGlobalUncertaintyCountermeasure() {
 		GlobalUncertaintyCountermeasureImpl globalUncertaintyCountermeasure = new GlobalUncertaintyCountermeasureImpl();
 		return globalUncertaintyCountermeasure;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public UncertaintyModelEquality createUncertaintyModelEquality() {
+		UncertaintyModelEqualityImpl uncertaintyModelEquality = new UncertaintyModelEqualityImpl();
+		return uncertaintyModelEquality;
 	}
 
 	/**

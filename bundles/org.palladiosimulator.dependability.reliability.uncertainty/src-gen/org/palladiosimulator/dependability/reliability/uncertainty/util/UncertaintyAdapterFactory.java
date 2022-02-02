@@ -91,8 +91,8 @@ public class UncertaintyAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseActiveComponentPrecondition(ActiveComponentPrecondition object) {
-			return createActiveComponentPreconditionAdapter();
+		public Adapter caseActiveComponent(ActiveComponent object) {
+			return createActiveComponentAdapter();
 		}
 
 		@Override
@@ -123,6 +123,11 @@ public class UncertaintyAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseGlobalUncertaintyCountermeasure(GlobalUncertaintyCountermeasure object) {
 			return createGlobalUncertaintyCountermeasureAdapter();
+		}
+
+		@Override
+		public Adapter caseUncertaintyModelEquality(UncertaintyModelEquality object) {
+			return createUncertaintyModelEqualityAdapter();
 		}
 
 		@Override
@@ -216,16 +221,16 @@ public class UncertaintyAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition <em>Active Component Precondition</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponent <em>Active Component</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponent
 	 * @generated
 	 */
-	public Adapter createActiveComponentPreconditionAdapter() {
+	public Adapter createActiveComponentAdapter() {
 		return null;
 	}
 
@@ -310,6 +315,20 @@ public class UncertaintyAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGlobalUncertaintyCountermeasureAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyModelEquality <em>Model Equality</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyModelEquality
+	 * @generated
+	 */
+	public Adapter createUncertaintyModelEqualityAdapter() {
 		return null;
 	}
 

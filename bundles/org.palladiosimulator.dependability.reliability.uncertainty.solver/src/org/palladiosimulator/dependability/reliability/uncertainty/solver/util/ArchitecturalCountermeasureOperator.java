@@ -96,7 +96,7 @@ public class ArchitecturalCountermeasureOperator {
 	private List<ArchitecturalCountermeasure> determineApplicableAndOrderedCountermeasures() {
 		var partitioned = uncertaintyRepo.getArchitecturalCountermeasures().stream()
 				.filter(c -> allPreconditionsFulfilled(c, pcmModel))
-				.filter(c -> allPreconditionsFulfilled(c.getAppliedfailuretype(), pcmModel))
+				.filter(c -> allPreconditionsFulfilled(c.getAppliedFailureType(), pcmModel))
 				.collect(groupingBy(UncertaintySpecificCountermeasure.class::isInstance));
 
 		var ordered = partitioned.get(true);

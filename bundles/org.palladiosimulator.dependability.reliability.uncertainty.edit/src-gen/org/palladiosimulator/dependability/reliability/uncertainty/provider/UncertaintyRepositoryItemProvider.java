@@ -165,7 +165,11 @@ public class UncertaintyRepositoryItemProvider extends EntityItemProvider {
 
 		newChildDescriptors.add(
 				createChildParameter(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_PRECONDITIONS,
-						UncertaintyFactory.eINSTANCE.createActiveComponentPrecondition()));
+						UncertaintyFactory.eINSTANCE.createActiveComponent()));
+
+		newChildDescriptors.add(
+				createChildParameter(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_PRECONDITIONS,
+						UncertaintyFactory.eINSTANCE.createUncertaintyModelEquality()));
 	}
 
 	/**

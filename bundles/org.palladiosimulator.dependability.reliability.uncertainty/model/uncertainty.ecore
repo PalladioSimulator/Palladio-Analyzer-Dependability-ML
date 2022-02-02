@@ -23,12 +23,12 @@
       eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="architecturalPreconditions"
         lowerBound="1" upperBound="-1" eType="#//ArchitecturalPrecondition"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="appliedfailuretype" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="appliedFailureType" lowerBound="1"
         eType="#//UncertaintyInducedFailureType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArchitecturalPrecondition" abstract="true"
       eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ActiveComponentPrecondition" eSuperTypes="#//ArchitecturalPrecondition">
+  <eClassifiers xsi:type="ecore:EClass" name="ActiveComponent" eSuperTypes="#//ArchitecturalPrecondition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiredActiveComponent"
         lowerBound="1" eType="ecore:EClass ../../org.palladiosimulator.pcm/model/pcm.ecore#//core/entity/InterfaceProvidingRequiringEntity"/>
   </eClassifiers>
@@ -55,5 +55,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="GlobalUncertaintyCountermeasure" eSuperTypes="#//ArchitecturalCountermeasure">
     <eStructuralFeatures xsi:type="ecore:EReference" name="improvedUncertaintyModel"
         lowerBound="1" eType="ecore:EClass ../../org.palladiosimulator.envdyn.model/model/environmentaldynamics.ecore#//staticmodel/GroundProbabilisticNetwork"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UncertaintyModelEquality" eSuperTypes="#//ArchitecturalPrecondition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="first" lowerBound="1" eType="ecore:EClass ../../org.palladiosimulator.envdyn.model/model/environmentaldynamics.ecore#//staticmodel/GroundProbabilisticNetwork"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="second" lowerBound="1"
+        eType="ecore:EClass ../../org.palladiosimulator.envdyn.model/model/environmentaldynamics.ecore#//staticmodel/GroundProbabilisticNetwork"/>
   </eClassifiers>
 </ecore:EPackage>

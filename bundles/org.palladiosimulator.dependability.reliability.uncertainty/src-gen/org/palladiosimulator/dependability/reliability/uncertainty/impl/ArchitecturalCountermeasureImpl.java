@@ -31,7 +31,7 @@ import tools.mdsd.modelingfoundations.identifier.impl.EntityImpl;
  * </p>
  * <ul>
  *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.ArchitecturalCountermeasureImpl#getArchitecturalPreconditions <em>Architectural Preconditions</em>}</li>
- *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.ArchitecturalCountermeasureImpl#getAppliedfailuretype <em>Appliedfailuretype</em>}</li>
+ *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.ArchitecturalCountermeasureImpl#getAppliedFailureType <em>Applied Failure Type</em>}</li>
  * </ul>
  *
  * @generated
@@ -48,14 +48,14 @@ public abstract class ArchitecturalCountermeasureImpl extends EntityImpl impleme
 	protected EList<ArchitecturalPrecondition> architecturalPreconditions;
 
 	/**
-	 * The cached value of the '{@link #getAppliedfailuretype() <em>Appliedfailuretype</em>}' reference.
+	 * The cached value of the '{@link #getAppliedFailureType() <em>Applied Failure Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAppliedfailuretype()
+	 * @see #getAppliedFailureType()
 	 * @generated
 	 * @ordered
 	 */
-	protected UncertaintyInducedFailureType appliedfailuretype;
+	protected UncertaintyInducedFailureType appliedFailureType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -97,18 +97,18 @@ public abstract class ArchitecturalCountermeasureImpl extends EntityImpl impleme
 	 * @generated
 	 */
 	@Override
-	public UncertaintyInducedFailureType getAppliedfailuretype() {
-		if (appliedfailuretype != null && appliedfailuretype.eIsProxy()) {
-			InternalEObject oldAppliedfailuretype = (InternalEObject) appliedfailuretype;
-			appliedfailuretype = (UncertaintyInducedFailureType) eResolveProxy(oldAppliedfailuretype);
-			if (appliedfailuretype != oldAppliedfailuretype) {
+	public UncertaintyInducedFailureType getAppliedFailureType() {
+		if (appliedFailureType != null && appliedFailureType.eIsProxy()) {
+			InternalEObject oldAppliedFailureType = (InternalEObject) appliedFailureType;
+			appliedFailureType = (UncertaintyInducedFailureType) eResolveProxy(oldAppliedFailureType);
+			if (appliedFailureType != oldAppliedFailureType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE, oldAppliedfailuretype,
-							appliedfailuretype));
+							UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIED_FAILURE_TYPE,
+							oldAppliedFailureType, appliedFailureType));
 			}
 		}
-		return appliedfailuretype;
+		return appliedFailureType;
 	}
 
 	/**
@@ -116,8 +116,8 @@ public abstract class ArchitecturalCountermeasureImpl extends EntityImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public UncertaintyInducedFailureType basicGetAppliedfailuretype() {
-		return appliedfailuretype;
+	public UncertaintyInducedFailureType basicGetAppliedFailureType() {
+		return appliedFailureType;
 	}
 
 	/**
@@ -126,13 +126,13 @@ public abstract class ArchitecturalCountermeasureImpl extends EntityImpl impleme
 	 * @generated
 	 */
 	@Override
-	public void setAppliedfailuretype(UncertaintyInducedFailureType newAppliedfailuretype) {
-		UncertaintyInducedFailureType oldAppliedfailuretype = appliedfailuretype;
-		appliedfailuretype = newAppliedfailuretype;
+	public void setAppliedFailureType(UncertaintyInducedFailureType newAppliedFailureType) {
+		UncertaintyInducedFailureType oldAppliedFailureType = appliedFailureType;
+		appliedFailureType = newAppliedFailureType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE, oldAppliedfailuretype,
-					appliedfailuretype));
+					UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIED_FAILURE_TYPE, oldAppliedFailureType,
+					appliedFailureType));
 	}
 
 	/**
@@ -145,10 +145,10 @@ public abstract class ArchitecturalCountermeasureImpl extends EntityImpl impleme
 		switch (featureID) {
 		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS:
 			return getArchitecturalPreconditions();
-		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE:
+		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIED_FAILURE_TYPE:
 			if (resolve)
-				return getAppliedfailuretype();
-			return basicGetAppliedfailuretype();
+				return getAppliedFailureType();
+			return basicGetAppliedFailureType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -166,8 +166,8 @@ public abstract class ArchitecturalCountermeasureImpl extends EntityImpl impleme
 			getArchitecturalPreconditions().clear();
 			getArchitecturalPreconditions().addAll((Collection<? extends ArchitecturalPrecondition>) newValue);
 			return;
-		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE:
-			setAppliedfailuretype((UncertaintyInducedFailureType) newValue);
+		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIED_FAILURE_TYPE:
+			setAppliedFailureType((UncertaintyInducedFailureType) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -184,8 +184,8 @@ public abstract class ArchitecturalCountermeasureImpl extends EntityImpl impleme
 		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS:
 			getArchitecturalPreconditions().clear();
 			return;
-		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE:
-			setAppliedfailuretype((UncertaintyInducedFailureType) null);
+		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIED_FAILURE_TYPE:
+			setAppliedFailureType((UncertaintyInducedFailureType) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -201,8 +201,8 @@ public abstract class ArchitecturalCountermeasureImpl extends EntityImpl impleme
 		switch (featureID) {
 		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS:
 			return architecturalPreconditions != null && !architecturalPreconditions.isEmpty();
-		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE:
-			return appliedfailuretype != null;
+		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__APPLIED_FAILURE_TYPE:
+			return appliedFailureType != null;
 		}
 		return super.eIsSet(featureID);
 	}

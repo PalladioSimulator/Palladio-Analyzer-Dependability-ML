@@ -252,13 +252,13 @@ public interface UncertaintyPackage extends EPackage {
 	int ARCHITECTURAL_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS = IdentifierPackage.ENTITY_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Appliedfailuretype</b></em>' reference.
+	 * The feature id for the '<em><b>Applied Failure Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
+	int ARCHITECTURAL_COUNTERMEASURE__APPLIED_FAILURE_TYPE = IdentifierPackage.ENTITY_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Architectural Countermeasure</em>' class.
@@ -325,14 +325,14 @@ public interface UncertaintyPackage extends EPackage {
 	int ARCHITECTURAL_PRECONDITION_OPERATION_COUNT = IdentifierPackage.ENTITY_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.ActiveComponentPreconditionImpl <em>Active Component Precondition</em>}' class.
+	 * The meta object id for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.ActiveComponentImpl <em>Active Component</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.ActiveComponentPreconditionImpl
-	 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyPackageImpl#getActiveComponentPrecondition()
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.ActiveComponentImpl
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyPackageImpl#getActiveComponent()
 	 * @generated
 	 */
-	int ACTIVE_COMPONENT_PRECONDITION = 4;
+	int ACTIVE_COMPONENT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -341,7 +341,7 @@ public interface UncertaintyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVE_COMPONENT_PRECONDITION__ID = ARCHITECTURAL_PRECONDITION__ID;
+	int ACTIVE_COMPONENT__ID = ARCHITECTURAL_PRECONDITION__ID;
 
 	/**
 	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
@@ -350,7 +350,7 @@ public interface UncertaintyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVE_COMPONENT_PRECONDITION__ENTITY_NAME = ARCHITECTURAL_PRECONDITION__ENTITY_NAME;
+	int ACTIVE_COMPONENT__ENTITY_NAME = ARCHITECTURAL_PRECONDITION__ENTITY_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Required Active Component</b></em>' reference.
@@ -359,25 +359,25 @@ public interface UncertaintyPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVE_COMPONENT_PRECONDITION__REQUIRED_ACTIVE_COMPONENT = ARCHITECTURAL_PRECONDITION_FEATURE_COUNT + 0;
+	int ACTIVE_COMPONENT__REQUIRED_ACTIVE_COMPONENT = ARCHITECTURAL_PRECONDITION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Active Component Precondition</em>' class.
+	 * The number of structural features of the '<em>Active Component</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVE_COMPONENT_PRECONDITION_FEATURE_COUNT = ARCHITECTURAL_PRECONDITION_FEATURE_COUNT + 1;
+	int ACTIVE_COMPONENT_FEATURE_COUNT = ARCHITECTURAL_PRECONDITION_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Active Component Precondition</em>' class.
+	 * The number of operations of the '<em>Active Component</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVE_COMPONENT_PRECONDITION_OPERATION_COUNT = ARCHITECTURAL_PRECONDITION_OPERATION_COUNT + 0;
+	int ACTIVE_COMPONENT_OPERATION_COUNT = ARCHITECTURAL_PRECONDITION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyImprovementImpl <em>Improvement</em>}' class.
@@ -565,13 +565,13 @@ public interface UncertaintyPackage extends EPackage {
 	int UNCERTAINTY_SPECIFIC_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS = ARCHITECTURAL_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Appliedfailuretype</b></em>' reference.
+	 * The feature id for the '<em><b>Applied Failure Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNCERTAINTY_SPECIFIC_COUNTERMEASURE__APPLIEDFAILURETYPE = ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE;
+	int UNCERTAINTY_SPECIFIC_COUNTERMEASURE__APPLIED_FAILURE_TYPE = ARCHITECTURAL_COUNTERMEASURE__APPLIED_FAILURE_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Target Uncertainty</b></em>' reference.
@@ -647,13 +647,13 @@ public interface UncertaintyPackage extends EPackage {
 	int GLOBAL_UNCERTAINTY_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS = ARCHITECTURAL_COUNTERMEASURE__ARCHITECTURAL_PRECONDITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Appliedfailuretype</b></em>' reference.
+	 * The feature id for the '<em><b>Applied Failure Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GLOBAL_UNCERTAINTY_COUNTERMEASURE__APPLIEDFAILURETYPE = ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE;
+	int GLOBAL_UNCERTAINTY_COUNTERMEASURE__APPLIED_FAILURE_TYPE = ARCHITECTURAL_COUNTERMEASURE__APPLIED_FAILURE_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Improved Uncertainty Model</b></em>' reference.
@@ -681,6 +681,70 @@ public interface UncertaintyPackage extends EPackage {
 	 * @ordered
 	 */
 	int GLOBAL_UNCERTAINTY_COUNTERMEASURE_OPERATION_COUNT = ARCHITECTURAL_COUNTERMEASURE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyModelEqualityImpl <em>Model Equality</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyModelEqualityImpl
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyPackageImpl#getUncertaintyModelEquality()
+	 * @generated
+	 */
+	int UNCERTAINTY_MODEL_EQUALITY = 11;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_MODEL_EQUALITY__ID = ARCHITECTURAL_PRECONDITION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Entity Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_MODEL_EQUALITY__ENTITY_NAME = ARCHITECTURAL_PRECONDITION__ENTITY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>First</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_MODEL_EQUALITY__FIRST = ARCHITECTURAL_PRECONDITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Second</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_MODEL_EQUALITY__SECOND = ARCHITECTURAL_PRECONDITION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Model Equality</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_MODEL_EQUALITY_FEATURE_COUNT = ARCHITECTURAL_PRECONDITION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Model Equality</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNCERTAINTY_MODEL_EQUALITY_OPERATION_COUNT = ARCHITECTURAL_PRECONDITION_OPERATION_COUNT + 0;
 
 	/**
 	 * Returns the meta object for class '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType <em>Induced Failure Type</em>}'.
@@ -801,15 +865,15 @@ public interface UncertaintyPackage extends EPackage {
 	EReference getArchitecturalCountermeasure_ArchitecturalPreconditions();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getAppliedfailuretype <em>Appliedfailuretype</em>}'.
+	 * Returns the meta object for the reference '{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getAppliedFailureType <em>Applied Failure Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Appliedfailuretype</em>'.
-	 * @see org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getAppliedfailuretype()
+	 * @return the meta object for the reference '<em>Applied Failure Type</em>'.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getAppliedFailureType()
 	 * @see #getArchitecturalCountermeasure()
 	 * @generated
 	 */
-	EReference getArchitecturalCountermeasure_Appliedfailuretype();
+	EReference getArchitecturalCountermeasure_AppliedFailureType();
 
 	/**
 	 * Returns the meta object for class '{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition <em>Architectural Precondition</em>}'.
@@ -822,25 +886,25 @@ public interface UncertaintyPackage extends EPackage {
 	EClass getArchitecturalPrecondition();
 
 	/**
-	 * Returns the meta object for class '{@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition <em>Active Component Precondition</em>}'.
+	 * Returns the meta object for class '{@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponent <em>Active Component</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Active Component Precondition</em>'.
-	 * @see org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition
+	 * @return the meta object for class '<em>Active Component</em>'.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponent
 	 * @generated
 	 */
-	EClass getActiveComponentPrecondition();
+	EClass getActiveComponent();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition#getRequiredActiveComponent <em>Required Active Component</em>}'.
+	 * Returns the meta object for the reference '{@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponent#getRequiredActiveComponent <em>Required Active Component</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Required Active Component</em>'.
-	 * @see org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition#getRequiredActiveComponent()
-	 * @see #getActiveComponentPrecondition()
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponent#getRequiredActiveComponent()
+	 * @see #getActiveComponent()
 	 * @generated
 	 */
-	EReference getActiveComponentPrecondition_RequiredActiveComponent();
+	EReference getActiveComponent_RequiredActiveComponent();
 
 	/**
 	 * Returns the meta object for class '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyImprovement <em>Improvement</em>}'.
@@ -980,6 +1044,38 @@ public interface UncertaintyPackage extends EPackage {
 	EReference getGlobalUncertaintyCountermeasure_ImprovedUncertaintyModel();
 
 	/**
+	 * Returns the meta object for class '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyModelEquality <em>Model Equality</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model Equality</em>'.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyModelEquality
+	 * @generated
+	 */
+	EClass getUncertaintyModelEquality();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyModelEquality#getFirst <em>First</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>First</em>'.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyModelEquality#getFirst()
+	 * @see #getUncertaintyModelEquality()
+	 * @generated
+	 */
+	EReference getUncertaintyModelEquality_First();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyModelEquality#getSecond <em>Second</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Second</em>'.
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyModelEquality#getSecond()
+	 * @see #getUncertaintyModelEquality()
+	 * @generated
+	 */
+	EReference getUncertaintyModelEquality_Second();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1104,13 +1200,13 @@ public interface UncertaintyPackage extends EPackage {
 				.getArchitecturalCountermeasure_ArchitecturalPreconditions();
 
 		/**
-		 * The meta object literal for the '<em><b>Appliedfailuretype</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Applied Failure Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ARCHITECTURAL_COUNTERMEASURE__APPLIEDFAILURETYPE = eINSTANCE
-				.getArchitecturalCountermeasure_Appliedfailuretype();
+		EReference ARCHITECTURAL_COUNTERMEASURE__APPLIED_FAILURE_TYPE = eINSTANCE
+				.getArchitecturalCountermeasure_AppliedFailureType();
 
 		/**
 		 * The meta object literal for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.ArchitecturalPreconditionImpl <em>Architectural Precondition</em>}' class.
@@ -1123,14 +1219,14 @@ public interface UncertaintyPackage extends EPackage {
 		EClass ARCHITECTURAL_PRECONDITION = eINSTANCE.getArchitecturalPrecondition();
 
 		/**
-		 * The meta object literal for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.ActiveComponentPreconditionImpl <em>Active Component Precondition</em>}' class.
+		 * The meta object literal for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.ActiveComponentImpl <em>Active Component</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.ActiveComponentPreconditionImpl
-		 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyPackageImpl#getActiveComponentPrecondition()
+		 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.ActiveComponentImpl
+		 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyPackageImpl#getActiveComponent()
 		 * @generated
 		 */
-		EClass ACTIVE_COMPONENT_PRECONDITION = eINSTANCE.getActiveComponentPrecondition();
+		EClass ACTIVE_COMPONENT = eINSTANCE.getActiveComponent();
 
 		/**
 		 * The meta object literal for the '<em><b>Required Active Component</b></em>' reference feature.
@@ -1138,8 +1234,7 @@ public interface UncertaintyPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ACTIVE_COMPONENT_PRECONDITION__REQUIRED_ACTIVE_COMPONENT = eINSTANCE
-				.getActiveComponentPrecondition_RequiredActiveComponent();
+		EReference ACTIVE_COMPONENT__REQUIRED_ACTIVE_COMPONENT = eINSTANCE.getActiveComponent_RequiredActiveComponent();
 
 		/**
 		 * The meta object literal for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyImprovementImpl <em>Improvement</em>}' class.
@@ -1260,6 +1355,32 @@ public interface UncertaintyPackage extends EPackage {
 		 */
 		EReference GLOBAL_UNCERTAINTY_COUNTERMEASURE__IMPROVED_UNCERTAINTY_MODEL = eINSTANCE
 				.getGlobalUncertaintyCountermeasure_ImprovedUncertaintyModel();
+
+		/**
+		 * The meta object literal for the '{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyModelEqualityImpl <em>Model Equality</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyModelEqualityImpl
+		 * @see org.palladiosimulator.dependability.reliability.uncertainty.impl.UncertaintyPackageImpl#getUncertaintyModelEquality()
+		 * @generated
+		 */
+		EClass UNCERTAINTY_MODEL_EQUALITY = eINSTANCE.getUncertaintyModelEquality();
+
+		/**
+		 * The meta object literal for the '<em><b>First</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNCERTAINTY_MODEL_EQUALITY__FIRST = eINSTANCE.getUncertaintyModelEquality_First();
+
+		/**
+		 * The meta object literal for the '<em><b>Second</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNCERTAINTY_MODEL_EQUALITY__SECOND = eINSTANCE.getUncertaintyModelEquality_Second();
 
 	}
 
