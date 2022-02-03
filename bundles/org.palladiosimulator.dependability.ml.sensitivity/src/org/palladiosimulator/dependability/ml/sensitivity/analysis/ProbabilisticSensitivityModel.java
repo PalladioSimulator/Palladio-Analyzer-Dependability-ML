@@ -66,8 +66,6 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 
 	public static ProbabilisticSensitivityModel createFrom(GroundProbabilisticNetwork probSensitivityModel,
 			TemplateVariableDefinitions templateVariables) {
-		// nutze templates vom teilbaum
-		
 		return new ProbabilisticSensitivityModel(probSensitivityModel, templateVariables);
 	}
 

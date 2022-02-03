@@ -29,7 +29,19 @@ public class UncertaintyModelManager {
 	}
 
 	public void registerModel(UncertaintyInducedFailureType uncertainty, UncertaintyModel model) {
-		managedModels.put(uncertainty, model);
+		if (findModelFor(uncertainty).isEmpty()) {
+			managedModels.put(uncertainty, model);
+		} else {
+			// TODO: logging
+		}
+	}
+
+	public void updateModel(UncertaintyInducedFailureType uncertainty) {
+		if (findModelFor(uncertainty).isPresent()) {
+			manage(uncertainty);
+		} else {
+			// TODO: logging
+		}
 	}
 
 	public Optional<UncertaintyModel> findModelFor(UncertaintyInducedFailureType uncertainty) {
@@ -38,20 +50,24 @@ public class UncertaintyModelManager {
 
 	public DiscreteUncertaintyStateSpace getStateSpace() {
 		System.out.println("getStateSpace, printing managedModels:");
-		managedModels.forEach((k,v) -> System.out.println(k.toString() + ", " + v.toString()));
-		
-		var states = managedModels.values().stream().flatMap(m -> m.getValueSpace().stream()).collect(toList());
+		managedModels.forEach((k, v) -> System.out.println(k.toString() + ", " + v.toString()));
+
+		var states = managedModels.values().stream()
+				.flatMap(m -> m.getValueSpace().stream())
+				.collect(toList());
 		return DiscreteUncertaintyStateSpace.of(states);
 	}
-	
+
 	// This method might be adapted if new uncertainty model implementations emerge.
 	public void manage(List<UncertaintyInducedFailureType> uncertainties) {
-		for (UncertaintyInducedFailureType each : uncertainties) {
-			if (isNull(each.getFailureVariable())) {
-				registerModel(each, new MLInducedUncertaintyModel(each));
-			} else {
-				registerModel(each, new BayesianUncertaintyModel(each));
-			}
+		uncertainties.forEach(this::manage);
+	}
+
+	public void manage(UncertaintyInducedFailureType failureType) {
+		if (isNull(failureType.getFailureVariable())) {
+			managedModels.put(failureType, new MLInducedUncertaintyModel(failureType));
+		} else {
+			managedModels.put(failureType, new BayesianUncertaintyModel(failureType));
 		}
 	}
 

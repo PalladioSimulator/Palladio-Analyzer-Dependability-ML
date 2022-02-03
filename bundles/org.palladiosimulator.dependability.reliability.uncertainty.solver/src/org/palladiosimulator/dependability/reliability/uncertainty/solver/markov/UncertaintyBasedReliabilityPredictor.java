@@ -126,7 +126,6 @@ public class UncertaintyBasedReliabilityPredictor {
 
 	private PCMInstance resolveUncertainties(PCMInstance modelToResolve, List<UncertaintyState> stateTuple) {
 		var uncertaintyResolver = new UncertaintyResolver(modelToResolve);
-		System.out.println("UncertaintyBasedReliabilityPredictor:resolveUncertainties");
 		uncertaintyRepo.getUncertaintyInducedFailureTypes()
 				.forEach(uncertainty -> uncertaintyResolver.resolve(uncertainty, stateTuple));
 		return modelToResolve;

@@ -11,6 +11,7 @@ import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyIn
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure;
 import org.palladiosimulator.dependability.reliability.uncertainty.improvement.UncertaintyImprovementCalculator;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.UncertaintyModelManager;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
 import org.palladiosimulator.dependability.reliability.uncertainty.util.UncertaintySwitch;
 import org.palladiosimulator.solver.models.PCMInstance;
@@ -76,7 +77,7 @@ public class ArchitecturalCountermeasureOperator {
 			@Override
 			public Void caseGlobalUncertaintyCountermeasure(GlobalUncertaintyCountermeasure countermeasure) {
 				for (UncertaintyInducedFailureType each : uncertaintyRepo.getUncertaintyInducedFailureTypes()) {
-					if (each.getId().equals(countermeasure.getId()) == false) {
+					if (each.getId().equals(countermeasure.getAppliedFailureType().getId()) == false) {
 						continue;
 					}
 					
@@ -85,6 +86,7 @@ public class ArchitecturalCountermeasureOperator {
 						return null;
 					} else {
 						each.setUncertaintyModel(improvedModel);
+						UncertaintyModelManager.get().updateModel(each);
 					}
 				}
 				return null;
@@ -99,8 +101,17 @@ public class ArchitecturalCountermeasureOperator {
 				.filter(c -> allPreconditionsFulfilled(c.getAppliedFailureType(), pcmModel))
 				.collect(groupingBy(UncertaintySpecificCountermeasure.class::isInstance));
 
-		var ordered = partitioned.get(true);
-		ordered.addAll(partitioned.get(false));
+		List<ArchitecturalCountermeasure> ordered = Lists.newArrayList();
+		
+		var uncertaintySpecificCountermeasures = partitioned.get(true);
+		if (uncertaintySpecificCountermeasures != null) {
+			ordered.addAll(uncertaintySpecificCountermeasures);
+		}
+		
+		var globalCountermeasures = partitioned.get(false);
+		if (globalCountermeasures != null) {
+			ordered.addAll(globalCountermeasures);
+		}
 
 		return ordered;
 	}
