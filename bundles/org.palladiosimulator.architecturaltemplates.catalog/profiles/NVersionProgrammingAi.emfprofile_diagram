@@ -6,6 +6,9 @@
     </eAnnotations>
     <eClassifiers xmi:type="emfprofile:Stereotype" xmi:id="_UQkncDbzEeyCQ69JbDj2Qw" name="AiNVAssemblyContext">
       <eSuperTypes xmi:type="ecore:EClass" href="http://www.modelversioning.org/emfprofile/application/1.1#//StereotypeApplication"/>
+      <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_1caGwIT-EeyrKZLlGMfE_w" name="improvedModelName" lowerBound="1">
+        <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eStructuralFeatures>
       <extensions xmi:type="emfprofile:Extension" xmi:id="_WLifUDbzEeyCQ69JbDj2Qw" lowerBound="1">
         <target xmi:type="ecore:EClass" href="http://palladiosimulator.org/PalladioComponentModel/5.2#//core/composition/AssemblyContext"/>
       </extensions>

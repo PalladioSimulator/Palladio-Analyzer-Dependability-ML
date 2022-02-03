@@ -90,6 +90,10 @@ main() {
 			hasAppliedStereotype(assemblyContext, NVERSION_ASSEMBLY_CONTEXT_STEREOTYPE)
 	);
 	
+	aiBasedAssemblyContexts->forEach(context) {
+		completeUncertaintyRepo(context)
+	};
+	
 	/*
 	var nvGroundProbabilisticModel : Set(GroundProbabilisticNetwork) :=
 		groundProbNetwork
@@ -271,24 +275,66 @@ main() {
 		var missingAiAlloc: AllocationContext := new AllocationContext(missingAiAssemblyContext, rc, null);
 	};
 	
-	// Pseudocode 3.6: 37 - updateUncertainty ()
-	// Pseudocode 3.7: 1 - updateUncertainty ()
-	// update uncertainty models:
-	// Pseudocode 3.7: 3 - nversion_GPN = findNversionGroundProbabilisticNetwork ()
-	var nversionNetwork : GroundProbabilisticNetwork := probabilisticRepo.models->select(network| network.entityName = "NVersionSensitivityModel")->any(true);
-	// Pseudocode 3.7: 5 - nversion_UIFT = findUncertaintyInducedFailureType ()
-	var uncertaintyInducedFailure : UncertaintyInducedFailureType := uncertaintyRepo.uncertaintyInducedFailureTypes->any(true);
-	// Pseudocdoe 3.7: 4 - nversion_P = findNversionPrecondition ()
-	var nversionPrecondition : ActiveComponentPrecondition := 	
-		uncertaintyRepo.architecturalPreconditions
-		->select(condition| condition.entityName = "NVersionProgramming_Planner_CompositeComponent")
-		->selectByKind(ActiveComponentPrecondition)->any(true);
-	// Pseudocode 3.7: 7 - nversion_P . setRequiredActiveComponent = voter
-	nversionPrecondition.requiredActiveComponent := voter.encapsulatedComponent__AssemblyContext;
-	// Pseudocode 3.7: 9 - nversion_UIFT . setPrecondition ( nversion_P )
-	uncertaintyInducedFailure.architecturalPreconditions := nversionPrecondition;
-	// Pseudocdoe 3.7: 10 - nversion_UIFT . setUncertaintyModel ( nversion_GPN )
-	uncertaintyInducedFailure.uncertaintyModel := nversionNetwork;
+//	// Pseudocode 3.6: 37 - updateUncertainty ()
+//	// Pseudocode 3.7: 1 - updateUncertainty ()
+//	// update uncertainty models:
+//	// Pseudocode 3.7: 3 - nversion_GPN = findNversionGroundProbabilisticNetwork ()
+//	var nversionNetwork : GroundProbabilisticNetwork := probabilisticRepo.models->select(network| network.entityName = "NVersionSensitivityModel")->any(true);
+//	// Pseudocode 3.7: 5 - nversion_UIFT = findUncertaintyInducedFailureType ()
+//	var uncertaintyInducedFailure : UncertaintyInducedFailureType := uncertaintyRepo.uncertaintyInducedFailureTypes->any(true);
+//	// Pseudocdoe 3.7: 4 - nversion_P = findNversionPrecondition ()
+//	var nversionPrecondition : ActiveComponentPrecondition := 	
+//		uncertaintyRepo.architecturalPreconditions
+//		->select(condition| condition.entityName = "NVersionProgramming_Planner_CompositeComponent")
+//		->selectByKind(ActiveComponentPrecondition)->any(true);
+//	// Pseudocode 3.7: 7 - nversion_P . setRequiredActiveComponent = voter
+//	nversionPrecondition.requiredActiveComponent := voter.encapsulatedComponent__AssemblyContext;
+//	// Pseudocode 3.7: 9 - nversion_UIFT . setPrecondition ( nversion_P )
+//	uncertaintyInducedFailure.architecturalPreconditions := nversionPrecondition;
+//	// Pseudocdoe 3.7: 10 - nversion_UIFT . setUncertaintyModel ( nversion_GPN )
+//	uncertaintyInducedFailure.uncertaintyModel := nversionNetwork;
+
+	
+};
+
+helper completeUncertaintyRepo(aiAssemblyContext: AssemblyContext) {
+	// Retrieve uncertainty failure type; assuming that an AI component is a basic component with a single seff and a single failure type	
+	var seff := aiAssemblyContext.encapsulatedComponent__AssemblyContext.oclAsType(BasicComponent).serviceEffectSpecifications__BasicComponent->asList()->first();
+	var refinedFailureType := seff.oclAsType(ResourceDemandingSEFF).steps_Behaviour
+		->select(action: AbstractAction | action.oclIsTypeOf(InternalAction))
+		.oclAsType(InternalAction)
+		.internalFailureOccurrenceDescriptions__InternalAction->asList()->first().softwareInducedFailureType__InternalFailureOccurrenceDescription;
+	var failureType := uncertaintyRepo.uncertaintyInducedFailureTypes->select(type | type._refines.id = refinedFailureType.id)->any(true);
+	
+	assert fatal(failureType != null) 
+		with log ("There is no failure type that references the proper AI component.");
+	
+	var countermeasure := new GlobalUncertaintyCountermeasure(failureType);
+	
+	var improvedModelName := getStringTaggedValue(aiAssemblyContext, "improvedModelName", NVERSION_ASSEMBLY_CONTEXT_STEREOTYPE);
+	var improvedModel := probabilisticRepo.models->select(model | model.entityName = improvedModelName)->any(true);
+	
+	var precondition := new UncertaintyModelEquality();
+	precondition.first := failureType.uncertaintyModel;
+	precondition.second := improvedModel;
+	
+	countermeasure.architecturalPreconditions := precondition;
+	countermeasure.improvedUncertaintyModel := improvedModel;
+	
+	uncertaintyRepo.architecturalPreconditions += precondition;
+	uncertaintyRepo.architecturalCountermeasures += countermeasure;
+}
+
+constructor GlobalUncertaintyCountermeasure::GlobalUncertaintyCountermeasure(failureType : UncertaintyInducedFailureType) {
+	entityName := "NVersion";
+	appliedFailureType := failureType;
+	architecturalPreconditions := null;
+};
+
+constructor UncertaintyModelEquality::UncertaintyModelEquality() {
+	entityName := "shareSameModelStructure";
+	first := null;
+	second := null;
 };
 
 helper Set(GroundProbabilisticNetwork)::makePCMEntity(): Set(Entity) {
@@ -304,16 +350,6 @@ mapping GroundProbabilisticNetwork::Entity(): Entity {
 	result.entityName := self.entityName;
 	}
 };
-
-constructor ActiveComponentPrecondition::ActiveComponentPrecondition(requiredActiveComponent2 : InterfaceProvidingRequiringEntity) {
-	requiredActiveComponent := requiredActiveComponent2;
-	entityName := null;
-};
-
-constructor ArchitecturalCountermeasure::ArchitecturalCountermeasure() {
-	targetUncertainty := null;
-};
-
 
 abstract mapping inout Connector::abstractCreateFilterForConnector(originalAssemblyContext : AssemblyContext, providingAssemblyContext: AssemblyContext) : Connector {
 	entityName := self.entityName+"_from_Voter";

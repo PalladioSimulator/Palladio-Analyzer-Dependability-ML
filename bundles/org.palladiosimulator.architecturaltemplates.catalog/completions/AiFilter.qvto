@@ -14,8 +14,11 @@ modeltype PCM_COMPLETION uses 'http://palladiosimulator.org/AnalyzerFramework/Co
 modeltype PCMSEFF_PERFORMANCE uses pcm::seff::seff_performance('http://palladiosimulator.org/PalladioComponentModel/SEFF/5.2');
 modeltype PCM_RESOURCETYPE uses pcm::resourcetype('http://palladiosimulator.org/PalladioComponentModel/5.2');
 modeltype PCM_REL uses 'http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2';
+modeltype STATIC uses 'http://palladiosimulator.org/Environment/StaticModel/1.0';
+modeltype TEMPLATE uses 'http://palladiosimulator.org/Environment/TemplateVariable/1.0';
+modeltype DIST uses distributionfunction('http://www.mdsd.tools/probdist/distributionfunction/1.0');
 
-transformation AiFilter(inout pcmAllocation : PCM_ALLOC, inout pcmUncertainty: PCM_UNCERTAINTY);
+transformation AiFilter(inout pcmAllocation : PCM_ALLOC, inout pcmUncertainty: PCM_UNCERTAINTY, in distRepo: DIST);
 
 // Pseudocode 3.4: 2 - Initilize Strings constants , PCM models
 // String constants
@@ -35,6 +38,7 @@ property system : System = allocation.system_Allocation;
 property resourceEnvironment : ResourceEnvironment = allocation.targetResourceEnvironment_Allocation;
 // property pcmUncertainty : Uncertainty = new Uncertainty(); 
 property uncertaintyRepo : UncertaintyRepository = pcmUncertainty.rootObjects()![UncertaintyRepository];
+property distributionRepo : ProbabilityDistributionFunctionRepository = distRepo.rootObjects()![ProbabilityDistributionFunctionRepository];
 
 // Pseudocode 3.4: 3 - main()
 main() {
@@ -79,6 +83,8 @@ main() {
 			// - ai component still reads events from original eventchannel -> delete that one
 			// - filter component should also read events from original Eventchannel -> add that one here
 			// - should be it, bc it shouldn't change failure probability
+			
+		completeUncertaintyRepo(aiAssemblyContext, filterAssemblyContext.encapsulatedComponent__AssemblyContext);
 		
 		// Pseudocode 3.4: 8 - switchSinkEventChannel ( aiAssembly , f i l t e r )
 		var aiSinkEvents : Set(EventChannel) :=  // all events that have aiAssemblyContext as Sink destination
@@ -116,7 +122,7 @@ main() {
 					if (not(aiAssemblyContext.encapsulatedComponent__AssemblyContext.requiredRoles_InterfaceRequiringEntity->isEmpty())) {
 						assemblyContext.encapsulatedComponent__AssemblyContext.requiredRoles_InterfaceRequiringEntity->forEach(requiredRole) {
 							// oder ist das die ID des Roles Objekts?
-							if (providedRole.providingEntity_ProvidedRole.id = requiredRole.requiringEntity_RequiredRole.id) then {
+							if (providedRole.providingEntity_ProvidedRole.id = requiredRole.requiringEntity_RequiredRole.id) {
 								assemblyContexts_requiredRoles += assemblyContext;						
 								// genau hier erkennt man die verbindung zwischen dene
 								//  ggf. hier umhängen auf den filter bzw hier der filter erstellen?
@@ -141,13 +147,11 @@ main() {
 								
 								//aiProvidingConnectors->map createFilterForAssemblyConnector(aiAssemblyContext, componentRequiresAiConnectors);
 								
-							} endif
+							};
 						}
 					} endif
-				}	
+				};	
 			} endif
-			
-			
 		 }
 	};
 	 
@@ -194,6 +198,63 @@ main() {
 	// uncertainty creation
 	log("QvTO: Finished main!");
 		 
+};
+
+helper completeUncertaintyRepo(aiAssemblyContext: AssemblyContext, filter : RepositoryComponent) {
+	// Retrieve uncertainty failure type; assuming that an AI component is a basic component with a single seff and a single failure type	
+	var seff := aiAssemblyContext.encapsulatedComponent__AssemblyContext.oclAsType(BasicComponent).serviceEffectSpecifications__BasicComponent->asList()->first();
+	var refinedFailureType := seff.oclAsType(ResourceDemandingSEFF).steps_Behaviour
+		->select(action: AbstractAction | action.oclIsTypeOf(InternalAction))
+		.oclAsType(InternalAction)
+		.internalFailureOccurrenceDescriptions__InternalAction->asList()->first().softwareInducedFailureType__InternalFailureOccurrenceDescription;
+	var failureType := uncertaintyRepo.uncertaintyInducedFailureTypes->select(type | type._refines.id = refinedFailureType.id)->any(true);
+	
+	assert fatal(failureType != null) 
+		with log ("There is no failure type that references the proper AI component.");
+	
+	var countermeasure := new UncertaintySpecificCountermeasure(failureType);
+	
+	var precondition := new ActiveComponent(filter);
+	countermeasure.architecturalPreconditions := precondition;
+	
+	var uncertaintyName := getStringTaggedValue(aiAssemblyContext, "targetUncertaintyName", FILTERED_ASSEMBLY_CONTEXT_STEREOTYPE);
+	log("**************** UncertaintyName: " +  uncertaintyName);
+	failureType.uncertaintyModel.localProbabilisticModels->any(true)
+		.groundRandomVariables->forEach(variable) {log("************************VarName:" + variable.instantiatedTemplate.entityName)};
+	countermeasure.targetUncertainty := failureType.uncertaintyModel.localProbabilisticModels->any(true)
+		.groundRandomVariables->select(variable | variable.instantiatedTemplate.entityName = uncertaintyName)->any(true)
+		.instantiatedTemplate;
+	
+	var improvement := new ProbabilisticImprovement();
+	countermeasure.uncertaintyImprovement := improvement;
+	
+	var distributionName := getStringTaggedValue(aiAssemblyContext, "distributionName", FILTERED_ASSEMBLY_CONTEXT_STEREOTYPE);
+	improvement.probabilityDistribution := distributionRepo.distributions
+		->selectByType(ProbabilityDistribution)
+		->select(dist | dist.entityName = distributionName)->any(true);
+		
+	uncertaintyRepo.architecturalPreconditions += precondition;
+	uncertaintyRepo.architecturalCountermeasures += countermeasure;
+	
+	log("*********** pre:" + uncertaintyRepo.architecturalPreconditions->size().toString());
+	log("*********** UIFT:" + uncertaintyRepo.uncertaintyInducedFailureTypes->size().toString());
+	log("*********** Count:" + uncertaintyRepo.architecturalCountermeasures->size().toString());
+}
+
+constructor UncertaintySpecificCountermeasure::UncertaintySpecificCountermeasure(failureType : UncertaintyInducedFailureType) {
+	entityName := "SensorNoiseFiltering";
+	appliedFailureType := failureType;
+	targetUncertainty := null;
+	architecturalPreconditions := null;
+};
+
+constructor ActiveComponent::ActiveComponent(component: RepositoryComponent) {
+	entityName := "requireFilterComponent";
+	requiredActiveComponent := component;
+};
+
+constructor ProbabilisticImprovement::ProbabilisticImprovement() {
+	probabilityDistribution := null;
 };
 
 abstract mapping inout Connector::abstractCreateFilterForConnector(originalAssemblyContext : AssemblyContext, providingAssemblyContext: AssemblyContext) : Connector {
@@ -425,29 +486,6 @@ constructor ProvidedRole::ProvidedRole() {
 	providingEntity_ProvidedRole := null;
 	// Role
 	entityName := null;
-};
-
-
-// uncertainty models 
-
-constructor ActiveComponentPrecondition::ActiveComponentPrecondition(component: RepositoryComponent) {
-	requiredActiveComponent := component;
-	entityName := null;
-	requiredActiveComponent := null;	
-};
-
-constructor ArchitecturalCountermeasure::ArchitecturalCountermeasure(preconditions : Set(ArchitecturalPrecondition)) {
-	targetUncertainty := null;
-	architecturalPreconditions := preconditions;
-};
-
-constructor UncertaintyInducedFailureType::UncertaintyInducedFailureType(precondition : ArchitecturalPrecondition, softwareInducedFailureType: SoftwareInducedFailureType) {
-	//refinesFailureType := softwareInducedFailureType; // naming von refines ist reserviert -> geändert auf refinesFailureType
-	// refinesFailureType := null; // naming von refines ist reserviert -> geändert auf refinesFailureType
-	
-	uncertaintyModel := null; // here the domain expert has to create and select the proper uncertainty model
-	// failureVariable := null;
-	architecturalPreconditions := precondition;
 };
 
 constructor EventGroup::EventGroup(name : String, sinkAssemblyContext: AssemblyContext, parameter: Parameter) {

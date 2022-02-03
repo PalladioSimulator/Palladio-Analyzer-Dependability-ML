@@ -6,6 +6,12 @@
     </eAnnotations>
     <eClassifiers xmi:type="emfprofile:Stereotype" xmi:id="_0g1XEMbXEeu0u_J2FkPWPA" name="AiAssemblyContext">
       <eSuperTypes xmi:type="ecore:EClass" href="http://www.modelversioning.org/emfprofile/application/1.1#//StereotypeApplication"/>
+      <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_szDaMITQEeyrKZLlGMfE_w" name="distributionName" lowerBound="1">
+        <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_wmiS4ITQEeyrKZLlGMfE_w" name="targetUncertaintyName" lowerBound="1">
+        <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eStructuralFeatures>
       <extensions xmi:type="emfprofile:Extension" xmi:id="_2v2MUMbXEeu0u_J2FkPWPA">
         <target xmi:type="ecore:EClass" href="http://palladiosimulator.org/PalladioComponentModel/5.2#//core/composition/AssemblyContext"/>
       </extensions>
