@@ -4,10 +4,7 @@
     <refines xsi:type="reliability:SoftwareInducedFailureType" href="AutonomousSystemComponents.repository#_B1LEScn0Eeu9AOcPvs9c6Q"/>
     <uncertaintyModel href="DNNSensitivityModels.staticmodel#_k1EB0DPwEeyLC5Tfbz4pBQ"/>
   </uncertaintyInducedFailureTypes>
-  <architecturalPreconditions xsi:type="uncertainty:ActiveComponentPrecondition" id="_rjsmQsnzEeu9AOcPvs9c6Q" entityName="DecisionPlanning">
-    <requiredActiveComponent xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_tFYp8LvmEeuyDrQZkcWZSA"/>
-  </architecturalPreconditions>
-    <architecturalPreconditions xsi:type="uncertainty:ActiveComponentPrecondition" id="_kuatsjWlEey2K-TwyX0t4A" entityName="NVersionProgramming_Planner_CompositeComponent">
+  <architecturalPreconditions xsi:type="uncertainty:ActiveComponent" id="_rjsmQsnzEeu9AOcPvs9c6Q" entityName="DecisionPlanning">
     <requiredActiveComponent xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_tFYp8LvmEeuyDrQZkcWZSA"/>
   </architecturalPreconditions>
 </uncertainty:UncertaintyRepository>

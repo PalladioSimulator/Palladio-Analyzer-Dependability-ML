@@ -416,10 +416,10 @@
     </dataTypes__Repository>
   </repository:Repository>
   <emfprofileapplication:ProfileApplication>
-    <stereotypeApplications xsi:type="org.palladiosimulator.architecturaltemplates.catalog.profiles:AiNVBasicComponent" appliedTo="_5-fPYDchEeylpfVm0_xYGQ">
+    <stereotypeApplications xsi:type="org.palladiosimulator.architecturaltemplates.catalog.profiles:AiNVBasicComponent" appliedTo="_tFYp8LvmEeuyDrQZkcWZSA">
       <extension href="../../plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram#_8zmKMDbzEeyCQ69JbDj2Qw"/>
     </stereotypeApplications>
-    <stereotypeApplications xsi:type="org.palladiosimulator.architecturaltemplates.catalog.profiles:AiNVBasicComponent" appliedTo="_tFYp8LvmEeuyDrQZkcWZSA">
+    <stereotypeApplications xsi:type="org.palladiosimulator.architecturaltemplates.catalog.profiles:AiNVBasicComponent" appliedTo="_5-fPYDchEeylpfVm0_xYGQ">
       <extension href="../../plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram#_8zmKMDbzEeyCQ69JbDj2Qw"/>
     </stereotypeApplications>
     <importedProfiles nsURI="org.palladiosimulator.architecturaltemplates.catalog.profiles.NVersionProgrammingAi" location="platform:/plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram"/>

@@ -4,13 +4,7 @@
     <refines xsi:type="reliability:SoftwareInducedFailureType" href="AutonomousSystemComponents.repository#_B1LEScn0Eeu9AOcPvs9c6Q"/>
     <uncertaintyModel href="DNNSensitivityModels.staticmodel#_k1EB0DPwEeyLC5Tfbz4pBQ"/>
   </uncertaintyInducedFailureTypes>
-  <architecturalCountermeasures id="_BBh8ocn7Eeu9AOcPvs9c6Q" entityName="Filter_Countermeasure" architecturalPreconditions="_rjsmQsnzEeu9AOcPvs9c6Q">
-    <targetUncertainty href="DNNTemplateVariables.templatevariable#_0uh4oCpGEeuMpaabmuiN-Q"/>
-    <uncertaintyImprovement xsi:type="uncertainty:ProbabilisticImprovement">
-      <probabilityDistribution href="DNNSensitivityDistributions.distributionfunction#_U0Va8DV2EeyQlMi8YS9oig"/>
-    </uncertaintyImprovement>
-  </architecturalCountermeasures>
-  <architecturalPreconditions xsi:type="uncertainty:ActiveComponentPrecondition" id="_rjsmQsnzEeu9AOcPvs9c6Q" entityName="DecisionPlanning">
+  <architecturalPreconditions xsi:type="uncertainty:ActiveComponent" id="_rjsmQsnzEeu9AOcPvs9c6Q" entityName="DecisionPlanning">
     <requiredActiveComponent xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_tFYp8LvmEeuyDrQZkcWZSA"/>
   </architecturalPreconditions>
 </uncertainty:UncertaintyRepository>

@@ -123,7 +123,7 @@
     </providedRoles_InterfaceProvidingEntity>
   </system:System>
   <emfprofileapplication:ProfileApplication>
-    <stereotypeApplications xsi:type="org.palladiosimulator.architecturaltemplates.catalog.profiles:AiNVAssemblyContext" appliedTo="_hM4QwAZqEeyBeaTSQFCmQg">
+    <stereotypeApplications xsi:type="org.palladiosimulator.architecturaltemplates.catalog.profiles:AiNVAssemblyContext" appliedTo="_hM4QwAZqEeyBeaTSQFCmQg" improvedModelName="NVersionSensitivityModel">
       <extension href="../../plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram#_WLifUDbzEeyCQ69JbDj2Qw"/>
     </stereotypeApplications>
     <importedProfiles nsURI="org.palladiosimulator.architecturaltemplates.catalog.profiles.NVersionProgrammingAi" location="platform:/plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram"/>
