@@ -218,9 +218,6 @@ helper completeUncertaintyRepo(aiAssemblyContext: AssemblyContext, filter : Repo
 	countermeasure.architecturalPreconditions := precondition;
 	
 	var uncertaintyName := getStringTaggedValue(aiAssemblyContext, "targetUncertaintyName", FILTERED_ASSEMBLY_CONTEXT_STEREOTYPE);
-	log("**************** UncertaintyName: " +  uncertaintyName);
-	failureType.uncertaintyModel.localProbabilisticModels->any(true)
-		.groundRandomVariables->forEach(variable) {log("************************VarName:" + variable.instantiatedTemplate.entityName)};
 	countermeasure.targetUncertainty := failureType.uncertaintyModel.localProbabilisticModels->any(true)
 		.groundRandomVariables->select(variable | variable.instantiatedTemplate.entityName = uncertaintyName)->any(true)
 		.instantiatedTemplate;
@@ -235,10 +232,6 @@ helper completeUncertaintyRepo(aiAssemblyContext: AssemblyContext, filter : Repo
 		
 	uncertaintyRepo.architecturalPreconditions += precondition;
 	uncertaintyRepo.architecturalCountermeasures += countermeasure;
-	
-	log("*********** pre:" + uncertaintyRepo.architecturalPreconditions->size().toString());
-	log("*********** UIFT:" + uncertaintyRepo.uncertaintyInducedFailureTypes->size().toString());
-	log("*********** Count:" + uncertaintyRepo.architecturalCountermeasures->size().toString());
 }
 
 constructor UncertaintySpecificCountermeasure::UncertaintySpecificCountermeasure(failureType : UncertaintyInducedFailureType) {
