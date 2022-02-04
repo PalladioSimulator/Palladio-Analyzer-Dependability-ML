@@ -40,6 +40,8 @@ public abstract class SensitivityModel {
 	public abstract void setMLSensitivityValues(Map<MLSensitivityEntry, Double> mlSensitivityValues);
 
 	public abstract double inferSensitivity(List<SensitivityProperty> properties);
+	
+	public abstract double conditionalSensitivity(List<SensitivityProperty> properties);
 
 	public abstract void saveAt(URI location);
 

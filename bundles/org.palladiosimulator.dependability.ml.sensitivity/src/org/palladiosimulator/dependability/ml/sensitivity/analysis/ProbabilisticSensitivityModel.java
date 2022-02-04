@@ -35,9 +35,13 @@ import org.palladiosimulator.envdyn.environment.templatevariable.TemplateVariabl
 import com.google.common.collect.Maps;
 
 import tools.mdsd.probdist.api.entity.CategoricalValue;
+import tools.mdsd.probdist.api.entity.Conditionable;
+import tools.mdsd.probdist.api.entity.ConditionalProbabilityDistribution;
 import tools.mdsd.probdist.api.parser.DefaultParameterParser;
+import tools.mdsd.probdist.distributionfunction.Domain;
 import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 import tools.mdsd.probdist.distributionfunction.SimpleParameter;
+import tools.mdsd.probdist.distributionfunction.TabularCPD;
 
 public class ProbabilisticSensitivityModel extends SensitivityModel {
 
@@ -107,10 +111,22 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 		var inputs = toInputValues(properties);
 		if (isInferenceRequired(inputs)) {
 			return bayesianNetwork.infer(inputs); // the Method is not implemented yet.. 
-			// durch das rauslöschen von Success/Fail aus dem SampleSpace komme ich hier mit dem fehler raus..
 		}
 		return bayesianNetwork.probability(inputs);
 
+	}
+	
+	@Override
+	public double conditionalSensitivity(List<SensitivityProperty> properties) {
+		var dist = findMLRandomVariable().getDescriptiveModel().getDistribution();
+		var paramRep = (TabularCPD) dist.getParams().get(0).getRepresentation();
+		var conditionalOutcomeDistribution = new ConditionalProbabilityDistribution(dist, paramRep);
+		
+		var conditionals = properties.stream()
+				.map(each -> new Conditionable.Conditional(Domain.CATEGORY, each.getValue()))
+				.collect(toList());
+		var outcomeEvent = (CategoricalValue) mlInputValue().value;
+		return conditionalOutcomeDistribution.given(conditionals).probability(outcomeEvent);
 	}
 
 	@Override

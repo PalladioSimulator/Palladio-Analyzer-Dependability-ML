@@ -76,6 +76,8 @@ public class UncertaintyBasedReliabilityPredictor {
 	private final UncertaintyRepository uncertaintyRepo;
 	private final PCMSolverWorkflowRunConfiguration config;
 	private final StateSpaceExplorationStrategy exploreStrategy;
+	
+	private ArchitecturalCountermeasureOperator operator = null;
 
 	private UncertaintyBasedReliabilityPredictor(StateSpaceExplorationStrategy exploreStrategy,
 			PCMSolverWorkflowRunConfiguration config, UncertaintyRepository uncertaintyRepo) {
@@ -110,17 +112,17 @@ public class UncertaintyBasedReliabilityPredictor {
 		return result;
 	}
 
-	public Set<ReliabilityPredictionResultPerScenario> predictConditionalSuccessProbability(PCMInstance unresolvedModel,
-			List<UncertaintyState> original) {
-		var improved = ArchitecturalCountermeasureOperator.createOperatorFor(unresolvedModel, uncertaintyRepo).apply(original);
+	public Set<ReliabilityPredictionResultPerScenario> predictConditionalSuccessProbability(PCMInstance unresolved,
+			List<UncertaintyState> stateTuple) {
+		getArchitecturalCountermeasureOperator(unresolved).applyOnce();
 
-		var resolvedModel = resolveUncertainties(unresolvedModel, improved); 
+		var resolved = resolveUncertainties(unresolved, stateTuple); 
 
-		var conditionalPoS = predictProbabilityOfSuccessGiven(resolvedModel);
-		var probOfUncertainties = predictProbabilityOfUncertainties(original, resolvedModel);
+		var conditionalPoS = predictProbabilityOfSuccessGiven(resolved);
+		var probOfUncertainties = predictProbabilityOfUncertainties(stateTuple, resolved);
 		
 		return conditionalPoS.stream()
-				.map(each -> ReliabilityPredictionResultPerScenario.of(each, improved, probOfUncertainties))
+				.map(each -> ReliabilityPredictionResultPerScenario.of(each, stateTuple, probOfUncertainties))
 				.collect(toSet());
 	}
 
@@ -147,6 +149,13 @@ public class UncertaintyBasedReliabilityPredictor {
 			}
 		}
 		return probOfUncertainties;
+	}
+	
+	private ArchitecturalCountermeasureOperator getArchitecturalCountermeasureOperator(PCMInstance unresolved) {
+		if (operator == null) {
+			operator = ArchitecturalCountermeasureOperator.createOperatorFor(unresolved, uncertaintyRepo);
+		}
+		return operator;
 	}
 
 }

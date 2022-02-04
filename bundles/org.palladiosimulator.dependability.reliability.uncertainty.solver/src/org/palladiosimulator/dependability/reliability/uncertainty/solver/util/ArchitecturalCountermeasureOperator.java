@@ -1,33 +1,75 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.solver.util;
 
-import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.util.ArchitecturalPreconditionUtil.allPreconditionsFulfilled;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure;
+import org.palladiosimulator.dependability.reliability.uncertainty.DeterministicImprovement;
 import org.palladiosimulator.dependability.reliability.uncertainty.GlobalUncertaintyCountermeasure;
+import org.palladiosimulator.dependability.reliability.uncertainty.ProbabilisticImprovement;
+import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyImprovement;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure;
 import org.palladiosimulator.dependability.reliability.uncertainty.improvement.UncertaintyImprovementCalculator;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.UncertaintyModelManager;
-import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
 import org.palladiosimulator.dependability.reliability.uncertainty.util.UncertaintySwitch;
+import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticNetwork;
+import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
 import org.palladiosimulator.solver.models.PCMInstance;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import tools.mdsd.probdist.api.entity.CategoricalValue;
+import tools.mdsd.probdist.api.entity.Conditionable;
+import tools.mdsd.probdist.api.entity.ConditionalProbabilityDistribution;
+import tools.mdsd.probdist.api.entity.UnivariateProbabilitiyMassFunction;
+import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.parser.ParameterParser.Sample;
+import tools.mdsd.probdist.distributionfunction.Domain;
+import tools.mdsd.probdist.distributionfunction.SimpleParameter;
 
 public class ArchitecturalCountermeasureOperator {
 
+	private class AppliedCountermeasureManager {
+		
+		private final Map<ArchitecturalCountermeasure,Boolean> managedCountermeasures;
+		
+		public AppliedCountermeasureManager() {
+			this.managedCountermeasures = Maps.newHashMap();
+			for (ArchitecturalCountermeasure each : uncertaintyRepo.getArchitecturalCountermeasures()) {
+				this.managedCountermeasures.put(each, false);
+			}
+		}
+		
+		public boolean isAlreadyApplied(ArchitecturalCountermeasure countermeasure) {
+			return Optional.ofNullable(managedCountermeasures.get(countermeasure)).orElse(false);
+		}
+		
+		public boolean isNotAlreadyApplied(ArchitecturalCountermeasure countermeasure) {
+			return isAlreadyApplied(countermeasure) == false;
+		}
+		
+		public void updateStatusOf(ArchitecturalCountermeasure countermeasure) {
+			managedCountermeasures.put(countermeasure, true);
+		}
+		
+	}
+	
 	private final PCMInstance pcmModel;
 	private final UncertaintyRepository uncertaintyRepo;
+	private final AppliedCountermeasureManager countermeasureManager;
 
 	private ArchitecturalCountermeasureOperator(PCMInstance pcmModel, UncertaintyRepository uncertaintyRepo) {
 		this.pcmModel = pcmModel;
 		this.uncertaintyRepo = uncertaintyRepo;
+		this.countermeasureManager = new AppliedCountermeasureManager();
 	}
 
 	public static ArchitecturalCountermeasureOperator createOperatorFor(PCMInstance pcmModel,
@@ -35,43 +77,38 @@ public class ArchitecturalCountermeasureOperator {
 		return new ArchitecturalCountermeasureOperator(pcmModel, uncertaintyRepo);
 	}
 
-	public List<UncertaintyState> apply(List<UncertaintyState> stateTuple) {
+	public void applyOnce() {
 		if (uncertaintyRepo.getArchitecturalCountermeasures().size() == 0) {
-			return stateTuple;
+			return;
 		}
-		
-		var improved = Lists.newArrayList(stateTuple);
-		
-		determineApplicableAndOrderedCountermeasures().forEach(c -> apply(c, improved));
-		
-		return improved;
+
+		filterApplicableCountermeasures().forEach(this::apply);
+	}
+	
+	private List<ArchitecturalCountermeasure> filterApplicableCountermeasures() {
+		return uncertaintyRepo.getArchitecturalCountermeasures().stream()
+				.filter(c -> countermeasureManager.isNotAlreadyApplied(c))
+				.filter(c -> allPreconditionsFulfilled(c, pcmModel))
+				.filter(c -> allPreconditionsFulfilled(c.getAppliedFailureType(), pcmModel))
+				.collect(toList());
 	}
 
-	private void apply(ArchitecturalCountermeasure countermeasure, List<UncertaintyState> stateTuple) {
+	private void apply(ArchitecturalCountermeasure countermeasure) {
 		new UncertaintySwitch<Void>() {
 
 			@Override
 			public Void caseUncertaintySpecificCountermeasure(UncertaintySpecificCountermeasure countermeasure) {
-				var applicableState = stateTuple.stream()
-						.filter(each -> each.instantiates(countermeasure.getTargetUncertainty()))
-						.findFirst();
-				if (applicableState.isEmpty()) {
-					return null;
-				}
+				var uncertaintyModel = countermeasure.getAppliedFailureType().getUncertaintyModel();
+				var affectedVariable = uncertaintyModel.getLocalProbabilisticModels().get(0).getGroundRandomVariables().stream()
+						.filter(variable -> variable.getInstantiatedTemplate().getId().equals(countermeasure.getTargetUncertainty().getId()))
+						.findFirst()
+						.get();
 
-				var oldState = applicableState.get();
-				stateTuple.remove(oldState);
+				switchDistributions(affectedVariable, countermeasure.getUncertaintyImprovement());	
+				
+				updateChanges(countermeasure);
 
-				var improvedValue = computeImprovmenet(countermeasure, oldState);
-				var improvedState = oldState.newValuedStateWith(improvedValue);
-				stateTuple.add(improvedState);
 				return null;
-			};
-
-			private CategoricalValue computeImprovmenet(UncertaintySpecificCountermeasure countermeasure,
-					UncertaintyState state) {
-				var improvement = countermeasure.getUncertaintyImprovement();
-				return UncertaintyImprovementCalculator.get().calculate(improvement, state.getValue());
 			}
 
 			@Override
@@ -80,40 +117,119 @@ public class ArchitecturalCountermeasureOperator {
 					if (each.getId().equals(countermeasure.getAppliedFailureType().getId()) == false) {
 						continue;
 					}
+
+					var original = retrieveFailureVariableFrom(each);
+					var improved = retrieveFailureVariableFrom(countermeasure.getImprovedUncertaintyModel());
+					original.getDescriptiveModel().setDistribution(improved.getDescriptiveModel().getDistribution());					
 					
-					var improvedModel = countermeasure.getImprovedUncertaintyModel();
-					if (each.getUncertaintyModel().getId().equals(improvedModel.getId())) {
-						return null;
-					} else {
-						each.setUncertaintyModel(improvedModel);
-						UncertaintyModelManager.get().updateModel(each);
-					}
+					updateChanges(countermeasure);					
 				}
 				return null;
-			};
+			}
 
 		}.doSwitch(countermeasure);
 	}
+	
+	private void switchDistributions(GroundRandomVariable affectedVariable, UncertaintyImprovement improvement) {
+		var generator = createGeneratorDistribution(affectedVariable, improvement);
+		var oldDistribution = affectedVariable.getDescriptiveModel().getDistribution();
 
-	private List<ArchitecturalCountermeasure> determineApplicableAndOrderedCountermeasures() {
-		var partitioned = uncertaintyRepo.getArchitecturalCountermeasures().stream()
-				.filter(c -> allPreconditionsFulfilled(c, pcmModel))
-				.filter(c -> allPreconditionsFulfilled(c.getAppliedFailureType(), pcmModel))
-				.collect(groupingBy(UncertaintySpecificCountermeasure.class::isInstance));
-
-		List<ArchitecturalCountermeasure> ordered = Lists.newArrayList();
-		
-		var uncertaintySpecificCountermeasures = partitioned.get(true);
-		if (uncertaintySpecificCountermeasures != null) {
-			ordered.addAll(uncertaintySpecificCountermeasures);
+		var params = oldDistribution.getParams();
+		if (params.size() != 1 || SimpleParameter.class.isInstance(params.get(0).getRepresentation()) == false) {
+			throw new IllegalArgumentException("The distribution structure is not supported.");
 		}
 		
-		var globalCountermeasures = partitioned.get(false);
-		if (globalCountermeasures != null) {
-			ordered.addAll(globalCountermeasures);
-		}
-
-		return ordered;
+		var adjustedParam = generateDistributionParams((SimpleParameter) params.get(0).getRepresentation(), generator);
+		params.get(0).setRepresentation(adjustedParam);
 	}
+
+	// Currently only SimpleParameter are supported
+	private SimpleParameter generateDistributionParams(SimpleParameter param, UnivariateProbabilitiyMassFunction generator) {
+		var samples = ProbabilityDistributionFactory.getParameterParser().parseSampleSpace(param);
+		for (Sample each : samples) {
+			var newProbability = generator.probability(each.value);
+			each.probability = newProbability;
+		}
+			
+		var builder = new StringBuilder();
+		for (Sample each : samples) {
+			builder.append(String.format("{%1s,%2s};", each.value, each.probability));
+		}
+		 
+		var strParam = builder.deleteCharAt(builder.length() - 1).toString();
+		param.setValue(strParam);
+		
+		return param;
+	}
+
+	private UnivariateProbabilitiyMassFunction createGeneratorDistribution(GroundRandomVariable affectedVariable,
+			UncertaintyImprovement uncertaintyImprovement) {
+		var oldDistribution = affectedVariable.getDescriptiveModel().getDistribution();
+		return new UnivariateProbabilitiyMassFunction(oldDistribution.getInstantiated()) {
+
+			private final UnivariateProbabilitiyMassFunction oldDistFunction = (UnivariateProbabilitiyMassFunction) ProbabilityDistributionFactory.get()
+					.getInstanceOf(oldDistribution)
+					.orElseThrow();
+			private final ConditionalProbabilityDistribution improvement = createCPDFrom(uncertaintyImprovement);
+
+			@Override
+			public CategoricalValue sample() {
+				var conditional = asConditional(oldDistFunction.sample());
+				return improvement.given(conditional).sample();
+			}
+
+			@Override
+			public Double probability(CategoricalValue value) {
+				var probability = 0.0;
+				for (CategoricalValue each : DiscreteUncertaintyStateSpace.toUncertaintyState(affectedVariable).getValueSpace()) {
+					var probOfUncertainty = oldDistFunction.probability(each);
+					var condProb = improvement.given(asConditional(each)).probability(value);
+					probability += probOfUncertainty * condProb;
+				}
+				return probability;
+			}
+			
+			private ConditionalProbabilityDistribution createCPDFrom(UncertaintyImprovement improvement) {
+				return new UncertaintySwitch<ConditionalProbabilityDistribution>() {
+
+					@Override
+					public ConditionalProbabilityDistribution caseProbabilisticImprovement(ProbabilisticImprovement probImprovement) {
+						return UncertaintyImprovementCalculator.get().createCPD(probImprovement.getProbabilityDistribution());
+					}
+
+					@Override
+					public ConditionalProbabilityDistribution caseDeterministicImprovement(DeterministicImprovement detImprovement) {
+						return UncertaintyImprovementCalculator.get().createIndicatorCPD(detImprovement);
+					}
+
+				}.doSwitch(improvement); 
+			}
+			
+			private List<Conditionable.Conditional> asConditional(CategoricalValue value) {
+				return Lists.newArrayList(new Conditionable.Conditional(Domain.CATEGORY, value));
+			}
+		};
+	}
+	
+	private GroundRandomVariable retrieveFailureVariableFrom(UncertaintyInducedFailureType type) {
+		if (type.getFailureVariable() != null) {
+			return type.getFailureVariable();
+		}
+		return retrieveFailureVariableFrom(type.getUncertaintyModel());
+	};
+	
+	private GroundRandomVariable retrieveFailureVariableFrom(GroundProbabilisticNetwork model) {
+		var results = UncertaintyModelUtil.filterRandomVariablesOnlyWithParent(model);
+		if (results.size() != 1) {
+			throw new RuntimeException("There are several variables with parents.");
+		}
+		return results.iterator().next();
+	};
+
+	
+	private void updateChanges(ArchitecturalCountermeasure countermeasure) {
+		UncertaintyModelManager.get().updateModel(countermeasure.getAppliedFailureType());
+		countermeasureManager.updateStatusOf(countermeasure);
+	};
 
 }
