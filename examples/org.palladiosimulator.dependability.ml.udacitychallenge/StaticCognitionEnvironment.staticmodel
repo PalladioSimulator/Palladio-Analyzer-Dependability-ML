@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<staticmodel:ProbabilisticModelRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:staticmodel="http://palladiosimulator.org/Environment/StaticModel/1.0" xmlns:templatevariable="http://palladiosimulator.org/Environment/TemplateVariable/1.0" id="_waU-UMiQEeu4ldHQmCCVsQ">
+  <models id="_BDjaYMiREeu4ldHQmCCVsQ" entityName="GroundStaticEnvironmentNetwork">
+    <localModels id="_RwiVEMiREeu4ldHQmCCVsQ">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="templateVariable.templatevariable#_lHIpgdaLEeu3JPPFxl43Jg"/>
+      <distribution href="default.distributionfunction#_arcO0Mh2EeuSv7ZQ4FB_Ew"/>
+    </localModels>
+    <localModels id="_sVVCYMiREeu4ldHQmCCVsQ">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="templateVariable.templatevariable#__KGcIdaLEeu3JPPFxl43Jg"/>
+      <distribution href="default.distributionfunction#_UvRMgMiQEeu4ldHQmCCVsQ"/>
+    </localModels>
+    <localModels id="_wO5U8MiREeu4ldHQmCCVsQ">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="templateVariable.templatevariable#_5FJ3IdaLEeu3JPPFxl43Jg"/>
+      <distribution href="default.distributionfunction#_1YYnAMiAEeu4ldHQmCCVsQ"/>
+    </localModels>
+    <localModels id="_ZpXX8NaGEeugmZy9iKpkSg">
+      <instantiatedFactor xsi:type="templatevariable:ProbabilisticTemplateFactor" href="templateVariable.templatevariable#_E7l5odaMEeu3JPPFxl43Jg"/>
+      <distribution href="default.distributionfunction#_JbM3QNTFEeujHpQKFaqPpw"/>
+    </localModels>
+    <localProbabilisticModels>
+      <groundRandomVariables id="_156-EMiREeu4ldHQmCCVsQ" entityName="InstantiatedBrightnessMeasureTemplate" descriptiveModel="_RwiVEMiREeu4ldHQmCCVsQ">
+        <instantiatedTemplate href="templateVariable.templatevariable#_dkA2UNaLEeu3JPPFxl43Jg"/>
+        <appliedObjects href="default.repository#_j7cKIL1rEeunTKCICMkJWw"/>
+      </groundRandomVariables>
+      <groundRandomVariables id="_VDSCwMiSEeu4ldHQmCCVsQ" entityName="InstantiatedDirtMeasureTemplate" descriptiveModel="_sVVCYMiREeu4ldHQmCCVsQ">
+        <instantiatedTemplate href="templateVariable.templatevariable#_gkFVENaLEeu3JPPFxl43Jg"/>
+        <appliedObjects href="default.repository#_j7cKIL1rEeunTKCICMkJWw"/>
+      </groundRandomVariables>
+      <groundRandomVariables id="_bvWSIMiSEeu4ldHQmCCVsQ" entityName="InstantiatedSensorNoiseTemplate" descriptiveModel="_wO5U8MiREeu4ldHQmCCVsQ">
+        <instantiatedTemplate href="templateVariable.templatevariable#_e2smMNaLEeu3JPPFxl43Jg"/>
+        <appliedObjects href="default.repository#_j7cKIL1rEeunTKCICMkJWw"/>
+      </groundRandomVariables>
+      <groundRandomVariables id="_nHei4NaGEeugmZy9iKpkSg" entityName="InstantiatedDummyMeasureTemplate" descriptiveModel="_ZpXX8NaGEeugmZy9iKpkSg">
+        <instantiatedTemplate href="templateVariable.templatevariable#_itJTUNaLEeu3JPPFxl43Jg"/>
+        <appliedObjects href="default.repository#_j7cKIL1rEeunTKCICMkJWw"/>
+      </groundRandomVariables>
+    </localProbabilisticModels>
+  </models>
+</staticmodel:ProbabilisticModelRepository>

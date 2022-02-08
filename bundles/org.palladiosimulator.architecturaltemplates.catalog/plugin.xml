@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+  <extension point="org.modelversioning.emfprofile.profile">
+     <profile profile_resource="profiles/AiFilter.emfprofile_diagram"/>
+  </extension>
+ <extension point="org.modelversioning.emfprofile.profile">
+     <profile profile_resource="profiles/NVersionProgrammingAi.emfprofile_diagram"/>
+ </extension>
+ 
+   <extension
+         point="org.eclipse.m2m.qvt.oml.javaBlackboxUnits">
+        <unit
+            name="ProfilesLibrary"
+            namespace="org.palladiosimulator.architecturaltemplates.catalog.black">
+         <library
+               class="org.palladiosimulator.architecturaltemplates.catalog.black.ProfilesLibrary"
+               name="ProfilesLibrary">
+            <metamodel
+                  nsURI="http://www.eclipse.org/emf/2002/Ecore">
+            </metamodel>
+            <metamodel
+                  nsURI="http://www.modelversioning.org/emfprofile/1.1">
+            </metamodel>
+            <metamodel
+                  nsURI="http://www.modelversioning.org/emfprofile/application/1.1">
+            </metamodel>
+            <metamodel
+                  nsURI="http://palladiosimulator.org/PalladioComponentModel/Core/Entity/5.2">
+            </metamodel>
+         </library>
+      </unit>
+        <unit
+              name="PCMLibrary"
+              namespace="org.palladiosimulator.architecturaltemplates.catalog.black">
+           <library
+                 class="org.palladiosimulator.architecturaltemplates.catalog.black.PCMLibrary"
+                 name="PCMLibrary">
+              <metamodel
+                    nsURI="http://www.eclipse.org/emf/2002/Ecore">
+              </metamodel>
+              <metamodel
+                    nsURI="http://www.modelversioning.org/emfprofile/1.1">
+              </metamodel>
+              <metamodel
+                    nsURI="http://www.modelversioning.org/emfprofile/application/1.1">
+              </metamodel>
+              <metamodel
+                    nsURI="http://palladiosimulator.org/PalladioComponentModel/Core/Entity/5.2">
+              </metamodel>
+           </library>
+        </unit>
+   </extension>
+   <extension
+         point="org.palladiosimulator.architecturaltemplates.catalogs">
+      <ATCatalog
+            catalogURI="platform:/plugin/org.palladiosimulator.architecturaltemplates.catalog/Default.architecturaltemplates#_2eRmoCOzEeSLXszsY50NUA">
+      </ATCatalog>
+   </extension>
+</plugin>

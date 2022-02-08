@@ -9,26 +9,25 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition;
+import org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponent;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
 
 import org.palladiosimulator.pcm.core.entity.InterfaceProvidingRequiringEntity;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Active Component Precondition</b></em>'.
+ * An implementation of the model object '<em><b>Active Component</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.ActiveComponentPreconditionImpl#getRequiredActiveComponent <em>Required Active Component</em>}</li>
+ *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.impl.ActiveComponentImpl#getRequiredActiveComponent <em>Required Active Component</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ActiveComponentPreconditionImpl extends ArchitecturalPreconditionImpl
-		implements ActiveComponentPrecondition {
+public class ActiveComponentImpl extends ArchitecturalPreconditionImpl implements ActiveComponent {
 	/**
 	 * The cached value of the '{@link #getRequiredActiveComponent() <em>Required Active Component</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -44,7 +43,7 @@ public class ActiveComponentPreconditionImpl extends ArchitecturalPreconditionIm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ActiveComponentPreconditionImpl() {
+	protected ActiveComponentImpl() {
 		super();
 	}
 
@@ -55,7 +54,7 @@ public class ActiveComponentPreconditionImpl extends ArchitecturalPreconditionIm
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return UncertaintyPackage.Literals.ACTIVE_COMPONENT_PRECONDITION;
+		return UncertaintyPackage.Literals.ACTIVE_COMPONENT;
 	}
 
 	/**
@@ -71,8 +70,8 @@ public class ActiveComponentPreconditionImpl extends ArchitecturalPreconditionIm
 			if (requiredActiveComponent != oldRequiredActiveComponent) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							UncertaintyPackage.ACTIVE_COMPONENT_PRECONDITION__REQUIRED_ACTIVE_COMPONENT,
-							oldRequiredActiveComponent, requiredActiveComponent));
+							UncertaintyPackage.ACTIVE_COMPONENT__REQUIRED_ACTIVE_COMPONENT, oldRequiredActiveComponent,
+							requiredActiveComponent));
 			}
 		}
 		return requiredActiveComponent;
@@ -98,8 +97,8 @@ public class ActiveComponentPreconditionImpl extends ArchitecturalPreconditionIm
 		requiredActiveComponent = newRequiredActiveComponent;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					UncertaintyPackage.ACTIVE_COMPONENT_PRECONDITION__REQUIRED_ACTIVE_COMPONENT,
-					oldRequiredActiveComponent, requiredActiveComponent));
+					UncertaintyPackage.ACTIVE_COMPONENT__REQUIRED_ACTIVE_COMPONENT, oldRequiredActiveComponent,
+					requiredActiveComponent));
 	}
 
 	/**
@@ -110,7 +109,7 @@ public class ActiveComponentPreconditionImpl extends ArchitecturalPreconditionIm
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case UncertaintyPackage.ACTIVE_COMPONENT_PRECONDITION__REQUIRED_ACTIVE_COMPONENT:
+		case UncertaintyPackage.ACTIVE_COMPONENT__REQUIRED_ACTIVE_COMPONENT:
 			if (resolve)
 				return getRequiredActiveComponent();
 			return basicGetRequiredActiveComponent();
@@ -126,7 +125,7 @@ public class ActiveComponentPreconditionImpl extends ArchitecturalPreconditionIm
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case UncertaintyPackage.ACTIVE_COMPONENT_PRECONDITION__REQUIRED_ACTIVE_COMPONENT:
+		case UncertaintyPackage.ACTIVE_COMPONENT__REQUIRED_ACTIVE_COMPONENT:
 			setRequiredActiveComponent((InterfaceProvidingRequiringEntity) newValue);
 			return;
 		}
@@ -141,7 +140,7 @@ public class ActiveComponentPreconditionImpl extends ArchitecturalPreconditionIm
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case UncertaintyPackage.ACTIVE_COMPONENT_PRECONDITION__REQUIRED_ACTIVE_COMPONENT:
+		case UncertaintyPackage.ACTIVE_COMPONENT__REQUIRED_ACTIVE_COMPONENT:
 			setRequiredActiveComponent((InterfaceProvidingRequiringEntity) null);
 			return;
 		}
@@ -156,10 +155,10 @@ public class ActiveComponentPreconditionImpl extends ArchitecturalPreconditionIm
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case UncertaintyPackage.ACTIVE_COMPONENT_PRECONDITION__REQUIRED_ACTIVE_COMPONENT:
+		case UncertaintyPackage.ACTIVE_COMPONENT__REQUIRED_ACTIVE_COMPONENT:
 			return requiredActiveComponent != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //ActiveComponentPreconditionImpl
+} //ActiveComponentImpl

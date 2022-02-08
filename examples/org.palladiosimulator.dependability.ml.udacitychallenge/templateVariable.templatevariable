@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templatevariable:TemplateVariableDefinitions xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:templatevariable="http://palladiosimulator.org/Environment/TemplateVariable/1.0" id="_Rh-AwNaLEeu3JPPFxl43Jg">
+  <variables id="_aM2tQNaLEeu3JPPFxl43Jg" entityName="MLRecognition"/>
+  <variables id="_dkA2UNaLEeu3JPPFxl43Jg" entityName="ImageBrightnessMeasure"/>
+  <variables id="_e2smMNaLEeu3JPPFxl43Jg" entityName="SensorNoise"/>
+  <variables id="_gkFVENaLEeu3JPPFxl43Jg" entityName="Dirt"/>
+  <factors xsi:type="templatevariable:ProbabilisticTemplateFactor" id="_lHIpgdaLEeu3JPPFxl43Jg" entityName="ImageBrightnessFactor" scope="_dkA2UNaLEeu3JPPFxl43Jg">
+    <distributionFamily href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
+  </factors>
+  <factors xsi:type="templatevariable:ProbabilisticTemplateFactor" id="_sShSIdaLEeu3JPPFxl43Jg" entityName="MLRecognitionFactor" scope="_aM2tQNaLEeu3JPPFxl43Jg _dkA2UNaLEeu3JPPFxl43Jg _e2smMNaLEeu3JPPFxl43Jg _gkFVENaLEeu3JPPFxl43Jg">
+    <distributionFamily href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
+  </factors>
+  <factors xsi:type="templatevariable:ProbabilisticTemplateFactor" id="_5FJ3IdaLEeu3JPPFxl43Jg" entityName="NoiseFactor" scope="_e2smMNaLEeu3JPPFxl43Jg">
+    <distributionFamily href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
+  </factors>
+  <factors xsi:type="templatevariable:ProbabilisticTemplateFactor" id="__KGcIdaLEeu3JPPFxl43Jg" entityName="DirtFactor" scope="_gkFVENaLEeu3JPPFxl43Jg">
+    <distributionFamily href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
+  </factors>
+  <relation xsi:type="templatevariable:DependenceRelation" target="_aM2tQNaLEeu3JPPFxl43Jg" source="_dkA2UNaLEeu3JPPFxl43Jg"/>
+  <relation xsi:type="templatevariable:DependenceRelation" target="_aM2tQNaLEeu3JPPFxl43Jg" source="_e2smMNaLEeu3JPPFxl43Jg"/>
+  <relation xsi:type="templatevariable:DependenceRelation" target="_aM2tQNaLEeu3JPPFxl43Jg" source="_gkFVENaLEeu3JPPFxl43Jg"/>
+  <relation xsi:type="templatevariable:PersistenceRelation" entityName="ImageBrightnessRelation" interfaceVariable="_dkA2UNaLEeu3JPPFxl43Jg"/>
+  <relation xsi:type="templatevariable:PersistenceRelation" entityName="SensorNoiseRelation" interfaceVariable="_e2smMNaLEeu3JPPFxl43Jg"/>
+  <relation xsi:type="templatevariable:PersistenceRelation" entityName="DirtApproximationRelation" interfaceVariable="_gkFVENaLEeu3JPPFxl43Jg"/>
+</templatevariable:TemplateVariableDefinitions>

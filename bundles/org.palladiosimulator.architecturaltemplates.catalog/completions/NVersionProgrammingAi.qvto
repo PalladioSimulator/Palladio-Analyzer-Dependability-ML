@@ -1,0 +1,694 @@
+import org.palladiosimulator.architecturaltemplates.catalog.black.ProfilesLibrary;
+
+modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
+
+modeltype PCM_ALLOC uses 'http://palladiosimulator.org/PalladioComponentModel/Allocation/5.2';
+modeltype PCM_REP uses 'http://palladiosimulator.org/PalladioComponentModel/Repository/5.2';
+modeltype PCM_CORE uses 'http://palladiosimulator.org/PalladioComponentModel/Core/Entity/5.2';
+modeltype PCM_UNCERTAINTY uses 'http://palladiosimulator.org/Uncertainty/1.0';
+modeltype STATICMODEL uses 'http://palladiosimulator.org/Environment/StaticModel/1.0';
+
+modeltype PCM_SYS uses 'http://palladiosimulator.org/PalladioComponentModel/System/5.2';
+modeltype PCM_RES_ENV uses 'http://palladiosimulator.org/PalladioComponentModel/ResourceEnvironment/5.2';
+modeltype PCMComposition uses pcm::core::composition('http://palladiosimulator.org/PalladioComponentModel/5.2');
+modeltype PCMSEFF uses pcm::seff('http://palladiosimulator.org/PalladioComponentModel/SEFF/5.2');
+modeltype PCM_COMPLETION uses 'http://palladiosimulator.org/AnalyzerFramework/Completions/1.0';
+modeltype PCMSEFF_PERFORMANCE uses pcm::seff::seff_performance('http://palladiosimulator.org/PalladioComponentModel/SEFF/5.2');
+modeltype PCM_RESOURCETYPE uses pcm::resourcetype('http://palladiosimulator.org/PalladioComponentModel/5.2');
+modeltype PCM_REL uses 'http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2';
+modeltype DISTRIBUTION uses 'http://www.mdsd.tools/probdist/distributionfunction/1.0';
+
+// modeltype MDSTTOOLS uses 'tools.mdsd.modelingfoundations.identifier.edit';
+
+// modeltype PCM_UNCERTAINTY uses pcm::uncertainty('http://palladiosimulator.org/Uncertainty/1.0');
+// modeltype PCM_UNCERTAINTY uses 'platform:/resource/org.palladiosimulator.dependability.reliability.uncertainty/model/uncertainty.ecore'; 
+
+
+transformation NVersionProgrammingAi(inout pcmAllocation : PCM_ALLOC, inout pcmRepo: PCM_REP, inout pcmUncertainty: PCM_UNCERTAINTY, in pcmStaticmodel: STATICMODEL, inout pcmSystem: PCM_SYS);
+
+// Pseudocode 3.6: 2 - // Initilize Strings constants , PCM models
+// String constants
+property AiBasicComponent : String = "AiNVBasicComponent";
+property AiAssemblyContext : String = "AiNVAssemblyContext";
+
+property NVERSION_ASSEMBLY_CONTEXT_PROFILE : String = "NVersionProgrammingAiProfile";
+property NVERSION_ASSEMBLY_CONTEXT_STEREOTYPE : String = "AiNVAssemblyContext";
+property NVERSION_BASIC_COMPONENT_STEREOTYPE : String = "AiNVBasicComponent";
+property NVERSION_GROUNDPROBABILISTICNETWORK_STEREOTYPE : String = "NVGroundProbabilisticNetwork";
+
+property NVERSION_PRECONDITION : String = "NVersionArchitecturalPrecondition";
+
+property AICHANNELTOVOTER : String = "AiChannelToVoter";
+
+
+// Models
+property allocation : Allocation = pcmAllocation.rootObjects()![Allocation];
+// property system : System = allocation.system_Allocation;
+property system : System = pcmSystem.rootObjects()![System];
+property resourceEnvironment : ResourceEnvironment = allocation.targetResourceEnvironment_Allocation;
+// property pcmUncertainty : Uncertainty = new Uncertainty(); 
+property repository : Repository = pcmRepo.rootObjects()![Repository];
+property uncertaintyRepo : UncertaintyRepository = pcmUncertainty.rootObjects()![UncertaintyRepository];
+property probabilisticRepo : ProbabilisticModelRepository = pcmStaticmodel.rootObjects()![ProbabilisticModelRepository]; 
+
+property AICHANNEL : String = "AiChannel";
+
+// Pseudocode 3.6: 3 - main()
+main() {
+	
+	// Pseudocode 3.6: 4 - checkConstraints ()
+	log("Started main of QvTO!");
+	var assemblyContexts : Set(AssemblyContext) := system.assemblyContexts__ComposedStructure;
+	//log("assemblyContexts emtpy: " + assemblyContexts->isEmpty().toString());
+	
+	var basicComponents : Set(BasicComponent) := repository.components__Repository->selectByKind(BasicComponent);
+
+	assert fatal(isProfileApplied(system.oclAsType(EObject), NVERSION_ASSEMBLY_CONTEXT_PROFILE))
+		with log ("The system has no profile " + NVERSION_ASSEMBLY_CONTEXT_PROFILE + " applied!");	
+		
+	assert fatal(hasAppliedStereotype(assemblyContexts, NVERSION_ASSEMBLY_CONTEXT_STEREOTYPE))
+		with log ("No assembly context has the stereotype " + NVERSION_ASSEMBLY_CONTEXT_STEREOTYPE + " applied!");
+	
+	assert fatal(hasAppliedStereotype(basicComponents, NVERSION_BASIC_COMPONENT_STEREOTYPE))
+		with log ("No basic components  has the stereotype " + NVERSION_BASIC_COMPONENT_STEREOTYPE + " applied!");
+	
+	//assert fatal(hasAppliedStereotype(groundProbabilisticModels, NVERSION_GROUNDPROBABILISTICNETWORK_STEREOTYPE))
+	//	with log ("No GroundProbabilisticNetwork has the stereotype " + NVERSION_GROUNDPROBABILISTICNETWORK_STEREOTYPE + " applied!");
+
+	log("QvTO: Finished asserts!");
+	
+	// Pseudocode 3.6: 6 - AiBasicComponents = getAiBasicComponents ( )
+	var aiBasicComponents : Set(BasicComponent) := 
+	basicComponents->select(basicComponent: BasicComponent |
+		 hasAppliedStereotype(basicComponent, NVERSION_BASIC_COMPONENT_STEREOTYPE)
+	);
+	
+	// Pseudocode 3.6: 7 - AiAssemblys = getAiAssembly ( )
+	var aiBasedAssemblyContexts : Set(AssemblyContext) :=
+		assemblyContexts
+		->select(assemblyContext : AssemblyContext |
+			hasAppliedStereotype(assemblyContext, NVERSION_ASSEMBLY_CONTEXT_STEREOTYPE)
+	);
+	
+	aiBasedAssemblyContexts->forEach(context) {
+		completeUncertaintyRepo(context)
+	};
+	
+	/*
+	var nvGroundProbabilisticModel : Set(GroundProbabilisticNetwork) :=
+		groundProbNetwork
+		->select(groundProbNetwork : GroundProbabilisticNetwork |
+			hasAppliedStereotype(groundProbNetwork, NVERSION_GROUNDPROBABILISTICNETWORK_STEREOTYPE)
+	);
+	*/
+	
+	log("aiBasicComponents->isEmpty():");
+	log(aiBasicComponents->isEmpty().toString());
+	
+	// create one composite component with:
+	// 	- sinkevent connection of ai component
+	// 	- sourceevent connection of ai component
+	//  - voter
+	//  - eventChannel between AIs and Voter called "VoterChannel"
+	//  - change sourceevent connection of each ai to newly created EventChannel "VoterChannel"
+	//  - Connector voter to "VoterChannel" and delgate to composite component
+	
+	var allAiAssemblyContext : Set(AssemblyContext) := null;
+	
+	// first add all AIs which are already in the system defined by comparing the ids of the BasicComponents.
+	aiBasedAssemblyContexts->forEach(aiAssembly) {
+		aiBasicComponents->forEach(aiBasicCom) {
+			if(aiAssembly.encapsulatedComponent__AssemblyContext.id = aiBasicCom.id) {
+				log("found components in the system!");
+				allAiAssemblyContext += aiAssembly;
+			};	
+		};
+	};
+	// Pseudocode 3.6: 8 - MissingBasicComponents = AiBasicComponents \ AiAssemblys .getBasicComponent ( )
+	// create AssemblyContext for all missing ai Components defined in the repository
+	var missingBasicComponents : Set(BasicComponent) := aiBasicComponents
+		->select(components 
+		|aiBasedAssemblyContexts.encapsulatedComponent__AssemblyContext
+		->exists(componentAssembly |componentAssembly.id != components.id));
+	
+	// Pseudocode 3.6: 9 - MissingAssemblyContexts = createAssemblyContexts (MissingBasicComponents )
+	var missingAiAssemblyContexts : Set(AssemblyContext) := null;
+	 
+	log("missingBasicComponents is emtpy: " + missingBasicComponents->isEmpty().toString());
+	missingBasicComponents->forEach(missingBC) {
+		log("missingBasicComponent: " + missingBC.id);
+		// create assemblyContext
+		var missingAssemblyContext : AssemblyContext := new AssemblyContext(missingBC);
+		missingAiAssemblyContexts += missingAssemblyContext;
+		// dont forget missing eventChannel Connections
+				
+	};
+	
+	// Pseudocode 3.6: 11 - removeInternalFailureOccurenceDescriptionsForAll ( AiBasicComponents )
+	// remove Imagerecognition failuretype
+	aiBasicComponents->forEach(component) {
+		component.serviceEffectSpecifications__BasicComponent
+			->selectByKind(ResourceDemandingSEFF)
+			->forEach(seff) {
+				seff.steps_Behaviour->forEach(step) {
+					if (step.oclIsTypeOf(InternalAction)) {
+						step.oclAsType(InternalAction)
+							.internalFailureOccurrenceDescriptions__InternalAction := null;
+					};
+				};
+			};
+	};
+	
+	// Pseudocode 3.6: 13 - AllAiAssemblys = AiAssemblys + MissingAssemblyContexts
+	allAiAssemblyContext += missingAiAssemblyContexts;
+	
+	
+	// get sourceRole of the EventGroup after the Ai-component
+	var sourceRoles : Set(SourceRole) := aiBasedAssemblyContexts->any(true).encapsulatedComponent__AssemblyContext
+		->selectByKind(BasicComponent)->any(true).requiredRoles_InterfaceRequiringEntity->selectByKind(SourceRole);
+	
+	// so that the filter event types (including parameter) equals the ai event types 
+	var oldAiOpProvidedRole: OperationProvidedRole := allAiAssemblyContext->any(true).encapsulatedComponent__AssemblyContext.providedRoles_InterfaceProvidingEntity->selectByKind(OperationProvidedRole)->any(true);
+	
+	// Pseudocode 3.6: 15 - oldParameters = getParameters ( getAnyOpProvidedRole ( AllAiAssemblys ) ) 
+	var oldParameters : Set(Parameter) := oldAiOpProvidedRole.providedInterface__OperationProvidedRole.signatures__OperationInterface.parameters__OperationSignature->asSet();
+ 			
+ 	// Pseudocode 3.6: 17 - voterSinkRole = new SinkRole ( AllAiAssemblys −>any( true ) . getEventGroup ())
+	// create voter sink- and source-role
+	var voterSinkRole : SinkRole := new SinkRole("Voter");
+	voterSinkRole.eventGroup__SinkRole := 
+		allAiAssemblyContext->any(true)
+		.encapsulatedComponent__AssemblyContext
+		.providedRoles_InterfaceProvidingEntity
+		->selectByKind(SinkRole)->any(true)
+		.eventGroup__SinkRole;
+
+	// Pseudocode 3.6: 18 - voterSourceRole = new SourceRole ( AllAiAssemblys −>any( true ) . getEventGroup () )
+	var voterSourceRole : SourceRole := new SourceRole("Voter");
+	voterSourceRole.eventGroup__SourceRole := 
+		allAiAssemblyContext->any(true)
+		.encapsulatedComponent__AssemblyContext
+		.requiredRoles_InterfaceRequiringEntity
+		->selectByKind(SourceRole)->any(true)
+		.eventGroup__SourceRole;	
+		
+	
+	// Pseudocode 3.6: 20 - opInterface = getInterface ( getAnyOpProvidedRole ( AllAiAssemblys ) )
+	// add operation required connection to ai interface
+	var opInterface : OperationInterface := oldAiOpProvidedRole.providedInterface__OperationProvidedRole;
+	log("opInterface: " + opInterface.entityName);
+	
+	// Pseudocode 3.6: 22 - OpRequireds = createOperationRequiredRoleForEach ( AllAiAssemblys , opInterface )
+	// TODO mehrer erzeugen
+	var opRequireds : Set(OperationRequiredRole) := null;
+	allAiAssemblyContext->forEach(ai) {
+			var opR : OperationRequiredRole := new OperationRequiredRole(opInterface, ai.id);
+			opRequireds += opR;
+	};
+	log("opRequired: " + opRequireds->any(true).entityName);
+	
+	var eventTypeAfterAi : EventType := null;
+	
+	// Pseudocode 3.6: 24 - voter = createVoter ( voterSinkRole , voterSourceRole , opInterface , OpRequireds , AllAiAssemblys )
+		// create voter 
+	var voter : AssemblyContext := 
+		createVoter(
+			voterSinkRole, 
+			voterSourceRole,
+			opInterface,
+			opRequireds,
+			allAiAssemblyContext 
+			); // it breaks with allAiAssemblyContext -> TODO: figure out why code breaks here. 
+	
+	voter.encapsulatedComponent__AssemblyContext.requiredRoles_InterfaceRequiringEntity += opRequireds; 
+	
+
+	// Pseudocode 3.6: 26 - replaceEventChannelSinkConnectors ( AiAssemblys , voter )
+	// assembly context connections:
+	var allEventSinkConnectors : Set(EventChannelSinkConnector) := system.connectors__ComposedStructure->selectByKind(EventChannelSinkConnector);
+	// allEventSinkConnectors.assemblyContext__EventChannelSinkConnector.id
+	var aiEventChannelSinkConnector : EventChannelSinkConnector := 
+		allEventSinkConnectors->select(connector |connector.assemblyContext__EventChannelSinkConnector.id = aiBasedAssemblyContexts->any(true).id)->any(true);
+		
+	aiEventChannelSinkConnector.assemblyContext__EventChannelSinkConnector := voter;
+	aiEventChannelSinkConnector.sinkRole__EventChannelSinkConnector := voterSinkRole;
+	// var connectors : Connector :=  
+	 
+	// Pseudocode 3.6: 27 - replaceEventChannelSourceConnectors ( AiAssemblys , voter )
+	var allEventSourceConnectors : Set(EventChannelSourceConnector) := system.connectors__ComposedStructure->selectByKind(EventChannelSourceConnector);
+	var aiEventChannelSourceConnector : EventChannelSourceConnector := 
+		allEventSourceConnectors->select(connector |connector.assemblyContext__EventChannelSourceConnector.id = aiBasedAssemblyContexts->any(true).id)->any(true);
+	
+	aiEventChannelSourceConnector.assemblyContext__EventChannelSourceConnector := voter;
+	aiEventChannelSourceConnector.sourceRole__EventChannelSourceRole := voterSourceRole;
+	
+	var voterRequiredRoles: Set(OperationRequiredRole) := 
+		voter.encapsulatedComponent__AssemblyContext
+		.requiredRoles_InterfaceRequiringEntity
+		->selectByKind(OperationRequiredRole);
+	
+	// Pseudocode 3.6: 29 - forEach ( aiAssembly : AllAiAssemblys )
+	// assembly Connectors between voter and ai assembly Contexts
+	allAiAssemblyContext->forEach(aiAssemblyContext) {
+		
+		// Pseudocode 3.6: 30 - providedRole = getProvidedRole ( aiAssembly )
+		var providedRole : OperationProvidedRole := 
+			aiAssemblyContext.encapsulatedComponent__AssemblyContext
+			.providedRoles_InterfaceProvidingEntity
+			->selectByKind(OperationProvidedRole)->any(true);
+		
+		// Pseudocode 3.6: 31 - requiredRole = findRequiredRoleToAssemblyContext ( aiAssembly ,getRequiredRoles ( voter ) )
+		var requiredRole := findRequiredRoleToAssemblyContext(aiAssemblyContext, voterRequiredRoles);
+		// Pseudocode 3.6: 32 - new AssemblyConnector ( providedRole , aiAssembly , requiredRole ,voter)
+		var assemblyContector : AssemblyConnector := 
+			new AssemblyConnector(providedRole, aiAssemblyContext,
+				requiredRole, voter);
+	};
+
+	// Pseudocode 3.6: 35 - createAllocationForAll ( MissingAssemblyContexts + voter ,findResourceContainer ( aiAssemblys )−>any( true ) )
+	var rc : ResourceContainer = findResourceContainer(aiBasedAssemblyContexts->any(true));
+	
+
+	var voterAlloc: AllocationContext := new AllocationContext(voter, rc, null);
+	
+	missingAiAssemblyContexts->forEach(missingAiAssemblyContext) {
+		var missingAiAlloc: AllocationContext := new AllocationContext(missingAiAssemblyContext, rc, null);
+	};
+	
+//	// Pseudocode 3.6: 37 - updateUncertainty ()
+//	// Pseudocode 3.7: 1 - updateUncertainty ()
+//	// update uncertainty models:
+//	// Pseudocode 3.7: 3 - nversion_GPN = findNversionGroundProbabilisticNetwork ()
+//	var nversionNetwork : GroundProbabilisticNetwork := probabilisticRepo.models->select(network| network.entityName = "NVersionSensitivityModel")->any(true);
+//	// Pseudocode 3.7: 5 - nversion_UIFT = findUncertaintyInducedFailureType ()
+//	var uncertaintyInducedFailure : UncertaintyInducedFailureType := uncertaintyRepo.uncertaintyInducedFailureTypes->any(true);
+//	// Pseudocdoe 3.7: 4 - nversion_P = findNversionPrecondition ()
+//	var nversionPrecondition : ActiveComponentPrecondition := 	
+//		uncertaintyRepo.architecturalPreconditions
+//		->select(condition| condition.entityName = "NVersionProgramming_Planner_CompositeComponent")
+//		->selectByKind(ActiveComponentPrecondition)->any(true);
+//	// Pseudocode 3.7: 7 - nversion_P . setRequiredActiveComponent = voter
+//	nversionPrecondition.requiredActiveComponent := voter.encapsulatedComponent__AssemblyContext;
+//	// Pseudocode 3.7: 9 - nversion_UIFT . setPrecondition ( nversion_P )
+//	uncertaintyInducedFailure.architecturalPreconditions := nversionPrecondition;
+//	// Pseudocdoe 3.7: 10 - nversion_UIFT . setUncertaintyModel ( nversion_GPN )
+//	uncertaintyInducedFailure.uncertaintyModel := nversionNetwork;
+
+	
+};
+
+helper completeUncertaintyRepo(aiAssemblyContext: AssemblyContext) {
+	// Retrieve uncertainty failure type; assuming that an AI component is a basic component with a single seff and a single failure type	
+	var seff := aiAssemblyContext.encapsulatedComponent__AssemblyContext.oclAsType(BasicComponent).serviceEffectSpecifications__BasicComponent->asList()->first();
+	var refinedFailureType := seff.oclAsType(ResourceDemandingSEFF).steps_Behaviour
+		->select(action: AbstractAction | action.oclIsTypeOf(InternalAction))
+		.oclAsType(InternalAction)
+		.internalFailureOccurrenceDescriptions__InternalAction->asList()->first().softwareInducedFailureType__InternalFailureOccurrenceDescription;
+	var failureType := uncertaintyRepo.uncertaintyInducedFailureTypes->select(type | type._refines.id = refinedFailureType.id)->any(true);
+	
+	assert fatal(failureType != null) 
+		with log ("There is no failure type that references the proper AI component.");
+	
+	var countermeasure := new GlobalUncertaintyCountermeasure(failureType);
+	
+	var improvedModelName := getStringTaggedValue(aiAssemblyContext, "improvedModelName", NVERSION_ASSEMBLY_CONTEXT_STEREOTYPE);
+	var improvedModel := probabilisticRepo.models->select(model | model.entityName = improvedModelName)->any(true);
+	
+	var precondition := new UncertaintyModelEquality();
+	precondition.first := failureType.uncertaintyModel;
+	precondition.second := improvedModel;
+	
+	countermeasure.architecturalPreconditions := precondition;
+	countermeasure.improvedUncertaintyModel := improvedModel;
+	
+	uncertaintyRepo.architecturalPreconditions += precondition;
+	uncertaintyRepo.architecturalCountermeasures += countermeasure;
+}
+
+constructor GlobalUncertaintyCountermeasure::GlobalUncertaintyCountermeasure(failureType : UncertaintyInducedFailureType) {
+	entityName := "NVersion";
+	appliedFailureType := failureType;
+	architecturalPreconditions := null;
+};
+
+constructor UncertaintyModelEquality::UncertaintyModelEquality() {
+	entityName := "shareSameModelStructure";
+	first := null;
+	second := null;
+};
+
+helper Set(GroundProbabilisticNetwork)::makePCMEntity(): Set(Entity) {
+	var entitys : Set(Entity) := null;
+	self->forEach(network){
+		entitys += network.deepclone()-> map Entity();
+	};
+	return entitys;
+};
+
+mapping GroundProbabilisticNetwork::Entity(): Entity {
+	init {
+	result.entityName := self.entityName;
+	}
+};
+
+abstract mapping inout Connector::abstractCreateFilterForConnector(originalAssemblyContext : AssemblyContext, providingAssemblyContext: AssemblyContext) : Connector {
+	entityName := self.entityName+"_from_Voter";
+	parentStructure__Connector := self.parentStructure__Connector;
+}
+
+helper createVoter(
+	sinkRole: SinkRole, 
+	sourceRole: SourceRole,
+	opInterface : OperationInterface,  
+	roleExternals: Set(OperationRequiredRole),
+	aiAssemblyContexts: Set(AssemblyContext)
+	) : AssemblyContext {
+
+	var aiComponentName: String := aiAssemblyContexts->any(true).encapsulatedComponent__AssemblyContext.entityName;
+			
+			
+			// TODO
+	var filter := 
+		new BasicComponent(
+			aiComponentName,
+			sinkRole, 
+			sourceRole,
+			opInterface,
+		 	roleExternals,
+			aiAssemblyContexts
+			);
+	var filterAssemblyContext : AssemblyContext := new AssemblyContext(filter);	
+	
+//	var rc : ResourceContainer = findResourceContainer(self);
+	
+	//var filterAllocationContext : AllocationContext := new AllocationContext(filterAssemblyContext, rc, null);
+	
+	
+	return filterAssemblyContext;
+};
+
+
+constructor BasicComponent::BasicComponent(
+	name: String,
+	sinkRole : SinkRole, 
+	sourceRole : SourceRole,
+	opInterface : OperationInterface,  
+	roleExternals: Set(OperationRequiredRole),	
+	aiAssemblyContexts: Set(AssemblyContext)
+	) {
+
+	entityName := 'Voter_' + name;
+	providedRoles_InterfaceProvidingEntity := sinkRole;
+	requiredRoles_InterfaceRequiringEntity := sourceRole;
+	
+	repository__RepositoryComponent := aiAssemblyContexts->any(true).encapsulatedComponent__AssemblyContext.repository__RepositoryComponent;
+	componentParameterUsage_ImplementationComponentType := aiAssemblyContexts->any(true).encapsulatedComponent__AssemblyContext[ImplementationComponentType].componentParameterUsage_ImplementationComponentType;
+	
+	serviceEffectSpecifications__BasicComponent := 
+		new ResourceDemandingSEFF(
+			aiAssemblyContexts,
+			opInterface, 
+			roleExternals,
+			sourceRole,
+			sinkRole); // todo
+
+};
+
+constructor OperationRequiredRole::OperationRequiredRole(interface : OperationInterface, name: String) {
+	requiredInterface__OperationRequiredRole := interface; // hier das interface
+	// requiringEntity_RequiredRole := null;
+	entityName := name;	
+};
+
+constructor SinkRole::SinkRole(name: String) { // parameter sinkrole von ai?
+	eventGroup__SinkRole := null; // TODO 1: sinkrole von AI
+	// ProvidedRole
+	providingEntity_ProvidedRole := null;
+	// Role
+	entityName := AICHANNELTOVOTER + 'SinkRole' + '_' + name; // TODO 2: sinkrole name von AI
+};
+
+constructor SourceRole::SourceRole(name: String) {
+	eventGroup__SourceRole := null; // TODO 3: setzen
+	// RequiredRole
+	requiringEntity_RequiredRole := null;
+	// Role
+	entityName := AICHANNELTOVOTER + 'SourceRole' + '_' + name;
+};
+
+constructor AssemblyConnector::AssemblyConnector(
+	providedRole: OperationProvidedRole, 
+	providingAssemblyContext: AssemblyContext,
+	requiredRole : OperationRequiredRole,
+	requiringAssemblyContext: AssemblyContext
+	
+	) {
+	entityName := "newAssemblyConnectorVoter";
+	parentStructure__Connector := system;
+	providedRole_AssemblyConnector := providedRole;
+	providingAssemblyContext_AssemblyConnector := providingAssemblyContext;	
+	requiredRole_AssemblyConnector := requiredRole;
+	requiringAssemblyContext_AssemblyConnector := requiringAssemblyContext;
+};
+
+constructor ResourceDemandingSEFF::ResourceDemandingSEFF(
+	aiAssemblyContexts : Set(AssemblyContext), 
+	opInterface : OperationInterface, 
+	roleExternals: Set(OperationRequiredRole),
+	sourceRole : SourceRole,
+	oldSinkrole: SinkRole){
+	
+	describedService__SEFF := oldSinkrole.eventGroup__SinkRole.eventTypes__EventGroup->any(true);
+	
+	var startAction : StartAction := new StartAction(null);
+	
+	var forkAction : ForkAction := new ForkAction();
+	
+	var normalBasicComponent_ : BasicComponent := aiAssemblyContexts.encapsulatedComponent__AssemblyContext->selectByType(BasicComponent)->any(true); // damit man eine basicComponent erhält 	
+	var resourceDemandSEFF_ : ResourceDemandingSEFF:= normalBasicComponent_.serviceEffectSpecifications__BasicComponent->selectByType(ResourceDemandingSEFF)->any(true);
+	var emitEventAction_ : EmitEventAction := resourceDemandSEFF_.steps_Behaviour->selectByType(EmitEventAction)->any(true);
+			
+	
+	aiAssemblyContexts->forEach(aiAssemblyContext) {
+		// var operationSignature: OperationSignature := aiAssemblyContext.encapsulatedComponent__AssemblyContext->selectByKind(BasicComponent).;
+		var operationSignature: OperationSignature := opInterface.signatures__OperationInterface->any(true);
+		var roleExternal : OperationRequiredRole := findRequiredRoleToAssemblyContext(aiAssemblyContext, roleExternals);
+		var externalCall := new ExternalCallAction(aiAssemblyContext.entityName,null, roleExternal,operationSignature);
+		
+		var forkCalls : ForkedBehaviour := new ForkedBehaviour(externalCall);
+		externalCall.predecessor_AbstractAction := forkCalls.steps_Behaviour->selectByKind(StartAction)->any(true);
+		externalCall.successor_AbstractAction := forkCalls.steps_Behaviour->selectByKind(StopAction)->any(true);
+		
+		
+		/*var eventGroupBetweenAiAndComponentBefore : String := oldSinkrole.eventGroup__SinkRole.id;
+		
+		log("finding proper variable usage..");
+		system.assemblyContexts__ComposedStructure->forEach(assemblyContext) {
+			var normalBasicComponent : BasicComponent := assemblyContext.encapsulatedComponent__AssemblyContext->selectByType(BasicComponent)->any(true); // damit man eine basicComponent erhält 
+			var eventGroupId : String := normalBasicComponent.requiredRoles_InterfaceRequiringEntity->selectByType(SourceRole)->any(true).eventGroup__SourceRole.id;
+			if(eventGroupBetweenAiAndComponentBefore = eventGroupId) { // found eventgroup between Ai and the componente before that. This should be now before the filter. But filter needs usage variable of the emiteventAction.
+				log("found variable usage! Starting coping..");
+				
+				var resourceDemandSEFF : ResourceDemandingSEFF:= normalBasicComponent.serviceEffectSpecifications__BasicComponent->selectByType(ResourceDemandingSEFF)->any(true);
+				var emitEventAction : EmitEventAction := resourceDemandSEFF.steps_Behaviour->selectByType(EmitEventAction)->any(true);
+				
+				externalCall.inputVariableUsages__CallAction := emitEventAction.inputVariableUsages__CallAction.deepclone();
+				log("copied successfuly!");
+			};
+		};*/
+	
+		
+		//externalCall.inputVariableUsages__CallAction := null;
+		//externalCall.returnVariableUsage__CallReturnAction := emitEventAction_.inputVariableUsages__CallAction.deepclone();
+		
+		forkAction.asynchronousForkedBehaviours_ForkAction += forkCalls;
+		
+	};
+	
+	var syncPoint : SynchronisationPoint := new SynchronisationPoint();
+	forkAction.synchronisingBehaviours_ForkAction := syncPoint;
+	
+	forkAction.predecessor_AbstractAction := startAction;
+	startAction.successor_AbstractAction := forkAction;
+	
+	
+	// emit event
+	var eventType : EventType := sourceRole.eventGroup__SourceRole.eventTypes__EventGroup->any(true);
+	
+	var eventAction : EmitEventAction := new EmitEventAction(eventType, forkAction, sourceRole, aiAssemblyContexts->any(true), oldSinkrole);
+	forkAction.successor_AbstractAction := eventAction;
+	
+	var stopAction : StopAction := new StopAction(eventAction);
+	eventAction.successor_AbstractAction := stopAction;
+	
+	steps_Behaviour := startAction;
+	steps_Behaviour += forkAction;
+	steps_Behaviour += eventAction;
+	steps_Behaviour += stopAction;
+	
+	
+};
+
+constructor StartAction::StartAction(nextAction: AbstractAction) {
+	// Entity
+	entityName := "startAction";
+	// AbstractInternalControlFlowAction
+	infrastructureCall__Action := null;
+	resourceCall__Action := null;
+	resourceDemand_Action := null;
+	// AbstractAction
+	predecessor_AbstractAction := null;
+	resourceDemandingBehaviour_AbstractAction := null;
+	successor_AbstractAction := nextAction;
+};
+
+constructor EmitEventAction::EmitEventAction(
+	eventType: EventType,
+	predecessor: AbstractAction,
+	sourceRole : SourceRole,
+	aiAssemblyContext: AssemblyContext,
+	oldSinkrole	: SinkRole
+	) {
+	
+	eventType__EmitEventAction := eventType;
+	sourceRole__EmitEventAction := sourceRole;
+	// AbstractAction
+	predecessor_AbstractAction := predecessor;
+	resourceDemandingBehaviour_AbstractAction := null;
+	successor_AbstractAction := null;
+	// CallAction
+	entityName := null;
+	// inputVariableUsages__CallAction kopie wie aus der EnrichedImage
+	// aiassembly.sinkrole -> alte eventgroup.id
+	// über alle assemblyContexte itereiren wo gilt : assemblyContext.sourceRole.eventgroup.id = dem oben
+	// dann habe ich also den kontext gefunden, dann schnappe alle emiteventactions und deepclone auf VariableUsage
+	
+    var normalBasicComponent : BasicComponent := aiAssemblyContext.encapsulatedComponent__AssemblyContext->selectByType(BasicComponent)->any(true); // damit man eine basicComponent erhält
+    
+    var resourceDemandSEFFs : Set(ResourceDemandingSEFF) := normalBasicComponent.serviceEffectSpecifications__BasicComponent->selectByType(ResourceDemandingSEFF);
+	// problem: resourceDemandSEFFs contains all seffs, including those which don't have an emitEventAction
+    var rdseffWithEventType : EventType := resourceDemandSEFFs.describedService__SEFF->selectByKind(EventType)->any(true);
+    // solution: select one resourceDemandSEFF, which describedService__SEFF is by kind EventType -> then there exists an emitEventAction.
+    var resourceDemandSEFF : ResourceDemandingSEFF := resourceDemandSEFFs->select(rdseff|rdseff.describedService__SEFF.id = rdseffWithEventType.id)->any(true);
+    
+    var emitEventAction : EmitEventAction := resourceDemandSEFF.steps_Behaviour->selectByType(EmitEventAction)->any(true);
+    inputVariableUsages__CallAction := emitEventAction.inputVariableUsages__CallAction.deepclone();
+
+};
+
+constructor StopAction::StopAction(lastAction : AbstractAction) {
+	predecessor_AbstractAction := lastAction;
+};
+
+constructor ExternalCallAction::ExternalCallAction(
+	name : String,
+	predecessor: AbstractAction,
+	roleExternal: OperationRequiredRole,
+	operationSignature: OperationSignature) {
+		entityName := name;
+		calledService_ExternalService := operationSignature;
+		retryCount := null;
+		role_ExternalService := roleExternal;
+			// AbstractAction
+		predecessor_AbstractAction := predecessor;
+		resourceDemandingBehaviour_AbstractAction := null;
+		successor_AbstractAction := null;
+};
+
+constructor ForkAction::ForkAction() {
+	// ForkedBehaviour
+	// SynchronisationPoint
+	asynchronousForkedBehaviours_ForkAction := null;
+	synchronisingBehaviours_ForkAction := null;
+};
+
+constructor ForkedBehaviour::ForkedBehaviour(externalCall : ExternalCallAction) {
+	forkAction_ForkedBehaivour := null;
+	var start : StartAction := new StartAction(null);
+	steps_Behaviour := start;
+	var stop : StopAction := new StopAction(null);
+	
+	if(externalCall = null) {
+		//MAX: add internal action relevant for reliability anlaysis
+		var internalAction := new InternalAction();
+		steps_Behaviour += internalAction;
+		start.successor_AbstractAction := internalAction;	
+		internalAction.predecessor_AbstractAction := start;
+		internalAction.successor_AbstractAction := stop;
+		stop.predecessor_AbstractAction := internalAction;
+	} else {
+		
+		start.successor_AbstractAction := externalCall;
+		// can not be reconnected, do it external!
+		//externalCall.predecessor_AbstractAction := start;
+		//externalCall.successor_AbstractAction := stop;	
+		steps_Behaviour += externalCall;
+		stop.predecessor_AbstractAction := externalCall;
+	};
+	
+	steps_Behaviour += stop;
+	
+};
+
+//MAX: failure specific internal action constructor
+constructor InternalAction::InternalAction() {
+	entityName := "makeVote";
+	internalFailureOccurrenceDescriptions__InternalAction += new InternalFailureOccurrenceDescription();
+};
+
+constructor InternalFailureOccurrenceDescription::InternalFailureOccurrenceDescription() {
+	failureProbability := 0.1; //This is actually a dummy value
+	softwareInducedFailureType__InternalFailureOccurrenceDescription := repository.failureTypes__Repository
+		->selectByType(SoftwareInducedFailureType)
+		->any(true); // Assuming only one software induced failure type in the repo which corresponds to the ML specific failure type...
+};
+
+constructor SynchronisationPoint::SynchronisationPoint() {
+	synchronousForkedBehaviours_SynchronisationPoint := new ForkedBehaviour(null);
+};
+
+
+constructor AssemblyContext::AssemblyContext(bc : RepositoryComponent){
+	entityName := "Assembly_"+bc.entityName;
+	encapsulatedComponent__AssemblyContext := bc;
+	parentStructure__AssemblyContext := system;
+};
+
+constructor AllocationContext::AllocationContext(ac : AssemblyContext, rc: ResourceContainer, ec: EventChannel){
+	var name : String := null;
+		
+	if(ac != null) {
+		name := "Allocation_" + ac.entityName;
+	} else {
+		name := "Allocation_" + ec.entityName;
+	};
+	entityName := name;
+	assemblyContext_AllocationContext := ac;
+	resourceContainer_AllocationContext := rc;
+	allocation_AllocationContext := allocation;
+	eventChannel__AllocationContext := ec;
+};
+
+/**
+ * Retruns a OperationRequiredRole which name is equal to the id of the parameter assemblyContext.
+ */
+query findRequiredRoleToAssemblyContext(assemblyContext : AssemblyContext, requirdRoles : Set(OperationRequiredRole)):OperationRequiredRole  {
+	// since only one role has the id of the assembly context as name, any() should be fine.
+	return requirdRoles->select(role|role.entityName = assemblyContext.id)->any(true);
+};
+
+/**
+ * Returns the ResourceContainer the AllocationContext corresponds to.
+ */
+query findResourceContainer(assemblyContext : AssemblyContext) : ResourceContainer {
+	var rcAlloc : Set(AllocationContext) = null;
+		
+	allocation.allocationContexts_Allocation->forEach(alloc) {
+		if(alloc.assemblyContext_AllocationContext.id = assemblyContext.id) {
+			rcAlloc += alloc;
+		};
+	};
+	return rcAlloc->selectOne(true).resourceContainer_AllocationContext;
+};
+
+	  

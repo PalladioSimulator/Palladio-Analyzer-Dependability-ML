@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:emfprofile="http://www.modelversioning.org/emfprofile/1.1" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation">
+  <emfprofile:Profile xmi:id="_yYDN0DbyEeyCQ69JbDj2Qw" name="NVersionProgrammingAiProfile" nsURI="org.palladiosimulator.architecturaltemplates.catalog.profiles.NVersionProgrammingAi" nsPrefix="org.palladiosimulator.architecturaltemplates.catalog.profiles">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_jIMmMDb3EeyBcdU8LAvwGg" source="org.palladiosimulator.architecturaltemplate">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_mpF6EDb3EeyBcdU8LAvwGg" key="AT" value="platform:/plugin/org.palladiosimulator.architecturaltemplates.catalog/Default.architecturaltemplates#_wKbcIBR2EeyN4cnysgFiKg"/>
+    </eAnnotations>
+    <eClassifiers xmi:type="emfprofile:Stereotype" xmi:id="_UQkncDbzEeyCQ69JbDj2Qw" name="AiNVAssemblyContext">
+      <eSuperTypes xmi:type="ecore:EClass" href="http://www.modelversioning.org/emfprofile/application/1.1#//StereotypeApplication"/>
+      <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_1caGwIT-EeyrKZLlGMfE_w" name="improvedModelName" lowerBound="1">
+        <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eStructuralFeatures>
+      <extensions xmi:type="emfprofile:Extension" xmi:id="_WLifUDbzEeyCQ69JbDj2Qw" lowerBound="1">
+        <target xmi:type="ecore:EClass" href="http://palladiosimulator.org/PalladioComponentModel/5.2#//core/composition/AssemblyContext"/>
+      </extensions>
+    </eClassifiers>
+    <eClassifiers xmi:type="emfprofile:Stereotype" xmi:id="_7ZaEIDbzEeyCQ69JbDj2Qw" name="AiNVBasicComponent">
+      <eSuperTypes xmi:type="ecore:EClass" href="http://www.modelversioning.org/emfprofile/application/1.1#//StereotypeApplication"/>
+      <extensions xmi:type="emfprofile:Extension" xmi:id="_8zmKMDbzEeyCQ69JbDj2Qw">
+        <target xmi:type="ecore:EClass" href="http://palladiosimulator.org/PalladioComponentModel/5.2#//repository/BasicComponent"/>
+      </extensions>
+    </eClassifiers>
+    <eClassifiers xmi:type="emfprofile:Stereotype" xmi:id="_QKNJ0DvnEeypyrSFXJhtlA" name="NVGroundProbabilisticNetwork">
+      <eSuperTypes xmi:type="ecore:EClass" href="http://www.modelversioning.org/emfprofile/application/1.1#//StereotypeApplication"/>
+      <extensions xmi:type="emfprofile:Extension" xmi:id="_ZSNCIDyBEeywd95NhF7ulg" lowerBound="1" upperBound="1">
+        <target xmi:type="ecore:EClass" href="http://palladiosimulator.org/Environment/StaticModel/1.0#//GroundProbabilisticNetwork"/>
+      </extensions>
+    </eClassifiers>
+  </emfprofile:Profile>
+  <notation:Diagram xmi:id="_yYSeYDbyEeyCQ69JbDj2Qw" type="EMFProfile" element="_yYDN0DbyEeyCQ69JbDj2Qw" name="NVersionProgrammingAi.emfprofile_diagram" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_8XqRkDbyEeyCQ69JbDj2Qw" type="2002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_8Xq4oDbyEeyCQ69JbDj2Qw" type="5002"/>
+      <children xmi:type="notation:BasicCompartment" xmi:id="_8Xq4oTbyEeyCQ69JbDj2Qw" type="7004">
+        <styles xmi:type="notation:SortingStyle" xmi:id="_8Xq4ojbyEeyCQ69JbDj2Qw"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_8Xq4ozbyEeyCQ69JbDj2Qw"/>
+      </children>
+      <children xmi:type="notation:BasicCompartment" xmi:id="_8Xq4pDbyEeyCQ69JbDj2Qw" type="7005">
+        <styles xmi:type="notation:SortingStyle" xmi:id="_8Xq4pTbyEeyCQ69JbDj2Qw"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_8Xq4pjbyEeyCQ69JbDj2Qw"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_8XqRkTbyEeyCQ69JbDj2Qw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_8XqRkjbyEeyCQ69JbDj2Qw" fontName=".AppleSystemUIFont"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_8XqRkzbyEeyCQ69JbDj2Qw" x="296" y="132" width="171" height="87"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_UQoR0DbzEeyCQ69JbDj2Qw" type="2006" element="_UQkncDbzEeyCQ69JbDj2Qw">
+      <children xmi:type="notation:DecorationNode" xmi:id="_UQoR1DbzEeyCQ69JbDj2Qw" type="5008"/>
+      <children xmi:type="notation:DecorationNode" xmi:id="_UQoR1TbzEeyCQ69JbDj2Qw" type="7008">
+        <styles xmi:type="notation:SortingStyle" xmi:id="_UQoR1jbzEeyCQ69JbDj2Qw"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_UQoR1zbzEeyCQ69JbDj2Qw"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_UQoR0TbzEeyCQ69JbDj2Qw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_UQoR0jbzEeyCQ69JbDj2Qw" fontName=".AppleSystemUIFont"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UQoR0zbzEeyCQ69JbDj2Qw" x="340" y="320" width="159" height="75"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uOuLgDbzEeyCQ69JbDj2Qw" type="2002">
+      <children xmi:type="notation:DecorationNode" xmi:id="_uOuLhDbzEeyCQ69JbDj2Qw" type="5002"/>
+      <children xmi:type="notation:BasicCompartment" xmi:id="_uOuLhTbzEeyCQ69JbDj2Qw" type="7004">
+        <styles xmi:type="notation:SortingStyle" xmi:id="_uOuLhjbzEeyCQ69JbDj2Qw"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_uOuLhzbzEeyCQ69JbDj2Qw"/>
+      </children>
+      <children xmi:type="notation:BasicCompartment" xmi:id="_uOuLiDbzEeyCQ69JbDj2Qw" type="7005">
+        <styles xmi:type="notation:SortingStyle" xmi:id="_uOuLiTbzEeyCQ69JbDj2Qw"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_uOuLijbzEeyCQ69JbDj2Qw"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_uOuLgTbzEeyCQ69JbDj2Qw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_uOuLgjbzEeyCQ69JbDj2Qw" fontName=".AppleSystemUIFont"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uOuLgzbzEeyCQ69JbDj2Qw" x="616" y="136" width="155" height="75"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_7ZdugDbzEeyCQ69JbDj2Qw" type="2006" element="_7ZaEIDbzEeyCQ69JbDj2Qw">
+      <children xmi:type="notation:DecorationNode" xmi:id="_7ZduhDbzEeyCQ69JbDj2Qw" type="5008"/>
+      <children xmi:type="notation:DecorationNode" xmi:id="_7ZduhTbzEeyCQ69JbDj2Qw" type="7008">
+        <styles xmi:type="notation:SortingStyle" xmi:id="_7ZduhjbzEeyCQ69JbDj2Qw"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_7ZduhzbzEeyCQ69JbDj2Qw"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_7ZdugTbzEeyCQ69JbDj2Qw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_7ZdugjbzEeyCQ69JbDj2Qw" fontName=".AppleSystemUIFont"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7ZdugzbzEeyCQ69JbDj2Qw" x="624" y="336" width="126" height="64"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_QKh58DvnEeypyrSFXJhtlA" type="2006" element="_QKNJ0DvnEeypyrSFXJhtlA">
+      <children xmi:type="notation:DecorationNode" xmi:id="_QKmycDvnEeypyrSFXJhtlA" type="5008"/>
+      <children xmi:type="notation:DecorationNode" xmi:id="_QKmycTvnEeypyrSFXJhtlA" type="7008">
+        <styles xmi:type="notation:SortingStyle" xmi:id="_QKmycjvnEeypyrSFXJhtlA"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_QKmyczvnEeypyrSFXJhtlA"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_QKh58TvnEeypyrSFXJhtlA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_QKh58jvnEeypyrSFXJhtlA" fontName=".AppleSystemUIFont"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QKh58zvnEeypyrSFXJhtlA" x="80" y="336"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_XkIWwDyBEeywd95NhF7ulg" type="2002">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_XkTV4DyBEeywd95NhF7ulg" source="Shortcut">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XkTV4TyBEeywd95NhF7ulg" key="modelID" value="EMFProfile"/>
+      </eAnnotations>
+      <children xmi:type="notation:DecorationNode" xmi:id="_XkQSkDyBEeywd95NhF7ulg" type="5002"/>
+      <children xmi:type="notation:BasicCompartment" xmi:id="_XkQ5oDyBEeywd95NhF7ulg" type="7004">
+        <styles xmi:type="notation:SortingStyle" xmi:id="_XkQ5oTyBEeywd95NhF7ulg"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_XkQ5ojyBEeywd95NhF7ulg"/>
+      </children>
+      <children xmi:type="notation:BasicCompartment" xmi:id="_XkQ5ozyBEeywd95NhF7ulg" type="7005">
+        <styles xmi:type="notation:SortingStyle" xmi:id="_XkQ5pDyBEeywd95NhF7ulg"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_XkQ5pTyBEeywd95NhF7ulg"/>
+      </children>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_XkIWwTyBEeywd95NhF7ulg"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_XkIWwjyBEeywd95NhF7ulg" fontName=".AppleSystemUIFont"/>
+      <element xmi:type="ecore:EClass" href="http://palladiosimulator.org/Environment/StaticModel/1.0#//GroundProbabilisticNetwork"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XkIWwzyBEeywd95NhF7ulg" x="68" y="148"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_yYSeYTbyEeyCQ69JbDj2Qw"/>
+    <edges xmi:type="notation:Edge" xmi:id="_WLmJsDbzEeyCQ69JbDj2Qw" type="4005" element="_WLifUDbzEeyCQ69JbDj2Qw" source="_UQoR0DbzEeyCQ69JbDj2Qw" target="_8XqRkDbyEeyCQ69JbDj2Qw">
+      <children xmi:type="notation:DecorationNode" xmi:id="_WLmwwDbzEeyCQ69JbDj2Qw" type="6004">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_WLmwwTbzEeyCQ69JbDj2Qw" x="-1" y="16"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_WLmJsTbzEeyCQ69JbDj2Qw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_WLmJsjbzEeyCQ69JbDj2Qw" fontName=".AppleSystemUIFont"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WLmJszbzEeyCQ69JbDj2Qw" points="[-12, -23, 81, 146]$[-36, -126, 57, 43]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WLpNADbzEeyCQ69JbDj2Qw" id="(0.8471337579617835,0.3150684931506849)"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_8zmxQDbzEeyCQ69JbDj2Qw" type="4005" element="_8zmKMDbzEeyCQ69JbDj2Qw" source="_7ZdugDbzEeyCQ69JbDj2Qw" target="_uOuLgDbzEeyCQ69JbDj2Qw">
+      <children xmi:type="notation:DecorationNode" xmi:id="_8zmxRDbzEeyCQ69JbDj2Qw" type="6004">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_8zmxRTbzEeyCQ69JbDj2Qw" y="23"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_8zmxQTbzEeyCQ69JbDj2Qw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_8zmxQjbzEeyCQ69JbDj2Qw" fontName=".AppleSystemUIFont"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_8zmxQzbzEeyCQ69JbDj2Qw" points="[-3, -10, 41, 142]$[-40, -140, 4, 12]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_8zomcDbzEeyCQ69JbDj2Qw" id="(0.8640776699029126,0.2564102564102564)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_8zpNgDbzEeyCQ69JbDj2Qw" id="(0.5620915032679739,0.8356164383561644)"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_ZSQsgDyBEeywd95NhF7ulg" type="4005" element="_ZSNCIDyBEeywd95NhF7ulg" source="_QKh58DvnEeypyrSFXJhtlA" target="_XkIWwDyBEeywd95NhF7ulg">
+      <children xmi:type="notation:DecorationNode" xmi:id="_ZSQshDyBEeywd95NhF7ulg" type="6004">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ZSQshTyBEeywd95NhF7ulg" x="-12" y="14"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_ZSQsgTyBEeywd95NhF7ulg"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_ZSQsgjyBEeywd95NhF7ulg" fontName=".AppleSystemUIFont"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ZSQsgzyBEeywd95NhF7ulg" points="[-3, -4, 52, 96]$[-40, -92, 15, 8]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ZSUW4DyBEeywd95NhF7ulg" id="(0.8846153846153846,0.10256410256410256)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ZSUW4TyBEeywd95NhF7ulg" id="(0.6643356643356644,0.8)"/>
+    </edges>
+  </notation:Diagram>
+</xmi:XMI>

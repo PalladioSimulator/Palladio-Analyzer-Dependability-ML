@@ -122,17 +122,17 @@ public class UncertaintySwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case UncertaintyPackage.ACTIVE_COMPONENT_PRECONDITION: {
-			ActiveComponentPrecondition activeComponentPrecondition = (ActiveComponentPrecondition) theEObject;
-			T result = caseActiveComponentPrecondition(activeComponentPrecondition);
+		case UncertaintyPackage.ACTIVE_COMPONENT: {
+			ActiveComponent activeComponent = (ActiveComponent) theEObject;
+			T result = caseActiveComponent(activeComponent);
 			if (result == null)
-				result = caseArchitecturalPrecondition(activeComponentPrecondition);
+				result = caseArchitecturalPrecondition(activeComponent);
 			if (result == null)
-				result = caseEntity(activeComponentPrecondition);
+				result = caseEntity(activeComponent);
 			if (result == null)
-				result = caseIdentifier(activeComponentPrecondition);
+				result = caseIdentifier(activeComponent);
 			if (result == null)
-				result = caseNamedElement(activeComponentPrecondition);
+				result = caseNamedElement(activeComponent);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -165,6 +165,51 @@ public class UncertaintySwitch<T> extends Switch<T> {
 		case UncertaintyPackage.MAP_ENTRY: {
 			MapEntry mapEntry = (MapEntry) theEObject;
 			T result = caseMapEntry(mapEntry);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case UncertaintyPackage.UNCERTAINTY_SPECIFIC_COUNTERMEASURE: {
+			UncertaintySpecificCountermeasure uncertaintySpecificCountermeasure = (UncertaintySpecificCountermeasure) theEObject;
+			T result = caseUncertaintySpecificCountermeasure(uncertaintySpecificCountermeasure);
+			if (result == null)
+				result = caseArchitecturalCountermeasure(uncertaintySpecificCountermeasure);
+			if (result == null)
+				result = caseEntity(uncertaintySpecificCountermeasure);
+			if (result == null)
+				result = caseIdentifier(uncertaintySpecificCountermeasure);
+			if (result == null)
+				result = caseNamedElement(uncertaintySpecificCountermeasure);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case UncertaintyPackage.GLOBAL_UNCERTAINTY_COUNTERMEASURE: {
+			GlobalUncertaintyCountermeasure globalUncertaintyCountermeasure = (GlobalUncertaintyCountermeasure) theEObject;
+			T result = caseGlobalUncertaintyCountermeasure(globalUncertaintyCountermeasure);
+			if (result == null)
+				result = caseArchitecturalCountermeasure(globalUncertaintyCountermeasure);
+			if (result == null)
+				result = caseEntity(globalUncertaintyCountermeasure);
+			if (result == null)
+				result = caseIdentifier(globalUncertaintyCountermeasure);
+			if (result == null)
+				result = caseNamedElement(globalUncertaintyCountermeasure);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case UncertaintyPackage.UNCERTAINTY_MODEL_EQUALITY: {
+			UncertaintyModelEquality uncertaintyModelEquality = (UncertaintyModelEquality) theEObject;
+			T result = caseUncertaintyModelEquality(uncertaintyModelEquality);
+			if (result == null)
+				result = caseArchitecturalPrecondition(uncertaintyModelEquality);
+			if (result == null)
+				result = caseEntity(uncertaintyModelEquality);
+			if (result == null)
+				result = caseIdentifier(uncertaintyModelEquality);
+			if (result == null)
+				result = caseNamedElement(uncertaintyModelEquality);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -235,17 +280,17 @@ public class UncertaintySwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Active Component Precondition</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Active Component</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Active Component Precondition</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Active Component</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseActiveComponentPrecondition(ActiveComponentPrecondition object) {
+	public T caseActiveComponent(ActiveComponent object) {
 		return null;
 	}
 
@@ -306,6 +351,51 @@ public class UncertaintySwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMapEntry(MapEntry object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Specific Countermeasure</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Specific Countermeasure</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUncertaintySpecificCountermeasure(UncertaintySpecificCountermeasure object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Global Uncertainty Countermeasure</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Global Uncertainty Countermeasure</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGlobalUncertaintyCountermeasure(GlobalUncertaintyCountermeasure object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model Equality</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model Equality</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUncertaintyModelEquality(UncertaintyModelEquality object) {
 		return null;
 	}
 

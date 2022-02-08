@@ -13,6 +13,7 @@ public class ArchitecturalPreconditionManager {
 	private final static Set<ArchitecturalPreconditionChecker> PRECONDITION_CHECKER = Sets.newHashSet();
 	static {
 		PRECONDITION_CHECKER.add(new ActiveComponentChecker());
+		PRECONDITION_CHECKER.add(new UncertaintyModelEqualityChecker());
 	}
 
 	private static ArchitecturalPreconditionManager managerInstance = null;

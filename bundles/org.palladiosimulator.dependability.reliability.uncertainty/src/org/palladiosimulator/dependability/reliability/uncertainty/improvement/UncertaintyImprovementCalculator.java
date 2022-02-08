@@ -1,5 +1,6 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.improvement;
 
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -19,7 +20,7 @@ import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 import tools.mdsd.probdist.distributionfunction.TabularCPD;
 
 public class UncertaintyImprovementCalculator {
-
+	
 	private final static UncertaintyImprovementCalculator CALCULATOR_INSTANCE = new UncertaintyImprovementCalculator();
 
 	private UncertaintyImprovementCalculator() {
@@ -53,7 +54,7 @@ public class UncertaintyImprovementCalculator {
 		return distribution.given(conditionals).sample();
 	}
 
-	private ConditionalProbabilityDistribution createCPD(ProbabilityDistribution dist) {
+	public ConditionalProbabilityDistribution createCPD(ProbabilityDistribution dist) {
 		if (dist.getParams().isEmpty()) {
 			throw new IllegalArgumentException("The distribution parameters must be set.");
 		}
@@ -65,10 +66,56 @@ public class UncertaintyImprovementCalculator {
 
 		return new ConditionalProbabilityDistribution(dist, (TabularCPD) paramRepresentation);
 	}
+	
+	public ConditionalProbabilityDistribution createIndicatorCPD(DeterministicImprovement improvement) {
+		return new ConditionalProbabilityDistribution(null, null) {
+			
+			private CategoricalValue givenValue = null;
+			
+			@Override
+			public Double probability(CategoricalValue value) {
+				if (givenValue == null) {
+					throw new RuntimeException("The conditional value must be set.");
+				}
+				
+				var deterministicValue = calculate(improvement, givenValue); 
+				return value.get().equals(deterministicValue.get()) ? 1.0 : 0.0;
+			}
+
+			@Override
+			public CategoricalValue sample() {
+				if (givenValue == null) {
+					throw new RuntimeException("The conditional value must be set.");
+				}
+				
+				return calculate(improvement, givenValue); 
+			}
+
+			@Override
+			public ConditionalProbabilityDistribution given(List<Conditional> conditionals) {
+				if (conditionals.size() != 1) {
+					throw new IllegalArgumentException("There must be no more than one conditional.");
+				}
+				
+				var value = conditionals.get(0);
+				if (CategoricalValue.class.isInstance(value) == false) {
+					throw new IllegalArgumentException("The conditional must be a categorical value.");
+				}
+				
+				givenValue = (CategoricalValue) value.getValue();
+				
+				return this;
+			}
+			
+		};
+	}
 
 	private CategoricalValue calculateDeterministically(DeterministicImprovement improvement, CategoricalValue value) {
-		return improvement.getMappingTable().stream().filter(entryMatching(value.get())).map(toCategoricalValue())
-				.findFirst().orElse(value);
+		return improvement.getMappingTable().stream()
+				.filter(entryMatching(value.get()))
+				.map(toCategoricalValue())
+				.findFirst()
+				.orElse(value);
 	}
 
 	private Function<MapEntry, CategoricalValue> toCategoricalValue() {

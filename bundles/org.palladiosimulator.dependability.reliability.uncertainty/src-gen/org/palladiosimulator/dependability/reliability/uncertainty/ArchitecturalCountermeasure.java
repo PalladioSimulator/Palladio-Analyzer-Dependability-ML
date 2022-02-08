@@ -4,8 +4,6 @@ package org.palladiosimulator.dependability.reliability.uncertainty;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.palladiosimulator.envdyn.environment.templatevariable.TemplateVariable;
-
 import tools.mdsd.modelingfoundations.identifier.Entity;
 
 /**
@@ -18,12 +16,11 @@ import tools.mdsd.modelingfoundations.identifier.Entity;
  * </p>
  * <ul>
  *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getArchitecturalPreconditions <em>Architectural Preconditions</em>}</li>
- *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getTargetUncertainty <em>Target Uncertainty</em>}</li>
- *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getUncertaintyImprovement <em>Uncertainty Improvement</em>}</li>
+ *   <li>{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getAppliedFailureType <em>Applied Failure Type</em>}</li>
  * </ul>
  *
  * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage#getArchitecturalCountermeasure()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface ArchitecturalCountermeasure extends Entity {
@@ -40,47 +37,25 @@ public interface ArchitecturalCountermeasure extends Entity {
 	EList<ArchitecturalPrecondition> getArchitecturalPreconditions();
 
 	/**
-	 * Returns the value of the '<em><b>Target Uncertainty</b></em>' reference.
+	 * Returns the value of the '<em><b>Applied Failure Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target Uncertainty</em>' reference.
-	 * @see #setTargetUncertainty(TemplateVariable)
-	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage#getArchitecturalCountermeasure_TargetUncertainty()
+	 * @return the value of the '<em>Applied Failure Type</em>' reference.
+	 * @see #setAppliedFailureType(UncertaintyInducedFailureType)
+	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage#getArchitecturalCountermeasure_AppliedFailureType()
 	 * @model required="true"
 	 * @generated
 	 */
-	TemplateVariable getTargetUncertainty();
+	UncertaintyInducedFailureType getAppliedFailureType();
 
 	/**
-	 * Sets the value of the '{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getTargetUncertainty <em>Target Uncertainty</em>}' reference.
+	 * Sets the value of the '{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getAppliedFailureType <em>Applied Failure Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target Uncertainty</em>' reference.
-	 * @see #getTargetUncertainty()
+	 * @param value the new value of the '<em>Applied Failure Type</em>' reference.
+	 * @see #getAppliedFailureType()
 	 * @generated
 	 */
-	void setTargetUncertainty(TemplateVariable value);
-
-	/**
-	 * Returns the value of the '<em><b>Uncertainty Improvement</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Uncertainty Improvement</em>' containment reference.
-	 * @see #setUncertaintyImprovement(UncertaintyImprovement)
-	 * @see org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage#getArchitecturalCountermeasure_UncertaintyImprovement()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
-	UncertaintyImprovement getUncertaintyImprovement();
-
-	/**
-	 * Sets the value of the '{@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure#getUncertaintyImprovement <em>Uncertainty Improvement</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Uncertainty Improvement</em>' containment reference.
-	 * @see #getUncertaintyImprovement()
-	 * @generated
-	 */
-	void setUncertaintyImprovement(UncertaintyImprovement value);
+	void setAppliedFailureType(UncertaintyInducedFailureType value);
 
 } // ArchitecturalCountermeasure

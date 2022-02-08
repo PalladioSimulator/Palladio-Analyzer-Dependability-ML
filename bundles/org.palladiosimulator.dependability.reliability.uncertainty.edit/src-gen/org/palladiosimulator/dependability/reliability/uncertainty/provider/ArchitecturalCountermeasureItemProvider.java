@@ -10,14 +10,10 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure;
-import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyFactory;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyPackage;
 
 import tools.mdsd.modelingfoundations.identifier.provider.EntityItemProvider;
@@ -51,7 +47,7 @@ public class ArchitecturalCountermeasureItemProvider extends EntityItemProvider 
 			super.getPropertyDescriptors(object);
 
 			addArchitecturalPreconditionsPropertyDescriptor(object);
-			addTargetUncertaintyPropertyDescriptor(object);
+			addAppliedFailureTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -74,50 +70,20 @@ public class ArchitecturalCountermeasureItemProvider extends EntityItemProvider 
 	}
 
 	/**
-	 * This adds a property descriptor for the Target Uncertainty feature.
+	 * This adds a property descriptor for the Applied Failure Type feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTargetUncertaintyPropertyDescriptor(Object object) {
+	protected void addAppliedFailureTypePropertyDescriptor(Object object) {
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(), getString("_UI_ArchitecturalCountermeasure_targetUncertainty_feature"),
+						getResourceLocator(), getString("_UI_ArchitecturalCountermeasure_appliedFailureType_feature"),
 						getString("_UI_PropertyDescriptor_description",
-								"_UI_ArchitecturalCountermeasure_targetUncertainty_feature",
+								"_UI_ArchitecturalCountermeasure_appliedFailureType_feature",
 								"_UI_ArchitecturalCountermeasure_type"),
-						UncertaintyPackage.Literals.ARCHITECTURAL_COUNTERMEASURE__TARGET_UNCERTAINTY, true, false, true,
-						null, null, null));
-	}
-
-	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(UncertaintyPackage.Literals.ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
+						UncertaintyPackage.Literals.ARCHITECTURAL_COUNTERMEASURE__APPLIED_FAILURE_TYPE, true, false,
+						true, null, null, null));
 	}
 
 	/**
@@ -164,12 +130,6 @@ public class ArchitecturalCountermeasureItemProvider extends EntityItemProvider 
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(ArchitecturalCountermeasure.class)) {
-		case UncertaintyPackage.ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT:
-			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-			return;
-		}
 		super.notifyChanged(notification);
 	}
 
@@ -183,14 +143,6 @@ public class ArchitecturalCountermeasureItemProvider extends EntityItemProvider 
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add(
-				createChildParameter(UncertaintyPackage.Literals.ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT,
-						UncertaintyFactory.eINSTANCE.createDeterministicImprovement()));
-
-		newChildDescriptors.add(
-				createChildParameter(UncertaintyPackage.Literals.ARCHITECTURAL_COUNTERMEASURE__UNCERTAINTY_IMPROVEMENT,
-						UncertaintyFactory.eINSTANCE.createProbabilisticImprovement()));
 	}
 
 	/**

@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
+import org.palladiosimulator.analyzer.workflow.jobs.EventsTransformationJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadModelIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.ValidatePCMModelsJob;
@@ -53,24 +54,23 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 			requireNonNull(config, "The reliability config must be specified.");
 			var pcmInstanceBuilderJob = new PCMInstanceBuilderJob(config);
 			relPredictionJob.addJob(pcmInstanceBuilderJob);
+			relPredictionJob.addJob(new LoadModelIntoBlackboardJob(URI.createURI(uncertaintyModel), 
+					LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
+			relPredictionJob.addJob(new PrepareBlackboardJob());
 			
 			var applyATs = launchConfig != null;
 			if (applyATs) {
 				addATJob(relPredictionJob);
-			} else {
-				relPredictionJob.addJob(new ValidatePCMModelsJob(config));
 			}
 			
+			relPredictionJob.addJob(new ValidatePCMModelsJob(config));
+			relPredictionJob.addJob(new EventsTransformationJob(config.getStoragePluginID(), config.getEventMiddlewareFile(), false));
 			relPredictionJob.addJob(new RootReliabilityPredictionRunJob(config, uncertaintyModel, explorationStrategy));
 			
 			return relPredictionJob;
 		}
 
 		private void addATJob(UncertaintyBasedReliabilityPredictionJob rootJob) {
-			var uncertaintyUri = URI.createURI(uncertaintyModel);
-			rootJob.addJob(new LoadModelIntoBlackboardJob(uncertaintyUri, LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
-			rootJob.addJob(new PrepareBlackboardJob());
-			
 			var atJob = new RunATJob();
 			var jobConfigurationBuilder = new ATExtensionConfigurationBuilder();
 			try {

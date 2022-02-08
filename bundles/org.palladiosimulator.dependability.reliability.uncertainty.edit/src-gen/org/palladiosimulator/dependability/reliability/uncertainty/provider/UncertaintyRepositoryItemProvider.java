@@ -157,11 +157,19 @@ public class UncertaintyRepositoryItemProvider extends EntityItemProvider {
 
 		newChildDescriptors.add(
 				createChildParameter(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_COUNTERMEASURES,
-						UncertaintyFactory.eINSTANCE.createArchitecturalCountermeasure()));
+						UncertaintyFactory.eINSTANCE.createUncertaintySpecificCountermeasure()));
+
+		newChildDescriptors.add(
+				createChildParameter(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_COUNTERMEASURES,
+						UncertaintyFactory.eINSTANCE.createGlobalUncertaintyCountermeasure()));
 
 		newChildDescriptors.add(
 				createChildParameter(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_PRECONDITIONS,
-						UncertaintyFactory.eINSTANCE.createActiveComponentPrecondition()));
+						UncertaintyFactory.eINSTANCE.createActiveComponent()));
+
+		newChildDescriptors.add(
+				createChildParameter(UncertaintyPackage.Literals.UNCERTAINTY_REPOSITORY__ARCHITECTURAL_PRECONDITIONS,
+						UncertaintyFactory.eINSTANCE.createUncertaintyModelEquality()));
 	}
 
 	/**

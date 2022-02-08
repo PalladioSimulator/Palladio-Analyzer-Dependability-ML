@@ -20,12 +20,11 @@ Package uncertainty <http://palladiosimulator.org/Uncertainty/1.0>
 
   Class ArchitecturalCountermeasure -> Entity
     Reference architecturalPreconditions : ArchitecturalPrecondition<<1..*>>
-    Reference targetUncertainty : TemplateVariable<<1..1>>
-    Reference uncertaintyImprovement : UncertaintyImprovement<<1..1>>
+    Reference appliedFailureType : UncertaintyInducedFailureType<<1..1>>
 
   Class ArchitecturalPrecondition -> Entity
 
-  Class ActiveComponentPrecondition -> ArchitecturalPrecondition
+  Class ActiveComponent -> ArchitecturalPrecondition
     Reference requiredActiveComponent : InterfaceProvidingRequiringEntity<<1..1>>
 
   Class UncertaintyImprovement
@@ -39,3 +38,14 @@ Package uncertainty <http://palladiosimulator.org/Uncertainty/1.0>
   Class MapEntry
     Attribute key : EString<<1..1>>
     Attribute value : EString<<1..1>>
+
+  Class UncertaintySpecificCountermeasure -> ArchitecturalCountermeasure
+    Reference targetUncertainty : TemplateVariable<<1..1>>
+    Reference uncertaintyImprovement : UncertaintyImprovement<<1..1>>
+
+  Class GlobalUncertaintyCountermeasure -> ArchitecturalCountermeasure
+    Reference improvedUncertaintyModel : GroundProbabilisticNetwork<<1..1>>
+
+  Class UncertaintyModelEquality -> ArchitecturalPrecondition
+    Reference first : GroundProbabilisticNetwork<<1..1>>
+    Reference second : GroundProbabilisticNetwork<<1..1>>

@@ -6,22 +6,19 @@ import static java.util.stream.Collectors.toSet;
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.util.ArchitecturalPreconditionUtil.allPreconditionsFulfilled;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
-import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRepository;
-import org.palladiosimulator.dependability.reliability.uncertainty.improvement.UncertaintyImprovementCalculator;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.UncertaintyModelManager;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.util.ArchitecturalCountermeasureOperator;
 import org.palladiosimulator.reliability.solver.pcm2markov.MarkovTransformationResult;
 import org.palladiosimulator.reliability.solver.pcm2markov.Pcm2MarkovStrategy;
 import org.palladiosimulator.solver.models.PCMInstance;
 import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import tools.mdsd.probdist.api.apache.supplier.MultinomialDistributionSupplier;
-import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 
 public class UncertaintyBasedReliabilityPredictor {
@@ -79,6 +76,8 @@ public class UncertaintyBasedReliabilityPredictor {
 	private final UncertaintyRepository uncertaintyRepo;
 	private final PCMSolverWorkflowRunConfiguration config;
 	private final StateSpaceExplorationStrategy exploreStrategy;
+	
+	private ArchitecturalCountermeasureOperator operator = null;
 
 	private UncertaintyBasedReliabilityPredictor(StateSpaceExplorationStrategy exploreStrategy,
 			PCMSolverWorkflowRunConfiguration config, UncertaintyRepository uncertaintyRepo) {
@@ -113,66 +112,22 @@ public class UncertaintyBasedReliabilityPredictor {
 		return result;
 	}
 
-	public Set<ReliabilityPredictionResultPerScenario> predictConditionalSuccessProbability(PCMInstance unresolvedModel,
+	public Set<ReliabilityPredictionResultPerScenario> predictConditionalSuccessProbability(PCMInstance unresolved,
 			List<UncertaintyState> stateTuple) {
-		// hier ansetzten passt also werte an countermeasure an
-		// hier anpassen
-		applyArchitecturalCountermeasures(unresolvedModel, stateTuple); // stateTuple wird angepasst.
+		getArchitecturalCountermeasureOperator(unresolved).applyOnce();
 
-		// pcm model wird angepasst, sprich hier werden die neue uncertainty fehler
-		// berechnet
-		var resolvedModel = resolveUncertainties(unresolvedModel, stateTuple); // neue stateTuple werte ändern
-																				// PCMInstanzen
+		var resolved = resolveUncertainties(unresolved, stateTuple); 
 
-		// berechnet systemfehler und passt hier system an -> echte markov auswertung
-		var conditionalPoS = predictProbabilityOfSuccessGiven(resolvedModel);
-		// also hier werden die HardwareInducedFehler beachtet
-		// wie wahrscheinlich ist es dass der fall eintritt? wird extra berechnet
-		var probOfUncertainties = predictProbabilityOfUncertainties(stateTuple, resolvedModel);
+		var conditionalPoS = predictProbabilityOfSuccessGiven(resolved);
+		var probOfUncertainties = predictProbabilityOfUncertainties(stateTuple, resolved);
 		
 		return conditionalPoS.stream()
 				.map(each -> ReliabilityPredictionResultPerScenario.of(each, stateTuple, probOfUncertainties))
 				.collect(toSet());
 	}
 
-	private void applyArchitecturalCountermeasures(PCMInstance pcmModel, List<UncertaintyState> stateTuple) {
-		for (ArchitecturalCountermeasure each : uncertaintyRepo.getArchitecturalCountermeasures()) {
-			var result = findApplicableState(each, stateTuple);
-			if (result.isEmpty()) {
-				break;
-			}
-
-			var oldState = result.get();
-			stateTuple.remove(oldState);
-
-			var improvedValue = applyArchitecturalCountermeasure(each, pcmModel, oldState);
-			var improvedState = oldState.newValuedStateWith(improvedValue);
-			stateTuple.add(improvedState);
-		}
-	}
-
-	private Optional<UncertaintyState> findApplicableState(ArchitecturalCountermeasure countermeasure,
-			List<UncertaintyState> stateTuple) {
-		return stateTuple.stream()
-				.filter(each -> each.instantiates(countermeasure.getTargetUncertainty()))
-				.findFirst();
-	}
-
-	private CategoricalValue applyArchitecturalCountermeasure(ArchitecturalCountermeasure countermeasure,
-			PCMInstance pcmModel, UncertaintyState state) {
-		if (allPreconditionsFulfilled(countermeasure, pcmModel)) {
-			var improvement = countermeasure.getUncertaintyImprovement();// hier greift man direkt auf das
-																			// uncertaintyImprovement zu
-			return UncertaintyImprovementCalculator.get().calculate(improvement, state.getValue());
-		}
-		return state.getValue();
-	}
-
-	// hier muss auch beachtet werden, dass pcminstanzen auf pcminstanzen einfluss
-	// haben.. bzw einzelnen objekte aus den pcminstanzen auf andere (ML auf system)
 	private PCMInstance resolveUncertainties(PCMInstance modelToResolve, List<UncertaintyState> stateTuple) {
 		var uncertaintyResolver = new UncertaintyResolver(modelToResolve);
-		System.out.println("UncertaintyBasedReliabilityPredictor:resolveUncertainties");
 		uncertaintyRepo.getUncertaintyInducedFailureTypes()
 				.forEach(uncertainty -> uncertaintyResolver.resolve(uncertainty, stateTuple));
 		return modelToResolve;
@@ -194,6 +149,13 @@ public class UncertaintyBasedReliabilityPredictor {
 			}
 		}
 		return probOfUncertainties;
+	}
+	
+	private ArchitecturalCountermeasureOperator getArchitecturalCountermeasureOperator(PCMInstance unresolved) {
+		if (operator == null) {
+			operator = ArchitecturalCountermeasureOperator.createOperatorFor(unresolved, uncertaintyRepo);
+		}
+		return operator;
 	}
 
 }

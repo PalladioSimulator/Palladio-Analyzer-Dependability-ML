@@ -119,49 +119,26 @@ public class UncertaintyItemProviderAdapterFactory extends UncertaintyAdapterFac
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure} instances.
+	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponent} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ArchitecturalCountermeasureItemProvider architecturalCountermeasureItemProvider;
+	protected ActiveComponentItemProvider activeComponentItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure}.
+	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponent}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createArchitecturalCountermeasureAdapter() {
-		if (architecturalCountermeasureItemProvider == null) {
-			architecturalCountermeasureItemProvider = new ArchitecturalCountermeasureItemProvider(this);
+	public Adapter createActiveComponentAdapter() {
+		if (activeComponentItemProvider == null) {
+			activeComponentItemProvider = new ActiveComponentItemProvider(this);
 		}
 
-		return architecturalCountermeasureItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ActiveComponentPreconditionItemProvider activeComponentPreconditionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createActiveComponentPreconditionAdapter() {
-		if (activeComponentPreconditionItemProvider == null) {
-			activeComponentPreconditionItemProvider = new ActiveComponentPreconditionItemProvider(this);
-		}
-
-		return activeComponentPreconditionItemProvider;
+		return activeComponentItemProvider;
 	}
 
 	/**
@@ -231,6 +208,75 @@ public class UncertaintyItemProviderAdapterFactory extends UncertaintyAdapterFac
 		}
 
 		return mapEntryItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UncertaintySpecificCountermeasureItemProvider uncertaintySpecificCountermeasureItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUncertaintySpecificCountermeasureAdapter() {
+		if (uncertaintySpecificCountermeasureItemProvider == null) {
+			uncertaintySpecificCountermeasureItemProvider = new UncertaintySpecificCountermeasureItemProvider(this);
+		}
+
+		return uncertaintySpecificCountermeasureItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.GlobalUncertaintyCountermeasure} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected GlobalUncertaintyCountermeasureItemProvider globalUncertaintyCountermeasureItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.GlobalUncertaintyCountermeasure}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createGlobalUncertaintyCountermeasureAdapter() {
+		if (globalUncertaintyCountermeasureItemProvider == null) {
+			globalUncertaintyCountermeasureItemProvider = new GlobalUncertaintyCountermeasureItemProvider(this);
+		}
+
+		return globalUncertaintyCountermeasureItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyModelEquality} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UncertaintyModelEqualityItemProvider uncertaintyModelEqualityItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyModelEquality}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUncertaintyModelEqualityAdapter() {
+		if (uncertaintyModelEqualityItemProvider == null) {
+			uncertaintyModelEqualityItemProvider = new UncertaintyModelEqualityItemProvider(this);
+		}
+
+		return uncertaintyModelEqualityItemProvider;
 	}
 
 	/**
@@ -342,16 +388,20 @@ public class UncertaintyItemProviderAdapterFactory extends UncertaintyAdapterFac
 			uncertaintyInducedFailureTypeItemProvider.dispose();
 		if (uncertaintyRepositoryItemProvider != null)
 			uncertaintyRepositoryItemProvider.dispose();
-		if (architecturalCountermeasureItemProvider != null)
-			architecturalCountermeasureItemProvider.dispose();
-		if (activeComponentPreconditionItemProvider != null)
-			activeComponentPreconditionItemProvider.dispose();
+		if (activeComponentItemProvider != null)
+			activeComponentItemProvider.dispose();
 		if (deterministicImprovementItemProvider != null)
 			deterministicImprovementItemProvider.dispose();
 		if (probabilisticImprovementItemProvider != null)
 			probabilisticImprovementItemProvider.dispose();
 		if (mapEntryItemProvider != null)
 			mapEntryItemProvider.dispose();
+		if (uncertaintySpecificCountermeasureItemProvider != null)
+			uncertaintySpecificCountermeasureItemProvider.dispose();
+		if (globalUncertaintyCountermeasureItemProvider != null)
+			globalUncertaintyCountermeasureItemProvider.dispose();
+		if (uncertaintyModelEqualityItemProvider != null)
+			uncertaintyModelEqualityItemProvider.dispose();
 	}
 
 }

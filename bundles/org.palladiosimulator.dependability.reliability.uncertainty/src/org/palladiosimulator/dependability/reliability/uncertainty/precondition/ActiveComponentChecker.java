@@ -3,7 +3,7 @@ package org.palladiosimulator.dependability.reliability.uncertainty.precondition
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponentPrecondition;
+import org.palladiosimulator.dependability.reliability.uncertainty.ActiveComponent;
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
 import org.palladiosimulator.pcm.core.composition.AssemblyContext;
 import org.palladiosimulator.pcm.core.entity.InterfaceProvidingRequiringEntity;
@@ -17,7 +17,7 @@ public class ActiveComponentChecker implements ArchitecturalPreconditionChecker 
 	
 	@Override
 	public boolean isApplicable(ArchitecturalPrecondition precondition) {
-		return precondition instanceof ActiveComponentPrecondition;
+		return precondition instanceof ActiveComponent;
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class ActiveComponentChecker implements ArchitecturalPreconditionChecker 
 			return false;
 		}
 
-		var requiredActiveComponent = ActiveComponentPrecondition.class.cast(precondition).getRequiredActiveComponent();
+		var requiredActiveComponent = ActiveComponent.class.cast(precondition).getRequiredActiveComponent();
 		return getInstantiatedComponents(pcmModel).anyMatch(isInstantiated(requiredActiveComponent));
 	}
 
