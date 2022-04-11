@@ -5,95 +5,34 @@
     <children xsi:type="notation:DecorationNode" type="7002">
       <children xsi:type="notation:Shape" type="3006" fontName=".AppleSystemUIFont">
         <children xsi:type="notation:DecorationNode" type="5009"/>
-        <children xsi:type="notation:Shape" type="3007" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5007">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_kYevQAZYEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds"/>
-        </children>
-        <children xsi:type="notation:Shape" type="3013" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5015">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_FRX34AZZEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds"/>
-        </children>
         <element href="AutonomousSystem.system#_1tSPMAZpEeyBeaTSQFCmQg"/>
         <layoutConstraint xsi:type="notation:Bounds" x="143" y="55"/>
       </children>
       <children xsi:type="notation:Shape" type="3006" fontName=".AppleSystemUIFont">
         <children xsi:type="notation:DecorationNode" type="5009"/>
-        <children xsi:type="notation:Shape" type="3007" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5007">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_HVRz4AZaEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds"/>
-        </children>
-        <children xsi:type="notation:Shape" type="3013" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5015">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_QdmqUAZaEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds"/>
-        </children>
-        <element href="AutonomousSystem.system#_23v3MAZpEeyBeaTSQFCmQg"/>
-        <layoutConstraint xsi:type="notation:Bounds" x="123" y="171"/>
-      </children>
-      <children xsi:type="notation:Shape" type="3006" fontName=".AppleSystemUIFont">
-        <children xsi:type="notation:DecorationNode" type="5009"/>
-        <children xsi:type="notation:Shape" type="3007" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5007">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_dQJIsAZaEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds"/>
-        </children>
-        <children xsi:type="notation:Shape" type="3013" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5015">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_3n5fkAZaEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds"/>
-        </children>
         <element href="AutonomousSystem.system#_36fGkAZpEeyBeaTSQFCmQg"/>
         <layoutConstraint xsi:type="notation:Bounds" x="83" y="287"/>
       </children>
       <children xsi:type="notation:Shape" type="3006" fontName=".AppleSystemUIFont">
         <children xsi:type="notation:DecorationNode" type="5009"/>
-        <children xsi:type="notation:Shape" type="3007" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5007">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_X4VzAAZZEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds"/>
-        </children>
-        <children xsi:type="notation:Shape" type="3013" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5015">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_AsuLgAZaEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds"/>
-        </children>
         <element href="AutonomousSystem.system#_5uroEAZpEeyBeaTSQFCmQg"/>
         <layoutConstraint xsi:type="notation:Bounds" x="91" y="405"/>
       </children>
       <children xsi:type="notation:Shape" type="3006" fontName=".AppleSystemUIFont">
         <children xsi:type="notation:DecorationNode" type="5009"/>
-        <children xsi:type="notation:Shape" type="3014" fontName=".AppleSystemUIFont">
+        <children xsi:type="notation:Shape" type="3014" fontName="Segoe UI">
           <children xsi:type="notation:DecorationNode" type="5016">
-            <layoutConstraint xsi:type="notation:Location" x="-147" y="53"/>
+            <layoutConstraint xsi:type="notation:Location" y="5"/>
           </children>
-          <element href="default.repository#_Ml_qIAZbEeyBeaTSQFCmQg"/>
+          <element href="AutonomousSystemComponents.repository#_M9Y2cAZbEeyBeaTSQFCmQg"/>
           <layoutConstraint xsi:type="notation:Bounds"/>
         </children>
-        <children xsi:type="notation:Shape" type="3014" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5016">
-            <layoutConstraint xsi:type="notation:Location" x="-157" y="14"/>
+        <children xsi:type="notation:Shape" type="3008" fontName="Segoe UI">
+          <children xsi:type="notation:DecorationNode" type="5008">
+            <layoutConstraint xsi:type="notation:Location" y="5"/>
           </children>
-          <element href="default.repository#_M9Y2cAZbEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds" x="-29" y="1"/>
+          <element href="AutonomousSystemComponents.repository#_1U90oDJBEey5eoGE8NduBA"/>
+          <layoutConstraint xsi:type="notation:Bounds"/>
         </children>
         <element href="AutonomousSystem.system#_8FOBoAZpEeyBeaTSQFCmQg"/>
         <layoutConstraint xsi:type="notation:Bounds" x="771" y="118"/>
@@ -102,11 +41,6 @@
         <children xsi:type="notation:DecorationNode" type="5019"/>
         <element href="AutonomousSystem.system#_DKCIMAZqEeyBeaTSQFCmQg"/>
         <layoutConstraint xsi:type="notation:Bounds" x="479" y="54"/>
-      </children>
-      <children xsi:type="notation:Shape" type="3017" fontName=".AppleSystemUIFont">
-        <children xsi:type="notation:DecorationNode" type="5019"/>
-        <element href="AutonomousSystem.system#_MB3EgAZqEeyBeaTSQFCmQg"/>
-        <layoutConstraint xsi:type="notation:Bounds" x="467" y="134"/>
       </children>
       <children xsi:type="notation:Shape" type="3017" fontName=".AppleSystemUIFont">
         <children xsi:type="notation:DecorationNode" type="5019"/>
@@ -120,72 +54,16 @@
       </children>
       <children xsi:type="notation:Shape" type="3006" fontName=".AppleSystemUIFont">
         <children xsi:type="notation:DecorationNode" type="5009"/>
-        <children xsi:type="notation:Shape" type="3014" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5016">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_LfLMAAZbEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds" x="-29" y="4"/>
-        </children>
-        <children xsi:type="notation:Shape" type="3014" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5016">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_MBnxwAZbEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds"/>
-        </children>
         <element href="AutonomousSystem.system#_Ze__EAZqEeyBeaTSQFCmQg"/>
         <layoutConstraint xsi:type="notation:Bounds" x="751" y="334"/>
       </children>
       <children xsi:type="notation:Shape" type="3006" fontName=".AppleSystemUIFont">
         <children xsi:type="notation:DecorationNode" type="5009"/>
-        <children xsi:type="notation:Shape" type="3007" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5007">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_uNWe0L1rEeunTKCICMkJWw"/>
-          <layoutConstraint xsi:type="notation:Bounds"/>
-        </children>
-        <children xsi:type="notation:Shape" type="3014" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5016">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_i6DlQAZfEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds" x="-29" y="8"/>
-        </children>
-        <children xsi:type="notation:Shape" type="3013" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5015">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_G5zQcAZoEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds"/>
-        </children>
         <element href="AutonomousSystem.system#_fxyLwAZqEeyBeaTSQFCmQg"/>
         <layoutConstraint xsi:type="notation:Bounds" x="1339" y="343"/>
       </children>
       <children xsi:type="notation:Shape" type="3006" fontName=".AppleSystemUIFont">
         <children xsi:type="notation:DecorationNode" type="5009"/>
-        <children xsi:type="notation:Shape" type="3007" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5007">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_4_VhsAZcEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds"/>
-        </children>
-        <children xsi:type="notation:Shape" type="3014" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5016">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_kfAw4AZfEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds" x="-29" y="4"/>
-        </children>
-        <children xsi:type="notation:Shape" type="3013" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5015">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_Fycm0AZoEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds"/>
-        </children>
         <element href="AutonomousSystem.system#_hM4QwAZqEeyBeaTSQFCmQg"/>
         <layoutConstraint xsi:type="notation:Bounds" x="1279" y="99"/>
       </children>
@@ -201,13 +79,6 @@
       </children>
       <children xsi:type="notation:Shape" type="3006" fontName=".AppleSystemUIFont">
         <children xsi:type="notation:DecorationNode" type="5009"/>
-        <children xsi:type="notation:Shape" type="3014" fontName=".AppleSystemUIFont">
-          <children xsi:type="notation:DecorationNode" type="5016">
-            <layoutConstraint xsi:type="notation:Location" y="5"/>
-          </children>
-          <element href="default.repository#_HTimIAZoEeyBeaTSQFCmQg"/>
-          <layoutConstraint xsi:type="notation:Bounds" x="-29" y="4"/>
-        </children>
         <element href="AutonomousSystem.system#_8PF54AZqEeyBeaTSQFCmQg"/>
         <layoutConstraint xsi:type="notation:Bounds" x="1872" y="231"/>
       </children>
@@ -216,77 +87,25 @@
         <element href="AutonomousSystem.system#_-NfgQAZqEeyBeaTSQFCmQg"/>
         <layoutConstraint xsi:type="notation:Bounds" x="1560" y="224"/>
       </children>
+      <children xsi:type="notation:Shape" type="3006" fontName="Segoe UI">
+        <children xsi:type="notation:DecorationNode" type="5009"/>
+        <element href="AutonomousSystem.system#_x6L90CzFEeyLXc1IPpAWxw"/>
+        <layoutConstraint xsi:type="notation:Bounds" x="937" y="431"/>
+      </children>
+      <children xsi:type="notation:Shape" type="3006" fontName="Segoe UI">
+        <children xsi:type="notation:DecorationNode" type="5009"/>
+        <element href="AutonomousSystem.system#_gALZ4CzGEeyLXc1IPpAWxw"/>
+        <layoutConstraint xsi:type="notation:Bounds" x="966" y="186"/>
+      </children>
+      <children xsi:type="notation:Shape" type="3006" fontName="Segoe UI">
+        <children xsi:type="notation:DecorationNode" type="5009"/>
+        <element href="AutonomousSystem.system#_DGpHMC6REeydEsXxOHK8gg"/>
+        <layoutConstraint xsi:type="notation:Bounds" x="1871" y="396"/>
+      </children>
     </children>
     <element href="AutonomousSystem.system#_Z3KSsL10EeunTKCICMkJWw"/>
     <layoutConstraint xsi:type="notation:Bounds" x="128" y="24" width="2197" height="593"/>
   </children>
   <styles xsi:type="notation:DiagramStyle"/>
   <element href="AutonomousSystem.system#_Z3KSsL10EeunTKCICMkJWw"/>
-  <edges xsi:type="notation:Connector" type="4009" source="//@children.0/@children.1/@children.0/@children.2" target="//@children.0/@children.1/@children.5">
-    <styles xsi:type="notation:FontStyle" fontName=".AppleSystemUIFont"/>
-    <element href="AutonomousSystem.system#_F2YZsAZqEeyBeaTSQFCmQg"/>
-    <bendpoints xsi:type="notation:RelativeBendpoints" points="[8, 0, -214, -148]$[230, 164, 8, 16]"/>
-  </edges>
-  <edges xsi:type="notation:Connector" type="4010" source="//@children.0/@children.1/@children.4/@children.2" target="//@children.0/@children.1/@children.5">
-    <styles xsi:type="notation:FontStyle" fontName=".AppleSystemUIFont"/>
-    <element href="AutonomousSystem.system#_KOoMUAZqEeyBeaTSQFCmQg"/>
-    <bendpoints xsi:type="notation:RelativeBendpoints" points="[0, 0, 236, -70]$[-274, 69, -38, -1]"/>
-  </edges>
-  <edges xsi:type="notation:Connector" type="4009" source="//@children.0/@children.1/@children.1/@children.2" target="//@children.0/@children.1/@children.6">
-    <styles xsi:type="notation:FontStyle" fontName=".AppleSystemUIFont"/>
-    <element href="AutonomousSystem.system#_OCnbUAZqEeyBeaTSQFCmQg"/>
-    <bendpoints xsi:type="notation:RelativeBendpoints" points="[8, 0, -222, 72]$[192, -71, -38, 1]"/>
-  </edges>
-  <edges xsi:type="notation:Connector" type="4010" source="//@children.0/@children.1/@children.4/@children.1" target="//@children.0/@children.1/@children.6">
-    <styles xsi:type="notation:FontStyle" fontName=".AppleSystemUIFont"/>
-    <element href="AutonomousSystem.system#_OhtyIAZqEeyBeaTSQFCmQg"/>
-    <bendpoints xsi:type="notation:RelativeBendpoints" points="[0, 0, 250, 19]$[-214, -21, 36, -2]"/>
-  </edges>
-  <edges xsi:type="notation:Connector" type="4009" source="//@children.0/@children.1/@children.3/@children.2" target="//@children.0/@children.1/@children.8">
-    <styles xsi:type="notation:FontStyle" fontName=".AppleSystemUIFont"/>
-    <element href="AutonomousSystem.system#_YhvFkAZqEeyBeaTSQFCmQg"/>
-    <bendpoints xsi:type="notation:RelativeBendpoints" points="[8, 0, -291, 41]$[265, -38, -34, 3]"/>
-  </edges>
-  <edges xsi:type="notation:Connector" type="4009" source="//@children.0/@children.1/@children.2/@children.2" target="//@children.0/@children.1/@children.7">
-    <styles xsi:type="notation:FontStyle" fontName=".AppleSystemUIFont"/>
-    <element href="AutonomousSystem.system#_ZAGckAZqEeyBeaTSQFCmQg"/>
-    <bendpoints xsi:type="notation:RelativeBendpoints" points="[8, 0, -246, 28]$[216, -27, -38, 1]"/>
-  </edges>
-  <edges xsi:type="notation:Connector" type="4010" source="//@children.0/@children.1/@children.9/@children.1" target="//@children.0/@children.1/@children.7">
-    <styles xsi:type="notation:FontStyle" fontName=".AppleSystemUIFont"/>
-    <element href="AutonomousSystem.system#_cwBD4AZqEeyBeaTSQFCmQg"/>
-    <bendpoints xsi:type="notation:RelativeBendpoints" points="[0, 0, 258, 23]$[-220, -24, 38, -1]"/>
-  </edges>
-  <edges xsi:type="notation:Connector" type="4010" source="//@children.0/@children.1/@children.9/@children.2" target="//@children.0/@children.1/@children.8">
-    <styles xsi:type="notation:FontStyle" fontName=".AppleSystemUIFont"/>
-    <element href="AutonomousSystem.system#_dTF7wAZqEeyBeaTSQFCmQg"/>
-    <bendpoints xsi:type="notation:RelativeBendpoints" points="[0, 0, 178, -43]$[-173, 42, 5, -1]"/>
-    <targetAnchor xsi:type="notation:IdentityAnchor" id="(0.8375,0.425)"/>
-  </edges>
-  <edges xsi:type="notation:Connector" type="4010" source="//@children.0/@children.1/@children.11/@children.2" target="//@children.0/@children.1/@children.12">
-    <styles xsi:type="notation:FontStyle" fontName=".AppleSystemUIFont"/>
-    <element href="AutonomousSystem.system#_5XMfsAZqEeyBeaTSQFCmQg"/>
-    <bendpoints xsi:type="notation:RelativeBendpoints" points="[0, 0, 178, 37]$[-175, -19, 3, 18]"/>
-  </edges>
-  <edges xsi:type="notation:Connector" type="4010" source="//@children.0/@children.1/@children.10/@children.2" target="//@children.0/@children.1/@children.13">
-    <styles xsi:type="notation:FontStyle" fontName=".AppleSystemUIFont"/>
-    <element href="AutonomousSystem.system#_5zahoAZqEeyBeaTSQFCmQg"/>
-    <bendpoints xsi:type="notation:RelativeBendpoints" points="[0, 0, 163, 31]$[-125, -32, 38, -1]"/>
-  </edges>
-  <edges xsi:type="notation:Connector" type="4009" source="//@children.0/@children.1/@children.11/@children.3" target="//@children.0/@children.1/@children.15">
-    <styles xsi:type="notation:FontStyle" fontName=".AppleSystemUIFont"/>
-    <element href="AutonomousSystem.system#__KbpoAZqEeyBeaTSQFCmQg"/>
-    <bendpoints xsi:type="notation:RelativeBendpoints" points="[8, 0, -159, -90]$[162, 107, -5, 17]"/>
-  </edges>
-  <edges xsi:type="notation:Connector" type="4009" source="//@children.0/@children.1/@children.10/@children.3" target="//@children.0/@children.1/@children.15">
-    <styles xsi:type="notation:FontStyle" fontName=".AppleSystemUIFont"/>
-    <element href="AutonomousSystem.system#__oXi0AZqEeyBeaTSQFCmQg"/>
-    <bendpoints xsi:type="notation:RelativeBendpoints" points="[8, 0, -99, 154]$[104, -136, -3, 18]"/>
-  </edges>
-  <edges xsi:type="notation:Connector" type="4010" source="//@children.0/@children.1/@children.14/@children.1" target="//@children.0/@children.1/@children.15">
-    <styles xsi:type="notation:FontStyle" fontName=".AppleSystemUIFont"/>
-    <element href="AutonomousSystem.system#_AECLIAZrEeyBeaTSQFCmQg"/>
-    <bendpoints xsi:type="notation:RelativeBendpoints" points="[0, 0, 203, -25]$[-198, 25, 5, 0]"/>
-    <targetAnchor xsi:type="notation:IdentityAnchor" id="(0.8375,0.575)"/>
-  </edges>
 </notation:Diagram>

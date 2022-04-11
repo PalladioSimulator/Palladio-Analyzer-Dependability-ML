@@ -4,9 +4,6 @@
     <assemblyContexts__ComposedStructure id="_1tSPMAZpEeyBeaTSQFCmQg" entityName="Assembly_Camera">
       <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_j7cKIL1rEeunTKCICMkJWw"/>
     </assemblyContexts__ComposedStructure>
-    <assemblyContexts__ComposedStructure id="_23v3MAZpEeyBeaTSQFCmQg" entityName="Assembly_DirtSensor">
-      <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_C6PL8AZaEeyBeaTSQFCmQg"/>
-    </assemblyContexts__ComposedStructure>
     <assemblyContexts__ComposedStructure id="_36fGkAZpEeyBeaTSQFCmQg" entityName="Assembly_Localisation">
       <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_bk2rkAZaEeyBeaTSQFCmQg"/>
     </assemblyContexts__ComposedStructure>
@@ -40,9 +37,6 @@
     <eventChannel__ComposedStructure id="_DKCIMAZqEeyBeaTSQFCmQg" entityName="PerceivedImage" eventChannelSourceConnector__EventChannel="_F2YZsAZqEeyBeaTSQFCmQg" eventChannelSinkConnector__EventChannel="_KOoMUAZqEeyBeaTSQFCmQg">
       <eventGroup__EventChannel href="AutonomousSystemComponents.repository#_uRMg0AZYEeyBeaTSQFCmQg"/>
     </eventChannel__ComposedStructure>
-    <eventChannel__ComposedStructure id="_MB3EgAZqEeyBeaTSQFCmQg" entityName="DirtLevelMeasure" eventChannelSourceConnector__EventChannel="_OCnbUAZqEeyBeaTSQFCmQg" eventChannelSinkConnector__EventChannel="_OhtyIAZqEeyBeaTSQFCmQg">
-      <eventGroup__EventChannel href="AutonomousSystemComponents.repository#_IP3M0AZaEeyBeaTSQFCmQg"/>
-    </eventChannel__ComposedStructure>
     <eventChannel__ComposedStructure id="_VPU5oAZqEeyBeaTSQFCmQg" entityName="LocalisationCoordinates" eventChannelSourceConnector__EventChannel="_ZAGckAZqEeyBeaTSQFCmQg" eventChannelSinkConnector__EventChannel="_cwBD4AZqEeyBeaTSQFCmQg">
       <eventGroup__EventChannel href="AutonomousSystemComponents.repository#_d3NIsAZaEeyBeaTSQFCmQg"/>
     </eventChannel__ComposedStructure>
@@ -63,12 +57,6 @@
     </connectors__ComposedStructure>
     <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_KOoMUAZqEeyBeaTSQFCmQg" assemblyContext__EventChannelSinkConnector="_8FOBoAZpEeyBeaTSQFCmQg" eventChannel__EventChannelSinkConnector="_DKCIMAZqEeyBeaTSQFCmQg">
       <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_M9Y2cAZbEeyBeaTSQFCmQg"/>
-    </connectors__ComposedStructure>
-    <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="_OCnbUAZqEeyBeaTSQFCmQg" assemblyContext__EventChannelSourceConnector="_23v3MAZpEeyBeaTSQFCmQg" eventChannel__EventChannelSourceConnector="_MB3EgAZqEeyBeaTSQFCmQg">
-      <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_QdmqUAZaEeyBeaTSQFCmQg"/>
-    </connectors__ComposedStructure>
-    <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_OhtyIAZqEeyBeaTSQFCmQg" assemblyContext__EventChannelSinkConnector="_8FOBoAZpEeyBeaTSQFCmQg" eventChannel__EventChannelSinkConnector="_MB3EgAZqEeyBeaTSQFCmQg">
-      <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_Ml_qIAZbEeyBeaTSQFCmQg"/>
     </connectors__ComposedStructure>
     <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="_YhvFkAZqEeyBeaTSQFCmQg" assemblyContext__EventChannelSourceConnector="_5uroEAZpEeyBeaTSQFCmQg" eventChannel__EventChannelSourceConnector="_XbxjEAZqEeyBeaTSQFCmQg">
       <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_AsuLgAZaEeyBeaTSQFCmQg"/>

@@ -2,7 +2,6 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emfprofileapplication="http://www.modelversioning.org/emfprofile/application/1.1" xmlns:org.palladiosimulator.architecturaltemplates.catalog.profiles="org.palladiosimulator.architecturaltemplates.catalog.profiles.NVersionProgrammingAi" xmlns:reliability="http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2" xmlns:seff="http://palladiosimulator.org/PalladioComponentModel/SEFF/5.2" xmlns:stoex="http://sdq.ipd.uka.de/StochasticExpressions/2.2" xsi:schemaLocation="org.palladiosimulator.architecturaltemplates.catalog.profiles.NVersionProgrammingAi ../../plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram#_yYDN0DbyEeyCQ69JbDj2Qw http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//reliability http://palladiosimulator.org/PalladioComponentModel/Repository/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//repository http://palladiosimulator.org/PalladioComponentModel/SEFF/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//seff">
   <repository:Repository id="_ntjpoLvmEeuyDrQZkcWZSA" entityName="AutonomousSystemComponentsRepository" repositoryDescription="">
     <components__Repository xsi:type="repository:BasicComponent" id="_tFYp8LvmEeuyDrQZkcWZSA" entityName="DecisionPlanning">
-      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_4_VhsAZcEeyBeaTSQFCmQg" entityName="Provided_IDecisionPlanning_DecisionPlanning" providedInterface__OperationProvidedRole="_pPldELvmEeuyDrQZkcWZSA"/>
       <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_kfAw4AZfEeyBeaTSQFCmQg" entityName="Sink_EnrichedImage_DecisionPlanning" eventGroup__SinkRole="_7tCeEAZcEeyBeaTSQFCmQg"/>
       <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_Fycm0AZoEeyBeaTSQFCmQg" entityName="Source_TrajectoryMsg_DecisionPlanning" eventGroup__SourceRole="_tfjDoAZnEeyBeaTSQFCmQg"/>
       <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_kfAw4QZfEeyBeaTSQFCmQg" describedService__SEFF="_-gHCoAZcEeyBeaTSQFCmQg">
@@ -24,7 +23,7 @@
           </inputVariableUsages__CallAction>
         </steps_Behaviour>
       </serviceEffectSpecifications__BasicComponent>
-      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_M67PZzuwEeymvdx4Ldek3A" describedService__SEFF="_dQitoDrZEeyKGZY-c7BXbA">
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_M67PZzuwEeymvdx4Ldek3A">
         <steps_Behaviour xsi:type="seff:StartAction" id="_RHpHcjuwEeymvdx4Ldek3A" entityName="startDecisionPlanning" successor_AbstractAction="_KGEQPDuyEeymvdx4Ldek3A"/>
         <steps_Behaviour xsi:type="seff:StopAction" id="_ULkLcDuwEeymvdx4Ldek3A" entityName="stopDecisionPlanning" predecessor_AbstractAction="_KGEQPDuyEeymvdx4Ldek3A"/>
         <steps_Behaviour xsi:type="seff:InternalAction" id="_KGEQPDuyEeymvdx4Ldek3A" entityName="internalActionDecisionPlanning" predecessor_AbstractAction="_RHpHcjuwEeymvdx4Ldek3A" successor_AbstractAction="_ULkLcDuwEeymvdx4Ldek3A">
@@ -65,7 +64,6 @@
       </serviceEffectSpecifications__BasicComponent>
     </components__Repository>
     <components__Repository xsi:type="repository:BasicComponent" id="_tHu6kL1rEeunTKCICMkJWw" entityName="Planner">
-      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_uNWe0L1rEeunTKCICMkJWw" entityName="Provided_IPlanner_Planner" providedInterface__OperationProvidedRole="_GqaK8L1pEeuDZfkzylcu4A"/>
       <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_i6DlQAZfEeyBeaTSQFCmQg" entityName="Sink_EnrichedDistanceMeasure_Planner" eventGroup__SinkRole="_Kj_EMAZdEeyBeaTSQFCmQg"/>
       <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_G5zQcAZoEeyBeaTSQFCmQg" entityName="Source_TrajectoryMsg_Planner" eventGroup__SourceRole="_tfjDoAZnEeyBeaTSQFCmQg"/>
       <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_i6EMUAZfEeyBeaTSQFCmQg" describedService__SEFF="_NRDHYAZdEeyBeaTSQFCmQg">
@@ -109,43 +107,9 @@
         </steps_Behaviour>
       </serviceEffectSpecifications__BasicComponent>
     </components__Repository>
-    <components__Repository xsi:type="repository:BasicComponent" id="_C6PL8AZaEeyBeaTSQFCmQg" entityName="DirtSensor">
-      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_HVRz4AZaEeyBeaTSQFCmQg" entityName="Provided_IPerception_DirtSensor" providedInterface__OperationProvidedRole="_ibE5VwZWEeyBeaTSQFCmQg"/>
-      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_QdmqUAZaEeyBeaTSQFCmQg" entityName="Source_DirtLevelMeasure_DirtSensor" eventGroup__SourceRole="_IP3M0AZaEeyBeaTSQFCmQg"/>
-      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_HVSa8AZaEeyBeaTSQFCmQg" describedService__SEFF="_mpGY8AZWEeyBeaTSQFCmQg">
-        <steps_Behaviour xsi:type="seff:StartAction" id="_HVSa8QZaEeyBeaTSQFCmQg" entityName="start" successor_AbstractAction="_5Ygc4A7yEeyOMYqsQbPIfw"/>
-        <steps_Behaviour xsi:type="seff:StopAction" id="_HVSa8gZaEeyBeaTSQFCmQg" entityName="stop" predecessor_AbstractAction="_H24aaxoJEeysZodRQ7UdNQ"/>
-        <steps_Behaviour xsi:type="seff:InternalAction" id="_5Ygc4A7yEeyOMYqsQbPIfw" entityName="readSensor" predecessor_AbstractAction="_HVSa8QZaEeyBeaTSQFCmQg" successor_AbstractAction="_H24aaxoJEeysZodRQ7UdNQ">
-          <resourceDemand_Action>
-            <specification_ParametericResourceDemand specification="0.25"/>
-            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
-          </resourceDemand_Action>
-        </steps_Behaviour>
-        <steps_Behaviour xsi:type="seff:EmitEventAction" id="_H24aaxoJEeysZodRQ7UdNQ" entityName="EmitDirtLevel" predecessor_AbstractAction="_5Ygc4A7yEeyOMYqsQbPIfw" successor_AbstractAction="_HVSa8gZaEeyBeaTSQFCmQg" eventType__EmitEventAction="_Knr_0AZaEeyBeaTSQFCmQg" sourceRole__EmitEventAction="_QdmqUAZaEeyBeaTSQFCmQg">
-          <inputVariableUsages__CallAction>
-            <variableCharacterisation_VariableUsage type="VALUE">
-              <specification_VariableCharacterisation specification="1"/>
-            </variableCharacterisation_VariableUsage>
-            <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="dirtLevel"/>
-          </inputVariableUsages__CallAction>
-        </steps_Behaviour>
-      </serviceEffectSpecifications__BasicComponent>
-    </components__Repository>
     <components__Repository xsi:type="repository:BasicComponent" id="_UrPIYAZaEeyBeaTSQFCmQg" entityName="SensorEnrichment">
-      <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_Ml_qIAZbEeyBeaTSQFCmQg" entityName="Sink_DirtLevelMeasure_SensorFusionSemanticUnderstanding" eventGroup__SinkRole="_IP3M0AZaEeyBeaTSQFCmQg"/>
       <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_M9Y2cAZbEeyBeaTSQFCmQg" entityName="Sink_PerceivedImage_SensorFusionSemanticUnderstanding" eventGroup__SinkRole="_uRMg0AZYEeyBeaTSQFCmQg"/>
       <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_1U90oDJBEey5eoGE8NduBA" entityName="SensorEnrichment.IImageFusion.OperationRequiredRole1" requiredInterface__OperationRequiredRole="_pCBcUDJBEey5eoGE8NduBA"/>
-      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_Ml_qIQZbEeyBeaTSQFCmQg" describedService__SEFF="_Knr_0AZaEeyBeaTSQFCmQg">
-        <steps_Behaviour xsi:type="seff:StartAction" id="_MmARMAZbEeyBeaTSQFCmQg" entityName="start" successor_AbstractAction="_n3ckcA7zEeyOMYqsQbPIfw"/>
-        <steps_Behaviour xsi:type="seff:StopAction" id="_MmARMQZbEeyBeaTSQFCmQg" entityName="stop" predecessor_AbstractAction="_tcj4gDJCEey5eoGE8NduBA"/>
-        <steps_Behaviour xsi:type="seff:InternalAction" id="_n3ckcA7zEeyOMYqsQbPIfw" entityName="setLatestValue" predecessor_AbstractAction="_MmARMAZbEeyBeaTSQFCmQg" successor_AbstractAction="_tcj4gDJCEey5eoGE8NduBA">
-          <resourceDemand_Action>
-            <specification_ParametericResourceDemand specification="0.01"/>
-            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
-          </resourceDemand_Action>
-        </steps_Behaviour>
-        <steps_Behaviour xsi:type="seff:ExternalCallAction" id="_tcj4gDJCEey5eoGE8NduBA" entityName="ExternalCallAction1" predecessor_AbstractAction="_n3ckcA7zEeyOMYqsQbPIfw" successor_AbstractAction="_MmARMQZbEeyBeaTSQFCmQg" calledService_ExternalService="_wQ0lUDJBEey5eoGE8NduBA" role_ExternalService="_1U90oDJBEey5eoGE8NduBA"/>
-      </serviceEffectSpecifications__BasicComponent>
       <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_M9Y2cQZbEeyBeaTSQFCmQg" describedService__SEFF="_4ilREAZYEeyBeaTSQFCmQg">
         <steps_Behaviour xsi:type="seff:StartAction" id="_M9ZdgAZbEeyBeaTSQFCmQg" entityName="start" successor_AbstractAction="_n-H54DJCEey5eoGE8NduBA"/>
         <steps_Behaviour xsi:type="seff:StopAction" id="_M9ZdgQZbEeyBeaTSQFCmQg" entityName="stop" predecessor_AbstractAction="_n-H54DJCEey5eoGE8NduBA"/>
@@ -288,7 +252,6 @@
     </components__Repository>
     <components__Repository xsi:type="repository:BasicComponent" id="_5-fPYDchEeylpfVm0_xYGQ" entityName="DecisionPlanning2">
       <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_BVvw0DciEeylpfVm0_xYGQ" entityName="Sink_EnrichedImage" eventGroup__SinkRole="_7tCeEAZcEeyBeaTSQFCmQg"/>
-      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_VNORkTciEeylpfVm0_xYGQ" entityName="Provied_IDecisionPlanning" providedInterface__OperationProvidedRole="_pPldELvmEeuyDrQZkcWZSA"/>
       <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_EcHr5jciEeylpfVm0_xYGQ" entityName="Source_TrajectoryMsg" eventGroup__SourceRole="_tfjDoAZnEeyBeaTSQFCmQg"/>
       <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_awtIRzciEeylpfVm0_xYGQ" describedService__SEFF="_-gHCoAZcEeyBeaTSQFCmQg">
         <steps_Behaviour xsi:type="seff:StartAction" id="_fGljYjciEeylpfVm0_xYGQ" entityName="start_2" successor_AbstractAction="_-dtXQDciEeylpfVm0_xYGQ"/>
@@ -309,7 +272,7 @@
           <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01" softwareInducedFailureType__InternalFailureOccurrenceDescription="_B1LEScn0Eeu9AOcPvs9c6Q"/>
         </steps_Behaviour>
       </serviceEffectSpecifications__BasicComponent>
-      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_2rIhgDuxEeymvdx4Ldek3A" describedService__SEFF="_dQitoDrZEeyKGZY-c7BXbA">
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_2rIhgDuxEeymvdx4Ldek3A">
         <steps_Behaviour xsi:type="seff:StartAction" id="_4Z1fAjuxEeymvdx4Ldek3A" entityName="startDecisionPlanning2" successor_AbstractAction="_8fvkfDuxEeymvdx4Ldek3A"/>
         <steps_Behaviour xsi:type="seff:InternalAction" id="_8fvkfDuxEeymvdx4Ldek3A" entityName="internalActionDecisionPlanning2" predecessor_AbstractAction="_4Z1fAjuxEeymvdx4Ldek3A" successor_AbstractAction="_AItPMDuyEeymvdx4Ldek3A">
           <resourceDemand_Action>
@@ -321,12 +284,6 @@
         <steps_Behaviour xsi:type="seff:StopAction" id="_AItPMDuyEeymvdx4Ldek3A" entityName="stopDecisionPlanning2" predecessor_AbstractAction="_8fvkfDuxEeymvdx4Ldek3A"/>
       </serviceEffectSpecifications__BasicComponent>
     </components__Repository>
-    <interfaces__Repository xsi:type="repository:OperationInterface" id="_pPldELvmEeuyDrQZkcWZSA" entityName="IDecisionPlanning">
-      <signatures__OperationInterface id="_dQitoDrZEeyKGZY-c7BXbA" entityName="calcSteeringAngle" returnType__OperationSignature="_1-EvLQZnEeyBeaTSQFCmQg">
-        <parameters__OperationSignature dataType__Parameter="_XiAEvQZbEeyBeaTSQFCmQg" parameterName="enrichedImg"/>
-      </signatures__OperationInterface>
-    </interfaces__Repository>
-    <interfaces__Repository xsi:type="repository:OperationInterface" id="_GqaK8L1pEeuDZfkzylcu4A" entityName="IPlanner"/>
     <interfaces__Repository xsi:type="repository:OperationInterface" id="_ibE5VwZWEeyBeaTSQFCmQg" entityName="IPerception">
       <signatures__OperationInterface id="_mpGY8AZWEeyBeaTSQFCmQg" entityName="sense"/>
     </interfaces__Repository>
@@ -338,13 +295,6 @@
     <interfaces__Repository xsi:type="repository:EventGroup" id="_Yll6kAZZEeyBeaTSQFCmQg" entityName="DistanceMeasure">
       <eventTypes__EventGroup id="_a4DscAZZEeyBeaTSQFCmQg" entityName="PerceivedDistance">
         <parameter__EventType parameterName="distance">
-          <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.0"/>
-        </parameter__EventType>
-      </eventTypes__EventGroup>
-    </interfaces__Repository>
-    <interfaces__Repository xsi:type="repository:EventGroup" id="_IP3M0AZaEeyBeaTSQFCmQg" entityName="DirtLevelMeasure">
-      <eventTypes__EventGroup id="_Knr_0AZaEeyBeaTSQFCmQg" entityName="DirtLevel">
-        <parameter__EventType parameterName="dirtLevel">
           <dataType__Parameter xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.0"/>
         </parameter__EventType>
       </eventTypes__EventGroup>
@@ -380,7 +330,7 @@
     <interfaces__Repository xsi:type="repository:OperationInterface" id="_pCBcUDJBEey5eoGE8NduBA" entityName="IImageFusion">
       <signatures__OperationInterface id="_wQ0lUDJBEey5eoGE8NduBA" entityName="fusion"/>
     </interfaces__Repository>
-    <failureTypes__Repository xsi:type="reliability:SoftwareInducedFailureType" id="_B1LEScn0Eeu9AOcPvs9c6Q" entityName="RecognitionClassificationFailure" internalFailureOccurrenceDescriptions__SoftwareInducedFailureType="/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 /0/@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0 /0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 /0/@components__Repository.12/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.1/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
+    <failureTypes__Repository xsi:type="reliability:SoftwareInducedFailureType" id="_B1LEScn0Eeu9AOcPvs9c6Q" entityName="RecognitionClassificationFailure" internalFailureOccurrenceDescriptions__SoftwareInducedFailureType="/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 /0/@components__Repository.11/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0 /0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 /0/@components__Repository.11/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.1/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
     <dataTypes__Repository xsi:type="repository:CollectionDataType" id="_ej3v4L1oEeuDZfkzylcu4A" entityName="stringarray">
       <innerType_CollectionDataType xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
     </dataTypes__Repository>

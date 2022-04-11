@@ -10,10 +10,6 @@
     <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_hM4QwAZqEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
-  <allocationContexts_Allocation id="_FLC9sDJcEeyhXqN6apk47A" entityName="Assembly_DirtSensor">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
-    <assemblyContext_AllocationContext href="AutonomousSystem.system#_23v3MAZpEeyBeaTSQFCmQg"/>
-  </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_Il7JIDJcEeyhXqN6apk47A" entityName="Assembly_Localisation">
     <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_36fGkAZpEeyBeaTSQFCmQg"/>

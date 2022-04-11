@@ -34,6 +34,7 @@
     <semanticResources>DNNTemplateVariables.templatevariable</semanticResources>
     <semanticResources>DNNSensitivityDistributions.distributionfunction</semanticResources>
     <semanticResources>platform:/resource/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram</semanticResources>
+    <semanticResources>default.repository</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_A1XLYBbHEeyXHaX8hT3CXg">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_A4q-EBbHEeyXHaX8hT3CXg" name="Repository Diagram" repPath="#_A1u-0BbHEeyXHaX8hT3CXg" changeId="cdd91ee8-ca92-4481-a85d-2d57f8f12bc4">
@@ -1811,16 +1812,16 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']"/>
       <ownedElements xmi:type="diagram:DNodeListElement" uid="_A5_MsRbHEeyXHaX8hT3CXg" name="longitude : DOUBLE">
-        <target xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#//@dataTypes__Repository.2/@innerDeclaration_CompositeDataType.0"/>
-        <semanticElements xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#//@dataTypes__Repository.2/@innerDeclaration_CompositeDataType.0"/>
+        <target xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#/0/@dataTypes__Repository.2/@innerDeclaration_CompositeDataType.0"/>
+        <semanticElements xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#/0/@dataTypes__Repository.2/@innerDeclaration_CompositeDataType.0"/>
         <ownedStyle xmi:type="diagram:Square" uid="_A8qGMBbHEeyXHaX8hT3CXg" labelPosition="node">
           <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']/@subNodeMappings[name='InnerDeclaration']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']/@subNodeMappings[name='InnerDeclaration']"/>
       </ownedElements>
       <ownedElements xmi:type="diagram:DNodeListElement" uid="_A8qtQBbHEeyXHaX8hT3CXg" name="latitude : DOUBLE">
-        <target xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#//@dataTypes__Repository.2/@innerDeclaration_CompositeDataType.1"/>
-        <semanticElements xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#//@dataTypes__Repository.2/@innerDeclaration_CompositeDataType.1"/>
+        <target xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#/0/@dataTypes__Repository.2/@innerDeclaration_CompositeDataType.1"/>
+        <semanticElements xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#/0/@dataTypes__Repository.2/@innerDeclaration_CompositeDataType.1"/>
         <ownedStyle xmi:type="diagram:Square" uid="_A8r7YBbHEeyXHaX8hT3CXg" labelPosition="node">
           <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']/@subNodeMappings[name='InnerDeclaration']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
@@ -1838,16 +1839,16 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']"/>
       <ownedElements xmi:type="diagram:DNodeListElement" uid="_A8sicBbHEeyXHaX8hT3CXg" name="dirtlevel : DOUBLE">
-        <target xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#//@dataTypes__Repository.3/@innerDeclaration_CompositeDataType.0"/>
-        <semanticElements xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#//@dataTypes__Repository.3/@innerDeclaration_CompositeDataType.0"/>
+        <target xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#/0/@dataTypes__Repository.3/@innerDeclaration_CompositeDataType.0"/>
+        <semanticElements xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#/0/@dataTypes__Repository.3/@innerDeclaration_CompositeDataType.0"/>
         <ownedStyle xmi:type="diagram:Square" uid="_A8tJgBbHEeyXHaX8hT3CXg" labelPosition="node">
           <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']/@subNodeMappings[name='InnerDeclaration']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']/@subNodeMappings[name='InnerDeclaration']"/>
       </ownedElements>
       <ownedElements xmi:type="diagram:DNodeListElement" uid="_A8twkBbHEeyXHaX8hT3CXg" name="img : Image">
-        <target xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#//@dataTypes__Repository.3/@innerDeclaration_CompositeDataType.1"/>
-        <semanticElements xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#//@dataTypes__Repository.3/@innerDeclaration_CompositeDataType.1"/>
+        <target xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#/0/@dataTypes__Repository.3/@innerDeclaration_CompositeDataType.1"/>
+        <semanticElements xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#/0/@dataTypes__Repository.3/@innerDeclaration_CompositeDataType.1"/>
         <ownedStyle xmi:type="diagram:Square" uid="_A9FkABbHEeyXHaX8hT3CXg" labelPosition="node">
           <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']/@subNodeMappings[name='InnerDeclaration']/@conditionnalStyles.2/@style"/>
         </ownedStyle>
@@ -1865,16 +1866,16 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']"/>
       <ownedElements xmi:type="diagram:DNodeListElement" uid="_HBG4gTI9Eey5eoGE8NduBA" name="position : STRING">
-        <target xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#//@dataTypes__Repository.4/@innerDeclaration_CompositeDataType.0"/>
-        <semanticElements xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#//@dataTypes__Repository.4/@innerDeclaration_CompositeDataType.0"/>
+        <target xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#/0/@dataTypes__Repository.4/@innerDeclaration_CompositeDataType.0"/>
+        <semanticElements xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#/0/@dataTypes__Repository.4/@innerDeclaration_CompositeDataType.0"/>
         <ownedStyle xmi:type="diagram:Square" uid="_HBHfkDI9Eey5eoGE8NduBA" labelPosition="node">
           <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']/@subNodeMappings[name='InnerDeclaration']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']/@subNodeMappings[name='InnerDeclaration']"/>
       </ownedElements>
       <ownedElements xmi:type="diagram:DNodeListElement" uid="_HBIGoDI9Eey5eoGE8NduBA" name="distance : STRING">
-        <target xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#//@dataTypes__Repository.4/@innerDeclaration_CompositeDataType.1"/>
-        <semanticElements xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#//@dataTypes__Repository.4/@innerDeclaration_CompositeDataType.1"/>
+        <target xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#/0/@dataTypes__Repository.4/@innerDeclaration_CompositeDataType.1"/>
+        <semanticElements xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#/0/@dataTypes__Repository.4/@innerDeclaration_CompositeDataType.1"/>
         <ownedStyle xmi:type="diagram:Square" uid="_HBIGoTI9Eey5eoGE8NduBA" labelPosition="node">
           <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']/@subNodeMappings[name='InnerDeclaration']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
@@ -1892,8 +1893,8 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']"/>
       <ownedElements xmi:type="diagram:DNodeListElement" uid="_A9GLEBbHEeyXHaX8hT3CXg" name="geomtetricalData : BYTE">
-        <target xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#//@dataTypes__Repository.5/@innerDeclaration_CompositeDataType.0"/>
-        <semanticElements xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#//@dataTypes__Repository.5/@innerDeclaration_CompositeDataType.0"/>
+        <target xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#/0/@dataTypes__Repository.5/@innerDeclaration_CompositeDataType.0"/>
+        <semanticElements xmi:type="repository:InnerDeclaration" href="AutonomousSystemComponents.repository#/0/@dataTypes__Repository.5/@innerDeclaration_CompositeDataType.0"/>
         <ownedStyle xmi:type="diagram:Square" uid="_A9GyIBbHEeyXHaX8hT3CXg" labelPosition="node">
           <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']/@ownedRepresentations[name='Repository%20Diagram']/@additionalLayers[name='DataTypes']/@containerMappings[name='CompositeDataType']/@subNodeMappings[name='InnerDeclaration']/@conditionnalStyles.0/@style"/>
         </ownedStyle>
@@ -5240,8 +5241,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_M3m84S6PEeydEsXxOHK8gg" name="1 &lt;CPU>">
-          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
-          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_M3nj8C6PEeydEsXxOHK8gg" labelPosition="node">
             <labelFormat>bold</labelFormat>
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']/@subNodeMappings[name='ResourceDemand']/@style"/>
@@ -5289,23 +5290,23 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']"/>
         <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_M3pZIC6PEeydEsXxOHK8gg" name="img">
-          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
-          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
           <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_M3r1YC6PEeydEsXxOHK8gg" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" backgroundColor="136,136,136" foregroundColor="136,136,136">
             <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']"/>
           <ownedElements xmi:type="diagram:DNodeListElement" uid="_M3sccS6PEeydEsXxOHK8gg" name="NUMBER_OF_ELEMENTS = 1">
-            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
-            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
             <ownedStyle xmi:type="diagram:Square" uid="_M3scci6PEeydEsXxOHK8gg" labelPosition="node" color="209,209,209">
               <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@subNodeMappings[name='VariableCharacterisationInput%20-%20Emit%20Event']/@style"/>
             </ownedStyle>
             <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@subNodeMappings[name='VariableCharacterisationInput%20-%20Emit%20Event']"/>
           </ownedElements>
           <ownedElements xmi:type="diagram:DNodeListElement" uid="_M3tDgC6PEeydEsXxOHK8gg" name="BYTESIZE = IntPMF[(1; 1.0)]">
-            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.1"/>
-            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.1"/>
+            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.1"/>
+            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.1"/>
             <ownedStyle xmi:type="diagram:Square" uid="_M3tDgS6PEeydEsXxOHK8gg" labelPosition="node" color="209,209,209">
               <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@subNodeMappings[name='VariableCharacterisationInput%20-%20Emit%20Event']/@style"/>
             </ownedStyle>
@@ -6111,8 +6112,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_IlQy5DI9Eey5eoGE8NduBA" name="1.0 &lt;CPU>">
-          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.10/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
-          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.10/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.10/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.10/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_IlRZ8DI9Eey5eoGE8NduBA" labelPosition="node">
             <labelFormat>bold</labelFormat>
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']/@subNodeMappings[name='ResourceDemand']/@style"/>
@@ -6160,15 +6161,15 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']"/>
         <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_IlTPIjI9Eey5eoGE8NduBA" name="enrichedDistance">
-          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.10/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
-          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.10/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.10/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.10/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
           <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_IlVrYDI9Eey5eoGE8NduBA" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" backgroundColor="136,136,136" foregroundColor="136,136,136">
             <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']"/>
           <ownedElements xmi:type="diagram:DNodeListElement" uid="_IlWScDI9Eey5eoGE8NduBA" name="BYTESIZE = IntPMF[(1; 1.0)]">
-            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.10/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
-            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.10/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.10/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.10/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
             <ownedStyle xmi:type="diagram:Square" uid="_IlWScTI9Eey5eoGE8NduBA" labelPosition="node" color="209,209,209">
               <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@subNodeMappings[name='VariableCharacterisationInput%20-%20Emit%20Event']/@style"/>
             </ownedStyle>
@@ -6405,8 +6406,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_cjqbBDI9Eey5eoGE8NduBA" name="2.0 &lt;CPU>">
-          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
-          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_cjqbBTI9Eey5eoGE8NduBA" labelPosition="node">
             <labelFormat>bold</labelFormat>
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']/@subNodeMappings[name='ResourceDemand']/@style"/>
@@ -6454,23 +6455,23 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']"/>
         <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_cjrpIzI9Eey5eoGE8NduBA" name="enrichedImg">
-          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
-          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
           <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_cjrpJDI9Eey5eoGE8NduBA" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" backgroundColor="136,136,136" foregroundColor="136,136,136">
             <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']"/>
           <ownedElements xmi:type="diagram:DNodeListElement" uid="_cjrpJjI9Eey5eoGE8NduBA" name="VALUE = 1">
-            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
-            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
             <ownedStyle xmi:type="diagram:Square" uid="_cjrpJzI9Eey5eoGE8NduBA" labelPosition="node" color="209,209,209">
               <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@subNodeMappings[name='VariableCharacterisationInput%20-%20Emit%20Event']/@style"/>
             </ownedStyle>
             <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@subNodeMappings[name='VariableCharacterisationInput%20-%20Emit%20Event']"/>
           </ownedElements>
           <ownedElements xmi:type="diagram:DNodeListElement" uid="_cjrpKDI9Eey5eoGE8NduBA" name="BYTESIZE = IntPMF[(1; 1.0)]">
-            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.1"/>
-            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.1"/>
+            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.1"/>
+            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.1"/>
             <ownedStyle xmi:type="diagram:Square" uid="_cjsQMDI9Eey5eoGE8NduBA" labelPosition="node" color="209,209,209">
               <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@subNodeMappings[name='VariableCharacterisationInput%20-%20Emit%20Event']/@style"/>
             </ownedStyle>
@@ -6710,8 +6711,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_g92HVTI9Eey5eoGE8NduBA" name="2.0 &lt;CPU>">
-          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
-          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_g92uYDI9Eey5eoGE8NduBA" labelPosition="node">
             <labelFormat>bold</labelFormat>
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']/@subNodeMappings[name='ResourceDemand']/@style"/>
@@ -6727,8 +6728,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='FailureOccurenceDescription%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_JaJ2szcjEeylpfVm0_xYGQ" name="[RecognitionClassificationFailure] 0.01">
-          <target xmi:type="reliability:InternalFailureOccurrenceDescription" href="AutonomousSystemComponents.repository#//@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
-          <semanticElements xmi:type="reliability:InternalFailureOccurrenceDescription" href="AutonomousSystemComponents.repository#//@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
+          <target xmi:type="reliability:InternalFailureOccurrenceDescription" href="AutonomousSystemComponents.repository#/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
+          <semanticElements xmi:type="reliability:InternalFailureOccurrenceDescription" href="AutonomousSystemComponents.repository#/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_JaKdwDcjEeylpfVm0_xYGQ" labelPosition="node">
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='FailureOccurenceDescription%20Container']/@subNodeMappings[name='FailureOccurenceDescription']/@style"/>
           </ownedStyle>
@@ -6767,15 +6768,15 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']"/>
         <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_D0R6uDI-Eey5eoGE8NduBA" name="trajectoryEvent">
-          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
-          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
           <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_D0ShwDI-Eey5eoGE8NduBA" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" backgroundColor="136,136,136" foregroundColor="136,136,136">
             <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']"/>
           <ownedElements xmi:type="diagram:DNodeListElement" uid="_Ozc-ADI-Eey5eoGE8NduBA" name="BYTESIZE = IntPMF[(1; 1.0)]">
-            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
-            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
             <ownedStyle xmi:type="diagram:Square" uid="_Ozc-ATI-Eey5eoGE8NduBA" labelPosition="node" color="209,209,209">
               <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@subNodeMappings[name='VariableCharacterisationInput%20-%20Emit%20Event']/@style"/>
             </ownedStyle>
@@ -7011,8 +7012,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_p_YuZTI_Eey5eoGE8NduBA" name="0.25 &lt;CPU>">
-          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.6/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
-          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.6/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.6/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.6/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_p_ZVcDI_Eey5eoGE8NduBA" labelPosition="node">
             <labelFormat>bold</labelFormat>
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']/@subNodeMappings[name='ResourceDemand']/@style"/>
@@ -7060,8 +7061,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']"/>
         <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_t3eaQDI_Eey5eoGE8NduBA" name="gpsCoordinates">
-          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.6/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
-          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.6/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.6/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.6/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
           <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
           <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
           <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -7070,8 +7071,8 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']"/>
           <ownedElements xmi:type="diagram:DNodeListElement" uid="_vPLNADI_Eey5eoGE8NduBA" name="BYTESIZE = IntPMF[(1; 1.0)]">
-            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.6/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
-            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.6/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.6/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.6/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
             <ownedStyle xmi:type="diagram:Square" uid="_vPLNATI_Eey5eoGE8NduBA" labelPosition="node" color="209,209,209">
               <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@subNodeMappings[name='VariableCharacterisationInput%20-%20Emit%20Event']/@style"/>
             </ownedStyle>
@@ -7307,8 +7308,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_wgpb-TI_Eey5eoGE8NduBA" name="1.0 &lt;CPU>">
-          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.3/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
-          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.3/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.3/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.3/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_wgqDADI_Eey5eoGE8NduBA" labelPosition="node">
             <labelFormat>bold</labelFormat>
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']/@subNodeMappings[name='ResourceDemand']/@style"/>
@@ -7356,8 +7357,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']"/>
         <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_zSsFwDI_Eey5eoGE8NduBA" name="distance">
-          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.3/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
-          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.3/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.3/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.3/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
           <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
           <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
           <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -7366,8 +7367,8 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']"/>
           <ownedElements xmi:type="diagram:DNodeListElement" uid="_0kTeoDI_Eey5eoGE8NduBA" name="VALUE = 1">
-            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.3/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
-            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.3/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.3/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.3/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
             <ownedStyle xmi:type="diagram:Square" uid="_0kUFsDI_Eey5eoGE8NduBA" labelPosition="node" color="209,209,209">
               <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@subNodeMappings[name='VariableCharacterisationInput%20-%20Emit%20Event']/@style"/>
             </ownedStyle>
@@ -7603,8 +7604,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_1ngBAzI_Eey5eoGE8NduBA" name="0.25 &lt;CPU>">
-          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.4/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
-          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.4/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.4/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.4/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_1ngBBDI_Eey5eoGE8NduBA" labelPosition="node">
             <labelFormat>bold</labelFormat>
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']/@subNodeMappings[name='ResourceDemand']/@style"/>
@@ -7652,8 +7653,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']"/>
         <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_4WiaIDI_Eey5eoGE8NduBA" name="dirtLevel">
-          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.4/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
-          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.4/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.4/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.4/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
           <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
           <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
           <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -7662,8 +7663,8 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']"/>
           <ownedElements xmi:type="diagram:DNodeListElement" uid="_5W9VUDI_Eey5eoGE8NduBA" name="VALUE = 1">
-            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.4/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
-            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.4/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.4/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.4/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
             <ownedStyle xmi:type="diagram:Square" uid="_5W9VUTI_Eey5eoGE8NduBA" labelPosition="node" color="209,209,209">
               <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@subNodeMappings[name='VariableCharacterisationInput%20-%20Emit%20Event']/@style"/>
             </ownedStyle>
@@ -8055,8 +8056,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_PCvP2TJBEey5eoGE8NduBA" name="1.0 &lt;CPU>">
-          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
-          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_PCv24DJBEey5eoGE8NduBA" labelPosition="node">
             <labelFormat>bold</labelFormat>
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']/@subNodeMappings[name='ResourceDemand']/@style"/>
@@ -8104,15 +8105,15 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']"/>
         <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_PCwd8zJBEey5eoGE8NduBA" name="trajectoryEvent">
-          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
-          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
           <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_PCxFADJBEey5eoGE8NduBA" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" backgroundColor="136,136,136" foregroundColor="136,136,136">
             <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']"/>
           <ownedElements xmi:type="diagram:DNodeListElement" uid="_PCxFAjJBEey5eoGE8NduBA" name="BYTESIZE = IntPMF[(1; 1.0)]">
-            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
-            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
             <ownedStyle xmi:type="diagram:Square" uid="_PCxFAzJBEey5eoGE8NduBA" labelPosition="node" color="209,209,209">
               <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@subNodeMappings[name='VariableCharacterisationInput%20-%20Emit%20Event']/@style"/>
             </ownedStyle>
@@ -8348,8 +8349,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_YwFe4zJBEey5eoGE8NduBA" name="0.01 &lt;CPU>">
-          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.5/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
-          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.5/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.5/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.5/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_YwFe5DJBEey5eoGE8NduBA" labelPosition="node">
             <labelFormat>bold</labelFormat>
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']/@subNodeMappings[name='ResourceDemand']/@style"/>
@@ -8637,8 +8638,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_SCDrNTJCEey5eoGE8NduBA" name="2.0 &lt;CPU>">
-          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
-          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@resourceDemand_Action.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_SCESQDJCEey5eoGE8NduBA" labelPosition="node">
             <labelFormat>bold</labelFormat>
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']/@subNodeMappings[name='ResourceDemand']/@style"/>
@@ -8686,23 +8687,23 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']"/>
         <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_SCE5WDJCEey5eoGE8NduBA" name="enrichedImg">
-          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
-          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
+          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0"/>
           <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_SCFgYDJCEey5eoGE8NduBA" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" backgroundColor="136,136,136" foregroundColor="136,136,136">
             <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']"/>
           <ownedElements xmi:type="diagram:DNodeListElement" uid="_SCFgYjJCEey5eoGE8NduBA" name="VALUE = 1">
-            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
-            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
             <ownedStyle xmi:type="diagram:Square" uid="_SCFgYzJCEey5eoGE8NduBA" labelPosition="node" color="209,209,209">
               <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@subNodeMappings[name='VariableCharacterisationInput%20-%20Emit%20Event']/@style"/>
             </ownedStyle>
             <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@subNodeMappings[name='VariableCharacterisationInput%20-%20Emit%20Event']"/>
           </ownedElements>
           <ownedElements xmi:type="diagram:DNodeListElement" uid="_SCGHcDJCEey5eoGE8NduBA" name="BYTESIZE = IntPMF[(1; 1.0)]">
-            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.1"/>
-            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.1"/>
+            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.1"/>
+            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.9/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.1"/>
             <ownedStyle xmi:type="diagram:Square" uid="_SCGHcTJCEey5eoGE8NduBA" labelPosition="node" color="209,209,209">
               <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@subNodeMappings[name='VariableCharacterisationInput%20-%20Emit%20Event']/@style"/>
             </ownedStyle>
@@ -9414,15 +9415,15 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']"/>
         <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_MusX8Du1EeyFSanCKbw16g" name="trajectoryEvent">
-          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@inputVariableUsages__CallAction.0"/>
-          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#//@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@inputVariableUsages__CallAction.0"/>
+          <target xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@inputVariableUsages__CallAction.0"/>
+          <semanticElements xmi:type="parameter:VariableUsage" href="AutonomousSystemComponents.repository#/0/@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@inputVariableUsages__CallAction.0"/>
           <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_MusX8Tu1EeyFSanCKbw16g" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" backgroundColor="136,136,136" foregroundColor="136,136,136">
             <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']"/>
           <ownedElements xmi:type="diagram:DNodeListElement" uid="_MusX8zu1EeyFSanCKbw16g" name="BYTESIZE = IntPMF[(1; 1.0)]">
-            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
-            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#//@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <target xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
+            <semanticElements xmi:type="parameter:VariableCharacterisation" href="AutonomousSystemComponents.repository#/0/@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@inputVariableUsages__CallAction.0/@variableCharacterisation_VariableUsage.0"/>
             <ownedStyle xmi:type="diagram:Square" uid="_Mus_ADu1EeyFSanCKbw16g" labelPosition="node" color="209,209,209">
               <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='EmitEventAction']/@subContainerMappings[name='InputVariableUsageCompartment']/@subContainerMappings[name='InputVariableUsage%20-%20EmitEvent']/@subNodeMappings[name='VariableCharacterisationInput%20-%20Emit%20Event']/@style"/>
             </ownedStyle>
@@ -9449,8 +9450,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_MunfcDu1EeyFSanCKbw16g" name="5.0 &lt;CPU>">
-          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@resourceDemand_Action.0"/>
-          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@resourceDemand_Action.0"/>
+          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@resourceDemand_Action.0"/>
+          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@resourceDemand_Action.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_MupUoDu1EeyFSanCKbw16g" labelPosition="node">
             <labelFormat>bold</labelFormat>
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']/@subNodeMappings[name='ResourceDemand']/@style"/>
@@ -9466,8 +9467,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='FailureOccurenceDescription%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_MuqiwDu1EeyFSanCKbw16g" name="[RecognitionClassificationFailure] 0.01">
-          <target xmi:type="reliability:InternalFailureOccurrenceDescription" href="AutonomousSystemComponents.repository#//@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
-          <semanticElements xmi:type="reliability:InternalFailureOccurrenceDescription" href="AutonomousSystemComponents.repository#//@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
+          <target xmi:type="reliability:InternalFailureOccurrenceDescription" href="AutonomousSystemComponents.repository#/0/@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
+          <semanticElements xmi:type="reliability:InternalFailureOccurrenceDescription" href="AutonomousSystemComponents.repository#/0/@components__Repository.12/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_MurJ0Du1EeyFSanCKbw16g" labelPosition="node">
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='FailureOccurenceDescription%20Container']/@subNodeMappings[name='FailureOccurenceDescription']/@style"/>
           </ownedStyle>
@@ -10287,8 +10288,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_OB6TVTu1EeyFSanCKbw16g" name="5.0 &lt;>">
-          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.12/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.1/@resourceDemand_Action.0"/>
-          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.12/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.1/@resourceDemand_Action.0"/>
+          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.12/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.1/@resourceDemand_Action.0"/>
+          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.12/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.1/@resourceDemand_Action.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_OB66YDu1EeyFSanCKbw16g" labelPosition="node">
             <labelFormat>bold</labelFormat>
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']/@subNodeMappings[name='ResourceDemand']/@style"/>
@@ -10304,8 +10305,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='FailureOccurenceDescription%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_OB66ZDu1EeyFSanCKbw16g" name="[] 0.01">
-          <target xmi:type="reliability:InternalFailureOccurrenceDescription" href="AutonomousSystemComponents.repository#//@components__Repository.12/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.1/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
-          <semanticElements xmi:type="reliability:InternalFailureOccurrenceDescription" href="AutonomousSystemComponents.repository#//@components__Repository.12/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.1/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
+          <target xmi:type="reliability:InternalFailureOccurrenceDescription" href="AutonomousSystemComponents.repository#/0/@components__Repository.12/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.1/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
+          <semanticElements xmi:type="reliability:InternalFailureOccurrenceDescription" href="AutonomousSystemComponents.repository#/0/@components__Repository.12/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.1/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_OB66ZTu1EeyFSanCKbw16g" labelPosition="node">
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='FailureOccurenceDescription%20Container']/@subNodeMappings[name='FailureOccurenceDescription']/@style"/>
           </ownedStyle>
@@ -10501,8 +10502,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_RYUOczu1EeyFSanCKbw16g" name="2.0 &lt;>">
-          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.0/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@resourceDemand_Action.0"/>
-          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#//@components__Repository.0/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <target xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@resourceDemand_Action.0"/>
+          <semanticElements xmi:type="seff_performance:ParametricResourceDemand" href="AutonomousSystemComponents.repository#/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@resourceDemand_Action.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_RYUOdDu1EeyFSanCKbw16g" labelPosition="node">
             <labelFormat>bold</labelFormat>
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='ResourceDemand%20Container']/@subNodeMappings[name='ResourceDemand']/@style"/>
@@ -10518,8 +10519,8 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='FailureOccurenceDescription%20Container']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" uid="_RYU1gDu1EeyFSanCKbw16g" name="[] 0.01">
-          <target xmi:type="reliability:InternalFailureOccurrenceDescription" href="AutonomousSystemComponents.repository#//@components__Repository.0/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
-          <semanticElements xmi:type="reliability:InternalFailureOccurrenceDescription" href="AutonomousSystemComponents.repository#//@components__Repository.0/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
+          <target xmi:type="reliability:InternalFailureOccurrenceDescription" href="AutonomousSystemComponents.repository#/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
+          <semanticElements xmi:type="reliability:InternalFailureOccurrenceDescription" href="AutonomousSystemComponents.repository#/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
           <ownedStyle xmi:type="diagram:Square" uid="_RYU1gTu1EeyFSanCKbw16g" labelPosition="node">
             <description xmi:type="style:SquareDescription" href="platform:/plugin/org.palladiosimulator.editors.sirius.seff/description/seff.odesign#//@ownedViewpoints[name='Seff']/@ownedRepresentations[name='Seff%20Diagram']/@defaultLayer/@containerMappings[name='InternalAction']/@subContainerMappings[name='FailureOccurenceDescription%20Container']/@subNodeMappings[name='FailureOccurenceDescription']/@style"/>
           </ownedStyle>
