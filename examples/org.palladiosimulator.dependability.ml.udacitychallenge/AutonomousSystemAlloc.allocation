@@ -74,4 +74,12 @@
     <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
     <eventChannel__AllocationContext href="AutonomousSystem.system#_-NfgQAZqEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_7E9TELmVEeyjMezYjxU3eA" entityName="Assembly_SensorDataIngestion">
+    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <assemblyContext_AllocationContext href="AutonomousSystem.system#_ikIBkLmVEeyjMezYjxU3eA"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_EEqZALmWEeyjMezYjxU3eA" entityName="Channel_AggregatedSensorData">
+    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <eventChannel__AllocationContext href="AutonomousSystem.system#_oH0ToLmVEeyjMezYjxU3eA"/>
+  </allocationContexts_Allocation>
 </allocation:Allocation>
