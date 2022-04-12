@@ -3,11 +3,12 @@
   <repository:Repository id="_ntjpoLvmEeuyDrQZkcWZSA" entityName="AutonomousSystemComponentsRepository" repositoryDescription="">
     <components__Repository xsi:type="repository:BasicComponent" id="_tFYp8LvmEeuyDrQZkcWZSA" entityName="ChauffeurSteeringAnglePrediction">
       <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_igjUcLoqEeyZT639BONGyg" entityName="Sink_PerceivedImage_ChauffeurSteeringAnglePrediction" eventGroup__SinkRole="_uRMg0AZYEeyBeaTSQFCmQg"/>
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_7VJR0LpeEeyZT639BONGyg" entityName="Provided_ISteeringAnglePrediction_ChauffeurSteeringAnglePrediction" providedInterface__OperationProvidedRole="_tJTeMLpeEeyZT639BONGyg"/>
       <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_Fycm0AZoEeyBeaTSQFCmQg" entityName="Source_TrajectoryMsg_DecisionPlanning" eventGroup__SourceRole="_tfjDoAZnEeyBeaTSQFCmQg"/>
       <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_kfAw4QZfEeyBeaTSQFCmQg" describedService__SEFF="_4ilREAZYEeyBeaTSQFCmQg">
         <steps_Behaviour xsi:type="seff:StartAction" id="_kfBX8AZfEeyBeaTSQFCmQg" entityName="start" successor_AbstractAction="_ZPGtEA_aEeyEv_6ldihyWQ"/>
         <steps_Behaviour xsi:type="seff:StopAction" id="_kfBX8QZfEeyBeaTSQFCmQg" entityName="stop" predecessor_AbstractAction="_q5F6Ow_oEeyEv_6ldihyWQ"/>
-        <steps_Behaviour xsi:type="seff:InternalAction" id="_ZPGtEA_aEeyEv_6ldihyWQ" entityName="ComputeSteeringAngle" predecessor_AbstractAction="_kfBX8AZfEeyBeaTSQFCmQg" successor_AbstractAction="_q5F6Ow_oEeyEv_6ldihyWQ">
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_ZPGtEA_aEeyEv_6ldihyWQ" entityName="predictSteeringAngle" predecessor_AbstractAction="_kfBX8AZfEeyBeaTSQFCmQg" successor_AbstractAction="_q5F6Ow_oEeyEv_6ldihyWQ">
           <resourceDemand_Action>
             <specification_ParametericResourceDemand specification="2.0"/>
             <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
@@ -21,6 +22,17 @@
             </variableCharacterisation_VariableUsage>
             <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="trajectoryEvent"/>
           </inputVariableUsages__CallAction>
+        </steps_Behaviour>
+      </serviceEffectSpecifications__BasicComponent>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_7VJR0bpeEeyZT639BONGyg" describedService__SEFF="_vYaaELpeEeyZT639BONGyg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_7VJ44LpeEeyZT639BONGyg" entityName="start" successor_AbstractAction="_QblqrLpgEeyZT639BONGyg"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_7VJ44bpeEeyZT639BONGyg" entityName="stop" predecessor_AbstractAction="_QblqrLpgEeyZT639BONGyg"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_QblqrLpgEeyZT639BONGyg" entityName="predictSteeringAngle" predecessor_AbstractAction="_7VJ44LpeEeyZT639BONGyg" successor_AbstractAction="_7VJ44bpeEeyZT639BONGyg">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="2.0"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.001" softwareInducedFailureType__InternalFailureOccurrenceDescription="_B1LEScn0Eeu9AOcPvs9c6Q"/>
         </steps_Behaviour>
       </serviceEffectSpecifications__BasicComponent>
     </components__Repository>
@@ -202,10 +214,11 @@
     </components__Repository>
     <components__Repository xsi:type="repository:BasicComponent" id="_5-fPYDchEeylpfVm0_xYGQ" entityName="RamboSteeringAnglePrediction">
       <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_hIIwALoqEeyZT639BONGyg" entityName="Sink_PerceivedImage_RamboSteeringAnglePrediction" eventGroup__SinkRole="_uRMg0AZYEeyBeaTSQFCmQg"/>
+      <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_6txv0LpeEeyZT639BONGyg" entityName="Provided_ISteeringAnglePrediction_RamboSteeringAnglePrediction" providedInterface__OperationProvidedRole="_tJTeMLpeEeyZT639BONGyg"/>
       <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_EcHr5jciEeylpfVm0_xYGQ" entityName="Source_TrajectoryMsg" eventGroup__SourceRole="_tfjDoAZnEeyBeaTSQFCmQg"/>
       <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_awtIRzciEeylpfVm0_xYGQ" describedService__SEFF="_4ilREAZYEeyBeaTSQFCmQg">
-        <steps_Behaviour xsi:type="seff:StartAction" id="_fGljYjciEeylpfVm0_xYGQ" entityName="start_2" successor_AbstractAction="_-dtXQDciEeylpfVm0_xYGQ"/>
-        <steps_Behaviour xsi:type="seff:StopAction" id="_f0J0ADciEeylpfVm0_xYGQ" entityName="stop_2" predecessor_AbstractAction="_iEEBKzciEeylpfVm0_xYGQ"/>
+        <steps_Behaviour xsi:type="seff:StartAction" id="_fGljYjciEeylpfVm0_xYGQ" entityName="start" successor_AbstractAction="_-dtXQDciEeylpfVm0_xYGQ"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_f0J0ADciEeylpfVm0_xYGQ" entityName="stop" predecessor_AbstractAction="_iEEBKzciEeylpfVm0_xYGQ"/>
         <steps_Behaviour xsi:type="seff:EmitEventAction" id="_iEEBKzciEeylpfVm0_xYGQ" entityName="publishTrajectoryMsg_2" predecessor_AbstractAction="_-dtXQDciEeylpfVm0_xYGQ" successor_AbstractAction="_f0J0ADciEeylpfVm0_xYGQ" eventType__EmitEventAction="_uyKiEAZnEeyBeaTSQFCmQg" sourceRole__EmitEventAction="_EcHr5jciEeylpfVm0_xYGQ">
           <inputVariableUsages__CallAction>
             <variableCharacterisation_VariableUsage type="BYTESIZE">
@@ -214,7 +227,18 @@
             <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="trajectoryEvent"/>
           </inputVariableUsages__CallAction>
         </steps_Behaviour>
-        <steps_Behaviour xsi:type="seff:InternalAction" id="_-dtXQDciEeylpfVm0_xYGQ" entityName="InternalAction1" predecessor_AbstractAction="_fGljYjciEeylpfVm0_xYGQ" successor_AbstractAction="_iEEBKzciEeylpfVm0_xYGQ">
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_-dtXQDciEeylpfVm0_xYGQ" entityName="predictSteeringAngle" predecessor_AbstractAction="_fGljYjciEeylpfVm0_xYGQ" successor_AbstractAction="_iEEBKzciEeylpfVm0_xYGQ">
+          <resourceDemand_Action>
+            <specification_ParametericResourceDemand specification="5.0"/>
+            <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+          </resourceDemand_Action>
+          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.001" softwareInducedFailureType__InternalFailureOccurrenceDescription="_B1LEScn0Eeu9AOcPvs9c6Q"/>
+        </steps_Behaviour>
+      </serviceEffectSpecifications__BasicComponent>
+      <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_6t2oULpeEeyZT639BONGyg" describedService__SEFF="_vYaaELpeEeyZT639BONGyg">
+        <steps_Behaviour xsi:type="seff:StartAction" id="_6t3PYLpeEeyZT639BONGyg" entityName="start" successor_AbstractAction="_S6dEXLphEeyZT639BONGyg"/>
+        <steps_Behaviour xsi:type="seff:StopAction" id="_6t3PYbpeEeyZT639BONGyg" entityName="stop" predecessor_AbstractAction="_S6dEXLphEeyZT639BONGyg"/>
+        <steps_Behaviour xsi:type="seff:InternalAction" id="_S6dEXLphEeyZT639BONGyg" entityName="predictSteeringAngle" predecessor_AbstractAction="_6t3PYLpeEeyZT639BONGyg" successor_AbstractAction="_6t3PYbpeEeyZT639BONGyg">
           <resourceDemand_Action>
             <specification_ParametericResourceDemand specification="5.0"/>
             <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
@@ -377,7 +401,13 @@
     <interfaces__Repository xsi:type="repository:OperationInterface" id="_BTTcsLo7EeyZT639BONGyg" entityName="IAcceleration">
       <signatures__OperationInterface id="_CkvPYLo7EeyZT639BONGyg" entityName="startAccelerateActuation"/>
     </interfaces__Repository>
-    <failureTypes__Repository xsi:type="reliability:SoftwareInducedFailureType" id="_B1LEScn0Eeu9AOcPvs9c6Q" entityName="MLPredictionFailure" internalFailureOccurrenceDescriptions__SoftwareInducedFailureType="/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 /0/@components__Repository.8/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
+    <interfaces__Repository xsi:type="repository:OperationInterface" id="_tJTeMLpeEeyZT639BONGyg" entityName="ISteeringAnglePrediction">
+      <signatures__OperationInterface id="_vYaaELpeEeyZT639BONGyg" entityName="predictSteeringAngle">
+        <parameters__OperationSignature dataType__Parameter="_sZfsbAS4Eey2zaw7LNPKtQ" parameterName="img"/>
+        <returnType__OperationSignature xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.3"/>
+      </signatures__OperationInterface>
+    </interfaces__Repository>
+    <failureTypes__Repository xsi:type="reliability:SoftwareInducedFailureType" id="_B1LEScn0Eeu9AOcPvs9c6Q" entityName="MLPredictionFailure" internalFailureOccurrenceDescriptions__SoftwareInducedFailureType="/0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 /0/@components__Repository.8/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0 /0/@components__Repository.0/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 /0/@components__Repository.8/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
     <dataTypes__Repository xsi:type="repository:CollectionDataType" id="_ej3v4L1oEeuDZfkzylcu4A" entityName="stringarray">
       <innerType_CollectionDataType xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
     </dataTypes__Repository>

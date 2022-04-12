@@ -298,7 +298,7 @@ main() {
 };
 
 helper completeUncertaintyRepo(aiAssemblyContext: AssemblyContext) {
-	// Retrieve uncertainty failure type; assuming that an AI component is a basic component with a single seff and a single failure type	
+	// Retrieve uncertainty failure type; assuming that an AI component is a basic component with at least one seff containing the ML failure type.	
 	var seff := aiAssemblyContext.encapsulatedComponent__AssemblyContext.oclAsType(BasicComponent).serviceEffectSpecifications__BasicComponent->asList()->first();
 	var refinedFailureType := seff.oclAsType(ResourceDemandingSEFF).steps_Behaviour
 		->select(action: AbstractAction | action.oclIsTypeOf(InternalAction))
