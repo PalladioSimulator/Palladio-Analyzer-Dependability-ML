@@ -12,7 +12,7 @@
             <specification_ParametericResourceDemand specification="2.0"/>
             <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
           </resourceDemand_Action>
-          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01" softwareInducedFailureType__InternalFailureOccurrenceDescription="_B1LEScn0Eeu9AOcPvs9c6Q"/>
+          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.001" softwareInducedFailureType__InternalFailureOccurrenceDescription="_B1LEScn0Eeu9AOcPvs9c6Q"/>
         </steps_Behaviour>
         <steps_Behaviour xsi:type="seff:EmitEventAction" id="_q5F6Ow_oEeyEv_6ldihyWQ" entityName="PublishTrajectoryMsg" predecessor_AbstractAction="_ZPGtEA_aEeyEv_6ldihyWQ" successor_AbstractAction="_kfBX8QZfEeyBeaTSQFCmQg" eventType__EmitEventAction="_uyKiEAZnEeyBeaTSQFCmQg" sourceRole__EmitEventAction="_Fycm0AZoEeyBeaTSQFCmQg">
           <inputVariableUsages__CallAction>
@@ -35,9 +35,6 @@
             <specification_ParametericResourceDemand specification="1"/>
             <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
           </resourceDemand_Action>
-          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01">
-            <softwareInducedFailureType__InternalFailureOccurrenceDescription href="pathmap://PCM_MODELS/FailureTypes.repository#_sLBREFf0EeW5Q6z-Ts8kIg"/>
-          </internalFailureOccurrenceDescriptions__InternalAction>
         </steps_Behaviour>
         <steps_Behaviour xsi:type="seff:EmitEventAction" id="_c598Cw27EeyCrf1VYDZcXw" entityName="PublishPerceivedImage" predecessor_AbstractAction="_zgCiQAZuEeyBeaTSQFCmQg" successor_AbstractAction="_kYk14AZYEeyBeaTSQFCmQg" eventType__EmitEventAction="_4ilREAZYEeyBeaTSQFCmQg" sourceRole__EmitEventAction="_FRX34AZZEeyBeaTSQFCmQg">
           <inputVariableUsages__CallAction>
@@ -60,6 +57,9 @@
             <specification_ParametericResourceDemand specification="1.0"/>
             <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
           </resourceDemand_Action>
+          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.001">
+            <softwareInducedFailureType__InternalFailureOccurrenceDescription href="pathmap://PCM_MODELS/FailureTypes.repository#_sLBREFf0EeW5Q6z-Ts8kIg"/>
+          </internalFailureOccurrenceDescriptions__InternalAction>
         </steps_Behaviour>
         <steps_Behaviour xsi:type="seff:EmitEventAction" id="_EAIOm7mnEeyS2sGHdAg-UQ" entityName="PublishEnrichedDistanceMeasure" predecessor_AbstractAction="_c2jzkA_oEeyEv_6ldihyWQ" successor_AbstractAction="_i6EMUgZfEeyBeaTSQFCmQg" eventType__EmitEventAction="_uyKiEAZnEeyBeaTSQFCmQg" sourceRole__EmitEventAction="_G5zQcAZoEeyBeaTSQFCmQg">
           <inputVariableUsages__CallAction>
@@ -149,7 +149,7 @@
             <specification_ParametericResourceDemand specification="10"/>
             <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
           </resourceDemand_Action>
-          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.05">
+          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.001">
             <softwareInducedFailureType__InternalFailureOccurrenceDescription href="pathmap://PCM_MODELS/FailureTypes.repository#_sLBREFf0EeW5Q6z-Ts8kIg"/>
           </internalFailureOccurrenceDescriptions__InternalAction>
         </steps_Behaviour>
@@ -219,7 +219,7 @@
             <specification_ParametericResourceDemand specification="5.0"/>
             <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
           </resourceDemand_Action>
-          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.01" softwareInducedFailureType__InternalFailureOccurrenceDescription="_B1LEScn0Eeu9AOcPvs9c6Q"/>
+          <internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.001" softwareInducedFailureType__InternalFailureOccurrenceDescription="_B1LEScn0Eeu9AOcPvs9c6Q"/>
         </steps_Behaviour>
       </serviceEffectSpecifications__BasicComponent>
     </components__Repository>
