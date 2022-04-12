@@ -18,10 +18,6 @@
     <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_5uroEAZpEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
-  <allocationContexts_Allocation id="_Prig8DJcEeyhXqN6apk47A" entityName="Assembyl_SensorEnrichment">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
-    <assemblyContext_AllocationContext href="AutonomousSystem.system#_8FOBoAZpEeyBeaTSQFCmQg"/>
-  </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_UfQHkDJcEeyhXqN6apk47A" entityName="Assembly_SensorEnrichmentDistance">
     <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_Ze__EAZqEeyBeaTSQFCmQg"/>
@@ -34,14 +30,6 @@
     <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_8PF54AZqEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
-  <allocationContexts_Allocation id="_iJRAgDJcEeyhXqN6apk47A" entityName="Assembly_SensorFusionDistance">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
-    <assemblyContext_AllocationContext href="AutonomousSystem.system#_x6L90CzFEeyLXc1IPpAWxw"/>
-  </allocationContexts_Allocation>
-  <allocationContexts_Allocation id="_mBSa8DJcEeyhXqN6apk47A" entityName="Assembly_SensorFusionImage">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
-    <assemblyContext_AllocationContext href="AutonomousSystem.system#_gALZ4CzGEeyLXc1IPpAWxw"/>
-  </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_poaSoDJcEeyhXqN6apk47A" entityName="Assembly_TrajectoryActuator">
     <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_DGpHMC6REeydEsXxOHK8gg"/>
@@ -50,10 +38,6 @@
     <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
     <eventChannel__AllocationContext href="AutonomousSystem.system#_DKCIMAZqEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
-  <allocationContexts_Allocation id="_y-R10DJcEeyhXqN6apk47A" entityName="Channel_DirtLevelMeasure">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
-    <eventChannel__AllocationContext href="AutonomousSystem.system#_MB3EgAZqEeyBeaTSQFCmQg"/>
-  </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_117YYDJcEeyhXqN6apk47A" entityName="Channel_LocalisationCoordinates">
     <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
     <eventChannel__AllocationContext href="AutonomousSystem.system#_VPU5oAZqEeyBeaTSQFCmQg"/>
@@ -61,10 +45,6 @@
   <allocationContexts_Allocation id="_4z17ADJcEeyhXqN6apk47A" entityName="Channel_DistanceMeasure">
     <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
     <eventChannel__AllocationContext href="AutonomousSystem.system#_XbxjEAZqEeyBeaTSQFCmQg"/>
-  </allocationContexts_Allocation>
-  <allocationContexts_Allocation id="_7w468DJcEeyhXqN6apk47A" entityName="Channel_EnrichedImage">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
-    <eventChannel__AllocationContext href="AutonomousSystem.system#_1ZjlcAZqEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_-1_DoDJcEeyhXqN6apk47A" entityName="Channel_EnrichedDistanceMeasure">
     <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
@@ -81,5 +61,21 @@
   <allocationContexts_Allocation id="_EEqZALmWEeyjMezYjxU3eA" entityName="Channel_AggregatedSensorData">
     <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
     <eventChannel__AllocationContext href="AutonomousSystem.system#_oH0ToLmVEeyjMezYjxU3eA"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_einMULo3EeyZT639BONGyg" entityName="Assembly_SemanticUnderstanding">
+    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <assemblyContext_AllocationContext href="AutonomousSystem.system#_IE3M4Lo3EeyZT639BONGyg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_XjVwQLo7EeyZT639BONGyg" entityName="Assembly_Steering">
+    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <assemblyContext_AllocationContext href="AutonomousSystem.system#_QtnOkLo7EeyZT639BONGyg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_bevO0Lo7EeyZT639BONGyg" entityName="Assembly_Brake">
+    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <assemblyContext_AllocationContext href="AutonomousSystem.system#_PBjVYLo7EeyZT639BONGyg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_dxbDILo7EeyZT639BONGyg" entityName="Assembly_Acceleration">
+    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <assemblyContext_AllocationContext href="AutonomousSystem.system#_NpvN4Lo7EeyZT639BONGyg"/>
   </allocationContexts_Allocation>
 </allocation:Allocation>
