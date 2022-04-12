@@ -1,81 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <allocation:Allocation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:allocation="http://palladiosimulator.org/PalladioComponentModel/Allocation/5.2" xsi:schemaLocation="http://palladiosimulator.org/PalladioComponentModel/Allocation/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//allocation" id="_8EdNAL11EeunTKCICMkJWw" entityName="AutonomousSystemAllocAllocation">
-  <targetResourceEnvironment_Allocation href="newResourceEnvironment.resourceenvironment#/"/>
+  <targetResourceEnvironment_Allocation href="SelfDrivingCarResourceEnvironment.resourceenvironment#/"/>
   <system_Allocation href="AutonomousSystem.system#_Z3KSsL10EeunTKCICMkJWw"/>
   <allocationContexts_Allocation id="_BnXbkDJcEeyhXqN6apk47A" entityName="Assembly_Camera">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_mg5F8bpBEeyZT639BONGyg"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_1tSPMAZpEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_a6wycDJcEeyhXqN6apk47A" entityName="Assembly_DecisionPlanning">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_hM4QwAZqEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_Il7JIDJcEeyhXqN6apk47A" entityName="Assembly_Localisation">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_mg5F8bpBEeyZT639BONGyg"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_36fGkAZpEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_L6JS8DJcEeyhXqN6apk47A" entityName="Assembly_DistanceMeasure">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_IDPGIbpAEeyZT639BONGyg"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_5uroEAZpEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_UfQHkDJcEeyhXqN6apk47A" entityName="Assembly_SensorEnrichmentDistance">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_IDPGIbpAEeyZT639BONGyg"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_Ze__EAZqEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_X-3pEDJcEeyhXqN6apk47A" entityName="Assembly_Planner">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_IDPGIbpAEeyZT639BONGyg"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_fxyLwAZqEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_d_o4sDJcEeyhXqN6apk47A" entityName="Assembly_TrajectoryController">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_IDPGIbpAEeyZT639BONGyg"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_8PF54AZqEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_poaSoDJcEeyhXqN6apk47A" entityName="Assembly_TrajectoryActuator">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_9s2EobpAEeyZT639BONGyg"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_DGpHMC6REeydEsXxOHK8gg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_t0Zx8DJcEeyhXqN6apk47A" entityName="Channel_PerceivedImage">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_mg5F8bpBEeyZT639BONGyg"/>
     <eventChannel__AllocationContext href="AutonomousSystem.system#_DKCIMAZqEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_117YYDJcEeyhXqN6apk47A" entityName="Channel_LocalisationCoordinates">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_mg5F8bpBEeyZT639BONGyg"/>
     <eventChannel__AllocationContext href="AutonomousSystem.system#_VPU5oAZqEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_4z17ADJcEeyhXqN6apk47A" entityName="Channel_DistanceMeasure">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_mg5F8bpBEeyZT639BONGyg"/>
     <eventChannel__AllocationContext href="AutonomousSystem.system#_XbxjEAZqEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_-1_DoDJcEeyhXqN6apk47A" entityName="Channel_EnrichedDistanceMeasure">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_IDPGIbpAEeyZT639BONGyg"/>
     <eventChannel__AllocationContext href="AutonomousSystem.system#_2jkhgAZqEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_B0bxwDJdEeyhXqN6apk47A" entityName="Channel_TrajectoryMsg">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_IDPGIbpAEeyZT639BONGyg"/>
     <eventChannel__AllocationContext href="AutonomousSystem.system#_-NfgQAZqEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_7E9TELmVEeyjMezYjxU3eA" entityName="Assembly_SensorDataIngestion">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_mg5F8bpBEeyZT639BONGyg"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_ikIBkLmVEeyjMezYjxU3eA"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_EEqZALmWEeyjMezYjxU3eA" entityName="Channel_AggregatedSensorData">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_mg5F8bpBEeyZT639BONGyg"/>
     <eventChannel__AllocationContext href="AutonomousSystem.system#_oH0ToLmVEeyjMezYjxU3eA"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_einMULo3EeyZT639BONGyg" entityName="Assembly_SemanticUnderstanding">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_IDPGIbpAEeyZT639BONGyg"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_IE3M4Lo3EeyZT639BONGyg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_XjVwQLo7EeyZT639BONGyg" entityName="Assembly_Steering">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_STv3MbpBEeyZT639BONGyg"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_QtnOkLo7EeyZT639BONGyg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_bevO0Lo7EeyZT639BONGyg" entityName="Assembly_Brake">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_STv3MbpBEeyZT639BONGyg"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_PBjVYLo7EeyZT639BONGyg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_dxbDILo7EeyZT639BONGyg" entityName="Assembly_Acceleration">
-    <resourceContainer_AllocationContext href="newResourceEnvironment.resourceenvironment#_XvAd8L11EeunTKCICMkJWw"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_YGnNsbpBEeyZT639BONGyg"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_NpvN4Lo7EeyZT639BONGyg"/>
   </allocationContexts_Allocation>
 </allocation:Allocation>
