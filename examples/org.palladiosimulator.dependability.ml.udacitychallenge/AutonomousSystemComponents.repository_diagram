@@ -301,7 +301,7 @@
       <children xmi:type="notation:DecorationNode" xmi:id="_1-oVcrl0Eey4H5l5DKBb_A" type="5102"/>
       <children xmi:type="notation:DecorationNode" xmi:id="_1-oVc7l0Eey4H5l5DKBb_A" type="7102">
         <children xmi:type="notation:Node" xmi:id="_MLzbALphEeyZT639BONGyg" type="3102">
-          <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_MLzbAbphEeyZT639BONGyg" hint="PCM SEFF Model"/>
+          <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_MLzbAbphEeyZT639BONGyg" diagramLink="_5Xa-4Lp0EeyZT639BONGyg" hint="PCM SEFF Model"/>
           <element xmi:type="seff:ResourceDemandingSEFF" href="AutonomousSystemComponents.repository#_awtIRzciEeylpfVm0_xYGQ"/>
           <layoutConstraint xmi:type="notation:Location" xmi:id="_MLzbArphEeyZT639BONGyg"/>
         </children>
@@ -3249,5 +3249,9 @@
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_lNFHILphEeyZT639BONGyg" id="(0.0,0.2713178294573643)"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_lNFHIbphEeyZT639BONGyg" id="(0.5666666666666667,0.8)"/>
     </edges>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_5Xa-4Lp0EeyZT639BONGyg" type="PCM SEFF Model" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_5Xa-4bp0EeyZT639BONGyg"/>
+    <element xmi:type="seff:ResourceDemandingSEFF" href="AutonomousSystemComponents.repository#_awtIRzciEeylpfVm0_xYGQ"/>
   </notation:Diagram>
 </xmi:XMI>

@@ -21,7 +21,7 @@
     <stringAttribute key="org.palladiosimulator.architecturaltemplates.jobs.config.modelStorageLocation" value="org.palladiosimulator.architecturaltemplates.temporary"/>
     <booleanAttribute key="org.palladiosimulator.architecturaltemplates.jobs.config.storeCompletedModels" value="true"/>
     <booleanAttribute key="org.palladiosimulator.dependability.reliability.uncertainty.ui.at" value="true"/>
-    <stringAttribute key="org.palladiosimulator.dependability.reliability.uncertainty.ui.model" value="platform:/resource/org.palladiosimulator.dependability.ml.udacitychallenge/ImageRecognitionUncertaintyModel.uncertainty"/>
+    <stringAttribute key="org.palladiosimulator.dependability.reliability.uncertainty.ui.model" value="platform:/resource/org.palladiosimulator.dependability.ml.udacitychallenge/RamboUncertaintyModel.uncertainty"/>
     <stringAttribute key="org.palladiosimulator.dependability.reliability.uncertainty.ui.strategy" value="Brute force exploration strategy"/>
     <stringAttribute key="outpath" value="org.palladiosimulator.temporary"/>
     <stringAttribute key="rmiRepositoryFile" value="pathmap://PCM_MODELS/Glassfish.repository"/>

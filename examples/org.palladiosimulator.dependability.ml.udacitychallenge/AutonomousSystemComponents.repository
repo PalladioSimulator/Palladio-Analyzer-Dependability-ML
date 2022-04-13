@@ -4,7 +4,7 @@
     <components__Repository xsi:type="repository:BasicComponent" id="_tFYp8LvmEeuyDrQZkcWZSA" entityName="ChauffeurSteeringAnglePrediction">
       <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_igjUcLoqEeyZT639BONGyg" entityName="Sink_PerceivedImage_ChauffeurSteeringAnglePrediction" eventGroup__SinkRole="_uRMg0AZYEeyBeaTSQFCmQg"/>
       <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_7VJR0LpeEeyZT639BONGyg" entityName="Provided_ISteeringAnglePrediction_ChauffeurSteeringAnglePrediction" providedInterface__OperationProvidedRole="_tJTeMLpeEeyZT639BONGyg"/>
-      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_Fycm0AZoEeyBeaTSQFCmQg" entityName="Source_TrajectoryMsg_DecisionPlanning" eventGroup__SourceRole="_tfjDoAZnEeyBeaTSQFCmQg"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_Fycm0AZoEeyBeaTSQFCmQg" entityName="ChauffeurSource_TrajectoryMsg" eventGroup__SourceRole="_tfjDoAZnEeyBeaTSQFCmQg"/>
       <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_kfAw4QZfEeyBeaTSQFCmQg" describedService__SEFF="_4ilREAZYEeyBeaTSQFCmQg">
         <steps_Behaviour xsi:type="seff:StartAction" id="_kfBX8AZfEeyBeaTSQFCmQg" entityName="start" successor_AbstractAction="_ZPGtEA_aEeyEv_6ldihyWQ"/>
         <steps_Behaviour xsi:type="seff:StopAction" id="_kfBX8QZfEeyBeaTSQFCmQg" entityName="stop" predecessor_AbstractAction="_q5F6Ow_oEeyEv_6ldihyWQ"/>
@@ -215,7 +215,7 @@
     <components__Repository xsi:type="repository:BasicComponent" id="_5-fPYDchEeylpfVm0_xYGQ" entityName="RamboSteeringAnglePrediction">
       <providedRoles_InterfaceProvidingEntity xsi:type="repository:SinkRole" id="_hIIwALoqEeyZT639BONGyg" entityName="Sink_PerceivedImage_RamboSteeringAnglePrediction" eventGroup__SinkRole="_uRMg0AZYEeyBeaTSQFCmQg"/>
       <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_6txv0LpeEeyZT639BONGyg" entityName="Provided_ISteeringAnglePrediction_RamboSteeringAnglePrediction" providedInterface__OperationProvidedRole="_tJTeMLpeEeyZT639BONGyg"/>
-      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_EcHr5jciEeylpfVm0_xYGQ" entityName="Source_TrajectoryMsg" eventGroup__SourceRole="_tfjDoAZnEeyBeaTSQFCmQg"/>
+      <requiredRoles_InterfaceRequiringEntity xsi:type="repository:SourceRole" id="_EcHr5jciEeylpfVm0_xYGQ" entityName="RamboSource_TrajectoryMsg" eventGroup__SourceRole="_tfjDoAZnEeyBeaTSQFCmQg"/>
       <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_awtIRzciEeylpfVm0_xYGQ" describedService__SEFF="_4ilREAZYEeyBeaTSQFCmQg">
         <steps_Behaviour xsi:type="seff:StartAction" id="_fGljYjciEeylpfVm0_xYGQ" entityName="start" successor_AbstractAction="_-dtXQDciEeylpfVm0_xYGQ"/>
         <steps_Behaviour xsi:type="seff:StopAction" id="_f0J0ADciEeylpfVm0_xYGQ" entityName="stop" predecessor_AbstractAction="_iEEBKzciEeylpfVm0_xYGQ"/>
