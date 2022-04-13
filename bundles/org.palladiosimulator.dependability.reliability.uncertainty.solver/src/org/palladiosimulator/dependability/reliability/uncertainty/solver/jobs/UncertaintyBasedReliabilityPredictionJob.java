@@ -2,6 +2,8 @@ package org.palladiosimulator.dependability.reliability.uncertainty.solver.jobs;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
@@ -25,7 +27,9 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 		private PCMSolverWorkflowRunConfiguration config = null;
 		private String uncertaintyModel = "";
 		private String explorationStrategy = "";
+		private boolean applyATs = false;
 		private ILaunchConfiguration launchConfig = null;
+		private Optional<String> exportLocation = Optional.empty();
 		
 		public UncertaintyBasedReliabilityPredictionJobBuilder withConfig(PCMSolverWorkflowRunConfiguration config) {
 			this.config = config;
@@ -44,6 +48,12 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 		
 		public UncertaintyBasedReliabilityPredictionJobBuilder applyArchitecturalTemplates(ILaunchConfiguration launchConfig) {
 			this.launchConfig = launchConfig;
+			this.applyATs = true;
+			return this;
+		}
+		
+		public UncertaintyBasedReliabilityPredictionJobBuilder exportResults(String exportLocation) {
+			this.exportLocation = Optional.ofNullable(exportLocation);
 			return this;
 		}
 		
@@ -58,14 +68,21 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 					LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
 			relPredictionJob.addJob(new PrepareBlackboardJob());
 			
-			var applyATs = launchConfig != null;
 			if (applyATs) {
 				addATJob(relPredictionJob);
 			}
 			
 			relPredictionJob.addJob(new ValidatePCMModelsJob(config));
 			relPredictionJob.addJob(new EventsTransformationJob(config.getStoragePluginID(), config.getEventMiddlewareFile(), false));
-			relPredictionJob.addJob(new RootReliabilityPredictionRunJob(config, uncertaintyModel, explorationStrategy));
+			
+			Optional<URI> exportLocationURI;
+			if (exportLocation.isEmpty()) {
+				exportLocationURI = Optional.empty();
+			} else {
+				var uri = URI.createURI(exportLocation.get());
+				exportLocationURI = Optional.of(uri);
+			}
+			relPredictionJob.addJob(new RootReliabilityPredictionRunJob(config, uncertaintyModel, explorationStrategy, exportLocationURI));
 			
 			return relPredictionJob;
 		}
