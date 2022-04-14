@@ -1,0 +1,7 @@
+Condition;Probability of Success;Probability of Fail
+Blurring: Blurry, Brightness: Normal;1;0
+Blurring: NotBlurry, Brightness: Normal;1;0
+Blurring: NotBlurry, Brightness: Low;1;0
+Blurring: Blurry, Brightness: Low;1;0
+Blurring: NotBlurry, Brightness: Strong;1;0
+Blurring: Blurry, Brightness: Strong;1;0
