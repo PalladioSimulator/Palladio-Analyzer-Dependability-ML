@@ -22,10 +22,10 @@ def generateResults():
     barplotReliabilityPredictions(ramboPcmRelFile)
     comparePredictionResultsAndSensModel(ramboSensModelFile, ramboPcmRelFile, 'Rambo')
 
-    #For all remaining AI models repeat the three lines from above
+    #TODO: For all remaining AI models repeat the three lines from above
 
     compareAccuracyAndPrediction()
-    compareAccuracyAndConditionalPrediction()
+    compareConditionalSuccessProbsOfAllModels()
 
 def barplotSensitivityModel(sensModelFile):
     sensModel = loadSensitivityModelData(sensModelFile)
@@ -78,15 +78,20 @@ def compareAccuracyAndPrediction():
     header = ('Model', 'Model accuracy', 'PCM-Rel success probability', 'Model success probability')
     rows.append(header)
 
-    successRambo = computeSuccessProbOfAIModel(ramboSensModelFile, ramboPcmRelFile)
-    successPcmRelRambo = retrievePcmRelSuccessProbability(ramboPcmRelFile)
-    ramboRow = ('Rambo', accRamboModel, successPcmRelRambo, successRambo)
-    rows.append(ramboRow)
+    successWS = computeSuccessProbOfAIModel(wsSensModelFile, wsPcmRelFile)
+    successPcmRelWS = retrievePcmRelSuccessProbability(wsPcmRelFile)
+    wsRow = ('WorstSteering', accWorstSteeringModel, successPcmRelWS, successWS)
+    rows.append(wsRow)
 
     #successChauffeur = computeSuccessProbOfAIModel(chauffeurSensModelFile, chauffeurPcmRelFile)
     #successPcmRelChauffeur = retrievePcmRelSuccessProbability(chauffeurPcmRelFile)
     #chauffeurRow = ('Chauffeur', accChauffeurModel, successPcmRelChauffeur, successChauffeur)
     #rows.append(chauffeurRow)
+
+    successRambo = computeSuccessProbOfAIModel(ramboSensModelFile, ramboPcmRelFile)
+    successPcmRelRambo = retrievePcmRelSuccessProbability(ramboPcmRelFile)
+    ramboRow = ('Rambo', accRamboModel, successPcmRelRambo, successRambo)
+    rows.append(ramboRow)
 
     #successNV = computeSuccessProbOfAIModel(nvSensModelFile, nvPcmRelFile)
     #successPcmRelNV = retrievePcmRelSuccessProbability(nvPcmRelFile)
@@ -98,16 +103,71 @@ def compareAccuracyAndPrediction():
     psRow = ('PerfectSteering', accPerfectSteeringModel, successPcmRelNV, successPS)
     rows.append(psRow)
 
-    successWS = computeSuccessProbOfAIModel(wsSensModelFile, wsPcmRelFile)
-    successPcmRelWS = retrievePcmRelSuccessProbability(wsPcmRelFile)
-    wsRow = ('WorstSteering', accWorstSteeringModel, successPcmRelWS, successWS)
-    rows.append(wsRow)
-
     createResultTable(rows, 'ComparisonAccuracyAndPrediction.csv')
 
 
-def compareAccuracyAndConditionalPrediction():
-    pass
+def compareConditionalSuccessProbsOfAllModels():
+    rows = []
+
+    header = ('Uncertainties',
+              'Con success prop perfect steering', 'Con success prop perfect steering PCM-Rel', 
+              'Con success prop NVersion', 'Con success prop NVersion PCM-Rel',
+              'Con success prop Rambo_Filter', 'Con success prop Rambo_Filter PCM-Rel',
+              'Con success prop Rambo', 'Con success prop Rambo PCM-Rel',
+              'Con success prop Chauffeur_Filter', 'Con success prop Chauffeur_Filter PCM-Rel',
+              'Con success prop Chauffeur', 'Con success prop Chauffeur PCM-Rel',
+              'Con success prop worst steering', 'Con success prop worst steering PCM-Rel')
+    rows.append(header)    
+
+    uncertainties = loadUncertaintyDist(psPcmRelFile).keys()
+    psSensModel = loadSensitivityModel(psSensModelFile)
+    psPcmRel = loadReliabilityPredictions(psPcmRelFile)
+    #nvSensModel = loadSensitivityModel(nvSensModelFile)
+    #nvPcmRel = loadReliabilityPredictions(nvPcmRelFile)
+    #ramboFilterSensModel = loadSensitivityModel(ramboFilterSensModelFile)
+    #ramboFilterPcmRel = loadReliabilityPredictions(ramboFilterPcmRelFile)
+    ramboSensModel = loadSensitivityModel(ramboSensModelFile)
+    ramboPcmRel = loadReliabilityPredictions(ramboPcmRelFile)
+    #chauffeurFilterSensModel = loadSensitivityModel(chauffeurFilterSensModelFile)
+    #chauffeurFilterPcmRel = loadReliabilityPredictions(chauffeurFilterPcmRelFile)
+    #chauffeurSensModel = loadSensitivityModel(chauffeurSensModelFile)
+    #chauffeurPcmRel = loadReliabilityPredictions(chauffeurPcmRelFile)
+    wsSensModel = loadSensitivityModel(wsSensModelFile)
+    wsPcmRel = loadReliabilityPredictions(wsPcmRelFile)
+
+    for each in uncertainties:
+        psSuccess = psSensModel[each]
+        psSuccessPcmRel = psPcmRel[each]
+
+        nvSuccess = 0.0#nvSensModel[each]
+        nvSuccessPcmRel = 0.0#nvPcmRel[each]
+
+        ramboFilterSuccess = 0.0#ramboFilterSensModel[each]
+        ramboFilterSuccessPcmRel = 0.0#ramboFilterPcmRel[each]
+
+        ramboSuccess = ramboSensModel[each]
+        ramboSuccessPcmRel = ramboPcmRel[each]
+
+        chauffeurFilterSuccess = 0.0#chauffeurFilterSensModel[each]
+        chauffeurFilterSuccessPcmRel = 0.0#chauffeurFilterPcmRel[each]
+
+        chauffeurSuccess = 0.0#chauffeurSensModel[each]
+        chauffeurSuccessPcmRel = 0.0#chauffeurPcmRel[each]
+
+        wsSuccess = wsSensModel[each]
+        wsSuccessPcmRel = wsPcmRel[each]
+
+        rows.append((each, 
+                     psSuccess, psSuccessPcmRel, 
+                     nvSuccess, nvSuccessPcmRel,
+                     ramboFilterSuccess, ramboFilterSuccessPcmRel,
+                     ramboSuccess, ramboSuccessPcmRel,
+                     chauffeurFilterSuccess, chauffeurFilterSuccessPcmRel,
+                     chauffeurSuccess, chauffeurSuccessPcmRel,
+                     wsSuccess, wsSuccessPcmRel))
+
+    createResultTable(rows, 'ComparisonConditionalSuccessProbsOfAllModels.csv')
+
 
 def loadSensitivityModelData(sensModelFile):
     sensModel = loadSensitivityModel(sensModelFile)
@@ -227,6 +287,14 @@ if __name__ == "__main__":
                 if file.startswith('ChauffeurReliabilityPredictionResults'):
                     global chauffeurPcmRelFile
                     chauffeurPcmRelFile = os.path.join(modelDir, file)
+        if dir.startswith("Chauffeur_Filter"):
+            for file in listdir(modelDir):
+                if file.startswith('Chauffeur_FilterSensitivityModel'):
+                    global chauffeurFilterSensModelFile
+                    chauffeurFilterSensModelFile = os.path.join(modelDir, file)
+                if file.startswith('Chauffeur_FilterReliabilityPredictionResults'):
+                    global chauffeurFilterPcmRelFile
+                    chauffeurFilterPcmRelFile = os.path.join(modelDir, file)
         if dir.startswith("Rambo"):
             for file in listdir(modelDir):
                 if file.startswith('RamboSensitivityModel'):
@@ -235,6 +303,14 @@ if __name__ == "__main__":
                 if file.startswith('RamboReliabilityPredictionResults'):
                     global ramboPcmRelFile
                     ramboPcmRelFile = os.path.join(modelDir, file)
+        if dir.startswith("Rambo_Filter"):
+            for file in listdir(modelDir):
+                if file.startswith('Rambo_FilterSensitivityModel'):
+                    global ramboFilterSensModelFile
+                    ramboFilterSensModelFile = os.path.join(modelDir, file)
+                if file.startswith('Rambo_FilterReliabilityPredictionResults'):
+                    global ramboFilterPcmRelFile
+                    ramboFilterPcmRelFile = os.path.join(modelDir, file)
         if dir.startswith("PerfectSteering"):
             for file in listdir(modelDir):
                 if file.startswith('PerfectSteeringSensitivityModel'):
