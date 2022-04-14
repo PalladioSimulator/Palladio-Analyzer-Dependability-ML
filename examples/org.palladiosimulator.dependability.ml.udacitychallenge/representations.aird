@@ -36,6 +36,8 @@
     <semanticResources>SelfDrivingCarResourceEnvironment.resourceenvironment</semanticResources>
     <semanticResources>ChauffeurUncertaintyModel.uncertainty</semanticResources>
     <semanticResources>RamboUncertaintyModel.uncertainty</semanticResources>
+    <semanticResources>PerfectSteeringUncertaintyModel.uncertainty</semanticResources>
+    <semanticResources>WorstSteeringUncertaintyModel.uncertainty</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_A1XLYBbHEeyXHaX8hT3CXg">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.palladiosimulator.editors.sirius.repository/description/repository.odesign#//@ownedViewpoints[name='Repository']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_A4q-EBbHEeyXHaX8hT3CXg" name="Repository Diagram" repPath="#_A1u-0BbHEeyXHaX8hT3CXg" changeId="cdd91ee8-ca92-4481-a85d-2d57f8f12bc4">

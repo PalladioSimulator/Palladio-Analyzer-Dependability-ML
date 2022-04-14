@@ -23,7 +23,7 @@
     <booleanAttribute key="org.palladiosimulator.dependability.reliability.uncertainty.ui.at" value="false"/>
     <booleanAttribute key="org.palladiosimulator.dependability.reliability.uncertainty.ui.export" value="true"/>
     <stringAttribute key="org.palladiosimulator.dependability.reliability.uncertainty.ui.export.file" value="platform:/resource/org.palladiosimulator.dependability.ml.udacitychallenge"/>
-    <stringAttribute key="org.palladiosimulator.dependability.reliability.uncertainty.ui.model" value="platform:/resource/org.palladiosimulator.dependability.ml.udacitychallenge/RamboUncertaintyModel.uncertainty"/>
+    <stringAttribute key="org.palladiosimulator.dependability.reliability.uncertainty.ui.model" value="platform:/resource/org.palladiosimulator.dependability.ml.udacitychallenge/WorstSteeringUncertaintyModel.uncertainty"/>
     <stringAttribute key="org.palladiosimulator.dependability.reliability.uncertainty.ui.strategy" value="Brute force exploration strategy"/>
     <stringAttribute key="outpath" value="org.palladiosimulator.temporary"/>
     <stringAttribute key="rmiRepositoryFile" value="pathmap://PCM_MODELS/Glassfish.repository"/>

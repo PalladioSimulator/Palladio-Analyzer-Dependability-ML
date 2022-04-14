@@ -17,7 +17,7 @@
       <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_tHu6kL1rEeunTKCICMkJWw"/>
     </assemblyContexts__ComposedStructure>
     <assemblyContexts__ComposedStructure id="_hM4QwAZqEeyBeaTSQFCmQg" entityName="Assembly_DecisionPlanning">
-      <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_tFYp8LvmEeuyDrQZkcWZSA"/>
+      <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_7yXvILu4Eey6j5H-iqteUQ"/>
     </assemblyContexts__ComposedStructure>
     <assemblyContexts__ComposedStructure id="_8PF54AZqEeyBeaTSQFCmQg" entityName="Assembly_TrajectoryController">
       <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_Ljtw8AZfEeyBeaTSQFCmQg"/>
@@ -74,7 +74,7 @@
       <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_MBnxwAZbEeyBeaTSQFCmQg"/>
     </connectors__ComposedStructure>
     <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="__KbpoAZqEeyBeaTSQFCmQg" entityName="SteeringAnglePredictionSourceConnector" assemblyContext__EventChannelSourceConnector="_hM4QwAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSourceConnector="_-NfgQAZqEeyBeaTSQFCmQg">
-      <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_Fycm0AZoEeyBeaTSQFCmQg"/>
+      <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_DaPfcLu5Eey6j5H-iqteUQ"/>
     </connectors__ComposedStructure>
     <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="__oXi0AZqEeyBeaTSQFCmQg" assemblyContext__EventChannelSourceConnector="_fxyLwAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSourceConnector="_-NfgQAZqEeyBeaTSQFCmQg">
       <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_G5zQcAZoEeyBeaTSQFCmQg"/>
@@ -108,7 +108,7 @@
       <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_gleOcLmTEeyjMezYjxU3eA"/>
     </connectors__ComposedStructure>
     <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_xZ6VYLoqEeyZT639BONGyg" entityName="SteeringAnglePredictionSinkConnector" assemblyContext__EventChannelSinkConnector="_hM4QwAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSinkConnector="_DKCIMAZqEeyBeaTSQFCmQg">
-      <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_igjUcLoqEeyZT639BONGyg"/>
+      <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_EplncLu5Eey6j5H-iqteUQ"/>
     </connectors__ComposedStructure>
     <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_exGqYLouEeyZT639BONGyg" assemblyContext__EventChannelSinkConnector="_Ze__EAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSinkConnector="_DKCIMAZqEeyBeaTSQFCmQg">
       <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_2493sLotEeyZT639BONGyg"/>
