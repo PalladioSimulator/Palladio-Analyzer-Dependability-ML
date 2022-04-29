@@ -15,7 +15,7 @@
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_36fGkAZpEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_L6JS8DJcEeyhXqN6apk47A" entityName="Assembly_DistanceMeasure">
-    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_IDPGIbpAEeyZT639BONGyg"/>
+    <resourceContainer_AllocationContext href="SelfDrivingCarResourceEnvironment.resourceenvironment#_mg5F8bpBEeyZT639BONGyg"/>
     <assemblyContext_AllocationContext href="AutonomousSystem.system#_5uroEAZpEeyBeaTSQFCmQg"/>
   </allocationContexts_Allocation>
   <allocationContexts_Allocation id="_UfQHkDJcEeyhXqN6apk47A" entityName="Assembly_SensorEnrichmentDistance">

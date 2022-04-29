@@ -1,0 +1,6 @@
+Model;RMSE_orig;RMSE_trans
+Rambo;0.05682;0.06144
+Chauffeur;0.05768;0.07065
+N-Version;0.04221;0.04631
+Worst;inf;inf
+Perfect;0;0

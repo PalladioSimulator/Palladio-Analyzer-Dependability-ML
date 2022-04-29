@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:composition="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.2" xmlns:emfprofileapplication="http://www.modelversioning.org/emfprofile/application/1.1" xmlns:org.palladiosimulator.architecturaltemplates.catalog.profiles="org.palladiosimulator.architecturaltemplates.catalog.profiles.NVersionProgrammingAi" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2" xmlns:system="http://palladiosimulator.org/PalladioComponentModel/System/5.2" xsi:schemaLocation="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//core/composition org.palladiosimulator.architecturaltemplates.catalog.profiles.NVersionProgrammingAi ../../plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram#_yYDN0DbyEeyCQ69JbDj2Qw http://palladiosimulator.org/PalladioComponentModel/Repository/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//repository http://palladiosimulator.org/PalladioComponentModel/System/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//system">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:composition="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.2" xmlns:emfprofileapplication="http://www.modelversioning.org/emfprofile/application/1.1" xmlns:org.palladiosimulator.architecturaltemplates.catalog.profiles="org.palladiosimulator.architecturaltemplates.catalog.profiles.aifilter" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2" xmlns:system="http://palladiosimulator.org/PalladioComponentModel/System/5.2" xsi:schemaLocation="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//core/composition org.palladiosimulator.architecturaltemplates.catalog.profiles.aifilter ../../plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/AiFilter.emfprofile_diagram#_jqYnIMOREeu_7dsDthY0bQ http://palladiosimulator.org/PalladioComponentModel/Repository/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//repository http://palladiosimulator.org/PalladioComponentModel/System/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//system">
   <system:System id="_Z3KSsL10EeunTKCICMkJWw" entityName="AutonomousSystemSystem">
     <assemblyContexts__ComposedStructure id="_1tSPMAZpEeyBeaTSQFCmQg" entityName="Assembly_Camera">
       <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_j7cKIL1rEeunTKCICMkJWw"/>
@@ -17,7 +17,7 @@
       <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_tHu6kL1rEeunTKCICMkJWw"/>
     </assemblyContexts__ComposedStructure>
     <assemblyContexts__ComposedStructure id="_hM4QwAZqEeyBeaTSQFCmQg" entityName="Assembly_DecisionPlanning">
-      <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_7yXvILu4Eey6j5H-iqteUQ"/>
+      <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_5-fPYDchEeylpfVm0_xYGQ"/>
     </assemblyContexts__ComposedStructure>
     <assemblyContexts__ComposedStructure id="_8PF54AZqEeyBeaTSQFCmQg" entityName="Assembly_TrajectoryController">
       <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_Ljtw8AZfEeyBeaTSQFCmQg"/>
@@ -74,7 +74,7 @@
       <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_MBnxwAZbEeyBeaTSQFCmQg"/>
     </connectors__ComposedStructure>
     <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="__KbpoAZqEeyBeaTSQFCmQg" entityName="SteeringAnglePredictionSourceConnector" assemblyContext__EventChannelSourceConnector="_hM4QwAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSourceConnector="_-NfgQAZqEeyBeaTSQFCmQg">
-      <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_DaPfcLu5Eey6j5H-iqteUQ"/>
+      <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_EcHr5jciEeylpfVm0_xYGQ"/>
     </connectors__ComposedStructure>
     <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="__oXi0AZqEeyBeaTSQFCmQg" assemblyContext__EventChannelSourceConnector="_fxyLwAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSourceConnector="_-NfgQAZqEeyBeaTSQFCmQg">
       <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_G5zQcAZoEeyBeaTSQFCmQg"/>
@@ -108,7 +108,7 @@
       <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_gleOcLmTEeyjMezYjxU3eA"/>
     </connectors__ComposedStructure>
     <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_xZ6VYLoqEeyZT639BONGyg" entityName="SteeringAnglePredictionSinkConnector" assemblyContext__EventChannelSinkConnector="_hM4QwAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSinkConnector="_DKCIMAZqEeyBeaTSQFCmQg">
-      <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_EplncLu5Eey6j5H-iqteUQ"/>
+      <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_hIIwALoqEeyZT639BONGyg"/>
     </connectors__ComposedStructure>
     <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_exGqYLouEeyZT639BONGyg" assemblyContext__EventChannelSinkConnector="_Ze__EAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSinkConnector="_DKCIMAZqEeyBeaTSQFCmQg">
       <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_2493sLotEeyZT639BONGyg"/>
@@ -145,9 +145,9 @@
     </providedRoles_InterfaceProvidingEntity>
   </system:System>
   <emfprofileapplication:ProfileApplication>
-    <stereotypeApplications xsi:type="org.palladiosimulator.architecturaltemplates.catalog.profiles:AiNVAssemblyContext" appliedTo="_hM4QwAZqEeyBeaTSQFCmQg" improvedModelName="NVersionSensitivityModel">
-      <extension href="../../plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram#_WLifUDbzEeyCQ69JbDj2Qw"/>
+    <stereotypeApplications xsi:type="org.palladiosimulator.architecturaltemplates.catalog.profiles:AiAssemblyContext" appliedTo="_hM4QwAZqEeyBeaTSQFCmQg" distributionName="Improvement_Filter" targetUncertaintyName="ImageBlurring">
+      <extension href="../../plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/AiFilter.emfprofile_diagram#_2v2MUMbXEeu0u_J2FkPWPA"/>
     </stereotypeApplications>
-    <importedProfiles nsURI="org.palladiosimulator.architecturaltemplates.catalog.profiles.NVersionProgrammingAi" location="platform:/plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram"/>
+    <importedProfiles nsURI="org.palladiosimulator.architecturaltemplates.catalog.profiles.aifilter" location="platform:/plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/AiFilter.emfprofile_diagram"/>
   </emfprofileapplication:ProfileApplication>
 </xmi:XMI>
