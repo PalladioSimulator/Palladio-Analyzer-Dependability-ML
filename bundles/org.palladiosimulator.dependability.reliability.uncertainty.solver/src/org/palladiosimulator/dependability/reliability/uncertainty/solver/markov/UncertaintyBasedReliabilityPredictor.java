@@ -103,9 +103,11 @@ public class UncertaintyBasedReliabilityPredictor {
 
 		ReliabilityPredictionResult result = new ReliabilityPredictionResult();
 
+		getArchitecturalCountermeasureOperator(unresolved).applyToUncertaintyModels();
+		
 		var stateSpace = UncertaintyModelManager.get().getStateSpace();
 		for (List<UncertaintyState> eachTuple : exploreStrategy.explore(stateSpace)) {
-			var conditionalPoS = predictConditionalSuccessProbability(unresolved, eachTuple);
+			var conditionalPoS = predict(unresolved, eachTuple);
 			result.addAll(conditionalPoS);
 		}
 
@@ -114,8 +116,11 @@ public class UncertaintyBasedReliabilityPredictor {
 
 	public Set<ReliabilityPredictionResultPerScenario> predictConditionalSuccessProbability(PCMInstance unresolved,
 			List<UncertaintyState> stateTuple) {
-		getArchitecturalCountermeasureOperator(unresolved).applyOnce();
-
+		var improved = getArchitecturalCountermeasureOperator(unresolved).applyToUncertainties(stateTuple);
+		return predict(unresolved, improved);
+	}
+	
+	private Set<ReliabilityPredictionResultPerScenario> predict(PCMInstance unresolved, List<UncertaintyState> stateTuple) {
 		var resolved = resolveUncertainties(unresolved, stateTuple); 
 
 		var conditionalPoS = predictProbabilityOfSuccessGiven(resolved);

@@ -17,6 +17,7 @@ import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyRe
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintySpecificCountermeasure;
 import org.palladiosimulator.dependability.reliability.uncertainty.improvement.UncertaintyImprovementCalculator;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace;
+import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.UncertaintyModelManager;
 import org.palladiosimulator.dependability.reliability.uncertainty.util.UncertaintySwitch;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticNetwork;
@@ -37,6 +38,7 @@ import tools.mdsd.probdist.distributionfunction.SimpleParameter;
 
 public class ArchitecturalCountermeasureOperator {
 
+	// TODO: check whether the class is still necessary
 	private class AppliedCountermeasureManager {
 		
 		private final Map<ArchitecturalCountermeasure,Boolean> managedCountermeasures;
@@ -77,7 +79,17 @@ public class ArchitecturalCountermeasureOperator {
 		return new ArchitecturalCountermeasureOperator(pcmModel, uncertaintyRepo);
 	}
 
-	public void applyOnce() {
+	public List<UncertaintyState> applyToUncertainties(List<UncertaintyState> stateTuple) {
+		if (uncertaintyRepo.getArchitecturalCountermeasures().size() == 0) {
+			return stateTuple;
+		}
+		
+		filterApplicableCountermeasures().forEach(c -> applyUncertaintySpecific(c, stateTuple));
+		
+		return stateTuple;
+	}
+
+	public void applyToUncertaintyModels() {
 		if (uncertaintyRepo.getArchitecturalCountermeasures().size() == 0) {
 			return;
 		}
@@ -87,12 +99,43 @@ public class ArchitecturalCountermeasureOperator {
 	
 	private List<ArchitecturalCountermeasure> filterApplicableCountermeasures() {
 		return uncertaintyRepo.getArchitecturalCountermeasures().stream()
-				.filter(c -> countermeasureManager.isNotAlreadyApplied(c))
+				//.filter(c -> countermeasureManager.isNotAlreadyApplied(c))
 				.filter(c -> allPreconditionsFulfilled(c, pcmModel))
 				.filter(c -> allPreconditionsFulfilled(c.getAppliedFailureType(), pcmModel))
 				.collect(toList());
 	}
 
+	private void applyUncertaintySpecific(ArchitecturalCountermeasure countermeasure, List<UncertaintyState> stateTuple) {
+		new UncertaintySwitch<Void>() {
+
+			@Override
+			public Void caseUncertaintySpecificCountermeasure(UncertaintySpecificCountermeasure countermeasure) {			
+				var improvement = createCPDFrom(countermeasure.getUncertaintyImprovement());
+				
+				var targetUncertainty = stateTuple.stream()
+						.filter(each -> each.instantiates(countermeasure.getTargetUncertainty()))
+						.findAny()
+						.orElseThrow(() -> new RuntimeException("There is no uncertainty with target for " + countermeasure.getEntityName()));
+				var valueToImprove = asConditional(targetUncertainty.getValue());
+				var improvedValue = improvement.given(valueToImprove).sample();
+				
+				stateTuple.remove(targetUncertainty);
+				
+				var improvedUncertainty = targetUncertainty.newValuedStateWith(improvedValue);
+				stateTuple.add(improvedUncertainty);		
+
+				return null;
+			}
+
+			@Override
+			public Void caseGlobalUncertaintyCountermeasure(GlobalUncertaintyCountermeasure countermeasure) {
+				apply(countermeasure);
+				return null;
+			}
+
+		}.doSwitch(countermeasure);
+	}
+	
 	private void apply(ArchitecturalCountermeasure countermeasure) {
 		new UncertaintySwitch<Void>() {
 
@@ -188,27 +231,28 @@ public class ArchitecturalCountermeasureOperator {
 				}
 				return probability;
 			}
-			
-			private ConditionalProbabilityDistribution createCPDFrom(UncertaintyImprovement improvement) {
-				return new UncertaintySwitch<ConditionalProbabilityDistribution>() {
 
-					@Override
-					public ConditionalProbabilityDistribution caseProbabilisticImprovement(ProbabilisticImprovement probImprovement) {
-						return UncertaintyImprovementCalculator.get().createCPD(probImprovement.getProbabilityDistribution());
-					}
-
-					@Override
-					public ConditionalProbabilityDistribution caseDeterministicImprovement(DeterministicImprovement detImprovement) {
-						return UncertaintyImprovementCalculator.get().createIndicatorCPD(detImprovement);
-					}
-
-				}.doSwitch(improvement); 
-			}
-			
-			private List<Conditionable.Conditional> asConditional(CategoricalValue value) {
-				return Lists.newArrayList(new Conditionable.Conditional(Domain.CATEGORY, value));
-			}
 		};
+	}
+	
+	private ConditionalProbabilityDistribution createCPDFrom(UncertaintyImprovement improvement) {
+		return new UncertaintySwitch<ConditionalProbabilityDistribution>() {
+
+			@Override
+			public ConditionalProbabilityDistribution caseProbabilisticImprovement(ProbabilisticImprovement probImprovement) {
+				return UncertaintyImprovementCalculator.get().createCPD(probImprovement.getProbabilityDistribution());
+			}
+
+			@Override
+			public ConditionalProbabilityDistribution caseDeterministicImprovement(DeterministicImprovement detImprovement) {
+				return UncertaintyImprovementCalculator.get().createIndicatorCPD(detImprovement);
+			}
+
+		}.doSwitch(improvement); 
+	}
+	
+	private List<Conditionable.Conditional> asConditional(CategoricalValue value) {
+		return Lists.newArrayList(new Conditionable.Conditional(Domain.CATEGORY, value));
 	}
 	
 	private GroundRandomVariable retrieveFailureVariableFrom(UncertaintyInducedFailureType type) {
