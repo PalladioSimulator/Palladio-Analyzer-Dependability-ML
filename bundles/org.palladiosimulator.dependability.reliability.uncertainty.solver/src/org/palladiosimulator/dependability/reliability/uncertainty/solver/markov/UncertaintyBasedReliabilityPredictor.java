@@ -85,7 +85,9 @@ public class UncertaintyBasedReliabilityPredictor {
 		this.exploreStrategy = exploreStrategy;
 		this.uncertaintyRepo = uncertaintyRepo;
 
-		UncertaintyModelManager.get().manage(uncertaintyRepo.getUncertaintyInducedFailureTypes());
+		var manager = UncertaintyModelManager.get(); 
+		manager.reset();
+		manager.manage(uncertaintyRepo.getUncertaintyInducedFailureTypes());
 
 		initProbabilityDistributions();
 	}

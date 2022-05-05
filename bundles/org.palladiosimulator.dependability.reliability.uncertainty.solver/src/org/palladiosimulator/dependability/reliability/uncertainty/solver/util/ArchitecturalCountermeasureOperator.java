@@ -4,9 +4,8 @@ import static java.util.stream.Collectors.toList;
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.util.ArchitecturalPreconditionUtil.allPreconditionsFulfilled;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure;
 import org.palladiosimulator.dependability.reliability.uncertainty.DeterministicImprovement;
 import org.palladiosimulator.dependability.reliability.uncertainty.GlobalUncertaintyCountermeasure;
@@ -20,12 +19,13 @@ import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.UncertaintyModelManager;
 import org.palladiosimulator.dependability.reliability.uncertainty.util.UncertaintySwitch;
+import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticModel;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticNetwork;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
+import org.palladiosimulator.envdyn.environment.staticmodel.LocalProbabilisticNetwork;
 import org.palladiosimulator.solver.models.PCMInstance;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.entity.Conditionable;
@@ -37,41 +37,13 @@ import tools.mdsd.probdist.distributionfunction.Domain;
 import tools.mdsd.probdist.distributionfunction.SimpleParameter;
 
 public class ArchitecturalCountermeasureOperator {
-
-	// TODO: check whether the class is still necessary
-	private class AppliedCountermeasureManager {
-		
-		private final Map<ArchitecturalCountermeasure,Boolean> managedCountermeasures;
-		
-		public AppliedCountermeasureManager() {
-			this.managedCountermeasures = Maps.newHashMap();
-			for (ArchitecturalCountermeasure each : uncertaintyRepo.getArchitecturalCountermeasures()) {
-				this.managedCountermeasures.put(each, false);
-			}
-		}
-		
-		public boolean isAlreadyApplied(ArchitecturalCountermeasure countermeasure) {
-			return Optional.ofNullable(managedCountermeasures.get(countermeasure)).orElse(false);
-		}
-		
-		public boolean isNotAlreadyApplied(ArchitecturalCountermeasure countermeasure) {
-			return isAlreadyApplied(countermeasure) == false;
-		}
-		
-		public void updateStatusOf(ArchitecturalCountermeasure countermeasure) {
-			managedCountermeasures.put(countermeasure, true);
-		}
-		
-	}
 	
 	private final PCMInstance pcmModel;
 	private final UncertaintyRepository uncertaintyRepo;
-	private final AppliedCountermeasureManager countermeasureManager;
 
 	private ArchitecturalCountermeasureOperator(PCMInstance pcmModel, UncertaintyRepository uncertaintyRepo) {
 		this.pcmModel = pcmModel;
 		this.uncertaintyRepo = uncertaintyRepo;
-		this.countermeasureManager = new AppliedCountermeasureManager();
 	}
 
 	public static ArchitecturalCountermeasureOperator createOperatorFor(PCMInstance pcmModel,
@@ -99,7 +71,6 @@ public class ArchitecturalCountermeasureOperator {
 	
 	private List<ArchitecturalCountermeasure> filterApplicableCountermeasures() {
 		return uncertaintyRepo.getArchitecturalCountermeasures().stream()
-				//.filter(c -> countermeasureManager.isNotAlreadyApplied(c))
 				.filter(c -> allPreconditionsFulfilled(c, pcmModel))
 				.filter(c -> allPreconditionsFulfilled(c.getAppliedFailureType(), pcmModel))
 				.collect(toList());
@@ -141,7 +112,8 @@ public class ArchitecturalCountermeasureOperator {
 
 			@Override
 			public Void caseUncertaintySpecificCountermeasure(UncertaintySpecificCountermeasure countermeasure) {
-				var uncertaintyModel = countermeasure.getAppliedFailureType().getUncertaintyModel();
+				var surrogate = makeSurrogate(countermeasure.getAppliedFailureType());
+				var uncertaintyModel = surrogate.getUncertaintyModel();
 				var affectedVariable = uncertaintyModel.getLocalProbabilisticModels().get(0).getGroundRandomVariables().stream()
 						.filter(variable -> variable.getInstantiatedTemplate().getId().equals(countermeasure.getTargetUncertainty().getId()))
 						.findFirst()
@@ -149,7 +121,7 @@ public class ArchitecturalCountermeasureOperator {
 
 				switchDistributions(affectedVariable, countermeasure.getUncertaintyImprovement());	
 				
-				updateChanges(countermeasure);
+				UncertaintyModelManager.get().updateModel(surrogate);	
 
 				return null;
 			}
@@ -161,11 +133,12 @@ public class ArchitecturalCountermeasureOperator {
 						continue;
 					}
 
-					var original = retrieveFailureVariableFrom(each);
+					var surrogate = makeSurrogate(countermeasure.getAppliedFailureType());
+					var original = retrieveFailureVariableFrom(surrogate);
 					var improved = retrieveFailureVariableFrom(countermeasure.getImprovedUncertaintyModel());
 					original.getDescriptiveModel().setDistribution(improved.getDescriptiveModel().getDistribution());					
 					
-					updateChanges(countermeasure);					
+					UncertaintyModelManager.get().updateModel(surrogate);					
 				}
 				return null;
 			}
@@ -268,12 +241,59 @@ public class ArchitecturalCountermeasureOperator {
 			throw new RuntimeException("There are several variables with parents.");
 		}
 		return results.iterator().next();
-	};
-
+	}
 	
-	private void updateChanges(ArchitecturalCountermeasure countermeasure) {
-		UncertaintyModelManager.get().updateModel(countermeasure.getAppliedFailureType());
-		countermeasureManager.updateStatusOf(countermeasure);
-	};
+	// The method makes an surrogate for the given failure type. The reason is that the uncertainty model
+	// will be possibly changed during analysis which might produce side effects if no surrogate is made.
+	private UncertaintyInducedFailureType makeSurrogate(UncertaintyInducedFailureType failureType) {
+		var surrogate = (UncertaintyInducedFailureType) EcoreUtil.copy(failureType);
+		surrogate.setFailureVariable(failureType.getFailureVariable());
+		surrogate.setRefines(failureType.getRefines());
+		surrogate.getArchitecturalPreconditions().addAll(failureType.getArchitecturalPreconditions());
+		
+		var originalModel = failureType.getUncertaintyModel();
+		var surrogatedModel = (GroundProbabilisticNetwork) EcoreUtil.copy(originalModel);
+		for (GroundProbabilisticModel each : originalModel.getLocalModels()) {
+			var surrogatedGroundModel = (GroundProbabilisticModel) EcoreUtil.copy(each);
+			surrogatedGroundModel.setDistribution(each.getDistribution());
+			surrogatedGroundModel.setInstantiatedFactor(each.getInstantiatedFactor());
+			
+			surrogatedModel.getLocalModels().add(surrogatedGroundModel);
+		}
+		
+		for (LocalProbabilisticNetwork eachNet : originalModel.getLocalProbabilisticModels()) {
+			var surrogatedLocalNetwork = (LocalProbabilisticNetwork) EcoreUtil.copy(eachNet);
+			for (GroundRandomVariable eachVar : eachNet.getGroundRandomVariables()) {
+				var surrogatedVariable = surrogatedLocalNetwork.getGroundRandomVariables().stream()
+						.filter(v -> v.getId().equals(eachVar.getId()))
+						.findFirst()
+						.orElseThrow(() -> new RuntimeException(
+								"Ground random variables have not been properly copied."));
+				surrogatedVariable.setInstantiatedTemplate(eachVar.getInstantiatedTemplate());
+				
+				if (eachVar.getAppliedObjects().isEmpty() == false) {
+					surrogatedVariable.getAppliedObjects().addAll(eachVar.getAppliedObjects());
+				}
+				
+				if (eachVar.getDependenceStructure().isEmpty() == false) {
+					surrogatedVariable.getDependenceStructure().addAll(eachVar.getDependenceStructure());
+				}
+				
+				var descModel = surrogatedModel.getLocalModels().stream()
+						.filter(m -> m.getId().equals(eachVar.getDescriptiveModel().getId()))
+						.findFirst()
+						.orElseThrow(() -> new RuntimeException(
+								"Could not found local model: " + eachVar.getDescriptiveModel().getEntityName()));
+				surrogatedVariable.setDescriptiveModel(descModel);
+				
+				surrogatedLocalNetwork.getGroundRandomVariables().add(surrogatedVariable);
+			}
+			surrogatedModel.getLocalProbabilisticModels().add(surrogatedLocalNetwork);
+		}
+		
+		surrogate.setUncertaintyModel(surrogatedModel);
+		
+		return surrogate;
+	}
 
 }
