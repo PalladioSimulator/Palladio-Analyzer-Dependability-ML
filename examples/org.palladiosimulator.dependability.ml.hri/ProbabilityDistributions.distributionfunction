@@ -23,7 +23,7 @@
   </distributions>
   <params id="_a9RjsMqkEeqObY-eK2jOOA" entityName="SensitivityBrightnessParam">
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
-    <representation xsi:type="distributionfunction:SimpleParameter" type="SAMPLESPACE" value="{(ImageBrightnessMeasure=High),0.3};{(ImageBrightnessMeasure=Low),0.3};{(ImageBrightnessMeasure=Medium),0.4}"/>
+    <representation xsi:type="distributionfunction:SimpleParameter" type="SAMPLESPACE" value="{(ImageBrightnessMeasure=High),0.2};{(ImageBrightnessMeasure=Low),0.2};{(ImageBrightnessMeasure=Medium),0.6}"/>
   </params>
   <params id="_a9TY4MqkEeqObY-eK2jOOA" entityName="SensitivityParam">
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
@@ -31,42 +31,42 @@
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=High)</conditonals>
         <conditonals>(SensorNoise=High)</conditonals>
-        <entry type="SAMPLESPACE" value="{Success,0.7};{Fail,0.3}"/>
+        <entry type="SAMPLESPACE" value="{Success,0.85};{Fail,0.15}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=High)</conditonals>
         <conditonals>(SensorNoise=Medium)</conditonals>
-        <entry type="SAMPLESPACE" value="{Success,0.75};{Fail,0.25}"/>
+        <entry type="SAMPLESPACE" value="{Success,0.9};{Fail,0.1}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=High)</conditonals>
         <conditonals>(SensorNoise=Low)</conditonals>
-        <entry type="SAMPLESPACE" value="{Success,0.8};{Fail,0.2}"/>
+        <entry type="SAMPLESPACE" value="{Success,0.95};{Fail,0.05}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=Low)</conditonals>
         <conditonals>(SensorNoise=High)</conditonals>
-        <entry type="SAMPLESPACE" value="{Success,0.7};{Fail,0.3}"/>
+        <entry type="SAMPLESPACE" value="{Success,0.85};{Fail,0.15}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=Low)</conditonals>
         <conditonals>(SensorNoise=Medium)</conditonals>
-        <entry type="SAMPLESPACE" value="{Success,0.75};{Fail,0.25}"/>
+        <entry type="SAMPLESPACE" value="{Success,0.9};{Fail,0.1}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=Low)</conditonals>
         <conditonals>(SensorNoise=Low)</conditonals>
-        <entry type="SAMPLESPACE" value="{Success,0.8};{Fail,0.2}"/>
-      </cpdEntries>
-      <cpdEntries>
-        <conditonals>(ImageBrightnessMeasure=Medium)</conditonals>
-        <conditonals>(SensorNoise=High)</conditonals>
         <entry type="SAMPLESPACE" value="{Success,0.95};{Fail,0.05}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=Medium)</conditonals>
+        <conditonals>(SensorNoise=High)</conditonals>
+        <entry type="SAMPLESPACE" value="{Success,0.9};{Fail,0.1}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightnessMeasure=Medium)</conditonals>
         <conditonals>(SensorNoise=Medium)</conditonals>
-        <entry type="SAMPLESPACE" value="{Success,0.975};{Fail,0.025}"/>
+        <entry type="SAMPLESPACE" value="{Success,0.95};{Fail,0.05}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=Medium)</conditonals>
@@ -80,11 +80,11 @@
     <representation xsi:type="distributionfunction:TabularCPD">
       <cpdEntries>
         <conditonals>(SensorNoise=High)</conditonals>
-        <entry type="SAMPLESPACE" value="{(SensorNoise=High),0.2};{(SensorNoise=Low),0};{(SensorNoise=Medium),0.8}"/>
+        <entry type="SAMPLESPACE" value="{(SensorNoise=High),0.4};{(SensorNoise=Low),0};{(SensorNoise=Medium),0.6}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(SensorNoise=Medium)</conditonals>
-        <entry type="SAMPLESPACE" value="{(SensorNoise=High),0.0};{(SensorNoise=Low),0.9};{(SensorNoise=Medium),0.1}"/>
+        <entry type="SAMPLESPACE" value="{(SensorNoise=High),0.0};{(SensorNoise=Low),0.7};{(SensorNoise=Medium),0.3}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(SensorNoise=Low)</conditonals>
@@ -97,15 +97,15 @@
     <representation xsi:type="distributionfunction:TabularCPD">
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=High)</conditonals>
-        <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure=High),0.75};{(ImageBrightnessMeasure=Low),0};{(ImageBrightnessMeasure=Medium),0.25}"/>
+        <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure=High),0.2};{(ImageBrightnessMeasure=Low),0};{(ImageBrightnessMeasure=Medium),0.8}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=Medium)</conditonals>
-        <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure=High),0.2};{(ImageBrightnessMeasure=Low),0.2};{(ImageBrightnessMeasure=Medium),0.6}"/>
+        <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure=High),0.1};{(ImageBrightnessMeasure=Low),0.3};{(ImageBrightnessMeasure=Medium),0.6}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(ImageBrightnessMeasure=Low)</conditonals>
-        <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure=High),0};{(ImageBrightnessMeasure=Low),0.75};{(ImageBrightnessMeasure=Medium),0.25}"/>
+        <entry type="SAMPLESPACE" value="{(ImageBrightnessMeasure=High),0};{(ImageBrightnessMeasure=Low),0.3};{(ImageBrightnessMeasure=Medium),0.7}"/>
       </cpdEntries>
     </representation>
   </params>
@@ -161,22 +161,22 @@
   </params>
   <params id="_dAG9sSpVEeuMpaabmuiN-Q" entityName="SensorNoiseParam">
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
-    <representation xsi:type="distributionfunction:SimpleParameter" type="SAMPLESPACE" value="{(SensorNoise=High),0.25};{(SensorNoise=Low),0.5};{(SensorNoise=Medium),0.25}"/>
+    <representation xsi:type="distributionfunction:SimpleParameter" type="SAMPLESPACE" value="{(SensorNoise=High),0.15};{(SensorNoise=Low),0.6};{(SensorNoise=Medium),0.25}"/>
   </params>
   <params id="_Bd_3ESpWEeuMpaabmuiN-Q" entityName="TemporalSensorNoiseParam">
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
     <representation xsi:type="distributionfunction:TabularCPD">
       <cpdEntries>
         <conditonals>(SensorNoise=High)</conditonals>
-        <entry type="SAMPLESPACE" value="{(SensorNoise=High),0.75};{(SensorNoise=Low),0};{(SensorNoise=Medium),0.25}"/>
+        <entry type="SAMPLESPACE" value="{(SensorNoise=High),0.1};{(SensorNoise=Low),0};{(SensorNoise=Medium),0.9}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(SensorNoise=Medium)</conditonals>
-        <entry type="SAMPLESPACE" value="{(SensorNoise=High),0.25};{(SensorNoise=Low),0.25};{(SensorNoise=Medium),0.5}"/>
+        <entry type="SAMPLESPACE" value="{(SensorNoise=High),0.1};{(SensorNoise=Low),0.6};{(SensorNoise=Medium),0.3}"/>
       </cpdEntries>
       <cpdEntries>
         <conditonals>(SensorNoise=Low)</conditonals>
-        <entry type="SAMPLESPACE" value="{(SensorNoise=High),0};{(SensorNoise=Low),0.6};{(SensorNoise=Medium),0.4}"/>
+        <entry type="SAMPLESPACE" value="{(SensorNoise=High),0};{(SensorNoise=Low),0.7};{(SensorNoise=Medium),0.3}"/>
       </cpdEntries>
     </representation>
   </params>
