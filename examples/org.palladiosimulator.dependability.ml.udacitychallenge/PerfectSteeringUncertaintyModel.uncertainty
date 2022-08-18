@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uncertainty:UncertaintyRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reliability="http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2" xmlns:uncertainty="http://palladiosimulator.org/Uncertainty/1.0" id="_owgZALu-Eey6j5H-iqteUQ" entityName="PerfectSteeringUncertaintyRepo">
+  <uncertaintyInducedFailureTypes id="_reJrALu-Eey6j5H-iqteUQ" entityName="PerfectSteeringFailureType" architecturalPreconditions="_7FlS47u-Eey6j5H-iqteUQ">
+    <refines xsi:type="reliability:SoftwareInducedFailureType" href="AutonomousSystemComponents.repository#_B1LEScn0Eeu9AOcPvs9c6Q"/>
+    <uncertaintyModel href="DNNSensitivityModels.staticmodel#_hiEjwLu7Eey6j5H-iqteUQ"/>
+  </uncertaintyInducedFailureTypes>
+  <architecturalPreconditions xsi:type="uncertainty:ActiveComponent" id="_7FlS47u-Eey6j5H-iqteUQ" entityName="PerfectSteeringModelComponentMustBeActive">
+    <requiredActiveComponent xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_v_3xcLu4Eey6j5H-iqteUQ"/>
+  </architecturalPreconditions>
+</uncertainty:UncertaintyRepository>

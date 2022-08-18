@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <resourceenvironment:ResourceEnvironment xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:resourceenvironment="http://palladiosimulator.org/PalladioComponentModel/ResourceEnvironment/5.2" entityName="RobotCognitionResourceEnvironment">
   <resourceContainer_ResourceEnvironment id="_XE0aMNDgEeqWne3bdagE9g" entityName="RobotComputationUnit">
-    <activeResourceSpecifications_ResourceContainer id="_aVuxUNDgEeqWne3bdagE9g" MTTR="0.01" MTTF="0.001">
+    <activeResourceSpecifications_ResourceContainer id="_aVuxUNDgEeqWne3bdagE9g" MTTR="0.01" MTTF="10.0">
       <schedulingPolicy href="pathmap://PCM_MODELS/Palladio.resourcetype#ProcessorSharing"/>
       <activeResourceType_ActiveResourceSpecification href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
       <processingRate_ProcessingResourceSpecification specification="100"/>

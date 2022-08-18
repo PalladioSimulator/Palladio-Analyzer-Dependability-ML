@@ -1,6 +1,6 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.ui.launch;
 
-import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.APPLY_AT_ATTR;
+import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.*;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.DEFAULT_ATTR;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.EXPLORATION_STRATEGY_ATTR;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.UNCERTAINTY_MODEL_ATTR;
@@ -49,6 +49,12 @@ public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConf
 			var applyATs = launchConfig.getAttribute(APPLY_AT_ATTR, false);
 			if (applyATs) {
 				jobBuilder.applyArchitecturalTemplates(launchConfig);
+			}
+			
+			var exportResults = launchConfig.getAttribute(EXPORT_RESULT_ATTR, false);
+			if (exportResults) {
+				var exportLocation = launchConfig.getAttribute(EXPORT_FILE_ATTR, DEFAULT_ATTR);
+				jobBuilder.exportResults(exportLocation);
 			}
 				
 			return jobBuilder.build();

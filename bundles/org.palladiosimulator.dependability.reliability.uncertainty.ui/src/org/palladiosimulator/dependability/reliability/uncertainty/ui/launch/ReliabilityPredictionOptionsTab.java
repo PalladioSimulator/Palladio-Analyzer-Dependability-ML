@@ -3,6 +3,8 @@ package org.palladiosimulator.dependability.reliability.uncertainty.ui.launch;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.APPLY_AT_ATTR;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.DEFAULT_ATTR;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.EXPLORATION_STRATEGY_ATTR;
+import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.EXPORT_FILE_ATTR;
+import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.EXPORT_RESULT_ATTR;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.UNCERTAINTY_MODEL_ATTR;
 
 import org.eclipse.core.runtime.CoreException;
@@ -17,6 +19,7 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -34,6 +37,8 @@ public class ReliabilityPredictionOptionsTab extends AbstractLaunchConfiguration
 	private Text uncertaintyModelLocation;
 	private Combo supportedStrategiesCombobox;
 	private Button atButton;
+	private Button exportResultsButton;
+	private Text exportLocationFile;
 
 	private final ModifyListener modifyListener = new ModifyListener() {
 
@@ -41,7 +46,7 @@ public class ReliabilityPredictionOptionsTab extends AbstractLaunchConfiguration
 			updateTab();
 		}
 	};
-	
+
 	private void updateTab() {
 		setDirty(true);
 		updateLaunchConfigurationDialog();
@@ -56,6 +61,8 @@ public class ReliabilityPredictionOptionsTab extends AbstractLaunchConfiguration
 		createSupportedExplorationStrategiesGroup(container);
 
 		createArchitecturalTemplateGroup(container);
+
+		createExportResultsGroup(container);
 	}
 
 	private Composite createRootContainer(Composite parent) {
@@ -84,7 +91,7 @@ public class ReliabilityPredictionOptionsTab extends AbstractLaunchConfiguration
 		supportedStrategiesCombobox.setItems(getStrategyNames());
 		supportedStrategiesCombobox.setSize(400, 200);
 		supportedStrategiesCombobox.addModifyListener(new ModifyListener() {
-			
+
 			@Override
 			public void modifyText(ModifyEvent arg0) {
 				updateTab();
@@ -101,17 +108,50 @@ public class ReliabilityPredictionOptionsTab extends AbstractLaunchConfiguration
 		atButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 4, 1));
 		atButton.setText("Apply architectural templates, if any");
 		atButton.addSelectionListener(new SelectionListener() {
-			
+
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				updateTab();
 			}
-			
+
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
 				updateTab();
 			}
 		});
+	}
+
+	private void createExportResultsGroup(Composite container) {
+		var exportResultsGroup = new Group(container, SWT.NONE);
+		exportResultsGroup.setText("Result export");
+
+		var gd = new GridData(SWT.FILL, SWT.CENTER, true, false);
+		exportResultsGroup.setLayoutData(gd);
+
+		exportResultsGroup.setLayout(new GridLayout());
+
+		exportResultsButton = new Button(exportResultsGroup, SWT.CHECK);
+		exportResultsButton.setLayoutData(gd);
+		exportResultsButton.setText("Export results of reliability prediction");
+		exportResultsButton.setSelection(false);
+		exportResultsButton.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				updateTab();
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				updateTab();
+			}
+		});
+
+		exportLocationFile = new Text(exportResultsGroup, SWT.SINGLE | SWT.BORDER);
+		exportLocationFile.setLayoutData(gd);
+		exportLocationFile.addModifyListener(modifyListener);
+		TabHelper.createFolderInputSection(exportResultsGroup, modifyListener, "Export location:", exportLocationFile, "Export location:",
+				getShell(), DEFAULT_ATTR);
 	}
 
 	private String[] getStrategyNames() {
@@ -125,14 +165,15 @@ public class ReliabilityPredictionOptionsTab extends AbstractLaunchConfiguration
 		configuration.setAttribute(EXPLORATION_STRATEGY_ATTR, DEFAULT_ATTR);
 		configuration.setAttribute(UNCERTAINTY_MODEL_ATTR, DEFAULT_ATTR);
 		configuration.setAttribute(APPLY_AT_ATTR, false);
+		configuration.setAttribute(EXPORT_RESULT_ATTR, false);
+		configuration.setAttribute(EXPORT_FILE_ATTR, DEFAULT_ATTR);
 	}
 
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
 			uncertaintyModelLocation.setText(configuration.getAttribute(UNCERTAINTY_MODEL_ATTR, DEFAULT_ATTR));
-			
-			
+
 			supportedStrategiesCombobox.select(0);
 			var expAttr = configuration.getAttribute(EXPLORATION_STRATEGY_ATTR, DEFAULT_ATTR);
 			for (int i = 0; i < supportedStrategiesCombobox.getItemCount(); i++) {
@@ -144,6 +185,9 @@ public class ReliabilityPredictionOptionsTab extends AbstractLaunchConfiguration
 			}
 
 			atButton.setSelection(configuration.getAttribute(APPLY_AT_ATTR, false));
+
+			exportResultsButton.setSelection(configuration.getAttribute(EXPORT_RESULT_ATTR, false));
+			exportLocationFile.setText(configuration.getAttribute(EXPORT_FILE_ATTR, DEFAULT_ATTR));
 		} catch (CoreException e) {
 			uncertaintyModelLocation.setText(DEFAULT_ATTR);
 			supportedStrategiesCombobox.select(0);
@@ -157,6 +201,8 @@ public class ReliabilityPredictionOptionsTab extends AbstractLaunchConfiguration
 				supportedStrategiesCombobox.getItem(supportedStrategiesCombobox.getSelectionIndex()));
 		configuration.setAttribute(UNCERTAINTY_MODEL_ATTR, uncertaintyModelLocation.getText());
 		configuration.setAttribute(APPLY_AT_ATTR, atButton.getSelection());
+		configuration.setAttribute(EXPORT_RESULT_ATTR, exportResultsButton.getSelection());
+		configuration.setAttribute(EXPORT_FILE_ATTR, exportLocationFile.getText());
 	}
 
 	@Override

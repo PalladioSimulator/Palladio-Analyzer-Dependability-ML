@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:composition="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.2" xmlns:emfprofileapplication="http://www.modelversioning.org/emfprofile/application/1.1" xmlns:org.palladiosimulator.architecturaltemplates.catalog.profiles="org.palladiosimulator.architecturaltemplates.catalog.profiles.NVersionProgrammingAi" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2" xmlns:system="http://palladiosimulator.org/PalladioComponentModel/System/5.2" xsi:schemaLocation="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//core/composition org.palladiosimulator.architecturaltemplates.catalog.profiles.NVersionProgrammingAi ../../plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram#_yYDN0DbyEeyCQ69JbDj2Qw http://palladiosimulator.org/PalladioComponentModel/Repository/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//repository http://palladiosimulator.org/PalladioComponentModel/System/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//system">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:composition="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.2" xmlns:emfprofileapplication="http://www.modelversioning.org/emfprofile/application/1.1" xmlns:org.palladiosimulator.architecturaltemplates.catalog.profiles="org.palladiosimulator.architecturaltemplates.catalog.profiles.aifilter" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2" xmlns:system="http://palladiosimulator.org/PalladioComponentModel/System/5.2" xsi:schemaLocation="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//core/composition org.palladiosimulator.architecturaltemplates.catalog.profiles.aifilter ../../plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/AiFilter.emfprofile_diagram#_jqYnIMOREeu_7dsDthY0bQ http://palladiosimulator.org/PalladioComponentModel/Repository/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//repository http://palladiosimulator.org/PalladioComponentModel/System/5.2 http://palladiosimulator.org/PalladioComponentModel/5.2#//system">
   <system:System id="_Z3KSsL10EeunTKCICMkJWw" entityName="AutonomousSystemSystem">
     <assemblyContexts__ComposedStructure id="_1tSPMAZpEeyBeaTSQFCmQg" entityName="Assembly_Camera">
       <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_j7cKIL1rEeunTKCICMkJWw"/>
-    </assemblyContexts__ComposedStructure>
-    <assemblyContexts__ComposedStructure id="_23v3MAZpEeyBeaTSQFCmQg" entityName="Assembly_DirtSensor">
-      <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_C6PL8AZaEeyBeaTSQFCmQg"/>
     </assemblyContexts__ComposedStructure>
     <assemblyContexts__ComposedStructure id="_36fGkAZpEeyBeaTSQFCmQg" entityName="Assembly_Localisation">
       <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_bk2rkAZaEeyBeaTSQFCmQg"/>
     </assemblyContexts__ComposedStructure>
     <assemblyContexts__ComposedStructure id="_5uroEAZpEeyBeaTSQFCmQg" entityName="Assembly_DistanceMeasure">
       <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_U6orwAZZEeyBeaTSQFCmQg"/>
-    </assemblyContexts__ComposedStructure>
-    <assemblyContexts__ComposedStructure id="_8FOBoAZpEeyBeaTSQFCmQg" entityName="Assembly_SensorEnrichment">
-      <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_UrPIYAZaEeyBeaTSQFCmQg"/>
     </assemblyContexts__ComposedStructure>
     <assemblyContexts__ComposedStructure id="_Ze__EAZqEeyBeaTSQFCmQg" entityName="Assembly_SensorEnrichmentDistance">
       <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_HM76wAZbEeyBeaTSQFCmQg"/>
@@ -23,52 +17,49 @@
       <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_tHu6kL1rEeunTKCICMkJWw"/>
     </assemblyContexts__ComposedStructure>
     <assemblyContexts__ComposedStructure id="_hM4QwAZqEeyBeaTSQFCmQg" entityName="Assembly_DecisionPlanning">
-      <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_tFYp8LvmEeuyDrQZkcWZSA"/>
+      <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_5-fPYDchEeylpfVm0_xYGQ"/>
     </assemblyContexts__ComposedStructure>
     <assemblyContexts__ComposedStructure id="_8PF54AZqEeyBeaTSQFCmQg" entityName="Assembly_TrajectoryController">
       <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_Ljtw8AZfEeyBeaTSQFCmQg"/>
     </assemblyContexts__ComposedStructure>
-    <assemblyContexts__ComposedStructure id="_x6L90CzFEeyLXc1IPpAWxw" entityName="Assembly_SensorFusionDistance">
-      <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_YdfssBocEeycFaD4cAfUiA"/>
-    </assemblyContexts__ComposedStructure>
-    <assemblyContexts__ComposedStructure id="_gALZ4CzGEeyLXc1IPpAWxw" entityName="Assembly_SensorFusionImage">
-      <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_ksPMYBoaEeycFaD4cAfUiA"/>
-    </assemblyContexts__ComposedStructure>
     <assemblyContexts__ComposedStructure id="_DGpHMC6REeydEsXxOHK8gg" entityName="Assembly_TrajectoryActuator">
       <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_X899EBodEeycFaD4cAfUiA"/>
     </assemblyContexts__ComposedStructure>
-    <eventChannel__ComposedStructure id="_DKCIMAZqEeyBeaTSQFCmQg" entityName="PerceivedImage" eventChannelSourceConnector__EventChannel="_F2YZsAZqEeyBeaTSQFCmQg" eventChannelSinkConnector__EventChannel="_KOoMUAZqEeyBeaTSQFCmQg">
+    <assemblyContexts__ComposedStructure id="_ikIBkLmVEeyjMezYjxU3eA" entityName="Assembly_SensorDataIngestions &lt;SensorDataIngestions>">
+      <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_PyDmgLmREeyjMezYjxU3eA"/>
+    </assemblyContexts__ComposedStructure>
+    <assemblyContexts__ComposedStructure id="_IE3M4Lo3EeyZT639BONGyg" entityName="Assembly_SemanticUnderstanding &lt;SemanticUnderstanding>">
+      <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_oPYCALo2EeyZT639BONGyg"/>
+    </assemblyContexts__ComposedStructure>
+    <assemblyContexts__ComposedStructure id="_NpvN4Lo7EeyZT639BONGyg" entityName="Assembly_Acceleration &lt;Acceleration>">
+      <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_2KOPcLo6EeyZT639BONGyg"/>
+    </assemblyContexts__ComposedStructure>
+    <assemblyContexts__ComposedStructure id="_PBjVYLo7EeyZT639BONGyg" entityName="Assembly_Brake &lt;Brake>">
+      <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_xxMZsLo6EeyZT639BONGyg"/>
+    </assemblyContexts__ComposedStructure>
+    <assemblyContexts__ComposedStructure id="_QtnOkLo7EeyZT639BONGyg" entityName="Assembly_Steering &lt;Steering>">
+      <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_vzR7gLo6EeyZT639BONGyg"/>
+    </assemblyContexts__ComposedStructure>
+    <eventChannel__ComposedStructure id="_DKCIMAZqEeyBeaTSQFCmQg" entityName="PerceivedImage" eventChannelSourceConnector__EventChannel="_F2YZsAZqEeyBeaTSQFCmQg" eventChannelSinkConnector__EventChannel="_xZ6VYLoqEeyZT639BONGyg _exGqYLouEeyZT639BONGyg _RmkzsLo3EeyZT639BONGyg">
       <eventGroup__EventChannel href="AutonomousSystemComponents.repository#_uRMg0AZYEeyBeaTSQFCmQg"/>
     </eventChannel__ComposedStructure>
-    <eventChannel__ComposedStructure id="_MB3EgAZqEeyBeaTSQFCmQg" entityName="DirtLevelMeasure" eventChannelSourceConnector__EventChannel="_OCnbUAZqEeyBeaTSQFCmQg" eventChannelSinkConnector__EventChannel="_OhtyIAZqEeyBeaTSQFCmQg">
-      <eventGroup__EventChannel href="AutonomousSystemComponents.repository#_IP3M0AZaEeyBeaTSQFCmQg"/>
-    </eventChannel__ComposedStructure>
-    <eventChannel__ComposedStructure id="_VPU5oAZqEeyBeaTSQFCmQg" entityName="LocalisationCoordinates" eventChannelSourceConnector__EventChannel="_ZAGckAZqEeyBeaTSQFCmQg" eventChannelSinkConnector__EventChannel="_cwBD4AZqEeyBeaTSQFCmQg">
+    <eventChannel__ComposedStructure id="_VPU5oAZqEeyBeaTSQFCmQg" entityName="LocalisationCoordinates" eventChannelSourceConnector__EventChannel="_ZAGckAZqEeyBeaTSQFCmQg" eventChannelSinkConnector__EventChannel="_cwBD4AZqEeyBeaTSQFCmQg _VS0b8Lo3EeyZT639BONGyg">
       <eventGroup__EventChannel href="AutonomousSystemComponents.repository#_d3NIsAZaEeyBeaTSQFCmQg"/>
     </eventChannel__ComposedStructure>
-    <eventChannel__ComposedStructure id="_XbxjEAZqEeyBeaTSQFCmQg" entityName="DistanceMeasure" eventChannelSourceConnector__EventChannel="_YhvFkAZqEeyBeaTSQFCmQg" eventChannelSinkConnector__EventChannel="_dTF7wAZqEeyBeaTSQFCmQg">
+    <eventChannel__ComposedStructure id="_XbxjEAZqEeyBeaTSQFCmQg" entityName="DistanceMeasure" eventChannelSourceConnector__EventChannel="_YhvFkAZqEeyBeaTSQFCmQg" eventChannelSinkConnector__EventChannel="_dTF7wAZqEeyBeaTSQFCmQg _WgYbQLo3EeyZT639BONGyg">
       <eventGroup__EventChannel href="AutonomousSystemComponents.repository#_Yll6kAZZEeyBeaTSQFCmQg"/>
     </eventChannel__ComposedStructure>
-    <eventChannel__ComposedStructure id="_1ZjlcAZqEeyBeaTSQFCmQg" entityName="EnrichedImage" eventChannelSourceConnector__EventChannel="_z-CVgDMTEeyVW6BvI9_zhQ" eventChannelSinkConnector__EventChannel="_5XMfsAZqEeyBeaTSQFCmQg">
-      <eventGroup__EventChannel href="AutonomousSystemComponents.repository#_7tCeEAZcEeyBeaTSQFCmQg"/>
-    </eventChannel__ComposedStructure>
-    <eventChannel__ComposedStructure id="_2jkhgAZqEeyBeaTSQFCmQg" entityName="EnrichedDistanceMeasure" eventChannelSourceConnector__EventChannel="__AZ2wDMTEeyVW6BvI9_zhQ" eventChannelSinkConnector__EventChannel="_FZu8MCzFEeyLXc1IPpAWxw">
+    <eventChannel__ComposedStructure id="_2jkhgAZqEeyBeaTSQFCmQg" entityName="FusedSensorDataChannel" eventChannelSourceConnector__EventChannel="_fUZksLouEeyZT639BONGyg" eventChannelSinkConnector__EventChannel="_FZu8MCzFEeyLXc1IPpAWxw">
       <eventGroup__EventChannel href="AutonomousSystemComponents.repository#_Kj_EMAZdEeyBeaTSQFCmQg"/>
     </eventChannel__ComposedStructure>
-    <eventChannel__ComposedStructure id="_-NfgQAZqEeyBeaTSQFCmQg" entityName="TrajectoryMsg" eventChannelSourceConnector__EventChannel="__KbpoAZqEeyBeaTSQFCmQg __oXi0AZqEeyBeaTSQFCmQg" eventChannelSinkConnector__EventChannel="_AECLIAZrEeyBeaTSQFCmQg">
+    <eventChannel__ComposedStructure id="_-NfgQAZqEeyBeaTSQFCmQg" entityName="TrajectoryMsg" eventChannelSourceConnector__EventChannel="__KbpoAZqEeyBeaTSQFCmQg __oXi0AZqEeyBeaTSQFCmQg _KjAqULo3EeyZT639BONGyg" eventChannelSinkConnector__EventChannel="_AECLIAZrEeyBeaTSQFCmQg">
       <eventGroup__EventChannel href="AutonomousSystemComponents.repository#_tfjDoAZnEeyBeaTSQFCmQg"/>
+    </eventChannel__ComposedStructure>
+    <eventChannel__ComposedStructure id="_oH0ToLmVEeyjMezYjxU3eA" entityName="AggregatedSensorData" eventChannelSourceConnector__EventChannel="_p3Yz0LmVEeyjMezYjxU3eA" eventChannelSinkConnector__EventChannel="_rox48LmVEeyjMezYjxU3eA _z4FcsLmVEeyjMezYjxU3eA _0-K7ALmVEeyjMezYjxU3eA">
+      <eventGroup__EventChannel href="AutonomousSystemComponents.repository#_SrhRgLmSEeyjMezYjxU3eA"/>
     </eventChannel__ComposedStructure>
     <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="_F2YZsAZqEeyBeaTSQFCmQg" assemblyContext__EventChannelSourceConnector="_1tSPMAZpEeyBeaTSQFCmQg" eventChannel__EventChannelSourceConnector="_DKCIMAZqEeyBeaTSQFCmQg">
       <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_FRX34AZZEeyBeaTSQFCmQg"/>
-    </connectors__ComposedStructure>
-    <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_KOoMUAZqEeyBeaTSQFCmQg" assemblyContext__EventChannelSinkConnector="_8FOBoAZpEeyBeaTSQFCmQg" eventChannel__EventChannelSinkConnector="_DKCIMAZqEeyBeaTSQFCmQg">
-      <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_M9Y2cAZbEeyBeaTSQFCmQg"/>
-    </connectors__ComposedStructure>
-    <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="_OCnbUAZqEeyBeaTSQFCmQg" assemblyContext__EventChannelSourceConnector="_23v3MAZpEeyBeaTSQFCmQg" eventChannel__EventChannelSourceConnector="_MB3EgAZqEeyBeaTSQFCmQg">
-      <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_QdmqUAZaEeyBeaTSQFCmQg"/>
-    </connectors__ComposedStructure>
-    <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_OhtyIAZqEeyBeaTSQFCmQg" assemblyContext__EventChannelSinkConnector="_8FOBoAZpEeyBeaTSQFCmQg" eventChannel__EventChannelSinkConnector="_MB3EgAZqEeyBeaTSQFCmQg">
-      <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_Ml_qIAZbEeyBeaTSQFCmQg"/>
     </connectors__ComposedStructure>
     <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="_YhvFkAZqEeyBeaTSQFCmQg" assemblyContext__EventChannelSourceConnector="_5uroEAZpEeyBeaTSQFCmQg" eventChannel__EventChannelSourceConnector="_XbxjEAZqEeyBeaTSQFCmQg">
       <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_AsuLgAZaEeyBeaTSQFCmQg"/>
@@ -82,11 +73,8 @@
     <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_dTF7wAZqEeyBeaTSQFCmQg" assemblyContext__EventChannelSinkConnector="_Ze__EAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSinkConnector="_XbxjEAZqEeyBeaTSQFCmQg">
       <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_MBnxwAZbEeyBeaTSQFCmQg"/>
     </connectors__ComposedStructure>
-    <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_5XMfsAZqEeyBeaTSQFCmQg" assemblyContext__EventChannelSinkConnector="_hM4QwAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSinkConnector="_1ZjlcAZqEeyBeaTSQFCmQg">
-      <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_kfAw4AZfEeyBeaTSQFCmQg"/>
-    </connectors__ComposedStructure>
-    <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="__KbpoAZqEeyBeaTSQFCmQg" assemblyContext__EventChannelSourceConnector="_hM4QwAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSourceConnector="_-NfgQAZqEeyBeaTSQFCmQg">
-      <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_Fycm0AZoEeyBeaTSQFCmQg"/>
+    <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="__KbpoAZqEeyBeaTSQFCmQg" entityName="SteeringAnglePredictionSourceConnector" assemblyContext__EventChannelSourceConnector="_hM4QwAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSourceConnector="_-NfgQAZqEeyBeaTSQFCmQg">
+      <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_EcHr5jciEeylpfVm0_xYGQ"/>
     </connectors__ComposedStructure>
     <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="__oXi0AZqEeyBeaTSQFCmQg" assemblyContext__EventChannelSourceConnector="_fxyLwAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSourceConnector="_-NfgQAZqEeyBeaTSQFCmQg">
       <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_G5zQcAZoEeyBeaTSQFCmQg"/>
@@ -97,10 +85,6 @@
     <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_FZu8MCzFEeyLXc1IPpAWxw" entityName="enrichedDistancePlannerSinkConnector" assemblyContext__EventChannelSinkConnector="_fxyLwAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSinkConnector="_2jkhgAZqEeyBeaTSQFCmQg">
       <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_i6DlQAZfEeyBeaTSQFCmQg"/>
     </connectors__ComposedStructure>
-    <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_1GuV0CzGEeyLXc1IPpAWxw" entityName="newAssemblyConnectorEnrichedDistance" requiringAssemblyContext_AssemblyConnector="_Ze__EAZqEeyBeaTSQFCmQg" providingAssemblyContext_AssemblyConnector="_x6L90CzFEeyLXc1IPpAWxw">
-      <providedRole_AssemblyConnector href="AutonomousSystemComponents.repository#_cd6OIBocEeycFaD4cAfUiA"/>
-      <requiredRole_AssemblyConnector href="AutonomousSystemComponents.repository#_bbuYYBocEeycFaD4cAfUiA"/>
-    </connectors__ComposedStructure>
     <connectors__ComposedStructure xsi:type="composition:ProvidedDelegationConnector" id="_7ks1MC6PEeydEsXxOHK8gg" entityName="newProvidedDelegationConnector_Camera" outerProvidedRole_ProvidedDelegationConnector="_2L3vUC6PEeydEsXxOHK8gg" assemblyContext_ProvidedDelegationConnector="_1tSPMAZpEeyBeaTSQFCmQg">
       <innerProvidedRole_ProvidedDelegationConnector href="AutonomousSystemComponents.repository#_kYevQAZYEeyBeaTSQFCmQg"/>
     </connectors__ComposedStructure>
@@ -108,24 +92,62 @@
       <providedRole_AssemblyConnector href="AutonomousSystemComponents.repository#_zAmhIDJIEey3M8R0wBejUA"/>
       <requiredRole_AssemblyConnector href="AutonomousSystemComponents.repository#_cUPfUBodEeycFaD4cAfUiA"/>
     </connectors__ComposedStructure>
-    <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_BYKckDJJEey3M8R0wBejUA" entityName="newAssemblyConnectorEnrichedImg" requiringAssemblyContext_AssemblyConnector="_8FOBoAZpEeyBeaTSQFCmQg" providingAssemblyContext_AssemblyConnector="_gALZ4CzGEeyLXc1IPpAWxw">
-      <providedRole_AssemblyConnector href="AutonomousSystemComponents.repository#_300iQDJBEey5eoGE8NduBA"/>
-      <requiredRole_AssemblyConnector href="AutonomousSystemComponents.repository#_1U90oDJBEey5eoGE8NduBA"/>
+    <connectors__ComposedStructure xsi:type="composition:ProvidedDelegationConnector" id="_nUeyMLmVEeyjMezYjxU3eA" entityName="ProvDelegation IPerceptionProvidedRole -> Provided_IPerception_SensorDataIngestions" outerProvidedRole_ProvidedDelegationConnector="_2L3vUC6PEeydEsXxOHK8gg" assemblyContext_ProvidedDelegationConnector="_ikIBkLmVEeyjMezYjxU3eA">
+      <innerProvidedRole_ProvidedDelegationConnector href="AutonomousSystemComponents.repository#_TmIVELmREeyjMezYjxU3eA"/>
     </connectors__ComposedStructure>
-    <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="_z-CVgDMTEeyVW6BvI9_zhQ" entityName="newEventChannelSourceConnector" assemblyContext__EventChannelSourceConnector="_gALZ4CzGEeyLXc1IPpAWxw" eventChannel__EventChannelSourceConnector="_1ZjlcAZqEeyBeaTSQFCmQg">
-      <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_3EmDwBoaEeycFaD4cAfUiA"/>
+    <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="_p3Yz0LmVEeyjMezYjxU3eA" assemblyContext__EventChannelSourceConnector="_ikIBkLmVEeyjMezYjxU3eA" eventChannel__EventChannelSourceConnector="_oH0ToLmVEeyjMezYjxU3eA">
+      <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_enkXULmTEeyjMezYjxU3eA"/>
     </connectors__ComposedStructure>
-    <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="__AZ2wDMTEeyVW6BvI9_zhQ" entityName="newEventChannelSourceConnector" assemblyContext__EventChannelSourceConnector="_x6L90CzFEeyLXc1IPpAWxw" eventChannel__EventChannelSourceConnector="_2jkhgAZqEeyBeaTSQFCmQg">
-      <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_dUJUXhocEeycFaD4cAfUiA"/>
+    <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_rox48LmVEeyjMezYjxU3eA" assemblyContext__EventChannelSinkConnector="_1tSPMAZpEeyBeaTSQFCmQg" eventChannel__EventChannelSinkConnector="_oH0ToLmVEeyjMezYjxU3eA">
+      <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_fhheILmTEeyjMezYjxU3eA"/>
+    </connectors__ComposedStructure>
+    <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_z4FcsLmVEeyjMezYjxU3eA" assemblyContext__EventChannelSinkConnector="_36fGkAZpEeyBeaTSQFCmQg" eventChannel__EventChannelSinkConnector="_oH0ToLmVEeyjMezYjxU3eA">
+      <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_gEF_sLmTEeyjMezYjxU3eA"/>
+    </connectors__ComposedStructure>
+    <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_0-K7ALmVEeyjMezYjxU3eA" assemblyContext__EventChannelSinkConnector="_5uroEAZpEeyBeaTSQFCmQg" eventChannel__EventChannelSinkConnector="_oH0ToLmVEeyjMezYjxU3eA">
+      <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_gleOcLmTEeyjMezYjxU3eA"/>
+    </connectors__ComposedStructure>
+    <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_xZ6VYLoqEeyZT639BONGyg" entityName="SteeringAnglePredictionSinkConnector" assemblyContext__EventChannelSinkConnector="_hM4QwAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSinkConnector="_DKCIMAZqEeyBeaTSQFCmQg">
+      <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_hIIwALoqEeyZT639BONGyg"/>
+    </connectors__ComposedStructure>
+    <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_exGqYLouEeyZT639BONGyg" assemblyContext__EventChannelSinkConnector="_Ze__EAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSinkConnector="_DKCIMAZqEeyBeaTSQFCmQg">
+      <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_2493sLotEeyZT639BONGyg"/>
+    </connectors__ComposedStructure>
+    <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="_fUZksLouEeyZT639BONGyg" assemblyContext__EventChannelSourceConnector="_Ze__EAZqEeyBeaTSQFCmQg" eventChannel__EventChannelSourceConnector="_2jkhgAZqEeyBeaTSQFCmQg">
+      <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_4MsJYLotEeyZT639BONGyg"/>
+    </connectors__ComposedStructure>
+    <connectors__ComposedStructure xsi:type="composition:EventChannelSourceConnector" id="_KjAqULo3EeyZT639BONGyg" assemblyContext__EventChannelSourceConnector="_IE3M4Lo3EeyZT639BONGyg" eventChannel__EventChannelSourceConnector="_-NfgQAZqEeyBeaTSQFCmQg">
+      <sourceRole__EventChannelSourceRole href="AutonomousSystemComponents.repository#_u73IILo2EeyZT639BONGyg"/>
+    </connectors__ComposedStructure>
+    <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_RmkzsLo3EeyZT639BONGyg" assemblyContext__EventChannelSinkConnector="_IE3M4Lo3EeyZT639BONGyg" eventChannel__EventChannelSinkConnector="_DKCIMAZqEeyBeaTSQFCmQg">
+      <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_rA7joLo2EeyZT639BONGyg"/>
+    </connectors__ComposedStructure>
+    <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_VS0b8Lo3EeyZT639BONGyg" assemblyContext__EventChannelSinkConnector="_IE3M4Lo3EeyZT639BONGyg" eventChannel__EventChannelSinkConnector="_VPU5oAZqEeyBeaTSQFCmQg">
+      <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_tdP1ELo2EeyZT639BONGyg"/>
+    </connectors__ComposedStructure>
+    <connectors__ComposedStructure xsi:type="composition:EventChannelSinkConnector" id="_WgYbQLo3EeyZT639BONGyg" assemblyContext__EventChannelSinkConnector="_IE3M4Lo3EeyZT639BONGyg" eventChannel__EventChannelSinkConnector="_XbxjEAZqEeyBeaTSQFCmQg">
+      <sinkRole__EventChannelSinkConnector href="AutonomousSystemComponents.repository#_uAivYLo2EeyZT639BONGyg"/>
+    </connectors__ComposedStructure>
+    <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_URGjcLo7EeyZT639BONGyg" entityName="Connector Assembly_TrajectoryActuator -> Assembly_Steering &lt;Steering>" requiringAssemblyContext_AssemblyConnector="_DGpHMC6REeydEsXxOHK8gg" providingAssemblyContext_AssemblyConnector="_QtnOkLo7EeyZT639BONGyg">
+      <providedRole_AssemblyConnector href="AutonomousSystemComponents.repository#_GTmGwLo7EeyZT639BONGyg"/>
+      <requiredRole_AssemblyConnector href="AutonomousSystemComponents.repository#_E23DALo7EeyZT639BONGyg"/>
+    </connectors__ComposedStructure>
+    <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_U_6xQLo7EeyZT639BONGyg" entityName="Connector Assembly_TrajectoryActuator -> Assembly_Brake &lt;Brake>" requiringAssemblyContext_AssemblyConnector="_DGpHMC6REeydEsXxOHK8gg" providingAssemblyContext_AssemblyConnector="_PBjVYLo7EeyZT639BONGyg">
+      <providedRole_AssemblyConnector href="AutonomousSystemComponents.repository#_HYpqULo7EeyZT639BONGyg"/>
+      <requiredRole_AssemblyConnector href="AutonomousSystemComponents.repository#_FRSVMLo7EeyZT639BONGyg"/>
+    </connectors__ComposedStructure>
+    <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_WJpZcLo7EeyZT639BONGyg" entityName="Connector Assembly_TrajectoryActuator -> Assembly_Acceleration &lt;Acceleration>" requiringAssemblyContext_AssemblyConnector="_DGpHMC6REeydEsXxOHK8gg" providingAssemblyContext_AssemblyConnector="_NpvN4Lo7EeyZT639BONGyg">
+      <providedRole_AssemblyConnector href="AutonomousSystemComponents.repository#_H3zrgLo7EeyZT639BONGyg"/>
+      <requiredRole_AssemblyConnector href="AutonomousSystemComponents.repository#_F0UJwLo7EeyZT639BONGyg"/>
     </connectors__ComposedStructure>
     <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_2L3vUC6PEeydEsXxOHK8gg" entityName="IPerceptionProvidedRole">
       <providedInterface__OperationProvidedRole href="AutonomousSystemComponents.repository#_ibE5VwZWEeyBeaTSQFCmQg"/>
     </providedRoles_InterfaceProvidingEntity>
   </system:System>
   <emfprofileapplication:ProfileApplication>
-    <stereotypeApplications xsi:type="org.palladiosimulator.architecturaltemplates.catalog.profiles:AiNVAssemblyContext" appliedTo="_hM4QwAZqEeyBeaTSQFCmQg" improvedModelName="NVersionSensitivityModel">
-      <extension href="../../plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram#_WLifUDbzEeyCQ69JbDj2Qw"/>
+    <stereotypeApplications xsi:type="org.palladiosimulator.architecturaltemplates.catalog.profiles:AiAssemblyContext" appliedTo="_hM4QwAZqEeyBeaTSQFCmQg" distributionName="Improvement_Filter" targetUncertaintyName="ImageBlurring">
+      <extension href="../../plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/AiFilter.emfprofile_diagram#_2v2MUMbXEeu0u_J2FkPWPA"/>
     </stereotypeApplications>
-    <importedProfiles nsURI="org.palladiosimulator.architecturaltemplates.catalog.profiles.NVersionProgrammingAi" location="platform:/plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/NVersionProgrammingAi.emfprofile_diagram"/>
+    <importedProfiles nsURI="org.palladiosimulator.architecturaltemplates.catalog.profiles.aifilter" location="platform:/plugin/org.palladiosimulator.architecturaltemplates.catalog/profiles/AiFilter.emfprofile_diagram"/>
   </emfprofileapplication:ProfileApplication>
 </xmi:XMI>

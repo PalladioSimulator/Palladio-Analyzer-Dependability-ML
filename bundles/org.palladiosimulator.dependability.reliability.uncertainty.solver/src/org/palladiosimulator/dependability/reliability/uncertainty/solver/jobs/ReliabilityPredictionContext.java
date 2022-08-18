@@ -1,5 +1,6 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.solver.jobs;
 
+import org.eclipse.emf.common.util.URI;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.ReliabilityPredictionResult;
 import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
@@ -9,6 +10,7 @@ public class ReliabilityPredictionContext {
 	protected final String uncertaintyModel;
 	protected final String explorationStrategy;
 	
+	public URI exportLocation;
 	public ReliabilityPredictionResult result;
 
 	protected ReliabilityPredictionContext(PCMSolverWorkflowRunConfiguration config, String uncertaintyModel,
@@ -17,11 +19,12 @@ public class ReliabilityPredictionContext {
 		this.uncertaintyModel = uncertaintyModel;
 		this.explorationStrategy = explorationStrategy;
 		this.result = result;
+		this.exportLocation = null;
 	}
 	
 	public ReliabilityPredictionContext(PCMSolverWorkflowRunConfiguration config, String uncertaintyModel,
 			String explorationStrategy) {
 		this(config, uncertaintyModel, explorationStrategy, null);
 	}
-
+	
 }

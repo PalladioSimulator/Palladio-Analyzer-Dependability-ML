@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uncertainty:UncertaintyRepository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reliability="http://palladiosimulator.org/PalladioComponentModel/Reliability/5.2" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.2" xmlns:uncertainty="http://palladiosimulator.org/Uncertainty/1.0" id="_HWqL0LpzEeyZT639BONGyg" entityName="RamboUncertaintyRepo">
+  <uncertaintyInducedFailureTypes id="_K-eAALpzEeyZT639BONGyg" entityName="RamboModelFailureType" architecturalPreconditions="_R31Eg7pzEeyZT639BONGyg">
+    <refines xsi:type="reliability:SoftwareInducedFailureType" href="AutonomousSystemComponents.repository#_B1LEScn0Eeu9AOcPvs9c6Q"/>
+    <uncertaintyModel href="DNNSensitivityModels.staticmodel#_SNgmUEBxEeykDOng-lD2og"/>
+  </uncertaintyInducedFailureTypes>
+  <architecturalPreconditions xsi:type="uncertainty:ActiveComponent" id="_R31Eg7pzEeyZT639BONGyg" entityName="RamboModelComponentMustBeActive">
+    <requiredActiveComponent xsi:type="repository:BasicComponent" href="AutonomousSystemComponents.repository#_5-fPYDchEeylpfVm0_xYGQ"/>
+  </architecturalPreconditions>
+</uncertainty:UncertaintyRepository>

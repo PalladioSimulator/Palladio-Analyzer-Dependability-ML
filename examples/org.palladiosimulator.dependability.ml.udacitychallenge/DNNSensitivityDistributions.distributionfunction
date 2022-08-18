@@ -18,6 +18,12 @@
   <distributions xsi:type="distributionfunction:ProbabilityDistribution" id="_7FFSMEBwEeykDOng-lD2og" entityName="RamboSensitivityDistribution" params="_3sSm4UBvEeykDOng-lD2og">
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
   </distributions>
+  <distributions xsi:type="distributionfunction:ProbabilityDistribution" id="_Y5xmULu9Eey6j5H-iqteUQ" entityName="PerfectSteeringSensitivityDistribution" params="_rJL9Ebu9Eey6j5H-iqteUQ">
+    <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
+  </distributions>
+  <distributions xsi:type="distributionfunction:ProbabilityDistribution" id="_g7CuELu9Eey6j5H-iqteUQ" entityName="WorstSteeringSensitivityModel" params="_zwX1Ubu9Eey6j5H-iqteUQ">
+    <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_4B7EsNMJEemr7qd1LI_fyw"/>
+  </distributions>
   <params id="_zlxAkTPxEeyLC5Tfbz4pBQ" entityName="ChauffeurSensitivityParam">
     <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
     <representation xsi:type="distributionfunction:TabularCPD">
@@ -141,6 +147,76 @@
         <conditonals>(ImageBrightness=Low)</conditonals>
         <conditonals>(ImageBlurring=NotBlurry)</conditonals>
         <entry type="SAMPLESPACE" value="{Success,0.941121789017};{Fail,0.0588782109826}"/>
+      </cpdEntries>
+    </representation>
+  </params>
+  <params id="_rJL9Ebu9Eey6j5H-iqteUQ" entityName="PerfectSteeringParam">
+    <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
+    <representation xsi:type="distributionfunction:TabularCPD">
+      <cpdEntries>
+        <conditonals>(ImageBrightness=Strong)</conditonals>
+        <conditonals>(ImageBlurring=Blurry)</conditonals>
+        <entry type="SAMPLESPACE" value="{Success,1.0};{Fail,0.0}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightness=Strong)</conditonals>
+        <conditonals>(ImageBlurring=NotBlurry)</conditonals>
+        <entry type="SAMPLESPACE" value="{Success,1.0};{Fail,0.0}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightness=Normal)</conditonals>
+        <conditonals>(ImageBlurring=Blurry)</conditonals>
+        <entry type="SAMPLESPACE" value="{Success,1.0};{Fail,0.0}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightness=Normal)</conditonals>
+        <conditonals>(ImageBlurring=NotBlurry)</conditonals>
+        <entry type="SAMPLESPACE" value="{Success,1.0};{Fail,0.0}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightness=Low)</conditonals>
+        <conditonals>(ImageBlurring=Blurry)</conditonals>
+        <entry type="SAMPLESPACE" value="{Success,1.0};{Fail,0.0}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightness=Low)</conditonals>
+        <conditonals>(ImageBlurring=NotBlurry)</conditonals>
+        <entry type="SAMPLESPACE" value="{Success,1.0};{Fail,0.0}"/>
+      </cpdEntries>
+    </representation>
+  </params>
+  <params id="_zwX1Ubu9Eey6j5H-iqteUQ" entityName="WorstSteeringParam">
+    <instantiated href="pathmap://PROBDIST_BASIC/BasicDistributionTypes.distributiontype#_8MFYAdMJEemr7qd1LI_fyw"/>
+    <representation xsi:type="distributionfunction:TabularCPD">
+      <cpdEntries>
+        <conditonals>(ImageBrightness=Strong)</conditonals>
+        <conditonals>(ImageBlurring=Blurry)</conditonals>
+        <entry type="SAMPLESPACE" value="{Success,0.0};{Fail,1.0}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightness=Strong)</conditonals>
+        <conditonals>(ImageBlurring=NotBlurry)</conditonals>
+        <entry type="SAMPLESPACE" value="{Success,0.0};{Fail,1.0}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightness=Normal)</conditonals>
+        <conditonals>(ImageBlurring=Blurry)</conditonals>
+        <entry type="SAMPLESPACE" value="{Success,0.0};{Fail,1.0}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightness=Normal)</conditonals>
+        <conditonals>(ImageBlurring=NotBlurry)</conditonals>
+        <entry type="SAMPLESPACE" value="{Success,0.0};{Fail,1.0}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightness=Low)</conditonals>
+        <conditonals>(ImageBlurring=Blurry)</conditonals>
+        <entry type="SAMPLESPACE" value="{Success,0.0};{Fail,1.0}"/>
+      </cpdEntries>
+      <cpdEntries>
+        <conditonals>(ImageBrightness=Low)</conditonals>
+        <conditonals>(ImageBlurring=NotBlurry)</conditonals>
+        <entry type="SAMPLESPACE" value="{Success,0.0};{Fail,1.0}"/>
       </cpdEntries>
     </representation>
   </params>
