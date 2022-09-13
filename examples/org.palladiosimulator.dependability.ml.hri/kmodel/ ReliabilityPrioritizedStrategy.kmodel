@@ -1,3 +1,39 @@
-if (true) {
+const float UPPER_THRESHOLD_RT = 0.1;
 
+/*
+ * Diese Werte sollten beim Aufruf der jeweil. Strategie geändert werden, jedoch ist das Kmodel nicht in der Lage Zustände zu halten.
+ * Kann man isDefaultMLModelActivated & isFilteringActivated dem Kmodel als Probe-Werte übergeben?
+ * 
+ * Mögliche Future work für das Kmodel: Erweiterung um weiteren Field-Typen "state".
+ */
+var bool{true, false} isDefaultMLModelActivated;
+var bool{true, false} isFilteringActivated;
+
+probe string imageBrightness : "_U5Fzu8qkEeqObY-eK2jOOA";
+probe string sensorNoise : "_0uh4oCpGEeuMpaabmuiN-Q";
+probe float responseTime : "Usage Scenario: EnvironmentPerception_Response Time";
+
+action SwitchToDefaultMLModel();
+action SwitchToRobustMLModel();
+action ActivateFilterComponent();
+action DeactivateFilterComponent();
+
+if (sensorNoise != "(SensorNoise=Low)" || imageBrightness != "(ImageBrightnessMeasure=Medium)") {
+	if (sensorNoise != "(SensorNoise=Low)" && imageBrightness != "(ImageBrightnessMeasure=Medium)" && isDefaultMLModelActivated) {
+		SwitchToRobustMLModel();
+	}
+	
+	if (sensorNoise != "(SensorNoise=Low)" && !isFilteringActivated) {
+		ActivateFilterComponent();
+	}
+}
+
+if (responseTime > UPPER_THRESHOLD_RT) {
+	if (isDefaultMLModelActivated) {
+		SwitchToDefaultMLModel();
+	} else {
+		if (isFilteringActivated) {
+			DeactivateFilterComponent();
+		}
+	}
 }
