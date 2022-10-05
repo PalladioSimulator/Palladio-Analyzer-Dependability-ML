@@ -11,46 +11,88 @@ from dictances import bhattacharyya, bhattacharyya_coefficient
 
 csvDelimiter = ';'
 
-accRamboModel = 0.0
-accChauffeurModel = 0.0
-accNVersionModel = 0.0
+probOfSuccessLabel = r'$P(X_b=Success \mid X_{\varphi_{B}},X_{\varphi_{Bl}})$'
+pcmRelSuccessLabel = r'$rel(M_{C_b} \mid \varphi_{B},\varphi_{Bl})$'
+
+accRamboModel = 0.05682
+accChauffeurModel = 0.05768
+accNVersionModel = 0.04221
 accPerfectSteeringModel = 1.0
 accWorstSteeringModel = 0.0
 
 def generateResults():
+    comparePredictionResultsAndSensModel(wsSensModelFile, wsPcmRelFile, 'WorstPossible')
+
+    comparePredictionResultsAndSensModel(chauffeurSensModelFile, chauffeurPcmRelFile, 'Chauffeur')
+    comparePredictionResultsAndSensModel(chauffeurSensModelFile, chauffeurFilterPcmRelFile, 'Chauffeur_Filter')
+
+    comparePredictionResultsAndSensModel(ramboSensModelFile, ramboPcmRelFile, 'Rambo')
+    comparePredictionResultsAndSensModel(ramboSensModelFile, ramboFilterPcmRelFile, 'Rambo_Filter')
+
+    comparePredictionResultsAndSensModel(nvSensModelFile, nvPcmRelFile, 'NVersion')
+
+    comparePredictionResultsAndSensModel(psSensModelFile, psPcmRelFile, 'Perfect')
+    if True:
+        return
+
+    comparePredictionResultsAndSensModel(wsSensModelFile, wsPcmRelFile, 'WorstPossible')
+
+    barplotSensitivityModel(chauffeurSensModelFile)
+    barplotReliabilityPredictions(chauffeurPcmRelFile)
+    comparePredictionResultsAndSensModel(chauffeurSensModelFile, chauffeurPcmRelFile, 'Chauffeur')
+    comparePredictionResultsAndSensModel(chauffeurSensModelFile, chauffeurFilterPcmRelFile, 'Chauffeur_Filter')
+
     barplotSensitivityModel(ramboSensModelFile)
     barplotReliabilityPredictions(ramboPcmRelFile)
     comparePredictionResultsAndSensModel(ramboSensModelFile, ramboPcmRelFile, 'Rambo')
+    comparePredictionResultsAndSensModel(ramboSensModelFile, ramboFilterPcmRelFile, 'Rambo_Filter')
 
-    #TODO: For all remaining AI models repeat the three lines from above
+    barplotSensitivityModel(nvSensModelFile, customYLims=(0.94,0.965))
+    barplotReliabilityPredictions(nvPcmRelFile, customYLims=(0.92,0.95))
+    comparePredictionResultsAndSensModel(nvSensModelFile, nvPcmRelFile, 'NVersion')
+
+    barplotSensitivityModel(psSensModelFile, customYLims=(0.97,1.0))
+    barplotReliabilityPredictions(psPcmRelFile, customYLims=(0.96,0.99))
+    comparePredictionResultsAndSensModel(psSensModelFile, psPcmRelFile, 'Perfect')
 
     compareAccuracyAndPrediction()
     compareConditionalSuccessProbsOfAllModels()
 
-def barplotSensitivityModel(sensModelFile):
+    lineplotSuccessProbabilities()
+
+def barplotSensitivityModel(sensModelFile, customYLims=(0.92,0.95)):
     sensModel = loadSensitivityModelData(sensModelFile)
 
-    plot = sns.catplot(x="Uncertainty", y="Probability of success", hue='HueHelper', palette = "Greys", legend = False, kind="bar", data=sensModel)
-    plot.set(ylim=(0.92,0.95))
+    plot = sns.catplot(x="Uncertainty", y=probOfSuccessLabel, hue='Uncertainty', palette = "deep", legend = False, kind="bar", dodge=False, data=sensModel)
+    plot.set(ylim=customYLims)
+    for ax in plot.axes.flat:
+        for label in ax.get_xticklabels():
+            label.set_rotation(35)
+            label.set_fontsize(7)
     plt.show()
 
-def barplotReliabilityPredictions(pcmRelFile):
+def barplotReliabilityPredictions(pcmRelFile, customYLims=(0.90,0.93)):
     predictions = loadReliabilityPredictionsData(pcmRelFile)
 
-    plot = sns.catplot(x="Uncertainty", y="Conditional probability of success", hue='HueHelper', palette = "Greys", legend = False, kind="bar", data=predictions)
-    plot.set(ylim=(0.91,0.93))
+    plot = sns.catplot(x="Uncertainty", y=pcmRelSuccessLabel, hue='Uncertainty', palette = "deep", legend = False, kind="bar", dodge=False, data=predictions)
+    plot.set(ylim=customYLims)
+    for ax in plot.axes.flat:
+        for label in ax.get_xticklabels():
+            label.set_rotation(35)
+            label.set_fontsize(7)
     plt.show()
 
 def comparePredictionResultsAndSensModel(sensModelFile, pcmRelFile, modelName):
     sensModel = loadSensitivityModel(sensModelFile)
     predictions = loadReliabilityPredictions(pcmRelFile)
+    uncertainties = loadUncertaintyDist(pcmRelFile)
 
     rows = []
     
-    header = ('Uncertainty', 'Con prob of success AI model', 'Con prob of success PCM-Rel', 'Diff', 'BC', 'D_B', 'adjD_B')
+    header = ('Uncertainty', 'Prob of Uncertainty', 'Con prob of success AI model', 'Con prob of success PCM-Rel', 'Diff', 'BC', 'D_B', 'adjD_B', 'k')
     rows.append(header)
 
-    for each in sensModel.keys():
+    for each in uncertainties.keys():
         aiSuccessProb = sensModel[each]
         predSuccessProb = predictions[each]
 
@@ -65,7 +107,14 @@ def comparePredictionResultsAndSensModel(sensModelFile, pcmRelFile, modelName):
         adjPredDist = {'Succ':adjPredSuccessProb, 'Fail':1 - adjPredSuccessProb}
         adj_d = bhattacharyya(aiDist, adjPredDist)
 
-        row = (each, aiSuccessProb, predSuccessProb, diff, bc, d, adj_d)
+        uncertaintyProb = uncertainties[each]
+
+        if predSuccessProb == 0:
+            k = 0
+        else:
+            k = predSuccessProb / aiSuccessProb
+
+        row = (each, uncertaintyProb, aiSuccessProb, predSuccessProb, diff, bc, d, adj_d, k)
         rows.append(row)
 
     fileToWrite = 'ComparisonPcmRelAndSensModel_' + modelName + '.csv'
@@ -83,20 +132,20 @@ def compareAccuracyAndPrediction():
     wsRow = ('WorstSteering', accWorstSteeringModel, successPcmRelWS, successWS)
     rows.append(wsRow)
 
-    #successChauffeur = computeSuccessProbOfAIModel(chauffeurSensModelFile, chauffeurPcmRelFile)
-    #successPcmRelChauffeur = retrievePcmRelSuccessProbability(chauffeurPcmRelFile)
-    #chauffeurRow = ('Chauffeur', accChauffeurModel, successPcmRelChauffeur, successChauffeur)
-    #rows.append(chauffeurRow)
+    successChauffeur = computeSuccessProbOfAIModel(chauffeurSensModelFile, chauffeurPcmRelFile)
+    successPcmRelChauffeur = retrievePcmRelSuccessProbability(chauffeurPcmRelFile)
+    chauffeurRow = ('Chauffeur', accChauffeurModel, successPcmRelChauffeur, successChauffeur)
+    rows.append(chauffeurRow)
 
     successRambo = computeSuccessProbOfAIModel(ramboSensModelFile, ramboPcmRelFile)
     successPcmRelRambo = retrievePcmRelSuccessProbability(ramboPcmRelFile)
     ramboRow = ('Rambo', accRamboModel, successPcmRelRambo, successRambo)
     rows.append(ramboRow)
 
-    #successNV = computeSuccessProbOfAIModel(nvSensModelFile, nvPcmRelFile)
-    #successPcmRelNV = retrievePcmRelSuccessProbability(nvPcmRelFile)
-    #nvRow = ('NVersion', accNVersionModel, successPcmRelNV, successNV)
-    #rows.append(nvRow)
+    successNV = computeSuccessProbOfAIModel(nvSensModelFile, nvPcmRelFile)
+    successPcmRelNV = retrievePcmRelSuccessProbability(nvPcmRelFile)
+    nvRow = ('NVersion', accNVersionModel, successPcmRelNV, successNV)
+    rows.append(nvRow)
 
     successPS = computeSuccessProbOfAIModel(psSensModelFile, psPcmRelFile)
     successPcmRelNV = retrievePcmRelSuccessProbability(psPcmRelFile)
@@ -122,16 +171,14 @@ def compareConditionalSuccessProbsOfAllModels():
     uncertainties = loadUncertaintyDist(psPcmRelFile).keys()
     psSensModel = loadSensitivityModel(psSensModelFile)
     psPcmRel = loadReliabilityPredictions(psPcmRelFile)
-    #nvSensModel = loadSensitivityModel(nvSensModelFile)
-    #nvPcmRel = loadReliabilityPredictions(nvPcmRelFile)
-    #ramboFilterSensModel = loadSensitivityModel(ramboFilterSensModelFile)
-    #ramboFilterPcmRel = loadReliabilityPredictions(ramboFilterPcmRelFile)
+    nvSensModel = loadSensitivityModel(nvSensModelFile)
+    nvPcmRel = loadReliabilityPredictions(nvPcmRelFile)
+    ramboFilterPcmRel = loadReliabilityPredictions(ramboFilterPcmRelFile)
     ramboSensModel = loadSensitivityModel(ramboSensModelFile)
     ramboPcmRel = loadReliabilityPredictions(ramboPcmRelFile)
-    #chauffeurFilterSensModel = loadSensitivityModel(chauffeurFilterSensModelFile)
-    #chauffeurFilterPcmRel = loadReliabilityPredictions(chauffeurFilterPcmRelFile)
-    #chauffeurSensModel = loadSensitivityModel(chauffeurSensModelFile)
-    #chauffeurPcmRel = loadReliabilityPredictions(chauffeurPcmRelFile)
+    chauffeurFilterPcmRel = loadReliabilityPredictions(chauffeurFilterPcmRelFile)
+    chauffeurSensModel = loadSensitivityModel(chauffeurSensModelFile)
+    chauffeurPcmRel = loadReliabilityPredictions(chauffeurPcmRelFile)
     wsSensModel = loadSensitivityModel(wsSensModelFile)
     wsPcmRel = loadReliabilityPredictions(wsPcmRelFile)
 
@@ -139,20 +186,20 @@ def compareConditionalSuccessProbsOfAllModels():
         psSuccess = psSensModel[each]
         psSuccessPcmRel = psPcmRel[each]
 
-        nvSuccess = 0.0#nvSensModel[each]
-        nvSuccessPcmRel = 0.0#nvPcmRel[each]
+        nvSuccess = nvSensModel[each]
+        nvSuccessPcmRel = nvPcmRel[each]
 
-        ramboFilterSuccess = 0.0#ramboFilterSensModel[each]
-        ramboFilterSuccessPcmRel = 0.0#ramboFilterPcmRel[each]
+        ramboFilterSuccess = ramboSensModel[each]
+        ramboFilterSuccessPcmRel = ramboFilterPcmRel[each]
 
         ramboSuccess = ramboSensModel[each]
         ramboSuccessPcmRel = ramboPcmRel[each]
 
-        chauffeurFilterSuccess = 0.0#chauffeurFilterSensModel[each]
-        chauffeurFilterSuccessPcmRel = 0.0#chauffeurFilterPcmRel[each]
+        chauffeurFilterSuccess = chauffeurSensModel[each]
+        chauffeurFilterSuccessPcmRel = chauffeurFilterPcmRel[each]
 
-        chauffeurSuccess = 0.0#chauffeurSensModel[each]
-        chauffeurSuccessPcmRel = 0.0#chauffeurPcmRel[each]
+        chauffeurSuccess = chauffeurSensModel[each]
+        chauffeurSuccessPcmRel = chauffeurPcmRel[each]
 
         wsSuccess = wsSensModel[each]
         wsSuccessPcmRel = wsPcmRel[each]
@@ -168,10 +215,88 @@ def compareConditionalSuccessProbsOfAllModels():
 
     createResultTable(rows, 'ComparisonConditionalSuccessProbsOfAllModels.csv')
 
+def lineplotSuccessProbabilities():
+    uncertainties = loadUncertaintyDist(psPcmRelFile).keys()
+    psSensModel = loadSensitivityModel(psSensModelFile)
+    psPcmRel = loadReliabilityPredictions(psPcmRelFile)
+    nvSensModel = loadSensitivityModel(nvSensModelFile)
+    nvPcmRel = loadReliabilityPredictions(nvPcmRelFile)
+    ramboFilterPcmRel = loadReliabilityPredictions(ramboFilterPcmRelFile)
+    ramboSensModel = loadSensitivityModel(ramboSensModelFile)
+    ramboPcmRel = loadReliabilityPredictions(ramboPcmRelFile)
+    chauffeurFilterPcmRel = loadReliabilityPredictions(chauffeurFilterPcmRelFile)
+    chauffeurSensModel = loadSensitivityModel(chauffeurSensModelFile)
+    chauffeurPcmRel = loadReliabilityPredictions(chauffeurPcmRelFile)
+    wsSensModel = loadSensitivityModel(wsSensModelFile)
+    wsPcmRel = loadReliabilityPredictions(wsPcmRelFile)
+
+    expandedModels = []
+    successProbsSens = []
+    successProbsPcmRel = []
+    expandedUncertainties = []
+    for each in uncertainties:
+        expanded = [each] * 7
+        expandedUncertainties.extend(expanded)
+
+        psSuccess = psSensModel[each]
+        successProbsSens.append(psSuccess)
+        psSuccessPcmRel = psPcmRel[each]
+        successProbsPcmRel.append(psSuccessPcmRel)
+        expandedModels.append(r'$b^+$')
+
+        nvSuccess = nvSensModel[each]
+        successProbsSens.append(nvSuccess)
+        nvSuccessPcmRel = nvPcmRel[each]
+        successProbsPcmRel.append(nvSuccessPcmRel)
+        expandedModels.append(r'$b_{NV}$')
+
+        ramboFilterSuccess = ramboSensModel[each]
+        successProbsSens.append(ramboFilterSuccess)
+        ramboFilterSuccessPcmRel = ramboFilterPcmRel[each]
+        successProbsPcmRel.append(ramboFilterSuccessPcmRel)
+        expandedModels.append(r'$b^f_R$')
+
+        ramboSuccess = ramboSensModel[each]
+        successProbsSens.append(ramboSuccess)
+        ramboSuccessPcmRel = ramboPcmRel[each]
+        successProbsPcmRel.append(ramboSuccessPcmRel)
+        expandedModels.append(r'$b_R$')
+
+        chauffeurFilterSuccess = chauffeurSensModel[each]
+        successProbsSens.append(chauffeurFilterSuccess)
+        chauffeurFilterSuccessPcmRel = chauffeurFilterPcmRel[each]
+        successProbsPcmRel.append(chauffeurFilterSuccessPcmRel)
+        expandedModels.append(r'$b^f_C$')
+
+        chauffeurSuccess = chauffeurSensModel[each]
+        successProbsSens.append(chauffeurSuccess)
+        chauffeurSuccessPcmRel = chauffeurPcmRel[each]
+        successProbsPcmRel.append(chauffeurSuccessPcmRel)
+        expandedModels.append(r'$b_C$')
+
+
+        wsSuccess = wsSensModel[each]
+        successProbsSens.append(wsSuccess)
+        wsSuccessPcmRel = wsPcmRel[each]
+        successProbsPcmRel.append(wsSuccessPcmRel)
+        expandedModels.append(r'$b^-$')
+
+    d = {'Uncertainty': expandedUncertainties, probOfSuccessLabel: successProbsSens, pcmRelSuccessLabel: successProbsPcmRel, 'Steering angle prediction models': expandedModels}
+
+    plot = sns.lineplot(data=d, x="Steering angle prediction models", y=probOfSuccessLabel, hue="Uncertainty", palette ="deep")
+    plot.set(ylim=(0.9,1.01))
+    plot.set_yticks(np.arange(0.9, 1.025, 0.025).tolist())
+    plt.show()
+
+    plot = sns.lineplot(data=d, x="Steering angle prediction models", y=pcmRelSuccessLabel, hue="Uncertainty", palette ="deep")
+    plot.set(ylim=(0.9,1.01))
+    plot.set_yticks(np.arange(0.9, 1.025, 0.025).tolist())
+    plt.show()
+
 
 def loadSensitivityModelData(sensModelFile):
     sensModel = loadSensitivityModel(sensModelFile)
-    d = {'Uncertainty': sensModel.keys(), 'Probability of success': sensModel.values(), 'HueHelper': [1] * 6}
+    d = {'Uncertainty': sensModel.keys(), probOfSuccessLabel: sensModel.values(), 'HueHelper': [1] * 6}
     return pd.DataFrame(data=d)
 
 def loadSensitivityModel(sensModelFile):
@@ -190,7 +315,7 @@ def loadSensitivityModel(sensModelFile):
 
 def loadReliabilityPredictionsData(pcmRelFile):
     predictions = loadReliabilityPredictions(pcmRelFile)
-    d = {'Uncertainty': predictions.keys(), 'Conditional probability of success': predictions.values(), 'HueHelper': [1] * 6}
+    d = {'Uncertainty': predictions.keys(), pcmRelSuccessLabel: predictions.values(), 'HueHelper': [1] * 6}
     return pd.DataFrame(data=d)
 
 def loadReliabilityPredictions(pcmRelFile):
@@ -259,7 +384,14 @@ def fromSensModelEntryToValueTuple(uncertaintyEntry):
     return uncertaintyEntry.replace("Blurring: ", "(").replace(", Brightness: ",",") + ")"
 
 def fromRelPredictionEntryToValueTuple(uncertaintyEntry):
-    return uncertaintyEntry.replace("ImageBlurring=", "").replace("),(",",").replace("ImageBrightness=", "")
+    values = uncertaintyEntry.split(',')
+    if "ImageBlurring" in values[0]:
+        blur = values[0].replace("ImageBlurring=", "").replace(")", "")
+        brightness = values[1].replace("(ImageBrightness=", "")
+    else:
+        blur = values[1].replace("ImageBlurring=", "").replace(")", "")
+        brightness = values[0].replace("(ImageBrightness=", "")
+    return blur + "," + brightness
 
 if __name__ == "__main__":
     base = os.getcwd()
@@ -289,9 +421,6 @@ if __name__ == "__main__":
                     chauffeurPcmRelFile = os.path.join(modelDir, file)
         if dir.startswith("Chauffeur_Filter"):
             for file in listdir(modelDir):
-                if file.startswith('Chauffeur_FilterSensitivityModel'):
-                    global chauffeurFilterSensModelFile
-                    chauffeurFilterSensModelFile = os.path.join(modelDir, file)
                 if file.startswith('Chauffeur_FilterReliabilityPredictionResults'):
                     global chauffeurFilterPcmRelFile
                     chauffeurFilterPcmRelFile = os.path.join(modelDir, file)
@@ -305,9 +434,6 @@ if __name__ == "__main__":
                     ramboPcmRelFile = os.path.join(modelDir, file)
         if dir.startswith("Rambo_Filter"):
             for file in listdir(modelDir):
-                if file.startswith('Rambo_FilterSensitivityModel'):
-                    global ramboFilterSensModelFile
-                    ramboFilterSensModelFile = os.path.join(modelDir, file)
                 if file.startswith('Rambo_FilterReliabilityPredictionResults'):
                     global ramboFilterPcmRelFile
                     ramboFilterPcmRelFile = os.path.join(modelDir, file)

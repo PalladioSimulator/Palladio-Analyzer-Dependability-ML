@@ -1,7 +1,7 @@
 Condition;Probability of Success;Probability of Fail
-Blurring: Blurry, Brightness: Normal;0.936524852012;0.0634751479881
+Blurring: Blurry, Brightness: Normal;0.936524852036;0.0634751479637
 Blurring: NotBlurry, Brightness: Normal;0.945611168437;0.0543888315629
-Blurring: NotBlurry, Brightness: Low;0.941121792668;0.0588782073316
-Blurring: Blurry, Brightness: Low;0.946180854051;0.0538191459487
-Blurring: NotBlurry, Brightness: Strong;0.94339618258;0.0566038174201
-Blurring: Blurry, Brightness: Strong;0.943466348843;0.0565336511571
+Blurring: NotBlurry, Brightness: Low;0.941121792965;0.058878207035
+Blurring: Blurry, Brightness: Low;0.946180854059;0.0538191459412
+Blurring: NotBlurry, Brightness: Strong;0.943396182558;0.0566038174419
+Blurring: Blurry, Brightness: Strong;0.94346634888;0.0565336511198
