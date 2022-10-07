@@ -1,0 +1,6 @@
+cff-version: 1.2.0
+authors:
+- family-names: "Scheerer"
+  given-names: "Max"
+title: "Reliability prediction of AI-enabled systems"
+url: "https://github.com/PalladioSimulator/Palladio-Analyzer-Dependability-ML"
