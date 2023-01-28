@@ -41,6 +41,7 @@ import tools.mdsd.library.standalone.initialization.StandaloneInitializerBuilder
 import tools.mdsd.probdist.api.apache.supplier.MultinomialDistributionSupplier;
 import tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
@@ -53,6 +54,8 @@ public class MLSensitivityAnalysisTest {
 	private Set<PropertyMeasure> propertyMeasures;
 	private MLSensitivityAnalysis sensitivityAnalysis;
 	private SensitivityModel result;
+	
+	private IProbabilityDistributionRegistry probabilityDistributionRegistry;
 
 	private static class TrainedModelMock implements TrainedModel {
 
@@ -132,7 +135,8 @@ public class MLSensitivityAnalysisTest {
 		standaloneInitializer.init();
 
 		DistributionTypeModelUtil.get(BasicDistributionTypesLoader.loadRepository());
-		ProbabilityDistributionFactory.get().register(new MultinomialDistributionSupplier());
+		probabilityDistributionRegistry = ProbabilityDistributionFactory.get();
+		probabilityDistributionRegistry.register(new MultinomialDistributionSupplier());
 
 		dummyFile = new File(System.getProperty("user.dir"));
 

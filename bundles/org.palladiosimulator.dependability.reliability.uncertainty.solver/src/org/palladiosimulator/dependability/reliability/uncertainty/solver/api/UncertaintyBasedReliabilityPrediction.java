@@ -15,6 +15,8 @@ import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.
 
 import com.google.common.collect.Sets;
 
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
+
 public class UncertaintyBasedReliabilityPrediction {
 
 	private final static Set<StateSpaceExplorationStrategy> STATE_SPACE_STRATEGY_REGISTER = Sets.newHashSet();
@@ -34,19 +36,19 @@ public class UncertaintyBasedReliabilityPrediction {
 		return STATE_SPACE_STRATEGY_REGISTER.stream().map(StateSpaceExplorationStrategy::getName).collect(toSet());
 	}
 
-	public static ReliabilityPredictionResult predict(UncertaintyBasedReliabilityPredictionConfig config) {
-		return buildReliabilityPredictor(config).predictSuccessProbability(config.getPCMInstance());
+	public static ReliabilityPredictionResult predict(UncertaintyBasedReliabilityPredictionConfig config, IProbabilityDistributionRegistry probabilityDistributionRegistry) {
+		return buildReliabilityPredictor(config, probabilityDistributionRegistry).predictSuccessProbability(config.getPCMInstance());
 	}
 
 	public static ReliabilityPredictionResult predictGiven(List<UncertaintyState> uncertaintyStates,
-			UncertaintyBasedReliabilityPredictionConfig config) {
-		var results = buildReliabilityPredictor(config).predictConditionalSuccessProbability(config.getPCMInstance(),
+			UncertaintyBasedReliabilityPredictionConfig config, IProbabilityDistributionRegistry probabilityDistributionRegistry) {
+		var results = buildReliabilityPredictor(config, probabilityDistributionRegistry).predictConditionalSuccessProbability(config.getPCMInstance(),
 				uncertaintyStates);
 		return new ReliabilityPredictionResult(results);
 	}
 
 	private static UncertaintyBasedReliabilityPredictor buildReliabilityPredictor(
-			UncertaintyBasedReliabilityPredictionConfig config) {
+			UncertaintyBasedReliabilityPredictionConfig config, IProbabilityDistributionRegistry probabilityDistributionRegistry) {
 		var builder = UncertaintyBasedReliabilityPredictor.newBuilder().withConfig(config.getRunConfig());
 
 		if (config.getStateSpaceExplorationStrategy().isPresent()) {
@@ -57,7 +59,7 @@ public class UncertaintyBasedReliabilityPrediction {
 
 		builder.andUncertaintyRepo(config.getUncertaintyRepository());
 
-		return builder.build();
+		return builder.build(probabilityDistributionRegistry);
 	}
 
 	private static Predicate<StateSpaceExplorationStrategy> strategyWith(String queriedName) {

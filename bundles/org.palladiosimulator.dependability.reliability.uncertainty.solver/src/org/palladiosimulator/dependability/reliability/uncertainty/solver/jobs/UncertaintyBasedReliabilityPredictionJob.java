@@ -19,6 +19,7 @@ import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 import de.uka.ipd.sdq.workflow.jobs.ICompositeJob;
 import de.uka.ipd.sdq.workflow.jobs.SequentialBlackboardInteractingJob;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 
 public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboardInteractingJob<MDSDBlackboard> implements ICompositeJob {
 
@@ -57,7 +58,7 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 			return this;
 		}
 		
-		public UncertaintyBasedReliabilityPredictionJob build() {
+		public UncertaintyBasedReliabilityPredictionJob build(IProbabilityDistributionRegistry probabilityDistributionRegistry) {
 			var relPredictionJob = new UncertaintyBasedReliabilityPredictionJob();
 			relPredictionJob.myBlackboard = new MDSDBlackboard();
 			
@@ -82,7 +83,7 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 				var uri = URI.createURI(exportLocation.get());
 				exportLocationURI = Optional.of(uri);
 			}
-			relPredictionJob.addJob(new RootReliabilityPredictionRunJob(config, uncertaintyModel, explorationStrategy, exportLocationURI));
+			relPredictionJob.addJob(new RootReliabilityPredictionRunJob(config, uncertaintyModel, explorationStrategy, exportLocationURI, probabilityDistributionRegistry));
 			
 			return relPredictionJob;
 		}

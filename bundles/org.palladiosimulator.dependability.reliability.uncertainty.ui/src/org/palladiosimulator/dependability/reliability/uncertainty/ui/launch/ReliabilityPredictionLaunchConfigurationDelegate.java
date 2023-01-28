@@ -1,8 +1,10 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.ui.launch;
 
-import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.*;
+import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.APPLY_AT_ATTR;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.DEFAULT_ATTR;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.EXPLORATION_STRATEGY_ATTR;
+import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.EXPORT_FILE_ATTR;
+import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.EXPORT_RESULT_ATTR;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.UNCERTAINTY_MODEL_ATTR;
 
 import org.eclipse.core.runtime.CoreException;
@@ -15,6 +17,8 @@ import org.palladiosimulator.reliability.solver.runconfig.PCMSolverReliabilityLa
 import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import de.uka.ipd.sdq.workflow.jobs.IJob;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
+import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 
 public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
 
@@ -57,7 +61,8 @@ public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConf
 				jobBuilder.exportResults(exportLocation);
 			}
 				
-			return jobBuilder.build();
+			IProbabilityDistributionRegistry probabilityDistributionRegistry = ProbabilityDistributionFactory.get();
+			return jobBuilder.build(probabilityDistributionRegistry);
 		}
 	}
 

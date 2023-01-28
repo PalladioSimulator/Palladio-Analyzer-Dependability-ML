@@ -19,7 +19,7 @@ import org.palladiosimulator.solver.models.PCMInstance;
 import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import tools.mdsd.probdist.api.apache.supplier.MultinomialDistributionSupplier;
-import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 
 public class UncertaintyBasedReliabilityPredictor {
 
@@ -50,12 +50,12 @@ public class UncertaintyBasedReliabilityPredictor {
 			return this;
 		}
 
-		public UncertaintyBasedReliabilityPredictor build() {
+		public UncertaintyBasedReliabilityPredictor build(IProbabilityDistributionRegistry probabilityDistributionRegistry) {
 			checkValidity();
 
 			adjustConfig();
 
-			return new UncertaintyBasedReliabilityPredictor(exploreStrategy, config, uncertaintyRepo);
+			return new UncertaintyBasedReliabilityPredictor(exploreStrategy, config, uncertaintyRepo, probabilityDistributionRegistry);
 		}
 
 		private void checkValidity() {
@@ -80,7 +80,7 @@ public class UncertaintyBasedReliabilityPredictor {
 	private ArchitecturalCountermeasureOperator operator = null;
 
 	private UncertaintyBasedReliabilityPredictor(StateSpaceExplorationStrategy exploreStrategy,
-			PCMSolverWorkflowRunConfiguration config, UncertaintyRepository uncertaintyRepo) {
+			PCMSolverWorkflowRunConfiguration config, UncertaintyRepository uncertaintyRepo, IProbabilityDistributionRegistry probabilityDistributionRegistry) {
 		this.config = config;
 		this.exploreStrategy = exploreStrategy;
 		this.uncertaintyRepo = uncertaintyRepo;
@@ -89,11 +89,11 @@ public class UncertaintyBasedReliabilityPredictor {
 		manager.reset();
 		manager.manage(uncertaintyRepo.getUncertaintyInducedFailureTypes());
 
-		initProbabilityDistributions();
+		initProbabilityDistributions(probabilityDistributionRegistry);
 	}
 
-	private void initProbabilityDistributions() {
-		ProbabilityDistributionFactory.get().register(new MultinomialDistributionSupplier());
+	private void initProbabilityDistributions(IProbabilityDistributionRegistry probabilityDistributionRegistry) {
+		probabilityDistributionRegistry.register(new MultinomialDistributionSupplier());
 	}
 
 	public static UncertaintyBasedReliabilityPredictionBuilder newBuilder() {
