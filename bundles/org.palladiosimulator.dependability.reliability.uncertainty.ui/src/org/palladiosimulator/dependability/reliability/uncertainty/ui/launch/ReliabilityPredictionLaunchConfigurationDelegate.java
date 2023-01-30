@@ -46,7 +46,7 @@ public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConf
 						UNCERTAINTY_MODEL_ATTR, EXPLORATION_STRATEGY_ATTR));
 			}
 			
-			ProbabilityDistributionFactory defaultProbabilityDistributionFactory = ProbabilityDistributionFactory.get();
+			ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
 			IProbabilityDistributionRegistry probabilityDistributionRegistry = defaultProbabilityDistributionFactory;
 			IProbabilityDistributionFactory probabilityDistributionFactory = defaultProbabilityDistributionFactory;
 			var jobBuilder = UncertaintyBasedReliabilityPredictionJob.newBuilder(probabilityDistributionFactory)

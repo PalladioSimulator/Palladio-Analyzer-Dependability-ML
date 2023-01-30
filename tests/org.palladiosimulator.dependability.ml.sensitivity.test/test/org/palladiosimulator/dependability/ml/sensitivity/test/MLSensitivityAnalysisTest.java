@@ -135,7 +135,7 @@ public class MLSensitivityAnalysisTest {
 		standaloneInitializer.init();
 
 		DistributionTypeModelUtil.get(BasicDistributionTypesLoader.loadRepository());
-		probabilityDistributionRegistry = ProbabilityDistributionFactory.get();
+		probabilityDistributionRegistry = new ProbabilityDistributionFactory();
 		probabilityDistributionRegistry.register(new MultinomialDistributionSupplier());
 
 		dummyFile = new File(System.getProperty("user.dir"));

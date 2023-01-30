@@ -15,6 +15,7 @@ import com.google.common.collect.Lists;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.entity.Conditionable.Conditional;
 import tools.mdsd.probdist.api.entity.ConditionalProbabilityDistribution;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.distributionfunction.Domain;
 import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 import tools.mdsd.probdist.distributionfunction.TabularCPD;
@@ -31,12 +32,12 @@ public class UncertaintyImprovementCalculator {
 		return CALCULATOR_INSTANCE;
 	}
 
-	public CategoricalValue calculate(UncertaintyImprovement improvement, CategoricalValue value) {
+	public CategoricalValue calculate(UncertaintyImprovement improvement, CategoricalValue value, IProbabilityDistributionFactory probabilityDistributionFactory) {
 		return new UncertaintySwitch<CategoricalValue>() {
 
 			@Override
 			public CategoricalValue caseProbabilisticImprovement(ProbabilisticImprovement object) {
-				return calculateProbabilistically(object, value);
+				return calculateProbabilistically(object, value, probabilityDistributionFactory);
 			}
 
 			@Override
@@ -47,14 +48,14 @@ public class UncertaintyImprovementCalculator {
 		}.doSwitch(improvement);
 	}
 
-	private CategoricalValue calculateProbabilistically(ProbabilisticImprovement improvement, CategoricalValue value) {
-		var distribution = createCPD(improvement.getProbabilityDistribution());
+	private CategoricalValue calculateProbabilistically(ProbabilisticImprovement improvement, CategoricalValue value, IProbabilityDistributionFactory probabilityDistributionFactory) {
+		var distribution = createCPD(improvement.getProbabilityDistribution(), probabilityDistributionFactory);
 
 		var conditionals = Lists.newArrayList(new Conditional(Domain.CATEGORY, value));
 		return distribution.given(conditionals).sample();
 	}
 
-	public ConditionalProbabilityDistribution createCPD(ProbabilityDistribution dist) {
+	public ConditionalProbabilityDistribution createCPD(ProbabilityDistribution dist, IProbabilityDistributionFactory probabilityDistributionFactory) {
 		if (dist.getParams().isEmpty()) {
 			throw new IllegalArgumentException("The distribution parameters must be set.");
 		}
@@ -64,11 +65,11 @@ public class UncertaintyImprovementCalculator {
 			throw new IllegalArgumentException("The parameter representation must be of type TabularCPD.");
 		}
 
-		return new ConditionalProbabilityDistribution(dist, (TabularCPD) paramRepresentation);
+		return new ConditionalProbabilityDistribution(dist, (TabularCPD) paramRepresentation, probabilityDistributionFactory);
 	}
 	
-	public ConditionalProbabilityDistribution createIndicatorCPD(DeterministicImprovement improvement) {
-		return new ConditionalProbabilityDistribution(null, null) {
+	public ConditionalProbabilityDistribution createIndicatorCPD(DeterministicImprovement improvement, IProbabilityDistributionFactory probabilityDistributionFactory) {
+		return new ConditionalProbabilityDistribution(null, null, probabilityDistributionFactory) {
 			
 			private CategoricalValue givenValue = null;
 			
@@ -78,7 +79,7 @@ public class UncertaintyImprovementCalculator {
 					throw new RuntimeException("The conditional value must be set.");
 				}
 				
-				var deterministicValue = calculate(improvement, givenValue); 
+				var deterministicValue = calculate(improvement, givenValue, probabilityDistributionFactory); 
 				return value.get().equals(deterministicValue.get()) ? 1.0 : 0.0;
 			}
 
@@ -88,7 +89,7 @@ public class UncertaintyImprovementCalculator {
 					throw new RuntimeException("The conditional value must be set.");
 				}
 				
-				return calculate(improvement, givenValue); 
+				return calculate(improvement, givenValue, probabilityDistributionFactory); 
 			}
 
 			@Override

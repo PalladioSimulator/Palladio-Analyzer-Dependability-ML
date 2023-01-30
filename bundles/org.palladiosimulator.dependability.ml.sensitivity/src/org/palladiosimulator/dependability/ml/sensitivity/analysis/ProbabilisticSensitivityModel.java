@@ -123,7 +123,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 	public double conditionalSensitivity(List<SensitivityProperty> properties) {
 		var dist = findMLRandomVariable().getDescriptiveModel().getDistribution();
 		var paramRep = (TabularCPD) dist.getParams().get(0).getRepresentation();
-		var conditionalOutcomeDistribution = new ConditionalProbabilityDistribution(dist, paramRep);
+		var conditionalOutcomeDistribution = new ConditionalProbabilityDistribution(dist, paramRep, probabilityDistributionFactory);
 		
 		var conditionals = properties.stream()
 				.map(each -> new Conditionable.Conditional(Domain.CATEGORY, each.getValue()))

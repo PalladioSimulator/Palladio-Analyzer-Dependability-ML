@@ -186,7 +186,7 @@ public class ArchitecturalCountermeasureOperator {
 		var oldDistribution = affectedVariable.getDescriptiveModel().getDistribution();
 		return new UnivariateProbabilitiyMassFunction(oldDistribution.getInstantiated()) {
 
-			private final UnivariateProbabilitiyMassFunction oldDistFunction = (UnivariateProbabilitiyMassFunction) ProbabilityDistributionFactory.get()
+			private final UnivariateProbabilitiyMassFunction oldDistFunction = (UnivariateProbabilitiyMassFunction) probabilityDistributionFactory
 					.getInstanceOf(oldDistribution)
 					.orElseThrow();
 			private final ConditionalProbabilityDistribution improvement = createCPDFrom(uncertaintyImprovement);
@@ -216,12 +216,12 @@ public class ArchitecturalCountermeasureOperator {
 
 			@Override
 			public ConditionalProbabilityDistribution caseProbabilisticImprovement(ProbabilisticImprovement probImprovement) {
-				return UncertaintyImprovementCalculator.get().createCPD(probImprovement.getProbabilityDistribution());
+				return UncertaintyImprovementCalculator.get().createCPD(probImprovement.getProbabilityDistribution(), probabilityDistributionFactory);
 			}
 
 			@Override
 			public ConditionalProbabilityDistribution caseDeterministicImprovement(DeterministicImprovement detImprovement) {
-				return UncertaintyImprovementCalculator.get().createIndicatorCPD(detImprovement);
+				return UncertaintyImprovementCalculator.get().createIndicatorCPD(detImprovement, probabilityDistributionFactory);
 			}
 
 		}.doSwitch(improvement); 
