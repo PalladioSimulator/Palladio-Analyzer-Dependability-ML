@@ -34,10 +34,12 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 		private ILaunchConfiguration launchConfig = null;
 		private Optional<String> exportLocation = Optional.empty();
 		
+		private final IProbabilityDistributionRegistry probabilityDistributionRegistry;
 		private final IProbabilityDistributionFactory probabilityDistributionFactory;
 		private final ParameterParser parameterParser;
 		
-		public UncertaintyBasedReliabilityPredictionJobBuilder(IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
+		public UncertaintyBasedReliabilityPredictionJobBuilder(IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
+		    this.probabilityDistributionRegistry = probabilityDistributionRegistry;
 		    this.probabilityDistributionFactory = probabilityDistributionFactory;
 		    this.parameterParser = parameterParser;
 		}
@@ -68,7 +70,7 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 			return this;
 		}
 		
-		public UncertaintyBasedReliabilityPredictionJob build(IProbabilityDistributionRegistry probabilityDistributionRegistry) {
+		public UncertaintyBasedReliabilityPredictionJob build() {
 			var relPredictionJob = new UncertaintyBasedReliabilityPredictionJob();
 			relPredictionJob.myBlackboard = new MDSDBlackboard();
 			
@@ -112,8 +114,8 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 		
 	}
 	
-	public static UncertaintyBasedReliabilityPredictionJobBuilder newBuilder(IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
-		return new UncertaintyBasedReliabilityPredictionJobBuilder(probabilityDistributionFactory, parameterParser);
+	public static UncertaintyBasedReliabilityPredictionJobBuilder newBuilder(IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
+		return new UncertaintyBasedReliabilityPredictionJobBuilder(probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser);
 	}
 	
 }

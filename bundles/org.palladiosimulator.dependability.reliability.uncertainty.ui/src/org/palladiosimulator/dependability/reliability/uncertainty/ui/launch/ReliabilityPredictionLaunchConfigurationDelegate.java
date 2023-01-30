@@ -52,7 +52,7 @@ public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConf
 			ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
 			IProbabilityDistributionRegistry probabilityDistributionRegistry = defaultProbabilityDistributionFactory;
 			IProbabilityDistributionFactory probabilityDistributionFactory = defaultProbabilityDistributionFactory;
-			var jobBuilder = UncertaintyBasedReliabilityPredictionJob.newBuilder(probabilityDistributionFactory, parameterParser)
+			var jobBuilder = UncertaintyBasedReliabilityPredictionJob.newBuilder(probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser)
 					.withConfig(config)
 					.andUncertaintyModel(uncertaintyModelLocation)
 					.andExplorationStrategy(explorationStrategy);
@@ -68,7 +68,7 @@ public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConf
 				jobBuilder.exportResults(exportLocation);
 			}
 				
-			return jobBuilder.build(probabilityDistributionRegistry);
+			return jobBuilder.build();
 		}
 	}
 
