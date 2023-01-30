@@ -19,15 +19,16 @@ import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticN
 import org.palladiosimulator.envdyn.environment.templatevariable.TemplateVariableDefinitions;
 
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.parser.ParameterParser;
 
 public class MLInducedUncertaintyModel implements UncertaintyModel {
 
 	private final Set<UncertaintyState> valueSpace;
 	private final ProbabilisticSensitivityModel sensitivityModel;
 
-	public MLInducedUncertaintyModel(UncertaintyInducedFailureType uncertainty, IProbabilityDistributionFactory probabilityDistributionFactory) {
+	public MLInducedUncertaintyModel(UncertaintyInducedFailureType uncertainty, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
 		this.sensitivityModel = initSensitivityModel(uncertainty, probabilityDistributionFactory);
-		this.valueSpace = computeValueSpace(uncertainty);
+		this.valueSpace = computeValueSpace(uncertainty, parameterParser);
 	}
 
 	private ProbabilisticSensitivityModel initSensitivityModel(UncertaintyInducedFailureType uncertainty, IProbabilityDistributionFactory probabilityDistributionFactory) {
@@ -47,8 +48,8 @@ public class MLInducedUncertaintyModel implements UncertaintyModel {
 		return (TemplateVariableDefinitions) anyVariable.getInstantiatedTemplate().eContainer();
 	}
 
-	private Set<UncertaintyState> computeValueSpace(UncertaintyInducedFailureType uncertainty) {
-		var statesIncludingMLVar = DiscreteUncertaintyStateSpace.valueSpaceOf(uncertainty);
+	private Set<UncertaintyState> computeValueSpace(UncertaintyInducedFailureType uncertainty, ParameterParser parameterParser) {
+		var statesIncludingMLVar = DiscreteUncertaintyStateSpace.valueSpaceOf(uncertainty, parameterParser);
 		return excludeMLInputVariable(statesIncludingMLVar);
 	}
 

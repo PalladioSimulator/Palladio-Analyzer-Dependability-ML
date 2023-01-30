@@ -17,6 +17,7 @@ import com.google.common.collect.Sets;
 
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
+import tools.mdsd.probdist.api.parser.ParameterParser;
 
 public class UncertaintyBasedReliabilityPrediction {
 
@@ -37,20 +38,20 @@ public class UncertaintyBasedReliabilityPrediction {
 		return STATE_SPACE_STRATEGY_REGISTER.stream().map(StateSpaceExplorationStrategy::getName).collect(toSet());
 	}
 
-	public static ReliabilityPredictionResult predict(UncertaintyBasedReliabilityPredictionConfig config, IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory) {
-		return buildReliabilityPredictor(config, probabilityDistributionRegistry, probabilityDistributionFactory).predictSuccessProbability(config.getPCMInstance());
+	public static ReliabilityPredictionResult predict(UncertaintyBasedReliabilityPredictionConfig config, IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
+		return buildReliabilityPredictor(config, probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser).predictSuccessProbability(config.getPCMInstance());
 	}
 
 	public static ReliabilityPredictionResult predictGiven(List<UncertaintyState> uncertaintyStates,
-			UncertaintyBasedReliabilityPredictionConfig config, IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory) {
-		var results = buildReliabilityPredictor(config, probabilityDistributionRegistry, probabilityDistributionFactory).predictConditionalSuccessProbability(config.getPCMInstance(),
+			UncertaintyBasedReliabilityPredictionConfig config, IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
+		var results = buildReliabilityPredictor(config, probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser).predictConditionalSuccessProbability(config.getPCMInstance(),
 				uncertaintyStates);
 		return new ReliabilityPredictionResult(results);
 	}
 
 	private static UncertaintyBasedReliabilityPredictor buildReliabilityPredictor(
-			UncertaintyBasedReliabilityPredictionConfig config, IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory) {
-		var builder = UncertaintyBasedReliabilityPredictor.newBuilder(probabilityDistributionRegistry, probabilityDistributionFactory).withConfig(config.getRunConfig());
+			UncertaintyBasedReliabilityPredictionConfig config, IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
+		var builder = UncertaintyBasedReliabilityPredictor.newBuilder(probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser).withConfig(config.getRunConfig());
 
 		if (config.getStateSpaceExplorationStrategy().isPresent()) {
 			builder.exploreStateSpaceWith(config.getStateSpaceExplorationStrategy().get());

@@ -32,7 +32,7 @@ import tools.mdsd.probdist.api.entity.Conditionable;
 import tools.mdsd.probdist.api.entity.ConditionalProbabilityDistribution;
 import tools.mdsd.probdist.api.entity.UnivariateProbabilitiyMassFunction;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
-import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.api.parser.ParameterParser.Sample;
 import tools.mdsd.probdist.distributionfunction.Domain;
 import tools.mdsd.probdist.distributionfunction.SimpleParameter;
@@ -42,16 +42,18 @@ public class ArchitecturalCountermeasureOperator {
 	private final PCMInstance pcmModel;
 	private final UncertaintyRepository uncertaintyRepo;
 	private final IProbabilityDistributionFactory probabilityDistributionFactory;
+	private final ParameterParser parameterParser;
 
-	private ArchitecturalCountermeasureOperator(PCMInstance pcmModel, UncertaintyRepository uncertaintyRepo, IProbabilityDistributionFactory probabilityDistributionFactory) {
+	private ArchitecturalCountermeasureOperator(PCMInstance pcmModel, UncertaintyRepository uncertaintyRepo, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
 		this.pcmModel = pcmModel;
 		this.uncertaintyRepo = uncertaintyRepo;
 		this.probabilityDistributionFactory = probabilityDistributionFactory;
+		this.parameterParser = parameterParser;
 	}
 
 	public static ArchitecturalCountermeasureOperator createOperatorFor(PCMInstance pcmModel,
-			UncertaintyRepository uncertaintyRepo, IProbabilityDistributionFactory probabilityDistributionFactory) {
-		return new ArchitecturalCountermeasureOperator(pcmModel, uncertaintyRepo, probabilityDistributionFactory);
+			UncertaintyRepository uncertaintyRepo, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
+		return new ArchitecturalCountermeasureOperator(pcmModel, uncertaintyRepo, probabilityDistributionFactory, parameterParser);
 	}
 
 	public List<UncertaintyState> applyToUncertainties(List<UncertaintyState> stateTuple) {
@@ -122,9 +124,9 @@ public class ArchitecturalCountermeasureOperator {
 						.findFirst()
 						.get();
 
-				switchDistributions(affectedVariable, countermeasure.getUncertaintyImprovement());	
+				switchDistributions(affectedVariable, countermeasure.getUncertaintyImprovement(), parameterParser);	
 				
-				UncertaintyModelManager.get().updateModel(surrogate, probabilityDistributionFactory);	
+				UncertaintyModelManager.get().updateModel(surrogate, probabilityDistributionFactory, parameterParser);	
 
 				return null;
 			}
@@ -141,7 +143,7 @@ public class ArchitecturalCountermeasureOperator {
 					var improved = retrieveFailureVariableFrom(countermeasure.getImprovedUncertaintyModel());
 					original.getDescriptiveModel().setDistribution(improved.getDescriptiveModel().getDistribution());					
 					
-					UncertaintyModelManager.get().updateModel(surrogate, probabilityDistributionFactory);
+					UncertaintyModelManager.get().updateModel(surrogate, probabilityDistributionFactory, parameterParser);
 				}
 				return null;
 			}
@@ -149,8 +151,8 @@ public class ArchitecturalCountermeasureOperator {
 		}.doSwitch(countermeasure);
 	}
 	
-	private void switchDistributions(GroundRandomVariable affectedVariable, UncertaintyImprovement improvement) {
-		var generator = createGeneratorDistribution(affectedVariable, improvement);
+	private void switchDistributions(GroundRandomVariable affectedVariable, UncertaintyImprovement improvement, ParameterParser parameterParser) {
+		var generator = createGeneratorDistribution(affectedVariable, improvement, parameterParser);
 		var oldDistribution = affectedVariable.getDescriptiveModel().getDistribution();
 
 		var params = oldDistribution.getParams();
@@ -158,13 +160,13 @@ public class ArchitecturalCountermeasureOperator {
 			throw new IllegalArgumentException("The distribution structure is not supported.");
 		}
 		
-		var adjustedParam = generateDistributionParams((SimpleParameter) params.get(0).getRepresentation(), generator);
+		var adjustedParam = generateDistributionParams((SimpleParameter) params.get(0).getRepresentation(), generator, parameterParser);
 		params.get(0).setRepresentation(adjustedParam);
 	}
 
 	// Currently only SimpleParameter are supported
-	private SimpleParameter generateDistributionParams(SimpleParameter param, UnivariateProbabilitiyMassFunction generator) {
-		var samples = ProbabilityDistributionFactory.getParameterParser().parseSampleSpace(param);
+	private SimpleParameter generateDistributionParams(SimpleParameter param, UnivariateProbabilitiyMassFunction generator, ParameterParser parameterParser) {
+		var samples = parameterParser.parseSampleSpace(param);
 		for (Sample each : samples) {
 			var newProbability = generator.probability(each.value);
 			each.probability = newProbability;
@@ -182,7 +184,7 @@ public class ArchitecturalCountermeasureOperator {
 	}
 
 	private UnivariateProbabilitiyMassFunction createGeneratorDistribution(GroundRandomVariable affectedVariable,
-			UncertaintyImprovement uncertaintyImprovement) {
+			UncertaintyImprovement uncertaintyImprovement, ParameterParser parameterParser) {
 		var oldDistribution = affectedVariable.getDescriptiveModel().getDistribution();
 		return new UnivariateProbabilitiyMassFunction(oldDistribution.getInstantiated()) {
 
@@ -200,7 +202,7 @@ public class ArchitecturalCountermeasureOperator {
 			@Override
 			public Double probability(CategoricalValue value) {
 				var probability = 0.0;
-				for (CategoricalValue each : DiscreteUncertaintyStateSpace.toUncertaintyState(affectedVariable).getValueSpace()) {
+				for (CategoricalValue each : DiscreteUncertaintyStateSpace.toUncertaintyState(affectedVariable, parameterParser).getValueSpace()) {
 					var probOfUncertainty = oldDistFunction.probability(each);
 					var condProb = improvement.given(asConditional(each)).probability(value);
 					probability += probOfUncertainty * condProb;

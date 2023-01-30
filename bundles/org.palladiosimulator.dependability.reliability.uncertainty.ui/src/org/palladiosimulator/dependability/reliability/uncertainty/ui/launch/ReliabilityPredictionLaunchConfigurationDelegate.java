@@ -20,6 +20,8 @@ import de.uka.ipd.sdq.workflow.jobs.IJob;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.parser.DefaultParameterParser;
+import tools.mdsd.probdist.api.parser.ParameterParser;
 
 public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
 
@@ -46,10 +48,11 @@ public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConf
 						UNCERTAINTY_MODEL_ATTR, EXPLORATION_STRATEGY_ATTR));
 			}
 			
+			ParameterParser parameterParser = new DefaultParameterParser();
 			ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
 			IProbabilityDistributionRegistry probabilityDistributionRegistry = defaultProbabilityDistributionFactory;
 			IProbabilityDistributionFactory probabilityDistributionFactory = defaultProbabilityDistributionFactory;
-			var jobBuilder = UncertaintyBasedReliabilityPredictionJob.newBuilder(probabilityDistributionFactory)
+			var jobBuilder = UncertaintyBasedReliabilityPredictionJob.newBuilder(probabilityDistributionFactory, parameterParser)
 					.withConfig(config)
 					.andUncertaintyModel(uncertaintyModelLocation)
 					.andExplorationStrategy(explorationStrategy);

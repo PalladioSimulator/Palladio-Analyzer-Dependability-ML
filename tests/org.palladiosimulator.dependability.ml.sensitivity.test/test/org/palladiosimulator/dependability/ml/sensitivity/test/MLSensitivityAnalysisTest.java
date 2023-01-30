@@ -43,6 +43,8 @@ import tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.parser.DefaultParameterParser;
+import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
 public class MLSensitivityAnalysisTest {
@@ -136,7 +138,8 @@ public class MLSensitivityAnalysisTest {
 
 		DistributionTypeModelUtil.get(BasicDistributionTypesLoader.loadRepository());
 		probabilityDistributionRegistry = new ProbabilityDistributionFactory();
-		probabilityDistributionRegistry.register(new MultinomialDistributionSupplier());
+		ParameterParser parameterParser =  new DefaultParameterParser();
+        probabilityDistributionRegistry.register(new MultinomialDistributionSupplier(parameterParser ));
 
 		dummyFile = new File(System.getProperty("user.dir"));
 

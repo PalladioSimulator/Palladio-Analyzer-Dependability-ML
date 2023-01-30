@@ -16,7 +16,7 @@ import com.google.common.collect.Lists;
 
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
-import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.distributionfunction.TabularCPD;
 
 public class BayesianUncertaintyModel implements UncertaintyModel {
@@ -24,15 +24,17 @@ public class BayesianUncertaintyModel implements UncertaintyModel {
 	private final BayesianNetwork bayesianNetwork;
 	private final GroundRandomVariable failureVariable;
 	private final Set<UncertaintyState> valueSpace;
+	private final ParameterParser parameterParser;
 
-	public BayesianUncertaintyModel(UncertaintyInducedFailureType uncertainty, IProbabilityDistributionFactory probabilityDistributionFactory) {
+	public BayesianUncertaintyModel(UncertaintyInducedFailureType uncertainty, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
 		this.bayesianNetwork = new BayesianNetwork(null, uncertainty.getUncertaintyModel(), probabilityDistributionFactory);
 		this.failureVariable = uncertainty.getFailureVariable();
 		this.valueSpace = computeValueSpace(uncertainty);
+		this.parameterParser = parameterParser;
 	}
 
 	private Set<UncertaintyState> computeValueSpace(UncertaintyInducedFailureType uncertainty) {
-		var statesIncludingFailureVar = DiscreteUncertaintyStateSpace.valueSpaceOf(uncertainty);
+		var statesIncludingFailureVar = DiscreteUncertaintyStateSpace.valueSpaceOf(uncertainty, parameterParser);
 		return excludeFailureVariable(statesIncludingFailureVar);
 	}
 
@@ -48,7 +50,7 @@ public class BayesianUncertaintyModel implements UncertaintyModel {
 
 	@Override
 	public double probability(List<UncertaintyState> values) {
-		return marginalizingFailureVariable(filterRelevantValues(values));
+		return marginalizingFailureVariable(filterRelevantValues(values), parameterParser);
 	}
 
 	@Override
@@ -58,9 +60,9 @@ public class BayesianUncertaintyModel implements UncertaintyModel {
 		return probOfFailure / probOfUncertainty;
 	}
 
-	private double marginalizingFailureVariable(List<InputValue> values) {
+	private double marginalizingFailureVariable(List<InputValue> values, ParameterParser parameterParser) {
 		var probability = 0.0;
-		for (CategoricalValue each : retrieveValueSpaceOf(failureVariable)) {
+		for (CategoricalValue each : retrieveValueSpaceOf(failureVariable, parameterParser)) {
 			var copiedValues = Lists.newArrayList(values);
 			copiedValues.add(InputValue.create(each, failureVariable));
 
@@ -69,12 +71,12 @@ public class BayesianUncertaintyModel implements UncertaintyModel {
 		return probability;
 	}
 
-	private Set<CategoricalValue> retrieveValueSpaceOf(GroundRandomVariable variable) {
+	private Set<CategoricalValue> retrieveValueSpaceOf(GroundRandomVariable variable, ParameterParser parameterParser) {
 		var distribution = failureVariable.getDescriptiveModel().getDistribution();
 		var paramRep = distribution.getParams().get(0).getRepresentation();
 		if (paramRep instanceof TabularCPD) {
 			var param = TabularCPD.class.cast(paramRep).getCpdEntries().get(0).getEntry();
-			var samples = ProbabilityDistributionFactory.getParameterParser().parseSampleSpace(param);
+			var samples = parameterParser.parseSampleSpace(param);
 			return samples.stream().map(each -> each.value).collect(toSet());
 		}
 

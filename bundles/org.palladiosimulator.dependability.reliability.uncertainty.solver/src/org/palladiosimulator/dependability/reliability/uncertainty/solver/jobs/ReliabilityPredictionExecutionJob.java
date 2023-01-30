@@ -9,16 +9,19 @@ import de.uka.ipd.sdq.workflow.jobs.JobFailedException;
 import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
+import tools.mdsd.probdist.api.parser.ParameterParser;
 
 public class ReliabilityPredictionExecutionJob extends ReliabilityPredictionRunJob {
     
     private final IProbabilityDistributionRegistry probabilityDistributionRegistry;
     private final IProbabilityDistributionFactory probabilityDistributionFactory;
+    private final ParameterParser parameterParser;
 
-	public ReliabilityPredictionExecutionJob(ReliabilityPredictionContext context, IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory) {
+	public ReliabilityPredictionExecutionJob(ReliabilityPredictionContext context, IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
 		super(context);
 		this.probabilityDistributionRegistry = probabilityDistributionRegistry;
 		this.probabilityDistributionFactory = probabilityDistributionFactory;
+		this.parameterParser = parameterParser;
 	}
 
 	@Override
@@ -28,7 +31,7 @@ public class ReliabilityPredictionExecutionJob extends ReliabilityPredictionRunJ
 				.andPcmModels(getBlackboard())
 				.exploreStateSpaceWith(context.explorationStrategy)
 				.build();
-		var result = UncertaintyBasedReliabilityPrediction.predict(runConfig, probabilityDistributionRegistry, probabilityDistributionFactory);
+		var result = UncertaintyBasedReliabilityPrediction.predict(runConfig, probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser);
 		
 		context.result = result;
 	}

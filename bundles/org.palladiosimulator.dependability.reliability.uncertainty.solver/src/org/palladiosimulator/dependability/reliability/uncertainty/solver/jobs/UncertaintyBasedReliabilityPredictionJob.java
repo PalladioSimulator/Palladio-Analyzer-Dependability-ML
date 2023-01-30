@@ -21,6 +21,7 @@ import de.uka.ipd.sdq.workflow.jobs.SequentialBlackboardInteractingJob;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
+import tools.mdsd.probdist.api.parser.ParameterParser;
 
 public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboardInteractingJob<MDSDBlackboard> implements ICompositeJob {
 
@@ -34,9 +35,11 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 		private Optional<String> exportLocation = Optional.empty();
 		
 		private final IProbabilityDistributionFactory probabilityDistributionFactory;
+		private final ParameterParser parameterParser;
 		
-		public UncertaintyBasedReliabilityPredictionJobBuilder(IProbabilityDistributionFactory probabilityDistributionFactory) {
+		public UncertaintyBasedReliabilityPredictionJobBuilder(IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
 		    this.probabilityDistributionFactory = probabilityDistributionFactory;
+		    this.parameterParser = parameterParser;
 		}
 		
 		public UncertaintyBasedReliabilityPredictionJobBuilder withConfig(PCMSolverWorkflowRunConfiguration config) {
@@ -90,7 +93,7 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 				var uri = URI.createURI(exportLocation.get());
 				exportLocationURI = Optional.of(uri);
 			}
-			relPredictionJob.addJob(new RootReliabilityPredictionRunJob(config, uncertaintyModel, explorationStrategy, exportLocationURI, probabilityDistributionRegistry, probabilityDistributionFactory));
+			relPredictionJob.addJob(new RootReliabilityPredictionRunJob(config, uncertaintyModel, explorationStrategy, exportLocationURI, probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser));
 			
 			return relPredictionJob;
 		}
@@ -109,8 +112,8 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 		
 	}
 	
-	public static UncertaintyBasedReliabilityPredictionJobBuilder newBuilder(IProbabilityDistributionFactory probabilityDistributionFactory) {
-		return new UncertaintyBasedReliabilityPredictionJobBuilder(probabilityDistributionFactory);
+	public static UncertaintyBasedReliabilityPredictionJobBuilder newBuilder(IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
+		return new UncertaintyBasedReliabilityPredictionJobBuilder(probabilityDistributionFactory, parameterParser);
 	}
 	
 }
