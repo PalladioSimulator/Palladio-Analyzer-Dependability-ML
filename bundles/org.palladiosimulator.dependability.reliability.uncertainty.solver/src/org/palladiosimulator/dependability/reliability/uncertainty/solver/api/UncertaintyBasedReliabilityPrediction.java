@@ -50,7 +50,7 @@ public class UncertaintyBasedReliabilityPrediction {
 
 	private static UncertaintyBasedReliabilityPredictor buildReliabilityPredictor(
 			UncertaintyBasedReliabilityPredictionConfig config, IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory) {
-		var builder = UncertaintyBasedReliabilityPredictor.newBuilder(probabilityDistributionFactory).withConfig(config.getRunConfig());
+		var builder = UncertaintyBasedReliabilityPredictor.newBuilder(probabilityDistributionRegistry, probabilityDistributionFactory).withConfig(config.getRunConfig());
 
 		if (config.getStateSpaceExplorationStrategy().isPresent()) {
 			builder.exploreStateSpaceWith(config.getStateSpaceExplorationStrategy().get());
@@ -60,7 +60,7 @@ public class UncertaintyBasedReliabilityPrediction {
 
 		builder.andUncertaintyRepo(config.getUncertaintyRepository());
 
-		return builder.build(probabilityDistributionRegistry);
+		return builder.build();
 	}
 
 	private static Predicate<StateSpaceExplorationStrategy> strategyWith(String queriedName) {

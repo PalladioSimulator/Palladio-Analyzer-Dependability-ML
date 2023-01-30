@@ -29,9 +29,11 @@ public class UncertaintyBasedReliabilityPredictor {
 		private PCMSolverWorkflowRunConfiguration config = null;
 		private StateSpaceExplorationStrategy exploreStrategy = null;
 		private UncertaintyRepository uncertaintyRepo = null;
+		private final IProbabilityDistributionRegistry probabilityDistributionRegistry;
 		private final IProbabilityDistributionFactory probabilityDistributionFactory;
 		
-		public UncertaintyBasedReliabilityPredictionBuilder(IProbabilityDistributionFactory probabilityDistributionFactory) {
+		public UncertaintyBasedReliabilityPredictionBuilder(IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory) {
+		    this.probabilityDistributionRegistry = probabilityDistributionRegistry;
 		    this.probabilityDistributionFactory = probabilityDistributionFactory;
 		}
 
@@ -56,7 +58,7 @@ public class UncertaintyBasedReliabilityPredictor {
 			return this;
 		}
 
-		public UncertaintyBasedReliabilityPredictor build(IProbabilityDistributionRegistry probabilityDistributionRegistry) {
+		public UncertaintyBasedReliabilityPredictor build() {
 			checkValidity();
 
 			adjustConfig();
@@ -104,8 +106,8 @@ public class UncertaintyBasedReliabilityPredictor {
 		probabilityDistributionRegistry.register(new MultinomialDistributionSupplier());
 	}
 
-	public static UncertaintyBasedReliabilityPredictionBuilder newBuilder(IProbabilityDistributionFactory probabilityDistributionFactory) {
-		return new UncertaintyBasedReliabilityPredictionBuilder(probabilityDistributionFactory);
+	public static UncertaintyBasedReliabilityPredictionBuilder newBuilder(IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory) {
+		return new UncertaintyBasedReliabilityPredictionBuilder(probabilityDistributionRegistry, probabilityDistributionFactory);
 	}
 
 	public ReliabilityPredictionResult predictSuccessProbability(PCMInstance unresolved) {
