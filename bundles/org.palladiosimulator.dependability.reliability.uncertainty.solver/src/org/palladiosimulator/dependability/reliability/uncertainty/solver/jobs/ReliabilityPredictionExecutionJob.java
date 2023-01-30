@@ -7,15 +7,18 @@ import org.palladiosimulator.dependability.reliability.uncertainty.solver.api.Un
 import de.uka.ipd.sdq.workflow.jobs.CleanupFailedException;
 import de.uka.ipd.sdq.workflow.jobs.JobFailedException;
 import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 
 public class ReliabilityPredictionExecutionJob extends ReliabilityPredictionRunJob {
     
     private final IProbabilityDistributionRegistry probabilityDistributionRegistry;
+    private final IProbabilityDistributionFactory probabilityDistributionFactory;
 
-	public ReliabilityPredictionExecutionJob(ReliabilityPredictionContext context, IProbabilityDistributionRegistry probabilityDistributionRegistry) {
+	public ReliabilityPredictionExecutionJob(ReliabilityPredictionContext context, IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory) {
 		super(context);
 		this.probabilityDistributionRegistry = probabilityDistributionRegistry;
+		this.probabilityDistributionFactory = probabilityDistributionFactory;
 	}
 
 	@Override
@@ -25,7 +28,7 @@ public class ReliabilityPredictionExecutionJob extends ReliabilityPredictionRunJ
 				.andPcmModels(getBlackboard())
 				.exploreStateSpaceWith(context.explorationStrategy)
 				.build();
-		var result = UncertaintyBasedReliabilityPrediction.predict(runConfig, probabilityDistributionRegistry);
+		var result = UncertaintyBasedReliabilityPrediction.predict(runConfig, probabilityDistributionRegistry, probabilityDistributionFactory);
 		
 		context.result = result;
 	}

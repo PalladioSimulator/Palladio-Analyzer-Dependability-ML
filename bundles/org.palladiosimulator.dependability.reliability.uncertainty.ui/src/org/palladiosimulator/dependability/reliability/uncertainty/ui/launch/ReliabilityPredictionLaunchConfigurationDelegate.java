@@ -17,6 +17,7 @@ import org.palladiosimulator.reliability.solver.runconfig.PCMSolverReliabilityLa
 import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import de.uka.ipd.sdq.workflow.jobs.IJob;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 
@@ -45,7 +46,10 @@ public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConf
 						UNCERTAINTY_MODEL_ATTR, EXPLORATION_STRATEGY_ATTR));
 			}
 			
-			var jobBuilder = UncertaintyBasedReliabilityPredictionJob.newBuilder()
+			ProbabilityDistributionFactory defaultProbabilityDistributionFactory = ProbabilityDistributionFactory.get();
+			IProbabilityDistributionRegistry probabilityDistributionRegistry = defaultProbabilityDistributionFactory;
+			IProbabilityDistributionFactory probabilityDistributionFactory = defaultProbabilityDistributionFactory;
+			var jobBuilder = UncertaintyBasedReliabilityPredictionJob.newBuilder(probabilityDistributionFactory)
 					.withConfig(config)
 					.andUncertaintyModel(uncertaintyModelLocation)
 					.andExplorationStrategy(explorationStrategy);
@@ -61,7 +65,6 @@ public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConf
 				jobBuilder.exportResults(exportLocation);
 			}
 				
-			IProbabilityDistributionRegistry probabilityDistributionRegistry = ProbabilityDistributionFactory.get();
 			return jobBuilder.build(probabilityDistributionRegistry);
 		}
 	}

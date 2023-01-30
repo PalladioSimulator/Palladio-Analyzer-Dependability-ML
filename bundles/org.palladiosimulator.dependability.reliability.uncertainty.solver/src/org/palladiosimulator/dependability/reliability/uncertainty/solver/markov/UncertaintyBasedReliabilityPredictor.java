@@ -19,6 +19,7 @@ import org.palladiosimulator.solver.models.PCMInstance;
 import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import tools.mdsd.probdist.api.apache.supplier.MultinomialDistributionSupplier;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 
 public class UncertaintyBasedReliabilityPredictor {
@@ -28,6 +29,11 @@ public class UncertaintyBasedReliabilityPredictor {
 		private PCMSolverWorkflowRunConfiguration config = null;
 		private StateSpaceExplorationStrategy exploreStrategy = null;
 		private UncertaintyRepository uncertaintyRepo = null;
+		private final IProbabilityDistributionFactory probabilityDistributionFactory;
+		
+		public UncertaintyBasedReliabilityPredictionBuilder(IProbabilityDistributionFactory probabilityDistributionFactory) {
+		    this.probabilityDistributionFactory = probabilityDistributionFactory;
+		}
 
 		public UncertaintyBasedReliabilityPredictionBuilder withConfig(PCMSolverWorkflowRunConfiguration config) {
 			this.config = config;
@@ -55,7 +61,7 @@ public class UncertaintyBasedReliabilityPredictor {
 
 			adjustConfig();
 
-			return new UncertaintyBasedReliabilityPredictor(exploreStrategy, config, uncertaintyRepo, probabilityDistributionRegistry);
+			return new UncertaintyBasedReliabilityPredictor(exploreStrategy, config, uncertaintyRepo, probabilityDistributionRegistry, probabilityDistributionFactory);
 		}
 
 		private void checkValidity() {
@@ -76,18 +82,20 @@ public class UncertaintyBasedReliabilityPredictor {
 	private final UncertaintyRepository uncertaintyRepo;
 	private final PCMSolverWorkflowRunConfiguration config;
 	private final StateSpaceExplorationStrategy exploreStrategy;
+	private final IProbabilityDistributionFactory probabilityDistributionFactory;
 	
 	private ArchitecturalCountermeasureOperator operator = null;
 
 	private UncertaintyBasedReliabilityPredictor(StateSpaceExplorationStrategy exploreStrategy,
-			PCMSolverWorkflowRunConfiguration config, UncertaintyRepository uncertaintyRepo, IProbabilityDistributionRegistry probabilityDistributionRegistry) {
+			PCMSolverWorkflowRunConfiguration config, UncertaintyRepository uncertaintyRepo, IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory) {
 		this.config = config;
 		this.exploreStrategy = exploreStrategy;
 		this.uncertaintyRepo = uncertaintyRepo;
+		this.probabilityDistributionFactory = probabilityDistributionFactory;
 
 		var manager = UncertaintyModelManager.get(); 
 		manager.reset();
-		manager.manage(uncertaintyRepo.getUncertaintyInducedFailureTypes());
+		manager.manage(uncertaintyRepo.getUncertaintyInducedFailureTypes(), probabilityDistributionFactory);
 
 		initProbabilityDistributions(probabilityDistributionRegistry);
 	}
@@ -96,8 +104,8 @@ public class UncertaintyBasedReliabilityPredictor {
 		probabilityDistributionRegistry.register(new MultinomialDistributionSupplier());
 	}
 
-	public static UncertaintyBasedReliabilityPredictionBuilder newBuilder() {
-		return new UncertaintyBasedReliabilityPredictionBuilder();
+	public static UncertaintyBasedReliabilityPredictionBuilder newBuilder(IProbabilityDistributionFactory probabilityDistributionFactory) {
+		return new UncertaintyBasedReliabilityPredictionBuilder(probabilityDistributionFactory);
 	}
 
 	public ReliabilityPredictionResult predictSuccessProbability(PCMInstance unresolved) {
@@ -105,7 +113,7 @@ public class UncertaintyBasedReliabilityPredictor {
 
 		ReliabilityPredictionResult result = new ReliabilityPredictionResult();
 
-		getArchitecturalCountermeasureOperator(unresolved).applyToUncertaintyModels();
+		getArchitecturalCountermeasureOperator(unresolved, probabilityDistributionFactory).applyToUncertaintyModels();
 		
 		var stateSpace = UncertaintyModelManager.get().getStateSpace();
 		for (List<UncertaintyState> eachTuple : exploreStrategy.explore(stateSpace)) {
@@ -118,7 +126,7 @@ public class UncertaintyBasedReliabilityPredictor {
 
 	public Set<ReliabilityPredictionResultPerScenario> predictConditionalSuccessProbability(PCMInstance unresolved,
 			List<UncertaintyState> stateTuple) {
-		var improved = getArchitecturalCountermeasureOperator(unresolved).applyToUncertainties(stateTuple);
+		var improved = getArchitecturalCountermeasureOperator(unresolved, probabilityDistributionFactory).applyToUncertainties(stateTuple);
 		return predict(unresolved, improved);
 	}
 	
@@ -158,9 +166,9 @@ public class UncertaintyBasedReliabilityPredictor {
 		return probOfUncertainties;
 	}
 	
-	private ArchitecturalCountermeasureOperator getArchitecturalCountermeasureOperator(PCMInstance unresolved) {
+	private ArchitecturalCountermeasureOperator getArchitecturalCountermeasureOperator(PCMInstance unresolved, IProbabilityDistributionFactory probabilityDistributionFactory) {
 		if (operator == null) {
-			operator = ArchitecturalCountermeasureOperator.createOperatorFor(unresolved, uncertaintyRepo);
+			operator = ArchitecturalCountermeasureOperator.createOperatorFor(unresolved, uncertaintyRepo, probabilityDistributionFactory);
 		}
 		return operator;
 	}

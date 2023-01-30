@@ -31,6 +31,7 @@ import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.entity.Conditionable;
 import tools.mdsd.probdist.api.entity.ConditionalProbabilityDistribution;
 import tools.mdsd.probdist.api.entity.UnivariateProbabilitiyMassFunction;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.parser.ParameterParser.Sample;
 import tools.mdsd.probdist.distributionfunction.Domain;
@@ -40,15 +41,17 @@ public class ArchitecturalCountermeasureOperator {
 	
 	private final PCMInstance pcmModel;
 	private final UncertaintyRepository uncertaintyRepo;
+	private final IProbabilityDistributionFactory probabilityDistributionFactory;
 
-	private ArchitecturalCountermeasureOperator(PCMInstance pcmModel, UncertaintyRepository uncertaintyRepo) {
+	private ArchitecturalCountermeasureOperator(PCMInstance pcmModel, UncertaintyRepository uncertaintyRepo, IProbabilityDistributionFactory probabilityDistributionFactory) {
 		this.pcmModel = pcmModel;
 		this.uncertaintyRepo = uncertaintyRepo;
+		this.probabilityDistributionFactory = probabilityDistributionFactory;
 	}
 
 	public static ArchitecturalCountermeasureOperator createOperatorFor(PCMInstance pcmModel,
-			UncertaintyRepository uncertaintyRepo) {
-		return new ArchitecturalCountermeasureOperator(pcmModel, uncertaintyRepo);
+			UncertaintyRepository uncertaintyRepo, IProbabilityDistributionFactory probabilityDistributionFactory) {
+		return new ArchitecturalCountermeasureOperator(pcmModel, uncertaintyRepo, probabilityDistributionFactory);
 	}
 
 	public List<UncertaintyState> applyToUncertainties(List<UncertaintyState> stateTuple) {
@@ -65,7 +68,7 @@ public class ArchitecturalCountermeasureOperator {
 		if (uncertaintyRepo.getArchitecturalCountermeasures().size() == 0) {
 			return;
 		}
-
+		
 		filterApplicableCountermeasures().forEach(this::apply);
 	}
 	
@@ -121,7 +124,7 @@ public class ArchitecturalCountermeasureOperator {
 
 				switchDistributions(affectedVariable, countermeasure.getUncertaintyImprovement());	
 				
-				UncertaintyModelManager.get().updateModel(surrogate);	
+				UncertaintyModelManager.get().updateModel(surrogate, probabilityDistributionFactory);	
 
 				return null;
 			}
@@ -138,7 +141,7 @@ public class ArchitecturalCountermeasureOperator {
 					var improved = retrieveFailureVariableFrom(countermeasure.getImprovedUncertaintyModel());
 					original.getDescriptiveModel().setDistribution(improved.getDescriptiveModel().getDistribution());					
 					
-					UncertaintyModelManager.get().updateModel(surrogate);					
+					UncertaintyModelManager.get().updateModel(surrogate, probabilityDistributionFactory);
 				}
 				return null;
 			}
@@ -246,15 +249,15 @@ public class ArchitecturalCountermeasureOperator {
 	// The method makes an surrogate for the given failure type. The reason is that the uncertainty model
 	// will be possibly changed during analysis which might produce side effects if no surrogate is made.
 	private UncertaintyInducedFailureType makeSurrogate(UncertaintyInducedFailureType failureType) {
-		var surrogate = (UncertaintyInducedFailureType) EcoreUtil.copy(failureType);
+		var surrogate = EcoreUtil.copy(failureType);
 		surrogate.setFailureVariable(failureType.getFailureVariable());
 		surrogate.setRefines(failureType.getRefines());
 		surrogate.getArchitecturalPreconditions().addAll(failureType.getArchitecturalPreconditions());
 		
 		var originalModel = failureType.getUncertaintyModel();
-		var surrogatedModel = (GroundProbabilisticNetwork) EcoreUtil.copy(originalModel);
+		var surrogatedModel = EcoreUtil.copy(originalModel);
 		for (GroundProbabilisticModel each : originalModel.getLocalModels()) {
-			var surrogatedGroundModel = (GroundProbabilisticModel) EcoreUtil.copy(each);
+			var surrogatedGroundModel = EcoreUtil.copy(each);
 			surrogatedGroundModel.setDistribution(each.getDistribution());
 			surrogatedGroundModel.setInstantiatedFactor(each.getInstantiatedFactor());
 			
@@ -262,7 +265,7 @@ public class ArchitecturalCountermeasureOperator {
 		}
 		
 		for (LocalProbabilisticNetwork eachNet : originalModel.getLocalProbabilisticModels()) {
-			var surrogatedLocalNetwork = (LocalProbabilisticNetwork) EcoreUtil.copy(eachNet);
+			var surrogatedLocalNetwork = EcoreUtil.copy(eachNet);
 			for (GroundRandomVariable eachVar : eachNet.getGroundRandomVariables()) {
 				var surrogatedVariable = surrogatedLocalNetwork.getGroundRandomVariables().stream()
 						.filter(v -> v.getId().equals(eachVar.getId()))

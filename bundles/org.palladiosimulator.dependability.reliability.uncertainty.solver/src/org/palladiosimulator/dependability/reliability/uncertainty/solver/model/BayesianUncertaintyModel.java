@@ -15,6 +15,7 @@ import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable
 import com.google.common.collect.Lists;
 
 import tools.mdsd.probdist.api.entity.CategoricalValue;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 import tools.mdsd.probdist.distributionfunction.TabularCPD;
 
@@ -24,8 +25,8 @@ public class BayesianUncertaintyModel implements UncertaintyModel {
 	private final GroundRandomVariable failureVariable;
 	private final Set<UncertaintyState> valueSpace;
 
-	public BayesianUncertaintyModel(UncertaintyInducedFailureType uncertainty) {
-		this.bayesianNetwork = new BayesianNetwork(null, uncertainty.getUncertaintyModel());
+	public BayesianUncertaintyModel(UncertaintyInducedFailureType uncertainty, IProbabilityDistributionFactory probabilityDistributionFactory) {
+		this.bayesianNetwork = new BayesianNetwork(null, uncertainty.getUncertaintyModel(), probabilityDistributionFactory);
 		this.failureVariable = uncertainty.getFailureVariable();
 		this.valueSpace = computeValueSpace(uncertainty);
 	}

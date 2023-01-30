@@ -7,15 +7,16 @@ import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import de.uka.ipd.sdq.workflow.jobs.SequentialBlackboardInteractingJob;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 
 public class RootReliabilityPredictionRunJob extends SequentialBlackboardInteractingJob<MDSDBlackboard> {
 	
 	public RootReliabilityPredictionRunJob(PCMSolverWorkflowRunConfiguration config, String uncertaintyModel,
-			String explorationStrategy, Optional<URI> exportLocation, IProbabilityDistributionRegistry probabilityDistributionRegistry) {		
+			String explorationStrategy, Optional<URI> exportLocation, IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory) {		
 		var context = new ReliabilityPredictionContext(config, uncertaintyModel, explorationStrategy);
 		
-		addJob(new ReliabilityPredictionExecutionJob(context, probabilityDistributionRegistry));
+		addJob(new ReliabilityPredictionExecutionJob(context, probabilityDistributionRegistry, probabilityDistributionFactory));
 		addJob(new ReliabilityPredictionResultVisualizationJob(context));
 		
 		if (exportLocation.isPresent()) {
