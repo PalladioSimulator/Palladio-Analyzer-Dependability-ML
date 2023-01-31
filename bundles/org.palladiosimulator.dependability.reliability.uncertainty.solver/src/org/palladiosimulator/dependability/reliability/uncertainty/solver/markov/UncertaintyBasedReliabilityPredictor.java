@@ -19,6 +19,7 @@ import org.palladiosimulator.solver.models.PCMInstance;
 import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import tools.mdsd.probdist.api.apache.supplier.MultinomialDistributionSupplier;
+import tools.mdsd.probdist.api.apache.util.IProbabilityDistributionRepositoryLookup;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.parser.ParameterParser;
@@ -33,11 +34,13 @@ public class UncertaintyBasedReliabilityPredictor {
 		private final IProbabilityDistributionRegistry probabilityDistributionRegistry;
 		private final IProbabilityDistributionFactory probabilityDistributionFactory;
 		private final ParameterParser parameterParser;
+		private final IProbabilityDistributionRepositoryLookup probDistRepoLookup;
 		
-		public UncertaintyBasedReliabilityPredictionBuilder(IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
+		public UncertaintyBasedReliabilityPredictionBuilder(IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
 		    this.probabilityDistributionRegistry = probabilityDistributionRegistry;
 		    this.probabilityDistributionFactory = probabilityDistributionFactory;
 		    this.parameterParser = parameterParser;
+		    this.probDistRepoLookup = probDistRepoLookup;
 		}
 
 		public UncertaintyBasedReliabilityPredictionBuilder withConfig(PCMSolverWorkflowRunConfiguration config) {
@@ -66,7 +69,7 @@ public class UncertaintyBasedReliabilityPredictor {
 
 			adjustConfig();
 
-			return new UncertaintyBasedReliabilityPredictor(exploreStrategy, config, uncertaintyRepo, probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser);
+			return new UncertaintyBasedReliabilityPredictor(exploreStrategy, config, uncertaintyRepo, probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser, probDistRepoLookup);
 		}
 
 		private void checkValidity() {
@@ -93,7 +96,7 @@ public class UncertaintyBasedReliabilityPredictor {
 	private ArchitecturalCountermeasureOperator operator = null;
 
 	private UncertaintyBasedReliabilityPredictor(StateSpaceExplorationStrategy exploreStrategy,
-			PCMSolverWorkflowRunConfiguration config, UncertaintyRepository uncertaintyRepo, IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
+			PCMSolverWorkflowRunConfiguration config, UncertaintyRepository uncertaintyRepo, IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
 		this.config = config;
 		this.exploreStrategy = exploreStrategy;
 		this.uncertaintyRepo = uncertaintyRepo;
@@ -104,15 +107,15 @@ public class UncertaintyBasedReliabilityPredictor {
 		manager.reset();
 		manager.manage(uncertaintyRepo.getUncertaintyInducedFailureTypes(), probabilityDistributionFactory, parameterParser);
 
-		initProbabilityDistributions(probabilityDistributionRegistry, parameterParser);
+		initProbabilityDistributions(probabilityDistributionRegistry, parameterParser, probDistRepoLookup);
 	}
 
-	private void initProbabilityDistributions(IProbabilityDistributionRegistry probabilityDistributionRegistry, ParameterParser parameterParser) {
-		probabilityDistributionRegistry.register(new MultinomialDistributionSupplier(parameterParser));
+	private void initProbabilityDistributions(IProbabilityDistributionRegistry probabilityDistributionRegistry, ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
+		probabilityDistributionRegistry.register(new MultinomialDistributionSupplier(parameterParser, probDistRepoLookup));
 	}
 
-	public static UncertaintyBasedReliabilityPredictionBuilder newBuilder(IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
-		return new UncertaintyBasedReliabilityPredictionBuilder(probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser);
+	public static UncertaintyBasedReliabilityPredictionBuilder newBuilder(IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
+		return new UncertaintyBasedReliabilityPredictionBuilder(probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser, probDistRepoLookup);
 	}
 
 	public ReliabilityPredictionResult predictSuccessProbability(PCMInstance unresolved) {

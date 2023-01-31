@@ -18,7 +18,8 @@ Require-Bundle: org.eclipse.ui,
  org.palladiosimulator.experimentautomation.application;bundle-version="5.0.0",
  org.palladiosimulator.architecturaltemplates.api;bundle-version="5.0.0",
  org.eclipse.emf.common;bundle-version="2.21.0",
- tools.mdsd.probdist.api
+ tools.mdsd.probdist.api,
+ tools.mdsd.probdist.api.apache
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: org.palladiosimulator.dependability.reliability.uncertainty.ui
 Bundle-ActivationPolicy: lazy

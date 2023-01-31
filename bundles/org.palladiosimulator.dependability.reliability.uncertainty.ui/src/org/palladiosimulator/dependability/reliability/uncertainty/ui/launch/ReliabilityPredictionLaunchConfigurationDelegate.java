@@ -17,6 +17,8 @@ import org.palladiosimulator.reliability.solver.runconfig.PCMSolverReliabilityLa
 import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import de.uka.ipd.sdq.workflow.jobs.IJob;
+import tools.mdsd.probdist.api.apache.util.IProbabilityDistributionRepositoryLookup;
+import tools.mdsd.probdist.api.apache.util.ProbabilityDistributionRepositoryLookup;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
@@ -52,7 +54,8 @@ public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConf
 			ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
 			IProbabilityDistributionRegistry probabilityDistributionRegistry = defaultProbabilityDistributionFactory;
 			IProbabilityDistributionFactory probabilityDistributionFactory = defaultProbabilityDistributionFactory;
-			var jobBuilder = UncertaintyBasedReliabilityPredictionJob.newBuilder(probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser)
+			IProbabilityDistributionRepositoryLookup probDistRepoLookup = new ProbabilityDistributionRepositoryLookup();
+			var jobBuilder = UncertaintyBasedReliabilityPredictionJob.newBuilder(probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser, probDistRepoLookup)
 					.withConfig(config)
 					.andUncertaintyModel(uncertaintyModelLocation)
 					.andExplorationStrategy(explorationStrategy);
