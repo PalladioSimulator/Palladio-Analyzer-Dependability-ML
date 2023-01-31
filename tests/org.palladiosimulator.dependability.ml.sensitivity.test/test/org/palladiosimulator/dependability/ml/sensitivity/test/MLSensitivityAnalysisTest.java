@@ -39,7 +39,7 @@ import com.google.common.collect.Sets;
 
 import tools.mdsd.library.standalone.initialization.StandaloneInitializerBuilder;
 import tools.mdsd.probdist.api.apache.supplier.MultinomialDistributionSupplier;
-import tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil;
+import tools.mdsd.probdist.api.apache.util.ProbabilityDistributionRepositoryLookup;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
@@ -136,7 +136,7 @@ public class MLSensitivityAnalysisTest {
 				.build();
 		standaloneInitializer.init();
 
-		DistributionTypeModelUtil.get(BasicDistributionTypesLoader.loadRepository());
+		ProbabilityDistributionRepositoryLookup.get(BasicDistributionTypesLoader.loadRepository());
 		probabilityDistributionRegistry = new ProbabilityDistributionFactory();
 		ParameterParser parameterParser =  new DefaultParameterParser();
         probabilityDistributionRegistry.register(new MultinomialDistributionSupplier(parameterParser ));
