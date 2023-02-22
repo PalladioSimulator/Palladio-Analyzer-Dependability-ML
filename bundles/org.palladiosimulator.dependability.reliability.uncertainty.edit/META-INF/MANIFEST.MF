@@ -1,6 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-SymbolicName: org.palladiosimulator.dependability.reliability.uncertainty.edit;singleton:=true
 Automatic-Module-Name: org.palladiosimulator.dependability.reliability.uncertainty.edit
 Bundle-Version: 1.0.0.qualifier
