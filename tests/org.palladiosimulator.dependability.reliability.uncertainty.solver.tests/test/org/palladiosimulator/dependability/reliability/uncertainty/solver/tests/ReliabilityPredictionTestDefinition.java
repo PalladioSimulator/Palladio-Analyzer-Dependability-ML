@@ -38,6 +38,15 @@ import com.google.common.collect.Lists;
 import de.uka.ipd.sdq.workflow.jobs.JobFailedException;
 import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
+import tools.mdsd.probdist.api.apache.util.IProbabilityDistributionRepositoryLookup;
+import tools.mdsd.probdist.api.apache.util.ProbabilityDistributionRepositoryLookup;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
+import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.parser.DefaultParameterParser;
+import tools.mdsd.probdist.api.parser.ParameterParser;
+import tools.mdsd.probdist.distributiontype.ProbabilityDistributionRepository;
+import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
 public class ReliabilityPredictionTestDefinition {
 
@@ -108,7 +117,15 @@ public class ReliabilityPredictionTestDefinition {
 		relPredictionJob.addJob(new EventsTransformationJob(pcmRelConfig.getStoragePluginID(), pcmRelConfig.getEventMiddlewareFile(), false));
 		
 		var context = new ReliabilityPredictionContext(pcmRelConfig, getUncertaintyModelURI(), TEST_STRATEGY);
-		relPredictionJob.add(new ReliabilityPredictionExecutionJob(context));
+		
+		ParameterParser parameterParser = new DefaultParameterParser();
+		ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
+		IProbabilityDistributionRegistry probabilityDistributionRegistry = defaultProbabilityDistributionFactory;
+		IProbabilityDistributionFactory probabilityDistributionFactory = defaultProbabilityDistributionFactory;
+		
+        ProbabilityDistributionRepository probabilityDistributionRepository = BasicDistributionTypesLoader.loadRepository();
+		IProbabilityDistributionRepositoryLookup probDistRepoLookup = new ProbabilityDistributionRepositoryLookup(probabilityDistributionRepository);
+		relPredictionJob.add(new ReliabilityPredictionExecutionJob(context, probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser, probDistRepoLookup));
 		
 		var resultJob = new ReliabilityPredictionResultJob(context);
 		relPredictionJob.add(resultJob);
@@ -126,10 +143,10 @@ public class ReliabilityPredictionTestDefinition {
 	}
 
 	public ReliabilityPredictionTestDefinition whenApplyingUncertaintyBasedPCMRelWith(
-			UncertaintyBasedReliabilityPredictionConfig config) {
+			UncertaintyBasedReliabilityPredictionConfig config, IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
 		requireNonNull(config, "The config must not be null.");
 
-		uncertaintyBasedResult = UncertaintyBasedReliabilityPrediction.predict(config);
+		uncertaintyBasedResult = UncertaintyBasedReliabilityPrediction.predict(config, probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser, probDistRepoLookup);
 
 		return this;
 	}

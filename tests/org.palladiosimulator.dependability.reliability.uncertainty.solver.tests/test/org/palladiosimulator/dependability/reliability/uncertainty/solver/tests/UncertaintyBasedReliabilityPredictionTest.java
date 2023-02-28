@@ -20,6 +20,8 @@ import org.palladiosimulator.dependability.reliability.uncertainty.solver.tests.
 import com.google.common.collect.Sets;
 
 import tools.mdsd.probdist.api.entity.CategoricalValue;
+import tools.mdsd.probdist.api.parser.DefaultParameterParser;
+import tools.mdsd.probdist.api.parser.ParameterParser;
 
 class UncertaintyBasedReliabilityPredictionTest extends BaseReliabilityPredictionTest {
 
@@ -27,7 +29,8 @@ class UncertaintyBasedReliabilityPredictionTest extends BaseReliabilityPredictio
 
 	@Test
 	public void test() {
-		getUncertaintyStateSpace().forEach(this::test);
+		ParameterParser parameterParser = new DefaultParameterParser();
+		getUncertaintyStateSpace(parameterParser).forEach(this::test);
 	}
 
 	public void test(UncertaintyState uncertaintyState) {
@@ -52,8 +55,8 @@ class UncertaintyBasedReliabilityPredictionTest extends BaseReliabilityPredictio
 		};
 	}
 
-	private Set<UncertaintyState> getUncertaintyStateSpace() {
-		var stateSpace = DiscreteUncertaintyStateSpace.valueSpaceOf(getUncertaintyInducedFailureType());
+	private Set<UncertaintyState> getUncertaintyStateSpace(ParameterParser parameterParser) {
+		var stateSpace = DiscreteUncertaintyStateSpace.valueSpaceOf(getUncertaintyInducedFailureType(), parameterParser);
 		excludeMLUncertaintyState(stateSpace);
 		return enrichToValuedUncertaintyStates(stateSpace);
 	}
