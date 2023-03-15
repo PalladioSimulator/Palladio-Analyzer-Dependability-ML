@@ -20,6 +20,9 @@ import org.palladiosimulator.dependability.ml.sensitivity.api.SensitivityAnalysi
 
 import com.google.common.collect.Lists;
 
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+
 public class MLSensitivityLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
 
 	@Override
@@ -47,7 +50,10 @@ public class MLSensitivityLaunchConfigurationDelegate extends LaunchConfiguratio
 				.storeSensitivityModelAt(sensModelStoringLocation)
 				.build();
 
-		MLSensitivityAnalyser.analyseAndSave(config);
+        ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
+		IProbabilityDistributionFactory probabilityDistributionFactory = defaultProbabilityDistributionFactory;
+		
+		MLSensitivityAnalyser.analyseAndSave(config, probabilityDistributionFactory);
 	}
 
 }

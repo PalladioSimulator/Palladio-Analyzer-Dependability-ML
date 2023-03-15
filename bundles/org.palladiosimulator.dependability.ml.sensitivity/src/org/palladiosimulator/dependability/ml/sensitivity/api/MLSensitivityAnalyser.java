@@ -19,6 +19,8 @@ import org.palladiosimulator.dependability.ml.sensitivity.transformation.propert
 
 import com.google.common.collect.Sets;
 
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
+
 public class MLSensitivityAnalyser {
 
 	private static final Set<MLSensitivityAnalysisStrategy> ANALYSIS_STRATEGY_REGISTRY = Sets.newHashSet();
@@ -73,7 +75,7 @@ public class MLSensitivityAnalyser {
 		return ANALYSIS_STRATEGY_REGISTRY.stream().map(MLSensitivityAnalysisStrategy::getName).collect(toSet());
 	}
 
-	public static SensitivityModel analyse(SensitivityAnalysisConfig config) {
+	public static SensitivityModel analyse(SensitivityAnalysisConfig config, IProbabilityDistributionFactory probabilityDistributionFactory) {
 		var analysisBuilder = MLSensitivityAnalysis.newBuilder()
 				.withSensitivityAnalysisStrategy(config.getAnalysisStrategy());
 		for (PropertyMeasure each : config.getPropertyMeasures()) {
@@ -81,7 +83,7 @@ public class MLSensitivityAnalyser {
 		}
 		var sensitivityAnalysis = analysisBuilder.build();
 
-		var sensitivityModel = ProbabilisticSensitivityModel.createFrom(Sets.newHashSet(config.getPropertyMeasures()));
+		var sensitivityModel = ProbabilisticSensitivityModel.createFrom(Sets.newHashSet(config.getPropertyMeasures()), probabilityDistributionFactory);
 
 		var context = MLAnalysisContext.newBuilder()
 				.analyseSensitivityOf(config.getTrainedModel())
@@ -94,8 +96,8 @@ public class MLSensitivityAnalyser {
 		return sensitivityAnalysis.analyseSensitivity(context);
 	}
 	
-	public static void analyseAndSave(SensitivityAnalysisConfig config) {
-		analyse(config).saveAt(config.getSensitivityModelStoringLocation());
+	public static void analyseAndSave(SensitivityAnalysisConfig config, IProbabilityDistributionFactory probabilityDistributionFactory) {
+		analyse(config, probabilityDistributionFactory).saveAt(config.getSensitivityModelStoringLocation());
 	}
 
 	private static Predicate<PropertyMeasure> propertyWith(String queriedId) {

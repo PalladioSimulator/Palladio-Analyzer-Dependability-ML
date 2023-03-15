@@ -67,8 +67,8 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 		this.probabilityDistributionFactory = probabilityDistributionFactory;
 	}
 
-	private ProbabilisticSensitivityModel() {
-		this(null, null, null);
+	private ProbabilisticSensitivityModel(IProbabilityDistributionFactory probabilityDistributionFactory) {
+		this(null, null, probabilityDistributionFactory);
 	}
 
 	public static ProbabilisticSensitivityModel createFrom(GroundProbabilisticNetwork probSensitivityModel,
@@ -76,8 +76,8 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 		return new ProbabilisticSensitivityModel(probSensitivityModel, templateVariables, probabilityDistributionFactory);
 	}
 
-	public static ProbabilisticSensitivityModel createFrom(Set<PropertyMeasure> propertyMeasures) {
-		return new ProbabilisticSensitivityModel().deriveFrom(propertyMeasures);
+	public static ProbabilisticSensitivityModel createFrom(Set<PropertyMeasure> propertyMeasures, IProbabilityDistributionFactory probabilityDistributionFactory) {
+		return new ProbabilisticSensitivityModel(probabilityDistributionFactory).deriveFrom(propertyMeasures);
 	}
 
 	@Override

@@ -42,6 +42,7 @@ import tools.mdsd.probdist.api.apache.supplier.MultinomialDistributionSupplier;
 import tools.mdsd.probdist.api.apache.util.IProbabilityDistributionRepositoryLookup;
 import tools.mdsd.probdist.api.apache.util.ProbabilityDistributionRepositoryLookup;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.parser.DefaultParameterParser;
@@ -60,6 +61,7 @@ public class MLSensitivityAnalysisTest {
 	private SensitivityModel result;
 	
 	private IProbabilityDistributionRegistry probabilityDistributionRegistry;
+	private IProbabilityDistributionFactory probabilityDistributionFactory; 
 
 	private static class TrainedModelMock implements TrainedModel {
 
@@ -138,9 +140,11 @@ public class MLSensitivityAnalysisTest {
 				.build();
 		standaloneInitializer.init();
 
+        ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
+		probabilityDistributionFactory = defaultProbabilityDistributionFactory;
 		ProbabilityDistributionRepository probDistRepo = BasicDistributionTypesLoader.loadRepository();
         IProbabilityDistributionRepositoryLookup probDistRepoLookup = new ProbabilityDistributionRepositoryLookup(probDistRepo);
-		probabilityDistributionRegistry = new ProbabilityDistributionFactory();
+		probabilityDistributionRegistry = defaultProbabilityDistributionFactory;
 		ParameterParser parameterParser =  new DefaultParameterParser();
         probabilityDistributionRegistry.register(new MultinomialDistributionSupplier(parameterParser, probDistRepoLookup));
 
@@ -241,7 +245,7 @@ public class MLSensitivityAnalysisTest {
 		context = MLAnalysisContext.newBuilder()
 				.analyseSensitivityOf(new TrainedModelMock())
 				.trainedWith(dummyFile)
-				.andCapturedBy(ProbabilisticSensitivityModel.createFrom(propertyMeasures))
+				.andCapturedBy(ProbabilisticSensitivityModel.createFrom(propertyMeasures, probabilityDistributionFactory))
 				.build();
 	}
 
