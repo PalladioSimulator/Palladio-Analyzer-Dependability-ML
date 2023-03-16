@@ -37,6 +37,7 @@ import com.google.common.collect.Maps;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.entity.Conditionable;
 import tools.mdsd.probdist.api.entity.ConditionalProbabilityDistribution;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.parser.DefaultParameterParser;
 import tools.mdsd.probdist.distributionfunction.Domain;
 import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
@@ -54,27 +55,29 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 
 	private final TemplateVariableDefinitions templateVariables;
 	private final GroundProbabilisticNetwork probSensitivityModel;
+	private final IProbabilityDistributionFactory probabilityDistributionFactory;
 
 	private BayesianNetwork bayesianNetwork;
 
 	private ProbabilisticSensitivityModel(GroundProbabilisticNetwork probSensitivityModel,
-			TemplateVariableDefinitions templateVariables) {
+			TemplateVariableDefinitions templateVariables, IProbabilityDistributionFactory probabilityDistributionFactory) {
 		this.probSensitivityModel = probSensitivityModel;
 		this.templateVariables = templateVariables;
 		this.bayesianNetwork = null;
+		this.probabilityDistributionFactory = probabilityDistributionFactory;
 	}
 
-	private ProbabilisticSensitivityModel() {
-		this(null, null);
+	private ProbabilisticSensitivityModel(IProbabilityDistributionFactory probabilityDistributionFactory) {
+		this(null, null, probabilityDistributionFactory);
 	}
 
 	public static ProbabilisticSensitivityModel createFrom(GroundProbabilisticNetwork probSensitivityModel,
-			TemplateVariableDefinitions templateVariables) {
-		return new ProbabilisticSensitivityModel(probSensitivityModel, templateVariables);
+			TemplateVariableDefinitions templateVariables, IProbabilityDistributionFactory probabilityDistributionFactory) {
+		return new ProbabilisticSensitivityModel(probSensitivityModel, templateVariables, probabilityDistributionFactory);
 	}
 
-	public static ProbabilisticSensitivityModel createFrom(Set<PropertyMeasure> propertyMeasures) {
-		return new ProbabilisticSensitivityModel().deriveFrom(propertyMeasures);
+	public static ProbabilisticSensitivityModel createFrom(Set<PropertyMeasure> propertyMeasures, IProbabilityDistributionFactory probabilityDistributionFactory) {
+		return new ProbabilisticSensitivityModel(probabilityDistributionFactory).deriveFrom(propertyMeasures);
 	}
 
 	@Override
@@ -105,7 +108,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 	@Override
 	public double inferSensitivity(List<SensitivityProperty> properties) {
 		if (isNull(bayesianNetwork)) {
-			bayesianNetwork = new BayesianNetwork(null, probSensitivityModel);
+			bayesianNetwork = new BayesianNetwork(null, probSensitivityModel, probabilityDistributionFactory);
 		}
 
 		var inputs = toInputValues(properties);
@@ -120,7 +123,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 	public double conditionalSensitivity(List<SensitivityProperty> properties) {
 		var dist = findMLRandomVariable().getDescriptiveModel().getDistribution();
 		var paramRep = (TabularCPD) dist.getParams().get(0).getRepresentation();
-		var conditionalOutcomeDistribution = new ConditionalProbabilityDistribution(dist, paramRep);
+		var conditionalOutcomeDistribution = new ConditionalProbabilityDistribution(dist, paramRep, probabilityDistributionFactory);
 		
 		var conditionals = properties.stream()
 				.map(each -> new Conditionable.Conditional(Domain.CATEGORY, each.getValue()))
@@ -151,7 +154,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 
 		ProbabilisticModelRepository groundNetworkRepo = getModelOfType(ProbabilisticModelRepository.class, models);
 		TemplateVariableDefinitions templateVariables = getModelOfType(TemplateVariableDefinitions.class, models);
-		return new ProbabilisticSensitivityModel(groundNetworkRepo.getModels().get(0), templateVariables);
+		return new ProbabilisticSensitivityModel(groundNetworkRepo.getModels().get(0), templateVariables, probabilityDistributionFactory);
 	}
 
 	@SuppressWarnings("unchecked")

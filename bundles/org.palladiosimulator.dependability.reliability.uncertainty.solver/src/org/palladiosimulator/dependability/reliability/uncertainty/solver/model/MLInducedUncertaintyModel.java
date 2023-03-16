@@ -18,19 +18,22 @@ import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticNetwork;
 import org.palladiosimulator.envdyn.environment.templatevariable.TemplateVariableDefinitions;
 
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.parser.ParameterParser;
+
 public class MLInducedUncertaintyModel implements UncertaintyModel {
 
 	private final Set<UncertaintyState> valueSpace;
 	private final ProbabilisticSensitivityModel sensitivityModel;
 
-	public MLInducedUncertaintyModel(UncertaintyInducedFailureType uncertainty) {
-		this.sensitivityModel = initSensitivityModel(uncertainty);
-		this.valueSpace = computeValueSpace(uncertainty);
+	public MLInducedUncertaintyModel(UncertaintyInducedFailureType uncertainty, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
+		this.sensitivityModel = initSensitivityModel(uncertainty, probabilityDistributionFactory);
+		this.valueSpace = computeValueSpace(uncertainty, parameterParser);
 	}
 
-	private ProbabilisticSensitivityModel initSensitivityModel(UncertaintyInducedFailureType uncertainty) {
+	private ProbabilisticSensitivityModel initSensitivityModel(UncertaintyInducedFailureType uncertainty, IProbabilityDistributionFactory probabilityDistributionFactory) {
 		var model = ProbabilisticSensitivityModel.createFrom(getProbabilisticModel(uncertainty),
-				getTemplates(uncertainty));
+				getTemplates(uncertainty), probabilityDistributionFactory);
 		model.setMLOutcomeMeasure(MLOutcomeMeasure.FAIL);
 		return model;
 	}
@@ -45,8 +48,8 @@ public class MLInducedUncertaintyModel implements UncertaintyModel {
 		return (TemplateVariableDefinitions) anyVariable.getInstantiatedTemplate().eContainer();
 	}
 
-	private Set<UncertaintyState> computeValueSpace(UncertaintyInducedFailureType uncertainty) {
-		var statesIncludingMLVar = DiscreteUncertaintyStateSpace.valueSpaceOf(uncertainty);
+	private Set<UncertaintyState> computeValueSpace(UncertaintyInducedFailureType uncertainty, ParameterParser parameterParser) {
+		var statesIncludingMLVar = DiscreteUncertaintyStateSpace.valueSpaceOf(uncertainty, parameterParser);
 		return excludeMLInputVariable(statesIncludingMLVar);
 	}
 
@@ -96,7 +99,7 @@ public class MLInducedUncertaintyModel implements UncertaintyModel {
 	private Optional<SensitivityProperty> findMeasurablePropertyOf(UncertaintyState state) {
 		for (PropertyMeasure each : MLSensitivityAnalyser.getAnalysablePropertyMeasures()) {
 			if (areSemanticallyEqual(state, each)) {
-				var result = (SensitivityProperty) each.findMeasurablePropertyWith(state.getValue()).get();
+				var result = each.findMeasurablePropertyWith(state.getValue()).get();
 				return Optional.of(result);
 			}
 		}

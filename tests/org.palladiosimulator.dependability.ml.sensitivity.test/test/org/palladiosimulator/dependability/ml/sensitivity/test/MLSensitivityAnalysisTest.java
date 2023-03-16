@@ -39,9 +39,15 @@ import com.google.common.collect.Sets;
 
 import tools.mdsd.library.standalone.initialization.StandaloneInitializerBuilder;
 import tools.mdsd.probdist.api.apache.supplier.MultinomialDistributionSupplier;
-import tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil;
+import tools.mdsd.probdist.api.apache.util.IProbabilityDistributionRepositoryLookup;
+import tools.mdsd.probdist.api.apache.util.ProbabilityDistributionRepositoryLookup;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.parser.DefaultParameterParser;
+import tools.mdsd.probdist.api.parser.ParameterParser;
+import tools.mdsd.probdist.distributiontype.ProbabilityDistributionRepository;
 import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
 public class MLSensitivityAnalysisTest {
@@ -53,6 +59,9 @@ public class MLSensitivityAnalysisTest {
 	private Set<PropertyMeasure> propertyMeasures;
 	private MLSensitivityAnalysis sensitivityAnalysis;
 	private SensitivityModel result;
+	
+	private IProbabilityDistributionRegistry probabilityDistributionRegistry;
+	private IProbabilityDistributionFactory probabilityDistributionFactory; 
 
 	private static class TrainedModelMock implements TrainedModel {
 
@@ -131,8 +140,13 @@ public class MLSensitivityAnalysisTest {
 				.build();
 		standaloneInitializer.init();
 
-		DistributionTypeModelUtil.get(BasicDistributionTypesLoader.loadRepository());
-		ProbabilityDistributionFactory.get().register(new MultinomialDistributionSupplier());
+        ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
+		probabilityDistributionFactory = defaultProbabilityDistributionFactory;
+		ProbabilityDistributionRepository probDistRepo = BasicDistributionTypesLoader.loadRepository();
+        IProbabilityDistributionRepositoryLookup probDistRepoLookup = new ProbabilityDistributionRepositoryLookup(probDistRepo);
+		probabilityDistributionRegistry = defaultProbabilityDistributionFactory;
+		ParameterParser parameterParser =  new DefaultParameterParser();
+        probabilityDistributionRegistry.register(new MultinomialDistributionSupplier(parameterParser, probDistRepoLookup));
 
 		dummyFile = new File(System.getProperty("user.dir"));
 
@@ -231,7 +245,7 @@ public class MLSensitivityAnalysisTest {
 		context = MLAnalysisContext.newBuilder()
 				.analyseSensitivityOf(new TrainedModelMock())
 				.trainedWith(dummyFile)
-				.andCapturedBy(ProbabilisticSensitivityModel.createFrom(propertyMeasures))
+				.andCapturedBy(ProbabilisticSensitivityModel.createFrom(propertyMeasures, probabilityDistributionFactory))
 				.build();
 	}
 

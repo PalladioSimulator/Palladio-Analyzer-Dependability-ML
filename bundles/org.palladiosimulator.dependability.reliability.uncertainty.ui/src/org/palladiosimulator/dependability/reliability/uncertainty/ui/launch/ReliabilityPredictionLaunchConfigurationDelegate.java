@@ -1,8 +1,10 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.ui.launch;
 
-import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.*;
+import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.APPLY_AT_ATTR;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.DEFAULT_ATTR;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.EXPLORATION_STRATEGY_ATTR;
+import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.EXPORT_FILE_ATTR;
+import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.EXPORT_RESULT_ATTR;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.UNCERTAINTY_MODEL_ATTR;
 
 import org.eclipse.core.runtime.CoreException;
@@ -15,6 +17,15 @@ import org.palladiosimulator.reliability.solver.runconfig.PCMSolverReliabilityLa
 import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import de.uka.ipd.sdq.workflow.jobs.IJob;
+import tools.mdsd.probdist.api.apache.util.IProbabilityDistributionRepositoryLookup;
+import tools.mdsd.probdist.api.apache.util.ProbabilityDistributionRepositoryLookup;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
+import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.parser.DefaultParameterParser;
+import tools.mdsd.probdist.api.parser.ParameterParser;
+import tools.mdsd.probdist.distributiontype.ProbabilityDistributionRepository;
+import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
 public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
 
@@ -41,7 +52,14 @@ public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConf
 						UNCERTAINTY_MODEL_ATTR, EXPLORATION_STRATEGY_ATTR));
 			}
 			
-			var jobBuilder = UncertaintyBasedReliabilityPredictionJob.newBuilder()
+			ParameterParser parameterParser = new DefaultParameterParser();
+			ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
+			IProbabilityDistributionRegistry probabilityDistributionRegistry = defaultProbabilityDistributionFactory;
+			IProbabilityDistributionFactory probabilityDistributionFactory = defaultProbabilityDistributionFactory;
+			
+            ProbabilityDistributionRepository probabilityDistributionRepository = BasicDistributionTypesLoader.loadRepository();
+			IProbabilityDistributionRepositoryLookup probDistRepoLookup = new ProbabilityDistributionRepositoryLookup(probabilityDistributionRepository);
+			var jobBuilder = UncertaintyBasedReliabilityPredictionJob.newBuilder(probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser, probDistRepoLookup)
 					.withConfig(config)
 					.andUncertaintyModel(uncertaintyModelLocation)
 					.andExplorationStrategy(explorationStrategy);

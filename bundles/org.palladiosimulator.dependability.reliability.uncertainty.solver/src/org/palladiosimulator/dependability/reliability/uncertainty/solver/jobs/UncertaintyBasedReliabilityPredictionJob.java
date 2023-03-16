@@ -19,6 +19,10 @@ import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 import de.uka.ipd.sdq.workflow.jobs.ICompositeJob;
 import de.uka.ipd.sdq.workflow.jobs.SequentialBlackboardInteractingJob;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
+import tools.mdsd.probdist.api.apache.util.IProbabilityDistributionRepositoryLookup;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
+import tools.mdsd.probdist.api.parser.ParameterParser;
 
 public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboardInteractingJob<MDSDBlackboard> implements ICompositeJob {
 
@@ -30,6 +34,18 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 		private boolean applyATs = false;
 		private ILaunchConfiguration launchConfig = null;
 		private Optional<String> exportLocation = Optional.empty();
+		
+		private final IProbabilityDistributionRegistry probabilityDistributionRegistry;
+		private final IProbabilityDistributionFactory probabilityDistributionFactory;
+		private final ParameterParser parameterParser;
+		private final IProbabilityDistributionRepositoryLookup probDistRepoLookup;
+		
+		public UncertaintyBasedReliabilityPredictionJobBuilder(IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
+		    this.probabilityDistributionRegistry = probabilityDistributionRegistry;
+		    this.probabilityDistributionFactory = probabilityDistributionFactory;
+		    this.parameterParser = parameterParser;
+		    this.probDistRepoLookup = probDistRepoLookup;
+		}
 		
 		public UncertaintyBasedReliabilityPredictionJobBuilder withConfig(PCMSolverWorkflowRunConfiguration config) {
 			this.config = config;
@@ -82,7 +98,7 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 				var uri = URI.createURI(exportLocation.get());
 				exportLocationURI = Optional.of(uri);
 			}
-			relPredictionJob.addJob(new RootReliabilityPredictionRunJob(config, uncertaintyModel, explorationStrategy, exportLocationURI));
+			relPredictionJob.addJob(new RootReliabilityPredictionRunJob(config, uncertaintyModel, explorationStrategy, exportLocationURI, probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser, probDistRepoLookup));
 			
 			return relPredictionJob;
 		}
@@ -101,8 +117,8 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
 		
 	}
 	
-	public static UncertaintyBasedReliabilityPredictionJobBuilder newBuilder() {
-		return new UncertaintyBasedReliabilityPredictionJobBuilder();
+	public static UncertaintyBasedReliabilityPredictionJobBuilder newBuilder(IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
+		return new UncertaintyBasedReliabilityPredictionJobBuilder(probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser, probDistRepoLookup);
 	}
 	
 }

@@ -18,7 +18,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import tools.mdsd.probdist.api.entity.CategoricalValue;
-import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.distributionfunction.ParamRepresentation;
 import tools.mdsd.probdist.distributionfunction.SimpleParameter;
 import tools.mdsd.probdist.distributionfunction.TabularCPD;
@@ -110,43 +110,43 @@ public class DiscreteUncertaintyStateSpace {
 		return new DiscreteUncertaintyStateSpace(uncertaintyStates);
 	}
 
-	public static Set<UncertaintyState> valueSpaceOf(UncertaintyInducedFailureType uncertainty) {
+	public static Set<UncertaintyState> valueSpaceOf(UncertaintyInducedFailureType uncertainty, ParameterParser parameterParser) {
 		GroundProbabilisticNetwork groundNetwork = uncertainty.getUncertaintyModel();
 		if (groundNetwork.getLocalProbabilisticModels().size() != 1) {
 			throw new IllegalArgumentException("The bayesian network must include only one local network.");
 		}
 
-		return deriveUncertaintyStates(groundNetwork.getLocalProbabilisticModels().get(0));
+		return deriveUncertaintyStates(groundNetwork.getLocalProbabilisticModels().get(0), parameterParser);
 	}
 
-	private static Set<UncertaintyState> deriveUncertaintyStates(LocalProbabilisticNetwork localNetwork) {
-		return localNetwork.getGroundRandomVariables().stream().map(DiscreteUncertaintyStateSpace::toUncertaintyState)
+	private static Set<UncertaintyState> deriveUncertaintyStates(LocalProbabilisticNetwork localNetwork, ParameterParser parameterParser) {
+		return localNetwork.getGroundRandomVariables().stream().map(c -> toUncertaintyState(c, parameterParser))
 				.collect(toSet());
 	}
 
-	public static UncertaintyState toUncertaintyState(GroundRandomVariable variable) {
+	public static UncertaintyState toUncertaintyState(GroundRandomVariable variable, ParameterParser parameterParser) {
 		var probDist = variable.getDescriptiveModel().getDistribution();
 		if (probDist.getParams().size() != 1) {
 			throw new IllegalArgumentException("The distribution is not valid for this operation.");
 		}
 
 		var param = probDist.getParams().get(0).getRepresentation();
-		return UncertaintyState.of(variable, getValueSpace(param));
+		return UncertaintyState.of(variable, getValueSpace(param, parameterParser));
 	}
 
-	private static Set<CategoricalValue> getValueSpace(ParamRepresentation param) {
+	private static Set<CategoricalValue> getValueSpace(ParamRepresentation param, ParameterParser parameterParser) {
 		if (SimpleParameter.class.isInstance(param)) {
-			return getValueSpace(SimpleParameter.class.cast(param));
+			return getValueSpace(SimpleParameter.class.cast(param), parameterParser);
 		} else if (TabularCPD.class.isInstance(param)) {
 			TabularCPDEntry any = TabularCPD.class.cast(param).getCpdEntries().get(0);
-			return getValueSpace(any.getEntry());
+			return getValueSpace(any.getEntry(), parameterParser);
 		}
 
 		throw new IllegalArgumentException("The distribution parameter type is not proper in this context.");
 	}
 
-	private static Set<CategoricalValue> getValueSpace(SimpleParameter param) {
-		var samples = ProbabilityDistributionFactory.getParameterParser().parseSampleSpace(param);
+	private static Set<CategoricalValue> getValueSpace(SimpleParameter param, ParameterParser parameterParser) {
+		var samples = parameterParser.parseSampleSpace(param);
 		return samples.stream().map(each -> each.value).collect(toSet());
 	}
 
