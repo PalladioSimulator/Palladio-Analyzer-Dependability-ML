@@ -4,12 +4,11 @@ name: Build Pipeline
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  Palladio-Analyzer-SimExp:
+  Palladio-Analyzer-Dependability-ML:
     uses: PalladioSimulator/Palladio-Build-ActionsPipeline/.github/workflows/build.yml@v3.3
     with:
       use-display-output: true
       no-caching: true
-      runner-label: ubuntu-latest
       java-version: 17
       deploy-updatesite: 'releng/org.palladiosimulator.dependability.ml.updatesite/target/repository'
     secrets:
