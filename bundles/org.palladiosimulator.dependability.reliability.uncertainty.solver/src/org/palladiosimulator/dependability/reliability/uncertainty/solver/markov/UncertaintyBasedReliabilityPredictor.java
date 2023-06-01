@@ -18,7 +18,6 @@ import org.palladiosimulator.reliability.solver.pcm2markov.Pcm2MarkovStrategy;
 import org.palladiosimulator.solver.models.PCMInstance;
 import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
-import tools.mdsd.probdist.api.apache.supplier.MultinomialDistributionSupplier;
 import tools.mdsd.probdist.api.apache.util.IProbabilityDistributionRepositoryLookup;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
@@ -107,11 +106,6 @@ public class UncertaintyBasedReliabilityPredictor {
 		manager.reset();
 		manager.manage(uncertaintyRepo.getUncertaintyInducedFailureTypes(), probabilityDistributionFactory, parameterParser);
 
-		initProbabilityDistributions(probabilityDistributionRegistry, parameterParser, probDistRepoLookup);
-	}
-
-	private void initProbabilityDistributions(IProbabilityDistributionRegistry probabilityDistributionRegistry, ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
-		probabilityDistributionRegistry.register(new MultinomialDistributionSupplier(parameterParser, probDistRepoLookup));
 	}
 
 	public static UncertaintyBasedReliabilityPredictionBuilder newBuilder(IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
