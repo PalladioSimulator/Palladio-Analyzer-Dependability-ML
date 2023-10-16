@@ -2,14 +2,14 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Sensitivity
 Bundle-SymbolicName: org.palladiosimulator.dependability.ml.sensitivity
-Bundle-Version: 5.1.0.qualifier
+Bundle-Version: 5.2.0
 Bundle-Activator: org.palladiosimulator.dependability.ml.sensitivity.Activator
 Require-Bundle: org.eclipse.core.runtime,
  com.google.guava;bundle-version="27.1.0",
  org.palladiosimulator.envdyn.model;bundle-version="0.1.0",
  tools.mdsd.probdist.api;bundle-version="1.0.0",
  tools.mdsd.probdist.model.basic;bundle-version="1.0.0",
- org.palladiosimulator.dependability.ml;bundle-version="5.1.0",
+ org.palladiosimulator.dependability.ml;bundle-version="5.2.0",
  org.palladiosimulator.envdyn.api;bundle-version="1.0.0",
  org.eclipse.core.resources;bundle-version="3.13.700"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
