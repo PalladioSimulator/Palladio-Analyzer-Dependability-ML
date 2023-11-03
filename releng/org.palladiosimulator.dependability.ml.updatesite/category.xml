@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
 	<!-- add features here -->
-	<feature url="features/org.palladiosimulator.dependability.ml.feature_5.1.0.qualifier.jar" id="org.palladiosimulator.dependability.ml.feature" version="5.1.0.qualifier">
+	<feature url="features/org.palladiosimulator.dependability.ml.feature_5.2.0.qualifier.jar" id="org.palladiosimulator.dependability.ml.feature" version="5.2.0.qualifier">
       <category name="org.palladiosimulator.addons.category"/>
    </feature>
-   <feature url="features/org.palladiosimulator.dependability.reliability.uncertainty.feature_5.1.0.qualifier.jar" id="org.palladiosimulator.dependability.reliability.uncertainty.feature" version="5.1.0.qualifier">
+   <feature url="features/org.palladiosimulator.dependability.reliability.uncertainty.feature_5.2.0.qualifier.jar" id="org.palladiosimulator.dependability.reliability.uncertainty.feature" version="5.2.0.qualifier">
       <category name="org.palladiosimulator.addons.category"/>
    </feature>
 	<!-- category definitions -->
