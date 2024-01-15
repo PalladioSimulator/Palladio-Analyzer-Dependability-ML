@@ -2,13 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ML UI
 Bundle-SymbolicName: org.palladiosimulator.dependability.ml.ui;singleton:=true
-Bundle-Version: 5.1.0.qualifier
+Bundle-Version: 5.2.0.qualifier
 Bundle-Activator: org.palladiosimulator.dependability.ml.ui.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.debug.core,
  org.eclipse.debug.ui;bundle-version="3.14.400",
- org.palladiosimulator.dependability.ml.sensitivity;bundle-version="5.1.0",
+ org.palladiosimulator.dependability.ml.sensitivity;bundle-version="5.2.0",
  com.google.guava;bundle-version="27.1.0",
  de.uka.ipd.sdq.workflow.launchconfig;bundle-version="4.2.0",
  tools.mdsd.probdist.api
