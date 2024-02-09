@@ -19,9 +19,9 @@ import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.distributionfunction.TabularCPD;
 
-public class BayesianUncertaintyModel<V> implements UncertaintyModel {
+public class BayesianUncertaintyModel<I> implements UncertaintyModel {
 
-    private final BayesianNetwork<V> bayesianNetwork;
+    private final BayesianNetwork<I> bayesianNetwork;
     private final GroundRandomVariable failureVariable;
     private final Set<UncertaintyState> valueSpace;
     private final ParameterParser parameterParser;
