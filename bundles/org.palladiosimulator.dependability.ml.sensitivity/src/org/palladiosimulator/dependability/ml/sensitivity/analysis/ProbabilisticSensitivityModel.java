@@ -25,7 +25,7 @@ import org.palladiosimulator.dependability.ml.sensitivity.transformation.Propert
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.SensitivityProperty;
 import org.palladiosimulator.dependability.ml.sensitivity.transformation.property.conversion.SensitivityPropertyConventions;
 import org.palladiosimulator.envdyn.api.entity.bn.BayesianNetwork;
-import org.palladiosimulator.envdyn.api.entity.bn.BayesianNetwork.InputValue;
+import org.palladiosimulator.envdyn.api.entity.bn.InputValue;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticModel;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticNetwork;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
