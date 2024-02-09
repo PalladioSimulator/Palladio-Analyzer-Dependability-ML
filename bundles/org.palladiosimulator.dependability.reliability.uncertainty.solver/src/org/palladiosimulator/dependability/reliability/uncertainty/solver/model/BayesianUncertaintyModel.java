@@ -15,11 +15,12 @@ import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable
 import com.google.common.collect.Lists;
 
 import tools.mdsd.probdist.api.entity.CategoricalValue;
+import tools.mdsd.probdist.api.entity.Value;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.distributionfunction.TabularCPD;
 
-public class BayesianUncertaintyModel<I> implements UncertaintyModel {
+public class BayesianUncertaintyModel<I extends Value<?>> implements UncertaintyModel {
 
     private final BayesianNetwork<I> bayesianNetwork;
     private final GroundRandomVariable failureVariable;
