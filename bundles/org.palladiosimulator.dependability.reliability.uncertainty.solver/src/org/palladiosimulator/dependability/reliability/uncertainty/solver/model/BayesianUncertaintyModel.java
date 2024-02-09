@@ -9,7 +9,7 @@ import java.util.Set;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.DiscreteUncertaintyStateSpace.UncertaintyState;
 import org.palladiosimulator.envdyn.api.entity.bn.BayesianNetwork;
-import org.palladiosimulator.envdyn.api.entity.bn.BayesianNetwork.InputValue;
+import org.palladiosimulator.envdyn.api.entity.bn.InputValue;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
 
 import com.google.common.collect.Lists;
