@@ -128,7 +128,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
 		var conditionals = properties.stream()
 				.map(each -> new Conditionable.Conditional(Domain.CATEGORY, each.getValue()))
 				.collect(toList());
-		var outcomeEvent = (CategoricalValue) mlInputValue().value;
+		var outcomeEvent = (CategoricalValue) mlInputValue().getValue();
 		return conditionalOutcomeDistribution.given(conditionals).probability(outcomeEvent);
 	}
 
