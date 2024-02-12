@@ -21,7 +21,7 @@ import tools.mdsd.probdist.distributionfunction.TabularCPD;
 
 public class BayesianUncertaintyModel implements UncertaintyModel {
 
-    private final BayesianNetwork bayesianNetwork;
+    private final BayesianNetwork<CategoricalValue> bayesianNetwork;
     private final GroundRandomVariable failureVariable;
     private final Set<UncertaintyState> valueSpace;
     private final ParameterParser parameterParser;
@@ -29,7 +29,7 @@ public class BayesianUncertaintyModel implements UncertaintyModel {
     public BayesianUncertaintyModel(UncertaintyInducedFailureType uncertainty,
             IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
             ParameterParser parameterParser) {
-        this.bayesianNetwork = new BayesianNetwork(null, uncertainty.getUncertaintyModel(),
+        this.bayesianNetwork = new BayesianNetwork<>(null, uncertainty.getUncertaintyModel(),
                 probabilityDistributionFactory);
         this.failureVariable = uncertainty.getFailureVariable();
         this.valueSpace = computeValueSpace(uncertainty);
