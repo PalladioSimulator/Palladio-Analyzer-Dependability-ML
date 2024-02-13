@@ -33,7 +33,7 @@ public class UncertaintyImprovementCalculator {
     }
 
     public CategoricalValue calculate(UncertaintyImprovement improvement, CategoricalValue value,
-            IProbabilityDistributionFactory probabilityDistributionFactory) {
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory) {
         return new UncertaintySwitch<CategoricalValue>() {
 
             @Override
@@ -50,16 +50,17 @@ public class UncertaintyImprovementCalculator {
     }
 
     private CategoricalValue calculateProbabilistically(ProbabilisticImprovement improvement, CategoricalValue value,
-            IProbabilityDistributionFactory probabilityDistributionFactory) {
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory) {
         var distribution = createCPD(improvement.getProbabilityDistribution(), probabilityDistributionFactory);
 
-        List<Conditional<CategoricalValue>> conditionals = Lists.newArrayList(new Conditional(Domain.CATEGORY, value));
+        List<Conditional<CategoricalValue>> conditionals = Lists
+            .newArrayList(new Conditional<>(Domain.CATEGORY, value));
         return distribution.given(conditionals)
             .sample();
     }
 
     public ConditionalProbabilityDistribution createCPD(ProbabilityDistribution dist,
-            IProbabilityDistributionFactory probabilityDistributionFactory) {
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory) {
         if (dist.getParams()
             .isEmpty()) {
             throw new IllegalArgumentException("The distribution parameters must be set.");
@@ -77,7 +78,7 @@ public class UncertaintyImprovementCalculator {
     }
 
     public ConditionalProbabilityDistribution createIndicatorCPD(DeterministicImprovement improvement,
-            IProbabilityDistributionFactory probabilityDistributionFactory) {
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory) {
         return new ConditionalProbabilityDistribution(null, null, probabilityDistributionFactory) {
 
             private CategoricalValue givenValue = null;

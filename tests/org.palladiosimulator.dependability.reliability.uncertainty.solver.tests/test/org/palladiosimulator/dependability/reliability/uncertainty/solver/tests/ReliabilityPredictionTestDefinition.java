@@ -40,6 +40,7 @@ import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
 import tools.mdsd.probdist.api.apache.util.IProbabilityDistributionRepositoryLookup;
 import tools.mdsd.probdist.api.apache.util.ProbabilityDistributionRepositoryLookup;
+import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
@@ -50,171 +51,180 @@ import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
 public class ReliabilityPredictionTestDefinition {
 
-	private class ReliabilityPredictionResultJob extends ReliabilityPredictionRunJob {
+    private class ReliabilityPredictionResultJob extends ReliabilityPredictionRunJob {
 
-		public ReliabilityPredictionResultJob(ReliabilityPredictionContext context) {
-			super(context);
-		}
-		
-		public ReliabilityPredictionResult getPredictionResult() {
-			return context.result;
-		}
-		
-	}
-	
-	public interface PredictionResultBasedAssertion
-			extends BiConsumer<MarkovTransformationResult, ReliabilityPredictionResult> {
+        public ReliabilityPredictionResultJob(ReliabilityPredictionContext context) {
+            super(context);
+        }
 
-	}
+        public ReliabilityPredictionResult getPredictionResult() {
+            return context.result;
+        }
 
-	private final static String TEST_STRATEGY = "Brute force exploration strategy";
+    }
 
-	private PCMSolverWorkflowRunConfiguration pcmRelConfig = null;
-	private MarkovTransformationResult pcmRelResult = null;
-	private ReliabilityPredictionResult uncertaintyBasedResult = null;
-	private List<PredictionResultBasedAssertion> assertions = Lists.newArrayList();
+    public interface PredictionResultBasedAssertion
+            extends BiConsumer<MarkovTransformationResult, ReliabilityPredictionResult> {
 
-	private ReliabilityPredictionTestDefinition() {
+    }
 
-	}
+    private final static String TEST_STRATEGY = "Brute force exploration strategy";
 
-	public static ReliabilityPredictionTestDefinition createTest() {
-		return new ReliabilityPredictionTestDefinition();
-	}
+    private PCMSolverWorkflowRunConfiguration pcmRelConfig = null;
+    private MarkovTransformationResult pcmRelResult = null;
+    private ReliabilityPredictionResult uncertaintyBasedResult = null;
+    private List<PredictionResultBasedAssertion> assertions = Lists.newArrayList();
 
-	public ReliabilityPredictionTestDefinition givenDefaultRunConfigs() {
-		this.pcmRelConfig = createDefaultPCMRelConfig();
-		return this;
-	}
+    private ReliabilityPredictionTestDefinition() {
 
-	public ReliabilityPredictionTestDefinition givenCustomRunConfigs(PCMSolverWorkflowRunConfiguration pcmRelConfig) {
-		this.pcmRelConfig = pcmRelConfig;
-		return this;
-	}
+    }
 
-	public ReliabilityPredictionTestDefinition whenApplyingPCMRel() {
-		requireNonNull(pcmRelConfig, "The PCM-Rel config must be specified first.");
+    public static ReliabilityPredictionTestDefinition createTest() {
+        return new ReliabilityPredictionTestDefinition();
+    }
 
-		var pcmModel = loadPCMInstance();
-		var solver = new Pcm2MarkovStrategy(pcmRelConfig);
-		solver.transform(pcmModel);
-		pcmRelResult = solver.getAllSolvedValues().get(0);
+    public ReliabilityPredictionTestDefinition givenDefaultRunConfigs() {
+        this.pcmRelConfig = createDefaultPCMRelConfig();
+        return this;
+    }
 
-		return this;
-	}
+    public ReliabilityPredictionTestDefinition givenCustomRunConfigs(PCMSolverWorkflowRunConfiguration pcmRelConfig) {
+        this.pcmRelConfig = pcmRelConfig;
+        return this;
+    }
 
-	public ReliabilityPredictionTestDefinition whenApplyingUncertaintyBasedPCMRel() {
-		var relPredictionJob = new UncertaintyBasedReliabilityPredictionJob();
-		relPredictionJob.setBlackboard(new MDSDBlackboard());
-		
-		requireNonNull(pcmRelConfig, "The reliability config must be specified.");
-		var pcmInstanceBuilderJob = new PCMInstanceBuilderJob(pcmRelConfig);
-		relPredictionJob.addJob(pcmInstanceBuilderJob);
-		relPredictionJob.addJob(new LoadModelIntoBlackboardJob(URI.createURI(getUncertaintyModelURI()), 
-				LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
-		relPredictionJob.addJob(new PrepareBlackboardJob());
-		relPredictionJob.addJob(new ValidatePCMModelsJob(pcmRelConfig));
-		relPredictionJob.addJob(new EventsTransformationJob(pcmRelConfig.getStoragePluginID(), pcmRelConfig.getEventMiddlewareFile(), false));
-		
-		var context = new ReliabilityPredictionContext(pcmRelConfig, getUncertaintyModelURI(), TEST_STRATEGY);
-		
-		ParameterParser parameterParser = new DefaultParameterParser();
-		ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
-		IProbabilityDistributionRegistry probabilityDistributionRegistry = defaultProbabilityDistributionFactory;
-		IProbabilityDistributionFactory probabilityDistributionFactory = defaultProbabilityDistributionFactory;
-		
-        ProbabilityDistributionRepository probabilityDistributionRepository = BasicDistributionTypesLoader.loadRepository();
-		IProbabilityDistributionRepositoryLookup probDistRepoLookup = new ProbabilityDistributionRepositoryLookup(probabilityDistributionRepository);
-		relPredictionJob.add(new ReliabilityPredictionExecutionJob(context, probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser, probDistRepoLookup));
-		
-		var resultJob = new ReliabilityPredictionResultJob(context);
-		relPredictionJob.add(resultJob);
-		
-		try {
-			relPredictionJob.execute(new NullProgressMonitor());
-		} catch (Exception e) {
-			fail("Something went wrong during the uncertainty based reliability job", e);
-		}
-		
-		uncertaintyBasedResult = resultJob.getPredictionResult();
-		
-		return this;
-		
-	}
+    public ReliabilityPredictionTestDefinition whenApplyingPCMRel() {
+        requireNonNull(pcmRelConfig, "The PCM-Rel config must be specified first.");
 
-	public ReliabilityPredictionTestDefinition whenApplyingUncertaintyBasedPCMRelWith(
-			UncertaintyBasedReliabilityPredictionConfig config, IProbabilityDistributionRegistry probabilityDistributionRegistry, IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
-		requireNonNull(config, "The config must not be null.");
+        var pcmModel = loadPCMInstance();
+        var solver = new Pcm2MarkovStrategy(pcmRelConfig);
+        solver.transform(pcmModel);
+        pcmRelResult = solver.getAllSolvedValues()
+            .get(0);
 
-		uncertaintyBasedResult = UncertaintyBasedReliabilityPrediction.predict(config, probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser, probDistRepoLookup);
+        return this;
+    }
 
-		return this;
-	}
+    public ReliabilityPredictionTestDefinition whenApplyingUncertaintyBasedPCMRel() {
+        var relPredictionJob = new UncertaintyBasedReliabilityPredictionJob();
+        relPredictionJob.setBlackboard(new MDSDBlackboard());
 
-	public ReliabilityPredictionTestDefinition thenAssert(PredictionResultBasedAssertion assertion) {
-		this.assertions.add(assertion);
-		return this;
-	}
+        requireNonNull(pcmRelConfig, "The reliability config must be specified.");
+        var pcmInstanceBuilderJob = new PCMInstanceBuilderJob(pcmRelConfig);
+        relPredictionJob.addJob(pcmInstanceBuilderJob);
+        relPredictionJob.addJob(new LoadModelIntoBlackboardJob(URI.createURI(getUncertaintyModelURI()),
+                LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
+        relPredictionJob.addJob(new PrepareBlackboardJob());
+        relPredictionJob.addJob(new ValidatePCMModelsJob(pcmRelConfig));
+        relPredictionJob.addJob(new EventsTransformationJob(pcmRelConfig.getStoragePluginID(),
+                pcmRelConfig.getEventMiddlewareFile(), false));
 
-	public ReliabilityPredictionTestDefinition thenAssert(PredictionResultBasedAssertion... assertions) {
-		this.assertions.addAll(Lists.newArrayList(assertions));
-		return this;
-	}
+        var context = new ReliabilityPredictionContext(pcmRelConfig, getUncertaintyModelURI(), TEST_STRATEGY);
 
-	public void test() {
-		assertions.forEach(assertion -> assertion.accept(pcmRelResult, uncertaintyBasedResult));
-	}
+        ParameterParser parameterParser = new DefaultParameterParser();
+        ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
+        IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry = defaultProbabilityDistributionFactory;
+        IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory = defaultProbabilityDistributionFactory;
 
-	private PCMSolverWorkflowRunConfiguration createDefaultPCMRelConfig() {
-		var config = new PCMSolverWorkflowRunConfiguration();
-		config.setReliabilityAnalysis(true);
-		config.setPrintMarkovStatistics(false);
-		config.setPrintMarkovSingleResults(false);
-		config.setSensitivityModelEnabled(false);
-		config.setSensitivityModelFileName(null);
-		config.setSensitivityLogFileName(null);
-		config.setDeleteTemporaryDataAfterAnalysis(true);
-		config.setDistance(1.0);
-		config.setDomainSize(32);
-		config.setIterationOverPhysicalSystemStatesEnabled(true);
-		config.setMarkovModelReductionEnabled(true);
-		config.setNumberOfEvaluatedSystemStates(1);
-		config.setNumberOfEvaluatedSystemStatesEnabled(false);
-		config.setSolvingTimeLimitEnabled(false);
-		config.setLogFile(null);
-		config.setNumberOfEvaluatedSystemStatesEnabled(false);
-		config.setNumberOfEvaluatedSystemStates(0);
-		config.setNumberOfExactDecimalPlacesEnabled(false);
-		config.setNumberOfExactDecimalPlaces(0);
-		config.setSolvingTimeLimitEnabled(false);
-		config.setMarkovModelStorageEnabled(false);
-		config.setIterationOverPhysicalSystemStatesEnabled(true);
-		config.setMarkovEvaluationMode("POINTSOFFAILURE");
-		config.setSaveResultsToFileEnabled(false);
-		config.setRMIMiddlewareFile(ConstantsContainer.DEFAULT_RMI_MIDDLEWARE_REPOSITORY_FILE);
-		config.setEventMiddlewareFile(ConstantsContainer.DEFAULT_EVENT_MIDDLEWARE_FILE);
-		config.setUsageModelFile(makeAbsolute(RELATIVE_USAGEMODEL_TEST_MODEL_PATH));
-		config.setAllocationFiles(Lists.newArrayList(makeAbsolute(RELATIVE_ALLOCATION_TEST_MODEL_PATH)));
-		return config;
-	}
+        ProbabilityDistributionRepository probabilityDistributionRepository = BasicDistributionTypesLoader
+            .loadRepository();
+        IProbabilityDistributionRepositoryLookup probDistRepoLookup = new ProbabilityDistributionRepositoryLookup(
+                probabilityDistributionRepository);
+        relPredictionJob.add(new ReliabilityPredictionExecutionJob(context, probabilityDistributionRegistry,
+                probabilityDistributionFactory, parameterParser, probDistRepoLookup));
 
-	private PCMInstance loadPCMInstance() {
-		return new PCMInstance((PCMResourceSetPartition) loadPcmModel()
-				.getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
-	}
-	
-	private MDSDBlackboard loadPcmModel() {
-		var pcmBuilderJob = new PCMTestInstanceBuilderJob(pcmRelConfig);
-		try {
-			pcmBuilderJob.execute(new NullProgressMonitor());
-		} catch (JobFailedException | UserCanceledException e) {
-			throw new RuntimeException("Something went wrong while building the PCM instance.", e);
-		}
-		return pcmBuilderJob.getBlackboard();
-	}
+        var resultJob = new ReliabilityPredictionResultJob(context);
+        relPredictionJob.add(resultJob);
 
-	private String getUncertaintyModelURI() {
-		return makeAbsolute(RELATIVE_UNCERTAINTY_TEST_MODEL_PATH);
-	}
+        try {
+            relPredictionJob.execute(new NullProgressMonitor());
+        } catch (Exception e) {
+            fail("Something went wrong during the uncertainty based reliability job", e);
+        }
+
+        uncertaintyBasedResult = resultJob.getPredictionResult();
+
+        return this;
+
+    }
+
+    public ReliabilityPredictionTestDefinition whenApplyingUncertaintyBasedPCMRelWith(
+            UncertaintyBasedReliabilityPredictionConfig config,
+            IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry,
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
+            ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
+        requireNonNull(config, "The config must not be null.");
+
+        uncertaintyBasedResult = UncertaintyBasedReliabilityPrediction.predict(config, probabilityDistributionRegistry,
+                probabilityDistributionFactory, parameterParser, probDistRepoLookup);
+
+        return this;
+    }
+
+    public ReliabilityPredictionTestDefinition thenAssert(PredictionResultBasedAssertion assertion) {
+        this.assertions.add(assertion);
+        return this;
+    }
+
+    public ReliabilityPredictionTestDefinition thenAssert(PredictionResultBasedAssertion... assertions) {
+        this.assertions.addAll(Lists.newArrayList(assertions));
+        return this;
+    }
+
+    public void test() {
+        assertions.forEach(assertion -> assertion.accept(pcmRelResult, uncertaintyBasedResult));
+    }
+
+    private PCMSolverWorkflowRunConfiguration createDefaultPCMRelConfig() {
+        var config = new PCMSolverWorkflowRunConfiguration();
+        config.setReliabilityAnalysis(true);
+        config.setPrintMarkovStatistics(false);
+        config.setPrintMarkovSingleResults(false);
+        config.setSensitivityModelEnabled(false);
+        config.setSensitivityModelFileName(null);
+        config.setSensitivityLogFileName(null);
+        config.setDeleteTemporaryDataAfterAnalysis(true);
+        config.setDistance(1.0);
+        config.setDomainSize(32);
+        config.setIterationOverPhysicalSystemStatesEnabled(true);
+        config.setMarkovModelReductionEnabled(true);
+        config.setNumberOfEvaluatedSystemStates(1);
+        config.setNumberOfEvaluatedSystemStatesEnabled(false);
+        config.setSolvingTimeLimitEnabled(false);
+        config.setLogFile(null);
+        config.setNumberOfEvaluatedSystemStatesEnabled(false);
+        config.setNumberOfEvaluatedSystemStates(0);
+        config.setNumberOfExactDecimalPlacesEnabled(false);
+        config.setNumberOfExactDecimalPlaces(0);
+        config.setSolvingTimeLimitEnabled(false);
+        config.setMarkovModelStorageEnabled(false);
+        config.setIterationOverPhysicalSystemStatesEnabled(true);
+        config.setMarkovEvaluationMode("POINTSOFFAILURE");
+        config.setSaveResultsToFileEnabled(false);
+        config.setRMIMiddlewareFile(ConstantsContainer.DEFAULT_RMI_MIDDLEWARE_REPOSITORY_FILE);
+        config.setEventMiddlewareFile(ConstantsContainer.DEFAULT_EVENT_MIDDLEWARE_FILE);
+        config.setUsageModelFile(makeAbsolute(RELATIVE_USAGEMODEL_TEST_MODEL_PATH));
+        config.setAllocationFiles(Lists.newArrayList(makeAbsolute(RELATIVE_ALLOCATION_TEST_MODEL_PATH)));
+        return config;
+    }
+
+    private PCMInstance loadPCMInstance() {
+        return new PCMInstance((PCMResourceSetPartition) loadPcmModel()
+            .getPartition(LoadPCMModelsIntoBlackboardJob.PCM_MODELS_PARTITION_ID));
+    }
+
+    private MDSDBlackboard loadPcmModel() {
+        var pcmBuilderJob = new PCMTestInstanceBuilderJob(pcmRelConfig);
+        try {
+            pcmBuilderJob.execute(new NullProgressMonitor());
+        } catch (JobFailedException | UserCanceledException e) {
+            throw new RuntimeException("Something went wrong while building the PCM instance.", e);
+        }
+        return pcmBuilderJob.getBlackboard();
+    }
+
+    private String getUncertaintyModelURI() {
+        return makeAbsolute(RELATIVE_UNCERTAINTY_TEST_MODEL_PATH);
+    }
 
 }

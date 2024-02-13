@@ -57,7 +57,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
     private final GroundProbabilisticNetwork probSensitivityModel;
     private final IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory;
 
-    private BayesianNetwork bayesianNetwork;
+    private BayesianNetwork<CategoricalValue> bayesianNetwork;
 
     private ProbabilisticSensitivityModel(GroundProbabilisticNetwork probSensitivityModel,
             TemplateVariableDefinitions templateVariables,
@@ -116,16 +116,14 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
     @Override
     public double inferSensitivity(List<SensitivityProperty> properties) {
         if (isNull(bayesianNetwork)) {
-            bayesianNetwork = new BayesianNetwork(null, probSensitivityModel, probabilityDistributionFactory);
+            bayesianNetwork = new BayesianNetwork<>(null, probSensitivityModel, probabilityDistributionFactory);
         }
 
         List<InputValue<CategoricalValue>> inputs = toInputValues(properties);
         if (isInferenceRequired(inputs)) {
             return bayesianNetwork.infer(inputs); // the Method is not implemented yet..
         }
-        // TODO:
-        List<InputValue> iv = (List) inputs;
-        return bayesianNetwork.probability(iv);
+        return bayesianNetwork.probability(inputs);
 
     }
 
@@ -142,7 +140,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
         List<Conditionable.Conditional<CategoricalValue>> conditionals = properties.stream()
             .map(each -> new Conditionable.Conditional<>(Domain.CATEGORY, each.getValue()))
             .collect(toList());
-        var outcomeEvent = (CategoricalValue) mlInputValue().getValue();
+        var outcomeEvent = mlInputValue().getValue();
         return conditionalOutcomeDistribution.given(conditionals)
             .probability(outcomeEvent);
     }
@@ -198,7 +196,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
         return inputs;
     }
 
-    private InputValue mlInputValue() {
+    private InputValue<CategoricalValue> mlInputValue() {
         var value = CategoricalValue.create(outcomeMeasure.toString());
         var mlVariable = findMLRandomVariable();
         return InputValue.create(value, mlVariable);
