@@ -64,7 +64,8 @@ public class BayesianUncertaintyModel implements UncertaintyModel {
         return probOfFailure / probOfUncertainty;
     }
 
-    private double marginalizingFailureVariable(List<InputValue> values, ParameterParser parameterParser) {
+    private double marginalizingFailureVariable(List<InputValue<CategoricalValue>> values,
+            ParameterParser parameterParser) {
         var probability = 0.0;
         for (CategoricalValue each : retrieveValueSpaceOf(failureVariable, parameterParser)) {
             var copiedValues = Lists.newArrayList(values);
@@ -97,10 +98,10 @@ public class BayesianUncertaintyModel implements UncertaintyModel {
                         variable.getEntityName()));
     }
 
-    private List<InputValue> filterRelevantValues(List<UncertaintyState> values) {
-        List<InputValue> inputValues = Lists.newArrayList();
+    private List<InputValue<CategoricalValue>> filterRelevantValues(List<UncertaintyState> values) {
+        List<InputValue<CategoricalValue>> inputValues = Lists.newArrayList();
         for (GroundRandomVariable each : bayesianNetwork.getGroundVariables()) {
-            var value = findValue(each, values).orElseThrow();
+            CategoricalValue value = findValue(each, values).orElseThrow();
             inputValues.add(InputValue.create(value, each));
         }
         return inputValues;
