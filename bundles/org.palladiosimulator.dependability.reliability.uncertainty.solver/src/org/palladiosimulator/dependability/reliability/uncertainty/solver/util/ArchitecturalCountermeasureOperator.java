@@ -41,11 +41,12 @@ public class ArchitecturalCountermeasureOperator {
 
     private final PCMInstance pcmModel;
     private final UncertaintyRepository uncertaintyRepo;
-    private final IProbabilityDistributionFactory probabilityDistributionFactory;
+    private final IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory;
     private final ParameterParser parameterParser;
 
     private ArchitecturalCountermeasureOperator(PCMInstance pcmModel, UncertaintyRepository uncertaintyRepo,
-            IProbabilityDistributionFactory probabilityDistributionFactory, ParameterParser parameterParser) {
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
+            ParameterParser parameterParser) {
         this.pcmModel = pcmModel;
         this.uncertaintyRepo = uncertaintyRepo;
         this.probabilityDistributionFactory = probabilityDistributionFactory;
@@ -53,7 +54,8 @@ public class ArchitecturalCountermeasureOperator {
     }
 
     public static ArchitecturalCountermeasureOperator createOperatorFor(PCMInstance pcmModel,
-            UncertaintyRepository uncertaintyRepo, IProbabilityDistributionFactory probabilityDistributionFactory,
+            UncertaintyRepository uncertaintyRepo,
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
             ParameterParser parameterParser) {
         return new ArchitecturalCountermeasureOperator(pcmModel, uncertaintyRepo, probabilityDistributionFactory,
                 parameterParser);
