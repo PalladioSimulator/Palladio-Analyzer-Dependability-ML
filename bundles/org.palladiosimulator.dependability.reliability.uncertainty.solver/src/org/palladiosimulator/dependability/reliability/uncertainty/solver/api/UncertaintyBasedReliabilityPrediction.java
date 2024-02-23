@@ -15,53 +15,80 @@ import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.
 
 import com.google.common.collect.Sets;
 
+import tools.mdsd.probdist.api.apache.util.IProbabilityDistributionRepositoryLookup;
+import tools.mdsd.probdist.api.entity.CategoricalValue;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
+import tools.mdsd.probdist.api.parser.ParameterParser;
+
 public class UncertaintyBasedReliabilityPrediction {
 
-	private final static Set<StateSpaceExplorationStrategy> STATE_SPACE_STRATEGY_REGISTER = Sets.newHashSet();
-	static {
-		STATE_SPACE_STRATEGY_REGISTER.add(new BruteForceExplorationStrategy());
-	}
+    private final static Set<StateSpaceExplorationStrategy> STATE_SPACE_STRATEGY_REGISTER = Sets.newHashSet();
+    static {
+        STATE_SPACE_STRATEGY_REGISTER.add(new BruteForceExplorationStrategy());
+    }
 
-	protected static Optional<StateSpaceExplorationStrategy> findStrategyWith(String name) {
-		return STATE_SPACE_STRATEGY_REGISTER.stream().filter(strategyWith(name)).findFirst();
-	}
+    protected static Optional<StateSpaceExplorationStrategy> findStrategyWith(String name) {
+        return STATE_SPACE_STRATEGY_REGISTER.stream()
+            .filter(strategyWith(name))
+            .findFirst();
+    }
 
-	public static void registerStrategy(StateSpaceExplorationStrategy strategy) {
-		STATE_SPACE_STRATEGY_REGISTER.add(strategy);
-	}
+    public static void registerStrategy(StateSpaceExplorationStrategy strategy) {
+        STATE_SPACE_STRATEGY_REGISTER.add(strategy);
+    }
 
-	public static Set<String> getSupportedStrategies() {
-		return STATE_SPACE_STRATEGY_REGISTER.stream().map(StateSpaceExplorationStrategy::getName).collect(toSet());
-	}
+    public static Set<String> getSupportedStrategies() {
+        return STATE_SPACE_STRATEGY_REGISTER.stream()
+            .map(StateSpaceExplorationStrategy::getName)
+            .collect(toSet());
+    }
 
-	public static ReliabilityPredictionResult predict(UncertaintyBasedReliabilityPredictionConfig config) {
-		return buildReliabilityPredictor(config).predictSuccessProbability(config.getPCMInstance());
-	}
+    public static ReliabilityPredictionResult predict(UncertaintyBasedReliabilityPredictionConfig config,
+            IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry,
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
+            ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
+        return buildReliabilityPredictor(config, probabilityDistributionRegistry, probabilityDistributionFactory,
+                parameterParser, probDistRepoLookup).predictSuccessProbability(config.getPCMInstance());
+    }
 
-	public static ReliabilityPredictionResult predictGiven(List<UncertaintyState> uncertaintyStates,
-			UncertaintyBasedReliabilityPredictionConfig config) {
-		var results = buildReliabilityPredictor(config).predictConditionalSuccessProbability(config.getPCMInstance(),
-				uncertaintyStates);
-		return new ReliabilityPredictionResult(results);
-	}
+    public static ReliabilityPredictionResult predictGiven(List<UncertaintyState> uncertaintyStates,
+            UncertaintyBasedReliabilityPredictionConfig config,
+            IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry,
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
+            ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
+        var results = buildReliabilityPredictor(config, probabilityDistributionRegistry, probabilityDistributionFactory,
+                parameterParser, probDistRepoLookup).predictConditionalSuccessProbability(config.getPCMInstance(),
+                        uncertaintyStates);
+        return new ReliabilityPredictionResult(results);
+    }
 
-	private static UncertaintyBasedReliabilityPredictor buildReliabilityPredictor(
-			UncertaintyBasedReliabilityPredictionConfig config) {
-		var builder = UncertaintyBasedReliabilityPredictor.newBuilder().withConfig(config.getRunConfig());
+    private static UncertaintyBasedReliabilityPredictor buildReliabilityPredictor(
+            UncertaintyBasedReliabilityPredictionConfig config,
+            IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry,
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
+            ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
+        var builder = UncertaintyBasedReliabilityPredictor
+            .newBuilder(probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser,
+                    probDistRepoLookup)
+            .withConfig(config.getRunConfig());
 
-		if (config.getStateSpaceExplorationStrategy().isPresent()) {
-			builder.exploreStateSpaceWith(config.getStateSpaceExplorationStrategy().get());
-		} else {
-			builder.bruteForceStateSpaceExploration();
-		}
+        if (config.getStateSpaceExplorationStrategy()
+            .isPresent()) {
+            builder.exploreStateSpaceWith(config.getStateSpaceExplorationStrategy()
+                .get());
+        } else {
+            builder.bruteForceStateSpaceExploration();
+        }
 
-		builder.andUncertaintyRepo(config.getUncertaintyRepository());
+        builder.andUncertaintyRepo(config.getUncertaintyRepository());
 
-		return builder.build();
-	}
+        return builder.build();
+    }
 
-	private static Predicate<StateSpaceExplorationStrategy> strategyWith(String queriedName) {
-		return s -> s.getName().equals(queriedName);
-	}
+    private static Predicate<StateSpaceExplorationStrategy> strategyWith(String queriedName) {
+        return s -> s.getName()
+            .equals(queriedName);
+    }
 
 }

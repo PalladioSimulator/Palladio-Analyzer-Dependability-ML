@@ -15,114 +15,128 @@ import com.google.common.collect.Lists;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.entity.Conditionable.Conditional;
 import tools.mdsd.probdist.api.entity.ConditionalProbabilityDistribution;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.distributionfunction.Domain;
 import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 import tools.mdsd.probdist.distributionfunction.TabularCPD;
 
 public class UncertaintyImprovementCalculator {
-	
-	private final static UncertaintyImprovementCalculator CALCULATOR_INSTANCE = new UncertaintyImprovementCalculator();
 
-	private UncertaintyImprovementCalculator() {
+    private final static UncertaintyImprovementCalculator CALCULATOR_INSTANCE = new UncertaintyImprovementCalculator();
 
-	}
+    private UncertaintyImprovementCalculator() {
 
-	public static UncertaintyImprovementCalculator get() {
-		return CALCULATOR_INSTANCE;
-	}
+    }
 
-	public CategoricalValue calculate(UncertaintyImprovement improvement, CategoricalValue value) {
-		return new UncertaintySwitch<CategoricalValue>() {
+    public static UncertaintyImprovementCalculator get() {
+        return CALCULATOR_INSTANCE;
+    }
 
-			@Override
-			public CategoricalValue caseProbabilisticImprovement(ProbabilisticImprovement object) {
-				return calculateProbabilistically(object, value);
-			}
+    public CategoricalValue calculate(UncertaintyImprovement improvement, CategoricalValue value,
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory) {
+        return new UncertaintySwitch<CategoricalValue>() {
 
-			@Override
-			public CategoricalValue caseDeterministicImprovement(DeterministicImprovement object) {
-				return calculateDeterministically(object, value);
-			}
+            @Override
+            public CategoricalValue caseProbabilisticImprovement(ProbabilisticImprovement object) {
+                return calculateProbabilistically(object, value, probabilityDistributionFactory);
+            }
 
-		}.doSwitch(improvement);
-	}
+            @Override
+            public CategoricalValue caseDeterministicImprovement(DeterministicImprovement object) {
+                return calculateDeterministically(object, value);
+            }
 
-	private CategoricalValue calculateProbabilistically(ProbabilisticImprovement improvement, CategoricalValue value) {
-		var distribution = createCPD(improvement.getProbabilityDistribution());
+        }.doSwitch(improvement);
+    }
 
-		var conditionals = Lists.newArrayList(new Conditional(Domain.CATEGORY, value));
-		return distribution.given(conditionals).sample();
-	}
+    private CategoricalValue calculateProbabilistically(ProbabilisticImprovement improvement, CategoricalValue value,
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory) {
+        var distribution = createCPD(improvement.getProbabilityDistribution(), probabilityDistributionFactory);
 
-	public ConditionalProbabilityDistribution createCPD(ProbabilityDistribution dist) {
-		if (dist.getParams().isEmpty()) {
-			throw new IllegalArgumentException("The distribution parameters must be set.");
-		}
+        List<Conditional<CategoricalValue>> conditionals = Lists
+            .newArrayList(new Conditional<>(Domain.CATEGORY, value));
+        return distribution.given(conditionals)
+            .sample();
+    }
 
-		var paramRepresentation = dist.getParams().get(0).getRepresentation();
-		if (TabularCPD.class.isInstance(paramRepresentation) == false) {
-			throw new IllegalArgumentException("The parameter representation must be of type TabularCPD.");
-		}
+    public ConditionalProbabilityDistribution createCPD(ProbabilityDistribution dist,
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory) {
+        if (dist.getParams()
+            .isEmpty()) {
+            throw new IllegalArgumentException("The distribution parameters must be set.");
+        }
 
-		return new ConditionalProbabilityDistribution(dist, (TabularCPD) paramRepresentation);
-	}
-	
-	public ConditionalProbabilityDistribution createIndicatorCPD(DeterministicImprovement improvement) {
-		return new ConditionalProbabilityDistribution(null, null) {
-			
-			private CategoricalValue givenValue = null;
-			
-			@Override
-			public Double probability(CategoricalValue value) {
-				if (givenValue == null) {
-					throw new RuntimeException("The conditional value must be set.");
-				}
-				
-				var deterministicValue = calculate(improvement, givenValue); 
-				return value.get().equals(deterministicValue.get()) ? 1.0 : 0.0;
-			}
+        var paramRepresentation = dist.getParams()
+            .get(0)
+            .getRepresentation();
+        if (TabularCPD.class.isInstance(paramRepresentation) == false) {
+            throw new IllegalArgumentException("The parameter representation must be of type TabularCPD.");
+        }
 
-			@Override
-			public CategoricalValue sample() {
-				if (givenValue == null) {
-					throw new RuntimeException("The conditional value must be set.");
-				}
-				
-				return calculate(improvement, givenValue); 
-			}
+        return new ConditionalProbabilityDistribution(dist, (TabularCPD) paramRepresentation,
+                probabilityDistributionFactory);
+    }
 
-			@Override
-			public ConditionalProbabilityDistribution given(List<Conditional> conditionals) {
-				if (conditionals.size() != 1) {
-					throw new IllegalArgumentException("There must be no more than one conditional.");
-				}
-				
-				var value = conditionals.get(0);
-				if (CategoricalValue.class.isInstance(value) == false) {
-					throw new IllegalArgumentException("The conditional must be a categorical value.");
-				}
-				
-				givenValue = (CategoricalValue) value.getValue();
-				
-				return this;
-			}
-			
-		};
-	}
+    public ConditionalProbabilityDistribution createIndicatorCPD(DeterministicImprovement improvement,
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory) {
+        return new ConditionalProbabilityDistribution(null, null, probabilityDistributionFactory) {
 
-	private CategoricalValue calculateDeterministically(DeterministicImprovement improvement, CategoricalValue value) {
-		return improvement.getMappingTable().stream()
-				.filter(entryMatching(value.get()))
-				.map(toCategoricalValue())
-				.findFirst()
-				.orElse(value);
-	}
+            private CategoricalValue givenValue = null;
 
-	private Function<MapEntry, CategoricalValue> toCategoricalValue() {
-		return entry -> CategoricalValue.create(entry.getValue());
-	}
+            @Override
+            public Double probability(CategoricalValue value) {
+                if (givenValue == null) {
+                    throw new RuntimeException("The conditional value must be set.");
+                }
 
-	private Predicate<MapEntry> entryMatching(String value) {
-		return entry -> entry.getKey().equals(value);
-	}
+                var deterministicValue = calculate(improvement, givenValue, probabilityDistributionFactory);
+                return value.get()
+                    .equals(deterministicValue.get()) ? 1.0 : 0.0;
+            }
+
+            @Override
+            public CategoricalValue sample() {
+                if (givenValue == null) {
+                    throw new RuntimeException("The conditional value must be set.");
+                }
+
+                return calculate(improvement, givenValue, probabilityDistributionFactory);
+            }
+
+            @Override
+            public ConditionalProbabilityDistribution given(List<Conditional<CategoricalValue>> conditionals) {
+                if (conditionals.size() != 1) {
+                    throw new IllegalArgumentException("There must be no more than one conditional.");
+                }
+
+                var value = conditionals.get(0);
+                if (CategoricalValue.class.isInstance(value) == false) {
+                    throw new IllegalArgumentException("The conditional must be a categorical value.");
+                }
+
+                givenValue = value.getValue();
+
+                return this;
+            }
+
+        };
+    }
+
+    private CategoricalValue calculateDeterministically(DeterministicImprovement improvement, CategoricalValue value) {
+        return improvement.getMappingTable()
+            .stream()
+            .filter(entryMatching(value.get()))
+            .map(toCategoricalValue())
+            .findFirst()
+            .orElse(value);
+    }
+
+    private Function<MapEntry, CategoricalValue> toCategoricalValue() {
+        return entry -> CategoricalValue.create(entry.getValue());
+    }
+
+    private Predicate<MapEntry> entryMatching(String value) {
+        return entry -> entry.getKey()
+            .equals(value);
+    }
 }

@@ -2,7 +2,7 @@
 <feature
       id="org.palladiosimulator.dependability.reliability.uncertainty.feature"
       label="Uncertainty-based Reliability Prediction"
-      version="5.1.0.qualifier"
+      version="5.2.0.qualifier"
       plugin="org.palladiosimulator.branding"
       license-feature="org.palladiosimulator.license"
       license-feature-version="1.0.0">
@@ -20,8 +20,6 @@
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.debug.core"/>
       <import plugin="org.eclipse.debug.ui"/>
-      <import plugin="org.palladiosimulator.solver"/>
-      <import plugin="org.palladiosimulator.reliability.solver"/>
       <import plugin="org.palladiosimulator.analyzer.workflow" version="4.3.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.workflow.mdsd" version="4.3.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.dependability.reliability.uncertainty.solver" version="5.1.0" match="greaterOrEqual"/>
@@ -30,7 +28,6 @@
       <import plugin="tools.mdsd.probdist.api" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="tools.mdsd.probdist.api.apache" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="com.google.guava" version="27.1.0" match="greaterOrEqual"/>
-      <import plugin="org.palladiosimulator.solver" version="4.2.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.reliability.solver" version="4.3.0" match="greaterOrEqual"/>
       <import plugin="de.uka.ipd.sdq.workflow"/>
       <import plugin="org.palladiosimulator.dependability.ml.sensitivity" version="5.1.0" match="greaterOrEqual"/>
@@ -39,7 +36,6 @@
       <import plugin="org.palladiosimulator.envdyn.model"/>
       <import plugin="de.uka.ipd.sdq.identifier"/>
       <import plugin="tools.mdsd.modelingfoundations.identifier"/>
-      <import plugin="org.palladiosimulator.pcm"/>
       <import plugin="de.uka.ipd.sdq.probfunction"/>
       <import plugin="tools.mdsd.probdist.model"/>
       <import plugin="de.uka.ipd.sdq.stoex"/>

@@ -39,262 +39,291 @@ import com.google.common.collect.Sets;
 
 import tools.mdsd.library.standalone.initialization.StandaloneInitializerBuilder;
 import tools.mdsd.probdist.api.apache.supplier.MultinomialDistributionSupplier;
-import tools.mdsd.probdist.api.apache.util.DistributionTypeModelUtil;
+import tools.mdsd.probdist.api.apache.util.IProbabilityDistributionRepositoryLookup;
+import tools.mdsd.probdist.api.apache.util.ProbabilityDistributionRepositoryLookup;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.parser.DefaultParameterParser;
+import tools.mdsd.probdist.api.parser.ParameterParser;
+import tools.mdsd.probdist.distributiontype.ProbabilityDistributionRepository;
 import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
 public class MLSensitivityAnalysisTest {
 
-	public static final String PROJECT_NAME_TEST = "org.palladiosimulator.dependability.ml.sensitivity.test";
+    public static final String PROJECT_NAME_TEST = "org.palladiosimulator.dependability.ml.sensitivity.test";
 
-	private File dummyFile;
-	private MLAnalysisContext context;
-	private Set<PropertyMeasure> propertyMeasures;
-	private MLSensitivityAnalysis sensitivityAnalysis;
-	private SensitivityModel result;
+    private File dummyFile;
+    private MLAnalysisContext context;
+    private Set<PropertyMeasure> propertyMeasures;
+    private MLSensitivityAnalysis sensitivityAnalysis;
+    private SensitivityModel result;
 
-	private static class TrainedModelMock implements TrainedModel {
+    private IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry;
+    private IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory;
 
-		private static class TrainingDataIteratorMock extends TrainingDataIterator {
+    private static class TrainedModelMock implements TrainedModel {
 
-			private final static List<Tuple<InputData, InputDataLabel>> TRAIN_DATA = Lists.newArrayList();
-			static {
-				TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(1), SimpleInputDataLabel.numericalLabel(1)));
-				TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(2), SimpleInputDataLabel.numericalLabel(2)));
-				TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(3), SimpleInputDataLabel.numericalLabel(3)));
-				TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(4), SimpleInputDataLabel.numericalLabel(4)));
-				TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(5), SimpleInputDataLabel.numericalLabel(5)));
-				TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(6), SimpleInputDataLabel.numericalLabel(6)));
-				TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(7), SimpleInputDataLabel.numericalLabel(7)));
-				TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(8), SimpleInputDataLabel.numericalLabel(8)));
-				TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(9), SimpleInputDataLabel.numericalLabel(9)));
-				TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(10), SimpleInputDataLabel.numericalLabel(10)));
-				TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(11), SimpleInputDataLabel.numericalLabel(11)));
-				TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(12), SimpleInputDataLabel.numericalLabel(12)));
-				TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(13), SimpleInputDataLabel.numericalLabel(13)));
-				TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(14), SimpleInputDataLabel.numericalLabel(14)));
-				TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(15), SimpleInputDataLabel.numericalLabel(15)));
-			}
+        private static class TrainingDataIteratorMock extends TrainingDataIterator {
 
-			protected TrainingDataIteratorMock(File trainingDataLocation) {
-				super(trainingDataLocation);
-			}
+            private final static List<Tuple<InputData, InputDataLabel>> TRAIN_DATA = Lists.newArrayList();
+            static {
+                TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(1), SimpleInputDataLabel.numericalLabel(1)));
+                TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(2), SimpleInputDataLabel.numericalLabel(2)));
+                TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(3), SimpleInputDataLabel.numericalLabel(3)));
+                TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(4), SimpleInputDataLabel.numericalLabel(4)));
+                TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(5), SimpleInputDataLabel.numericalLabel(5)));
+                TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(6), SimpleInputDataLabel.numericalLabel(6)));
+                TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(7), SimpleInputDataLabel.numericalLabel(7)));
+                TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(8), SimpleInputDataLabel.numericalLabel(8)));
+                TRAIN_DATA.add(Tuple.of(PrimitiveInputData.numericalValue(9), SimpleInputDataLabel.numericalLabel(9)));
+                TRAIN_DATA
+                    .add(Tuple.of(PrimitiveInputData.numericalValue(10), SimpleInputDataLabel.numericalLabel(10)));
+                TRAIN_DATA
+                    .add(Tuple.of(PrimitiveInputData.numericalValue(11), SimpleInputDataLabel.numericalLabel(11)));
+                TRAIN_DATA
+                    .add(Tuple.of(PrimitiveInputData.numericalValue(12), SimpleInputDataLabel.numericalLabel(12)));
+                TRAIN_DATA
+                    .add(Tuple.of(PrimitiveInputData.numericalValue(13), SimpleInputDataLabel.numericalLabel(13)));
+                TRAIN_DATA
+                    .add(Tuple.of(PrimitiveInputData.numericalValue(14), SimpleInputDataLabel.numericalLabel(14)));
+                TRAIN_DATA
+                    .add(Tuple.of(PrimitiveInputData.numericalValue(15), SimpleInputDataLabel.numericalLabel(15)));
+            }
 
-			@Override
-			protected Iterator<Tuple<InputData, InputDataLabel>> load(File trainingDataLocation) {
-				return TRAIN_DATA.iterator();
-			}
-		}
+            protected TrainingDataIteratorMock(File trainingDataLocation) {
+                super(trainingDataLocation);
+            }
 
-		@Override
-		public MLPredictionResult makePrediction(Tuple<InputData, InputDataLabel> dataTuple) {
-			MLPredictionResult result;
+            @Override
+            protected Iterator<Tuple<InputData, InputDataLabel>> load(File trainingDataLocation) {
+                return TRAIN_DATA.iterator();
+            }
+        }
 
-			var value = asNumerical(dataTuple.getFirst()).getValue().intValue();
-			if (Boolean.logicalOr(value <= 5, value > 10)) {
-				result = new MLPredictionResult(determineRandomly());
-				result.getPredictions().add(new OutputData("0.5", ""));
-			} else {
-				result = new MLPredictionResult(true);
-				result.getPredictions().add(new OutputData("1.0", ""));
-			}
+        @Override
+        public MLPredictionResult makePrediction(Tuple<InputData, InputDataLabel> dataTuple) {
+            MLPredictionResult result;
 
-			return result;
-		}
+            var value = asNumerical(dataTuple.getFirst()).getValue()
+                .intValue();
+            if (Boolean.logicalOr(value <= 5, value > 10)) {
+                result = new MLPredictionResult(determineRandomly());
+                result.getPredictions()
+                    .add(new OutputData("0.5", ""));
+            } else {
+                result = new MLPredictionResult(true);
+                result.getPredictions()
+                    .add(new OutputData("1.0", ""));
+            }
 
-		private boolean determineRandomly() {
-			return new Random(System.currentTimeMillis()).nextInt(2) == 1;
-		}
+            return result;
+        }
 
-		@Override
-		public void loadModel(URI modelLocation) {
+        private boolean determineRandomly() {
+            return new Random(System.currentTimeMillis()).nextInt(2) == 1;
+        }
 
-		}
+        @Override
+        public void loadModel(URI modelLocation) {
 
-		@Override
-		public TrainingDataIterator getTrainingDataIteratorBy(File dataLocation) {
-			return new TrainingDataIteratorMock(dataLocation);
-		}
+        }
 
-		@Override
-		public String getName() {
-			return "MockModel";
-		}
+        @Override
+        public TrainingDataIterator getTrainingDataIteratorBy(File dataLocation) {
+            return new TrainingDataIteratorMock(dataLocation);
+        }
 
-	}
+        @Override
+        public String getName() {
+            return "MockModel";
+        }
 
-	@Before
-	public void setUp() throws Exception {
-		var standaloneInitializer = StandaloneInitializerBuilder.builder()
-				.registerProjectURI(MLSensitivityAnalysisTest.class, PROJECT_NAME_TEST)
-				.build();
-		standaloneInitializer.init();
+    }
 
-		DistributionTypeModelUtil.get(BasicDistributionTypesLoader.loadRepository());
-		ProbabilityDistributionFactory.get().register(new MultinomialDistributionSupplier());
+    @Before
+    public void setUp() throws Exception {
+        var standaloneInitializer = StandaloneInitializerBuilder.builder()
+            .registerProjectURI(MLSensitivityAnalysisTest.class, PROJECT_NAME_TEST)
+            .build();
+        standaloneInitializer.init();
 
-		dummyFile = new File(System.getProperty("user.dir"));
+        ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
+        probabilityDistributionFactory = defaultProbabilityDistributionFactory;
+        ProbabilityDistributionRepository probDistRepo = BasicDistributionTypesLoader.loadRepository();
+        IProbabilityDistributionRepositoryLookup probDistRepoLookup = new ProbabilityDistributionRepositoryLookup(
+                probDistRepo);
+        probabilityDistributionRegistry = defaultProbabilityDistributionFactory;
+        ParameterParser parameterParser = new DefaultParameterParser();
+        probabilityDistributionRegistry
+            .register(new MultinomialDistributionSupplier(parameterParser, probDistRepoLookup));
 
-		var trainingDataStrategy = TrainingDataBasedAnalysisStrategy.confidenceBasedStrategy();
+        dummyFile = new File(System.getProperty("user.dir"));
 
-		var simpleUpperBoundMeasure = new PropertyMeasure() {
+        var trainingDataStrategy = TrainingDataBasedAnalysisStrategy.confidenceBasedStrategy();
 
-			private final MeasurableSensitivityProperty trueValue = generateFromRaw(CategoricalValue.create("TRUE"));
-			private final MeasurableSensitivityProperty falseValue = generateFromRaw(CategoricalValue.create("FALSE"));
+        var simpleUpperBoundMeasure = new PropertyMeasure() {
 
-			@Override
-			public String getId() {
-				return "SimpleUpperBoundMeasure";
-			}
+            private final MeasurableSensitivityProperty trueValue = generateFromRaw(CategoricalValue.create("TRUE"));
+            private final MeasurableSensitivityProperty falseValue = generateFromRaw(CategoricalValue.create("FALSE"));
 
-			@Override
-			public MeasurableSensitivityProperty apply(InputData inputData) {
-				var value = asNumerical(inputData).getValue().intValue();
-				if (value > 10) {
-					return trueValue;
-				}
-				return falseValue;
-			}
+            @Override
+            public String getId() {
+                return "SimpleUpperBoundMeasure";
+            }
 
-			@Override
-			public Set<MeasurableSensitivityProperty> getMeasurablePropertySpace() {
-				return Sets.newHashSet(trueValue, falseValue);
-			}
+            @Override
+            public MeasurableSensitivityProperty apply(InputData inputData) {
+                var value = asNumerical(inputData).getValue()
+                    .intValue();
+                if (value > 10) {
+                    return trueValue;
+                }
+                return falseValue;
+            }
 
-			@Override
-			public Boolean isApplicableTo(InputData inputData) {
-				return true;
-			}
+            @Override
+            public Set<MeasurableSensitivityProperty> getMeasurablePropertySpace() {
+                return Sets.newHashSet(trueValue, falseValue);
+            }
 
-			@Override
-			public String getName() {
-				return "";
-			}
-		};
-		var simpleLowerBoundMeasure = new PropertyMeasure() {
+            @Override
+            public Boolean isApplicableTo(InputData inputData) {
+                return true;
+            }
 
-			private final MeasurableSensitivityProperty trueValue = generateFromRaw(CategoricalValue.create("TRUE"));
-			private final MeasurableSensitivityProperty falseValue = generateFromRaw(CategoricalValue.create("FALSE"));
+            @Override
+            public String getName() {
+                return "";
+            }
+        };
+        var simpleLowerBoundMeasure = new PropertyMeasure() {
 
-			@Override
-			public String getId() {
-				return "SimpleLowerBoundMeasure";
-			}
+            private final MeasurableSensitivityProperty trueValue = generateFromRaw(CategoricalValue.create("TRUE"));
+            private final MeasurableSensitivityProperty falseValue = generateFromRaw(CategoricalValue.create("FALSE"));
 
-			@Override
-			public MeasurableSensitivityProperty apply(InputData inputData) {
-				var value = asNumerical(inputData).getValue().intValue();
-				if (value <= 5) {
-					return trueValue;
-				}
-				return falseValue;
-			}
+            @Override
+            public String getId() {
+                return "SimpleLowerBoundMeasure";
+            }
 
-			@Override
-			public Set<MeasurableSensitivityProperty> getMeasurablePropertySpace() {
-				return Sets.newHashSet(trueValue, falseValue);
-			}
+            @Override
+            public MeasurableSensitivityProperty apply(InputData inputData) {
+                var value = asNumerical(inputData).getValue()
+                    .intValue();
+                if (value <= 5) {
+                    return trueValue;
+                }
+                return falseValue;
+            }
 
-			@Override
-			public Boolean isApplicableTo(InputData inputData) {
-				return true;
-			}
+            @Override
+            public Set<MeasurableSensitivityProperty> getMeasurablePropertySpace() {
+                return Sets.newHashSet(trueValue, falseValue);
+            }
 
-			@Override
-			public String getName() {
-				return "";
-			}
-		};
-		propertyMeasures = Sets.newHashSet(simpleLowerBoundMeasure, simpleUpperBoundMeasure);
+            @Override
+            public Boolean isApplicableTo(InputData inputData) {
+                return true;
+            }
 
-		sensitivityAnalysis = MLSensitivityAnalysis.newBuilder()
-				.withSensitivityAnalysisStrategy(trainingDataStrategy)
-				.addPropertyMeasure(simpleUpperBoundMeasure)
-				.addPropertyMeasure(simpleLowerBoundMeasure)
-				.build();
-	}
+            @Override
+            public String getName() {
+                return "";
+            }
+        };
+        propertyMeasures = Sets.newHashSet(simpleLowerBoundMeasure, simpleUpperBoundMeasure);
 
-	@SuppressWarnings("unchecked")
-	private static PrimitiveInputData<Number> asNumerical(InputData input) {
-		return (PrimitiveInputData<Number>) input;
-	}
+        sensitivityAnalysis = MLSensitivityAnalysis.newBuilder()
+            .withSensitivityAnalysisStrategy(trainingDataStrategy)
+            .addPropertyMeasure(simpleUpperBoundMeasure)
+            .addPropertyMeasure(simpleLowerBoundMeasure)
+            .build();
+    }
 
-	@Test
-	public void test() {
-		givenMLContext();
-		whenAnalysingSensitivity();
-		thenSensitivityModelIsValid();
-	}
+    @SuppressWarnings("unchecked")
+    private static PrimitiveInputData<Number> asNumerical(InputData input) {
+        return (PrimitiveInputData<Number>) input;
+    }
 
-	private void givenMLContext() {
-		context = MLAnalysisContext.newBuilder()
-				.analyseSensitivityOf(new TrainedModelMock())
-				.trainedWith(dummyFile)
-				.andCapturedBy(ProbabilisticSensitivityModel.createFrom(propertyMeasures))
-				.build();
-	}
+    @Test
+    public void test() {
+        givenMLContext();
+        whenAnalysingSensitivity();
+        thenSensitivityModelIsValid();
+    }
 
-	private void whenAnalysingSensitivity() {
-		result = sensitivityAnalysis.analyseSensitivity(context);
+    private void givenMLContext() {
+        context = MLAnalysisContext.newBuilder()
+            .analyseSensitivityOf(new TrainedModelMock())
+            .trainedWith(dummyFile)
+            .andCapturedBy(ProbabilisticSensitivityModel.createFrom(propertyMeasures, probabilityDistributionFactory))
+            .build();
+    }
+
+    private void whenAnalysingSensitivity() {
+        result = sensitivityAnalysis.analyseSensitivity(context);
 
 //		var location = Paths.get(System.getProperty("user.dir"), "model").toFile().toURI();
 //		result.saveAt(location);
-	}
+    }
 
-	private void thenSensitivityModelIsValid() {
-		assertValidSensitivityValuesOfAll(propertyMeasures);
-		assertValidMLSensitivityValue();
-	}
+    private void thenSensitivityModelIsValid() {
+        assertValidSensitivityValuesOfAll(propertyMeasures);
+        assertValidMLSensitivityValue();
+    }
 
-	private void assertValidMLSensitivityValue() {
-		var iterator = propertyMeasures.iterator();
-		var firstMeasure = iterator.next();
-		var secondMeasure = iterator.next();
-		for (MeasurableSensitivityProperty eachValOfFirst : firstMeasure.getMeasurablePropertySpace()) {
-			for (MeasurableSensitivityProperty eachValOfSecond : secondMeasure.getMeasurablePropertySpace()) {
-				var properties = Lists.<SensitivityProperty>newArrayList(eachValOfFirst, eachValOfSecond);
-				var successSensitivity = -1.0;
-				try {
-					successSensitivity = result.inferSensitivity(properties);
-				} catch (MLSensitivityAnalysisException e) {
-					fail(String.format("Something went wrong during inference, see: %s", e.getMessage()));
-				}
+    private void assertValidMLSensitivityValue() {
+        var iterator = propertyMeasures.iterator();
+        var firstMeasure = iterator.next();
+        var secondMeasure = iterator.next();
+        for (MeasurableSensitivityProperty eachValOfFirst : firstMeasure.getMeasurablePropertySpace()) {
+            for (MeasurableSensitivityProperty eachValOfSecond : secondMeasure.getMeasurablePropertySpace()) {
+                var properties = Lists.<SensitivityProperty> newArrayList(eachValOfFirst, eachValOfSecond);
+                var successSensitivity = -1.0;
+                try {
+                    successSensitivity = result.inferSensitivity(properties);
+                } catch (MLSensitivityAnalysisException e) {
+                    fail(String.format("Something went wrong during inference, see: %s", e.getMessage()));
+                }
 
-				assertValueIsInRange(successSensitivity);
-			}
-		}
-	}
+                assertValueIsInRange(successSensitivity);
+            }
+        }
+    }
 
-	private void assertValidSensitivityValuesOfAll(Set<PropertyMeasure> propertyMeasures) {
-		for (PropertyMeasure eachMeasure : propertyMeasures) {
-			Map<MeasurableSensitivityProperty, Double> sensitivityValues = Maps.newHashMap();
-			for (MeasurableSensitivityProperty eachProperty : eachMeasure.getMeasurablePropertySpace()) {
-				try {
-					var sensitivityValue = result.getSensitivityValuesOf(eachProperty);
-					sensitivityValues.put(eachProperty, sensitivityValue);
-				} catch (MLSensitivityAnalysisException e) {
-					fail(String.format("Property %1s could not be found, see: %2s", eachMeasure.getId(),
-							e.getMessage()));
-				}
-			}
-			assertValidValues(sensitivityValues);
-		}
-	}
+    private void assertValidSensitivityValuesOfAll(Set<PropertyMeasure> propertyMeasures) {
+        for (PropertyMeasure eachMeasure : propertyMeasures) {
+            Map<MeasurableSensitivityProperty, Double> sensitivityValues = Maps.newHashMap();
+            for (MeasurableSensitivityProperty eachProperty : eachMeasure.getMeasurablePropertySpace()) {
+                try {
+                    var sensitivityValue = result.getSensitivityValuesOf(eachProperty);
+                    sensitivityValues.put(eachProperty, sensitivityValue);
+                } catch (MLSensitivityAnalysisException e) {
+                    fail(String.format("Property %1s could not be found, see: %2s", eachMeasure.getId(),
+                            e.getMessage()));
+                }
+            }
+            assertValidValues(sensitivityValues);
+        }
+    }
 
-	private void assertValidValues(Map<MeasurableSensitivityProperty, Double> sensitivityValues) {
-		for (MeasurableSensitivityProperty each : sensitivityValues.keySet()) {
-			assertValueIsInRange(sensitivityValues.get(each));
-		}
-		assertSumsUpToOne(sensitivityValues.values());
-	}
+    private void assertValidValues(Map<MeasurableSensitivityProperty, Double> sensitivityValues) {
+        for (MeasurableSensitivityProperty each : sensitivityValues.keySet()) {
+            assertValueIsInRange(sensitivityValues.get(each));
+        }
+        assertSumsUpToOne(sensitivityValues.values());
+    }
 
-	private void assertValueIsInRange(Double value) {
-		assertTrue(Boolean.logicalOr(value >= 0, value <= 1));
-	}
+    private void assertValueIsInRange(Double value) {
+        assertTrue(Boolean.logicalOr(value >= 0, value <= 1));
+    }
 
-	private void assertSumsUpToOne(Collection<Double> values) {
-		assertTrue(values.stream().reduce(Double::sum).orElse(Double.NaN) == 1);
-	}
+    private void assertSumsUpToOne(Collection<Double> values) {
+        assertTrue(values.stream()
+            .reduce(Double::sum)
+            .orElse(Double.NaN) == 1);
+    }
 
 }
