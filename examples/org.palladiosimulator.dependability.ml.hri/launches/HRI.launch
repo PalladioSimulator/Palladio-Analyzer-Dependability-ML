@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.palladiosimulator.simexp.ui.workflow.launchConfigurationType1">
+    <intAttribute key="NumberOfRuns" value="1"/>
+    <intAttribute key="NumberOfSimulationsPerRun" value="3"/>
+    <stringAttribute key="Quality Objective" value="Reliability"/>
+    <stringAttribute key="Simulation Engine" value="PCM"/>
+    <stringAttribute key="SimulationID" value="HRI"/>
+    <stringAttribute key="allocationFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/RobotCognitionDeployment.allocation"/>
+    <stringAttribute key="bad_container_name" value="\org.palladiosimulator.dependability.ml.hri\launches_H"/>
+    <stringAttribute key="dynamicModelFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/DynamicRobotCognitionEnvironment.dynamicmodel"/>
+    <stringAttribute key="experimentsFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/RobotCognitionExperiment.experiments"/>
+    <stringAttribute key="failureScenarioFile" value=""/>
+    <stringAttribute key="kmodelFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/strategies/ ReliabilityPrioritizedStrategy.kmodel"/>
+    <stringAttribute key="monitorRepositoryFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/RobotCognitionMonitors.monitorrepository"/>
+    <listAttribute key="monitors">
+        <listEntry value="System Response Time"/>
+    </listAttribute>
+    <booleanAttribute key="org.eclipse.debug.core.ATTR_FORCE_SYSTEM_CONSOLE_ENCODING" value="false"/>
+    <listAttribute key="prismModuleFile">
+        <listEntry value=""/>
+    </listAttribute>
+    <listAttribute key="prismPropertyFile">
+        <listEntry value=""/>
+    </listAttribute>
+    <stringAttribute key="staticModelFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/StaticRobotCognitionEnvironment.staticmodel"/>
+    <stringAttribute key="usageFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/RobotCognitionUsage.usagemodel"/>
+</launchConfiguration>
