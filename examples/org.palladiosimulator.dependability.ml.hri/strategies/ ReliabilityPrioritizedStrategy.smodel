@@ -1,3 +1,5 @@
+modelName = "ReliabilityPrioritizedStrategy";
+
 const float UPPER_THRESHOLD_RT = 0.1;
 
 /*
@@ -6,12 +8,15 @@ const float UPPER_THRESHOLD_RT = 0.1;
  * 
  * Mögliche Future work für das Kmodel: Erweiterung um weiteren Field-Typen "state".
  */
-var bool{true, false} isDefaultMLModelActivated;
-var bool{true, false} isFilteringActivated;
+optimizable bool{true, false} isDefaultMLModelActivated;
+optimizable bool{true, false} isFilteringActivated;
 
-probe string imageBrightness : "_U5Fzu8qkEeqObY-eK2jOOA";
-probe string sensorNoise : "_0uh4oCpGEeuMpaabmuiN-Q";
-probe float responseTime : "Usage Scenario: EnvironmentPerception_Response Time";
+envvar string imageBrightness :staticId"_rbdHAN4kEeqaAYEZJq_V3Q" dynamicId"_rbdHAN4kEeqaAYEZJq_V3Q"; // entity name: InstantiatedBrightnessMeasureTemplate
+envvar string sensorNoise : staticId"_mDumMCpIEeuMpaabmuiN-Q" dynamicId"_mDumMCpIEeuMpaabmuiN-Q"; // entity name: InstantiatedSensorNoiseTemplate
+
+probe float responseTime : monitorId"_EYxTcd4VEeqKieYo_sZiMQ"; // System Response Time : "Usage Scenario: EnvironmentPerception";
+
+//query("... where system. ...") ocl : name "isDefaultMLModelActivated" "ocl constraint: " targetModel:PcmSystem -> auf PCM Modell anwenden
 
 action SwitchToDefaultMLModel();
 action SwitchToRobustMLModel();
