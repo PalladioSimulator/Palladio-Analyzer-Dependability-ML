@@ -1,0 +1,39 @@
+modelName = "ReliabilityPrioritizedStrategy";
+
+const double UPPER_THRESHOLD_RT = 0.1;
+
+var bool isDefaultMLModelActivated = true;
+var bool isFilteringActivated = true;
+
+//optimizable bool{true, false} isDefaultMLModelActivated;
+//optimizable bool{true, false} isFilteringActivated;
+
+envvar string imageBrightness :variableId="_rbdHAN4kEeqaAYEZJq_V3Q"; // entity name: InstantiatedBrightnessMeasureTemplate
+envvar string sensorNoise : variableId = "_mDumMCpIEeuMpaabmuiN-Q"; // entity name: InstantiatedSensorNoiseTemplate
+
+probe double responseTime : monitorId = "_EYxTcd4VEeqKieYo_sZiMQ"; // System Response Time : "Usage Scenario: EnvironmentPerception";
+
+action SwitchToDefaultMLModel();
+action SwitchToRobustMLModel();
+action ActivateFilterComponent();
+action DeactivateFilterComponent();
+
+if (sensorNoise != "(SensorNoise=Low)" || imageBrightness != "(ImageBrightnessMeasure=Medium)") {
+	if (sensorNoise != "(SensorNoise=Low)" && imageBrightness != "(ImageBrightnessMeasure=Medium)" && isDefaultMLModelActivated) {
+		SwitchToRobustMLModel();
+	}
+	
+	if (sensorNoise != "(SensorNoise=Low)" && !isFilteringActivated) {
+		ActivateFilterComponent();
+	}
+}
+
+if (responseTime > UPPER_THRESHOLD_RT) {
+	if (isDefaultMLModelActivated) {
+		SwitchToDefaultMLModel();
+	} else {
+		if (isFilteringActivated) {
+			DeactivateFilterComponent();
+		}
+	}
+}
