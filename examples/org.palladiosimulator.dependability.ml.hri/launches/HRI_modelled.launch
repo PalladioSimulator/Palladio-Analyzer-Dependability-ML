@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.palladiosimulator.simexp.ui.workflow.launchConfigurationType1">
+    <intAttribute key="NumberOfRuns" value="1"/>
+    <intAttribute key="NumberOfSimulationsPerRun" value="100"/>
+    <stringAttribute key="Quality Objective" value="RELIABILITY"/>
+    <stringAttribute key="Simulation Engine" value="PCM"/>
+    <stringAttribute key="SimulationID" value="HRI_modelled"/>
+    <stringAttribute key="Simulator Type" value="MODELLED"/>
+    <stringAttribute key="allocationFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/RobotCognitionDeployment.allocation"/>
+    <stringAttribute key="dynamicModelFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/DynamicRobotCognitionEnvironment.dynamicmodel"/>
+    <stringAttribute key="experimentsFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/RobotCognitionExperiment.experiments"/>
+    <stringAttribute key="monitorRepositoryFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/RobotCognitionMonitors.monitorrepository"/>
+    <listAttribute key="monitors">
+        <listEntry value="System Response Time"/>
+    </listAttribute>
+    <booleanAttribute key="org.eclipse.debug.core.ATTR_FORCE_SYSTEM_CONSOLE_ENCODING" value="false"/>
+    <stringAttribute key="smodelFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/strategies/ReliabilityPrioritizedStrategy.smodel"/>
+    <stringAttribute key="staticModelFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/StaticRobotCognitionEnvironment.staticmodel"/>
+    <stringAttribute key="usageFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/RobotCognitionUsage.usagemodel"/>
+</launchConfiguration>
