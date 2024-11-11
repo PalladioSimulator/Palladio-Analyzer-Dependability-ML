@@ -225,6 +225,10 @@ public class ArchitecturalCountermeasureOperator {
             private final ConditionalProbabilityDistribution improvement = createCPDFrom(uncertaintyImprovement);
 
             @Override
+            public void init(int seed) {
+            }
+
+            @Override
             public CategoricalValue sample() {
                 var conditional = asConditional(oldDistFunction.sample());
                 return improvement.given(conditional)
