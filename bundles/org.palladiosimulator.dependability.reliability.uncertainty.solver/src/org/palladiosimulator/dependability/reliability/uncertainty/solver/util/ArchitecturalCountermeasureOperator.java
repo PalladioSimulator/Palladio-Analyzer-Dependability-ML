@@ -226,10 +226,19 @@ public class ArchitecturalCountermeasureOperator {
 
             @Override
             public void init(int seed) {
+                if (initialized) {
+                    throw new RuntimeException("initialized");
+                }
+                initialized = true;
+                oldDistFunction.init(seed);
+                improvement.init(seed);
             }
 
             @Override
             public CategoricalValue sample() {
+                if (!initialized) {
+                    throw new RuntimeException("not initialized");
+                }
                 var conditional = asConditional(oldDistFunction.sample());
                 return improvement.given(conditional)
                     .sample();
