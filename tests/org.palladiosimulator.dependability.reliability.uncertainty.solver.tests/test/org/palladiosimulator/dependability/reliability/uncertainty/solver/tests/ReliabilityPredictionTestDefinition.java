@@ -46,6 +46,7 @@ import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.parser.DefaultParameterParser;
 import tools.mdsd.probdist.api.parser.ParameterParser;
+import tools.mdsd.probdist.api.random.NoSeedProvider;
 import tools.mdsd.probdist.distributiontype.ProbabilityDistributionRepository;
 import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
@@ -122,7 +123,8 @@ public class ReliabilityPredictionTestDefinition {
         var context = new ReliabilityPredictionContext(pcmRelConfig, getUncertaintyModelURI(), TEST_STRATEGY);
 
         ParameterParser parameterParser = new DefaultParameterParser();
-        ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
+        ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory(
+                new NoSeedProvider());
         IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry = defaultProbabilityDistributionFactory;
         IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory = defaultProbabilityDistributionFactory;
 

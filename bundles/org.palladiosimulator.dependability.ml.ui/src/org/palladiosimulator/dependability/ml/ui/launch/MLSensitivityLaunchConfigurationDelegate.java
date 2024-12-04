@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.random.NoSeedProvider;
 
 public class MLSensitivityLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
 
@@ -52,7 +53,8 @@ public class MLSensitivityLaunchConfigurationDelegate extends LaunchConfiguratio
             .storeSensitivityModelAt(sensModelStoringLocation)
             .build();
 
-        ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
+        ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory(
+                new NoSeedProvider());
         IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory = defaultProbabilityDistributionFactory;
 
         MLSensitivityAnalyser.analyseAndSave(config, probabilityDistributionFactory);

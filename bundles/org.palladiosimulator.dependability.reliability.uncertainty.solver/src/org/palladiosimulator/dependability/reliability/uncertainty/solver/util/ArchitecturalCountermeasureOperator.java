@@ -34,6 +34,7 @@ import tools.mdsd.probdist.api.entity.UnivariateProbabilitiyMassFunction;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.api.parser.ParameterParser.Sample;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 import tools.mdsd.probdist.distributionfunction.Domain;
 import tools.mdsd.probdist.distributionfunction.SimpleParameter;
 
@@ -225,13 +226,13 @@ public class ArchitecturalCountermeasureOperator {
             private final ConditionalProbabilityDistribution improvement = createCPDFrom(uncertaintyImprovement);
 
             @Override
-            public void init(int seed) {
+            public void init(ISeedProvider seedProvider) {
                 if (initialized) {
                     throw new RuntimeException("initialized");
                 }
                 initialized = true;
-                oldDistFunction.init(seed);
-                improvement.init(seed);
+                oldDistFunction.init(seedProvider);
+                improvement.init(seedProvider);
             }
 
             @Override
