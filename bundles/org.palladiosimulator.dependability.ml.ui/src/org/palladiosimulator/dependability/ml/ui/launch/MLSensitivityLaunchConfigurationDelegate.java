@@ -9,6 +9,7 @@ import static org.palladiosimulator.dependability.ml.ui.launch.MLSensitivityLaun
 import static org.palladiosimulator.dependability.ml.ui.launch.MLSensitivityLaunchAttributes.SENSITIVITY_PROP_ATTR;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -23,7 +24,6 @@ import com.google.common.collect.Lists;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
-import tools.mdsd.probdist.api.random.NoSeedProvider;
 
 public class MLSensitivityLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
 
@@ -54,7 +54,7 @@ public class MLSensitivityLaunchConfigurationDelegate extends LaunchConfiguratio
             .build();
 
         ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory(
-                new NoSeedProvider());
+                Optional.empty());
         IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory = defaultProbabilityDistributionFactory;
 
         MLSensitivityAnalyser.analyseAndSave(config, probabilityDistributionFactory);

@@ -7,6 +7,8 @@ import static org.palladiosimulator.dependability.reliability.uncertainty.ui.lau
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.EXPORT_RESULT_ATTR;
 import static org.palladiosimulator.dependability.reliability.uncertainty.ui.launch.UncertaintyBasedReliabilityPredictionAttributes.UNCERTAINTY_MODEL_ATTR;
 
+import java.util.Optional;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
@@ -25,7 +27,6 @@ import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.parser.DefaultParameterParser;
 import tools.mdsd.probdist.api.parser.ParameterParser;
-import tools.mdsd.probdist.api.random.NoSeedProvider;
 import tools.mdsd.probdist.distributiontype.ProbabilityDistributionRepository;
 import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
@@ -56,7 +57,7 @@ public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConf
 
             ParameterParser parameterParser = new DefaultParameterParser();
             ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory(
-                    new NoSeedProvider());
+                    Optional.empty());
             IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry = defaultProbabilityDistributionFactory;
             IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory = defaultProbabilityDistributionFactory;
 

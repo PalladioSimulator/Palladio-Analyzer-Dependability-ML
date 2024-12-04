@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 
@@ -47,7 +48,6 @@ import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.parser.DefaultParameterParser;
 import tools.mdsd.probdist.api.parser.ParameterParser;
-import tools.mdsd.probdist.api.random.NoSeedProvider;
 import tools.mdsd.probdist.distributiontype.ProbabilityDistributionRepository;
 import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
@@ -151,7 +151,7 @@ public class MLSensitivityAnalysisTest {
         standaloneInitializer.init();
 
         ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory(
-                new NoSeedProvider());
+                Optional.empty());
         probabilityDistributionFactory = defaultProbabilityDistributionFactory;
         ProbabilityDistributionRepository probDistRepo = BasicDistributionTypesLoader.loadRepository();
         IProbabilityDistributionRepositoryLookup probDistRepoLookup = new ProbabilityDistributionRepositoryLookup(
