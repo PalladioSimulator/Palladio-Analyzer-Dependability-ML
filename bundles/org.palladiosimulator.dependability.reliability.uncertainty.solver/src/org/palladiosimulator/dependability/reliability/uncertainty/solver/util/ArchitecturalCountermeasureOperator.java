@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.toList;
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.util.ArchitecturalPreconditionUtil.allPreconditionsFulfilled;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure;
@@ -226,7 +227,7 @@ public class ArchitecturalCountermeasureOperator {
             private final ConditionalProbabilityDistribution improvement = createCPDFrom(uncertaintyImprovement);
 
             @Override
-            public void init(ISeedProvider seedProvider) {
+            public void init(Optional<ISeedProvider> seedProvider) {
                 if (initialized) {
                     throw new RuntimeException("initialized");
                 }

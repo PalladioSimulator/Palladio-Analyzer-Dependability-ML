@@ -8,6 +8,7 @@ import static org.palladiosimulator.dependability.reliability.uncertainty.solver
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.tests.BaseReliabilityPredictionTest.makeAbsolute;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.BiConsumer;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -46,7 +47,6 @@ import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.parser.DefaultParameterParser;
 import tools.mdsd.probdist.api.parser.ParameterParser;
-import tools.mdsd.probdist.api.random.NoSeedProvider;
 import tools.mdsd.probdist.distributiontype.ProbabilityDistributionRepository;
 import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
@@ -124,7 +124,7 @@ public class ReliabilityPredictionTestDefinition {
 
         ParameterParser parameterParser = new DefaultParameterParser();
         ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory(
-                new NoSeedProvider());
+                Optional.empty());
         IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry = defaultProbabilityDistributionFactory;
         IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory = defaultProbabilityDistributionFactory;
 
