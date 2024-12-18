@@ -9,6 +9,7 @@ import static org.palladiosimulator.dependability.ml.ui.launch.MLSensitivityLaun
 import static org.palladiosimulator.dependability.ml.ui.launch.MLSensitivityLaunchAttributes.SENSITIVITY_PROP_ATTR;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -52,7 +53,8 @@ public class MLSensitivityLaunchConfigurationDelegate extends LaunchConfiguratio
             .storeSensitivityModelAt(sensModelStoringLocation)
             .build();
 
-        ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
+        ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory(
+                Optional.empty());
         IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory = defaultProbabilityDistributionFactory;
 
         MLSensitivityAnalyser.analyseAndSave(config, probabilityDistributionFactory);

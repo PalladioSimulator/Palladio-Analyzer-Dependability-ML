@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.toList;
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.util.ArchitecturalPreconditionUtil.allPreconditionsFulfilled;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalCountermeasure;
@@ -34,6 +35,7 @@ import tools.mdsd.probdist.api.entity.UnivariateProbabilitiyMassFunction;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.parser.ParameterParser;
 import tools.mdsd.probdist.api.parser.ParameterParser.Sample;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 import tools.mdsd.probdist.distributionfunction.Domain;
 import tools.mdsd.probdist.distributionfunction.SimpleParameter;
 
@@ -225,7 +227,20 @@ public class ArchitecturalCountermeasureOperator {
             private final ConditionalProbabilityDistribution improvement = createCPDFrom(uncertaintyImprovement);
 
             @Override
+            public void init(Optional<ISeedProvider> seedProvider) {
+                if (initialized) {
+                    throw new RuntimeException("initialized");
+                }
+                initialized = true;
+                oldDistFunction.init(seedProvider);
+                improvement.init(seedProvider);
+            }
+
+            @Override
             public CategoricalValue sample() {
+                if (!initialized) {
+                    throw new RuntimeException("not initialized");
+                }
                 var conditional = asConditional(oldDistFunction.sample());
                 return improvement.given(conditional)
                     .sample();
