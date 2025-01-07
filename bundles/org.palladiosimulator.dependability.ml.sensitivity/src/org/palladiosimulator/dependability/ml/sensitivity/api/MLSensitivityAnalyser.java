@@ -21,6 +21,7 @@ import com.google.common.collect.Sets;
 
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 
 public class MLSensitivityAnalyser {
 
@@ -87,7 +88,8 @@ public class MLSensitivityAnalyser {
     }
 
     public static SensitivityModel analyse(SensitivityAnalysisConfig config,
-            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory) {
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
+            Optional<ISeedProvider> seedProvider) {
         var analysisBuilder = MLSensitivityAnalysis.newBuilder()
             .withSensitivityAnalysisStrategy(config.getAnalysisStrategy());
         for (PropertyMeasure each : config.getPropertyMeasures()) {
@@ -96,7 +98,7 @@ public class MLSensitivityAnalyser {
         var sensitivityAnalysis = analysisBuilder.build();
 
         var sensitivityModel = ProbabilisticSensitivityModel.createFrom(Sets.newHashSet(config.getPropertyMeasures()),
-                probabilityDistributionFactory);
+                probabilityDistributionFactory, seedProvider);
 
         var context = MLAnalysisContext.newBuilder()
             .analyseSensitivityOf(config.getTrainedModel())
@@ -111,8 +113,10 @@ public class MLSensitivityAnalyser {
     }
 
     public static void analyseAndSave(SensitivityAnalysisConfig config,
-            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory) {
-        analyse(config, probabilityDistributionFactory).saveAt(config.getSensitivityModelStoringLocation());
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
+            Optional<ISeedProvider> seedProvider) {
+        analyse(config, probabilityDistributionFactory, seedProvider)
+            .saveAt(config.getSensitivityModelStoringLocation());
     }
 
     private static Predicate<PropertyMeasure> propertyWith(String queriedId) {

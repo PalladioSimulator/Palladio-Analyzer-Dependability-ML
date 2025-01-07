@@ -47,6 +47,7 @@ import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.parser.DefaultParameterParser;
 import tools.mdsd.probdist.api.parser.ParameterParser;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 import tools.mdsd.probdist.distributiontype.ProbabilityDistributionRepository;
 import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
@@ -75,6 +76,7 @@ public class ReliabilityPredictionTestDefinition {
     private MarkovTransformationResult pcmRelResult = null;
     private ReliabilityPredictionResult uncertaintyBasedResult = null;
     private List<PredictionResultBasedAssertion> assertions = Lists.newArrayList();
+    private Optional<ISeedProvider> seedProvider = Optional.empty();
 
     private ReliabilityPredictionTestDefinition() {
 
@@ -133,7 +135,7 @@ public class ReliabilityPredictionTestDefinition {
         IProbabilityDistributionRepositoryLookup probDistRepoLookup = new ProbabilityDistributionRepositoryLookup(
                 probabilityDistributionRepository);
         relPredictionJob.add(new ReliabilityPredictionExecutionJob(context, probabilityDistributionRegistry,
-                probabilityDistributionFactory, parameterParser, probDistRepoLookup));
+                probabilityDistributionFactory, parameterParser, probDistRepoLookup, seedProvider));
 
         var resultJob = new ReliabilityPredictionResultJob(context);
         relPredictionJob.add(resultJob);
@@ -158,7 +160,7 @@ public class ReliabilityPredictionTestDefinition {
         requireNonNull(config, "The config must not be null.");
 
         uncertaintyBasedResult = UncertaintyBasedReliabilityPrediction.predict(config, probabilityDistributionRegistry,
-                probabilityDistributionFactory, parameterParser, probDistRepoLookup);
+                probabilityDistributionFactory, parameterParser, probDistRepoLookup, seedProvider);
 
         return this;
     }

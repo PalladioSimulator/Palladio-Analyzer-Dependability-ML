@@ -15,6 +15,7 @@ import com.google.common.collect.Maps;
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.parser.ParameterParser;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 
 public class UncertaintyModelManager {
 
@@ -39,9 +40,9 @@ public class UncertaintyModelManager {
 
     public void updateModel(UncertaintyInducedFailureType uncertainty,
             IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
-            ParameterParser parameterParser) {
+            ParameterParser parameterParser, Optional<ISeedProvider> seedProvider) {
         if (findModelFor(uncertainty).isPresent()) {
-            manage(uncertainty, probabilityDistributionFactory, parameterParser);
+            manage(uncertainty, probabilityDistributionFactory, parameterParser, seedProvider);
         } else {
             // TODO: logging
         }
@@ -65,10 +66,10 @@ public class UncertaintyModelManager {
     // This method might be adapted if new uncertainty model implementations emerge.
     public void manage(List<UncertaintyInducedFailureType> uncertainties,
             final IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
-            ParameterParser parameterParser) {
+            ParameterParser parameterParser, Optional<ISeedProvider> seedProvider) {
         Consumer<UncertaintyInducedFailureType> consumer = new Consumer<>() {
             public void accept(UncertaintyInducedFailureType failureType) {
-                manage(failureType, probabilityDistributionFactory, parameterParser);
+                manage(failureType, probabilityDistributionFactory, parameterParser, seedProvider);
             }
         };
         uncertainties.forEach(consumer);
@@ -76,10 +77,10 @@ public class UncertaintyModelManager {
 
     public void manage(UncertaintyInducedFailureType failureType,
             IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
-            ParameterParser parameterParser) {
+            ParameterParser parameterParser, Optional<ISeedProvider> seedProvider) {
         if (isNull(failureType.getFailureVariable())) {
-            managedModels.put(failureType.getId(),
-                    new MLInducedUncertaintyModel(failureType, probabilityDistributionFactory, parameterParser));
+            managedModels.put(failureType.getId(), new MLInducedUncertaintyModel(failureType,
+                    probabilityDistributionFactory, parameterParser, seedProvider));
         } else {
             managedModels.put(failureType.getId(),
                     new BayesianUncertaintyModel(failureType, probabilityDistributionFactory, parameterParser));

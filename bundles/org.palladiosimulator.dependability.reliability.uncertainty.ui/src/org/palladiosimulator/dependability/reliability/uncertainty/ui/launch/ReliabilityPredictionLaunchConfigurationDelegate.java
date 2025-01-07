@@ -27,6 +27,7 @@ import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.factory.ProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.parser.DefaultParameterParser;
 import tools.mdsd.probdist.api.parser.ParameterParser;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 import tools.mdsd.probdist.distributiontype.ProbabilityDistributionRepository;
 import tools.mdsd.probdist.model.basic.loader.BasicDistributionTypesLoader;
 
@@ -65,9 +66,10 @@ public class ReliabilityPredictionLaunchConfigurationDelegate extends LaunchConf
                 .loadRepository();
             IProbabilityDistributionRepositoryLookup probDistRepoLookup = new ProbabilityDistributionRepositoryLookup(
                     probabilityDistributionRepository);
+            Optional<ISeedProvider> seedProvider = Optional.empty();
             var jobBuilder = UncertaintyBasedReliabilityPredictionJob
                 .newBuilder(probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser,
-                        probDistRepoLookup)
+                        probDistRepoLookup, seedProvider)
                 .withConfig(config)
                 .andUncertaintyModel(uncertaintyModelLocation)
                 .andExplorationStrategy(explorationStrategy);

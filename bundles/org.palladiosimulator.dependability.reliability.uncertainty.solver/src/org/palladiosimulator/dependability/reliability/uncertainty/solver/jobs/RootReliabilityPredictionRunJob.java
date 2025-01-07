@@ -12,6 +12,7 @@ import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.parser.ParameterParser;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 
 public class RootReliabilityPredictionRunJob extends SequentialBlackboardInteractingJob<MDSDBlackboard> {
 
@@ -19,11 +20,12 @@ public class RootReliabilityPredictionRunJob extends SequentialBlackboardInterac
             String explorationStrategy, Optional<URI> exportLocation,
             IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry,
             IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
-            ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
+            ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup,
+            Optional<ISeedProvider> seedProvider) {
         var context = new ReliabilityPredictionContext(config, uncertaintyModel, explorationStrategy);
 
         addJob(new ReliabilityPredictionExecutionJob(context, probabilityDistributionRegistry,
-                probabilityDistributionFactory, parameterParser, probDistRepoLookup));
+                probabilityDistributionFactory, parameterParser, probDistRepoLookup, seedProvider));
         addJob(new ReliabilityPredictionResultVisualizationJob(context));
 
         if (exportLocation.isPresent()) {

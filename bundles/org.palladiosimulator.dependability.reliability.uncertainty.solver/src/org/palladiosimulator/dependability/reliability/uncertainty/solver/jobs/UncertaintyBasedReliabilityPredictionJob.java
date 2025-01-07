@@ -24,6 +24,7 @@ import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.parser.ParameterParser;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 
 public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboardInteractingJob<MDSDBlackboard>
         implements ICompositeJob {
@@ -41,15 +42,18 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
         private final IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory;
         private final ParameterParser parameterParser;
         private final IProbabilityDistributionRepositoryLookup probDistRepoLookup;
+        private final Optional<ISeedProvider> seedProvider;
 
         public UncertaintyBasedReliabilityPredictionJobBuilder(
                 IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry,
                 IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
-                ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
+                ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup,
+                Optional<ISeedProvider> seedProvider) {
             this.probabilityDistributionRegistry = probabilityDistributionRegistry;
             this.probabilityDistributionFactory = probabilityDistributionFactory;
             this.parameterParser = parameterParser;
             this.probDistRepoLookup = probDistRepoLookup;
+            this.seedProvider = seedProvider;
         }
 
         public UncertaintyBasedReliabilityPredictionJobBuilder withConfig(PCMSolverWorkflowRunConfiguration config) {
@@ -107,7 +111,7 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
             }
             relPredictionJob.addJob(new RootReliabilityPredictionRunJob(config, uncertaintyModel, explorationStrategy,
                     exportLocationURI, probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser,
-                    probDistRepoLookup));
+                    probDistRepoLookup, seedProvider));
 
             return relPredictionJob;
         }
@@ -129,9 +133,10 @@ public class UncertaintyBasedReliabilityPredictionJob extends SequentialBlackboa
     public static UncertaintyBasedReliabilityPredictionJobBuilder newBuilder(
             IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry,
             IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
-            ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
+            ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup,
+            Optional<ISeedProvider> seedProvider) {
         return new UncertaintyBasedReliabilityPredictionJobBuilder(probabilityDistributionRegistry,
-                probabilityDistributionFactory, parameterParser, probDistRepoLookup);
+                probabilityDistributionFactory, parameterParser, probDistRepoLookup, seedProvider);
     }
 
 }

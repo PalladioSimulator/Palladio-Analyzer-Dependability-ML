@@ -21,6 +21,7 @@ import org.palladiosimulator.envdyn.environment.templatevariable.TemplateVariabl
 import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.parser.ParameterParser;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 
 public class MLInducedUncertaintyModel implements UncertaintyModel {
 
@@ -29,15 +30,16 @@ public class MLInducedUncertaintyModel implements UncertaintyModel {
 
     public MLInducedUncertaintyModel(UncertaintyInducedFailureType uncertainty,
             IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
-            ParameterParser parameterParser) {
-        this.sensitivityModel = initSensitivityModel(uncertainty, probabilityDistributionFactory);
+            ParameterParser parameterParser, Optional<ISeedProvider> seedProvider) {
+        this.sensitivityModel = initSensitivityModel(uncertainty, probabilityDistributionFactory, seedProvider);
         this.valueSpace = computeValueSpace(uncertainty, parameterParser);
     }
 
     private ProbabilisticSensitivityModel initSensitivityModel(UncertaintyInducedFailureType uncertainty,
-            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory) {
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
+            Optional<ISeedProvider> seedProvider) {
         var model = ProbabilisticSensitivityModel.createFrom(getProbabilisticModel(uncertainty),
-                getTemplates(uncertainty), probabilityDistributionFactory);
+                getTemplates(uncertainty), probabilityDistributionFactory, seedProvider);
         model.setMLOutcomeMeasure(MLOutcomeMeasure.FAIL);
         return model;
     }

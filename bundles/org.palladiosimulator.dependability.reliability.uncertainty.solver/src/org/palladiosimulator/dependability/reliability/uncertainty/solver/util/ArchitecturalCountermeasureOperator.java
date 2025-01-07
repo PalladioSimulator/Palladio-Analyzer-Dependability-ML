@@ -45,22 +45,24 @@ public class ArchitecturalCountermeasureOperator {
     private final UncertaintyRepository uncertaintyRepo;
     private final IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory;
     private final ParameterParser parameterParser;
+    private final Optional<ISeedProvider> seedProvider;
 
     private ArchitecturalCountermeasureOperator(PCMInstance pcmModel, UncertaintyRepository uncertaintyRepo,
             IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
-            ParameterParser parameterParser) {
+            ParameterParser parameterParser, Optional<ISeedProvider> seedProvider) {
         this.pcmModel = pcmModel;
         this.uncertaintyRepo = uncertaintyRepo;
         this.probabilityDistributionFactory = probabilityDistributionFactory;
         this.parameterParser = parameterParser;
+        this.seedProvider = seedProvider;
     }
 
     public static ArchitecturalCountermeasureOperator createOperatorFor(PCMInstance pcmModel,
             UncertaintyRepository uncertaintyRepo,
             IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
-            ParameterParser parameterParser) {
+            ParameterParser parameterParser, Optional<ISeedProvider> seedProvider) {
         return new ArchitecturalCountermeasureOperator(pcmModel, uncertaintyRepo, probabilityDistributionFactory,
-                parameterParser);
+                parameterParser, seedProvider);
     }
 
     public List<UncertaintyState> applyToUncertainties(List<UncertaintyState> stateTuple) {
@@ -146,7 +148,7 @@ public class ArchitecturalCountermeasureOperator {
                 switchDistributions(affectedVariable, countermeasure.getUncertaintyImprovement(), parameterParser);
 
                 UncertaintyModelManager.get()
-                    .updateModel(surrogate, probabilityDistributionFactory, parameterParser);
+                    .updateModel(surrogate, probabilityDistributionFactory, parameterParser, seedProvider);
 
                 return null;
             }
@@ -168,7 +170,7 @@ public class ArchitecturalCountermeasureOperator {
                             .getDistribution());
 
                     UncertaintyModelManager.get()
-                        .updateModel(surrogate, probabilityDistributionFactory, parameterParser);
+                        .updateModel(surrogate, probabilityDistributionFactory, parameterParser, seedProvider);
                 }
                 return null;
             }
