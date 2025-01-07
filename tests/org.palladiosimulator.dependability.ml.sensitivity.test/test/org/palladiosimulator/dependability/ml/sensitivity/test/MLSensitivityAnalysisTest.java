@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 
@@ -149,7 +150,8 @@ public class MLSensitivityAnalysisTest {
             .build();
         standaloneInitializer.init();
 
-        ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
+        ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory(
+                Optional.empty());
         probabilityDistributionFactory = defaultProbabilityDistributionFactory;
         ProbabilityDistributionRepository probDistRepo = BasicDistributionTypesLoader.loadRepository();
         IProbabilityDistributionRepositoryLookup probDistRepoLookup = new ProbabilityDistributionRepositoryLookup(

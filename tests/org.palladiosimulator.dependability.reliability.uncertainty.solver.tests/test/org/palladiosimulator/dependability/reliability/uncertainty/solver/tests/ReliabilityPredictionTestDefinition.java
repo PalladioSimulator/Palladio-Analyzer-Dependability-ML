@@ -8,6 +8,7 @@ import static org.palladiosimulator.dependability.reliability.uncertainty.solver
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.tests.BaseReliabilityPredictionTest.makeAbsolute;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.BiConsumer;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -122,7 +123,8 @@ public class ReliabilityPredictionTestDefinition {
         var context = new ReliabilityPredictionContext(pcmRelConfig, getUncertaintyModelURI(), TEST_STRATEGY);
 
         ParameterParser parameterParser = new DefaultParameterParser();
-        ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory();
+        ProbabilityDistributionFactory defaultProbabilityDistributionFactory = new ProbabilityDistributionFactory(
+                Optional.empty());
         IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry = defaultProbabilityDistributionFactory;
         IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory = defaultProbabilityDistributionFactory;
 

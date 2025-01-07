@@ -117,6 +117,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
     public double inferSensitivity(List<SensitivityProperty> properties) {
         if (isNull(bayesianNetwork)) {
             bayesianNetwork = new BayesianNetwork<>(null, probSensitivityModel, probabilityDistributionFactory);
+            bayesianNetwork.init(Optional.empty());
         }
 
         List<InputValue<CategoricalValue>> inputs = toInputValues(properties);
