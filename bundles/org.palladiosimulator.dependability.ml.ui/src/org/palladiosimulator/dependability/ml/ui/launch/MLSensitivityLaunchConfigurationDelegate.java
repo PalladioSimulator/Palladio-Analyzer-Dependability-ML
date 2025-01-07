@@ -57,7 +57,7 @@ public class MLSensitivityLaunchConfigurationDelegate extends LaunchConfiguratio
                 Optional.empty());
         IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory = defaultProbabilityDistributionFactory;
 
-        MLSensitivityAnalyser.analyseAndSave(config, probabilityDistributionFactory);
+        MLSensitivityAnalyser.analyseAndSave(config, probabilityDistributionFactory, Optional.empty());
     }
 
 }

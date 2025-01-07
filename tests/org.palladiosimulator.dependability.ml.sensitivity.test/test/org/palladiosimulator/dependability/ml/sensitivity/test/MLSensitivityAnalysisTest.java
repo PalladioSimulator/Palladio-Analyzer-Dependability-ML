@@ -260,7 +260,8 @@ public class MLSensitivityAnalysisTest {
         context = MLAnalysisContext.newBuilder()
             .analyseSensitivityOf(new TrainedModelMock())
             .trainedWith(dummyFile)
-            .andCapturedBy(ProbabilisticSensitivityModel.createFrom(propertyMeasures, probabilityDistributionFactory))
+            .andCapturedBy(ProbabilisticSensitivityModel.createFrom(propertyMeasures, probabilityDistributionFactory,
+                    Optional.empty()))
             .build();
     }
 

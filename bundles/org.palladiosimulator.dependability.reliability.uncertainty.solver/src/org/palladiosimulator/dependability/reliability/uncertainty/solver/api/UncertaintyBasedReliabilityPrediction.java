@@ -20,6 +20,7 @@ import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.parser.ParameterParser;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 
 public class UncertaintyBasedReliabilityPrediction {
 
@@ -47,19 +48,21 @@ public class UncertaintyBasedReliabilityPrediction {
     public static ReliabilityPredictionResult predict(UncertaintyBasedReliabilityPredictionConfig config,
             IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry,
             IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
-            ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
+            ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup,
+            Optional<ISeedProvider> seedProvider) {
         return buildReliabilityPredictor(config, probabilityDistributionRegistry, probabilityDistributionFactory,
-                parameterParser, probDistRepoLookup).predictSuccessProbability(config.getPCMInstance());
+                parameterParser, probDistRepoLookup, seedProvider).predictSuccessProbability(config.getPCMInstance());
     }
 
     public static ReliabilityPredictionResult predictGiven(List<UncertaintyState> uncertaintyStates,
             UncertaintyBasedReliabilityPredictionConfig config,
             IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry,
             IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
-            ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
+            ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup,
+            Optional<ISeedProvider> seedProvider) {
         var results = buildReliabilityPredictor(config, probabilityDistributionRegistry, probabilityDistributionFactory,
-                parameterParser, probDistRepoLookup).predictConditionalSuccessProbability(config.getPCMInstance(),
-                        uncertaintyStates);
+                parameterParser, probDistRepoLookup, seedProvider)
+                    .predictConditionalSuccessProbability(config.getPCMInstance(), uncertaintyStates);
         return new ReliabilityPredictionResult(results);
     }
 
@@ -67,10 +70,11 @@ public class UncertaintyBasedReliabilityPrediction {
             UncertaintyBasedReliabilityPredictionConfig config,
             IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry,
             IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
-            ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
+            ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup,
+            Optional<ISeedProvider> seedProvider) {
         var builder = UncertaintyBasedReliabilityPredictor
             .newBuilder(probabilityDistributionRegistry, probabilityDistributionFactory, parameterParser,
-                    probDistRepoLookup)
+                    probDistRepoLookup, seedProvider)
             .withConfig(config.getRunConfig());
 
         if (config.getStateSpaceExplorationStrategy()

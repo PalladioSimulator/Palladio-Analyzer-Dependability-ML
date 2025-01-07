@@ -1,5 +1,7 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.solver.jobs;
 
+import java.util.Optional;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.api.UncertaintyBasedReliabilityPrediction;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.api.UncertaintyBasedReliabilityPredictionConfig;
@@ -12,6 +14,7 @@ import tools.mdsd.probdist.api.entity.CategoricalValue;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionRegistry;
 import tools.mdsd.probdist.api.parser.ParameterParser;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 
 public class ReliabilityPredictionExecutionJob extends ReliabilityPredictionRunJob {
 
@@ -19,16 +22,19 @@ public class ReliabilityPredictionExecutionJob extends ReliabilityPredictionRunJ
     private final IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory;
     private final ParameterParser parameterParser;
     private final IProbabilityDistributionRepositoryLookup probDistRepoLookup;
+    private final Optional<ISeedProvider> seedProvider;
 
     public ReliabilityPredictionExecutionJob(ReliabilityPredictionContext context,
             IProbabilityDistributionRegistry<CategoricalValue> probabilityDistributionRegistry,
             IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
-            ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup) {
+            ParameterParser parameterParser, IProbabilityDistributionRepositoryLookup probDistRepoLookup,
+            Optional<ISeedProvider> seedProvider) {
         super(context);
         this.probabilityDistributionRegistry = probabilityDistributionRegistry;
         this.probabilityDistributionFactory = probabilityDistributionFactory;
         this.parameterParser = parameterParser;
         this.probDistRepoLookup = probDistRepoLookup;
+        this.seedProvider = seedProvider;
     }
 
     @Override
@@ -39,7 +45,7 @@ public class ReliabilityPredictionExecutionJob extends ReliabilityPredictionRunJ
             .exploreStateSpaceWith(context.explorationStrategy)
             .build();
         var result = UncertaintyBasedReliabilityPrediction.predict(runConfig, probabilityDistributionRegistry,
-                probabilityDistributionFactory, parameterParser, probDistRepoLookup);
+                probabilityDistributionFactory, parameterParser, probDistRepoLookup, seedProvider);
 
         context.result = result;
     }

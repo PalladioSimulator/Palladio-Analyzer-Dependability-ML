@@ -39,6 +39,7 @@ import tools.mdsd.probdist.api.entity.Conditionable;
 import tools.mdsd.probdist.api.entity.ConditionalProbabilityDistribution;
 import tools.mdsd.probdist.api.factory.IProbabilityDistributionFactory;
 import tools.mdsd.probdist.api.parser.DefaultParameterParser;
+import tools.mdsd.probdist.api.random.ISeedProvider;
 import tools.mdsd.probdist.distributionfunction.Domain;
 import tools.mdsd.probdist.distributionfunction.ProbabilityDistribution;
 import tools.mdsd.probdist.distributionfunction.SimpleParameter;
@@ -56,33 +57,40 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
     private final TemplateVariableDefinitions templateVariables;
     private final GroundProbabilisticNetwork probSensitivityModel;
     private final IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory;
+    private final Optional<ISeedProvider> seedProvider;
 
     private BayesianNetwork<CategoricalValue> bayesianNetwork;
 
     private ProbabilisticSensitivityModel(GroundProbabilisticNetwork probSensitivityModel,
             TemplateVariableDefinitions templateVariables,
-            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory) {
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
+            Optional<ISeedProvider> seedProvider) {
         this.probSensitivityModel = probSensitivityModel;
         this.templateVariables = templateVariables;
         this.bayesianNetwork = null;
         this.probabilityDistributionFactory = probabilityDistributionFactory;
+        this.seedProvider = seedProvider;
     }
 
     private ProbabilisticSensitivityModel(
-            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory) {
-        this(null, null, probabilityDistributionFactory);
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
+            Optional<ISeedProvider> seedProvider) {
+        this(null, null, probabilityDistributionFactory, seedProvider);
     }
 
     public static ProbabilisticSensitivityModel createFrom(GroundProbabilisticNetwork probSensitivityModel,
             TemplateVariableDefinitions templateVariables,
-            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory) {
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
+            Optional<ISeedProvider> seedProvider) {
         return new ProbabilisticSensitivityModel(probSensitivityModel, templateVariables,
-                probabilityDistributionFactory);
+                probabilityDistributionFactory, seedProvider);
     }
 
     public static ProbabilisticSensitivityModel createFrom(Set<PropertyMeasure> propertyMeasures,
-            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory) {
-        return new ProbabilisticSensitivityModel(probabilityDistributionFactory).deriveFrom(propertyMeasures);
+            IProbabilityDistributionFactory<CategoricalValue> probabilityDistributionFactory,
+            Optional<ISeedProvider> seedProvider) {
+        return new ProbabilisticSensitivityModel(probabilityDistributionFactory, seedProvider)
+            .deriveFrom(propertyMeasures);
     }
 
     @Override
@@ -137,6 +145,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
             .getRepresentation();
         var conditionalOutcomeDistribution = new ConditionalProbabilityDistribution(dist, paramRep,
                 probabilityDistributionFactory);
+        conditionalOutcomeDistribution.init(seedProvider);
 
         List<Conditionable.Conditional<CategoricalValue>> conditionals = properties.stream()
             .map(each -> new Conditionable.Conditional<>(Domain.CATEGORY, each.getValue()))
@@ -169,7 +178,7 @@ public class ProbabilisticSensitivityModel extends SensitivityModel {
         ProbabilisticModelRepository groundNetworkRepo = getModelOfType(ProbabilisticModelRepository.class, models);
         TemplateVariableDefinitions templateVariables = getModelOfType(TemplateVariableDefinitions.class, models);
         return new ProbabilisticSensitivityModel(groundNetworkRepo.getModels()
-            .get(0), templateVariables, probabilityDistributionFactory);
+            .get(0), templateVariables, probabilityDistributionFactory, seedProvider);
     }
 
     @SuppressWarnings("unchecked")
