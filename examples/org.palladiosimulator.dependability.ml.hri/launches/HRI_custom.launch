@@ -6,7 +6,12 @@
     <stringAttribute key="Simulation Engine" value="PCM"/>
     <stringAttribute key="SimulationID" value="HRI_custom"/>
     <stringAttribute key="Simulator Type" value="CUSTOM"/>
-    <setAttribute key="TransformationsActive"/>
+    <setAttribute key="TransformationsActive">
+        <setEntry value="ActivateFilterComponent"/>
+        <setEntry value="DeactivateFilterComponent"/>
+        <setEntry value="SwitchToDefaultMLModel"/>
+        <setEntry value="SwitchToRobustMLModel"/>
+    </setAttribute>
     <stringAttribute key="allocationFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/RobotCognitionDeployment.allocation"/>
     <stringAttribute key="dynamicModelFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/DynamicRobotCognitionEnvironment.dynamicmodel"/>
     <stringAttribute key="experimentsFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/RobotCognitionExperiment.experiments"/>
