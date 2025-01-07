@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.palladiosimulator.simexp.ui.workflow.launchConfigurationType1">
     <intAttribute key="NumberOfRuns" value="1"/>
-    <intAttribute key="NumberOfSimulationsPerRun" value="100"/>
+    <intAttribute key="NumberOfSimulationsPerRun" value="20"/>
     <stringAttribute key="Quality Objective" value="RELIABILITY"/>
     <stringAttribute key="Simulation Engine" value="PCM"/>
     <stringAttribute key="SimulationID" value="HRI_custom"/>
     <stringAttribute key="Simulator Type" value="CUSTOM"/>
+    <setAttribute key="TransformationsActive"/>
     <stringAttribute key="allocationFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/RobotCognitionDeployment.allocation"/>
     <stringAttribute key="dynamicModelFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/DynamicRobotCognitionEnvironment.dynamicmodel"/>
     <stringAttribute key="experimentsFile" value="platform:/resource/org.palladiosimulator.dependability.ml.hri/RobotCognitionExperiment.experiments"/>
