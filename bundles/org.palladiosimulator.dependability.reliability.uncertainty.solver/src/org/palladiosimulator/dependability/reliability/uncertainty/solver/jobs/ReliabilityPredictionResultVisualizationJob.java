@@ -5,7 +5,7 @@ import static org.palladiosimulator.dependability.reliability.uncertainty.solver
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.palladiosimulator.analyzer.workflow.core.blackboard.PCMResourceSetPartition;
-import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
+import org.palladiosimulator.analyzer.workflow.core.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.pcm.usagemodel.UsageScenario;
 
 import de.uka.ipd.sdq.workflow.jobs.CleanupFailedException;
