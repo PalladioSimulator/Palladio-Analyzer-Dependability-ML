@@ -1,7 +1,7 @@
 package org.palladiosimulator.dependability.reliability.uncertainty.precondition;
 
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
-import org.palladiosimulator.solver.models.PCMInstance;
+import org.palladiosimulator.solver.core.models.PCMInstance;
 
 public interface ArchitecturalPreconditionChecker {
 	

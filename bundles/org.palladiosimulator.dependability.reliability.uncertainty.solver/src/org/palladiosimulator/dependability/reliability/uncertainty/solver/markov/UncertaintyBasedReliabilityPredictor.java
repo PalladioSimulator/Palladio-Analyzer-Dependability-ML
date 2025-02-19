@@ -16,7 +16,7 @@ import org.palladiosimulator.dependability.reliability.uncertainty.solver.model.
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.util.ArchitecturalCountermeasureOperator;
 import org.palladiosimulator.reliability.solver.pcm2markov.MarkovTransformationResult;
 import org.palladiosimulator.reliability.solver.pcm2markov.Pcm2MarkovStrategy;
-import org.palladiosimulator.solver.models.PCMInstance;
+import org.palladiosimulator.solver.core.models.PCMInstance;
 import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import tools.mdsd.probdist.api.apache.util.IProbabilityDistributionRepositoryLookup;

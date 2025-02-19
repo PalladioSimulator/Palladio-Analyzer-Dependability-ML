@@ -6,7 +6,7 @@ import org.palladiosimulator.dependability.reliability.uncertainty.Architectural
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
 import org.palladiosimulator.dependability.reliability.uncertainty.UncertaintyInducedFailureType;
 import org.palladiosimulator.dependability.reliability.uncertainty.precondition.ArchitecturalPreconditionManager;
-import org.palladiosimulator.solver.models.PCMInstance;
+import org.palladiosimulator.solver.core.models.PCMInstance;
 
 public class ArchitecturalPreconditionUtil {
 
