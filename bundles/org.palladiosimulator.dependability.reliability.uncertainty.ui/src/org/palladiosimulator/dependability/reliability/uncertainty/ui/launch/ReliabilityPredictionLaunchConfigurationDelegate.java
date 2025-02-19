@@ -16,7 +16,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.jobs.UncertaintyBasedReliabilityPredictionJob;
 import org.palladiosimulator.reliability.solver.runconfig.PCMSolverReliabilityLaunchConfigurationDelegate;
-import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
+import org.palladiosimulator.solver.core.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import de.uka.ipd.sdq.workflow.jobs.IJob;
 import tools.mdsd.probdist.api.apache.util.IProbabilityDistributionRepositoryLookup;

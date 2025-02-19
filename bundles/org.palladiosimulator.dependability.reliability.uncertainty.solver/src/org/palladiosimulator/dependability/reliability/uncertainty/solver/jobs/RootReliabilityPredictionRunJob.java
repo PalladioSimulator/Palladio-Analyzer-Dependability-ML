@@ -3,7 +3,7 @@ package org.palladiosimulator.dependability.reliability.uncertainty.solver.jobs;
 import java.util.Optional;
 
 import org.eclipse.emf.common.util.URI;
-import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
+import org.palladiosimulator.solver.core.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import de.uka.ipd.sdq.workflow.jobs.SequentialBlackboardInteractingJob;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
