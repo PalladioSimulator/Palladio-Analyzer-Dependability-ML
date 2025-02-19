@@ -4,7 +4,7 @@ import static org.palladiosimulator.dependability.reliability.uncertainty.solver
 import static org.palladiosimulator.dependability.reliability.uncertainty.solver.util.PredictionResultFormatting.sortByUncertainties;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
+import org.palladiosimulator.analyzer.workflow.core.blackboard.PCMResourceSetPartition;
 import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.pcm.usagemodel.UsageScenario;
 
