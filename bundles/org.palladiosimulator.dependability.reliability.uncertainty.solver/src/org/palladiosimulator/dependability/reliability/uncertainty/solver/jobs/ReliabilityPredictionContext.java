@@ -2,7 +2,7 @@ package org.palladiosimulator.dependability.reliability.uncertainty.solver.jobs;
 
 import org.eclipse.emf.common.util.URI;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.markov.ReliabilityPredictionResult;
-import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
+import org.palladiosimulator.solver.core.runconfig.PCMSolverWorkflowRunConfiguration;
 
 public class ReliabilityPredictionContext {
 

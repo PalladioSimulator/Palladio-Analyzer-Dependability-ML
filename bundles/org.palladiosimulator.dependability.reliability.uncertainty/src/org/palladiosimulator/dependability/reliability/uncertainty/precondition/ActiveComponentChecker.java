@@ -7,7 +7,7 @@ import org.palladiosimulator.dependability.reliability.uncertainty.ActiveCompone
 import org.palladiosimulator.dependability.reliability.uncertainty.ArchitecturalPrecondition;
 import org.palladiosimulator.pcm.core.composition.AssemblyContext;
 import org.palladiosimulator.pcm.core.entity.InterfaceProvidingRequiringEntity;
-import org.palladiosimulator.solver.models.PCMInstance;
+import org.palladiosimulator.solver.core.models.PCMInstance;
 
 public class ActiveComponentChecker implements ArchitecturalPreconditionChecker {
 

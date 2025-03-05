@@ -24,7 +24,7 @@ import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticM
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundProbabilisticNetwork;
 import org.palladiosimulator.envdyn.environment.staticmodel.GroundRandomVariable;
 import org.palladiosimulator.envdyn.environment.staticmodel.LocalProbabilisticNetwork;
-import org.palladiosimulator.solver.models.PCMInstance;
+import org.palladiosimulator.solver.core.models.PCMInstance;
 
 import com.google.common.collect.Lists;
 

@@ -13,11 +13,11 @@ import java.util.function.BiConsumer;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.palladiosimulator.analyzer.workflow.ConstantsContainer;
-import org.palladiosimulator.analyzer.workflow.blackboard.PCMResourceSetPartition;
+import org.palladiosimulator.analyzer.workflow.core.ConstantsContainer;
+import org.palladiosimulator.analyzer.workflow.core.blackboard.PCMResourceSetPartition;
+import org.palladiosimulator.analyzer.workflow.core.jobs.LoadModelIntoBlackboardJob;
+import org.palladiosimulator.analyzer.workflow.core.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.EventsTransformationJob;
-import org.palladiosimulator.analyzer.workflow.jobs.LoadModelIntoBlackboardJob;
-import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.ValidatePCMModelsJob;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.api.UncertaintyBasedReliabilityPrediction;
 import org.palladiosimulator.dependability.reliability.uncertainty.solver.api.UncertaintyBasedReliabilityPredictionConfig;
@@ -31,8 +31,8 @@ import org.palladiosimulator.dependability.reliability.uncertainty.solver.tests.
 import org.palladiosimulator.experimentautomation.application.jobs.PrepareBlackboardJob;
 import org.palladiosimulator.reliability.solver.pcm2markov.MarkovTransformationResult;
 import org.palladiosimulator.reliability.solver.pcm2markov.Pcm2MarkovStrategy;
-import org.palladiosimulator.solver.models.PCMInstance;
-import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
+import org.palladiosimulator.solver.core.models.PCMInstance;
+import org.palladiosimulator.solver.core.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import com.google.common.collect.Lists;
 

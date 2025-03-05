@@ -24,8 +24,8 @@ import org.palladiosimulator.pcm.repository.Repository;
 import org.palladiosimulator.pcm.resourceenvironment.LinkingResource;
 import org.palladiosimulator.pcm.resourceenvironment.ProcessingResourceSpecification;
 import org.palladiosimulator.pcm.seff.ServiceEffectSpecification;
-import org.palladiosimulator.solver.models.PCMInstance;
-import org.palladiosimulator.solver.transformations.EMFHelper;
+import org.palladiosimulator.solver.core.models.PCMInstance;
+import org.palladiosimulator.solver.core.transformations.EMFHelper;
 
 import com.google.common.collect.Lists;
 

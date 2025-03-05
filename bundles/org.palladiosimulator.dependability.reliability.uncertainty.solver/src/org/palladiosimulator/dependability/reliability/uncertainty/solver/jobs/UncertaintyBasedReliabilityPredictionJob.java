@@ -7,14 +7,14 @@ import java.util.Optional;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
+import org.palladiosimulator.analyzer.workflow.core.jobs.LoadModelIntoBlackboardJob;
+import org.palladiosimulator.analyzer.workflow.core.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.EventsTransformationJob;
-import org.palladiosimulator.analyzer.workflow.jobs.LoadModelIntoBlackboardJob;
-import org.palladiosimulator.analyzer.workflow.jobs.LoadPCMModelsIntoBlackboardJob;
 import org.palladiosimulator.analyzer.workflow.jobs.ValidatePCMModelsJob;
 import org.palladiosimulator.architecturaltemplates.jobs.RunATJob;
 import org.palladiosimulator.architecturaltemplates.jobs.config.ATExtensionConfigurationBuilder;
 import org.palladiosimulator.experimentautomation.application.jobs.PrepareBlackboardJob;
-import org.palladiosimulator.solver.runconfig.PCMSolverWorkflowRunConfiguration;
+import org.palladiosimulator.solver.core.runconfig.PCMSolverWorkflowRunConfiguration;
 
 import de.uka.ipd.sdq.workflow.jobs.ICompositeJob;
 import de.uka.ipd.sdq.workflow.jobs.SequentialBlackboardInteractingJob;
