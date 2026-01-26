@@ -6,8 +6,8 @@ Bundle-Version: 5.2.0.qualifier
 Automatic-Module-Name: org.palladiosimulator.dependability.ml.sensitivity.test
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Require-Bundle: org.junit,
- org.palladiosimulator.dependability.ml;bundle-version="5.2.0",
- org.palladiosimulator.dependability.ml.sensitivity;bundle-version="5.2.0",
+ org.palladiosimulator.dependability.ml,
+ org.palladiosimulator.dependability.ml.sensitivity,
  tools.mdsd.probdist.api,
  com.google.guava;bundle-version="27.1.0",
  org.eclipse.emf.ecore.xmi;bundle-version="2.16.0",
