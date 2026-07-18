@@ -3,5 +3,5 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Palladio-Analyzer-Dependability-ML
 Bundle-SymbolicName: Palladio-Analyzer-Dependability-ML
 Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Automatic-Module-Name: Palladio.Analyzer.Dependability.ML
