@@ -6,7 +6,7 @@
     modelPluginID="org.palladiosimulator.dependability.reliability.uncertainty" modelName="Uncertainty"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" codeFormatting="true"
     testsDirectory="/org.palladiosimulator.dependability.reliability.uncertainty.tests/src-gen"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="17.0" copyrightFields="false"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="21.0" copyrightFields="false"
     usedGenPackages="../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.palladiosimulator.envdyn.model/model/environmentaldynamics.genmodel#//environment ../../de.uka.ipd.sdq.identifier/model/identifier.genmodel#//identifier ../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier ../../org.palladiosimulator.pcm/model/pcm.genmodel#//pcm ../../de.uka.ipd.sdq.probfunction/model/ProbabilityFunction.genmodel#//probfunction ../../tools.mdsd.probdist.model/model/probdist.genmodel#//probdist ../../de.uka.ipd.sdq.stoex/model/stoex.genmodel#//stoex ../../de.uka.ipd.sdq.units/model/Units.genmodel#//units"
     operationReflection="true" importOrganizing="true">
   <foreignModel>uncertainty.ecore</foreignModel>
