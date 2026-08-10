@@ -51,7 +51,7 @@
       <import plugin="de.uka.ipd.sdq.stoex.edit"/>
       <import plugin="de.uka.ipd.sdq.units.edit"/>
       <import plugin="org.junit"/>
-      <import plugin="org.junit.jupiter.api"/>
+      <import plugin="junit-jupiter-api"/>
       <import plugin="org.palladiosimulator.solver"/>
       <import plugin="org.palladiosimulator.pcm"/>
       <import plugin="org.palladiosimulator.analyzer.completions"/>
@@ -64,7 +64,6 @@
       <import plugin="org.eclipse.xtend.typesystem.emf" version="2.2.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.solver.context"/>
       <import plugin="org.palladiosimulator.reliability"/>
-      <import plugin="org.eclipse.emf.query" version="1.7.0" match="greaterOrEqual"/>
       <import plugin="org.palladiosimulator.reliability.markov"/>
       <import plugin="de.uka.ipd.sdq.probfunction.math"/>
       <import plugin="org.apache.commons.math3" version="3.6.1" match="greaterOrEqual"/>
