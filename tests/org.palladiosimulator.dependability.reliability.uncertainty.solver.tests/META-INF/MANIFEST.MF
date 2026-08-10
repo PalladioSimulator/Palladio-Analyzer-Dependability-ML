@@ -4,7 +4,7 @@ Bundle-Name: Tests
 Bundle-SymbolicName: org.palladiosimulator.dependability.reliability.uncertainty.solver.tests
 Bundle-Version: 5.2.0.qualifier
 Automatic-Module-Name: org.palladiosimulator.dependability.reliability.uncertainty.solver.tests
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.junit,
  junit-jupiter-api,
  org.palladiosimulator.dependability.reliability.uncertainty.solver,
